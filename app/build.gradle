@@ -1,0 +1,25 @@
+plugins { id 'com.android.application' }
+
+android {
+    namespace 'pl.srgmobile.classic'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId 'pl.srgmobile.classic.gpsfix18'
+        minSdk 26
+        targetSdk 34
+        versionCode 11418
+        versionName '1.4.18'
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+        }
+        debug { debuggable true }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
