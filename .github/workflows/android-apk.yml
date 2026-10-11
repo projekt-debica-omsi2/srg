@@ -24,6 +24,8 @@ jobs:
           test -n "$SDKMANAGER"
           yes | "$SDKMANAGER" --licenses >/dev/null || true
           "$SDKMANAGER" 'platforms;android-35' 'build-tools;35.0.0'
+      - name: Test auto GPS stop switching
+        run: node tests/test-auto-gps.cjs
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.9'
@@ -32,6 +34,6 @@ jobs:
       - name: Publish APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: SRG-Mobile-v1.4.18-GPS-DIAGNOSTYKA-debug
+          name: SRG-Mobile-v1.4.19-AUTO-PRZYSTANKI-debug
           path: app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error

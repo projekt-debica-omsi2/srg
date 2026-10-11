@@ -5,11 +5,11 @@ android {
     compileSdk 35
 
     defaultConfig {
-        applicationId 'pl.srgmobile.classic.gpsfix18'
+        applicationId 'pl.srgmobile.classic.autogps19'
         minSdk 26
         targetSdk 34
-        versionCode 11418
-        versionName '1.4.18'
+        versionCode 11419
+        versionName '1.4.19'
     }
 
     buildTypes {

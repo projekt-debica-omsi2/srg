@@ -1,28 +1,27 @@
-# SRG Mobile v1.4.18 — GPS DIAGNOSTYKA
+# SRG Mobile v1.4.19 — AUTO PRZYSTANKI GPS
 
-Wersja testowa. Naprawa obsługi przerwania/wznowienia GPS przez systemowe okno uprawnień oraz diagnostyka statusów odbiornika. Android `applicationId`: `pl.srgmobile.classic.gpsfix18`, więc instaluje się **obok** wcześniejszych APK — nie usuwaj v1.3.5.
+Wersja testowa: automatyczne przełączanie przystanków w aktywnym kursie na podstawie GPS Android. Bazą jest działająca na tablecie v1.4.18. Moduł Android LocationManager pozostał bez zmian.
 
-## Jak zbudować prawdziwy APK
+## Co robi
+- Funkcja **AUTO PRZYSTANKI: WŁ.** jest domyślnie włączona (stan zapisywany lokalnie, można ją wyłączyć na ekranie Ustawienia → GPS).
+- Po wybraniu kursu korzysta z kolejności przystanków WŁAŚCIWEGO WARIANTU RJ i 68 lokalizacji GPS zapisanych w aplikacji.
+- Przełącza **jedynie na kolejny** przystanek, gdy trzy osobne odczyty przez co najmniej 2,2 s potwierdzą wejście w strefę do ok. 65 m, z dokładnością GPS nie gorszą niż 65 m. Tablet musi znajdować się bliżej następnego niż bieżącego przystanku.
+- Zabezpieczenie: min. 5 s pomiędzy zmianami, brak przełączania przy ręcznym podglądzie, bez cofania i bez automatycznego kończenia kursu.
+- Ręczna zmiana przyciskami i ✓ nadal działa; AUTO GPS kontynuuje od ustawionego ręcznie przystanku.
+- Przejrzysty stan działania na ekranie GPS, mała etykieta AUTO GPS na ekranie KURS.
+- Jeśli wczytasz zewnętrzny RJ bez przypisanych koordynatów, przełączanie automatyczne jest wstrzymane, a nie zgadywane.
 
-1. Rozpakuj ZIP.
-2. Skopiuj **jego zawartość** do istniejącego repozytorium `SRG-Mobile`, zastępując poprzednie pliki. Nie kopiuj osobnego folderu nadrzędnego.
-3. GitHub Desktop → commit np. `SRG Mobile v1.4.18 GPS diagnostics` → Push origin.
-4. Na GitHub → Actions → Build SRG Mobile GPS APK → po zielonym wyniku pobierz artifact `SRG-Mobile-v1.4.18-GPS-DIAGNOSTYKA-debug`.
-5. Rozpakuj pobrany artifact, zainstaluj `app-debug.apk` na Androidzie.
+## Instalacja i budowanie
+1. Rozpakuj ZIP w folderze repozytorium **srg**. Skopiuj zawartość (nie katalog nadrzędny) z zastąpieniem wcześniejszych plików.
+2. GitHub Desktop → Commit to main → Push origin.
+3. GitHub → Actions → kompilacja `Build SRG Mobile GPS APK`.
+4. Pobierz plik z sekcji Artifacts (ZIP) i z niego `app-debug.apk`.
+5. Zainstaluj APK na tablecie. Pakiet `pl.srgmobile.classic.autogps19` instaluje się obok v1.4.18.
 
-## Test
+## Test w trasie (bezpieczeństwo)
+Po uruchomieniu kursu sprawdź, czy GPS pokazuje pozycję i otwórz Ustawienia → GPS: `AUTO PRZYSTANKI: WŁ.`. Gdy zbliżysz się do **następnego** przystanku, powinien sam zmienić pozycję licznika na ekranie KURS. Nie powinien przeskoczyć kilku przystanków ani przełączyć na sąsiedni kierunek. Przy niepoprawnych współrzędnych wyłącz AUTO GPS i popraw przystanek ręcznie.
 
-1. Włącz w Androidzie główny przełącznik **Lokalizacja**, a aplikacji nadaj **Dokładną lokalizację**.
-2. Otwórz ustawienia → GPS; użyj **Sprawdź stan** i następnie **Uruchom GPS**.
-3. Jeśli pozostanie problem, przepisz **kod z pola `Android GPS:`** i dalszy opis — np. `DISABLED`, `NO_PROVIDER`, `PERMISSION`, `WAITING` albo `ERROR`.
-4. Dla `WAITING` odczekaj na otwartej przestrzeni kilka minut. `NO_PROVIDER` oznacza brak sprzętowego GPS_PROVIDER, którego nie da się naprawić samymi uprawnieniami.
+**Ważne:** współrzędne 68 przystanków pochodzą z wcześniej zebranych danych, `gpsVerified=false`. Nie wszystkie przystanki ani punkty pośrednie zostały zweryfikowane w jeździe; automatyka jest eksperymentalna i nie służy do obsługi informacji pasażerskiej bez kontroli kierowcy.
 
-GPS w tej wersji jest satelitarny (`GPS_PROVIDER`), nie zastępowany po cichu lokalizacją z sieci. Punkty GPS z RJ zachowano. Nie włączono automatycznej zmiany przystanków, dopóki nie potwierdzimy odbioru pozycji na urządzeniu.
-
-## Zmiany
-- Odmowa i oczekiwanie na zgodę lokalizacji mają różne kody.
-- Okno uprawnień nie wyłącza natychmiast GPS poprzez `onPause`.
-- Powrót do aplikacji przywraca subskrypcję GPS.
-- Licznik satelitów nie blokuje GPS, jeśli system nie obsługuje tego wywołania.
-- Widok GPS ponownie odczytuje faktyczny stan usługi i udostępnia **Sprawdź stan**.
-- Nowy identyfikator Androida zapobiega konfliktowi podpisu z wcześniej instalowanymi eksperymentalnymi APK.
+## Kontrola testowa
+Algorytm w `app/src/main/assets/auto-gps.js` jest oddzielny od odbiornika GPS (Java) i może być testowany w Node.js (`node tests/test-auto-gps.cjs`). Nie dodawano dostępu do Internetu.
