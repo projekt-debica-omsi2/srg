@@ -1,0 +1,91 @@
+'use strict';
+/* SRG LCD v4.1: transfers until actual next-stop announcement after departure; then ads. */
+const el = id => document.getElementById(id);
+let currentState=null, ads=[], adsSignature='', adTimer=null, adNumber=-1, routeSignature='', pollInFlight=false;
+let lastMode='', transferSignature='', stopSignature='';
+const previewParams=new URLSearchParams(location.search);
+const forcedPreview=previewParams.get('preview');
+const weekFormat=new Intl.DateTimeFormat('pl-PL',{weekday:'long'});
+const dateFormat=new Intl.DateTimeFormat('pl-PL',{day:'numeric',month:'long',year:'numeric'});
+function tickClock(){
+ const d=new Date();el('time').textContent=`${d.getHours()}:${String(d.getMinutes()).padStart(2,'0')}`;
+ el('weekday').textContent=weekFormat.format(d);
+ el('longDate').textContent=dateFormat.format(d);
+}
+function isActive(d){return Boolean(d && d.kursAktywny===true && d.kursId && Array.isArray(d.przystanki) && d.przystanki.length)}
+function show(panel){if(lastMode===panel)return;lastMode=panel;el('clockPanel').hidden=panel!=='clock';el('routePanel').hidden=panel!=='route';el('stopPanel').hidden=panel!=='stop'}
+function routeText(stops){return stops.map(x=>x.nazwa||'').filter(Boolean).join('  –  ')}
+function setRoute(d){
+ const key=JSON.stringify([d.kursId,d.linia,d.kierunek,d.przystanki.map(x=>x.nazwa)]);
+ if(key===routeSignature)return;routeSignature=key;
+ el('routeLine').textContent=d.linia||'—';el('routeDirection').textContent='→ '+(d.kierunek||d.przystanki.at(-1)?.nazwa||'—').toLocaleUpperCase('pl-PL');
+ el('routeText').textContent=routeText(d.przystanki).toLocaleUpperCase('pl-PL');
+ const r=el('routeText');setTimeout(()=>fitMarquee(r,r.parentElement,'route'),0);
+}
+function setStop(label,name,note){
+ const n=String(name||'—').toLocaleUpperCase('pl-PL');
+ const sig=JSON.stringify([label,n,note||'']);
+ if(sig===stopSignature)return;stopSignature=sig;el('stopLabel').textContent=label;el('stopName').textContent=n;
+ el('stopName').classList.toggle('small',n.length>23);el('stopName').classList.toggle('tiny',n.length>31);
+ el('stopNote').textContent=note||'';el('stopPanel').classList.toggle('next-mode',label.startsWith('NASTĘPNY'));setTimeout(()=>fitMarquee(el('stopName'),el('stopPanel'),'stop'),0);
+}
+function fitMarquee(node,holder,type){
+ if(!node||!holder)return;
+ const available=type==='route'?holder.clientWidth:holder.clientWidth*0.96;
+ node.classList.remove('scrolling');holder.classList.remove('moving');node.style.removeProperty('--start-x');node.style.removeProperty('--end-x');
+ if(node.scrollWidth<=available+4)return;
+ const start=type==='stop'?(node.scrollWidth+32):0;
+ const distance=type==='stop'?(node.scrollWidth+holder.clientWidth+64):(node.scrollWidth-available+44);
+ node.style.setProperty('--start-x',start+'px');node.style.setProperty('--end-x',(start-distance)+'px');
+ node.style.setProperty(type==='route'?'--marquee-duration':'--stop-duration',(Math.max(12,Math.round(distance/48)+8))+'s');
+ if(type==='route')holder.classList.add('moving');else node.classList.add('scrolling');
+}
+function paint(){
+ const d=currentState;
+ if(!isActive(d)){show('clock');paintLower();return}
+ const sequence=['route','next','current','clock'];
+ const mode=(forcedPreview && sequence.includes(forcedPreview))?forcedPreview:sequence[Math.floor(Date.now()/7000)%sequence.length];
+ if(mode==='clock'){show('clock');paintLower();return}
+ if(mode==='route'){setRoute(d);show('route');paintLower();return}
+ const stop=mode==='next'?d.nastepny:d.aktualny;
+ const name=stop?.nazwa||((mode==='next'&&d.koniecKursu)?'====================':'—');
+ const isTerminal=(mode==='next'&&d.koncowyNastepny)||(mode==='current'&&d.koniecKursu);
+ setStop(mode==='next'?'NASTĘPNY PRZYSTANEK:':'PRZYSTANEK:',name,
+         isTerminal?'PRZYSTANEK KOŃCOWY':(stop?.naZadanie?'NA ŻĄDANIE':''));show('stop');paintLower();
+}
+function setTransfer(data){
+ const box=el('transferCarriers');box.replaceChildren();
+ el('transferStop').textContent=String(data.przystanek||'').toLocaleUpperCase('pl-PL');
+ for(const name of (data.przewoznicy||[])){
+  const chip=document.createElement('span');chip.className='transfer-carrier';chip.textContent=name;box.append(chip);
+ }
+}
+function paintLower(){
+ const d=currentState, data=isActive(d)&&d.reklamyPoZapowiedzi!==true?d.przesiadka:null;
+ const sig=data?JSON.stringify([d.kursId,d.aktualnyIndeks,data]):'';
+ if(sig!==transferSignature){transferSignature=sig;if(data)setTransfer(data)}
+ // Przesiadki az do rzeczywistej zapowiedzi nastepnego przystanku po odjezdzie.
+ // Pozniejsze cykliczne widoki 'next' NIE sa wyzwalaczem; sterownik przesyla nextStopAnnounced.
+ // Nowy przystanek zeruje znacznik i moze ponownie pokazac przesiadki.
+ const showTransfer=Boolean(data);
+ el('transfer').hidden=!showTransfer;
+ el('adMedia').style.visibility=showTransfer?'hidden':'visible';
+}
+async function pollState(){
+ if(pollInFlight)return;pollInFlight=true;
+ try{const r=await fetch('/api/state',{cache:'no-store'});if(!r.ok)throw Error(String(r.status));currentState=await r.json()}
+ catch(e){currentState={kursAktywny:false}}
+ finally{pollInFlight=false;paint()}
+}
+function chooseAd(){if(ads.length<2)return 0;let k=Math.floor(Math.random()*(ads.length-1));if(k>=adNumber)k++;return k}
+function nextAd(){
+ if(adTimer)clearTimeout(adTimer);const box=el('adMedia');box.replaceChildren();if(!ads.length){adNumber=-1;return}
+ adNumber=chooseAd();const entry=ads[adNumber],isVideo=entry.typ==='video';
+ const item=document.createElement(isVideo?'video':'img');item.className='aditem';item.src=entry.url;
+ if(isVideo){item.muted=true;item.autoplay=true;item.playsInline=true;item.addEventListener('ended',nextAd,{once:true});item.addEventListener('error',nextAd,{once:true});box.append(item);adTimer=setTimeout(nextAd,60000);item.play().catch(()=>{clearTimeout(adTimer);adTimer=setTimeout(nextAd,1500)})}
+ else{item.alt='';item.addEventListener('error',nextAd,{once:true});box.append(item);adTimer=setTimeout(nextAd,12000)}
+}
+async function pollAds(){try{const r=await fetch('/api/reklamy',{cache:'no-store'});if(!r.ok)throw Error(String(r.status));const a=await r.json();if(!Array.isArray(a))throw Error('bad list');const sig=JSON.stringify(a);if(sig!==adsSignature){adsSignature=sig;ads=a;nextAd()}}catch(e){}}
+tickClock();show('clock');pollState();pollAds();
+setInterval(tickClock,1000);setInterval(pollState,750);setInterval(paint,500);setInterval(pollAds,8000);
+window.SRGLcdPreview={paint,tickClock,show,setState(d){currentState=d;paint()}};

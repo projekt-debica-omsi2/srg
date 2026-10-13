@@ -1,4 +1,4 @@
-# SRG Mobile v1.4.25 — Marek Neural + 4 melodie + lokalna tablica LCD
+# SRG Mobile v1.4.28 — Marek Neural + jedna melodia B2–E4–C4 + LCD v4.1
 
 **Projekt źródłowy do zbudowania APK na GitHubie. Nie jest to skompilowany instalator.**
 
@@ -28,10 +28,10 @@ Pierwsza melodia to krótkie pianino B2–E4–C4 wybrane przez użytkownika; po
 
 To **dodatkowy ekran HTML** dla pasażerów, a nie modyfikacja oryginalnej zewnętrznej tablicy R&G 24 V.
 
-1. Zainstaluj zbudowane APK v1.4.25 na tablecie REVVL Tab 2.
+1. Zainstaluj zbudowane APK v1.4.28 na tablecie REVVL Tab 2.
 2. Połącz tablet i urządzenie z ekranem LCD z **tym samym prywatnym Wi-Fi**, bez izolacji klientów.
 3. Uruchom SRG Mobile, wybierz kurs, włącz GPS.
-4. W `Ustawienia → GPS` odczytaj adres, np. `http://192.168.1.123:47283/?key=12345678` (to tylko przykład; użyj **swojego** adresu i kodu).
+4. W `Ustawienia → GPS` odczytaj adres, np. `http://192.168.5.105:47283/` (przykładowe IP; użyj aktualnego IP swojego tabletu; bez klucza).
 5. Otwórz ten adres w przeglądarce urządzenia z LCD. Tablica będzie pobierała numer linii, kierunek, aktualny i kolejne przystanki co 1,7 sekundy.
 6. Aby **ukryć pasek adresu** w Chrome na komputerze naciśnij `F11`, albo kliknij subtelny przycisk `⛶` w prawym dolnym rogu. Na Androidzie można użyć trybu pełnoekranowego przeglądarki / instalacji strony na ekran główny (zależnie od przeglądarki). Sama zwykła strona HTML nie może na stałe wymusić schowania pasków systemowych.
 7. Ekran `app/src/main/assets/lcd.html` możesz otworzyć na komputerze **osobno** jako demonstrację wyglądu — zobaczysz znacznik DEMO. Nie wysyła wtedy danych GPS.
@@ -50,7 +50,7 @@ python GENERUJ_MP3_MAREK.py --dry-run  # pliki gotowe, to tylko podgląd tekstó
 node tests/test-marek-generated.cjs  # weryfikuje otrzymane 79 MP3
 ```
 
-Testy logiki GPS są komputerowe. **Aplikacja v1.4.25 i serwer LCD nie były jeszcze uruchomione na prawdziwym tablecie ani skompilowane z użyciem GitHub Actions**. Ich działanie trzeba potwierdzić na urządzeniach, a szczególnie prawidłowy adres Wi-Fi, dźwięk przycisków i odtwarzanie MP3.
+Testy logiki GPS są komputerowe. **Aplikacja v1.4.28 i serwer LCD nie były jeszcze uruchomione na prawdziwym tablecie ani skompilowane z użyciem GitHub Actions**. Ich działanie trzeba potwierdzić na urządzeniach, a szczególnie prawidłowy adres Wi-Fi, dźwięk przycisków i odtwarzanie MP3.
 
 
 ## Aktualizacja 1.4.24 — rozkłady S-25 i S-27 ze zdjęć
@@ -68,3 +68,30 @@ Testy logiki GPS są komputerowe. **Aplikacja v1.4.25 i serwer LCD nie były jes
 - Port wewnętrznej tablicy Android poprawiono z 8765 na **47283**; 8-cyfrowy kod parowania pozostaje.
 - **UWAGA:** projekt 1.4.25 nadal używa wcześniejszego prostego widoku tablicy LCD z 1.4.24. Pełny osobny prototyp LCD v4.1 (reklamy/przesiadki) nie został jeszcze zintegrowany z Androidem. Nie przedstawiać go jako gotowego elementu APK.
 - Kompilacja APK i test na tablecie nadal wymagane.
+
+
+## Aktualizacja v1.4.28 — LCD v4.1 + ustawienia
+- Wbudowany LCD v4.1 dostępny pod `http://IP_TABLETU:47283/` bez klucza. Tablet i komputer muszą być w tej samej sieci hotspotu. Zmiana IP wymaga aktualizacji adresu w QR.
+- Dolne pole LCD: skonfigurowane orientacyjne przesiadki, a poza nimi czarne tło. Własne reklamy z `app/src/main/assets/reklama/` (PNG/JPG/GIF/WEBP/MP4) są publikowane przez `/api/reklamy` i odtwarzane na LCD. Dodanie reklam wymaga ponownego zbudowania APK; import reklam przez UI nie jest zaimplementowany.
+- Górny pasek LCD: zegar, kierunek i trasa z bieżącego wariantu RJ, następny/aktualny przystanek, przewijanie przy zbyt długiej nazwie.
+- Numer pojazdu w Ustawienia → Numer pojazdu; trwały zapis na tablecie; `Nr: X` nad SRG Mobile.
+- Kasownik: pierwsze dotknięcie pokazuje X i odtwarza „Kontrola biletów”, drugie usuwa X bez dźwięku.
+- Dźwięk: przełącznik ZAPOWIEDZI obok głośnika i mikrofonu, jedna melodia B2–E4–C4.
+- Opóźnienie/przyspieszenie odnosi się do bieżącego przystanku; - dla opóźnienia, + dla przyspieszenia. Brak fotografii: robocze godziny interpolowane.
+- 79 oryginalnych MP3 zachowanych bez zmian. Dodatkowe nazwy cyfrowe dla Nagawczyny i Dąbrowy wymagają ponownego nagrania MP3, NIE są jeszcze podmienione.
+- Brak uwierzytelniania LCD oznacza, że każdy podłączony do hotspotu może odczytać informacje pasażerskie. Nie przekierowywać portu na Internet.
+
+
+## Aktualizacja v1.4.28 (2026-10-14)
+
+- **Odchyłka** z godziny aktualnie zatwierdzonego przystanku (minus = opóźnienie, plus = przyspieszenie, `0:00` na czas). Zmienia się też co sekundę. Godziny przy kursach sfotografowanych są bezpośrednio z fotografii; brakujące godziny między potwierdzonymi punktami są oznaczone tyldą `~` jako **szacunek**, nie dane ze zdjęć. Dla kursów roboczych wszystkie czasy pośrednie są szacowane na podstawie odległości GPS w obrębie tej samej trasy.
+- **Klęczany Stadion (ID 23) i Klęczany Szkoła (ID 47)** są obszarem o wspólnym znaczeniu rozkładowym, ale odrębnymi punktami fizycznymi, na odrębnych kierunkach i z oddzielnymi współrzędnymi GPS. NIE są zamieniane na siebie w automacie GPS i NIE kopiują między sobą godzin z przeciwnego kierunku.
+- **Koniec trasy**: po terminalnym przystanku następne dwie pozycje: `--:-- ====================`. Pole Droga dalej śledzi metry względem ostatniego odcinka, bez komunikatu KONIEC TRASY.
+- **DŹWIĘK**: pełna szerokość po prawej stronie panelu ikon. Zakładki Głośnik i Mikrofon (WRG), regulacja głośności 0–100. Głośność zapowiedzi MP3 jest naprawdę ustawiana w natywnym Android MediaPlayer. `Głośnik wewn./zewn.` to etykieta profilu — o faktycznym wyjściu jack/Bluetooth decydują ustawienia routingu Androida.
+- **WRG**: mikrofon wbudowany / zewnętrzny, ręczne ON/OFF, rzeczywisty odczyt wejścia i odsłuch/nagłośnienie Web Audio na domyślnym wyjściu Androida (wymaga udzielenia uprawnienia). Uruchom WRG tylko w bezpiecznej odległości od głośników — może wystąpić sprzężenie lub opóźnienie Bluetooth. Obsługa dwóch niezależnych wyjść Bluetooth równocześnie nie jest gwarantowana.
+- **KAMERY**: przełączanie podglądu rzeczywistej kamery tabletu przód/tył (jedna naraz), z przyznawaniem uprawnień Androida. Drugi jednoczesny tor kamery może być nieobsługiwany przez sprzęt. Jeśli WebView nie udostępnia WebRTC dla lokalnej strony plikowej, kamera pokaże komunikat zamiast fałszywego obrazu.
+- **Kasownik**: pierwszy klik włącza X i odtwarza komunikat; drugi usuwa X bez dźwięku.
+- **LCD v4.1**: poprawione nieprzerywane przewijanie nazwy długiego przystanku i pełnej trasy z RJ; port `47283`, wejście przez `http://IP_TABLETU:47283/` bez klucza, automatyczne informacje z kursówki/GPS. Przesiadki odłożone do czasu dostarczenia zweryfikowanych danych, więc obecnie dolny ekran pozostaje czarny lub wyświetla lokalne reklamy z APK.
+- **Ikona**: SRG Mobile Dębica zachowana z przesłanego logo.
+
+**Testy**: Node.js oraz podstawowe testy w przeglądarce. Nie wykonano kompilacji APK ani testu fizycznego na REVVL Tab 2 (brak lokalnego Android SDK). Po `Commit` i `Push` pobierz APK debug z GitHub Actions. Jeśli kamera/mikrofon wyświetla brak uprawnień, nadaj je w ustawieniach aplikacji Android.

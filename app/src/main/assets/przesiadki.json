@@ -1,0 +1,102 @@
+{
+  "wersja": 1,
+  "status": "KONFIGURACJA UŻYTKOWNIKA — NIEZWERYFIKOWANE POŁĄCZENIA",
+  "uwaga": "Listy przewoźników są propozycją ekspozycji, NIE potwierdzeniem postoju, połączenia ani skomunikowania. Edytuj po zweryfikowaniu na miejscu. RJ daje listę przystanków, nie rozkłady pozostałych przewoźników.",
+  "zasady": [
+    {
+      "id": "rzeszow_lokalne",
+      "nazwa": "Rzeszów — komunikacja miejska",
+      "stopIds": [
+        31,
+        32,
+        33,
+        34,
+        40,
+        41,
+        42,
+        43
+      ],
+      "przewoznicy": [
+        "MPK Rzeszów",
+        "PKS i przewoźnicy regionalni"
+      ]
+    },
+    {
+      "id": "rzeszow_dworce",
+      "nazwa": "Rzeszów — okolice dworców",
+      "stopIds": [
+        33,
+        34,
+        40,
+        41
+      ],
+      "przewoznicy": [
+        "PKP Intercity",
+        "POLREGIO",
+        "Leo Express"
+      ]
+    },
+    {
+      "id": "debica_mks",
+      "nazwa": "Dębica — komunikacja miejska",
+      "stopIds": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8,
+        62,
+        63,
+        64,
+        65,
+        66,
+        67,
+        68,
+        39
+      ],
+      "przewoznicy": [
+        "MKS Dębica"
+      ]
+    },
+    {
+      "id": "debica_pkp",
+      "nazwa": "Dębica — stacja kolejowa (jeśli występuje w RJ)",
+      "nazwaPattern": "\\bDĘBICA\\s+(PKP|DWORZEC KOLEJOWY|STACJA KOLEJOWA)\\b",
+      "przewoznicy": [
+        "PKP Intercity",
+        "POLREGIO",
+        "Leo Express"
+      ]
+    },
+    {
+      "id": "sedziszow_grunwaldzka",
+      "nazwa": "Sędziszów Małopolski — Grunwaldzka",
+      "stopIds": [
+        21,
+        49
+      ],
+      "przewoznicy": [
+        "POLREGIO"
+      ]
+    },
+    {
+      "id": "ropczyce_dworzec",
+      "nazwa": "Ropczyce — dworzec autobusowy",
+      "stopIds": [
+        14,
+        56
+      ],
+      "przewoznicy": [
+        "FlixBus",
+        "MONIS",
+        "BAK",
+        "Busik",
+        "Pozostali przewoźnicy"
+      ]
+    }
+  ],
+  "czasWyswietlania": "Przez cały czas, kiedy jest aktywny przystanek z przesiadkami; reklamy wracają po zmianie przystanku."
+}

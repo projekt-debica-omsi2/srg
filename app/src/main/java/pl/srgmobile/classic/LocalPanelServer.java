@@ -2,6 +2,8 @@ package pl.srgmobile.classic;
 
 import android.content.Context;
 import org.json.JSONObject;
+import org.json.JSONArray;
+import android.content.res.AssetManager;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.net.SocketException;
@@ -23,17 +25,15 @@ import java.util.concurrent.Executors;
  */
 final class LocalPanelServer {
     private final Context context;
-    private final String key;
     private volatile String state = "{\"active\":false}";
     private volatile long lastPublish = 0;
     private volatile boolean running = false;
     private ServerSocket server;
     private final ExecutorService workers = Executors.newFixedThreadPool(3);
     private static final Set<String> ALLOWED = new HashSet<>(Arrays.asList(
-        "active", "line", "direction", "current", "next", "following", "index", "count", "phase", "phaseUntil", "clock", "course"));
+        "active", "line", "direction", "current", "next", "following", "index", "count", "phase", "phaseUntil", "clock", "course", "kursAktywny", "kursId", "linia", "kierunek", "aktualnyIndeks", "koniecKursu", "koncowyNastepny", "reklamyPoZapowiedzi", "przystanki", "aktualny", "nastepny", "przesiadka"));
 
-    LocalPanelServer(Context context, String key) { this.context = context; this.key = key; }
-    String getKey() { return key; }
+    LocalPanelServer(Context context) { this.context = context; }
 
     void start() {
         if (running) return;
@@ -53,14 +53,15 @@ final class LocalPanelServer {
     }
 
     void publish(String raw) {
-        if (raw == null || raw.length() > 4000) return;
+        if (raw == null || raw.length() > 16000) return;
         try {
             JSONObject input = new JSONObject(raw), safe = new JSONObject();
             for (String field : ALLOWED) {
                 if (!input.has(field)) continue;
                 Object value = input.opt(field);
                 if (value instanceof Boolean || value instanceof Number) safe.put(field, value);
-                else if (value instanceof String) safe.put(field, ((String)value).substring(0, Math.min(150, ((String)value).length())));
+                else if (value instanceof String) safe.put(field, ((String)value).substring(0, Math.min(180, ((String)value).length())));
+                else if ((field.equals("przystanki") && value instanceof org.json.JSONArray) || ((field.equals("aktualny") || field.equals("nastepny") || field.equals("przesiadka")) && value instanceof JSONObject)) safe.put(field, value);
             }
             state = safe.toString();
             lastPublish = System.currentTimeMillis();
@@ -85,19 +86,52 @@ final class LocalPanelServer {
             int lines = 0; String line;
             while ((line = br.readLine()) != null && !line.isEmpty() && lines++ < 32) { /* headers */ }
             String path = parts[1];
-            boolean loopback = socket.getInetAddress().isLoopbackAddress();
-            boolean paired = loopback || path.matches("[^#]*[?&]key="+key+"(?:&[^#]*)?");
-            if (!paired) { send(socket, 403, "text/plain", "Brak kodu parowania SRG LCD".getBytes(StandardCharsets.UTF_8)); return; }
+            // Public read-only to local LAN: no query key (user QR points to bare IP:47283).
             String route = path.split("\\?",2)[0];
             if (route.equals("/") || route.equals("/lcd.html")) {
                 send(socket, 200, "text/html; charset=utf-8", asset("lcd.html"));
             } else if (route.equals("/manifest.webmanifest")) {
-                send(socket, 200, "application/manifest+json", new String(asset("manifest.webmanifest"), StandardCharsets.UTF_8).replace("__KEY__",key).getBytes(StandardCharsets.UTF_8));
+                send(socket, 200, "application/manifest+json", asset("manifest.webmanifest"));
+            } else if (route.equals("/app.js")) {
+                send(socket, 200, "application/javascript; charset=utf-8", asset("app.js"));
+            } else if (route.equals("/app.css")) {
+                send(socket, 200, "text/css; charset=utf-8", asset("app.css"));
+            } else if (route.equals("/api/reklamy")) {
+                JSONArray list = new JSONArray();
+                String[] files = context.getAssets().list("reklama");
+                if (files != null) for (String file : files) {
+                    if (!file.matches("[A-Za-z0-9_.-]{1,100}\\.(?i:png|jpg|jpeg|gif|webp|mp4)")) continue;
+                    JSONObject item = new JSONObject();item.put("url", "/reklama/"+file);
+                    item.put("typ", file.toLowerCase(java.util.Locale.ROOT).endsWith("mp4")?"video":"image");list.put(item);
+                }
+                send(socket, 200, "application/json; charset=utf-8", list.toString().getBytes(StandardCharsets.UTF_8));
+            } else if (route.startsWith("/reklama/")) {
+                String file = route.substring("/reklama/".length());
+                if (!file.matches("[A-Za-z0-9_.-]{1,100}\\.(?i:png|jpg|jpeg|gif|webp|mp4)")) {
+                    send(socket, 404, "text/plain", "Not found".getBytes(StandardCharsets.US_ASCII));return;
+                }
+                String extension = file.substring(file.lastIndexOf('.')+1).toLowerCase(java.util.Locale.ROOT);
+                String mime = extension.equals("mp4")?"video/mp4":extension.equals("png")?"image/png":extension.equals("gif")?"image/gif":extension.equals("webp")?"image/webp":"image/jpeg";
+                sendAssetStream(socket,"reklama/"+file,mime);
             } else if (route.equals("/api/state")) {
                 String json = state.substring(0, state.length()-1) + ",\"updatedAt\":"+lastPublish+"}";
                 send(socket, 200, "application/json; charset=utf-8", json.getBytes(StandardCharsets.UTF_8));
             } else { send(socket, 404, "text/plain", "Not found".getBytes(StandardCharsets.US_ASCII)); }
         } catch (Exception ignored) { }
+    }
+
+    private void sendAssetStream(Socket socket, String name, String mime) throws Exception {
+        // Stream assets to avoid copying large videos into heap; Android AssetInputStream supports available().
+        try (InputStream file = context.getAssets().open(name, AssetManager.ACCESS_STREAMING)) {
+            OutputStream out = socket.getOutputStream();
+            long remaining = file.available();
+            String headers = "HTTP/1.1 200 OK\r\nContent-Type: "+mime+"\r\nContent-Length: "+remaining+
+                "\r\nCache-Control: no-store\r\nX-Content-Type-Options: nosniff\r\nConnection: close\r\n\r\n";
+            out.write(headers.getBytes(StandardCharsets.US_ASCII));
+            byte[] buffer=new byte[16384];int n;
+            while ((n=file.read(buffer))!=-1){out.write(buffer,0,n);}
+            out.flush();
+        }
     }
 
     private byte[] asset(String name) throws Exception {

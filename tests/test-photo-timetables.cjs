@@ -22,7 +22,10 @@ assert(raw.includes("{tripNo:1,variantIndex:0,startTime:'16:00',endTime:'17:20',
 assert(raw.includes("{tripNo:6,variantIndex:1,startTime:'14:20',endTime:'15:45',photoTimesKey:'S-27:6'}"));
 assert(raw.indexOf("{tripNo:5,variantIndex:0,startTime:'12:45',endTime:'14:05'}")<raw.indexOf("{tripNo:6,variantIndex:1,startTime:'14:20',endTime:'15:45',photoTimesKey:'S-27:6'}"));
 assert(raw.includes('if(c.photoTimesKey)'));
-assert(raw.includes("const noTime=state.course?.photoTimesKey?'--:--':null"));
+assert(raw.includes('function plannedTimeInfo('));
+assert(raw.includes('if(c.photoTimesKey)'));
+assert(raw.includes("(inf.estimated?'~':'')"));
+assert(raw.includes('const id=ss[index]?.id'));
 assert(raw.includes("photoTimesKey:t.photoTimesKey||null"));
 const obj=raw.match(/const PHOTO_STOP_TIMES_BY_COURSE=(\{[^;]+\});/);
 assert(obj,'Brak mapy godzin w JS');assert.deepEqual(JSON.parse(obj[1]),{

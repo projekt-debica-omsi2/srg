@@ -11,9 +11,9 @@ for(const variant of route.variants){
 }
 for(let i=1;i<=4;i++)assert(fs.statSync(`app/src/main/assets/audio/chimes/${i}.mp3`).size>1000,'Brak dzwieku '+i);
 const panel=fs.readFileSync('app/src/main/assets/lcd.html','utf8');
-assert(panel.includes('/api/state'));assert(panel.includes('requestFullscreen'));
+assert(panel.includes('/app.js'));assert(fs.readFileSync('app/src/main/assets/app.js','utf8').includes('/api/state'));
 const html=fs.readFileSync('app/src/main/assets/index.html','utf8');
-assert(html.includes("playInspectionAudio();toast('KONTROLA BILETÓW')"));
+assert(html.includes("if(state.validatorOn)playInspectionAudio()"));
 assert(html.includes('window.SRGLcd.publish(JSON.stringify(payload))'));
 assert(html.includes('announceTerminal(stop.id,isStopOnRequest(stop))'));
 assert(html.includes("['na_zadanie.mp3']"));
@@ -24,4 +24,4 @@ assert(java.includes('na_zadanie.mp3'));
 assert(java.includes(':47283/'));
 const server=fs.readFileSync('app/src/main/java/pl/srgmobile/classic/LocalPanelServer.java','utf8');
 assert(server.includes('ServerSocket(47283)'));
-console.log('PASS LCD/RJ: 68 przystankow, 7 wariantow, 4 melodyjki, polaczenie i przyciski');
+console.log('PASS LCD/RJ: 68 przystankow, 7 wariantow, 79 voice MP3 + fixed piano chime, LCD v4.1, LAN no key');

@@ -1,0 +1,18 @@
+const fs=require('fs'),assert=require('node:assert/strict');
+const html=fs.readFileSync('app/src/main/assets/index.html','utf8');
+const js=fs.readFileSync('app/src/main/assets/app.js','utf8');
+const css=fs.readFileSync('app/src/main/assets/app.css','utf8');
+const java=fs.readFileSync('app/src/main/java/pl/srgmobile/classic/MainActivity.java','utf8');
+const server=fs.readFileSync('app/src/main/java/pl/srgmobile/classic/LocalPanelServer.java','utf8');
+assert(html.includes('id="vehicleInput"')&&html.includes('id="railVehicleNo"'));
+assert(html.includes("localStorage.setItem('srgVehicleNumber',v)"));
+assert(html.includes('id="soundVoiceToggle"')&&html.includes('validatorOff'));
+assert(html.includes('przystanki:active?ss.map(x=>({nazwa:x.name}))'));
+assert(html.includes('const info=plannedTimeInfo(idx,ss.length)')); 
+assert(js.includes("const sequence=['route','next','current','clock']"));
+assert(css.includes('.stop-panel.next-mode .stop-name{color:#101010}'));
+assert(css.includes('.stop-name.scrolling'));
+assert(java.includes(':47283/";')&&!java.includes(':47283/?key'));
+assert(!server.includes('if (!paired)'));
+assert(server.includes('/api/reklamy')&&server.includes('"przystanki"'));
+console.log('PASS v1.4.26 UI: nr pojazdu, voice, inspection, LCD v4.1 full RJ route, bare port');

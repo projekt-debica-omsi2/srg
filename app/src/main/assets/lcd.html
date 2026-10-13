@@ -1,68 +1,16 @@
-<!doctype html><html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="theme-color" content="#131c21"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-capable" content="yes"><title>SRG LCD — tablica wewnętrzna</title>
-<style>
-:root{--red:#b71c2b;--ink:#18232a;--light:#e9f0f4;--surface:#121b21;--muted:#90a3b0}
-*{box-sizing:border-box}html,body{margin:0;width:100%;height:100%;font-family:Arial,"Segoe UI",sans-serif;overflow:hidden;background:#0e1519;color:#fff}
-main{width:100vw;height:100dvh;display:flex;flex-direction:column;position:relative}
-header{background:#ecf1f5;color:#17232c;display:grid;grid-template-columns:minmax(100px,13%) 1fr auto;align-items:center;min-height:26%;gap:min(2vw,30px);padding:1.8vh 2.3vw;border-bottom:7px solid var(--red)}
-.route{font-size:clamp(54px,9.5vw,160px);font-weight:950;text-align:center;border-right:3px solid #a7b0b6;line-height:.95}
-.head-text{min-width:0}#headLabel{font-size:clamp(14px,1.8vw,35px);letter-spacing:.13em;font-weight:900;color:#65757f;text-transform:uppercase}
-#headStop{font-size:clamp(27px,4.1vw,78px);letter-spacing:-.03em;line-height:1.06;font-weight:950;overflow:hidden;white-space:nowrap;text-overflow:ellipsis}
-.side{text-align:right;min-width:9vw}.clock{font-size:clamp(23px,3vw,58px);font-variant-numeric:tabular-nums;font-weight:900}.status{font-size:clamp(9px,1.25vw,20px);color:#52616b;margin-top:6px;font-weight:700}
-section{flex:1;min-height:0;position:relative;display:flex;flex-direction:column;gap:4%;padding:4vh 5vw;background:radial-gradient(ellipse at 75% 35%,#2a3a45 0%,#111a20 58%,#0b1115 100%)}
-.brand{display:flex;align-items:center;justify-content:space-between;gap:2vw}.brand b{color:#dce7ec;font-size:clamp(13px,1.8vw,29px);letter-spacing:.2em}.brand span{background:#b71c2b;color:#fff;padding:.5em 1.1em;font-weight:850;letter-spacing:.08em;font-size:clamp(10px,1.2vw,22px)}
-.title{font-size:clamp(18px,3vw,65px);font-weight:850;color:#f3f7f9;max-width:97%;opacity:.92;text-transform:uppercase;line-height:1.05}
-.destination{font-size:clamp(30px,6vw,126px);font-weight:950;line-height:1.01;letter-spacing:-.027em;color:#fff;overflow:hidden;max-height:2.4em;word-wrap:break-word}
-.sub{font-size:clamp(14px,2.1vw,46px);font-weight:650;color:#c7d5dd;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.foot{margin-top:auto;display:grid;grid-template-columns:1fr auto;align-items:center;gap:2vw;border-top:2px solid #53616b;padding-top:2vh}
-.trail{font-size:clamp(12px,1.5vw,30px);color:#dce5ed;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.trail b{color:#fff}
-.counter{background:#f4f5f7;color:#141d23;font-size:clamp(20px,3vw,54px);font-weight:900;padding:.25em .5em}
-.last .brand span{background:#bc202b}.last .destination{color:#f6f6f6}
-button#full{position:absolute;right:8px;bottom:8px;opacity:.13;background:#232f36;color:white;border:1px solid #73808a;border-radius:5px;padding:5px 10px;cursor:pointer;font-size:13px}button#full:hover,button#full:focus{opacity:1}
-#demoFlag{display:none;position:absolute;top:0;left:0;z-index:2;background:#ebac25;color:#111;padding:3px 12px;font-weight:900;font-size:13px}
-@media(orientation:portrait){header{grid-template-columns:26% 1fr;min-height:29%}.side{display:none}.route{font-size:14vw}#headLabel{font-size:3.2vw}#headStop{font-size:5vw}section{padding:4vh 5vw}.title{font-size:4.3vw}.destination{font-size:10vw}.sub{font-size:3vw}.trail{font-size:3vw}.counter{font-size:5vw}}
-</style></head>
-<body><main id="screen"><div id="demoFlag">DEMO — bez połączenia ze sterownikiem</div><header><div class="route" id="line">1</div><div class="head-text"><div id="headLabel">NASTĘPNY PRZYSTANEK</div><div id="headStop">DĘBICA DWORZEC AUTOBUSOWY</div></div><div class="side"><div class="clock" id="clock">--:--</div><div class="status" id="status">OCZEKIWANIE NA DANE</div></div></header>
-<section><div class="brand"><b>SRG • INFORMACJA PASAŻERSKA</b><span id="indicator">KIERUNEK</span></div><div class="title" id="sectionTitle">LINIA 1 — KIERUNEK</div><div class="destination" id="big">RZESZÓW DWORZEC AUTOBUSOWY</div><div class="sub" id="detail">NASTĘPNY PRZYSTANEK: ZURT</div><div class="foot"><div class="trail" id="following">DALEJ: DĘBICA RZESZOWSKA TECHNIKUM</div><div class="counter" id="count">01 / 34</div></div></section>
-<button id="full" title="Przełącz ekran pełnoekranowy">⛶</button></main>
-<script>
-(() => {'use strict';
-const $=id=>document.getElementById(id), q=new URLSearchParams(location.search);
-const key=q.get('key')||(()=>{try{return localStorage.getItem('srgPanelToken')||''}catch(e){return ''}})();
-if(q.get('key'))try{localStorage.setItem('srgPanelToken',q.get('key'))}catch(e){}
-if(key && location.protocol==='http:'){const m=document.createElement('link');m.rel='manifest';m.href='/manifest.webmanifest?key='+encodeURIComponent(key);document.head.appendChild(m)}
-const fake={active:true,line:'1',direction:'RZESZÓW DWORZEC AUTOBUSOWY',current:'DĘBICA DWORZEC AUTOBUSOWY',next:'ZURT',following:'DĘBICA RZESZOWSKA TECHNIKUM',index:1,count:34,phase:'NEXT',phaseUntil:0,updatedAt:Date.now()};
-const demo=location.protocol==='file:'||q.get('demo')==='1';
-let latest=null, requestedFull=false;
-function clock(){const now=new Date();$('clock').textContent=now.toLocaleTimeString('pl-PL',{hour:'2-digit',minute:'2-digit'});}
-function draw(s){
- latest=s;
- const fresh=demo||(Date.now()-Number(s.updatedAt||0)<25000);
- const active=Boolean(s.active)&&fresh;
- $('demoFlag').style.display=demo?'block':'none';
- $('status').textContent=demo?'WIDOK DEMO':active?'POŁĄCZONO':'BRAK AKTUALNYCH DANYCH';
- if(!active){$('line').textContent='—';$('headLabel').textContent='BRAK AKTYWNEGO KURSU';$('headStop').textContent='SRG LCD';$('sectionTitle').textContent='WYBIERZ KURS W STEROWNIKU';$('big').textContent='OCZEKIWANIE NA DANE';$('detail').textContent='Połącz tablicę z tabletem przez Wi-Fi';$('following').textContent='—';$('count').textContent='-- / --';$('indicator').textContent='OFFLINE';$('screen').classList.remove('last');return;}
- const i=Number(s.index)||1, n=Number(s.count)||0, terminal=i===n;
- const phase=Date.now()<(s.phaseUntil||0)?s.phase:'NORMAL';
- $('line').textContent=s.line||'—';
- $('headLabel').textContent=phase==='ARRIVAL'?'PRZYSTANEK':phase==='NEXT'?'NASTĘPNY PRZYSTANEK':'OBECNY PRZYSTANEK';
- $('headStop').textContent=s.current||'—';
- $('sectionTitle').textContent=terminal?'PRZYSTANEK KOŃCOWY':phase==='ARRIVAL'?'DOJECHANO DO PRZYSTANKU':'LINIA '+(s.line||'—')+' — KIERUNEK';
- $('big').textContent=terminal?(s.current||'—'):(phase==='NEXT'?(s.current||'—'):(s.direction||'—'));
- $('detail').textContent=terminal?'DZIĘKUJEMY ZA PODRÓŻ':phase==='NEXT'?'NASTĘPNY PRZYSTANEK': 'NASTĘPNY: '+(s.next||'—');
- $('following').textContent=terminal?'KONIEC TRASY':'DALEJ: '+(s.next||'—')+(s.following?'  •  '+s.following:'');
- $('count').textContent=String(i).padStart(2,'0')+' / '+String(n).padStart(2,'0');
- $('indicator').textContent=terminal?'KOŃCOWY':phase==='NEXT'?'ZAPOWIEDŹ':'KIERUNEK';
- $('screen').classList.toggle('last',terminal);
-}
-async function poll(){
- if(demo){draw(fake);return;}
- try{
-  const res=await fetch('/api/state'+(key?'?key='+encodeURIComponent(key):''),{cache:'no-store'});
-  if(!res.ok)throw Error('HTTP '+res.status);
-  draw(await res.json());
- }catch(e){draw({...fake,active:false,updatedAt:0});}
-}
-$('full').addEventListener('click',async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen();}catch(e){}});
-clock();setInterval(clock,1000);poll();setInterval(poll,1700);setInterval(()=>{if(latest)draw(latest)},1000);
-})();
-</script></body></html>
+<!doctype html>
+<html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="theme-color" content="#065ac4"><title>SRG LCD v4 · 47283</title><link href="/app.css" rel="stylesheet"></head>
+<body><main id="lcd"><header id="info" aria-live="off">
+  <section id="clockPanel" class="panel clock-panel"><div id="time" class="clock-value">6:34</div><div class="calendar"><div id="weekday">poniedziałek</div><div id="longDate">12 października 2026</div></div></section>
+  <section id="routePanel" class="panel paper-panel" hidden><div id="routeLine" class="route-number">1</div><div class="right-info"><div class="route-direction" id="routeDirection">—</div><div class="route-caption"><span>TRASA:</span><div class="ticker-window"><span id="routeText"></span></div></div></div></section>
+  <section id="stopPanel" class="panel paper-panel stop-panel" hidden><div id="stopLabel" class="stop-label">PRZYSTANEK:</div><div id="stopName" class="stop-name">—</div><div id="stopNote" class="stop-note"></div></section>
+</header>
+<section id="ad" class="ads">
+  <div id="adMedia" aria-label="Pole na reklamy"></div>
+  <div id="transfer" class="transfer" hidden aria-label="Informacje o przesiadkach">
+    <div class="transfer-head"><span class="transfer-mark">↔</span><div class="transfer-heading"><div class="transfer-kicker">INFORMACJE PASAŻERSKIE</div><div class="transfer-title">MOŻLIWE PRZESIADKI</div></div></div>
+    <div class="transfer-stop" id="transferStop">—</div>
+    <div class="transfer-carriers" id="transferCarriers"></div>
+    <div class="transfer-foot">Informacja orientacyjna · sprawdź rozkład wybranego przewoźnika</div>
+  </div>
+</section></main><script src="/app.js"></script></body></html>

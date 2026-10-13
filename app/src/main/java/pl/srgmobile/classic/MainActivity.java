@@ -23,8 +23,11 @@ import android.webkit.JavascriptInterface;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+import android.webkit.WebChromeClient;
+import android.webkit.PermissionRequest;
+import java.util.ArrayList;
+import java.util.List;
 import org.json.JSONObject;
-import java.security.SecureRandom;
 import java.net.NetworkInterface;
 import java.net.Inet4Address;
 import java.net.InetAddress;
@@ -33,6 +36,9 @@ import java.util.Collections;
 /** Natywne, lokalne GPS_PROVIDER bez wymagania Internetu. */
 public final class MainActivity extends Activity implements LocationListener {
     private static final int LOCATION_REQUEST = 41;
+    private static final int MEDIA_REQUEST = 42;
+    private PermissionRequest pendingMediaRequest;
+    private float voiceVolume = 0.9f;
     private WebView web;
     private LocationManager gps;
     private boolean requested = false;
@@ -54,13 +60,11 @@ public final class MainActivity extends Activity implements LocationListener {
         if (state != null) requested = state.getBoolean("gps_requested", requested);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         gps = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
-        chimeIndex = Math.max(1, Math.min(4, getPreferences(MODE_PRIVATE).getInt("chime_index", 1)));
-        String token = getPreferences(MODE_PRIVATE).getString("lcd_key", null);
-        if (token == null || !token.matches("[0-9]{8}")) {
-            token = String.format(java.util.Locale.US, "%08d", new SecureRandom().nextInt(100000000));
-            getPreferences(MODE_PRIVATE).edit().putString("lcd_key", token).apply();
-        }
-        lcdServer = new LocalPanelServer(this, token);
+        chimeIndex = 1; // Jedyny dzwonek B2-E4-C4
+        voiceVolume = getPreferences(MODE_PRIVATE).getFloat("voice_volume",0.9f);
+        // LCD: odczyt tylko w lokalnej sieci Wi-Fi/hotspot, stały port 47283,
+        // brak klucza w adresie (zgodność z wydrukowanym QR).
+        lcdServer = new LocalPanelServer(this);
         lcdServer.start();
         web = new WebView(this);
         web.setBackgroundColor(0xff070a09);
@@ -72,6 +76,32 @@ public final class MainActivity extends Activity implements LocationListener {
         cfg.setAllowContentAccess(false);
         cfg.setAllowFileAccessFromFileURLs(false);
         cfg.setAllowUniversalAccessFromFileURLs(false);
+        web.setWebChromeClient(new WebChromeClient() {
+            @Override public void onPermissionRequest(PermissionRequest request) {
+                runOnUiThread(() -> {
+                    // WebView wczytuje wyłącznie lokalne, zaufane assety aplikacji.
+                    String origin = String.valueOf(request.getOrigin());
+                    if (!origin.startsWith("file://")) { request.deny();return; }
+                    List<String> missing=new ArrayList<>();
+                    for (String r:request.getResources()) {
+                        if (PermissionRequest.RESOURCE_VIDEO_CAPTURE.equals(r)) {
+                            if (checkSelfPermission(Manifest.permission.CAMERA)!=PackageManager.PERMISSION_GRANTED)
+                                missing.add(Manifest.permission.CAMERA);
+                        } else if (PermissionRequest.RESOURCE_AUDIO_CAPTURE.equals(r)) {
+                            if (checkSelfPermission(Manifest.permission.RECORD_AUDIO)!=PackageManager.PERMISSION_GRANTED)
+                                missing.add(Manifest.permission.RECORD_AUDIO);
+                        } else {request.deny();return;}
+                    }
+                    if (pendingMediaRequest!=null) pendingMediaRequest.deny();
+                    pendingMediaRequest=request;
+                    if (missing.isEmpty()) completeMediaPermission();
+                    else requestPermissions(missing.toArray(new String[0]),MEDIA_REQUEST);
+                });
+            }
+            @Override public void onPermissionRequestCanceled(PermissionRequest request) {
+                runOnUiThread(() -> { if (pendingMediaRequest==request) pendingMediaRequest=null; });
+            }
+        });
         web.setWebViewClient(new WebViewClient() {
             @Override public boolean shouldOverrideUrlLoading(WebView view, android.webkit.WebResourceRequest req) {
                 String url = req.getUrl().toString();
@@ -122,9 +152,26 @@ public final class MainActivity extends Activity implements LocationListener {
             if (lcdServer != null) lcdServer.publish(json);
         }
         @JavascriptInterface public String getUrl() {
-            return "http://"+getLocalIp()+":47283/?key="+lcdServer.getKey();
+            return "http://"+getLocalIp()+":47283/";
         }
     }
+    private void completeMediaPermission() {
+        PermissionRequest r=pendingMediaRequest; pendingMediaRequest=null;
+        if(r==null)return;
+        List<String> permitted=new ArrayList<>();
+        for(String res:r.getResources()) {
+            if(PermissionRequest.RESOURCE_VIDEO_CAPTURE.equals(res) &&
+               checkSelfPermission(Manifest.permission.CAMERA)==PackageManager.PERMISSION_GRANTED)
+                permitted.add(res);
+            else if(PermissionRequest.RESOURCE_AUDIO_CAPTURE.equals(res) &&
+               checkSelfPermission(Manifest.permission.RECORD_AUDIO)==PackageManager.PERMISSION_GRANTED)
+                permitted.add(res);
+        }
+        if (permitted.size()==r.getResources().length && !permitted.isEmpty())
+            r.grant(permitted.toArray(new String[0]));
+        else r.deny();
+    }
+
     private String getLocalIp() {
         String fallback = null;
         try {
@@ -172,7 +219,7 @@ public final class MainActivity extends Activity implements LocationListener {
             runOnUiThread(() -> queueVoice(chimeFile(), "inspection.mp3"));
         }
         @JavascriptInterface public void setChime(int i) {
-            if (i < 1 || i > 4) return;
+            if (i != 1) return;
             runOnUiThread(() -> {
                 chimeIndex = i;
                 getPreferences(MODE_PRIVATE).edit().putInt("chime_index", i).apply();
@@ -180,6 +227,13 @@ public final class MainActivity extends Activity implements LocationListener {
             });
         }
         @JavascriptInterface public void stop() { runOnUiThread(() -> stopVoice()); }
+        @JavascriptInterface public void setVolume(int percent) {
+            runOnUiThread(() -> {
+                voiceVolume=Math.max(0f,Math.min(1f,percent/100f));
+                getPreferences(MODE_PRIVATE).edit().putFloat("voice_volume",voiceVolume).apply();
+                if(voicePlayer!=null)voicePlayer.setVolume(voiceVolume,voiceVolume);
+            });
+        }
     }
     private String chimeFile() { return "chimes/"+chimeIndex+".mp3"; }
     private void queueVoice(String... files) {
@@ -221,6 +275,7 @@ public final class MainActivity extends Activity implements LocationListener {
                 return true;
             });
             mp.prepare();
+            mp.setVolume(voiceVolume,voiceVolume);
             voicePlayer = mp;
             sendJS("window.onNativeAudioStatus&&window.onNativeAudioStatus('PLAYING','');");
             mp.start();
@@ -325,6 +380,7 @@ public final class MainActivity extends Activity implements LocationListener {
 
     @Override public void onRequestPermissionsResult(int code, String[] perms, int[] grants) {
         super.onRequestPermissionsResult(code, perms, grants);
+        if (code == MEDIA_REQUEST) { completeMediaPermission(); return; }
         if (code != LOCATION_REQUEST) return;
         if (hasFinePermission()) {
             if (requested) startGpsNative(); else explainStatus();
@@ -396,6 +452,7 @@ public final class MainActivity extends Activity implements LocationListener {
         stopListening();
         stopVoice();
         if (lcdServer != null) lcdServer.close();
+        if (pendingMediaRequest!=null){pendingMediaRequest.deny();pendingMediaRequest=null;}
         pageReady=false;
         if (web != null) { web.removeJavascriptInterface("SRGNativeGPS"); web.removeJavascriptInterface("SRGNativeAudio"); web.removeJavascriptInterface("SRGLcd"); web.destroy(); web=null; }
         super.onDestroy();
