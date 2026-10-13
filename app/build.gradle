@@ -5,11 +5,11 @@ android {
     compileSdk 35
 
     defaultConfig {
-        applicationId 'pl.srgmobile.classic.lcd23'
+        applicationId 'pl.srgmobile.classic.lcd29standalone'
         minSdk 26
         targetSdk 34
-        versionCode 11428
-        versionName '1.4.28'
+        versionCode 11429
+        versionName '1.4.29'
     }
 
     buildTypes {
