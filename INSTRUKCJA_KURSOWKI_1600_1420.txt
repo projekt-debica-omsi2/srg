@@ -1,0 +1,26 @@
+SRG Mobile v1.4.24 — DWIE KURSÓWKI Z GODZINAMI Z FOTOGRAFII
+
+S-25 kurs nr 1: 16:00 Dębica DA → 17:20 Rzeszów DA; wariant RJ 0.
+S-27 kurs nr 6 (OSTATNI): 14:20 Rzeszów DA → 15:45 Dębica DA; wariant RJ 1.
+
+Czasy na 32 kafelkach każdego kursu przepisano z oryginalnego ekranu.
+Brak interpolacji w tych dwóch kursach: --:-- w aplikacji oznacza
+przystanek, którego nie można rzetelnie połączyć ze skrótem z fotografii.
+Wszystkie oryginalne 64 godziny znajdziesz w KURSOWKI_FOTO_1600_1420.csv i JSON.
+Uwaga: nie utożsamiaj 'numer na ekranie' z ID przystanku RJ.
+Przystanki GPS i kolejność wariantów pozostały bez zmian.
+
+DO SPRAWDZENIA PO PODANIU PEŁNYCH NAZW:
+- D-CA MECHA (RJ: TECHNIKUM / RAJ — brak pewnej zgodności)
+- NAGAWCZYNA / NAGAWCZYN1 (RJ: NAGAWCZYNA 1 / 2)
+- ŚWILCZA GÓ (w RJ: ŚWILCZA OSIEDLE / NOWY DWÓR)
+- DĄBROWA1 vs RJ DĄBROWA 2 i KLĘCZANSTA vs RJ KLĘCZANY SZKOŁA (S-27)
+- D-CA RZCPN i D-CA MECHA w końcowej części S-27
+
+UŻYCIE:
+1. Wypakuj CAŁY projekt ZIP do lokalnego repozytorium srg, nadpisując projekt.
+2. Jeśli nie wygenerowałeś jeszcze 78 plików Marek Neural, uruchom
+   GENERUJ_WSZYSTKIE_MP3.cmd na Windows i poczekaj na 78/78.
+3. Dodaj pliki w GitHub Desktop i wykonaj Commit + Push.
+4. GitHub Actions zbuduje APK, pod warunkiem że test wygenerowanych MP3 przejdzie.
+To źródła Android Studio, NIE skompilowany APK. Nie testowano jeszcze na fizycznym tablecie.

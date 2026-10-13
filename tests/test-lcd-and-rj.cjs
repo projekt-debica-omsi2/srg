@@ -1,0 +1,27 @@
+const fs=require('fs');
+const assert=require('assert/strict');
+const route=JSON.parse(fs.readFileSync('route_data.json','utf8'));
+const stops=new Map(route.stops.map(s=>[s.id,s.name]));
+assert.equal(route.stops.length,68);assert.equal(stops.size,68);
+assert.equal(route.variants.length,7);
+for(const variant of route.variants){
+ assert(variant.stopIds.length>1,'wariant za krotki');
+ assert(stops.has(variant.stopIds[0])&&stops.has(variant.stopIds.at(-1)),'ID kursu bez nazwy');
+ for(const id of variant.stopIds)assert(stops.has(id),'Brak nazwy RJ id '+id);
+}
+for(let i=1;i<=4;i++)assert(fs.statSync(`app/src/main/assets/audio/chimes/${i}.mp3`).size>1000,'Brak dzwieku '+i);
+const panel=fs.readFileSync('app/src/main/assets/lcd.html','utf8');
+assert(panel.includes('/api/state'));assert(panel.includes('requestFullscreen'));
+const html=fs.readFileSync('app/src/main/assets/index.html','utf8');
+assert(html.includes("playInspectionAudio();toast('KONTROLA BILETÓW')"));
+assert(html.includes('window.SRGLcd.publish(JSON.stringify(payload))'));
+assert(html.includes('announceTerminal(stop.id,isStopOnRequest(stop))'));
+assert(html.includes("['na_zadanie.mp3']"));
+assert(html.includes('announceName(stop.id,isStopOnRequest(stop))'));
+const java=fs.readFileSync('app/src/main/java/pl/srgmobile/classic/MainActivity.java','utf8');
+assert(java.includes('onRequest) queueVoice(chimeFile(), \"next.mp3\"'));
+assert(java.includes('na_zadanie.mp3'));
+assert(java.includes(':47283/'));
+const server=fs.readFileSync('app/src/main/java/pl/srgmobile/classic/LocalPanelServer.java','utf8');
+assert(server.includes('ServerSocket(47283)'));
+console.log('PASS LCD/RJ: 68 przystankow, 7 wariantow, 4 melodyjki, polaczenie i przyciski');

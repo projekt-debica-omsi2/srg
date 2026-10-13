@@ -6,6 +6,11 @@ import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.location.GnssStatus;
+import android.media.AudioAttributes;
+import android.media.MediaPlayer;
+import android.content.res.AssetFileDescriptor;
+import java.util.ArrayDeque;
+import java.io.IOException;
 import android.location.Location;
 import android.location.LocationListener;
 import android.location.LocationManager;
@@ -19,6 +24,11 @@ import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
 import org.json.JSONObject;
+import java.security.SecureRandom;
+import java.net.NetworkInterface;
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.util.Collections;
 
 /** Natywne, lokalne GPS_PROVIDER bez wymagania Internetu. */
 public final class MainActivity extends Activity implements LocationListener {
@@ -33,6 +43,10 @@ public final class MainActivity extends Activity implements LocationListener {
     private long lastFixAt = 0L;
     private final Handler handler = new Handler(Looper.getMainLooper());
     private GnssStatus.Callback satCallback;
+    private MediaPlayer voicePlayer;
+    private final ArrayDeque<String> pendingVoice = new ArrayDeque<>();
+    private LocalPanelServer lcdServer;
+    private int chimeIndex = 1;
 
     @Override public void onCreate(Bundle state) {
         super.onCreate(state);
@@ -40,6 +54,14 @@ public final class MainActivity extends Activity implements LocationListener {
         if (state != null) requested = state.getBoolean("gps_requested", requested);
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         gps = (LocationManager) getSystemService(Context.LOCATION_SERVICE);
+        chimeIndex = Math.max(1, Math.min(4, getPreferences(MODE_PRIVATE).getInt("chime_index", 1)));
+        String token = getPreferences(MODE_PRIVATE).getString("lcd_key", null);
+        if (token == null || !token.matches("[0-9]{8}")) {
+            token = String.format(java.util.Locale.US, "%08d", new SecureRandom().nextInt(100000000));
+            getPreferences(MODE_PRIVATE).edit().putString("lcd_key", token).apply();
+        }
+        lcdServer = new LocalPanelServer(this, token);
+        lcdServer.start();
         web = new WebView(this);
         web.setBackgroundColor(0xff070a09);
         WebSettings cfg = web.getSettings();
@@ -61,6 +83,8 @@ public final class MainActivity extends Activity implements LocationListener {
             }
         });
         web.addJavascriptInterface(new GpsBridge(), "SRGNativeGPS");
+        web.addJavascriptInterface(new AudioBridge(), "SRGNativeAudio");
+        web.addJavascriptInterface(new LcdBridge(), "SRGLcd");
         setContentView(web);
         web.loadUrl("file:///android_asset/index.html");
     }
@@ -90,6 +114,125 @@ public final class MainActivity extends Activity implements LocationListener {
                 catch (Exception e) { sendStatus("ERROR", "Nie można otworzyć ustawień Androida: "+e.getMessage()); }
             });
         }
+    }
+
+    /** Publish ONLY passenger-facing course data; never expose coordinates or driver ID. */
+    public final class LcdBridge {
+        @JavascriptInterface public void publish(String json) {
+            if (lcdServer != null) lcdServer.publish(json);
+        }
+        @JavascriptInterface public String getUrl() {
+            return "http://"+getLocalIp()+":47283/?key="+lcdServer.getKey();
+        }
+    }
+    private String getLocalIp() {
+        String fallback = null;
+        try {
+            for (NetworkInterface nif : Collections.list(NetworkInterface.getNetworkInterfaces())) {
+                if (!nif.isUp() || nif.isLoopback()) continue;
+                for (InetAddress ip : Collections.list(nif.getInetAddresses())) {
+                    if (!(ip instanceof Inet4Address) || !ip.isSiteLocalAddress() || ip.isLoopbackAddress()) continue;
+                    // Prefer the tablet Wi-Fi address over any VPN or tethering interface.
+                    if (nif.getName().toLowerCase(java.util.Locale.ROOT).startsWith("wlan")) return ip.getHostAddress();
+                    if (fallback == null) fallback = ip.getHostAddress();
+                }
+            }
+        } catch (Exception ignored) { }
+        return fallback == null ? "127.0.0.1" : fallback;
+    }
+
+    /** Each utterance starts with the selected short chime (1..4). */
+    public final class AudioBridge {
+        @JavascriptInterface public void announceStop(int stopId, boolean onRequest) {
+            if (stopId < 1 || stopId > 68) return;
+            runOnUiThread(() -> {
+                if (onRequest) queueVoice(chimeFile(), "next.mp3", "stops/"+stopId+".mp3", "na_zadanie.mp3");
+                else queueVoice(chimeFile(), "next.mp3", "stops/"+stopId+".mp3");
+            });
+        }
+        @JavascriptInterface public void announceTerminal(int stopId, boolean onRequest) {
+            if (stopId < 1 || stopId > 68) return;
+            runOnUiThread(() -> {
+                if (onRequest) queueVoice(chimeFile(), "next.mp3", "stops/"+stopId+".mp3", "na_zadanie.mp3", "terminal.mp3");
+                else queueVoice(chimeFile(), "next.mp3", "stops/"+stopId+".mp3", "terminal.mp3");
+            });
+        }
+        @JavascriptInterface public void announceName(int stopId, boolean onRequest) {
+            if (stopId < 1 || stopId > 68) return;
+            runOnUiThread(() -> {
+                if (onRequest) queueVoice(chimeFile(), "stops/"+stopId+".mp3", "na_zadanie.mp3");
+                else queueVoice(chimeFile(), "stops/"+stopId+".mp3");
+            });
+        }
+        @JavascriptInterface public void announceStart(int variantIndex) {
+            if (variantIndex < 0 || variantIndex > 6) return;
+            runOnUiThread(() -> queueVoice(chimeFile(), "start/"+variantIndex+".mp3"));
+        }
+        @JavascriptInterface public void announceInspection() {
+            runOnUiThread(() -> queueVoice(chimeFile(), "inspection.mp3"));
+        }
+        @JavascriptInterface public void setChime(int i) {
+            if (i < 1 || i > 4) return;
+            runOnUiThread(() -> {
+                chimeIndex = i;
+                getPreferences(MODE_PRIVATE).edit().putInt("chime_index", i).apply();
+                queueVoice(chimeFile());
+            });
+        }
+        @JavascriptInterface public void stop() { runOnUiThread(() -> stopVoice()); }
+    }
+    private String chimeFile() { return "chimes/"+chimeIndex+".mp3"; }
+    private void queueVoice(String... files) {
+        stopVoice();
+        for (String file : files) pendingVoice.addLast(file);
+        playVoiceNext();
+    }
+    private void stopVoice() {
+        pendingVoice.clear();
+        if (voicePlayer != null) {
+            try { voicePlayer.setOnCompletionListener(null); voicePlayer.stop(); } catch (Exception ignored) {}
+            try { voicePlayer.release(); } catch (Exception ignored) {}
+            voicePlayer = null;
+        }
+    }
+    private void playVoiceNext() {
+        if (pendingVoice.isEmpty()) {
+            sendJS("window.onNativeAudioStatus&&window.onNativeAudioStatus('DONE','');");
+            return;
+        }
+        String file = pendingVoice.removeFirst();
+        if (!file.matches("(?:chimes/[1-4]\\.mp3|next\\.mp3|stops/[0-9]{1,2}\\.mp3|start/[0-6]\\.mp3|terminal\\.mp3|inspection\\.mp3|na_zadanie\\.mp3)")) {
+            sendAudioError("Nieprawidłowy plik audio");
+            playVoiceNext();
+            return;
+        }
+        MediaPlayer mp = new MediaPlayer();
+        try (AssetFileDescriptor afd = getAssets().openFd("audio/"+file)) {
+            mp.setAudioAttributes(new AudioAttributes.Builder()
+                    .setUsage(AudioAttributes.USAGE_MEDIA)
+                    .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH).build());
+            mp.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
+            mp.setOnCompletionListener(completed -> {
+                if (voicePlayer != completed) return;
+                completed.release();voicePlayer=null;playVoiceNext();
+            });
+            mp.setOnErrorListener((player, what, extra) -> {
+                if (voicePlayer == player) { player.release(); voicePlayer=null;sendAudioError("Błąd dekodera "+what);playVoiceNext(); }
+                return true;
+            });
+            mp.prepare();
+            voicePlayer = mp;
+            sendJS("window.onNativeAudioStatus&&window.onNativeAudioStatus('PLAYING','');");
+            mp.start();
+        } catch (IOException | IllegalStateException e) {
+            try { mp.release(); } catch (Exception ignored) {}
+            voicePlayer = null;
+            sendAudioError("Nie można odtworzyć "+file+": "+e.getMessage());
+            playVoiceNext();
+        }
+    }
+    private void sendAudioError(String detail) {
+        sendJS("window.onNativeAudioStatus&&window.onNativeAudioStatus('ERROR',"+JSONObject.quote(detail)+");");
     }
 
     private void storeRequested() {
@@ -241,6 +384,7 @@ public final class MainActivity extends Activity implements LocationListener {
     @Override protected void onStop() {
         // Brak lokalizacji w tle. Użytkownik nadal chce GPS po wznowieniu.
         stopListening();
+        stopVoice();
         super.onStop();
     }
     @Override protected void onResume() {
@@ -250,8 +394,10 @@ public final class MainActivity extends Activity implements LocationListener {
     }
     @Override protected void onDestroy() {
         stopListening();
+        stopVoice();
+        if (lcdServer != null) lcdServer.close();
         pageReady=false;
-        if (web != null) { web.removeJavascriptInterface("SRGNativeGPS"); web.destroy(); web=null; }
+        if (web != null) { web.removeJavascriptInterface("SRGNativeGPS"); web.removeJavascriptInterface("SRGNativeAudio"); web.removeJavascriptInterface("SRGLcd"); web.destroy(); web=null; }
         super.onDestroy();
     }
 }
