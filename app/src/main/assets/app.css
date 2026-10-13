@@ -34,3 +34,10 @@
 @keyframes marquee{0%,8%{transform:translateX(var(--start-x,0px))}92%,100%{transform:translateX(var(--end-x,-100px))}}
 @keyframes stop-scroll{0%,8%{transform:translateX(var(--start-x,0px))}92%,100%{transform:translateX(var(--end-x,-100px))}}
 .clock-panel .calendar{position:relative;align-self:stretch;flex:1}#longDate{position:absolute;right:2%;bottom:10%;text-align:right}#weekday{position:absolute;left:3%;top:10%}
+
+/* v1.4.29: strzałka przy lewej krawędzi; ciągły ticker od prawej do lewej */
+.route-number{left:1%;font-size:clamp(35px,5.2vw,95px)}
+.right-info{left:9%;right:1%}
+.route-caption{overflow:hidden}
+.ticker-window.moving #routeText{animation:marquee var(--marquee-duration,28s) linear infinite!important;animation-delay:0s!important}
+@keyframes marquee{0%{transform:translateX(var(--start-x,100%))}100%{transform:translateX(var(--end-x,-100%))}}

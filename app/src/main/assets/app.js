@@ -16,10 +16,10 @@ function isActive(d){return Boolean(d && d.kursAktywny===true && d.kursId && Arr
 function show(panel){if(lastMode===panel)return;lastMode=panel;el('clockPanel').hidden=panel!=='clock';el('routePanel').hidden=panel!=='route';el('stopPanel').hidden=panel!=='stop'}
 function routeText(stops){return stops.map(x=>x.nazwa||'').filter(Boolean).join('  –  ')}
 function setRoute(d){
- const key=JSON.stringify([d.kursId,d.linia,d.kierunek,d.przystanki.map(x=>x.nazwa)]);
+ const key=JSON.stringify([d.kursId,d.linia,d.kierunek,d.aktualnyIndeks,d.przystanki.map(x=>x.nazwa)]);
  if(key===routeSignature)return;routeSignature=key;
- el('routeLine').textContent=d.linia||'—';el('routeDirection').textContent='→ '+(d.kierunek||d.przystanki.at(-1)?.nazwa||'—').toLocaleUpperCase('pl-PL');
- el('routeText').textContent=routeText(d.przystanki).toLocaleUpperCase('pl-PL');
+ el('routeLine').textContent='→';el('routeDirection').textContent='→ '+(d.kierunek||d.przystanki.at(-1)?.nazwa||'—').toLocaleUpperCase('pl-PL');
+ el('routeText').textContent=routeText(d.przystanki.slice(Math.max(0,d.aktualnyIndeks||0))).toLocaleUpperCase('pl-PL');
  const r=el('routeText');setTimeout(()=>fitMarquee(r,r.parentElement,'route'),0);
 }
 function setStop(label,name,note){
@@ -33,25 +33,40 @@ function fitMarquee(node,holder,type){
  if(!node||!holder)return;
  const available=type==='route'?holder.clientWidth:holder.clientWidth*0.96;
  node.classList.remove('scrolling');holder.classList.remove('moving');node.style.removeProperty('--start-x');node.style.removeProperty('--end-x');
- if(node.scrollWidth<=available+4)return;
- const start=type==='stop'?(node.scrollWidth+32):0;
- const distance=type==='stop'?(node.scrollWidth+holder.clientWidth+64):(node.scrollWidth-available+44);
+ if(type!=='route' && node.scrollWidth<=available+4)return;
+ const start=type==='stop'?(node.scrollWidth+32):holder.clientWidth;
+ const distance=type==='stop'?(node.scrollWidth+holder.clientWidth+64):(node.scrollWidth+holder.clientWidth+64);
  node.style.setProperty('--start-x',start+'px');node.style.setProperty('--end-x',(start-distance)+'px');
  node.style.setProperty(type==='route'?'--marquee-duration':'--stop-duration',(Math.max(12,Math.round(distance/48)+8))+'s');
  if(type==='route')holder.classList.add('moving');else node.classList.add('scrolling');
 }
+// Pokazujemy aktualny przystanek tylko w czasie dojazdu/postoju.
+// Zmiana indeksu ręcznie lub przez GPS natychmiast zmienia nazwę.
+let lastStopIndex=-1, stopVisibleUntil=0, lastCourse='';
 function paint(){
  const d=currentState;
- if(!isActive(d)){show('clock');paintLower();return}
- const sequence=['route','next','current','clock'];
- const mode=(forcedPreview && sequence.includes(forcedPreview))?forcedPreview:sequence[Math.floor(Date.now()/7000)%sequence.length];
- if(mode==='clock'){show('clock');paintLower();return}
- if(mode==='route'){setRoute(d);show('route');paintLower();return}
- const stop=mode==='next'?d.nastepny:d.aktualny;
- const name=stop?.nazwa||((mode==='next'&&d.koniecKursu)?'====================':'—');
- const isTerminal=(mode==='next'&&d.koncowyNastepny)||(mode==='current'&&d.koniecKursu);
- setStop(mode==='next'?'NASTĘPNY PRZYSTANEK:':'PRZYSTANEK:',name,
-         isTerminal?'PRZYSTANEK KOŃCOWY':(stop?.naZadanie?'NA ŻĄDANIE':''));show('stop');paintLower();
+ if(!isActive(d)){lastStopIndex=-1;lastCourse='';show('clock');paintLower();return}
+ const now=Date.now(), idx=Number(d.aktualnyIndeks)||0;
+ if(d.kursId!==lastCourse){lastCourse=d.kursId;lastStopIndex=-1;stopVisibleUntil=0}
+ if(idx!==lastStopIndex){lastStopIndex=idx;stopVisibleUntil=now+14000;routeSignature=''}
+ // GPS 50 m przed przystankiem: sterownik może przekazać odległość do następnego.
+ const nearNext=Number.isFinite(Number(d.odlegloscDoNastepnegoM)) && d.odlegloscDoNastepnegoM!==null && Number(d.odlegloscDoNastepnegoM)<=50 && Number(d.odlegloscDoNastepnegoM)>=0;
+ const arrived=d.phase==='ARRIVAL' && now<=Number(d.phaseUntil||0);
+ const onStop=arrived || now<stopVisibleUntil;
+ const requested=forcedPreview;
+ if(requested==='clock'){show('clock');paintLower();return}
+ if(requested==='route'){setRoute(d);show('route');paintLower();return}
+ if(requested==='next' || (!onStop&&nearNext)){
+  const st=d.nastepny||d.aktualny;
+  setStop('NASTĘPNY PRZYSTANEK:',st?.nazwa||'—',st?.naZadanie?'NA ŻĄDANIE':'');show('stop');paintLower();return;
+ }
+ if(requested==='current' || onStop){
+  const st=d.aktualny;
+  setStop('PRZYSTANEK:',st?.nazwa||'—',st?.naZadanie?'NA ŻĄDANIE':'');show('stop');paintLower();return;
+ }
+ // W czasie jazdy: zegar i stale przesuwająca się trasa.
+ if(Math.floor(now/9000)%2===0){setRoute(d);show('route')}else show('clock');
+ paintLower();
 }
 function setTransfer(data){
  const box=el('transferCarriers');box.replaceChildren();
