@@ -1,9 +1,11 @@
-name: Build SRG Mobile GPS APK
+name: Build SRG Mobile 1.4.30 APK
 on:
   workflow_dispatch:
   push:
     paths:
       - 'app/**'
+      - 'tests/**'
+      - 'gradle.properties'
       - '*.gradle'
       - 'settings.gradle'
       - '.github/workflows/android-apk.yml'
@@ -37,6 +39,11 @@ jobs:
       - name: Verify 79 embedded Marek Neural recordings
         # Nagrane MP3 dołączone w repo; test SHA256 chroni komplet przed pomyłkami.
         run: node tests/test-marek-generated.cjs
+      - name: Test combined timetables and LCD
+        run: |
+          node tests/test-v1429.cjs
+          node tests/test-lcd-merged.cjs
+          node tests/test-schedule-deviation.cjs
       - uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.9'
@@ -45,6 +52,6 @@ jobs:
       - name: Publish APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: SRG-Mobile-v1.4.26-MAREK79-S25-S27-debug
+          name: SRG-Mobile-v1.4.30-KURSOWKI-LCD-LAN-debug
           path: app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error

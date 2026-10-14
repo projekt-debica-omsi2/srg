@@ -55,17 +55,17 @@ function paint(){
  const onStop=arrived || now<stopVisibleUntil;
  const requested=forcedPreview;
  if(requested==='clock'){show('clock');paintLower();return}
- if(requested==='route'){setRoute(d);show('route');paintLower();return}
+ if(requested==='route'){show('route');setRoute(d);paintLower();return}
  if(requested==='next' || (!onStop&&nearNext)){
-  const st=d.nastepny||d.aktualny;
-  setStop('NASTĘPNY PRZYSTANEK:',st?.nazwa||'—',st?.naZadanie?'NA ŻĄDANIE':'');show('stop');paintLower();return;
+  const st=d.nastepny;
+  setStop('NASTĘPNY PRZYSTANEK:',st?.nazwa||(d.koniecKursu?'====================':'—'),d.koncowyNastepny?'PRZYSTANEK KOŃCOWY':(st?.naZadanie?'NA ŻĄDANIE':''));show('stop');paintLower();return;
  }
  if(requested==='current' || onStop){
   const st=d.aktualny;
-  setStop('PRZYSTANEK:',st?.nazwa||'—',st?.naZadanie?'NA ŻĄDANIE':'');show('stop');paintLower();return;
+  setStop('PRZYSTANEK:',st?.nazwa||'—',d.koniecKursu?'PRZYSTANEK KOŃCOWY':(st?.naZadanie?'NA ŻĄDANIE':''));show('stop');paintLower();return;
  }
  // W czasie jazdy: zegar i stale przesuwająca się trasa.
- if(Math.floor(now/9000)%2===0){setRoute(d);show('route')}else show('clock');
+ if(Math.floor(now/9000)%2===0){show('route');setRoute(d)}else show('clock');
  paintLower();
 }
 function setTransfer(data){
@@ -104,3 +104,5 @@ async function pollAds(){try{const r=await fetch('/api/reklamy',{cache:'no-store
 tickClock();show('clock');pollState();pollAds();
 setInterval(tickClock,1000);setInterval(pollState,750);setInterval(paint,500);setInterval(pollAds,8000);
 window.SRGLcdPreview={paint,tickClock,show,setState(d){currentState=d;paint()}};
+
+window.addEventListener('resize',()=>{routeSignature='';stopSignature='';paint()});

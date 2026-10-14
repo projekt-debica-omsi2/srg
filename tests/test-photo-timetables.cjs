@@ -28,7 +28,7 @@ assert(raw.includes("(inf.estimated?'~':'')"));
 assert(raw.includes('const id=ss[index]?.id'));
 assert(raw.includes("photoTimesKey:t.photoTimesKey||null"));
 const obj=raw.match(/const PHOTO_STOP_TIMES_BY_COURSE=(\{[^;]+\});/);
-assert(obj,'Brak mapy godzin w JS');assert.deepEqual(JSON.parse(obj[1]),{
+assert(obj,'Brak mapy godzin w JS');const all=JSON.parse(obj[1]);assert.deepEqual({'S-25:1':all['S-25:1'],'S-27:6':all['S-27:6']},{
  'S-25:1':first.godziny_wg_id_RJ,'S-27:6':last.godziny_wg_id_RJ
 });
 console.log(`PASS: S-25/1: ${Object.keys(first.godziny_wg_id_RJ).length}/32 godzin w RJ, S-27/6: ${Object.keys(last.godziny_wg_id_RJ).length}/32 godzin w RJ; 64 oryginalne godziny zachowane`);
