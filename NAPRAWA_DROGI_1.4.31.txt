@@ -1,0 +1,7 @@
+Naprawa pola Droga: poprzedni przystanek → wybrany przystanek docelowy.
+W 1.4.28 i 1.4.30 po zmianie GPS licznik mierzył już kolejny odcinek i przez aktualny pokazywał 0.
+W 1.4.31 licznik używa odcinka, po którym faktycznie jedziesz. Dla pierwszego przystanku używa odcinka 1 → 2; dla końcowego przedostatni → ostatni.
+Zachowano filtry jakości i świeżości GPS, wszystkie kursówki, LCD oraz port 47283.
+To nadal szacunek postępu z GPS w linii prostej, nie drogowy licznik kilometrów.
+Symulacja i testy logiki wykonane; test jazdy na tablecie pozostaje do wykonania.
+Wgraj zawartość paczki do repozytorium, commit i push. Actions zbuduje APK 1.4.31.

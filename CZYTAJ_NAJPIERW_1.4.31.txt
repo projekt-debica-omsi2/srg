@@ -1,0 +1,24 @@
+SRG MOBILE 1.4.31 — KURSÓWKI + LCD NA DRUGIM URZĄDZENIU
+
+GITHUB DESKTOP / ACTIONS
+1. Rozpakuj ZIP poza folderem repozytorium.
+2. Skopiuj CAŁĄ zawartość paczki do głównego folderu repozytorium: app, tests, .github oraz pliki Gradle. Zastąp istniejące pliki. Nie kopiuj ZIP-a jako jednego pliku i nie dodawaj dodatkowego katalogu nadrzędnego.
+3. W GitHub Desktop zrób commit, następnie Push origin.
+4. GitHub → Actions → Build SRG Mobile 1.4.31 APK. Możesz też użyć Run workflow.
+5. Po udanym buildzie pobierz artifact SRG-Mobile-v1.4.31-KURSOWKI-LCD-LAN-debug, rozpakuj i zainstaluj app-debug.apk na urządzeniu sterownika.
+
+LCD NA INNYM URZĄDZENIU
+1. Połącz oba urządzenia z tym samym Wi-Fi albo podłącz ekran do hotspotu tabletu sterownika.
+2. Uruchom APK sterownika, wybierz kurs i otwórz jego ustawienia LCD.
+3. Na drugim urządzeniu wpisz w przeglądarce DOKŁADNY adres z ustawień, np. http://192.168.1.20:47283/ (przykład, rzeczywisty adres będzie inny).
+4. Nie wpisuj localhost ani 127.0.0.1 na drugim urządzeniu. Nie otwieraj tam lcd.html jako lokalnego pliku.
+5. Pozostaw sterownik uruchomiony. Sieć gościnna z izolacją klientów może blokować połączenie. Po zmianie Wi-Fi sprawdź ponownie adres.
+LCD działa w przeglądarce; nie wymaga osobnej aplikacji Android na drugim ekranie.
+
+ZAWARTOŚĆ
+- Wszystkie kursówki, kurs S-27 08:15–09:35, dodatkowy Rzeszów 10:10–Dębica 11:29, ręczny wybór pojedynczego kursu.
+- LCD: strzałka, przewijanie trasy od aktualnego przystanku, zegar/trasa w czasie jazdy, aktualizacja przystanku przy zmianie ręcznej/GPS, oznaczenie końcowego.
+- Niepotwierdzone godziny nadal są puste (szczegóły w README_ZMIANY_v1.4.29.md).
+- Nie dodano funkcji „następny 50 m przed”: stary wariant LCD przewidywał takie pole, ale sterownik go nie wysyła. Logika GPS sterownika pozostaje zachowana.
+- Zachowany identyfikator standardowego sterownika pl.srgmobile.classic.lcd23. Wariant „osobna aplikacja LCD” miał inny identyfikator; zamknij go przed uruchomieniem tej wersji, ponieważ oba używają portu 47283.
+- ZIP zawiera cały projekt, audio i workflow, a nie gotowy APK. Kompilacja nastąpi na GitHub Actions. Aktualizacja istniejącej instalacji wymaga zgodnego podpisu APK.
