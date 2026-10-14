@@ -40,12 +40,26 @@ function fitMarquee(node,holder,type){
  node.style.setProperty(type==='route'?'--marquee-duration':'--stop-duration',(Math.max(12,Math.round(distance/48)+8))+'s');
  if(type==='route')holder.classList.add('moving');else node.classList.add('scrolling');
 }
+const configuredCycle=window.SRGLcdCycle.create();
+let configuredMode='';
+function paintConfigured(d){
+ const step=configuredCycle.pick(d.lcdConfig,d,Date.now());configuredMode=step.type;
+ if(step.type==='route'){show('route');setRoute(d)}
+ else if(step.type==='next'||step.type==='current'){
+  const next=step.type==='next',st=next?d.nastepny:d.aktualny;
+  const terminal=next?d.koncowyNastepny:d.koniecKursu;
+  show('stop');setStop(next?'NASTĘPNY PRZYSTANEK:':'PRZYSTANEK:',st?.nazwa||'—',terminal?'PRZYSTANEK KOŃCOWY':st?.naZadanie?'NA ŻĄDANIE':'');
+ }else show('clock');
+ paintLower();
+}
 // Pokazujemy aktualny przystanek tylko w czasie dojazdu/postoju.
 // Zmiana indeksu ręcznie lub przez GPS natychmiast zmienia nazwę.
 let lastStopIndex=-1, stopVisibleUntil=0, lastCourse='';
 function paint(){
  const d=currentState;
- if(!isActive(d)){lastStopIndex=-1;lastCourse='';show('clock');paintLower();return}
+ if(!isActive(d)){configuredCycle.reset();configuredMode='';lastStopIndex=-1;lastCourse='';show('clock');paintLower();return}
+ if(d.lcdConfig&&!forcedPreview){paintConfigured(d);return;}
+ configuredMode='';
  const now=Date.now(), idx=Number(d.aktualnyIndeks)||0;
  if(d.kursId!==lastCourse){lastCourse=d.kursId;lastStopIndex=-1;stopVisibleUntil=0}
  if(idx!==lastStopIndex){lastStopIndex=idx;stopVisibleUntil=now+14000;routeSignature=''}
@@ -76,7 +90,8 @@ function setTransfer(data){
  }
 }
 function paintLower(){
- const d=currentState, data=isActive(d)&&d.reklamyPoZapowiedzi!==true?d.przesiadka:null;
+ const d=currentState, useCycle=!!d?.lcdConfig&&!forcedPreview;
+ const data=isActive(d)&&(useCycle?configuredMode==='transfers':d.reklamyPoZapowiedzi!==true)?d.przesiadka:null;
  const sig=data?JSON.stringify([d.kursId,d.aktualnyIndeks,data]):'';
  if(sig!==transferSignature){transferSignature=sig;if(data)setTransfer(data)}
  // Przesiadki az do rzeczywistej zapowiedzi nastepnego przystanku po odjezdzie.

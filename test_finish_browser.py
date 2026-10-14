@@ -7,7 +7,7 @@ with sync_playwright() as pw:
  errs=[]
  page.on('pageerror',lambda ex:errs.append(str(ex)))
  html=p.read_text(encoding='utf8')
- for name in ['auto-gps.js','voice-gps.js','schedule-deviation.js']:
+ for name in ['auto-gps.js','voice-gps.js','schedule-deviation.js','lcd-cycle.js']:
   dep=(p.parent/name).read_text(encoding='utf8')
   html=html.replace('<script src="'+name+'"></script>','<script>'+dep+'</script>')
  page.set_content(html,wait_until='load',timeout=20000)

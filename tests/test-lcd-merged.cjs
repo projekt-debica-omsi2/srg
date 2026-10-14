@@ -1,6 +1,7 @@
 const fs=require('fs'),vm=require('vm'),assert=require('assert/strict');
 const nodes={};function node(){return {textContent:'',hidden:false,style:{setProperty(){},removeProperty(){}},classList:{toggle(){},add(){},remove(){}},clientWidth:1000,scrollWidth:1600,parentElement:{clientWidth:1000,classList:{add(){},remove(){}}},replaceChildren(){},append(){}}}
 const ctx={document:{getElementById:id=>nodes[id]??=node(),createElement:node},window:{addEventListener(){}},location:{search:''},URLSearchParams,Intl,Date,setTimeout:()=>0,clearTimeout(){},setInterval(){},fetch:()=>new Promise(()=>{})};vm.createContext(ctx);
+vm.runInContext(fs.readFileSync('app/src/main/assets/lcd-cycle.js','utf8'),ctx);
 vm.runInContext(fs.readFileSync('app/src/main/assets/app.js','utf8'),ctx);
 const api=ctx.window.SRGLcdPreview;
 const stops=[{nazwa:'START'},{nazwa:'DWORZEC LOKALNY'},{nazwa:'DWORZEC AUTOBUSOWY'}];

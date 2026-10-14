@@ -1,0 +1,17 @@
+SRG Mobile 1.4.32 — osobne ustawienia LCD
+
+MENU → Ustawienia → Tablica LCD / Czasy i kolejność.
+Adres LCD przeniesiono z GPS do ustawień LCD.
+Każdy wiersz to pozycja w pętli. Wybierz ekran i czas od 0 do 300 sekund.
+0 = pomijanie. Można dodać do 12 pozycji, usunąć pozycję lub powtórzyć trasę.
+Przykład domyślny: Trasa 12 s → Następny 7 s → Przystanek 7 s → Przesiadki 8 s → Trasa 12 s → od początku.
+Zegar jest również dostępny do wyboru.
+Zapisz i zastosuj zapamiętuje ustawienia w sterowniku oraz przesyła je do LCD przez sieć lokalną. Nie trzeba zmieniać adresu ani instalować aplikacji na drugim ekranie.
+Po aktualizacji sterownika odśwież stronę LCD na drugim urządzeniu jeden raz.
+Zmiana przystanku lub ustawień restartuje cykl. Kolejne odczyty stanu z serwera nie resetują czasu. Bez kursu wyświetla się zegar.
+Przesiadki wyświetlane są w dotychczasowym dolnym polu zamiast reklam, z zegarem na górze. Ekran pomija je, gdy brak danych. Dane przesiadek w obecnym sterowniku pozostają wyłączone — ta aktualizacja nie wymyśla połączeń.
+W trybie cyklu ekran następnego przystanku pobiera pole następnego przystanku z istniejącego sterownika. Cyklem nie sterują zapowiedzi głosowe.
+Zachowano naprawę Drogi z 1.4.31, kursówki i ręczny wybór kursu.
+
+Wgraj zawartość ZIP do repozytorium, commit i push. GitHub Actions zbuduje APK 1.4.32. Paczka zawiera cały projekt, bez gotowego APK.
+Testy: cykl, granice sekund, powtórzenie trasy, pomijanie pustych ekranów, przesiadki, reset, przesyłanie konfiguracji, stare kursówki i Droga. Test na urządzeniach pozostaje do wykonania.
