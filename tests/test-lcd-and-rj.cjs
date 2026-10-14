@@ -15,6 +15,8 @@ assert(panel.includes('/app.js'));assert(fs.readFileSync('app/src/main/assets/ap
 const html=fs.readFileSync('app/src/main/assets/index.html','utf8');
 assert(html.includes("if(state.validatorOn)playInspectionAudio()"));
 assert(html.includes('window.SRGLcd.publish(JSON.stringify(payload))'));
+assert(html.includes("const ss=state.variant?.stops||[]"),'LCD uses stops from the active RJ variant');
+assert(html.includes("linia:active?(state.variant.line||'')"),'LCD receives the line number from the active RJ variant');
 assert(html.includes('announceTerminal(stop.id,isStopOnRequest(stop))'));
 assert(html.includes("['na_zadanie.mp3']"));
 assert(html.includes('announceName(stop.id,isStopOnRequest(stop))'));

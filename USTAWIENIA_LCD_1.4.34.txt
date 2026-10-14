@@ -1,0 +1,9 @@
+SRG Mobile 1.4.34 — ręczne ekrany przystanków na LCD
+
+W trakcie aktywnego kursu przycisk > na sterowniku pokazuje na LCD nazwę ręcznie wybranego następnego przystanku. Przycisk < pokazuje ręcznie wybrany przystanek. Ekran widoczny jest przez skonfigurowany dla niego czas, potem wraca zwykły cykl LCD. Jeżeli ustawisz 0 sekund, ekran ręczny jest wyłączony.
+
+Ekrany „Następny przystanek” i „Przystanek” nie pojawiają się już samoczynnie w cyklu. Ich wiersze ustawień służą tylko do czasu ręcznego pokazu. Trasa, przesiadki i zegar nadal są cykliczne. GPS nie wyzwala ręcznych ekranów.
+
+Zawartość „Przesiadki” pojawi się tylko, jeśli serwer ma dane przesiadek. Na razie pozostaje pusta, więc LCD pomija ten ekran. Ustawienia i adres LCD są oddzielone od GPS.
+
+Po zainstalowaniu aktualizacji odśwież przeglądarkę LCD na drugim urządzeniu. ZIP zawiera pełny projekt, bez APK. Wgraj zawartość do repozytorium i push; GitHub Actions zbuduje APK.

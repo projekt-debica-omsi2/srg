@@ -31,7 +31,7 @@ final class LocalPanelServer {
     private ServerSocket server;
     private final ExecutorService workers = Executors.newFixedThreadPool(3);
     private static final Set<String> ALLOWED = new HashSet<>(Arrays.asList(
-        "lcdConfig", "active", "line", "direction", "current", "next", "following", "index", "count", "phase", "phaseUntil", "clock", "course", "kursAktywny", "kursId", "linia", "kierunek", "aktualnyIndeks", "koniecKursu", "koncowyNastepny", "reklamyPoZapowiedzi", "przystanki", "aktualny", "nastepny", "przesiadka"));
+        "lcdManual", "lcdConfig", "active", "line", "direction", "current", "next", "following", "index", "count", "phase", "phaseUntil", "clock", "course", "kursAktywny", "kursId", "linia", "kierunek", "aktualnyIndeks", "koniecKursu", "koncowyNastepny", "reklamyPoZapowiedzi", "przystanki", "aktualny", "nastepny", "przesiadka"));
 
     LocalPanelServer(Context context) { this.context = context; }
 
@@ -61,7 +61,7 @@ final class LocalPanelServer {
                 Object value = input.opt(field);
                 if (value instanceof Boolean || value instanceof Number) safe.put(field, value);
                 else if (value instanceof String) safe.put(field, ((String)value).substring(0, Math.min(180, ((String)value).length())));
-                else if ((field.equals("przystanki") && value instanceof org.json.JSONArray) || ((field.equals("aktualny") || field.equals("nastepny") || field.equals("przesiadka") || field.equals("lcdConfig")) && value instanceof JSONObject)) safe.put(field, value);
+                else if ((field.equals("przystanki") && value instanceof org.json.JSONArray) || ((field.equals("aktualny") || field.equals("nastepny") || field.equals("przesiadka") || field.equals("lcdConfig") || field.equals("lcdManual")) && value instanceof JSONObject)) safe.put(field, value);
             }
             state = safe.toString();
             lastPublish = System.currentTimeMillis();

@@ -18,7 +18,8 @@ function routeText(stops){return stops.map(x=>x.nazwa||'').filter(Boolean).join(
 function setRoute(d){
  const key=JSON.stringify([d.kursId,d.linia,d.kierunek,d.aktualnyIndeks,d.przystanki.map(x=>x.nazwa)]);
  if(key===routeSignature)return;routeSignature=key;
- el('routeLine').textContent='→';el('routeDirection').textContent='→ '+(d.kierunek||d.przystanki.at(-1)?.nazwa||'—').toLocaleUpperCase('pl-PL');
+ // Numer linii i kolejność przystanków pochodzą z aktywnego wariantu wczytanego z pliku RJ.
+ el('routeLine').textContent=d.linia||'—';el('routeDirection').textContent='→ '+(d.kierunek||d.przystanki.at(-1)?.nazwa||'—').toLocaleUpperCase('pl-PL');
  el('routeText').textContent=routeText(d.przystanki.slice(Math.max(0,d.aktualnyIndeks||0))).toLocaleUpperCase('pl-PL');
  const r=el('routeText');setTimeout(()=>fitMarquee(r,r.parentElement,'route'),0);
 }
@@ -41,9 +42,19 @@ function fitMarquee(node,holder,type){
  if(type==='route')holder.classList.add('moving');else node.classList.add('scrolling');
 }
 const configuredCycle=window.SRGLcdCycle.create();
-let configuredMode='';
+let configuredMode='',manualScreenSignature='';
 function paintConfigured(d){
- const step=configuredCycle.pick(d.lcdConfig,d,Date.now());configuredMode=step.type;
+ const now=Date.now(),manual=d.lcdManual,validManual=isActive(d)&&manual&&Number.isFinite(manual.expiresAt)&&manual.expiresAt>now&&['next','current'].includes(manual.type);
+ if(validManual){
+  const sig=JSON.stringify([manual.id,manual.type,manual.index,manual.name,manual.expiresAt]);
+  if(sig!==manualScreenSignature){manualScreenSignature=sig;configuredCycle.reset()}
+  configuredMode=manual.type;show('stop');
+  const label=manual.type==='next'?'NASTĘPNY PRZYSTANEK:':'PRZYSTANEK:';
+  const terminal=manual.type==='next'?manual.index>=d.przystanki.length-1:manual.index>=d.przystanki.length-1;
+  setStop(label,manual.name||'—',terminal?'PRZYSTANEK KOŃCOWY':manual.naZadanie?'NA ŻĄDANIE':'');paintLower();return;
+ }
+ manualScreenSignature='';
+ const step=configuredCycle.pick(d.lcdConfig,d,now);configuredMode=step.type;
  if(step.type==='route'){show('route');setRoute(d)}
  else if(step.type==='next'||step.type==='current'){
   const next=step.type==='next',st=next?d.nastepny:d.aktualny;
@@ -57,7 +68,7 @@ function paintConfigured(d){
 let lastStopIndex=-1, stopVisibleUntil=0, lastCourse='';
 function paint(){
  const d=currentState;
- if(!isActive(d)){configuredCycle.reset();configuredMode='';lastStopIndex=-1;lastCourse='';show('clock');paintLower();return}
+ if(!isActive(d)){configuredCycle.reset();configuredMode='';manualScreenSignature='';lastStopIndex=-1;lastCourse='';show('clock');paintLower();return}
  if(d.lcdConfig&&!forcedPreview){paintConfigured(d);return;}
  configuredMode='';
  const now=Date.now(), idx=Number(d.aktualnyIndeks)||0;
