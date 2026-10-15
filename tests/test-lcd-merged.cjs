@@ -4,11 +4,11 @@ const ctx={document:{getElementById:id=>nodes[id]??=node(),createElement:node},w
 vm.runInContext(fs.readFileSync('app/src/main/assets/lcd-cycle.js','utf8'),ctx);
 vm.runInContext(fs.readFileSync('app/src/main/assets/app.js','utf8'),ctx);
 const api=ctx.window.SRGLcdPreview;
-const stops=[{nazwa:'START'},{nazwa:'DWORZEC LOKALNY'},{nazwa:'DWORZEC AUTOBUSOWY'}];
+const stops=[{nazwa:'START',ulica:'GŁOWACKIEGO'},{nazwa:'DWORZEC LOKALNY',ulica:'TOWARNICKIEGO'},{nazwa:'KRAKOWSKA GALERIA',ulica:'KRAKOWSKA'},{nazwa:'KRAKOWSKA SZPITAL',ulica:'KRAKOWSKA'}];
 const state={kursAktywny:true,kursId:'S27',linia:'1',przystanki:stops,aktualnyIndeks:1,aktualny:stops[1],nastepny:stops[2],koniecKursu:false,koncowyNastepny:true};api.setState(state);
 assert.equal(nodes.stopName.textContent,'DWORZEC LOKALNY');assert.equal(nodes.stopNote.textContent,'');
-vm.runInContext('setRoute(currentState)',ctx);assert.equal(nodes.routeText.textContent,'DWORZEC LOKALNY  –  DWORZEC AUTOBUSOWY');assert.equal(nodes.routeLine.textContent,'1');
-api.setState({...state,aktualnyIndeks:2,aktualny:stops[2],nastepny:null,koniecKursu:true,koncowyNastepny:false});assert.equal(nodes.stopNote.textContent,'PRZYSTANEK KOŃCOWY');
+vm.runInContext('setRoute(currentState)',ctx);assert.equal(nodes.routeText.textContent,'TOWARNICKIEGO  –  KRAKOWSKA');
+api.setState({...state,aktualnyIndeks:3,aktualny:stops[3],nastepny:null,koniecKursu:true,koncowyNastepny:false});assert.equal(nodes.stopNote.textContent,'PRZYSTANEK KOŃCOWY');
 api.setState({kursAktywny:false});assert.equal(nodes.clockPanel.hidden,false);
 const server=fs.readFileSync('app/src/main/java/pl/srgmobile/classic/LocalPanelServer.java','utf8');assert(server.includes('new ServerSocket(47283)'));assert(server.includes('route.equals("/api/state")'));
 console.log('PASS LCD: remaining stops, intermediate/terminal, clock, LAN endpoint');

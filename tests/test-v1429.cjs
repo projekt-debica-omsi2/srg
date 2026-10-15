@@ -3,7 +3,7 @@ const h=fs.readFileSync('app/src/main/assets/index.html','utf8');
 const data=JSON.parse(fs.readFileSync('route_data.json','utf8'));
 function fn(name){let start=h.indexOf('function '+name+'('),brace=h.indexOf('{',start),depth=1,i=brace+1;for(;depth;i++){if(h[i]==='{')depth++;else if(h[i]==='}')depth--;}return h.slice(start,i)}
 const elements={};function element(){return {children:[],appendChild(b){this.children.push(b)},classList:{toggle(){}},set innerHTML(v){this.children=[]},textContent:''}}
-const ctx={state:{rj:{courses:[],variants:data.variants.map(v=>({...v,stops:v.stopIds.map(id=>data.stops.find(s=>s.id===id))}))}},document:{createElement:element},$:s=>elements[s]??=element(),$$:()=>[],finalDirection:v=>v.stops.at(-1).name};vm.createContext(ctx);
+const ctx={state:{rj:{referenceVariants:{0:0,1:1},courses:[],variants:data.variants.map(v=>({...v,stops:v.stopIds.map(id=>data.stops.find(s=>s.id===id))}))}},document:{createElement:element},$:s=>elements[s]??=element(),$$:()=>[],finalDirection:v=>v.stops.at(-1).name};vm.createContext(ctx);
 vm.runInContext(h.match(/const PHOTO_STOP_TIMES_BY_COURSE=.*?;/)[0]+h.match(/const MANUAL_DUTIES=\[[\s\S]*?\n\];/)[0]+['manualCourseEntries','plannedTimeInfo','hhmmToMinutes','allIndividualCourses','renderDutySelect','nextTripSameDuty','dutyEntries'].map(fn).join('\n'),ctx);
 vm.runInContext(`state.course=manualCourseEntries().find(c=>c.task==='S-27'&&c.tripNo===3);state.variant=state.rj.variants[0]`,ctx);
 const at=id=>vm.runInContext(`plannedTimeInfo(state.variant.stops.findIndex(s=>s.id===${id}))`,ctx);

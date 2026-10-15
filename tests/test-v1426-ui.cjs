@@ -7,7 +7,7 @@ const server=fs.readFileSync('app/src/main/java/pl/srgmobile/classic/LocalPanelS
 assert(html.includes('id="vehicleInput"')&&html.includes('id="railVehicleNo"'));
 assert(html.includes("localStorage.setItem('srgVehicleNumber',v)"));
 assert(html.includes('id="soundVoiceToggle"')&&html.includes('validatorOff'));
-assert(html.includes('przystanki:active?ss.map(x=>({nazwa:x.name}))'));
+assert(html.includes("przystanki:active?ss.map(x=>({nazwa:x.name,ulica:x.street||''}))"));
 assert(html.includes('const info=plannedTimeInfo(idx,ss.length)')); 
 assert(js.includes('d.lcdManual')&&js.includes("['next','current']"));
 assert(html.includes("window.SRGLcdCycle.duration(lcdConfig,type)"));

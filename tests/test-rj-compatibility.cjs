@@ -1,0 +1,20 @@
+const fs=require('fs'),vm=require('vm'),assert=require('assert/strict');
+const h=fs.readFileSync('app/src/main/assets/index.html','utf8');
+const ctx={window:{}};vm.createContext(ctx);
+vm.runInContext([...h.matchAll(/<script>([\s\S]*?)<\/script>/g)].map(x=>x[1]).find(x=>x.includes('root.RJParser=')),ctx);
+vm.runInContext(h.slice(h.indexOf('function stopIdentity('),h.indexOf('function applyRJBuffer(')),ctx);
+const bytes=new Uint8Array(fs.readFileSync('app/src/main/assets/rj261014.011'));
+const ref=ctx.window.RJParser.parse(bytes),r=ctx.window.RJParser.parse(bytes);
+ctx.linkRJReference(r,ref);
+assert(r.stops.every(s=>s.referenceCompatible));assert.equal(r.referenceVariants[0],0);
+const signature=r.signature;
+r.variants.reverse();r.variants.forEach((v,i)=>v.index=i);
+ctx.linkRJReference(r,ref);assert.equal(r.referenceVariants[0],6);
+const id=r.stops[0].id;r.stops[0].name='INNY PRZYSTANEK';
+ctx.linkRJReference(r,ref);assert(!r.stops[0].referenceCompatible);assert.notEqual(r.signature,signature);
+for(const v of ref.variants.filter(v=>v.stops.some(s=>s.id===id)))assert.equal(r.referenceVariants[v.index],undefined);
+// The ID is a record value, not its ordinal position.
+const changed=bytes.slice(),a=ref.stops[0].address;changed[a]=0x12;changed[a+1]=0x34;
+const parsed=ctx.window.RJParser.parse(changed);assert.equal(parsed.stops[0].id,4660);
+assert(parsed.variants.some(v=>v.stops.some(s=>s.id===4660)));
+console.log('PASS RJ compatibility: variant reorder, changed stop identity, session signature, binary stop ID');

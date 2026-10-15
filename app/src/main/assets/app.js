@@ -14,12 +14,12 @@ function tickClock(){
 }
 function isActive(d){return Boolean(d && d.kursAktywny===true && d.kursId && Array.isArray(d.przystanki) && d.przystanki.length)}
 function show(panel){if(lastMode===panel)return;lastMode=panel;el('clockPanel').hidden=panel!=='clock';el('routePanel').hidden=panel!=='route';el('stopPanel').hidden=panel!=='stop'}
-function routeText(stops){return stops.map(x=>x.nazwa||'').filter(Boolean).join('  –  ')}
+function routeText(stops){return stops.map(x=>String(x.ulica||x.nazwa||'').trim()).filter((street,i,list)=>street&&street!==list[i-1]).join('  –  ')}
 function setRoute(d){
- const key=JSON.stringify([d.kursId,d.linia,d.kierunek,d.aktualnyIndeks,d.przystanki.map(x=>x.nazwa)]);
+ const key=JSON.stringify([d.kursId,d.linia,d.kierunek,d.aktualnyIndeks,d.przystanki.map(x=>[x.nazwa,x.ulica])]);
  if(key===routeSignature)return;routeSignature=key;
- // Numer linii i kolejność przystanków pochodzą z aktywnego wariantu wczytanego z pliku RJ.
- el('routeLine').textContent=d.linia||'—';el('routeDirection').textContent='→ '+(d.kierunek||d.przystanki.at(-1)?.nazwa||'—').toLocaleUpperCase('pl-PL');
+ // Nazwy ulic i kolejność przystanków pochodzą z aktywnego wariantu wczytanego z pliku RJ.
+ el('routeDirection').textContent='→ '+(d.kierunek||d.przystanki.at(-1)?.nazwa||'—').toLocaleUpperCase('pl-PL');
  el('routeText').textContent=routeText(d.przystanki.slice(Math.max(0,d.aktualnyIndeks||0))).toLocaleUpperCase('pl-PL');
  const r=el('routeText');setTimeout(()=>fitMarquee(r,r.parentElement,'route'),0);
 }
@@ -124,7 +124,7 @@ function nextAd(){
  adNumber=chooseAd();const entry=ads[adNumber],isVideo=entry.typ==='video';
  const item=document.createElement(isVideo?'video':'img');item.className='aditem';item.src=entry.url;
  if(isVideo){item.muted=true;item.autoplay=true;item.playsInline=true;item.addEventListener('ended',nextAd,{once:true});item.addEventListener('error',nextAd,{once:true});box.append(item);adTimer=setTimeout(nextAd,60000);item.play().catch(()=>{clearTimeout(adTimer);adTimer=setTimeout(nextAd,1500)})}
- else{item.alt='';item.addEventListener('error',nextAd,{once:true});box.append(item);adTimer=setTimeout(nextAd,12000)}
+ else{item.alt='';item.addEventListener('error',nextAd,{once:true});box.append(item);if(ads.length>1)adTimer=setTimeout(nextAd,5000)}
 }
 async function pollAds(){try{const r=await fetch('/api/reklamy',{cache:'no-store'});if(!r.ok)throw Error(String(r.status));const a=await r.json();if(!Array.isArray(a))throw Error('bad list');const sig=JSON.stringify(a);if(sig!==adsSignature){adsSignature=sig;ads=a;nextAd()}}catch(e){}}
 tickClock();show('clock');pollState();pollAds();

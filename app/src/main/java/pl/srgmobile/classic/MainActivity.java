@@ -148,12 +148,42 @@ public final class MainActivity extends Activity implements LocationListener {
 
     /** Publish ONLY passenger-facing course data; never expose coordinates or driver ID. */
     public final class LcdBridge {
+        @JavascriptInterface public void chooseAds() {
+            runOnUiThread(() -> {
+                Intent picker=new Intent(Intent.ACTION_OPEN_DOCUMENT);
+                picker.addCategory(Intent.CATEGORY_OPENABLE);picker.setType("*/*");
+                picker.putExtra(Intent.EXTRA_MIME_TYPES,new String[]{"image/jpeg","image/png","image/gif","image/webp","video/mp4"});
+                picker.putExtra(Intent.EXTRA_ALLOW_MULTIPLE,true);
+                try{startActivityForResult(picker,43);}catch(Exception e){adsNotice("Nie można otworzyć wyboru plików.");}
+            });
+        }
+        @JavascriptInterface public String listAds() {
+            try{return new AdStore(MainActivity.this).list().toString();}catch(Exception e){return "[]";}
+        }
+        @JavascriptInterface public boolean removeAd(String id) { return new AdStore(MainActivity.this).remove(id); }
         @JavascriptInterface public void publish(String json) {
             if (lcdServer != null) lcdServer.publish(json);
         }
         @JavascriptInterface public String getUrl() {
             return "http://"+getLocalIp()+":47283/";
         }
+    }
+    private void adsNotice(String text) {
+        runOnUiThread(() -> { if(web!=null)web.evaluateJavascript("window.srgAdsUpdated && window.srgAdsUpdated("+JSONObject.quote(text)+")",null); });
+    }
+    @Override protected void onActivityResult(int requestCode,int resultCode,Intent data) {
+        super.onActivityResult(requestCode,resultCode,data);
+        if(requestCode!=43)return;
+        if(resultCode!=RESULT_OK||data==null){adsNotice("Nie dodano plików.");return;}
+        List<android.net.Uri> uris=new ArrayList<>();
+        if(data.getClipData()!=null)for(int i=0;i<data.getClipData().getItemCount();i++)uris.add(data.getClipData().getItemAt(i).getUri());
+        else if(data.getData()!=null)uris.add(data.getData());
+        adsNotice("Zapisywanie reklam…");
+        new Thread(() -> {
+            int added=0;String error="";AdStore store=new AdStore(this);
+            for(android.net.Uri uri:uris)try{store.add(uri);added++;}catch(Exception e){error=String.valueOf(e.getMessage());}
+            adsNotice("Dodano: "+added+" z "+uris.size()+"."+(error.isEmpty()?"":" "+error));
+        },"SRG-ad-import").start();
     }
     private void completeMediaPermission() {
         PermissionRequest r=pendingMediaRequest; pendingMediaRequest=null;

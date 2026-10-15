@@ -106,7 +106,19 @@ final class LocalPanelServer {
                     JSONObject item = new JSONObject();item.put("url", "/reklama/"+file);
                     item.put("typ", file.toLowerCase(java.util.Locale.ROOT).endsWith("mp4")?"video":"image");list.put(item);
                 }
+                JSONArray imported=new AdStore(context).list();
+                for(int i=0;i<imported.length();i++)list.put(imported.getJSONObject(i));
                 send(socket, 200, "application/json; charset=utf-8", list.toString().getBytes(StandardCharsets.UTF_8));
+            } else if (route.startsWith("/reklama-local/")) {
+                String name=route.substring("/reklama-local/".length());
+                java.io.File file=new AdStore(context).file(name);
+                if(file==null||!file.isFile()){send(socket,404,"text/plain",new byte[0]);return;}
+                String mime=name.endsWith(".mp4")?"video/mp4":name.endsWith(".png")?"image/png":name.endsWith(".gif")?"image/gif":name.endsWith(".webp")?"image/webp":"image/jpeg";
+                try(InputStream in=new java.io.FileInputStream(file)) {
+                    OutputStream out=socket.getOutputStream();
+                    out.write(("HTTP/1.1 200 OK\r\nContent-Type: "+mime+"\r\nContent-Length: "+file.length()+"\r\nCache-Control: no-store\r\nX-Content-Type-Options: nosniff\r\nConnection: close\r\n\r\n").getBytes(StandardCharsets.US_ASCII));
+                    byte[] buffer=new byte[65536];int n;while((n=in.read(buffer))!=-1)out.write(buffer,0,n);out.flush();
+                }
             } else if (route.startsWith("/reklama/")) {
                 String file = route.substring("/reklama/".length());
                 if (!file.matches("[A-Za-z0-9_.-]{1,100}\\.(?i:png|jpg|jpeg|gif|webp|mp4)")) {
