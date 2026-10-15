@@ -1,0 +1,1 @@
+Tu dodaj reklamy JPG, JPEG, PNG, GIF, WebP lub MP4 przed zbudowaniem APK. Pliki bez podfolderów. Po zmianie folderu zbuduj i zainstaluj nowe APK. Bez przebudowy można dodawać pliki w Ustawienia > Tablica LCD > Dodaj reklamy. Zdjęcia: 5 sekund; pojedyncze zdjęcie pozostaje stale. Inne formaty są pomijane.

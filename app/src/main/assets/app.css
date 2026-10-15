@@ -41,3 +41,15 @@
 .route-caption{overflow:hidden}
 .ticker-window.moving #routeText{animation:marquee var(--marquee-duration,28s) linear infinite!important;animation-delay:0s!important}
 @keyframes marquee{0%{transform:translateX(var(--start-x,100%))}100%{transform:translateX(var(--end-x,-100%))}}
+
+/* Future transfer module: independent lower area; not enabled by app.js. */
+#transferDraft[hidden]{display:none!important}
+#transferDraft{position:absolute;inset:0;background:#06a4d5;color:#051b25;padding:1.5vh 3vw;overflow:hidden;font-weight:700}
+.td-meta{display:flex;justify-content:space-between;gap:2vw;font-size:1.8vw;border-bottom:1px solid #07374c30;padding-bottom:1.8vh}
+#transferDraft h2{text-align:center;font-size:2.3vw;margin:2vh 0}
+.td-row{display:grid;grid-template-columns:minmax(0,1fr) 28%;align-items:center;min-height:10vh;border-bottom:1px solid #06334a25;font-size:2.4vw}
+.td-row>:last-child{border-left:1px solid #06334a30;text-align:center;height:100%;display:flex;justify-content:center;align-items:center}
+.td-head{font-size:1.6vw;min-height:5vh;color:#123b49}
+.td-clip{min-width:0;overflow:hidden;margin-right:2vw}.td-text{display:inline-block;white-space:nowrap}.td-time{font-variant-numeric:tabular-nums;white-space:nowrap}
+.td-moving{animation:td-scroll var(--td-duration) linear infinite alternate}
+@keyframes td-scroll{0%,15%{transform:translateX(0)}85%,100%{transform:translateX(var(--td-end))}}

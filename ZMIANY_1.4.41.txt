@@ -1,0 +1,4 @@
+Przesiadki: przygotowany ukryty moduł transfer-draft.js, bez prawdziwych danych i bez aktywacji. Góra LCD działa niezależnie. Przewijanie tylko przepełnionego przewoźnika/kierunku; godziny nieruchome. PNG to makieta projektu, nie zrzut uruchomionej aplikacji.
+Zielony pasek: godzina i nazwa wyśrodkowane, po prawej ID RJ w nawiasach. Pole Przystanek nad paskiem również pokazuje ID RJ.
+Reklamy: wrzuć JPG/PNG/GIF/WebP/MP4 do app/src/main/assets/reklama, bez podfolderów; zbuduj nowe APK. Można też dodawać z ustawień aplikacji bez przebudowy.
+Testy JS przeszły; Android APK wymaga kompilacji na GitHubie. Test wizualny w przeglądarce nie był dostępny w tym środowisku.

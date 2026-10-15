@@ -1,0 +1,5 @@
+Przesiadki FlixBus włączone dla czterech miejsc. Godziny przepisane dokładnie ze zdjęć i potwierdzone przez użytkownika jako codzienne odjazdy. Bez dodawania 3 minut postoju.
+Paryż (Bercy Seine): Rzeszów Dworzec Lokalny 08:30; Sędziszów os. Młodych 08:57; Ropczyce DA 09:12; Dębica DA 09:37.
+Rzeszów, Dworzec Lokalny: Dębica DA 21:00; Ropczyce DA 21:22; Sędziszów os. Młodych 21:32. Przyjazd końcowy 22:00 pominięty.
+Odjazd znika od swojej godziny. Codziennie po północy lista wraca. Strefa Europe/Warsaw. Przy pustej liście są reklamy. Dane stałe — bez API, informacji o opóźnieniach i automatycznych aktualizacji rozkładu.
+Przypisanie do ID i nazwy z RJ w obu kierunkach. Górny moduł LCD bez zmiany wyglądu.

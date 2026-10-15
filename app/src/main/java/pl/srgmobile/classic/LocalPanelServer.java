@@ -94,6 +94,8 @@ final class LocalPanelServer {
                 send(socket, 200, "application/manifest+json", asset("manifest.webmanifest"));
             } else if (route.equals("/lcd-cycle.js")) {
                 send(socket, 200, "application/javascript; charset=utf-8", asset("lcd-cycle.js"));
+            } else if (route.equals("/transfer-draft.js")) {
+                send(socket, 200, "application/javascript; charset=utf-8", asset("transfer-draft.js"));
             } else if (route.equals("/app.js")) {
                 send(socket, 200, "application/javascript; charset=utf-8", asset("app.js"));
             } else if (route.equals("/app.css")) {
@@ -102,8 +104,8 @@ final class LocalPanelServer {
                 JSONArray list = new JSONArray();
                 String[] files = context.getAssets().list("reklama");
                 if (files != null) for (String file : files) {
-                    if (!file.matches("[A-Za-z0-9_.-]{1,100}\\.(?i:png|jpg|jpeg|gif|webp|mp4)")) continue;
-                    JSONObject item = new JSONObject();item.put("url", "/reklama/"+file);
+                    if (!file.matches("[^/\\\\]{1,200}\\.(?i:png|jpg|jpeg|gif|webp|mp4)")) continue;
+                    JSONObject item = new JSONObject();item.put("url", "/reklama/"+android.net.Uri.encode(file));
                     item.put("typ", file.toLowerCase(java.util.Locale.ROOT).endsWith("mp4")?"video":"image");list.put(item);
                 }
                 JSONArray imported=new AdStore(context).list();
@@ -120,8 +122,8 @@ final class LocalPanelServer {
                     byte[] buffer=new byte[65536];int n;while((n=in.read(buffer))!=-1)out.write(buffer,0,n);out.flush();
                 }
             } else if (route.startsWith("/reklama/")) {
-                String file = route.substring("/reklama/".length());
-                if (!file.matches("[A-Za-z0-9_.-]{1,100}\\.(?i:png|jpg|jpeg|gif|webp|mp4)")) {
+                String file = android.net.Uri.decode(route.substring("/reklama/".length()));
+                if (!file.matches("[^/\\\\]{1,200}\\.(?i:png|jpg|jpeg|gif|webp|mp4)")) {
                     send(socket, 404, "text/plain", "Not found".getBytes(StandardCharsets.US_ASCII));return;
                 }
                 String extension = file.substring(file.lastIndexOf('.')+1).toLowerCase(java.util.Locale.ROOT);

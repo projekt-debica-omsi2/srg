@@ -101,6 +101,12 @@ function setTransfer(data){
  }
 }
 function paintLower(){
+ const live=currentState?.przesiadka;
+ if(window.SRGTransferDraft&&isActive(currentState)&&Array.isArray(live?.rows)&&live.rows.length){
+  const page=Math.floor(Date.now()/8000)%Math.ceil(live.rows.length/4),visible={...live,rows:live.rows.slice(page*4,page*4+4)};const sig=JSON.stringify(visible);if(sig!==transferSignature){transferSignature=sig;window.SRGTransferDraft.render(visible)}
+  el('transfer').hidden=true;el('adMedia').style.visibility='hidden';return;
+ }
+ window.SRGTransferDraft?.hide();
  const d=currentState, useCycle=!!d?.lcdConfig&&!forcedPreview;
  const data=isActive(d)&&(useCycle?configuredMode==='transfers':d.reklamyPoZapowiedzi!==true)?d.przesiadka:null;
  const sig=data?JSON.stringify([d.kursId,d.aktualnyIndeks,data]):'';
