@@ -1,0 +1,8 @@
+LCD i zapowiedzi:
+- Zapowiedź następnego przystanku uruchamia ekran NASTĘPNY PRZYSTANEK z tą samą nazwą.
+- Zapowiedź przyjazdowa uruchamia różowy ekran PRZYSTANEK.
+- Czas z ustawień LCD; zero wyłącza dany komunikat.
+- GPS zmienia przystanek: natychmiast zastępuje ekran poprzedniego przystanku, także przy pominięciu i wyłączonym głosie.
+- Zdarzenia są powiązane z kursem i indeksem, aby nie przenosiły się na nowy przystanek.
+- Przesiadki tylko z potwierdzonych godzin dla bieżącego przystanku. Zmiana przystanku usuwa poprzednie przesiadki; brak odjazdów lub ustawienie przesiadek 0 s pokazuje reklamy.
+Przetestowano logikę JS, zdarzenia sterownika i renderer LCD. APK wymaga kompilacji na GitHubie; lokalnie nie testowano Androida.

@@ -29,3 +29,27 @@ const html=fs.readFileSync('app/src/main/assets/index.html','utf8');const gps=ht
 assert(!gps.includes('id="lcdUrl"'));assert(html.includes('data-go="lcdSettings"'));assert(html.includes("localStorage.setItem('srgLcdCycleV1'"));
 const java=fs.readFileSync('app/src/main/java/pl/srgmobile/classic/LocalPanelServer.java','utf8');assert(java.includes('field.equals("lcdConfig")'));assert(java.includes('field.equals("lcdManual")'));assert(java.includes('route.equals("/lcd-cycle.js")'));
 console.log('PASS LCD cycle: timed route/transfer loop; next/current durations reserved for manual arrows; LAN event transport');
+// Announcement event overrides the cycle, expires, and cannot leak to a new stop/course.
+now=20000;
+const arrival={...payload,lcdManual:{id:10,type:'current',index:0,name:'A',courseKey:'s27',anchorIndex:0,expiresAt:30000}};
+preview.setState(arrival);assert.equal(nodes.stopName.textContent,'A');assert.equal(nodes.stopLabel.textContent,'PRZYSTANEK:');
+now=21000;preview.setState({...arrival,aktualnyIndeks:1,lcdManual:{id:11,type:'next',index:1,name:'B',courseKey:'s27',anchorIndex:1,expiresAt:24000},przesiadka:null});
+assert.equal(nodes.stopName.textContent,'B');assert.equal(nodes.stopLabel.textContent,'NASTĘPNY PRZYSTANEK:');assert.equal(nodes.transfer.hidden,true);
+now=24000;preview.paint();assert.equal(nodes.stopPanel.hidden,true);
+preview.setState({...arrival,aktualnyIndeks:1,przesiadka:null});assert.equal(nodes.stopPanel.hidden,true);
+preview.setState({...arrival,kursId:'different',przesiadka:null});assert.equal(nodes.stopPanel.hidden,true);
+// Exercise real driver event hooks, including native early returns.
+function driverFunction(name){const start=html.indexOf('function '+name+'('),brace=html.indexOf('{',start);let end=brace+1,depth=1;for(;depth;end++){if(html[end]==='{')depth++;else if(html[end]==='}')depth--;}return html.slice(start,end)}
+const A={id:1,name:'A',referenceCompatible:true},B={id:2,name:'B',referenceCompatible:true};
+const driver={state:{course:{},variant:{stops:[A,B]},routeIndex:0,pendingStop:null,rj:{}},lcdConfig:config,lcdManualScreen:null,lcdManualCounter:0,transferAdState:'',voiceEnabled:true,autoGpsEnabled:true,window:{SRGLcdCycle:api,SRGNativeAudio:{announceStop(){},announceTerminal(){},announceName(){}}},Date:MockDate,courseSessionKey:()=> 's27',lcdPublish(){},markLcdPhase(){},isStopOnRequest:()=>false,autoGpsTracker:{evaluate:()=>({advance:true,nextIndex:1,departure:true})},refreshCourse(){},refreshAutoGpsIndicator(){},toast(){},autoGpsMessage:''};vm.createContext(driver);
+vm.runInContext(['markManualLcdScreen','playNextStopAudio','playArrivalAudio','processAutoGpsFix'].map(driverFunction).join('\n'),driver);
+now=25000;driver.playArrivalAudio(A);assert.equal(driver.lcdManualScreen.type,'current');assert.equal(driver.lcdManualScreen.expiresAt,29000);
+now=25500;driver.processAutoGpsFix({});assert.equal(driver.lcdManualScreen.type,'next');assert.equal(driver.lcdManualScreen.name,'B');assert.equal(driver.lcdManualScreen.anchorIndex,1);assert.equal(driver.lcdManualScreen.expiresAt,28500);
+console.log('PASS LCD announcement synchronization, GPS interruption, configured duration, stale event rejection');
+let transferVisible=false;ui.window.SRGTransferDraft={render(){transferVisible=true},hide(){transferVisible=false}};
+now=40000;
+const withRows={...payload,lcdManual:null,przesiadka:{rows:[{carrier:'FlixBus',direction:'Paryż',time:'09:37'}]}};
+preview.setState(withRows);assert(transferVisible);assert.equal(nodes.adMedia.style.visibility,'hidden');
+preview.setState({...withRows,aktualnyIndeks:1,przesiadka:null});assert(!transferVisible);assert.equal(nodes.adMedia.style.visibility,'visible');
+preview.setState({...withRows,lcdConfig:{steps:[{type:'route',seconds:10},{type:'transfers',seconds:0}]}});assert(!transferVisible);assert.equal(nodes.adMedia.style.visibility,'visible');
+console.log('PASS confirmed transfers disappear on stop change; disabled transfers show ads');

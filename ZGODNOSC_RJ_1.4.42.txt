@@ -1,0 +1,9 @@
+Wersja 1.4.42 — zgodność danych RJ
+ID w nawiasie pochodzi z rekordu przystanku w aktywnym pliku .011.
+Nazwy, ulice, kolejność przystanków i warianty pochodzą z tego samego RJ.
+Dodatkowe kursówki są dopasowane po linii, kodzie wariantu i kolejności ID/nazw, a nie po pozycji wariantu w pliku. Niezgodne kursówki są pomijane.
+GPS i nagrania wymagają zgodności ID oraz nazwy z bazą MONIS Dębica.
+Zmiana RJ czyści chwilowy ekran przystanku LCD. Zapisany kurs nie jest przywracany do innego zestawu danych.
+Godziny ze zdjęć i szacunki pozostają dodatkowymi danymi; ta wersja nie dodaje dekodowania godzin z sekcji Krs.
+Reklamy i ustawienia czasów LCD pozostają niezależne od RJ.
+Testy JavaScript przeszły. Kompilacja Android APK wymaga GitHub Actions.

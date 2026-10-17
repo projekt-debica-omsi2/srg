@@ -44,7 +44,7 @@ function fitMarquee(node,holder,type){
 const configuredCycle=window.SRGLcdCycle.create();
 let configuredMode='',manualScreenSignature='';
 function paintConfigured(d){
- const now=Date.now(),manual=d.lcdManual,validManual=isActive(d)&&manual&&Number.isFinite(manual.expiresAt)&&manual.expiresAt>now&&['next','current'].includes(manual.type);
+ const now=Date.now(),manual=d.lcdManual,validManual=isActive(d)&&manual&&(manual.anchorIndex==null||manual.anchorIndex===d.aktualnyIndeks)&&(manual.courseKey==null||manual.courseKey===d.kursId)&&Number.isFinite(manual.expiresAt)&&manual.expiresAt>now&&['next','current'].includes(manual.type);
  if(validManual){
   const sig=JSON.stringify([manual.id,manual.type,manual.index,manual.name,manual.expiresAt]);
   if(sig!==manualScreenSignature){manualScreenSignature=sig;configuredCycle.reset()}
@@ -102,8 +102,8 @@ function setTransfer(data){
 }
 function paintLower(){
  const live=currentState?.przesiadka;
- if(window.SRGTransferDraft&&isActive(currentState)&&Array.isArray(live?.rows)&&live.rows.length){
-  const page=Math.floor(Date.now()/8000)%Math.ceil(live.rows.length/4),visible={...live,rows:live.rows.slice(page*4,page*4+4)};const sig=JSON.stringify(visible);if(sig!==transferSignature){transferSignature=sig;window.SRGTransferDraft.render(visible)}
+ if(window.SRGTransferDraft&&(!currentState?.lcdConfig||window.SRGLcdCycle.duration(currentState.lcdConfig,'transfers')>0)&&isActive(currentState)&&Array.isArray(live?.rows)&&live.rows.length){
+  const page=Math.floor(Date.now()/8000)%Math.ceil(live.rows.length/4),visible={...live,rows:live.rows.slice(page*4,page*4+4)};const sig=JSON.stringify([currentState.kursId,currentState.aktualnyIndeks,visible]);if(sig!==transferSignature){transferSignature=sig;window.SRGTransferDraft.render(visible)}
   el('transfer').hidden=true;el('adMedia').style.visibility='hidden';return;
  }
  window.SRGTransferDraft?.hide();
