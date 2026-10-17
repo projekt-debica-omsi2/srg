@@ -1,0 +1,1 @@
+Dodano wbudowaną planszę ŻYCZYMY / MIŁEJ PODRÓŻY w polu reklam. Białe tło, czarny tekst Courier New / monospace jak na ekranie kursu SRG. Plansza rotuje z reklamami co 5 sekund; gdy jest jedyna, zostaje stale. Przesiadki zachowują pierwszeństwo. APK wymaga kompilacji na GitHubie.

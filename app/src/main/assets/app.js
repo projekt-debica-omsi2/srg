@@ -128,11 +128,16 @@ function chooseAd(){if(ads.length<2)return 0;let k=Math.floor(Math.random()*(ads
 function nextAd(){
  if(adTimer)clearTimeout(adTimer);const box=el('adMedia');box.replaceChildren();if(!ads.length){adNumber=-1;return}
  adNumber=chooseAd();const entry=ads[adNumber],isVideo=entry.typ==='video';
+ if(entry.typ==='greeting'){
+  const item=document.createElement('div');item.className='aditem greeting-ad';
+  for(const text of ['ŻYCZYMY','MIŁEJ PODRÓŻY']){const line=document.createElement('div');line.textContent=text;item.append(line)}
+  box.append(item);if(ads.length>1)adTimer=setTimeout(nextAd,5000);return;
+ }
  const item=document.createElement(isVideo?'video':'img');item.className='aditem';item.src=entry.url;
  if(isVideo){item.muted=true;item.autoplay=true;item.playsInline=true;item.addEventListener('ended',nextAd,{once:true});item.addEventListener('error',nextAd,{once:true});box.append(item);adTimer=setTimeout(nextAd,60000);item.play().catch(()=>{clearTimeout(adTimer);adTimer=setTimeout(nextAd,1500)})}
  else{item.alt='';item.addEventListener('error',nextAd,{once:true});box.append(item);if(ads.length>1)adTimer=setTimeout(nextAd,5000)}
 }
-async function pollAds(){try{const r=await fetch('/api/reklamy',{cache:'no-store'});if(!r.ok)throw Error(String(r.status));const a=await r.json();if(!Array.isArray(a))throw Error('bad list');const sig=JSON.stringify(a);if(sig!==adsSignature){adsSignature=sig;ads=a;nextAd()}}catch(e){}}
+async function pollAds(){try{const r=await fetch('/api/reklamy',{cache:'no-store'});if(!r.ok)throw Error(String(r.status));const a=await r.json();if(!Array.isArray(a))throw Error('bad list');const list=[{typ:'greeting'},...a];const sig=JSON.stringify(list);if(sig!==adsSignature){adsSignature=sig;ads=list;nextAd()}}catch(e){}}
 tickClock();show('clock');pollState();pollAds();
 setInterval(tickClock,1000);setInterval(pollState,750);setInterval(paint,500);setInterval(pollAds,8000);
 window.SRGLcdPreview={paint,tickClock,show,setState(d){currentState=d;paint()}};

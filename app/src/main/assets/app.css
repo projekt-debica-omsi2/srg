@@ -53,3 +53,5 @@
 .td-clip{min-width:0;overflow:hidden;margin-right:2vw}.td-text{display:inline-block;white-space:nowrap}.td-time{font-variant-numeric:tabular-nums;white-space:nowrap}
 .td-moving{animation:td-scroll var(--td-duration) linear infinite alternate}
 @keyframes td-scroll{0%,15%{transform:translateX(0)}85%,100%{transform:translateX(var(--td-end))}}
+
+.greeting-ad{background:#fff;color:#000;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5vh;padding:3vw;font:800 clamp(24px,6.2vw,120px)/1.15 'Courier New',monospace;text-align:center;white-space:nowrap}
