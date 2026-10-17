@@ -1,4 +1,4 @@
-PRZESIADKI 1.4.42 — przygotowanie, brak aktywnego API
+PRZESIADKI 1.4.44 — przygotowanie, brak aktywnego API
 Przystanki z RJ: Dębica DA 1/68, Ropczyce DA 14/56, Sędziszów os. Młodych 18/52, Rzeszów Dworzec Lokalny 33/41. Dopasowanie sprawdza także nazwę.
 Moduł filtruje odjazdy według daty i czasu Europe/Warsaw. Miniony odjazd znika; późniejsze kursy w tym kierunku pozostają. Po ostatnim odjeździe kierunek znika do końca dnia. Brak przyszłych odjazdów = reklamy. Lista dłuższa niż 4 wiersze zmienia stronę co 8 sekund.
 Nie uzyskano bieżącego API ani zweryfikowanej pełnej listy kierunków/godzin. transfers-data.js pozostaje pusty i verified:false. Nie ma automatycznego pobierania od FlixBus. Integracja sieciowa wymaga dokumentacji/dostępu API lub datowanego eksportu rozkładu. Nie umieszczać kluczy API w APK.

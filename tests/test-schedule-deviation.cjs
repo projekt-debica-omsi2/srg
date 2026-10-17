@@ -42,7 +42,7 @@ assert(html.includes("times[index]||null"),'Use computed estimated times');
 assert(html.includes("state.pendingStop"),'Do not use pending preview as actual stop');
 assert(manifest.includes('android:icon="@mipmap/ic_launcher"'));
 assert(manifest.includes('android:roundIcon="@mipmap/ic_launcher_round"'));
-assert(build.includes("versionName '1.4.42'"));
+assert(build.includes("versionName '1.4.44'"));
 for(const density of ['mdpi','hdpi','xhdpi','xxhdpi','xxxhdpi'])assert(fs.existsSync(`app/src/main/res/mipmap-${density}/ic_launcher.png`));
 assert(fs.existsSync('app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml'));
 assert(fs.existsSync('app/src/main/res/drawable/ic_launcher_foreground.png'));

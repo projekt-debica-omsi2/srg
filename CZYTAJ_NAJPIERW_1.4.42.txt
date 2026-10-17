@@ -1,11 +1,11 @@
-SRG MOBILE 1.4.42 — LCD: RĘCZNE EKRANY PRZYSTANKÓW
+SRG MOBILE 1.4.44 — LCD: RĘCZNE EKRANY PRZYSTANKÓW
 
 GITHUB DESKTOP / ACTIONS
 1. Rozpakuj ZIP poza folderem repozytorium.
 2. Skopiuj CAŁĄ zawartość paczki do głównego folderu repozytorium: app, tests, .github oraz pliki Gradle. Zastąp istniejące pliki. Nie kopiuj ZIP-a jako jednego pliku i nie dodawaj dodatkowego katalogu nadrzędnego.
 3. W GitHub Desktop zrób commit, następnie Push origin.
-4. GitHub → Actions → Build SRG Mobile 1.4.42 APK. Możesz też użyć Run workflow.
-5. Po udanym buildzie pobierz artifact SRG-Mobile-v1.4.42-KURSOWKI-LCD-LAN-debug, rozpakuj i zainstaluj app-debug.apk na urządzeniu sterownika.
+4. GitHub → Actions → Build SRG Mobile 1.4.44 APK. Możesz też użyć Run workflow.
+5. Po udanym buildzie pobierz artifact SRG-Mobile-v1.4.44-KURSOWKI-LCD-LAN-debug, rozpakuj i zainstaluj app-debug.apk na urządzeniu sterownika.
 
 LCD NA INNYM URZĄDZENIU
 1. Połącz oba urządzenia z tym samym Wi-Fi albo podłącz ekran do hotspotu tabletu sterownika.

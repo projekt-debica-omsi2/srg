@@ -1,4 +1,4 @@
-SRG Mobile 1.4.42 — ręczne ekrany przystanków na LCD
+SRG Mobile 1.4.44 — ręczne ekrany przystanków na LCD
 
 W trakcie aktywnego kursu przycisk > na sterowniku pokazuje na LCD nazwę ręcznie wybranego następnego przystanku. Przycisk < pokazuje ręcznie wybrany przystanek. Ekran widoczny jest przez skonfigurowany dla niego czas, potem wraca zwykły cykl LCD. Jeżeli ustawisz 0 sekund, ekran ręczny jest wyłączony.
 
@@ -12,6 +12,6 @@ W cyklicznym ekranie „Trasa” są wyświetlane nazwy ulic z aktywnego wariant
 
 Usunięto numer linii z LCD. Trasa korzysta z szerszego pola. Wbudowany rozkład: rj261014.011 z pełnego projektu MONIS_DEBICA.
 
-NOWE W 1.4.42
+NOWE W 1.4.44
 Na zielonym pasku aktualnego przystanku po prawej jest ID z AutoEdit, np. (000040).
 Ustawienia → Tablica LCD → Dodaj reklamy: wybierz zdjęcia lub MP4 z tabletu. Można dodawać kolejne pliki w dowolnym momencie bez AutoEdit i bez nowego APK. Pliki są kopiowane do aplikacji, zachowywane po restarcie i przy aktualizacji. Odinstalowanie lub wyczyszczenie danych aplikacji usuwa kopie. Lista ma przyciski usuwania. LCD pobiera listę co 8 sekund. Zdjęcia: 5 s; pojedyncze zdjęcie: cały czas.

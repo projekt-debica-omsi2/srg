@@ -1,0 +1,3 @@
+Pod Zadanie: numer kolejny / liczba przystanków, zgodnie z kierunkiem. ID RJ na zielonym pasku pozostaje.
+Ustawienia > Tablica LCD > Ręczne sterowanie LCD > Zapisz i zastosuj. Domyślnie wyłączone. Włączone: obie strzałki pokazują Następny przystanek, zatwierdzenie pokazuje Przystanek. GPS i zapowiedzi nadal działają niezależnie.
+Odtworzono funkcję opisaną dla 1.4.43 na bazie przesłanej paczki 1.4.42. APK wymaga kompilacji na GitHubie.

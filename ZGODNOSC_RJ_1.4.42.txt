@@ -1,4 +1,4 @@
-Wersja 1.4.42 — zgodność danych RJ
+Wersja 1.4.44 — zgodność danych RJ
 ID w nawiasie pochodzi z rekordu przystanku w aktywnym pliku .011.
 Nazwy, ulice, kolejność przystanków i warianty pochodzą z tego samego RJ.
 Dodatkowe kursówki są dopasowane po linii, kodzie wariantu i kolejności ID/nazw, a nie po pozycji wariantu w pliku. Niezgodne kursówki są pomijane.
