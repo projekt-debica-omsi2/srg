@@ -7,7 +7,7 @@
   const steps=raw.steps.slice(0,12).filter(s=>s&&kinds.includes(s.type)).map(s=>({type:s.type,seconds:Number.isFinite(Number(s.seconds))?Math.max(0,Math.min(300,Math.round(Number(s.seconds)))):0}));
   return steps.length?{manualControl:raw.manualControl===true,steps}:defaults();
  }
- function available(config,state){return normalize(config).steps.filter(s=>s.seconds>0&&s.type!=='next'&&s.type!=='current'&&(s.type!=='transfers'||(state.przesiadka&&Array.isArray(state.przesiadka.przewoznicy)&&state.przesiadka.przewoznicy.length)));
+ function available(config,state){return normalize(config).steps.filter(s=>s.seconds>0&&s.type!=='next'&&s.type!=='current'&&(s.type!=='transfers'||(state.przesiadka&&((Array.isArray(state.przesiadka.rows)&&state.przesiadka.rows.length)||(Array.isArray(state.przesiadka.przewoznicy)&&state.przesiadka.przewoznicy.length)))));
  }
  function duration(config,type){return normalize(config).steps.filter(s=>s.type===type).reduce((m,s)=>Math.max(m,s.seconds),0)}
  function create(){let key='',started=0;return {reset(){key='';},pick(config,state,now){

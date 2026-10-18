@@ -102,7 +102,7 @@ function setTransfer(data){
 }
 function paintLower(){
  const live=currentState?.przesiadka;
- if(window.SRGTransferDraft&&(!currentState?.lcdConfig||window.SRGLcdCycle.duration(currentState.lcdConfig,'transfers')>0)&&isActive(currentState)&&Array.isArray(live?.rows)&&live.rows.length){
+ if(window.SRGTransferDraft&&isActive(currentState)&&Array.isArray(live?.rows)&&live.rows.length&&(!currentState?.lcdConfig||configuredMode==='transfers')){
   const page=Math.floor(Date.now()/8000)%Math.ceil(live.rows.length/4),visible={...live,rows:live.rows.slice(page*4,page*4+4)};const sig=JSON.stringify([currentState.kursId,currentState.aktualnyIndeks,visible]);if(sig!==transferSignature){transferSignature=sig;window.SRGTransferDraft.render(visible)}
   el('transfer').hidden=true;el('adMedia').style.visibility='hidden';return;
  }

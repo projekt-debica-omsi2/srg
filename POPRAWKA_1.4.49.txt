@@ -1,0 +1,8 @@
+SRG Mobile 1.4.49 — poprawka przesiadek POLREGIO
+1. Poprawione dopasowanie przystanku Sędziszów Małopolski Grunwaldzka (także warianty pisowni i litera Ł).
+2. Naprawiony cykl LCD: przesiadki rozpoznają pole rows, a nie tylko przewoznicy.
+3. Tabela odjazdów wyświetla się w kroku 'Przesiadki' cyklu LCD.
+4. Zachowane odjazdy POLREGIO ze stacji Sędziszów Małopolski Wschodni, poniedziałek–piątek.
+5. Zmieniony numer wersji w interfejsie i Gradle na 1.4.49.
+Weryfikacja testowa: poniedziałek 19.10.2026 06:00 — 41 nadchodzących odjazdów; niedziela — 0.
+To archiwum źródłowe. APK wymaga budowania w GitHub Actions.
