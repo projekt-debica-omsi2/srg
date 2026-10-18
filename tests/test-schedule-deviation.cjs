@@ -42,7 +42,11 @@ assert(html.includes("times[index]||null"),'Use computed estimated times');
 assert(html.includes("state.pendingStop"),'Do not use pending preview as actual stop');
 assert(manifest.includes('android:icon="@mipmap/ic_launcher"'));
 assert(manifest.includes('android:roundIcon="@mipmap/ic_launcher_round"'));
-assert(build.includes("versionName '1.4.45'"));
+// Validate version metadata without pinning this functional test to one release.
+const version=build.match(/versionName\s+['"](\d+)\.(\d+)\.(\d+)['"]/);
+assert(version,'Missing semantic Android versionName');
+const versionCode=build.match(/versionCode\s+(\d+)/);
+assert(versionCode && Number(versionCode[1])>0,'Missing positive Android versionCode');
 for(const density of ['mdpi','hdpi','xhdpi','xxhdpi','xxxhdpi'])assert(fs.existsSync(`app/src/main/res/mipmap-${density}/ic_launcher.png`));
 assert(fs.existsSync('app/src/main/res/mipmap-anydpi-v26/ic_launcher.xml'));
 assert(fs.existsSync('app/src/main/res/drawable/ic_launcher_foreground.png'));

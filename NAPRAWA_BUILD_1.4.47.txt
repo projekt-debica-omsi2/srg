@@ -1,0 +1,1 @@
+Naprawiono test-schedule-deviation.cjs: usunięto wymaganie konkretnej historycznej wersji 1.4.45, zachowując walidację metadanych wersji. Wszystkie 15 testów workflow przechodzi lokalnie. Wersja aplikacji pozostaje 1.4.47. APK nie zostało zbudowane w tym środowisku. Wgraj zawartość paczki do repozytorium, zastępując pliki.
