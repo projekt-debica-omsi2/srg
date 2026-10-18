@@ -1,0 +1,5 @@
+SRG Mobile v1.4.48
+- Poprawiono numer wersji na ekranie, w informacjach i w konfiguracji Androida.
+- Uodporniono rozpoznawanie przystanku Sędziszów Małopolski Grunwaldzka (ID 21/49) na warianty zapisu i typ ID.
+- Zachowano 45 odjazdów POLREGIO w dni poniedziałek–piątek; bez sobót i niedziel.
+- Przesiadki LCD wyświetlają tylko przyszłe odjazdy.

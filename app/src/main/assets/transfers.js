@@ -5,10 +5,11 @@
  {key:'ropczyce-da',ids:[14,56],name:'ROPCZYCE DWORZEC AUTOBUSOWY'},
  {key:'sedziszow-mlodych',ids:[18,52],name:'SĘDZISZÓW MAŁOPOLSKI OSIEDLE MŁODYCH'},
  {key:'rzeszow-lokalny',ids:[33,41],name:'RZESZÓW DWORZEC LOKALNY'}];
+ const normalizeName=s=>String(s||'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toUpperCase().replace(/[^A-Z0-9]+/g,' ').trim();
  const dateFmt=new Intl.DateTimeFormat('sv-SE',{timeZone:'Europe/Warsaw',year:'numeric',month:'2-digit',day:'2-digit'});
  const timeFmt=new Intl.DateTimeFormat('pl-PL',{timeZone:'Europe/Warsaw',hour:'2-digit',minute:'2-digit',hourCycle:'h23'});
  function forStop(stop,feed=root.SRGTransferData,now=Date.now()){
-  const station=stations.find(s=>s.ids.includes(stop?.id)&&s.name===String(stop?.name||'').trim().toUpperCase());
+  const station=stations.find(s=>s.ids.includes(Number(stop?.id))&&(normalizeName(s.name)===normalizeName(stop?.name)|| (s.key==='sedziszow-grunwaldzka'&&/SEDZISZOW.*GRUNWALDZKA/.test(normalizeName(stop?.name)))));
   if(!station||!feed||feed.verified!==true||!Array.isArray(feed.departures)||!Number.isFinite(now))return null;
   const day=dateFmt.format(now),seen=new Set();
   const rows=feed.departures.filter(r=>r.station===station.key&&['FlixBus','POLREGIO'].includes(r.carrier)&&typeof r.direction==='string'&&r.direction.trim()&&!r.cancelled&&typeof r.departure==='string'&&/(Z|[+-]\d{2}:\d{2})$/.test(r.departure)).map(r=>({...r,epoch:Date.parse(r.departure)}))
