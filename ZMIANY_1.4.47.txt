@@ -1,0 +1,11 @@
+1.4.47 — przesiadki kolejowe na Sędziszów Małopolski Grunwaldzka (ID 21 i 49).
+45 odjazdów POLREGIO ze stacji Sędziszów Małopolski Wschodni, odczytanych z 8 zdjęć.
+Użytkownik potwierdził: kursowanie PONIEDZIAŁEK–PIĄTEK, bez sobót i niedziel.
+Nie dodano osobnych wyjątków świątecznych — użytkownik ich nie podał.
+Kierunek to stacja docelowa (druga linia relacji na zdjęciu).
+Godzina znika w chwili odjazdu; późniejsze pociągi pozostają. Po ostatnim: reklamy.
+Po zmianie przystanku dotychczasowy mechanizm usuwa przesiadki.
+LCD pokazuje po 4 odjazdy, zmiana strony co 8 sekund (istniejąca funkcja).
+Nie doliczamy czasu dojścia do stacji; godziny dotyczą odjazdów pociągów.
+Zachowano 7 codziennych odjazdów FlixBus oraz zmiany R&G/USB z 1.4.46.
+Bez API, opóźnień i automatycznych aktualizacji. APK wymaga kompilacji.

@@ -1,4 +1,4 @@
-name: Build SRG Mobile 1.4.46 APK
+name: Build SRG Mobile 1.4.47 APK
 on:
   workflow_dispatch:
   push:
@@ -46,6 +46,7 @@ jobs:
           node tests/test-lcd-cycle.cjs
           node tests/test-manual-lcd.cjs
           node tests/test-transfers.cjs
+          node tests/test-train-transfers.cjs
           node tests/test-road-progress.cjs
           node tests/test-schedule-deviation.cjs
       - uses: gradle/actions/setup-gradle@v4
@@ -58,6 +59,6 @@ jobs:
       - name: Publish APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: SRG-Mobile-v1.4.46-KURSOWKI-LCD-LAN-debug
+          name: SRG-Mobile-v1.4.47-KURSOWKI-LCD-LAN-debug
           path: app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error
