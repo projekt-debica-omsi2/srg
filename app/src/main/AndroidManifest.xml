@@ -8,6 +8,7 @@
     <uses-feature android:name="android.hardware.microphone" android:required="false" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
+    <uses-feature android:name="android.hardware.usb.host" android:required="false"/>
     <application
         android:label="SRG Mobile 1.4.45"
         android:icon="@mipmap/ic_launcher"

@@ -174,8 +174,15 @@
 <div class="levelRow"><button class="cyan" id="volumeMinus" type="button">−</button><div class="levelBar"><div class="fill" id="volumeFill"></div><div class="pct" id="volumePct">90%</div></div><button class="cyan" id="volumePlus" type="button">+</button></div></div>
 <div class="wrgSafety" id="soundHint">Głośność dotyczy zapowiedzi w aplikacji. Wybór fizycznego wyjścia audio jest sterowany przez Androida.</div>
 <div class="soundActions"><button id="soundCancel" type="button">✖</button><button id="soundSave" type="button">✔</button></div></div></section>
-<section class="view subView" id="settings"><div class="top"><span>USTAWIENIA</span><span class="clock" data-clock="1">--:--:--</span></div>
-<div class="settingsTiles">
+<section class="view subView" id="rgSettings"><div class="top">TABLICA R&amp;G · USB–RS-485</div><div class="transWrap" style="overflow:auto"><div class="transCard">
+<p>Testy tablic zewnętrznych: adresy 17 i 18. Brak potwierdzonego protokołu R&amp;G — wpisz własną ramkę. Połączenie USB nie potwierdza działania tablicy.</p>
+<div class="transGrid"><label>Konwerter USB<select id="rgDevice"></select></label><label>Prędkość<select id="rgBaud"><option>9600</option><option>19200</option><option>38400</option><option>57600</option><option>115200</option></select></label><label>Bity danych<select id="rgData"><option>8</option><option>7</option></select></label><label>Parzystość<select id="rgParity"><option value="0">Brak</option><option value="1">Nieparzysta</option><option value="2">Parzysta</option></select></label><label>Bity stopu<select id="rgStop"><option>1</option><option>2</option></select></label><label>Profil testu<select id="rgProfile"><option value="utf8">Własna ramka + UTF-8</option><option value="ascii">Własna ramka + ASCII</option><option value="hex">Surowe HEX (ręcznie)</option></select></label></div>
+<div class="transButtons"><button id="rgScan">Odśwież USB</button><button id="rgConnect">Połącz</button><button id="rgDisconnect">Rozłącz</button></div><p id="rgStatus">Rozłączone</p>
+<label>Ramka HEX: {addr} = jeden bajt adresu, {text} = tekst. Nagłówek i sumę kontrolną należy podać według protokołu.<input id="rgFrame" placeholder="Brak domyślnej ramki — wpisz HEX" maxlength="12000"></label>
+<label>Tekst testowy / kierunek<input id="rgText" value="TEST" maxlength="120"></label><label>Znacznik fontu (opcjonalny, tylko tekstowy)<input id="rgFont" placeholder="np. &lt;f1&gt; — tylko jeśli tablica obsługuje" maxlength="30"></label>
+<div class="transButtons"><button id="rgCourse">Pobierz kierunek kursu</button><button id="rgPreview">Podgląd HEX</button><button id="rgSend">Wyślij test na 17 i 18</button></div>
+<p><label><input type="checkbox" id="rgVerified"> Potwierdzam, że ten profil i parametry poprawnie wyświetliły napis na tablicy</label></p><p><label><input type="checkbox" id="rgAuto"> Wysyłaj kierunek po wyborze / zmianie kursu (tylko zweryfikowany profil)</label></p><button class="wideBack" id="rgSave">Zapisz ustawienia</button><pre id="rgLog" style="min-height:100px"></pre><button class="wideBack" data-go="settings">Wróć</button></div></div></section><section class="view subView" id="settings"><div class="top"><span>USTAWIENIA</span><span class="clock" data-clock="1">--:--:--</span></div>
+<div class="settingsTiles"><button class="settingTile" data-go="rgSettings"><b>R&G</b><span>Tablica R&G</span></button>
 <button class="settingTile" data-go="transmission"><b>⚙</b><span>Ustawienia<br/>transmisji</span></button>
 <button class="settingTile" data-go="rjSettings"><b>RJ</b><span>Rozkład jazdy<br/>/ plik RJ</span></button>
 <button class="settingTile" id="vehicleSettingsBtn" data-go="vehicleSettings"><b id="settingsVehicleNo">75</b><span>Numer pojazdu</span></button>
@@ -1098,6 +1105,7 @@ function selectCourse(c){
  state.courseStartedNotified=false;
  $('#courseLine').textContent=v.line||c.line||'—';$('#courseDest').textContent=finalDirection(v).toUpperCase();
  $('#courseTask').textContent=c.manualDuty?c.task:String(c.courseNo||c.index+1);
+ window.dispatchEvent(new CustomEvent('srg-course-selected',{detail:{direction:finalDirection(v)}}));
  refreshCourse();closeCoursePicker();go('course');updateDepartureUI();if(voiceEnabled){playStartAudio();}if(!state.gpsAutoAttempted){state.gpsAutoAttempted=true;if(window.SRGNativeGPS || (!['file:','content:'].includes(location.protocol) && window.isSecureContext))startGps();}
  // Kursy z RJ bez godziny odjazdu pozostają do ręcznej obsługi — nie wymyślamy godziny.
  if(state.courseDepartureAt===null)toast('Brak godziny odjazdu z pierwszego przystanku');
@@ -1120,4 +1128,4 @@ $('#rs485Capability').textContent=('serial'in navigator)?'Web Serial: dostępny'
 
 // boot default
 loadBuiltinRJ(false);renderNoActiveCourse();refreshAutoGpsIndicator();refreshVoiceIndicator();updateClocks();renderIdle();const restored=restoreSession();go(restored?'course':'idle');setInterval(updateDepartureUI,1000);setInterval(renderRoad,5000);window.__srg={state,go,refreshCourse,loadBuiltinRJ,applyRJBuffer,finalDirection,renderCourses,openCoursePicker,closeCoursePicker,selectCourse,renderDutySelect,openTripChoice,renderTripChoice,nearestFutureIndex,dutyEntries,finishCurrentTrip,nextTripSameDuty,askLogout,openDriverChange,startGps,stopGps,departureDateForCourse,formatDepartureDifference,updateDepartureUI,closeCourseStarted,updateGpsFix,processAutoGpsFix,processVoiceGpsFix,refreshAutoGpsIndicator,refreshVoiceIndicator,restoreSession,persistSession,renderRoad,roadMeters,roadProjection};
-})();</script></body></html>
+})();</script><script src="rg-usb.js"></script></body></html>

@@ -8,8 +8,8 @@ android {
         applicationId 'pl.srgmobile.classic.lcd23'
         minSdk 26
         targetSdk 34
-        versionCode 11445
-        versionName '1.4.45'
+        versionCode 11446
+        versionName '1.4.46'
     }
 
     buildTypes {
@@ -23,3 +23,5 @@ android {
         targetCompatibility JavaVersion.VERSION_17
     }
 }
+
+dependencies { implementation 'com.github.mik3y:usb-serial-for-android:3.8.1' }

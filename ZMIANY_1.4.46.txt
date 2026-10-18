@@ -1,0 +1,31 @@
+SRG Mobile 1.4.46 — zmiany na bazie dołączonego ZIP 1.4.45
+Menu -> Ustawienia -> Tablica R&G.
+Natywny transport USB serial: biblioteka usb-serial-for-android 3.8.1 (JitPack).
+Wybór konwertera, zgoda Androida, port 0, konfiguracja prędkości / bitów / parzystości,
+rozłączenie, odbiór i log HEX. Wymaga konwertera USB–RS-485 z automatycznym kierunkiem transmisji.
+USB Host/OTG wymagane. Zasilanie tablicy pozostaje osobne.
+Nie testowano z fizycznym tabletem ani tablicą; nie zbudowano APK lokalnie.
+
+Profile są formatami TESTOWYMI, nie implementacjami protokołów R&G:
+1. Własna ramka z tekstem UTF-8.
+2. Własna ramka z tekstem ASCII (odrzuca polskie znaki).
+3. Surowe HEX, wysyłane tylko raz, bez automatyki.
+Ramka tekstowa wymaga {addr} i {text}. Adresy 17 i 18 dziesiętnie
+wstawiane są jako bajty 11 i 12 HEX. Nie dodajemy wymyślonych nagłówków ani CRC.
+Brak automatycznego obliczania długości lub sumy kontrolnej: jeśli protokół tego
+wymaga, trzeba zaimplementować jego pełny format przed użyciem automatyki.
+Puste pole ramki jest zamierzone. Brak gotowych komend do zmiany kierunku.
+Znacznik fontu to opcjonalny prefiks tekstu; nie przesyła pliku czcionki.
+Nie dodano fontów z wcześniejszych archiwów — nie ma ich w bieżącej paczce.
+
+Po teście zaznacz potwierdzenie działania profilu i opcję automatyki.
+Przy wyborze kolejnego kursu wysyłany jest jego kierunek na oba adresy.
+Automatyka nie działa przy rozłączonym USB i wymaga ponownego potwierdzenia
+po restarcie aplikacji lub zmianie parametrów. Nie ma ponawiania utraconych komend.
+Sam zapis TX / połączony USB nie oznacza potwierdzenia przez tablicę.
+Bez ramki można przetestować wykrywanie i otwieranie portu oraz podgląd HEX.
+9600 jest jedynie początkową wartością ustawień, nie ustaleniem dla Twojej tablicy.
+
+Zachowano LCD, reklamy, GPS, ręczne LCD, przesiadki i rozkłady z paczki 1.4.45.
+GitHub Actions buduje wersję 1.4.46. Wgraj pełną zawartość ZIP, w tym .github.
+Walidacja: test ramek, składnia JS, testy GPS, głosu, LCD, ręcznego LCD i przesiadek.

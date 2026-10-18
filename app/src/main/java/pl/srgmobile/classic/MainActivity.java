@@ -35,6 +35,7 @@ import java.util.Collections;
 
 /** Natywne, lokalne GPS_PROVIDER bez wymagania Internetu. */
 public final class MainActivity extends Activity implements LocationListener {
+    private RgUsbBridge rgUsb;
     private static final int LOCATION_REQUEST = 41;
     private static final int MEDIA_REQUEST = 42;
     private PermissionRequest pendingMediaRequest;
@@ -115,6 +116,8 @@ public final class MainActivity extends Activity implements LocationListener {
         web.addJavascriptInterface(new GpsBridge(), "SRGNativeGPS");
         web.addJavascriptInterface(new AudioBridge(), "SRGNativeAudio");
         web.addJavascriptInterface(new LcdBridge(), "SRGLcd");
+        rgUsb = new RgUsbBridge(this, web);
+        web.addJavascriptInterface(rgUsb, "SRGRgUsb");
         setContentView(web);
         web.loadUrl("file:///android_asset/index.html");
     }
@@ -470,6 +473,7 @@ public final class MainActivity extends Activity implements LocationListener {
     @Override protected void onStop() {
         // Brak lokalizacji w tle. Użytkownik nadal chce GPS po wznowieniu.
         stopListening();
+        if (rgUsb != null) rgUsb.close();
         stopVoice();
         super.onStop();
     }
@@ -480,6 +484,7 @@ public final class MainActivity extends Activity implements LocationListener {
     }
     @Override protected void onDestroy() {
         stopListening();
+        if (rgUsb != null) rgUsb.close();
         stopVoice();
         if (lcdServer != null) lcdServer.close();
         if (pendingMediaRequest!=null){pendingMediaRequest.deny();pendingMediaRequest=null;}
