@@ -11,7 +11,7 @@
  function forStop(stop,feed=root.SRGTransferData,now=Date.now()){
   const stopName=normalizeName(stop?.name);
   const station=stations.find(s=> {
-   if(s.key==='sedziszow-grunwaldzka' && /SEDZISZOW.*GRUNWALDZKA/.test(stopName))return true;
+   if(s.key==='sedziszow-grunwaldzka' && /SEDZISZOW.*GRUNWALDZKA/.test(stopName) && (stop?.id==null||s.ids.includes(Number(stop.id))))return true;
    return s.ids.includes(Number(stop?.id)) && (normalizeName(s.name)===stopName || !stopName);
   });
   if(!station||!feed||feed.verified!==true||!Array.isArray(feed.departures)||!Number.isFinite(now))return null;
