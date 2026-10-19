@@ -1,0 +1,9 @@
+1.4.49: S-27 kurs 4, Rzeszów DA 10:45 -> Dębica DA 12:04.
+Zastąpiono wcześniejsze godziny szacowane godzinami z filmu 7712.mp4.
+Odczytano 32 pozycje, 30 przypisano do istniejących ID RJ.
+Niepewne przypisania: Świlcza GÓ 10:59 oraz D-ca RzCPN 11:58.
+Obie pozycje zachowano w pliku kursowki_godziny_z_fotografii.json; nie przypisano ich do przypadkowych ID.
+Przystanki RJ bez potwierdzonej godziny tego kursu pokazują --:-- zamiast szacunku.
+Wycofano całą omyłkowo dodaną listę przystanków z 1.4.48.
+Zachowano zmiany z 1.4.47 BUILD_FIX: przesiadki kolejowe pon.–pt., USB/RS485, LCD.
+Nie zmieniano dni kursowania ani pozostałych kursów S-27.

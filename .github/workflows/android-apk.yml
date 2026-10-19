@@ -45,6 +45,7 @@ jobs:
           node tests/test-lcd-merged.cjs
           node tests/test-lcd-cycle.cjs
           node tests/test-manual-lcd.cjs
+          node tests/test-s27-1045.cjs
           node tests/test-transfers.cjs
           node tests/test-train-transfers.cjs
           node tests/test-road-progress.cjs
