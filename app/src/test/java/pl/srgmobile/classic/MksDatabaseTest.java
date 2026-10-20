@@ -6,7 +6,7 @@ import java.nio.file.*;
 public class MksDatabaseTest {
  static JSONObject fixture() throws Exception {
   Path p=Path.of("../tests/fixtures/mks-sqlite-tables.json");if(!Files.exists(p))p=Path.of("tests/fixtures/mks-sqlite-tables.json");
-  return new JSONObject(Files.readString(p));
+  return new JSONObject(new String(Files.readAllBytes(p), java.nio.charset.StandardCharsets.UTF_8));
  }
  static JSONObject convert(JSONObject t) throws Exception {return MksDatabase.convert(t.getJSONArray("stops"),t.getJSONArray("calendar"),t.getJSONArray("notes"),t.getJSONArray("departures"),t.getJSONArray("versions"));}
  @Test public void realDatabaseCalendarAndSides() throws Exception {
