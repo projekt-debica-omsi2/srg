@@ -1,0 +1,11 @@
+1.4.53 — komplet przesiadek
+Rzeszów: trzy ekrany po maksymalnie 8 najbliższych kursów:
+1. PKS Rzeszów + Monis
+2. Kolej: 112 POLREGIO, 45 PKP Intercity, 2 RegioJet — razem 159 odjazdów ze zdjęć.
+3. MPK 0A + 0B
+Kolej kursuje od poniedziałku do piątku według potwierdzenia użytkownika, bez dodatkowych wyjątków świątecznych. Brak godzin Leo Express w dostarczonych zdjęciach.
+Nie pokazujemy dopisków BUS ani utrudnień.
+Grunwaldzka, os. Młodych, Ropczyce D.A. i Dębica D.A.: maksymalnie 8 najbliższych odjazdów, bez kolejnych stron z dalszymi kursami.
+Po osiągnięciu godziny odjazdu wchodzi następny kurs.
+Monis 5:45 Ropczyce: Hnp.
+Dane offline, bez automatycznego pobierania aktualizacji. Zakres PKS/Monis do 31.12.2026; MPK wymaga ponownego sprawdzenia od 23.12.2026.

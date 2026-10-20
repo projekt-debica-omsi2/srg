@@ -1,0 +1,9 @@
+SRG Mobile 1.4.59 — proxy pobierania MKS
+
+Dodano ustawienie adresu HTTPS proxy mybus-hub-api.php. Aplikacja dopisuje city=DEBIC&action=schedule do adresu bez parametrów. Puste pole przywraca bezpośrednie pobieranie. Zmiana adresu wymusza sprawdzenie przy kolejnym zadaniu, także przed upływem 6 godzin. Pobieranie nadal wymaga Wi-Fi i respektuje wstrzymanie aktualizacji.
+
+Dołączono server-mks-proxy z dwoma przesłanymi plikami PHP i instrukcją hostingu. Nie podano adresu uruchomionego proxy; nie zostało ono wdrożone. Serwer musi mieć dostęp do rj.mks.debica.pl.
+
+Ograniczenie: pobierana jest oryginalna baza binarna. Parser jej odjazdów pozostaje do dopasowania do próbki. Samo pobranie nie zmienia jeszcze wyświetlanych godzin MKS.
+
+Weryfikacja: kompilacja czterech klas synchronizacji względem API Android 35; 7 testów JUnit protokołu i adresów proxy; testy JavaScript cache/przywracania, MKS, przesiadek i PKS. Nie wykonano pełnej kompilacji APK ani testu PHP na działającym hostingu.

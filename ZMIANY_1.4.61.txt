@@ -1,0 +1,22 @@
+SRG Mobile 1.4.61 — przesiadki MKS z proxy i poprawa generatora nagrań
+
+Proxy e-dębica.pl:8088 pobiera gzip z bazą SQLite. Android odczytuje bazę i zapisuje rozkład do pamięci offline. Aktualizacja przez Wi-Fi, przy błędzie pozostaje ostatni poprawny rozkład. Funkcja przywrócenia rozkładu z APK obejmuje także nową bazę MKS.
+
+Powiązania przystanków:
+Dworzec autobusowy w obu kierunkach -> DWORZEC PKP MKS (171).
+ZURT -> ZURIT. (241), nazwa z oryginalnej bazy.
+Technikum -> 243 w stronę Rzeszowa/zajezdni, 89 w stronę Dębicy.
+Rzeszowska RAJ / centrum handlowe -> 244 w stronę Rzeszowa, 87 w stronę Dębicy.
+Rzeszowska MKS -> 576 / 575.
+Rzeszowska Nadleśnictwo -> 252 / 59.
+Nagawczyna 1 -> 253 / 60.
+Nagawczyna 2 -> 254 / 61.
+Zawada E4 w obu kierunkach -> oba słupki Zawada Baszta 123 i 308: Braciejowa, Stobierna oraz warianty skrócone/wydłużone.
+Dębica plac Gryfitów -> Rzeszowska plac Gryfitów 88.
+
+Do 8 najbliższych odjazdów MKS na ekran, bez filtracji po numerze linii. Odjazd znika po osiągnięciu jego minuty. Dni kursowania pochodzą z KALENDARZ, wyjątki i warianty z UWAGI. Nie zgaduje się kursowania poza datami bazy. Kopia dołączona do APK zawiera kalendarz 18.10–31.12.2026; kolejne pobrania mogą dostarczyć nowszy kalendarz. Przy Baszcie nie dodano arbitralnego czasu dojścia.
+
+Nagrania: uruchom ZMIEN_NAGRANIA_NAGAWCZYNA_DABROWA.bat z katalogu rozpakowanej paczki. Wymagany Windows z Pythonem 3 oraz Internet do generatora Marek Neural. BAT generuje nowe wypowiedzi, nie zmienia numerów plików. Nagawczyna 1 -> „Nagawczyna jeden”, Nagawczyna 2 -> „Nagawczyna dwa”, Dąbrowa -> „Dąbrowa”, Dąbrowa 2 -> „Dąbrowa jeden” zgodnie z prośbą o zmianę dźwięku. Nazwy przystanków w rozkładzie pozostają bez zmian. Oba kierunki są uwzględnione.
+Oryginalne MP3 pozostają w tej paczce; nowe nagrania powstaną po uruchomieniu BAT. Skrypt zachowa kopię zastępowanych plików w KOPIA_NAGRAN_PRZED_ZMIANA i zaktualizuje manifest SHA256. Po wykonaniu BAT prześlij zmienione audio i manifest wraz z projektem do GitHub, przed budowaniem APK.
+
+Weryfikacja: 20 testów JUnit, kompilacja klas synchronizacji względem Android API 35, testy JS mapowania/kalendarza/odjazdów/rollbacku, regresje MKS/PKS/przesiadek i integralność istniejących nagrań. Generator sprawdzony w trybie dry-run. Nie wykonano pełnej kompilacji APK ani uruchomienia BAT na Windows/tablecie.

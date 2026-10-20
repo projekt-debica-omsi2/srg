@@ -1,0 +1,14 @@
+1.4.56 — MKS Dębica z przesłanej bazy
+
+Dębica DA: ekran MKS zawiera odjazdy DWORZEC PKP (stopId 171, numer 16), oba kierunki. 23 relacje; 250 odjazdów roboczych, 233 roboczych wakacyjnych/feryjnych, 86 sobotnich i 50 niedzielno-świątecznych. Wyświetlane maksymalnie 8 kolejnych kursów z numerem linii. Nie mieszamy z przystankami Brzeźnica Dworzec ani Sandomierska Dworzec Wschodni.
+Źródło: mks_static_state.json przesłany przez użytkownika 20.10.2026. Daty obowiązywania nie podano w pliku; nie przedstawiamy kopii jako potwierdzonego rozkładu aktualnie pobranego od przewoźnika. Wszystkie odjazdy wybranego przystanku mają puste oznaczenia mark. Nie zastosowano przybliżonej legendy z PHP do nieznanych wyjątków.
+Obsługa świąt i dni roboczych/ferii, kalendarz szkolny Podkarpacia do 31.08.2027. Po tym terminie roboczy profil wymaga aktualizacji kalendarza.
+
+AKTUALIZACJE MKS
+Ustawienia -> Aktualizacja rozkładów -> Adres HTTPS danych MKS.
+Obsługiwany jest kompletny plik mks_static_state.json (conn) albo dołączony mks-dworzec-feed.json (profiles). Po wpisaniu działającego adresu aplikacja pobiera przez Wi-Fi, sprawdza strukturę i zachowuje ostatnią poprawną kopię. Sprawdzanie co 6 godzin, jak pozostałe źródła. Bez wpisanego URL działa lokalna baza.
+Nie opublikowano niczego na serwerze użytkownika. Potrzebny adres aktualizowanego pliku. Jednorazowe wgranie statycznego JSON nie zapewnia aktualizacji po zmianach u przewoźnika — dane na tym adresie muszą być uzupełniane przez działający proces serwera.
+Przesłany mks-timetable-json.php czyta lokalne data/mks_stop_board.json; nie pobiera nowego rozkładu u operatora i zwraca tylko wybraną relację. Nie traktujemy takiej odpowiedzi jako kompletnego rozkładu dworca.
+Bezpośredni adres http://rj.mks.debica.pl/Timetable?stopId=171&routeId=9421&dir=1 nadal nie odpowiedział podczas próby. Nie włączono nieprzetestowanego pobierania plików binarnych myBus ani losowego zastępowania starych danych. Oryginalnych przesłanych PHP/BAT nie uruchamiano ani nie modyfikowano.
+
+Testy: parser oryginalnej struktury conn i wynikowych profiles, odrzucenie innego przystanku, cztery kalendarze MKS, dni świąteczne i ferie, 8 kursów i oba ID Dębicy DA. Nowy kod Java skompilowany z API Android 35. Pełny APK i zachowanie na tablecie pozostają do sprawdzenia po budowie GitHub Actions.

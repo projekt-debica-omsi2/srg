@@ -1,0 +1,7 @@
+1.4.52 — Rzeszów: PKS + Monis (8 odjazdów), ekran PKP, MPK 0A/0B (8 odjazdów).
+Ekrany zmieniają się kolejno co ustawiony czas przesiadek (domyślnie 8 s).
+Monis: 32 kursy z dostarczonego zdjęcia. Kurs 5:45 Ropczyce poprawiony na Hnp.
+PKP: BRAK DANYCH. Ekran pokazuje Rozkład kolejowy niedostępny. Potrzebny pełny rozkład odjazdów z dniami kursowania.
+MPK: oficjalny e-info, rozkład od 03.10.2026, pobrano 19.10.2026. 0A przystanek PKP 01, 0B PKP 03.
+Dane MPK wymagają sprawdzenia od 23.12.2026 ze względu na świąteczne zmiany; po tej dacie nie pokazujemy niezweryfikowanych godzin.
+PKS/Monis: zakres dat do 31.12.2026. Brak automatycznego pobierania zmian rozkładów z internetu.

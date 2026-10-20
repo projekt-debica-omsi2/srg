@@ -3,14 +3,18 @@ const t=require('../app/src/main/assets/transfers.js'),ctx={window:{}};vm.runInN
 const at=s=>Date.parse(s+'+02:00');
 for(const id of [21,49]){
  const stop={id,name:'SĘDZISZÓW MAŁOPOLSKI GRUNWALDZKA'};
- assert.equal(t.forStop(stop,feed,at('2026-10-19T00:00:00')).rows.length,45);
+ assert.equal(t.forStop(stop,feed,at('2026-10-19T00:00:00')).rows.length,8);
  assert.equal(t.forStop(stop,feed,at('2026-10-18T00:00:00')),null);
- assert.equal(t.forStop(stop,feed,at('2026-10-20T00:00:00')).rows.length,45);
- assert.equal(t.forStop(stop,feed,at('2026-10-23T00:00:00')).rows.length,45);
+ assert.equal(t.forStop(stop,feed,at('2026-10-20T00:00:00')).rows.length,8);
+ assert.equal(t.forStop(stop,feed,at('2026-10-23T00:00:00')).rows.length,8);
  assert.equal(t.forStop(stop,feed,at('2026-10-24T00:00:00')),null);
  assert.equal(t.forStop(stop,feed,at('2026-10-25T00:00:00')),null);
- assert.equal(t.forStop(stop,feed,Date.parse('2026-10-26T00:00:00+01:00')).rows.length,45);
- assert.equal(t.forStop(stop,feed,at('2026-10-19T04:35:00')).rows.length,44);
+ assert.equal(t.forStop(stop,feed,Date.parse('2026-10-26T00:00:00+01:00')).rows.length,8);
+ assert.equal(t.forStop(stop,feed,at('2026-10-19T04:35:00')).rows.length,8);
+ const first=t.forStop(stop,feed,at('2026-10-19T00:00:00'));
+ const advanced=t.forStop(stop,feed,at('2026-10-19T04:35:00'));
+ assert.equal(first.rowsPerPage,8);assert(first.rows.some(r=>r.time==='04:35'));assert(advanced.rows.every(r=>r.time>'04:35'));
+ assert(advanced.rows.some(r=>!first.rows.some(x=>x.train===r.train)));
  const before=t.forStop(stop,feed,at('2026-10-19T20:44:59')).rows.filter(r=>r.time==='20:45');
  assert.deepEqual(before.map(r=>r.direction).sort(),['Rzeszów Główny','Tarnów']);
  assert.equal(t.forStop(stop,feed,at('2026-10-19T20:45:00')).rows.length,4);

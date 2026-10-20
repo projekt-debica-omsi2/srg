@@ -1,0 +1,17 @@
+1.4.55 — automatyczne aktualizacje rozkładów przez Wi-Fi
+
+DZIAŁAJĄCA IMPLEMENTACJA
+Kolej: PKP Intercity, POLREGIO, Leo Express, RegioJet i inni przewoźnicy obecni w tablicy stacyjnej. Rzeszów Główny, Dębica, Sędziszów Małopolski Wschodni. Pobieranie planowych odjazdów na dziś i kolejne 6 dni z gdziepociag.pl (nieoficjalny serwis danych PKP PLK).
+PKS Rzeszów: bezpośrednio z https://pks.rzeszow.pl/tablice-dworcowe/13150019/rzeszow-d-a — aktualne godziny, stanowiska, okres ważności i oznaczenia dni kursowania. Kalendarz generowany na 14 dni z ograniczeniem do ważności źródła. Dane szkolne Podkarpacia zweryfikowane do 31.08.2027; po tym terminie parser zgłosi potrzebę aktualizacji kalendarza zamiast zgadywać ferie.
+Połączenia przypięte do sieci Wi-Fi z Internetem; brak przełączenia pobierania na transmisję komórkową. Pierwsze sprawdzenie przy uruchomieniu aplikacji. Zadanie systemowe sprawdza możliwość pracy co około 15 minut; każdy poprawnie pobrany rozkład jest sprawdzany ponownie po 6 godzinach. Android może opóźnić zadania w tle, zwłaszcza po wymuszeniu zatrzymania aplikacji.
+Pobieranie dzielone na sesje do około 3 minut, kontynuowane w następnych uruchomieniach zadania. Każdy rozkład stacja/dzień jest zapisywany dopiero po sprawdzeniu kompletności. Przerwanie Wi-Fi, błąd strony lub zmiana jej struktury pozostawiają poprzednią poprawną kopię. Atomowy zapis w pamięci aplikacji. Nowa zawartość zastępuje poprzednią; te same dane jedynie odświeżają czas sprawdzenia.
+Ustawienia -> Aktualizacja rozkładów: status Wi-Fi, ostatnie poprawne sprawdzenie, błędy. Planowe rozkłady, bez informacji o opóźnieniach. Zachowane maksymalnie 8 najbliższych kursów i wszystkie wcześniejsze funkcje.
+
+MKS DĘBICA — NIEPODŁĄCZONE
+Sprawdzono oficjalną stronę, assets/all.js, stronę myBus oraz publiczny wpis WordPress rozkład-jazdy. Dostępny skrypt zawiera obsługę interfejsu, a publiczny wpis strony nie zawiera tabel odjazdów. Strona rozkładu i rj.mks.debica.pl kończą się błędem/timeoutem. Nie udało się uzyskać działającego źródła danych; MKS NIE jest automatycznie pobierany. Ekran pozostaje przygotowany do uzupełnienia. Potrzebny działający adres rozkładu lub zapis strony wraz z zasobami, aby dokończyć adapter.
+Monis zachowuje oddzielny rozkład użytkownika i nie jest nadpisywany przez PKS. MPK Rzeszów pozostaje z wcześniejszego rozkładu offline.
+
+WERYFIKACJA
+Testy parserów: realna tabela PKS (904 wpisy), kalendarz szkolny/świąteczny, nakładanie stron z jednoczesnymi odjazdami, odrzucenie błędnej daty i niepełnej tablicy. Testy JS: integracja pamięci, zachowanie Monis i odrzucenie błędnych danych oraz regresje przesiadek.
+Nowy moduł Java sprawdzany kompilatorem z Android API 35. Pełne złożenie APK wykonuje GitHub Actions; nie zweryfikowano jeszcze instalacji na tablecie ani działania zadań w tle na urządzeniu.
+Źródło kalendarza szkolnego: https://www.gov.pl/web/edukacja/terminy-ferii-zimowych-w-roku-szkolnym-20262027 oraz kalendarz MEN 2026/2027.

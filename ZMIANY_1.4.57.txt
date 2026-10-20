@@ -1,0 +1,10 @@
+1.4.57 — bezpośrednie pobieranie bazy z API MKS
+
+Domyślne źródło: http://rj.mks.debica.pl/AndroidService/SchedulesService.svc/
+Protokół z przesłanych plików: PingService z Age=403, następnie GetScheduleFile z Age=343+wynik PingService; User-Agent myBusOnline. Odpowiedzi błędne/401/403 są odrzucane, bez omijania odmowy dostępu. Wi-Fi z Internetem, przypięcie połączeń do tej sieci, limit pliku 64 MiB, ograniczone timeouty. HTTP dozwolone wyłącznie dla rj.mks.debica.pl; pozostałe źródła nadal wymagają HTTPS.
+Próby automatycznie w istniejącym zadaniu synchronizacji; ponowne sprawdzenie po 6 h od udanego pobrania. Baza atomowo zapisywana jako mks-schedule.bin w prywatnej pamięci aplikacji. Wyliczane SHA-256, rozmiar i rozpoznanie nagłówka gzip/SQLite/binary. Nie trzeba podawać adresu własnego serwera.
+
+WAŻNE — ETAP NIEUKOŃCZONY
+To pobieranie oryginalnej bazy, nie ukończona aktualizacja godzin wyświetlanych na ekranie. Serwer API nie odpowiedział podczas prób HTTP/HTTPS, więc nie uzyskano rzeczywistej bazy ani jej schematu. Nie dopisano zgadywanego parsera SQLite. Odjazdy MKS nadal pochodzą z przesłanego mks_static_state.json (lub poprawnego opcjonalnego JSON). Oryginalna baza nie jest stosowana do odjazdów, co pokazuje status.
+Po zbudowaniu APK: połącz tablet z Wi-Fi, otwórz Ustawienia -> Aktualizacja rozkładów. Jeżeli API pobierze bazę, użyj „Zapisz pobraną bazę MKS” i prześlij mks-schedule.bin. Próbka pozwoli dopisać i przetestować właściwy parser, bez zgadywania dni i kierunków.
+Testy protokołu: prawidłowa kolejność metod/nagłówków, odrzucenie błędnego PingService i HTML zamiast bazy. Nowe klasy skompilowane z API Android 35; pełny APK i eksport na tablecie wymagają budowy GitHub oraz sprawdzenia na urządzeniu.

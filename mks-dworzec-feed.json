@@ -1,0 +1,5587 @@
+{
+  "source": "Dane przesłane przez użytkownika 2026-10-20; mks_static_state.json",
+  "stop": "DWORZEC PKP",
+  "stopId": "171",
+  "profiles": {
+    "Roboczy": [
+      {
+        "time": "04:20",
+        "direction": "BRACIEJOWA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "1"
+      },
+      {
+        "time": "04:43",
+        "direction": "CHOTOWA OŚRODEK",
+        "carrier": "MKS 5",
+        "line": "5",
+        "stopId": "171",
+        "routeId": "9432",
+        "dir": "1"
+      },
+      {
+        "time": "04:58",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "05:09",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "05:19",
+        "direction": "BRACIEJOWA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "1"
+      },
+      {
+        "time": "05:21",
+        "direction": "STOBIERNA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "2"
+      },
+      {
+        "time": "05:25",
+        "direction": "LAKIERY DĘBICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "2"
+      },
+      {
+        "time": "05:28",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "05:29",
+        "direction": "KRAKOWSKA - KĘPA/p. PUSTKÓW LERG",
+        "carrier": "MKS 11",
+        "line": "11",
+        "stopId": "171",
+        "routeId": "9422",
+        "dir": "1"
+      },
+      {
+        "time": "05:30",
+        "direction": "PODGRODZIE/p. LATOSZYN ZDRÓJ",
+        "carrier": "MKS 14",
+        "line": "14",
+        "stopId": "171",
+        "routeId": "9424",
+        "dir": "1"
+      },
+      {
+        "time": "05:30",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "05:34",
+        "direction": "NAGAWCZYNA",
+        "carrier": "MKS 5",
+        "line": "5",
+        "stopId": "171",
+        "routeId": "9432",
+        "dir": "2"
+      },
+      {
+        "time": "05:36",
+        "direction": "CHOTOWA OŚRODEK",
+        "carrier": "MKS 5",
+        "line": "5",
+        "stopId": "171",
+        "routeId": "9432",
+        "dir": "1"
+      },
+      {
+        "time": "06:00",
+        "direction": "BRACIEJOWA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "1"
+      },
+      {
+        "time": "06:12",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "06:17",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "06:17",
+        "direction": "STOBIERNA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "2"
+      },
+      {
+        "time": "06:18",
+        "direction": "OS. WOLICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "1"
+      },
+      {
+        "time": "06:20",
+        "direction": "BRACIEJOWA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "1"
+      },
+      {
+        "time": "06:20",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "06:24",
+        "direction": "LAKIERY DĘBICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "2"
+      },
+      {
+        "time": "06:24",
+        "direction": "NAGAWCZYNA",
+        "carrier": "MKS 5",
+        "line": "5",
+        "stopId": "171",
+        "routeId": "9432",
+        "dir": "2"
+      },
+      {
+        "time": "06:25",
+        "direction": "PODGRODZIE/p. LATOSZYN ZDRÓJ",
+        "carrier": "MKS 14",
+        "line": "14",
+        "stopId": "171",
+        "routeId": "9424",
+        "dir": "1"
+      },
+      {
+        "time": "06:27",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "06:27",
+        "direction": "BOROWA",
+        "carrier": "MKS 16",
+        "line": "16",
+        "stopId": "171",
+        "routeId": "9426",
+        "dir": "1"
+      },
+      {
+        "time": "06:27",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "06:32",
+        "direction": "ZAJEZDNIA MKS/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "2"
+      },
+      {
+        "time": "06:36",
+        "direction": "CHOTOWA OŚRODEK",
+        "carrier": "MKS 5",
+        "line": "5",
+        "stopId": "171",
+        "routeId": "9432",
+        "dir": "1"
+      },
+      {
+        "time": "06:47",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "06:50",
+        "direction": "KRAKOWSKA - KĘPA/p. PUSTKÓW LERG",
+        "carrier": "MKS 11",
+        "line": "11",
+        "stopId": "171",
+        "routeId": "9422",
+        "dir": "1"
+      },
+      {
+        "time": "06:51",
+        "direction": "LAKIERY DĘBICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "2"
+      },
+      {
+        "time": "06:51",
+        "direction": "OS. WOLICA/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "1"
+      },
+      {
+        "time": "06:56",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "07:09",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "07:09",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "07:18",
+        "direction": "BRACIEJOWA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "1"
+      },
+      {
+        "time": "07:20",
+        "direction": "STOBIERNA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "2"
+      },
+      {
+        "time": "07:22",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "07:22",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "07:22",
+        "direction": "ZAJEZDNIA MKS/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "2"
+      },
+      {
+        "time": "07:31",
+        "direction": "LAKIERY DĘBICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "2"
+      },
+      {
+        "time": "07:32",
+        "direction": "OS. WOLICA/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "1"
+      },
+      {
+        "time": "07:33",
+        "direction": "OS. WOLICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "1"
+      },
+      {
+        "time": "07:34",
+        "direction": "ZAJEZDNIA MKS",
+        "carrier": "MKS 16",
+        "line": "16",
+        "stopId": "171",
+        "routeId": "9426",
+        "dir": "2"
+      },
+      {
+        "time": "07:36",
+        "direction": "CHOTOWA OŚRODEK",
+        "carrier": "MKS 5",
+        "line": "5",
+        "stopId": "171",
+        "routeId": "9432",
+        "dir": "1"
+      },
+      {
+        "time": "07:37",
+        "direction": "PUSTKÓW WIEŚ/PRZEZ BRÓDKI, ŁĘG",
+        "carrier": "MKS 11",
+        "line": "11",
+        "stopId": "171",
+        "routeId": "9422",
+        "dir": "2"
+      },
+      {
+        "time": "07:37",
+        "direction": "KRAKOWSKA/SZPITAL",
+        "carrier": "MKS 18",
+        "line": "18",
+        "stopId": "171",
+        "routeId": "9428",
+        "dir": "1"
+      },
+      {
+        "time": "07:38",
+        "direction": "PODGRODZIE/p. LATOSZYN ZDRÓJ",
+        "carrier": "MKS 14",
+        "line": "14",
+        "stopId": "171",
+        "routeId": "9424",
+        "dir": "1"
+      },
+      {
+        "time": "07:39",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "07:39",
+        "direction": "NAGAWCZYNA",
+        "carrier": "MKS 5",
+        "line": "5",
+        "stopId": "171",
+        "routeId": "9432",
+        "dir": "2"
+      },
+      {
+        "time": "07:41",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "07:43",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "07:46",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "07:47",
+        "direction": "ZAJEZDNIA MKS/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "2"
+      },
+      {
+        "time": "07:56",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "08:11",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "08:17",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "08:19",
+        "direction": "OS. WOLICA/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "1"
+      },
+      {
+        "time": "08:26",
+        "direction": "LAKIERY DĘBICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "2"
+      },
+      {
+        "time": "08:27",
+        "direction": "ZAJEZDNIA MKS/PRZEZ SŁONECZNĄ",
+        "carrier": "MKS 8",
+        "line": "8",
+        "stopId": "171",
+        "routeId": "9434",
+        "dir": "2"
+      },
+      {
+        "time": "08:28",
+        "direction": "BRACIEJOWA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "1"
+      },
+      {
+        "time": "08:29",
+        "direction": "ZAJEZDNIA MKS",
+        "carrier": "MKS 14",
+        "line": "14",
+        "stopId": "171",
+        "routeId": "9424",
+        "dir": "2"
+      },
+      {
+        "time": "08:29",
+        "direction": "ZAJEZDNIA MKS/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "2"
+      },
+      {
+        "time": "08:30",
+        "direction": "OS. WOLICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "1"
+      },
+      {
+        "time": "08:35",
+        "direction": "KRAKOWSKA/SZPITAL",
+        "carrier": "MKS 18",
+        "line": "18",
+        "stopId": "171",
+        "routeId": "9428",
+        "dir": "1"
+      },
+      {
+        "time": "08:35",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "08:35",
+        "direction": "NAGAWCZYNA",
+        "carrier": "MKS 5",
+        "line": "5",
+        "stopId": "171",
+        "routeId": "9432",
+        "dir": "2"
+      },
+      {
+        "time": "08:37",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "08:38",
+        "direction": "PUSTYNIA KOŚCIÓŁ/PRZEZ SŁONECZNĄ",
+        "carrier": "MKS 8",
+        "line": "8",
+        "stopId": "171",
+        "routeId": "9434",
+        "dir": "1"
+      },
+      {
+        "time": "08:39",
+        "direction": "STOBIERNA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "2"
+      },
+      {
+        "time": "08:41",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "08:56",
+        "direction": "PUSTYNIA KOŚCIÓŁ",
+        "carrier": "MKS 18",
+        "line": "18",
+        "stopId": "171",
+        "routeId": "9428",
+        "dir": "2"
+      },
+      {
+        "time": "08:57",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "08:59",
+        "direction": "OS. WOLICA/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "1"
+      },
+      {
+        "time": "09:07",
+        "direction": "LAKIERY DĘBICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "2"
+      },
+      {
+        "time": "09:18",
+        "direction": "PODGRODZIE/p. LATOSZYN ZDRÓJ",
+        "carrier": "MKS 14",
+        "line": "14",
+        "stopId": "171",
+        "routeId": "9424",
+        "dir": "1"
+      },
+      {
+        "time": "09:20",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "09:22",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "09:33",
+        "direction": "CHOTOWA OŚRODEK",
+        "carrier": "MKS 5",
+        "line": "5",
+        "stopId": "171",
+        "routeId": "9432",
+        "dir": "1"
+      },
+      {
+        "time": "09:38",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "09:40",
+        "direction": "KRAKOWSKA/SZPITAL",
+        "carrier": "MKS 18",
+        "line": "18",
+        "stopId": "171",
+        "routeId": "9428",
+        "dir": "1"
+      },
+      {
+        "time": "09:40",
+        "direction": "ZAJEZDNIA MKS/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "2"
+      },
+      {
+        "time": "09:40",
+        "direction": "PUSTYNIA KOŚCIÓŁ/PRZEZ SŁONECZNĄ",
+        "carrier": "MKS 8",
+        "line": "8",
+        "stopId": "171",
+        "routeId": "9434",
+        "dir": "1"
+      },
+      {
+        "time": "09:42",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "09:43",
+        "direction": "BRACIEJOWA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "1"
+      },
+      {
+        "time": "09:54",
+        "direction": "OS. WOLICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "1"
+      },
+      {
+        "time": "09:55",
+        "direction": "LAKIERY DĘBICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "2"
+      },
+      {
+        "time": "09:58",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "10:01",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "10:13",
+        "direction": "STOBIERNA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "2"
+      },
+      {
+        "time": "10:17",
+        "direction": "PUSTYNIA KOŚCIÓŁ",
+        "carrier": "MKS 18",
+        "line": "18",
+        "stopId": "171",
+        "routeId": "9428",
+        "dir": "2"
+      },
+      {
+        "time": "10:18",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "10:19",
+        "direction": "OS. WOLICA/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "1"
+      },
+      {
+        "time": "10:20",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "10:22",
+        "direction": "LAKIERY DĘBICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "2"
+      },
+      {
+        "time": "10:22",
+        "direction": "ZAJEZDNIA MKS/PRZEZ SŁONECZNĄ",
+        "carrier": "MKS 8",
+        "line": "8",
+        "stopId": "171",
+        "routeId": "9434",
+        "dir": "2"
+      },
+      {
+        "time": "10:25",
+        "direction": "NAGAWCZYNA",
+        "carrier": "MKS 5",
+        "line": "5",
+        "stopId": "171",
+        "routeId": "9432",
+        "dir": "2"
+      },
+      {
+        "time": "10:38",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "10:41",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "10:48",
+        "direction": "PODGRODZIE/p. LATOSZYN ZDRÓJ",
+        "carrier": "MKS 14",
+        "line": "14",
+        "stopId": "171",
+        "routeId": "9424",
+        "dir": "1"
+      },
+      {
+        "time": "10:58",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "11:02",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "11:03",
+        "direction": "PUSTYNIA KOŚCIÓŁ/PRZEZ SŁONECZNĄ",
+        "carrier": "MKS 8",
+        "line": "8",
+        "stopId": "171",
+        "routeId": "9434",
+        "dir": "1"
+      },
+      {
+        "time": "11:04",
+        "direction": "ZAJEZDNIA MKS/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "2"
+      },
+      {
+        "time": "11:07",
+        "direction": "LAKIERY DĘBICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "2"
+      },
+      {
+        "time": "11:10",
+        "direction": "KRAKOWSKA/SZPITAL",
+        "carrier": "MKS 18",
+        "line": "18",
+        "stopId": "171",
+        "routeId": "9428",
+        "dir": "1"
+      },
+      {
+        "time": "11:16",
+        "direction": "OS. WOLICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "1"
+      },
+      {
+        "time": "11:18",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "11:21",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "11:29",
+        "direction": "STOBIERNA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "2"
+      },
+      {
+        "time": "11:35",
+        "direction": "PUSTKÓW WIEŚ/PRZEZ BRÓDKI, ŁĘG",
+        "carrier": "MKS 11",
+        "line": "11",
+        "stopId": "171",
+        "routeId": "9422",
+        "dir": "2"
+      },
+      {
+        "time": "11:35",
+        "direction": "BRACIEJOWA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "1"
+      },
+      {
+        "time": "11:40",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "11:41",
+        "direction": "OS. WOLICA/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "1"
+      },
+      {
+        "time": "11:42",
+        "direction": "ZAJEZDNIA MKS/PRZEZ SŁONECZNĄ",
+        "carrier": "MKS 8",
+        "line": "8",
+        "stopId": "171",
+        "routeId": "9434",
+        "dir": "2"
+      },
+      {
+        "time": "11:48",
+        "direction": "PUSTYNIA KOŚCIÓŁ",
+        "carrier": "MKS 18",
+        "line": "18",
+        "stopId": "171",
+        "routeId": "9428",
+        "dir": "2"
+      },
+      {
+        "time": "11:49",
+        "direction": "ZAJEZDNIA MKS",
+        "carrier": "MKS 14",
+        "line": "14",
+        "stopId": "171",
+        "routeId": "9424",
+        "dir": "2"
+      },
+      {
+        "time": "11:57",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "11:59",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "12:03",
+        "direction": "PODGRODZIE/p. LATOSZYN ZDRÓJ",
+        "carrier": "MKS 14",
+        "line": "14",
+        "stopId": "171",
+        "routeId": "9424",
+        "dir": "1"
+      },
+      {
+        "time": "12:07",
+        "direction": "ZAJEZDNIA MKS/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "2"
+      },
+      {
+        "time": "12:18",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "12:20",
+        "direction": "PUSTYNIA KOŚCIÓŁ/PRZEZ SŁONECZNĄ",
+        "carrier": "MKS 8",
+        "line": "8",
+        "stopId": "171",
+        "routeId": "9434",
+        "dir": "1"
+      },
+      {
+        "time": "12:22",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "12:25",
+        "direction": "NAGAWCZYNA",
+        "carrier": "MKS 5",
+        "line": "5",
+        "stopId": "171",
+        "routeId": "9432",
+        "dir": "2"
+      },
+      {
+        "time": "12:29",
+        "direction": "LAKIERY DĘBICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "2"
+      },
+      {
+        "time": "12:30",
+        "direction": "KRAKOWSKA/SZPITAL",
+        "carrier": "MKS 18",
+        "line": "18",
+        "stopId": "171",
+        "routeId": "9428",
+        "dir": "1"
+      },
+      {
+        "time": "12:33",
+        "direction": "OS. WOLICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "1"
+      },
+      {
+        "time": "12:41",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "12:52",
+        "direction": "PUSTYNIA KOŚCIÓŁ",
+        "carrier": "MKS 18",
+        "line": "18",
+        "stopId": "171",
+        "routeId": "9428",
+        "dir": "2"
+      },
+      {
+        "time": "12:54",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "13:02",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "13:02",
+        "direction": "ZAJEZDNIA MKS/PRZEZ SŁONECZNĄ",
+        "carrier": "MKS 8",
+        "line": "8",
+        "stopId": "171",
+        "routeId": "9434",
+        "dir": "2"
+      },
+      {
+        "time": "13:03",
+        "direction": "KRAKOWSKA - KĘPA/p. PUSTKÓW LERG",
+        "carrier": "MKS 11",
+        "line": "11",
+        "stopId": "171",
+        "routeId": "9422",
+        "dir": "1"
+      },
+      {
+        "time": "13:12",
+        "direction": "OS. WOLICA/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "1"
+      },
+      {
+        "time": "13:14",
+        "direction": "LAKIERY DĘBICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "2"
+      },
+      {
+        "time": "13:19",
+        "direction": "OS. WOLICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "1"
+      },
+      {
+        "time": "13:21",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "13:24",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "13:25",
+        "direction": "KRAKOWSKA/SZPITAL",
+        "carrier": "MKS 18",
+        "line": "18",
+        "stopId": "171",
+        "routeId": "9428",
+        "dir": "1"
+      },
+      {
+        "time": "13:25",
+        "direction": "PUSTYNIA KOŚCIÓŁ/PRZEZ SŁONECZNĄ",
+        "carrier": "MKS 8",
+        "line": "8",
+        "stopId": "171",
+        "routeId": "9434",
+        "dir": "1"
+      },
+      {
+        "time": "13:26",
+        "direction": "BRACIEJOWA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "1"
+      },
+      {
+        "time": "13:27",
+        "direction": "STOBIERNA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "2"
+      },
+      {
+        "time": "13:28",
+        "direction": "CHOTOWA OŚRODEK",
+        "carrier": "MKS 5",
+        "line": "5",
+        "stopId": "171",
+        "routeId": "9432",
+        "dir": "1"
+      },
+      {
+        "time": "13:38",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "13:40",
+        "direction": "PUSTYNIA KOŚCIÓŁ",
+        "carrier": "MKS 18",
+        "line": "18",
+        "stopId": "171",
+        "routeId": "9428",
+        "dir": "2"
+      },
+      {
+        "time": "13:43",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "13:49",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "13:52",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "13:53",
+        "direction": "OS. WOLICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "1"
+      },
+      {
+        "time": "13:57",
+        "direction": "LAKIERY DĘBICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "2"
+      },
+      {
+        "time": "14:13",
+        "direction": "OS. WOLICA/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "1"
+      },
+      {
+        "time": "14:13",
+        "direction": "ZAJEZDNIA MKS/PRZEZ SŁONECZNĄ",
+        "carrier": "MKS 8",
+        "line": "8",
+        "stopId": "171",
+        "routeId": "9434",
+        "dir": "2"
+      },
+      {
+        "time": "14:17",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "14:20",
+        "direction": "NAGAWCZYNA",
+        "carrier": "MKS 5",
+        "line": "5",
+        "stopId": "171",
+        "routeId": "9432",
+        "dir": "2"
+      },
+      {
+        "time": "14:23",
+        "direction": "PUSTYNIA KOŚCIÓŁ",
+        "carrier": "MKS 18",
+        "line": "18",
+        "stopId": "171",
+        "routeId": "9428",
+        "dir": "2"
+      },
+      {
+        "time": "14:25",
+        "direction": "CHOTOWA OŚRODEK",
+        "carrier": "MKS 5",
+        "line": "5",
+        "stopId": "171",
+        "routeId": "9432",
+        "dir": "1"
+      },
+      {
+        "time": "14:26",
+        "direction": "STOBIERNA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "2"
+      },
+      {
+        "time": "14:27",
+        "direction": "PUSTYNIA KOŚCIÓŁ/PRZEZ SŁONECZNĄ",
+        "carrier": "MKS 8",
+        "line": "8",
+        "stopId": "171",
+        "routeId": "9434",
+        "dir": "1"
+      },
+      {
+        "time": "14:29",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "14:31",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "14:32",
+        "direction": "BRACIEJOWA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "1"
+      },
+      {
+        "time": "14:32",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "14:32",
+        "direction": "ZAJEZDNIA MKS/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "2"
+      },
+      {
+        "time": "14:33",
+        "direction": "PUSTKÓW WIEŚ/PRZEZ BRÓDKI, ŁĘG",
+        "carrier": "MKS 11",
+        "line": "11",
+        "stopId": "171",
+        "routeId": "9422",
+        "dir": "2"
+      },
+      {
+        "time": "14:33",
+        "direction": "BOROWA",
+        "carrier": "MKS 16",
+        "line": "16",
+        "stopId": "171",
+        "routeId": "9426",
+        "dir": "1"
+      },
+      {
+        "time": "14:33",
+        "direction": "OS. WOLICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "1"
+      },
+      {
+        "time": "14:37",
+        "direction": "LAKIERY DĘBICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "2"
+      },
+      {
+        "time": "14:52",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "14:54",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "15:02",
+        "direction": "PASZCZYNA",
+        "carrier": "MKS 15",
+        "line": "15",
+        "stopId": "171",
+        "routeId": "9425",
+        "dir": "2"
+      },
+      {
+        "time": "15:05",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "15:09",
+        "direction": "ZAJEZDNIA MKS/PRZEZ SŁONECZNĄ",
+        "carrier": "MKS 8",
+        "line": "8",
+        "stopId": "171",
+        "routeId": "9434",
+        "dir": "2"
+      },
+      {
+        "time": "15:14",
+        "direction": "LAKIERY DĘBICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "2"
+      },
+      {
+        "time": "15:18",
+        "direction": "PODGRODZIE/p. LATOSZYN ZDRÓJ",
+        "carrier": "MKS 14",
+        "line": "14",
+        "stopId": "171",
+        "routeId": "9424",
+        "dir": "1"
+      },
+      {
+        "time": "15:18",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "15:19",
+        "direction": "PUSTYNIA KOŚCIÓŁ",
+        "carrier": "MKS 18",
+        "line": "18",
+        "stopId": "171",
+        "routeId": "9428",
+        "dir": "2"
+      },
+      {
+        "time": "15:20",
+        "direction": "NAGAWCZYNA",
+        "carrier": "MKS 5",
+        "line": "5",
+        "stopId": "171",
+        "routeId": "9432",
+        "dir": "2"
+      },
+      {
+        "time": "15:21",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "15:22",
+        "direction": "CHOTOWA OŚRODEK",
+        "carrier": "MKS 5",
+        "line": "5",
+        "stopId": "171",
+        "routeId": "9432",
+        "dir": "1"
+      },
+      {
+        "time": "15:29",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "15:30",
+        "direction": "BRACIEJOWA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "1"
+      },
+      {
+        "time": "15:31",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "15:31",
+        "direction": "OS. WOLICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "1"
+      },
+      {
+        "time": "15:33",
+        "direction": "OS. WOLICA/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "1"
+      },
+      {
+        "time": "15:35",
+        "direction": "STOBIERNA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "2"
+      },
+      {
+        "time": "15:37",
+        "direction": "ZAJEZDNIA MKS/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "2"
+      },
+      {
+        "time": "15:40",
+        "direction": "ZAJEZDNIA MKS",
+        "carrier": "MKS 16",
+        "line": "16",
+        "stopId": "171",
+        "routeId": "9426",
+        "dir": "2"
+      },
+      {
+        "time": "15:43",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "15:51",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "15:57",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "16:02",
+        "direction": "ZAJEZDNIA MKS/PRZEZ SŁONECZNĄ",
+        "carrier": "MKS 8",
+        "line": "8",
+        "stopId": "171",
+        "routeId": "9434",
+        "dir": "2"
+      },
+      {
+        "time": "16:08",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "16:10",
+        "direction": "LAKIERY DĘBICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "2"
+      },
+      {
+        "time": "16:11",
+        "direction": "PUSTYNIA KOŚCIÓŁ",
+        "carrier": "MKS 18",
+        "line": "18",
+        "stopId": "171",
+        "routeId": "9428",
+        "dir": "2"
+      },
+      {
+        "time": "16:14",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "16:20",
+        "direction": "ZAJEZDNIA MKS",
+        "carrier": "MKS 14",
+        "line": "14",
+        "stopId": "171",
+        "routeId": "9424",
+        "dir": "2"
+      },
+      {
+        "time": "16:20",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "16:22",
+        "direction": "BOROWA",
+        "carrier": "MKS 16",
+        "line": "16",
+        "stopId": "171",
+        "routeId": "9426",
+        "dir": "1"
+      },
+      {
+        "time": "16:22",
+        "direction": "NAGAWCZYNA",
+        "carrier": "MKS 5",
+        "line": "5",
+        "stopId": "171",
+        "routeId": "9432",
+        "dir": "2"
+      },
+      {
+        "time": "16:24",
+        "direction": "CHOTOWA OŚRODEK",
+        "carrier": "MKS 5",
+        "line": "5",
+        "stopId": "171",
+        "routeId": "9432",
+        "dir": "1"
+      },
+      {
+        "time": "16:32",
+        "direction": "OS. WOLICA/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "1"
+      },
+      {
+        "time": "16:35",
+        "direction": "BRACIEJOWA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "1"
+      },
+      {
+        "time": "16:37",
+        "direction": "PODGRODZIE/p. LATOSZYN ZDRÓJ",
+        "carrier": "MKS 14",
+        "line": "14",
+        "stopId": "171",
+        "routeId": "9424",
+        "dir": "1"
+      },
+      {
+        "time": "16:37",
+        "direction": "ZAJEZDNIA MKS/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "2"
+      },
+      {
+        "time": "16:55",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "16:57",
+        "direction": "STOBIERNA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "2"
+      },
+      {
+        "time": "16:58",
+        "direction": "PUSTKÓW WIEŚ/PRZEZ BRÓDKI, ŁĘG",
+        "carrier": "MKS 11",
+        "line": "11",
+        "stopId": "171",
+        "routeId": "9422",
+        "dir": "2"
+      },
+      {
+        "time": "17:05",
+        "direction": "PUSTYNIA KOŚCIÓŁ/PRZEZ SŁONECZNĄ",
+        "carrier": "MKS 8",
+        "line": "8",
+        "stopId": "171",
+        "routeId": "9434",
+        "dir": "1"
+      },
+      {
+        "time": "17:16",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "17:20",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "17:21",
+        "direction": "NAGAWCZYNA",
+        "carrier": "MKS 5",
+        "line": "5",
+        "stopId": "171",
+        "routeId": "9432",
+        "dir": "2"
+      },
+      {
+        "time": "17:22",
+        "direction": "ZAJEZDNIA MKS/PRZEZ SŁONECZNĄ",
+        "carrier": "MKS 8",
+        "line": "8",
+        "stopId": "171",
+        "routeId": "9434",
+        "dir": "2"
+      },
+      {
+        "time": "17:27",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "17:29",
+        "direction": "ZAJEZDNIA MKS",
+        "carrier": "MKS 14",
+        "line": "14",
+        "stopId": "171",
+        "routeId": "9424",
+        "dir": "2"
+      },
+      {
+        "time": "17:29",
+        "direction": "ZAJEZDNIA MKS",
+        "carrier": "MKS 16",
+        "line": "16",
+        "stopId": "171",
+        "routeId": "9426",
+        "dir": "2"
+      },
+      {
+        "time": "17:32",
+        "direction": "PODGRODZIE/p. LATOSZYN ZDRÓJ",
+        "carrier": "MKS 14",
+        "line": "14",
+        "stopId": "171",
+        "routeId": "9424",
+        "dir": "1"
+      },
+      {
+        "time": "17:33",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "17:39",
+        "direction": "OS. WOLICA/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "1"
+      },
+      {
+        "time": "17:40",
+        "direction": "ZAJEZDNIA MKS/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "2"
+      },
+      {
+        "time": "18:05",
+        "direction": "PUSTYNIA KOŚCIÓŁ/PRZEZ SŁONECZNĄ",
+        "carrier": "MKS 8",
+        "line": "8",
+        "stopId": "171",
+        "routeId": "9434",
+        "dir": "1"
+      },
+      {
+        "time": "18:11",
+        "direction": "STOBIERNA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "2"
+      },
+      {
+        "time": "18:17",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "18:20",
+        "direction": "KRAKOWSKA - KĘPA/p. PUSTKÓW LERG",
+        "carrier": "MKS 11",
+        "line": "11",
+        "stopId": "171",
+        "routeId": "9422",
+        "dir": "1"
+      },
+      {
+        "time": "18:21",
+        "direction": "BRACIEJOWA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "1"
+      },
+      {
+        "time": "18:23",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "18:27",
+        "direction": "ZAJEZDNIA MKS",
+        "carrier": "MKS 14",
+        "line": "14",
+        "stopId": "171",
+        "routeId": "9424",
+        "dir": "2"
+      },
+      {
+        "time": "18:40",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "18:41",
+        "direction": "ZAJEZDNIA MKS/PRZEZ SŁONECZNĄ",
+        "carrier": "MKS 8",
+        "line": "8",
+        "stopId": "171",
+        "routeId": "9434",
+        "dir": "2"
+      },
+      {
+        "time": "18:57",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "18:58",
+        "direction": "OS. WOLICA/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "1"
+      },
+      {
+        "time": "19:00",
+        "direction": "ZAJEZDNIA MKS/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "2"
+      },
+      {
+        "time": "19:17",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "19:22",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "19:31",
+        "direction": "BRACIEJOWA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "1"
+      },
+      {
+        "time": "19:32",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "19:36",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "19:45",
+        "direction": "STOBIERNA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "2"
+      },
+      {
+        "time": "20:17",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "20:20",
+        "direction": "OS. WOLICA/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "1"
+      },
+      {
+        "time": "20:20",
+        "direction": "ZAJEZDNIA MKS/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "2"
+      },
+      {
+        "time": "20:30",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "20:31",
+        "direction": "STOBIERNA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "2"
+      },
+      {
+        "time": "21:02",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "21:18",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "21:21",
+        "direction": "LAKIERY DĘBICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "2"
+      },
+      {
+        "time": "21:35",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "22:12",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "22:19",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "22:25",
+        "direction": "OS. WOLICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "1"
+      }
+    ],
+    "Roboczy wakacyjny/feryjny": [
+      {
+        "time": "04:20",
+        "direction": "BRACIEJOWA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "1"
+      },
+      {
+        "time": "04:48",
+        "direction": "CHOTOWA OŚRODEK",
+        "carrier": "MKS 5",
+        "line": "5",
+        "stopId": "171",
+        "routeId": "9432",
+        "dir": "1"
+      },
+      {
+        "time": "05:00",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "05:09",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "05:19",
+        "direction": "BRACIEJOWA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "1"
+      },
+      {
+        "time": "05:21",
+        "direction": "STOBIERNA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "2"
+      },
+      {
+        "time": "05:25",
+        "direction": "LAKIERY DĘBICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "2"
+      },
+      {
+        "time": "05:29",
+        "direction": "KRAKOWSKA - KĘPA/p. PUSTKÓW LERG",
+        "carrier": "MKS 11",
+        "line": "11",
+        "stopId": "171",
+        "routeId": "9422",
+        "dir": "1"
+      },
+      {
+        "time": "05:30",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "05:31",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "05:33",
+        "direction": "PODGRODZIE/p. LATOSZYN ZDRÓJ",
+        "carrier": "MKS 14",
+        "line": "14",
+        "stopId": "171",
+        "routeId": "9424",
+        "dir": "1"
+      },
+      {
+        "time": "05:34",
+        "direction": "NAGAWCZYNA",
+        "carrier": "MKS 5",
+        "line": "5",
+        "stopId": "171",
+        "routeId": "9432",
+        "dir": "2"
+      },
+      {
+        "time": "05:36",
+        "direction": "CHOTOWA OŚRODEK",
+        "carrier": "MKS 5",
+        "line": "5",
+        "stopId": "171",
+        "routeId": "9432",
+        "dir": "1"
+      },
+      {
+        "time": "06:11",
+        "direction": "BRACIEJOWA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "1"
+      },
+      {
+        "time": "06:12",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "06:15",
+        "direction": "OS. WOLICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "1"
+      },
+      {
+        "time": "06:17",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "06:17",
+        "direction": "STOBIERNA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "2"
+      },
+      {
+        "time": "06:20",
+        "direction": "BRACIEJOWA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "1"
+      },
+      {
+        "time": "06:21",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "06:24",
+        "direction": "NAGAWCZYNA",
+        "carrier": "MKS 5",
+        "line": "5",
+        "stopId": "171",
+        "routeId": "9432",
+        "dir": "2"
+      },
+      {
+        "time": "06:27",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "06:27",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "06:27",
+        "direction": "LAKIERY DĘBICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "2"
+      },
+      {
+        "time": "06:28",
+        "direction": "PODGRODZIE/p. LATOSZYN ZDRÓJ",
+        "carrier": "MKS 14",
+        "line": "14",
+        "stopId": "171",
+        "routeId": "9424",
+        "dir": "1"
+      },
+      {
+        "time": "06:32",
+        "direction": "ZAJEZDNIA MKS/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "2"
+      },
+      {
+        "time": "06:36",
+        "direction": "CHOTOWA OŚRODEK",
+        "carrier": "MKS 5",
+        "line": "5",
+        "stopId": "171",
+        "routeId": "9432",
+        "dir": "1"
+      },
+      {
+        "time": "06:47",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "06:49",
+        "direction": "KRAKOWSKA - KĘPA/p. PUSTKÓW LERG",
+        "carrier": "MKS 11",
+        "line": "11",
+        "stopId": "171",
+        "routeId": "9422",
+        "dir": "1"
+      },
+      {
+        "time": "06:49",
+        "direction": "LAKIERY DĘBICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "2"
+      },
+      {
+        "time": "06:51",
+        "direction": "OS. WOLICA/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "1"
+      },
+      {
+        "time": "06:57",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "07:09",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "07:10",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "07:18",
+        "direction": "BRACIEJOWA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "1"
+      },
+      {
+        "time": "07:22",
+        "direction": "ZAJEZDNIA MKS/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "2"
+      },
+      {
+        "time": "07:27",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "07:29",
+        "direction": "LAKIERY DĘBICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "2"
+      },
+      {
+        "time": "07:31",
+        "direction": "STOBIERNA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "2"
+      },
+      {
+        "time": "07:32",
+        "direction": "OS. WOLICA/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "1"
+      },
+      {
+        "time": "07:36",
+        "direction": "CHOTOWA OŚRODEK",
+        "carrier": "MKS 5",
+        "line": "5",
+        "stopId": "171",
+        "routeId": "9432",
+        "dir": "1"
+      },
+      {
+        "time": "07:37",
+        "direction": "PUSTKÓW WIEŚ/PRZEZ BRÓDKI, ŁĘG",
+        "carrier": "MKS 11",
+        "line": "11",
+        "stopId": "171",
+        "routeId": "9422",
+        "dir": "2"
+      },
+      {
+        "time": "07:37",
+        "direction": "KRAKOWSKA/SZPITAL",
+        "carrier": "MKS 18",
+        "line": "18",
+        "stopId": "171",
+        "routeId": "9428",
+        "dir": "1"
+      },
+      {
+        "time": "07:39",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "07:39",
+        "direction": "NAGAWCZYNA",
+        "carrier": "MKS 5",
+        "line": "5",
+        "stopId": "171",
+        "routeId": "9432",
+        "dir": "2"
+      },
+      {
+        "time": "07:40",
+        "direction": "PODGRODZIE/p. LATOSZYN ZDRÓJ",
+        "carrier": "MKS 14",
+        "line": "14",
+        "stopId": "171",
+        "routeId": "9424",
+        "dir": "1"
+      },
+      {
+        "time": "07:41",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "07:43",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "07:45",
+        "direction": "OS. WOLICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "1"
+      },
+      {
+        "time": "07:47",
+        "direction": "ZAJEZDNIA MKS/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "2"
+      },
+      {
+        "time": "08:11",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "08:17",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "08:19",
+        "direction": "OS. WOLICA/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "1"
+      },
+      {
+        "time": "08:26",
+        "direction": "LAKIERY DĘBICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "2"
+      },
+      {
+        "time": "08:27",
+        "direction": "ZAJEZDNIA MKS/PRZEZ SŁONECZNĄ",
+        "carrier": "MKS 8",
+        "line": "8",
+        "stopId": "171",
+        "routeId": "9434",
+        "dir": "2"
+      },
+      {
+        "time": "08:29",
+        "direction": "ZAJEZDNIA MKS/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "2"
+      },
+      {
+        "time": "08:31",
+        "direction": "OS. WOLICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "1"
+      },
+      {
+        "time": "08:32",
+        "direction": "BRACIEJOWA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "1"
+      },
+      {
+        "time": "08:35",
+        "direction": "NAGAWCZYNA",
+        "carrier": "MKS 5",
+        "line": "5",
+        "stopId": "171",
+        "routeId": "9432",
+        "dir": "2"
+      },
+      {
+        "time": "08:36",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "08:38",
+        "direction": "PUSTYNIA KOŚCIÓŁ/PRZEZ SŁONECZNĄ",
+        "carrier": "MKS 8",
+        "line": "8",
+        "stopId": "171",
+        "routeId": "9434",
+        "dir": "1"
+      },
+      {
+        "time": "08:41",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "08:41",
+        "direction": "ZAJEZDNIA MKS",
+        "carrier": "MKS 14",
+        "line": "14",
+        "stopId": "171",
+        "routeId": "9424",
+        "dir": "2"
+      },
+      {
+        "time": "08:41",
+        "direction": "STOBIERNA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "2"
+      },
+      {
+        "time": "08:57",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "08:59",
+        "direction": "OS. WOLICA/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "1"
+      },
+      {
+        "time": "09:07",
+        "direction": "LAKIERY DĘBICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "2"
+      },
+      {
+        "time": "09:18",
+        "direction": "PODGRODZIE/p. LATOSZYN ZDRÓJ",
+        "carrier": "MKS 14",
+        "line": "14",
+        "stopId": "171",
+        "routeId": "9424",
+        "dir": "1"
+      },
+      {
+        "time": "09:20",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "09:22",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "09:31",
+        "direction": "CHOTOWA OŚRODEK",
+        "carrier": "MKS 5",
+        "line": "5",
+        "stopId": "171",
+        "routeId": "9432",
+        "dir": "1"
+      },
+      {
+        "time": "09:34",
+        "direction": "KRAKOWSKA/SZPITAL",
+        "carrier": "MKS 18",
+        "line": "18",
+        "stopId": "171",
+        "routeId": "9428",
+        "dir": "1"
+      },
+      {
+        "time": "09:38",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "09:40",
+        "direction": "ZAJEZDNIA MKS/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "2"
+      },
+      {
+        "time": "09:40",
+        "direction": "PUSTYNIA KOŚCIÓŁ/PRZEZ SŁONECZNĄ",
+        "carrier": "MKS 8",
+        "line": "8",
+        "stopId": "171",
+        "routeId": "9434",
+        "dir": "1"
+      },
+      {
+        "time": "09:42",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "09:43",
+        "direction": "BRACIEJOWA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "1"
+      },
+      {
+        "time": "09:47",
+        "direction": "LAKIERY DĘBICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "2"
+      },
+      {
+        "time": "09:59",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "10:00",
+        "direction": "OS. WOLICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "1"
+      },
+      {
+        "time": "10:01",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "10:09",
+        "direction": "PUSTYNIA KOŚCIÓŁ",
+        "carrier": "MKS 18",
+        "line": "18",
+        "stopId": "171",
+        "routeId": "9428",
+        "dir": "2"
+      },
+      {
+        "time": "10:13",
+        "direction": "STOBIERNA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "2"
+      },
+      {
+        "time": "10:18",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "10:19",
+        "direction": "OS. WOLICA/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "1"
+      },
+      {
+        "time": "10:20",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "10:22",
+        "direction": "LAKIERY DĘBICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "2"
+      },
+      {
+        "time": "10:22",
+        "direction": "ZAJEZDNIA MKS/PRZEZ SŁONECZNĄ",
+        "carrier": "MKS 8",
+        "line": "8",
+        "stopId": "171",
+        "routeId": "9434",
+        "dir": "2"
+      },
+      {
+        "time": "10:25",
+        "direction": "NAGAWCZYNA",
+        "carrier": "MKS 5",
+        "line": "5",
+        "stopId": "171",
+        "routeId": "9432",
+        "dir": "2"
+      },
+      {
+        "time": "10:33",
+        "direction": "PODGRODZIE/p. LATOSZYN ZDRÓJ",
+        "carrier": "MKS 14",
+        "line": "14",
+        "stopId": "171",
+        "routeId": "9424",
+        "dir": "1"
+      },
+      {
+        "time": "10:39",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "10:41",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "10:58",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "11:00",
+        "direction": "ZAJEZDNIA MKS/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "2"
+      },
+      {
+        "time": "11:02",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "11:03",
+        "direction": "PUSTYNIA KOŚCIÓŁ/PRZEZ SŁONECZNĄ",
+        "carrier": "MKS 8",
+        "line": "8",
+        "stopId": "171",
+        "routeId": "9434",
+        "dir": "1"
+      },
+      {
+        "time": "11:07",
+        "direction": "LAKIERY DĘBICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "2"
+      },
+      {
+        "time": "11:16",
+        "direction": "OS. WOLICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "1"
+      },
+      {
+        "time": "11:19",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "11:21",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "11:29",
+        "direction": "ZAJEZDNIA MKS",
+        "carrier": "MKS 14",
+        "line": "14",
+        "stopId": "171",
+        "routeId": "9424",
+        "dir": "2"
+      },
+      {
+        "time": "11:29",
+        "direction": "STOBIERNA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "2"
+      },
+      {
+        "time": "11:35",
+        "direction": "PUSTKÓW WIEŚ/PRZEZ BRÓDKI, ŁĘG",
+        "carrier": "MKS 11",
+        "line": "11",
+        "stopId": "171",
+        "routeId": "9422",
+        "dir": "2"
+      },
+      {
+        "time": "11:35",
+        "direction": "BRACIEJOWA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "1"
+      },
+      {
+        "time": "11:39",
+        "direction": "OS. WOLICA/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "1"
+      },
+      {
+        "time": "11:40",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "11:42",
+        "direction": "ZAJEZDNIA MKS/PRZEZ SŁONECZNĄ",
+        "carrier": "MKS 8",
+        "line": "8",
+        "stopId": "171",
+        "routeId": "9434",
+        "dir": "2"
+      },
+      {
+        "time": "11:46",
+        "direction": "PUSTYNIA KOŚCIÓŁ",
+        "carrier": "MKS 18",
+        "line": "18",
+        "stopId": "171",
+        "routeId": "9428",
+        "dir": "2"
+      },
+      {
+        "time": "11:52",
+        "direction": "PODGRODZIE/p. LATOSZYN ZDRÓJ",
+        "carrier": "MKS 14",
+        "line": "14",
+        "stopId": "171",
+        "routeId": "9424",
+        "dir": "1"
+      },
+      {
+        "time": "11:57",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "11:59",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "12:18",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "12:20",
+        "direction": "ZAJEZDNIA MKS/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "2"
+      },
+      {
+        "time": "12:20",
+        "direction": "PUSTYNIA KOŚCIÓŁ/PRZEZ SŁONECZNĄ",
+        "carrier": "MKS 8",
+        "line": "8",
+        "stopId": "171",
+        "routeId": "9434",
+        "dir": "1"
+      },
+      {
+        "time": "12:22",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "12:25",
+        "direction": "NAGAWCZYNA",
+        "carrier": "MKS 5",
+        "line": "5",
+        "stopId": "171",
+        "routeId": "9432",
+        "dir": "2"
+      },
+      {
+        "time": "12:26",
+        "direction": "LAKIERY DĘBICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "2"
+      },
+      {
+        "time": "12:30",
+        "direction": "KRAKOWSKA/SZPITAL",
+        "carrier": "MKS 18",
+        "line": "18",
+        "stopId": "171",
+        "routeId": "9428",
+        "dir": "1"
+      },
+      {
+        "time": "12:31",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "12:31",
+        "direction": "OS. WOLICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "1"
+      },
+      {
+        "time": "12:49",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "12:52",
+        "direction": "PUSTYNIA KOŚCIÓŁ",
+        "carrier": "MKS 18",
+        "line": "18",
+        "stopId": "171",
+        "routeId": "9428",
+        "dir": "2"
+      },
+      {
+        "time": "12:58",
+        "direction": "KRAKOWSKA - KĘPA/p. PUSTKÓW LERG",
+        "carrier": "MKS 11",
+        "line": "11",
+        "stopId": "171",
+        "routeId": "9422",
+        "dir": "1"
+      },
+      {
+        "time": "13:02",
+        "direction": "ZAJEZDNIA MKS/PRZEZ SŁONECZNĄ",
+        "carrier": "MKS 8",
+        "line": "8",
+        "stopId": "171",
+        "routeId": "9434",
+        "dir": "2"
+      },
+      {
+        "time": "13:03",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "13:07",
+        "direction": "LAKIERY DĘBICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "2"
+      },
+      {
+        "time": "13:09",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "13:10",
+        "direction": "OS. WOLICA/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "1"
+      },
+      {
+        "time": "13:18",
+        "direction": "OS. WOLICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "1"
+      },
+      {
+        "time": "13:23",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "13:26",
+        "direction": "BRACIEJOWA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "1"
+      },
+      {
+        "time": "13:27",
+        "direction": "STOBIERNA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "2"
+      },
+      {
+        "time": "13:28",
+        "direction": "CHOTOWA OŚRODEK",
+        "carrier": "MKS 5",
+        "line": "5",
+        "stopId": "171",
+        "routeId": "9432",
+        "dir": "1"
+      },
+      {
+        "time": "13:30",
+        "direction": "PUSTYNIA KOŚCIÓŁ/PRZEZ SŁONECZNĄ",
+        "carrier": "MKS 8",
+        "line": "8",
+        "stopId": "171",
+        "routeId": "9434",
+        "dir": "1"
+      },
+      {
+        "time": "13:34",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "13:43",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "13:52",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "13:55",
+        "direction": "LAKIERY DĘBICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "2"
+      },
+      {
+        "time": "13:58",
+        "direction": "OS. WOLICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "1"
+      },
+      {
+        "time": "14:05",
+        "direction": "ZAJEZDNIA MKS/PRZEZ SŁONECZNĄ",
+        "carrier": "MKS 8",
+        "line": "8",
+        "stopId": "171",
+        "routeId": "9434",
+        "dir": "2"
+      },
+      {
+        "time": "14:13",
+        "direction": "OS. WOLICA/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "1"
+      },
+      {
+        "time": "14:17",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "14:20",
+        "direction": "NAGAWCZYNA",
+        "carrier": "MKS 5",
+        "line": "5",
+        "stopId": "171",
+        "routeId": "9432",
+        "dir": "2"
+      },
+      {
+        "time": "14:25",
+        "direction": "CHOTOWA OŚRODEK",
+        "carrier": "MKS 5",
+        "line": "5",
+        "stopId": "171",
+        "routeId": "9432",
+        "dir": "1"
+      },
+      {
+        "time": "14:26",
+        "direction": "STOBIERNA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "2"
+      },
+      {
+        "time": "14:28",
+        "direction": "PUSTYNIA KOŚCIÓŁ/PRZEZ SŁONECZNĄ",
+        "carrier": "MKS 8",
+        "line": "8",
+        "stopId": "171",
+        "routeId": "9434",
+        "dir": "1"
+      },
+      {
+        "time": "14:29",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "14:31",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "14:32",
+        "direction": "BRACIEJOWA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "1"
+      },
+      {
+        "time": "14:32",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "14:32",
+        "direction": "ZAJEZDNIA MKS/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "2"
+      },
+      {
+        "time": "14:33",
+        "direction": "PUSTKÓW WIEŚ/PRZEZ BRÓDKI, ŁĘG",
+        "carrier": "MKS 11",
+        "line": "11",
+        "stopId": "171",
+        "routeId": "9422",
+        "dir": "2"
+      },
+      {
+        "time": "14:33",
+        "direction": "OS. WOLICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "1"
+      },
+      {
+        "time": "14:37",
+        "direction": "LAKIERY DĘBICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "2"
+      },
+      {
+        "time": "14:45",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "14:54",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "15:05",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "15:07",
+        "direction": "ZAJEZDNIA MKS/PRZEZ SŁONECZNĄ",
+        "carrier": "MKS 8",
+        "line": "8",
+        "stopId": "171",
+        "routeId": "9434",
+        "dir": "2"
+      },
+      {
+        "time": "15:17",
+        "direction": "LAKIERY DĘBICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "2"
+      },
+      {
+        "time": "15:18",
+        "direction": "PODGRODZIE/p. LATOSZYN ZDRÓJ",
+        "carrier": "MKS 14",
+        "line": "14",
+        "stopId": "171",
+        "routeId": "9424",
+        "dir": "1"
+      },
+      {
+        "time": "15:18",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "15:19",
+        "direction": "PUSTYNIA KOŚCIÓŁ",
+        "carrier": "MKS 18",
+        "line": "18",
+        "stopId": "171",
+        "routeId": "9428",
+        "dir": "2"
+      },
+      {
+        "time": "15:20",
+        "direction": "NAGAWCZYNA",
+        "carrier": "MKS 5",
+        "line": "5",
+        "stopId": "171",
+        "routeId": "9432",
+        "dir": "2"
+      },
+      {
+        "time": "15:21",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "15:22",
+        "direction": "CHOTOWA OŚRODEK",
+        "carrier": "MKS 5",
+        "line": "5",
+        "stopId": "171",
+        "routeId": "9432",
+        "dir": "1"
+      },
+      {
+        "time": "15:29",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "15:30",
+        "direction": "BRACIEJOWA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "1"
+      },
+      {
+        "time": "15:31",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "15:31",
+        "direction": "OS. WOLICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "1"
+      },
+      {
+        "time": "15:33",
+        "direction": "OS. WOLICA/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "1"
+      },
+      {
+        "time": "15:35",
+        "direction": "STOBIERNA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "2"
+      },
+      {
+        "time": "15:37",
+        "direction": "ZAJEZDNIA MKS/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "2"
+      },
+      {
+        "time": "15:43",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "15:49",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "15:57",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "16:01",
+        "direction": "STOBIERNA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "2"
+      },
+      {
+        "time": "16:02",
+        "direction": "ZAJEZDNIA MKS/PRZEZ SŁONECZNĄ",
+        "carrier": "MKS 8",
+        "line": "8",
+        "stopId": "171",
+        "routeId": "9434",
+        "dir": "2"
+      },
+      {
+        "time": "16:08",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "16:10",
+        "direction": "LAKIERY DĘBICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "2"
+      },
+      {
+        "time": "16:14",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "16:20",
+        "direction": "ZAJEZDNIA MKS",
+        "carrier": "MKS 14",
+        "line": "14",
+        "stopId": "171",
+        "routeId": "9424",
+        "dir": "2"
+      },
+      {
+        "time": "16:21",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "16:22",
+        "direction": "NAGAWCZYNA",
+        "carrier": "MKS 5",
+        "line": "5",
+        "stopId": "171",
+        "routeId": "9432",
+        "dir": "2"
+      },
+      {
+        "time": "16:24",
+        "direction": "CHOTOWA OŚRODEK",
+        "carrier": "MKS 5",
+        "line": "5",
+        "stopId": "171",
+        "routeId": "9432",
+        "dir": "1"
+      },
+      {
+        "time": "16:30",
+        "direction": "PUSTYNIA KOŚCIÓŁ/PRZEZ SŁONECZNĄ",
+        "carrier": "MKS 8",
+        "line": "8",
+        "stopId": "171",
+        "routeId": "9434",
+        "dir": "1"
+      },
+      {
+        "time": "16:32",
+        "direction": "PODGRODZIE/p. LATOSZYN ZDRÓJ",
+        "carrier": "MKS 14",
+        "line": "14",
+        "stopId": "171",
+        "routeId": "9424",
+        "dir": "1"
+      },
+      {
+        "time": "16:32",
+        "direction": "OS. WOLICA/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "1"
+      },
+      {
+        "time": "16:35",
+        "direction": "BRACIEJOWA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "1"
+      },
+      {
+        "time": "16:37",
+        "direction": "ZAJEZDNIA MKS/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "2"
+      },
+      {
+        "time": "16:55",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "16:57",
+        "direction": "STOBIERNA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "2"
+      },
+      {
+        "time": "16:58",
+        "direction": "PUSTKÓW WIEŚ/PRZEZ BRÓDKI, ŁĘG",
+        "carrier": "MKS 11",
+        "line": "11",
+        "stopId": "171",
+        "routeId": "9422",
+        "dir": "2"
+      },
+      {
+        "time": "17:05",
+        "direction": "PUSTYNIA KOŚCIÓŁ/PRZEZ SŁONECZNĄ",
+        "carrier": "MKS 8",
+        "line": "8",
+        "stopId": "171",
+        "routeId": "9434",
+        "dir": "1"
+      },
+      {
+        "time": "17:16",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "17:20",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "17:21",
+        "direction": "NAGAWCZYNA",
+        "carrier": "MKS 5",
+        "line": "5",
+        "stopId": "171",
+        "routeId": "9432",
+        "dir": "2"
+      },
+      {
+        "time": "17:22",
+        "direction": "ZAJEZDNIA MKS/PRZEZ SŁONECZNĄ",
+        "carrier": "MKS 8",
+        "line": "8",
+        "stopId": "171",
+        "routeId": "9434",
+        "dir": "2"
+      },
+      {
+        "time": "17:27",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "17:29",
+        "direction": "ZAJEZDNIA MKS",
+        "carrier": "MKS 14",
+        "line": "14",
+        "stopId": "171",
+        "routeId": "9424",
+        "dir": "2"
+      },
+      {
+        "time": "17:32",
+        "direction": "PODGRODZIE/p. LATOSZYN ZDRÓJ",
+        "carrier": "MKS 14",
+        "line": "14",
+        "stopId": "171",
+        "routeId": "9424",
+        "dir": "1"
+      },
+      {
+        "time": "17:33",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "17:39",
+        "direction": "OS. WOLICA/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "1"
+      },
+      {
+        "time": "17:40",
+        "direction": "ZAJEZDNIA MKS/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "2"
+      },
+      {
+        "time": "18:05",
+        "direction": "PUSTYNIA KOŚCIÓŁ/PRZEZ SŁONECZNĄ",
+        "carrier": "MKS 8",
+        "line": "8",
+        "stopId": "171",
+        "routeId": "9434",
+        "dir": "1"
+      },
+      {
+        "time": "18:11",
+        "direction": "STOBIERNA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "2"
+      },
+      {
+        "time": "18:17",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "18:18",
+        "direction": "KRAKOWSKA - KĘPA/p. PUSTKÓW LERG",
+        "carrier": "MKS 11",
+        "line": "11",
+        "stopId": "171",
+        "routeId": "9422",
+        "dir": "1"
+      },
+      {
+        "time": "18:21",
+        "direction": "BRACIEJOWA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "1"
+      },
+      {
+        "time": "18:23",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "18:24",
+        "direction": "ZAJEZDNIA MKS",
+        "carrier": "MKS 14",
+        "line": "14",
+        "stopId": "171",
+        "routeId": "9424",
+        "dir": "2"
+      },
+      {
+        "time": "18:41",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "18:41",
+        "direction": "ZAJEZDNIA MKS/PRZEZ SŁONECZNĄ",
+        "carrier": "MKS 8",
+        "line": "8",
+        "stopId": "171",
+        "routeId": "9434",
+        "dir": "2"
+      },
+      {
+        "time": "18:57",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "18:58",
+        "direction": "OS. WOLICA/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "1"
+      },
+      {
+        "time": "19:00",
+        "direction": "ZAJEZDNIA MKS/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "2"
+      },
+      {
+        "time": "19:17",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "19:22",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "19:31",
+        "direction": "BRACIEJOWA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "1"
+      },
+      {
+        "time": "19:32",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "19:36",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "19:45",
+        "direction": "STOBIERNA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "2"
+      },
+      {
+        "time": "20:17",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "20:20",
+        "direction": "ZAJEZDNIA MKS/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "2"
+      },
+      {
+        "time": "20:30",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "20:31",
+        "direction": "STOBIERNA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "2"
+      },
+      {
+        "time": "20:35",
+        "direction": "OS. WOLICA/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "1"
+      },
+      {
+        "time": "21:02",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "21:19",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "21:21",
+        "direction": "LAKIERY DĘBICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "2"
+      },
+      {
+        "time": "21:35",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "22:12",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "22:19",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "22:25",
+        "direction": "OS. WOLICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "1"
+      }
+    ],
+    "Sobota": [
+      {
+        "time": "04:46",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "05:16",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "06:04",
+        "direction": "BRACIEJOWA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "1"
+      },
+      {
+        "time": "06:46",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "06:55",
+        "direction": "STOBIERNA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "2"
+      },
+      {
+        "time": "07:17",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "07:40",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "07:48",
+        "direction": "ZAJEZDNIA MKS/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "2"
+      },
+      {
+        "time": "07:59",
+        "direction": "BRACIEJOWA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "1"
+      },
+      {
+        "time": "08:03",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "08:12",
+        "direction": "OS. WOLICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "1"
+      },
+      {
+        "time": "08:40",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "08:45",
+        "direction": "LAKIERY DĘBICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "2"
+      },
+      {
+        "time": "08:46",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "08:48",
+        "direction": "OS. WOLICA/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "1"
+      },
+      {
+        "time": "09:01",
+        "direction": "ZAJEZDNIA MKS/PRZEZ SŁONECZNĄ",
+        "carrier": "MKS 8",
+        "line": "8",
+        "stopId": "171",
+        "routeId": "9434",
+        "dir": "2"
+      },
+      {
+        "time": "09:17",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "09:17",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "09:26",
+        "direction": "STOBIERNA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "2"
+      },
+      {
+        "time": "09:28",
+        "direction": "OS. WOLICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "1"
+      },
+      {
+        "time": "09:37",
+        "direction": "PUSTYNIA KOŚCIÓŁ/PRZEZ SŁONECZNĄ",
+        "carrier": "MKS 8",
+        "line": "8",
+        "stopId": "171",
+        "routeId": "9434",
+        "dir": "1"
+      },
+      {
+        "time": "09:45",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "09:48",
+        "direction": "ZAJEZDNIA MKS/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "2"
+      },
+      {
+        "time": "09:54",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "10:10",
+        "direction": "LAKIERY DĘBICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "2"
+      },
+      {
+        "time": "10:10",
+        "direction": "OS. WOLICA/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "1"
+      },
+      {
+        "time": "10:17",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "10:21",
+        "direction": "ZAJEZDNIA MKS/PRZEZ SŁONECZNĄ",
+        "carrier": "MKS 8",
+        "line": "8",
+        "stopId": "171",
+        "routeId": "9434",
+        "dir": "2"
+      },
+      {
+        "time": "10:25",
+        "direction": "BRACIEJOWA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "1"
+      },
+      {
+        "time": "10:32",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "10:46",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "10:57",
+        "direction": "PUSTYNIA KOŚCIÓŁ/PRZEZ SŁONECZNĄ",
+        "carrier": "MKS 8",
+        "line": "8",
+        "stopId": "171",
+        "routeId": "9434",
+        "dir": "1"
+      },
+      {
+        "time": "11:03",
+        "direction": "OS. WOLICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "1"
+      },
+      {
+        "time": "11:08",
+        "direction": "ZAJEZDNIA MKS/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "2"
+      },
+      {
+        "time": "11:17",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "11:26",
+        "direction": "STOBIERNA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "2"
+      },
+      {
+        "time": "11:28",
+        "direction": "OS. WOLICA/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "1"
+      },
+      {
+        "time": "11:30",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "11:36",
+        "direction": "LAKIERY DĘBICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "2"
+      },
+      {
+        "time": "11:41",
+        "direction": "ZAJEZDNIA MKS/PRZEZ SŁONECZNĄ",
+        "carrier": "MKS 8",
+        "line": "8",
+        "stopId": "171",
+        "routeId": "9434",
+        "dir": "2"
+      },
+      {
+        "time": "11:45",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "12:04",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "12:13",
+        "direction": "OS. WOLICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "1"
+      },
+      {
+        "time": "12:17",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "12:17",
+        "direction": "PUSTYNIA KOŚCIÓŁ/PRZEZ SŁONECZNĄ",
+        "carrier": "MKS 8",
+        "line": "8",
+        "stopId": "171",
+        "routeId": "9434",
+        "dir": "1"
+      },
+      {
+        "time": "12:25",
+        "direction": "BRACIEJOWA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "1"
+      },
+      {
+        "time": "12:28",
+        "direction": "ZAJEZDNIA MKS/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "2"
+      },
+      {
+        "time": "12:45",
+        "direction": "LAKIERY DĘBICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "2"
+      },
+      {
+        "time": "12:46",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "12:48",
+        "direction": "OS. WOLICA/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "1"
+      },
+      {
+        "time": "13:00",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "13:01",
+        "direction": "ZAJEZDNIA MKS/PRZEZ SŁONECZNĄ",
+        "carrier": "MKS 8",
+        "line": "8",
+        "stopId": "171",
+        "routeId": "9434",
+        "dir": "2"
+      },
+      {
+        "time": "13:18",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "13:33",
+        "direction": "OS. WOLICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "1"
+      },
+      {
+        "time": "13:35",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "13:37",
+        "direction": "PUSTYNIA KOŚCIÓŁ/PRZEZ SŁONECZNĄ",
+        "carrier": "MKS 8",
+        "line": "8",
+        "stopId": "171",
+        "routeId": "9434",
+        "dir": "1"
+      },
+      {
+        "time": "13:45",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "13:48",
+        "direction": "ZAJEZDNIA MKS/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "2"
+      },
+      {
+        "time": "14:13",
+        "direction": "LAKIERY DĘBICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "2"
+      },
+      {
+        "time": "14:17",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "14:25",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "14:26",
+        "direction": "STOBIERNA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "2"
+      },
+      {
+        "time": "14:46",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "14:58",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "15:15",
+        "direction": "ZAJEZDNIA MKS/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "2"
+      },
+      {
+        "time": "15:17",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "15:20",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "15:25",
+        "direction": "BRACIEJOWA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "1"
+      },
+      {
+        "time": "15:28",
+        "direction": "OS. WOLICA/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "1"
+      },
+      {
+        "time": "15:45",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "16:00",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "16:17",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "16:26",
+        "direction": "STOBIERNA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "2"
+      },
+      {
+        "time": "16:28",
+        "direction": "ZAJEZDNIA MKS/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "2"
+      },
+      {
+        "time": "16:40",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "16:46",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "17:17",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "17:26",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "17:45",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "18:00",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "18:17",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "18:40",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "18:41",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "19:17",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "20:40",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "21:07",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      }
+    ],
+    "Niedziele i święta": [
+      {
+        "time": "05:17",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "06:43",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "07:17",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "07:25",
+        "direction": "ZAJEZDNIA MKS/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "2"
+      },
+      {
+        "time": "07:55",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "08:30",
+        "direction": "OS. WOLICA/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "1"
+      },
+      {
+        "time": "08:33",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "08:36",
+        "direction": "PUSTYNIA KOŚCIÓŁ",
+        "carrier": "MKS 18",
+        "line": "18",
+        "stopId": "171",
+        "routeId": "9428",
+        "dir": "2"
+      },
+      {
+        "time": "08:57",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "09:02",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "09:25",
+        "direction": "ZAJEZDNIA MKS/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "2"
+      },
+      {
+        "time": "09:32",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "09:37",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "10:07",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "10:15",
+        "direction": "STOBIERNA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "2"
+      },
+      {
+        "time": "10:25",
+        "direction": "OS. WOLICA/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "1"
+      },
+      {
+        "time": "10:26",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "11:02",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "11:09",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "11:18",
+        "direction": "ZAJEZDNIA MKS/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "2"
+      },
+      {
+        "time": "11:42",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "11:45",
+        "direction": "STOBIERNA",
+        "carrier": "MKS 2",
+        "line": "2",
+        "stopId": "171",
+        "routeId": "9429",
+        "dir": "2"
+      },
+      {
+        "time": "11:48",
+        "direction": "PUSTYNIA KOŚCIÓŁ",
+        "carrier": "MKS 18",
+        "line": "18",
+        "stopId": "171",
+        "routeId": "9428",
+        "dir": "2"
+      },
+      {
+        "time": "12:01",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "12:42",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "12:42",
+        "direction": "OS. WOLICA/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "1"
+      },
+      {
+        "time": "12:43",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "13:17",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "13:25",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "13:53",
+        "direction": "OS. WOLICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "1"
+      },
+      {
+        "time": "14:00",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "14:39",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "14:43",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "14:55",
+        "direction": "LAKIERY DĘBICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "2"
+      },
+      {
+        "time": "15:17",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "15:20",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "15:25",
+        "direction": "ZAJEZDNIA MKS/p. IGLOOPOL",
+        "carrier": "MKS 7",
+        "line": "7",
+        "stopId": "171",
+        "routeId": "9433",
+        "dir": "2"
+      },
+      {
+        "time": "15:33",
+        "direction": "OS. WOLICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "1"
+      },
+      {
+        "time": "15:59",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "16:10",
+        "direction": "LAKIERY DĘBICA",
+        "carrier": "MKS 4",
+        "line": "4",
+        "stopId": "171",
+        "routeId": "9431",
+        "dir": "2"
+      },
+      {
+        "time": "16:40",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "16:43",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "17:17",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "17:26",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "18:00",
+        "direction": "STRASZĘCIN SZPITAL",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "1"
+      },
+      {
+        "time": "18:38",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "18:40",
+        "direction": "WIELOPOLSKA",
+        "carrier": "MKS 3",
+        "line": "3",
+        "stopId": "171",
+        "routeId": "9430",
+        "dir": "2"
+      },
+      {
+        "time": "19:17",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      },
+      {
+        "time": "20:38",
+        "direction": "KRAKOWSKA - KĘPA",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "1"
+      },
+      {
+        "time": "21:07",
+        "direction": "PUSTKÓW LERG",
+        "carrier": "MKS 1",
+        "line": "1",
+        "stopId": "171",
+        "routeId": "9421",
+        "dir": "2"
+      }
+    ]
+  },
+  "version": "79a39e400c3f7a8863088563e62efc597cbcac0c7b03d3d4f7efc4700a97d683"
+}

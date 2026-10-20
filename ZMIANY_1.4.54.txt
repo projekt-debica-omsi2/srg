@@ -1,0 +1,10 @@
+1.4.54 — weekendy i Dębica PKP
+
+Rzeszów Główny: dokładne datowane rozkłady kolejowe na 8 sobót/niedziel od 24.10 do 15.11.2026; wszyscy przewoźnicy dostępni w źródle. Indywidualne kalendarze IC w dni robocze 19.10–15.11, z wyjątkami Mehoffer.
+Grunwaldzka: odjazdy Sędziszów Małopolski Wschodni na te same 8 dni weekendowych, osobno dla każdej daty. W dni robocze zachowany poprzedni rozkład.
+Dębica DA: wspólny ekran kolejowy Dębica PKP — POLREGIO, PKP Intercity, Leo Express oraz RegioJet obecne w danych. Rozkład osobno dla każdego dnia 19.10–15.11.2026. Zachowane wcześniejsze przesiadki autobusowe na dodatkowym ekranie.
+MKS Dębica i Monis: oddzielne ekrany przygotowane, rozkłady do uzupełnienia po otrzymaniu danych.
+Wszędzie maksymalnie 8 najbliższych odjazdów; kurs znika o godzinie odjazdu. Bez dopisków BUS i utrudnienia.
+Źródło nowych danych: gdziepociag.pl (nieoficjalny serwis danych PKP PLK), pobrano 19.10.2026; adres źródła przy każdej dacie w station-rail-data.js. Liczby pozycji porównano z całodobowymi licznikami źródła, łącznie 44 stacja/daty.
+Dane offline wymagają aktualizacji po 15.11.2026. Nowych rozkładów weekendowych nie powielamy na kolejne daty bez sprawdzenia.
+Paczka zawiera źródła do GitHub; nie jest gotowym APK.

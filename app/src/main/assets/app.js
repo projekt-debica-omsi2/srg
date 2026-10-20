@@ -3,6 +3,7 @@
 const el = id => document.getElementById(id);
 let currentState=null, ads=[], adsSignature='', adTimer=null, adNumber=-1, routeSignature='', pollInFlight=false;
 let lastMode='', transferSignature='', stopSignature='';
+let transferPageKey='',transferPageStarted=0;
 const previewParams=new URLSearchParams(location.search);
 const forcedPreview=previewParams.get('preview');
 const weekFormat=new Intl.DateTimeFormat('pl-PL',{weekday:'long'});
@@ -102,10 +103,14 @@ function setTransfer(data){
 }
 function paintLower(){
  const live=currentState?.przesiadka;
- if(window.SRGTransferDraft&&(!currentState?.lcdConfig||window.SRGLcdCycle.duration(currentState.lcdConfig,'transfers')>0)&&isActive(currentState)&&Array.isArray(live?.rows)&&live.rows.length){
-  const page=Math.floor(Date.now()/8000)%Math.ceil(live.rows.length/4),visible={...live,rows:live.rows.slice(page*4,page*4+4)};const sig=JSON.stringify([currentState.kursId,currentState.aktualnyIndeks,visible]);if(sig!==transferSignature){transferSignature=sig;window.SRGTransferDraft.render(visible)}
+ if(window.SRGTransferDraft&&(!currentState?.lcdConfig||window.SRGLcdCycle.duration(currentState.lcdConfig,'transfers')>0)&&isActive(currentState)&&(Array.isArray(live?.pages)&&live.pages.length||Array.isArray(live?.rows)&&live.rows.length)){
+  const now=Date.now(),key=JSON.stringify([currentState.kursId,currentState.aktualnyIndeks]);
+  if(key!==transferPageKey||now<transferPageStarted){transferPageKey=key;transferPageStarted=now;}
+  const size=live.rowsPerPage===8?8:4,seconds=currentState.lcdConfig?window.SRGLcdCycle.duration(currentState.lcdConfig,'transfers'):8;
+  const visible=Array.isArray(live.pages)&&live.pages.length?{...live,...live.pages[Math.floor((now-transferPageStarted)/(Math.max(1,seconds)*1000))%live.pages.length]}:{...live,rows:live.rows.slice((Math.floor(now/8000)%Math.ceil(live.rows.length/size))*size,(Math.floor(now/8000)%Math.ceil(live.rows.length/size))*size+size)};const sig=JSON.stringify([currentState.kursId,currentState.aktualnyIndeks,visible]);if(sig!==transferSignature){transferSignature=sig;window.SRGTransferDraft.render(visible)}
   el('transfer').hidden=true;el('adMedia').style.visibility='hidden';return;
  }
+ transferPageKey='';
  window.SRGTransferDraft?.hide();
  const d=currentState, useCycle=!!d?.lcdConfig&&!forcedPreview;
  const data=isActive(d)&&(useCycle?configuredMode==='transfers':d.reklamyPoZapowiedzi!==true)?d.przesiadka:null;

@@ -1,0 +1,6 @@
+1.4.58 — przywracanie rozkładu dołączonego do APK
+Ustawienia -> Aktualizacja rozkładów -> Przywróć rozkład z aplikacji.
+Przywraca wbudowane dane przesiadek kolejowych, PKS i MKS, usuwa nakładkę pobranych danych z bieżącego widoku i wstrzymuje pobieranie przez Wi-Fi. Ustawienie jest zachowane po zamknięciu aplikacji i restarcie tabletu. Pobrane kopie nie są usuwane.
+Włącz ponownie aktualizacje przywraca użycie pobranych kopii i wznawia automatyczne sprawdzanie.
+Funkcja dotyczy bazy w aktualnym APK; nie cofa wersji aplikacji ani kursówek RJ. Nie przedłuża dat ważności starych rozkładów.
+Testy: powtarzalny powrót do niezmienionej kopii wbudowanej, usunięcie pobranych dni z widoku, ponowne przyjęcie aktualizacji i regresja MKS. Moduł Java skompilowany z API 35. Ograniczenie z wersji 1.4.57 pozostaje: binarna baza MKS z API nie jest jeszcze stosowana do wyświetlanych godzin.

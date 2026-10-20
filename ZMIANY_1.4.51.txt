@@ -1,0 +1,6 @@
+1.4.51 — Rzeszów Dworzec Autobusowy: cztery najbliższe planowe odjazdy.
+Po osiągnięciu godziny odjazdu kurs znika, a wchodzi kolejny. Aktualizacja co ok. 1,75 s.
+Dane offline ze strony PKS Rzeszów pobrane 19.10.2026, ważne 14.10–31.12.2026.
+Uwzględnione oznaczenia dni kursowania, święta i przerwa świąteczna MEN.
+Po ostatnim kursie i po wygaśnięciu rozkładu przesiadki PKS są ukrywane.
+Nie jest to informacja o opóźnieniach ani automatyczna synchronizacja ze stroną.

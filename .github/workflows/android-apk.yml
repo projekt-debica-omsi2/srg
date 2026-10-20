@@ -1,4 +1,4 @@
-name: Build SRG Mobile 1.4.50 APK
+name: Build SRG Mobile 1.4.61 APK
 on:
   workflow_dispatch:
   push:
@@ -47,6 +47,12 @@ jobs:
           node tests/test-manual-lcd.cjs
           node tests/test-s27-1045.cjs
           node tests/test-transfers.cjs
+          node tests/test-pks-transfers.cjs
+          node tests/test-rzeszow-rail.cjs
+          node tests/test-weekend-hubs.cjs
+          node tests/test-timetable-cache.cjs
+          node tests/test-mks-debica.cjs
+          node tests/test-mks-network.cjs
           node tests/test-train-transfers.cjs
           node tests/test-road-progress.cjs
           node tests/test-schedule-deviation.cjs
@@ -56,10 +62,10 @@ jobs:
       - name: Test R&G frame templates
         run: node tests/test-rg-usb.cjs
       - name: Build debug APK
-        run: gradle --no-daemon :app:assembleDebug
+        run: gradle --no-daemon :app:testDebugUnitTest :app:assembleDebug
       - name: Publish APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: SRG-Mobile-v1.4.50-KURSOWKI-LCD-LAN-debug
+          name: SRG-Mobile-v1.4.61-KURSOWKI-LCD-LAN-debug
           path: app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error

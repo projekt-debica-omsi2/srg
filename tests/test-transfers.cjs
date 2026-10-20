@@ -12,11 +12,12 @@ assert.equal(t.forStop(stop,{verified:true,departures:[row('invalid'),row('2026-
 console.log('PASS transfers: RJ IDs, names, Warsaw date, expiry, later same-direction trips, midnight, invalid/cancelled data');
 const fs=require('fs'),vm=require('vm'),ctx={window:{}};vm.runInNewContext(fs.readFileSync('app/src/main/assets/transfers-data.js','utf8'),ctx);const daily=JSON.parse(JSON.stringify(ctx.window.SRGTransferData));
 assert.equal(daily.daily.filter(r=>r.carrier==='FlixBus').length,7);
-for(const station of t.stations.filter(s=>s.key!=='sedziszow-grunwaldzka')){for(const id of station.ids){
+for(const station of t.stations.filter(s=>s.key!=='sedziszow-grunwaldzka'&&s.key!=='rzeszow-da')){for(const id of station.ids){
  const st={id,name:station.name};const result=t.forStop(st,daily,Date.parse('2026-10-16T00:00:00+02:00'));
  assert.equal(result.rows.length,station.key==='rzeszow-lokalny'?1:2);
  for(const row of result.rows){const at=Date.parse('2026-10-16T'+row.time+':00+02:00');assert(!t.forStop(st,daily,at)?.rows.some(r=>r.time===row.time));}
- assert.equal(t.forStop(st,daily,Date.parse('2026-10-16T23:59:59+02:00')),null);
+ if(station.key==='debica-da')assert(t.forStop(st,daily,Date.parse('2026-10-16T23:59:59+02:00')).pages.every(p=>p.rows.length===0));
+ else assert.equal(t.forStop(st,daily,Date.parse('2026-10-16T23:59:59+02:00')),null);
  assert.equal(t.forStop(st,daily,Date.parse('2026-10-17T00:00:00+02:00')).rows.length,result.rows.length);
  assert.equal(t.forStop(st,daily,Date.parse('2026-12-01T00:00:00+01:00')).rows.length,result.rows.length);
 }}

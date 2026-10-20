@@ -1,0 +1,5 @@
+1.4.60 — działający adres proxy MKS
+Domyślny adres: http://xn--e-dbica-c9a.pl:8088/mybus-hub-api.php?city=DEBIC&action=schedule
+Jest to domena e-dębica.pl z polskim ę. Sprawdzono HTTP 200 i pobrano 101893 bajty gzip 20.10.2026. HTTPS na porcie 8088 nie odpowiedział poprawnie.
+Dodano wyjątek HTTP tylko dla tej domeny; walidacja proxy dopuszcza HTTP tylko na porcie 8088. Pozostałe proxy wymagają HTTPS. Zapisany wcześniej adres pozostaje zachowany; przy braku ustawienia używany jest powyższy adres.
+Pobieranie przez Wi-Fi. Parser godzin z oryginalnej bazy pozostaje do wykonania; próbka została już uzyskana. To paczka źródłowa, nie APK.

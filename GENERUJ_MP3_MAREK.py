@@ -4,7 +4,7 @@ Run on Windows with Python 3.10+: py -3 GENERUJ_79_MP3_MAREK.py
 Voice service is external and may change; resulting MP3 are local and work offline.
 """
 from __future__ import annotations
-import argparse, asyncio, hashlib, json, re, subprocess, sys, time
+import argparse, asyncio, hashlib, json, re, subprocess, sys, time, shutil
 from pathlib import Path
 BASE=Path(__file__).resolve().parent
 DATA=BASE/'route_data.json'
@@ -14,6 +14,9 @@ STATUS=BASE/'.tts_status.json'
 
 def spoken(name):
     name=re.sub(r'\s+(?:N\.?\s*Ż\.?|NZ|NA ŻĄDANIE)\s*$', '',str(name).strip(),flags=re.I)
+    if re.fullmatch(r'NAGAWCZYNA [12]',name,flags=re.I):
+        return 'Nagawczyna '+('jeden' if name.endswith('1') else 'dwa')
+    if name.upper()=='DĄBROWA 2':return 'Dąbrowa jeden'
     name=re.sub(r'\s+\d{1,4}[a-z]?\s*$', '',name,flags=re.I)
     return name.strip()
 
@@ -47,11 +50,18 @@ def ready(jobs):
                for rel,txt in jobs)
 
 def get_tts():
-    try: import edge_tts;return edge_tts
-    except ImportError:
-        print('Instaluję edge-tts dla aktualnego Pythona...')
-        subprocess.check_call([sys.executable,'-m','pip','install','edge-tts'])
-        import edge_tts;return edge_tts
+    from importlib.metadata import version, PackageNotFoundError
+    try:
+        installed=version('edge-tts')
+        numbers=tuple(int(n) for n in installed.split('.')[:3])
+    except (PackageNotFoundError, ValueError):
+        numbers=(0,0,0)
+    if numbers < (7,3,0):
+        print('Aktualizuję edge-tts — starsze wersje mogą zwracać błąd 403...')
+        subprocess.check_call([sys.executable,'-m','pip','install','--upgrade','edge-tts>=7.3.0'])
+    import edge_tts
+    print('edge-tts:',version('edge-tts'))
+    return edge_tts
 
 async def generate(jobs, force=False):
     if not force and ready(jobs):
@@ -71,11 +81,22 @@ async def generate(jobs, force=False):
             try:
                 await edge_tts.Communicate(txt,VOICE,rate=RATE).save(str(tmp))
                 if not tmp.is_file() or tmp.stat().st_size<1000:raise ValueError('pusty MP3')
+                backup=BASE/'KOPIA_NAGRAN_PRZED_ZMIANA'/rel
+                if path.exists() and not backup.exists():
+                    backup.parent.mkdir(parents=True,exist_ok=True);shutil.copy2(path,backup)
                 tmp.replace(path);status[rel]=digest
+                manifest_path=BASE/'NAGRANIA_79_SHA256.json'
+                manifest=json.loads(manifest_path.read_text('utf-8')) if manifest_path.exists() else {}
+                manifest[rel]=hashlib.sha256(path.read_bytes()).hexdigest()
+                manifest_path.write_text(json.dumps(manifest,ensure_ascii=False,indent=2),encoding='utf-8')
                 STATUS.write_text(json.dumps(status,ensure_ascii=False,indent=2),encoding='utf-8')
                 print(f'[{i:02}/{len(jobs)}] OK: {rel} - {txt}');success=True;break
             except Exception as exc:
                 tmp.unlink(missing_ok=True)
+                if getattr(exc,'status',None)==403:
+                    print('Serwer mowy odrzucił połączenie (403). Przerwano; wcześniejsze pliki są zachowane.')
+                    print('Uruchom poprawiony BAT aktualizujący edge-tts. Jeśli błąd pozostaje, prześlij wersję edge-tts z początku okna.')
+                    return 1
                 print(f'[{i:02}/{len(jobs)}] BŁĄD (próba {retry+1}/3): {exc}')
                 await asyncio.sleep(2*(retry+1))
         if not success:failed.append(rel)
@@ -85,9 +106,12 @@ async def generate(jobs, force=False):
     print('Gotowe. MP3 są w assets/audio i będą pakowane do APK.');return 0
 
 def main():
-    ap=argparse.ArgumentParser();ap.add_argument('--dry-run',action='store_true');ap.add_argument('--force',action='store_true');args=ap.parse_args()
+    ap=argparse.ArgumentParser();ap.add_argument('--dry-run',action='store_true');ap.add_argument('--force',action='store_true');ap.add_argument('--nazwy-nagawczyna-dabrowa',action='store_true');args=ap.parse_args()
     jobs=build_jobs()
-    print('Marek Neural: komplet 79 plików już dołączony; brak konieczności ponownego generowania')
+    if args.nazwy_nagawczyna_dabrowa:
+        data=json.loads(DATA.read_text('utf-8'));ids={s['id'] for s in data['stops'] if s['name'].startswith(('NAGAWCZYNA ', 'DĄBROWA'))}
+        jobs=[j for j in jobs if j[0] in {f'stops/{i}.mp3' for i in ids}]
+    print(f'Marek Neural: sprawdzam {len(jobs)} nagrań; zmienione teksty zostaną wygenerowane.')
     if args.dry_run:
         for fn,text in jobs: print(fn,'->',text)
         return 0

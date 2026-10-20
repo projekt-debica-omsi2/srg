@@ -113,6 +113,14 @@ public final class MainActivity extends Activity implements LocationListener {
                 if (requested) startGpsNative(); else explainStatus();
             }
         });
+        TimetableSync.install(this);
+        web.addJavascriptInterface(new TimetableSync.Bridge(this), "SRGTimetables");
+        web.addJavascriptInterface(new Object(){
+            @JavascriptInterface public void exportFile(){runOnUiThread(()->{
+                if(!new java.io.File(getFilesDir(),"mks-schedule.bin").isFile()){android.widget.Toast.makeText(MainActivity.this,"API MKS nie pobrało jeszcze bazy",android.widget.Toast.LENGTH_LONG).show();return;}
+                Intent intent=new Intent(Intent.ACTION_CREATE_DOCUMENT);intent.setType("application/octet-stream");intent.addCategory(Intent.CATEGORY_OPENABLE);intent.putExtra(Intent.EXTRA_TITLE,"mks-schedule.bin");startActivityForResult(intent,44);
+            });}
+        },"SRGMksExport");
         web.addJavascriptInterface(new GpsBridge(), "SRGNativeGPS");
         web.addJavascriptInterface(new AudioBridge(), "SRGNativeAudio");
         web.addJavascriptInterface(new LcdBridge(), "SRGLcd");
@@ -176,6 +184,15 @@ public final class MainActivity extends Activity implements LocationListener {
     }
     @Override protected void onActivityResult(int requestCode,int resultCode,Intent data) {
         super.onActivityResult(requestCode,resultCode,data);
+        if(requestCode==44){
+            if(resultCode==RESULT_OK&&data!=null&&data.getData()!=null){final android.net.Uri uri=data.getData();new Thread(()->{
+                String message;
+                try(java.io.InputStream in=new java.io.FileInputStream(new java.io.File(getFilesDir(),"mks-schedule.bin"));java.io.OutputStream out=getContentResolver().openOutputStream(uri)){
+                    if(out==null)throw new java.io.IOException("Brak dostępu do pliku");byte[] buffer=new byte[16384];int n;while((n=in.read(buffer))!=-1)out.write(buffer,0,n);message="Zapisano bazę MKS";
+                }catch(Exception e){message="Nie zapisano bazy MKS: "+e.getMessage();}
+                final String result=message;runOnUiThread(()->android.widget.Toast.makeText(this,result,android.widget.Toast.LENGTH_LONG).show());
+            },"MKS-export").start();}return;
+        }
         if(requestCode!=43)return;
         if(resultCode!=RESULT_OK||data==null){adsNotice("Nie dodano plików.");return;}
         List<android.net.Uri> uris=new ArrayList<>();
@@ -489,7 +506,7 @@ public final class MainActivity extends Activity implements LocationListener {
         if (lcdServer != null) lcdServer.close();
         if (pendingMediaRequest!=null){pendingMediaRequest.deny();pendingMediaRequest=null;}
         pageReady=false;
-        if (web != null) { web.removeJavascriptInterface("SRGNativeGPS"); web.removeJavascriptInterface("SRGNativeAudio"); web.removeJavascriptInterface("SRGLcd"); web.destroy(); web=null; }
+        if (web != null) { web.removeJavascriptInterface("SRGMksExport"); web.removeJavascriptInterface("SRGTimetables"); web.removeJavascriptInterface("SRGNativeGPS"); web.removeJavascriptInterface("SRGNativeAudio"); web.removeJavascriptInterface("SRGLcd"); web.destroy(); web=null; }
         super.onDestroy();
     }
 }
