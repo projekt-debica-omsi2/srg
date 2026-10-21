@@ -11,7 +11,7 @@
  function forStop(stop,feed=root.SRGTransferData,now=Date.now()){
   const station=stations.find(s=>s.ids.includes(stop?.id)&&s.name===String(stop?.name||'').trim().toUpperCase());
   const networkRows=Number.isFinite(now)?root.SRGMKS?.rowsFor(stop,dateFmt.format(now),timeFmt.format(now)):null;
-  if(networkRows&&station?.key!=='debica-da'){const time=timeFmt.format(now);return {przystanek:stop.name,stop:stop.name,time,rows:networkRows,rowsPerPage:8,pages:[{title:'PRZESIADKI — MKS DĘBICA',rows:networkRows,emptyText:'Brak odjazdów MKS w dostępnym kalendarzu na dziś'}]};}
+  if(networkRows&&station?.key!=='debica-da'){const time=timeFmt.format(now);return {przystanek:stop.name,stop:stop.name,time,rows:networkRows,rowsPerPage:8,pages:[{title:'PRZESIADKI',rows:networkRows,emptyText:'Brak odjazdów MKS w dostępnym kalendarzu na dziś'}]};}
   if(station?.key==='rzeszow-da')return hubForStop(stop,now);
   if(!station||!feed||feed.verified!==true||!Array.isArray(feed.departures)||!Number.isFinite(now))return null;
   const day=dateFmt.format(now),seen=new Set();
@@ -39,13 +39,13 @@
    const rail=dated?railRows(dated,day,localTime):rows.filter(r=>['PKP Intercity','POLREGIO','Leo Express'].includes(r.carrier));
    rail.push(...railRows(feeds.rail,day,localTime));
    rail.sort((a,b)=>a.time.localeCompare(b.time));
+   const busSeen=new Set();
+   const combinedBus=[...rows.filter(r=>!['PKP Intercity','POLREGIO','Leo Express'].includes(r.carrier)),...railRows(feeds.monis,day,localTime)].sort((a,b)=>a.time.localeCompare(b.time)||a.carrier.localeCompare(b.carrier)).filter(r=>{const key=JSON.stringify([r.time,r.carrier,r.direction]);if(busSeen.has(key))return false;busSeen.add(key);return true;}).slice(0,8);
    const pages=[
-    {title:'PRZESIADKI — DĘBICA PKP',rows:rail.slice(0,8),emptyText:'Brak dostępnych odjazdów kolejowych'},
-    {title:'PRZESIADKI — MKS DĘBICA',rows:networkRows??(root.SRGTimetableCache?.mksRows(root.SRGMKSDebica,day,localTime)||railRows(feeds.mks,day,localTime)),emptyText:'Brak dostępnych odjazdów MKS'},
-    {title:'PRZESIADKI — MONIS',rows:railRows(feeds.monis,day,localTime),emptyText:'Rozkład Monis do uzupełnienia'}
+    {title:'PRZESIADKI',rows:rail.slice(0,8),emptyText:'Brak dostępnych odjazdów kolejowych'},
+    {title:'PRZESIADKI',rows:networkRows??(root.SRGTimetableCache?.mksRows(root.SRGMKSDebica,day,localTime)||railRows(feeds.mks,day,localTime)),emptyText:'Brak dostępnych odjazdów MKS'},
+    {title:'PRZESIADKI',rows:combinedBus,emptyText:'Brak dostępnych odjazdów autobusów'}
    ];
-   const other=rows.filter(r=>!['PKP Intercity','POLREGIO','Leo Express'].includes(r.carrier));
-   if(other.length)pages.push({title:'PRZESIADKI — AUTOBUSY',rows:other.slice(0,8)});
    return {przystanek:stop.name,stop:stop.name,time:localTime,rows:rows.slice(0,8),rowsPerPage:8,pages};
   }
   return rows.length?{przystanek:stop.name,stop:stop.name,time:timeFmt.format(now),rows:rows.slice(0,8),rowsPerPage:8}:null;
@@ -60,9 +60,9 @@
   const rail=railRows(root.SRGStationRail?.['rzeszow-da']?.[day]||root.SRGRailRzeszow,day,time);
   if(!bus&&!mpk.length&&!rail.length)return null;
   const pages=[
-   {title:'PRZESIADKI — PKS / MONIS',rows:bus?.rows||[],emptyText:'Brak dalszych odjazdów w rozkładzie na dziś'},
-   {title:'PRZESIADKI — RZESZÓW GŁÓWNY PKP',rows:rail,emptyText:'Rozkład kolejowy niedostępny'},
-   {title:'PRZESIADKI — MPK 0A / 0B',rows:mpk,emptyText:'Brak dostępnych odjazdów'}
+   {title:'PRZESIADKI',rows:bus?.rows||[],emptyText:'Brak dalszych odjazdów w rozkładzie na dziś'},
+   {title:'PRZESIADKI',rows:rail,emptyText:'Rozkład kolejowy niedostępny'},
+   {title:'PRZESIADKI',rows:mpk,emptyText:'Brak dostępnych odjazdów'}
   ];
   return {przystanek:stop.name,stop:stop.name,time,rows:bus?.rows||[],rowsPerPage:8,pages};
  }

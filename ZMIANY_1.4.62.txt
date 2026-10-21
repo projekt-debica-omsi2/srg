@@ -1,0 +1,6 @@
+1.4.62
+- Dębica: wspólny ekran FlixBus i Monis, chronologicznie do 8 odjazdów; usunięto oddzielny dodatkowy ekran autobusów. Korzysta z dostępnych danych; nie dodano nowych godzin Monis.
+- Wszystkie nagłówki ekranów przesiadek brzmią PRZESIADKI.
+- MPK Rzeszów 0A i 0B: kierunek Dworzec Główny PKP, zgodnie z opisami kierunków w danych E-INFO; bez opisu przebiegu ulicami.
+- Zachowano przesłane nowe nagrania oraz poprawkę kompilacji testu MKS.
+- Sprawdzono połączenie autobusów, limit i kolejność, testy MPK/MKS, przesiadki weekendowe i integralność nagrań. APK wymaga budowania na GitHubie.

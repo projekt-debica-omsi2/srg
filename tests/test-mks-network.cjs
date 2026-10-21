@@ -7,7 +7,7 @@ const stop=id=>({id,name:api.expected[id]});
 for(const id of Object.keys(api.map).map(Number))for(const day of ['2026-10-20','2026-10-24','2026-10-25']){
  const expectedIds=api.map[id].map(String),rows=api.rowsFor(stop(id),day,'05:00');assert(rows.length<=8);assert(rows.every(r=>expectedIds.includes(r.stopId)&&r.time>'05:00'));
  const panel=w.SRGTransfers.forStop(stop(id),w.SRGTransferData,Date.parse(day+'T05:00:00+02:00'));
- assert(panel);const page=panel.pages.find(p=>p.title.includes('MKS'));assert.equal(JSON.stringify(page.rows),JSON.stringify(rows));
+ assert(panel);const page=panel.pages[[1,68].includes(id)?1:0];assert.equal(JSON.stringify(page.rows),JSON.stringify(rows));
 }
 assert.equal(api.rowsFor(stop(9),'2026-10-20','05:00').map(r=>r.direction).includes('STOBIERNA'),true);
 assert.equal(api.rowsFor(stop(9),'2026-10-20','05:00').map(r=>r.direction).includes('BRACIEJOWA'),true);

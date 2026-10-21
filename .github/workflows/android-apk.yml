@@ -1,4 +1,4 @@
-name: Build SRG Mobile 1.4.61 APK
+name: Build SRG Mobile 1.4.62 APK
 on:
   workflow_dispatch:
   push:
@@ -66,6 +66,6 @@ jobs:
       - name: Publish APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: SRG-Mobile-v1.4.61-KURSOWKI-LCD-LAN-debug
+          name: SRG-Mobile-v1.4.62-KURSOWKI-LCD-LAN-debug
           path: app/build/outputs/apk/debug/app-debug.apk
           if-no-files-found: error

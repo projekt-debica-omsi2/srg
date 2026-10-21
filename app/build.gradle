@@ -8,8 +8,8 @@ android {
         applicationId 'pl.srgmobile.classic.lcd23'
         minSdk 26
         targetSdk 34
-        versionCode 11461
-        versionName '1.4.61'
+        versionCode 11462
+        versionName '1.4.62'
     }
 
     buildTypes {

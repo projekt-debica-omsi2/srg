@@ -16,5 +16,5 @@ const sun=root.SRGStationRail['sedziszow-grunwaldzka']['2026-10-25'].departures;
 assert(sat.some(r=>r.time==='05:33'&&r.direction==='Przemyśl Główny'));
 assert(!sat.some(r=>r.time==='05:42'));assert(sun.some(r=>r.time==='05:42'&&r.direction==='Rzeszów Główny'));
 assert(!result('sedziszow-grunwaldzka','2026-10-24','23:59'));
-const deb=result('debica-da','2026-10-19');assert.equal(deb.pages[1].rows.length,0);assert.equal(deb.pages[2].rows.length,0);
+const deb=result('debica-da','2026-10-19');assert.equal(deb.pages[1].rows.length,0);assert.equal(deb.pages.length,3);assert(deb.pages[2].rows.length>0);assert(deb.pages[2].rows.every(r=>r.carrier==='FlixBus'));assert(deb.pages.every(p=>p.title==='PRZESIADKI'));
 console.log('PASS dated station feeds: weekend differences, expiry, 8 rows, Warsaw DST, empty MKS/Monis');
