@@ -6,7 +6,7 @@ window.SRGTransferDraft={
   host.replaceChildren();host.classList.toggle('td-eight',data.rowsPerPage===8);
   const make=(tag,cls,text)=>{const e=document.createElement(tag);e.className=cls;e.textContent=text;return e};
   const meta=make('div','td-meta','');meta.append(make('span','','Aktualny przystanek: '+data.stop),make('span','','Godzina: '+data.time));host.append(meta);
-  host.append(make('h2','',data.title||'PRZESIADKI'));
+  host.append(make('h2','','PRZESIADKI'));
   const table=make('div','td-table','');const head=make('div','td-row td-head','');head.append(make('span','','Przewoźnik / kierunek'),make('span','','Planowy odjazd'));table.append(head);
   for(const row of data.rows){const line=make('div','td-row',''),clip=make('div','td-clip',''),label=make('span','td-text',row.carrier+' / '+row.direction);clip.append(label);line.append(clip,make('span','td-time',row.time));table.append(line)}
   if(!data.rows.length)table.append(make('div','td-row',data.emptyText||'Brak odjazdów'));

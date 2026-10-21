@@ -1,0 +1,1 @@
+1.4.63: oba widoki tablicy LCD wyświetlają stały nagłówek PRZESIADKI. Renderer ignoruje tytuły dostarczane w danych, także starsze nazwy typu PRZESIADKI — DĘBICA PKP. Po instalacji nowego APK należy odświeżyć stronę na ekranie LCD. Testy przesiadek przeszły.
