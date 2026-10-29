@@ -31,7 +31,7 @@ final class LocalPanelServer {
     private ServerSocket server;
     private final ExecutorService workers = Executors.newFixedThreadPool(3);
     private static final Set<String> ALLOWED = new HashSet<>(Arrays.asList(
-        "lcdManual", "lcdConfig", "active", "line", "direction", "current", "next", "following", "index", "count", "phase", "phaseUntil", "clock", "course", "kursAktywny", "kursId", "linia", "kierunek", "aktualnyIndeks", "koniecKursu", "koncowyNastepny", "reklamyPoZapowiedzi", "przystanki", "aktualny", "nastepny", "przesiadka"));
+        "additional", "lcdManual", "lcdConfig", "active", "line", "direction", "current", "next", "following", "index", "count", "phase", "phaseUntil", "clock", "course", "kursAktywny", "kursId", "linia", "kierunek", "aktualnyIndeks", "koniecKursu", "koncowyNastepny", "reklamyPoZapowiedzi", "przystanki", "aktualny", "nastepny", "przesiadka"));
 
     LocalPanelServer(Context context) { this.context = context; }
 

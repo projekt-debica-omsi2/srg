@@ -35,7 +35,7 @@ import java.util.Collections;
 
 /** Natywne, lokalne GPS_PROVIDER bez wymagania Internetu. */
 public final class MainActivity extends Activity implements LocationListener {
-    private RgUsbBridge rgUsb;
+    private RgUsbBridge rgUsb, ibisUsb;
     private static final int LOCATION_REQUEST = 41;
     private static final int MEDIA_REQUEST = 42;
     private PermissionRequest pendingMediaRequest;
@@ -126,6 +126,11 @@ public final class MainActivity extends Activity implements LocationListener {
         web.addJavascriptInterface(new LcdBridge(), "SRGLcd");
         rgUsb = new RgUsbBridge(this, web);
         web.addJavascriptInterface(rgUsb, "SRGRgUsb");
+        ibisUsb = new RgUsbBridge(this, web, "IBIS", "ibisUsbEvent");
+        web.addJavascriptInterface(ibisUsb, "SRGIbisUsb");
+        web.addJavascriptInterface(new Object(){
+            @JavascriptInterface public String version(){try{return getPackageManager().getPackageInfo(getPackageName(),0).versionName;}catch(Exception e){return "";}}
+        }, "SRGApp");
         setContentView(web);
         web.loadUrl("file:///android_asset/index.html");
     }
@@ -490,7 +495,6 @@ public final class MainActivity extends Activity implements LocationListener {
     @Override protected void onStop() {
         // Brak lokalizacji w tle. Użytkownik nadal chce GPS po wznowieniu.
         stopListening();
-        if (rgUsb != null) rgUsb.close();
         stopVoice();
         super.onStop();
     }
@@ -502,6 +506,7 @@ public final class MainActivity extends Activity implements LocationListener {
     @Override protected void onDestroy() {
         stopListening();
         if (rgUsb != null) rgUsb.close();
+        if (ibisUsb != null) ibisUsb.close();
         stopVoice();
         if (lcdServer != null) lcdServer.close();
         if (pendingMediaRequest!=null){pendingMediaRequest.deny();pendingMediaRequest=null;}

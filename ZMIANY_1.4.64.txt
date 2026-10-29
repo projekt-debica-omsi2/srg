@@ -1,0 +1,36 @@
+SRG Mobile 1.4.64 (11464)
+
+LCD: włącznik przewijania, suwak 10–200 px/s i podgląd w ramce.
+Ustawienie obejmuje trasę, przystanek i przewijane teksty przesiadek.
+
+Linie dodatkowe: wejście przez hasło za każdym razem, edycja kierunku,
+opcjonalny numer, Tylko wyświetl / Wyświetl i zapisz / Zapisz.
+Zapisane pozycje dostępne w zakładce Linie dodatkowe wyboru kursówki.
+Kurs dodatkowy nie ma przystanków, odchyłki ani automatyki zapowiedzi.
+Wyjście przez Wymelduj > Wyjście z kursówki. Aktywny kurs jest przywracany.
+Zmiana wspólnego hasła w Ustawienia > Zmiana hasła wymaga obecnego hasła.
+Numer wersji na ekranie jest odczytywany z zainstalowanego APK.
+
+USB: niezależne połączenia RS-485 i IBIS przez dwa adaptery/hub.
+Aplikacja blokuje jednoczesne otwarcie tego samego adaptera przez oba kanały.
+Wyjście do ustawień Androida nie niszczy już transportu USB.
+Sterownik USB 3.8.1: m.in. CDC/ACM (CH343), FTDI, CH340/341, CP210x i PL2303;
+obsługa parametrów zależy także od adaptera. Nie każdy konwerter jest
+interfejsem elektrycznym IBIS. IBIS wymaga właściwego interfejsu, 1200/7E2.
+
+IBIS: ręczne DS001, DS003, DS003a, DS003c, DS004, DS004c, DS005, DS006.
+Automatyczne DS003a/DS003c/DS005/DS006 po połączeniu i potwierdzeniu testu.
+Numery linii w automatyce są składane z tekstem kierunku, bez zgadywania
+kodów ukrywania linii konkretnej tablicy. Polskie litery są transliterowane.
+R&G nadal wymaga własnej potwierdzonej ramki — brak wymyślonego protokołu.
+SLE MAEB08001-50.00 (Karosa): zgodność pozostaje NIEPOTWIERDZONA sprzętowo.
+Brak CAN i prędkości.
+
+Źródła formatów, bez kopiowania implementacji:
+https://github.com/CatoLynx/pyIBISv2/blob/master/ibis/ibis_protocol.py
+https://github.com/xtomasnemec/IBIS2USB
+https://github.com/mik3y/usb-serial-for-android/tree/v3.8.1
+
+Walidacja lokalna: testy Node oraz kompilacja źródeł Java przeciw Android API35.
+Pełny build APK i testy Gradle wykonuje workflow GitHub Actions po wgraniu.
+Nie wykonano testu sprzętowego USB/IBIS/SLE ani testu wizualnego Androida.

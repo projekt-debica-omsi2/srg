@@ -12,7 +12,7 @@ window.SRGTransferDraft={
   if(!data.rows.length)table.append(make('div','td-row',data.emptyText||'Brak odjazdów'));
   if(data.rowsPerPage===8){for(let i=Math.max(1,data.rows.length);i<8;i++){const blank=make('div','td-row td-empty','');blank.setAttribute('aria-hidden','true');blank.append(make('span','',''),make('span','',''));table.append(blank)}}
   host.append(table);host.hidden=false;
-  requestAnimationFrame(()=>host.querySelectorAll('.td-clip').forEach(clip=>{const label=clip.firstChild,overflow=label.scrollWidth-clip.clientWidth;if(overflow>2){label.classList.add('td-moving');label.style.setProperty('--td-end',-overflow+'px');label.style.setProperty('--td-duration',Math.max(10,overflow/35+5)+'s')}}));
+  requestAnimationFrame(()=>host.querySelectorAll('.td-clip').forEach(clip=>{const label=clip.firstChild,overflow=label.scrollWidth-clip.clientWidth;if(overflow>2&&window.srgScrollConfig?.scrollEnabled!==false){label.classList.add('td-moving');label.style.setProperty('--td-end',-overflow+'px');label.style.setProperty('--td-duration',Math.max(2,overflow/(window.srgScrollConfig?.scrollSpeed||48)+2)+'s')}}));
  },
  hide(){document.getElementById('transferDraft').hidden=true}
 };

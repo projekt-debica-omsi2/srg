@@ -13,15 +13,15 @@ function tickClock(){
  el('weekday').textContent=weekFormat.format(d);
  el('longDate').textContent=dateFormat.format(d);
 }
-function isActive(d){return Boolean(d && d.kursAktywny===true && d.kursId && Array.isArray(d.przystanki) && d.przystanki.length)}
+function isActive(d){return Boolean(d && d.kursAktywny===true && d.kursId && Array.isArray(d.przystanki) && (d.przystanki.length||d.additional===true))}
 function show(panel){if(lastMode===panel)return;lastMode=panel;el('clockPanel').hidden=panel!=='clock';el('routePanel').hidden=panel!=='route';el('stopPanel').hidden=panel!=='stop'}
 function routeText(stops){return stops.map(x=>String(x.ulica||x.nazwa||'').trim()).filter((street,i,list)=>street&&street!==list[i-1]).join('  –  ')}
 function setRoute(d){
  const key=JSON.stringify([d.kursId,d.linia,d.kierunek,d.aktualnyIndeks,d.przystanki.map(x=>[x.nazwa,x.ulica])]);
  if(key===routeSignature)return;routeSignature=key;
  // Nazwy ulic i kolejność przystanków pochodzą z aktywnego wariantu wczytanego z pliku RJ.
- el('routeDirection').textContent='→ '+(d.kierunek||d.przystanki.at(-1)?.nazwa||'—').toLocaleUpperCase('pl-PL');
- el('routeText').textContent=routeText(d.przystanki.slice(Math.max(0,d.aktualnyIndeks||0))).toLocaleUpperCase('pl-PL');
+ el('routeDirection').textContent=(d.additional&&d.linia?d.linia+' → ':'→ ')+(d.kierunek||d.przystanki.at(-1)?.nazwa||'—').toLocaleUpperCase('pl-PL');
+ el('routeText').textContent=(d.additional?((d.linia?d.linia+' → ':'')+d.kierunek):routeText(d.przystanki.slice(Math.max(0,d.aktualnyIndeks||0)))).toLocaleUpperCase('pl-PL');
  const r=el('routeText');setTimeout(()=>fitMarquee(r,r.parentElement,'route'),0);
 }
 function setStop(label,name,note){
@@ -35,11 +35,12 @@ function fitMarquee(node,holder,type){
  if(!node||!holder)return;
  const available=type==='route'?holder.clientWidth:holder.clientWidth*0.96;
  node.classList.remove('scrolling');holder.classList.remove('moving');node.style.removeProperty('--start-x');node.style.removeProperty('--end-x');
+ if(currentState?.lcdConfig?.scrollEnabled===false)return;
  if(type!=='route' && node.scrollWidth<=available+4)return;
  const start=type==='stop'?(node.scrollWidth+32):holder.clientWidth;
  const distance=type==='stop'?(node.scrollWidth+holder.clientWidth+64):(node.scrollWidth+holder.clientWidth+64);
  node.style.setProperty('--start-x',start+'px');node.style.setProperty('--end-x',(start-distance)+'px');
- node.style.setProperty(type==='route'?'--marquee-duration':'--stop-duration',(Math.max(12,Math.round(distance/48)+8))+'s');
+ node.style.setProperty(type==='route'?'--marquee-duration':'--stop-duration',(distance/(currentState?.lcdConfig?.scrollSpeed||48))+'s');
  if(type==='route')holder.classList.add('moving');else node.classList.add('scrolling');
 }
 const configuredCycle=window.SRGLcdCycle.create();
@@ -69,7 +70,9 @@ function paintConfigured(d){
 let lastStopIndex=-1, stopVisibleUntil=0, lastCourse='';
 function paint(){
  const d=currentState;
+ const scrollKey=JSON.stringify([d?.lcdConfig?.scrollEnabled,d?.lcdConfig?.scrollSpeed]);if(window.srgScrollKey!==scrollKey){window.srgScrollKey=scrollKey;routeSignature='';stopSignature='';transferSignature='';}window.srgScrollConfig=d?.lcdConfig;
  if(!isActive(d)){configuredCycle.reset();configuredMode='';manualScreenSignature='';lastStopIndex=-1;lastCourse='';show('clock');paintLower();return}
+ if(d.additional){show('route');setRoute(d);paintLower();return;}
  if(d.lcdConfig&&!forcedPreview){paintConfigured(d);return;}
  configuredMode='';
  const now=Date.now(), idx=Number(d.aktualnyIndeks)||0;
