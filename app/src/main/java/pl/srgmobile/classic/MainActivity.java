@@ -129,6 +129,7 @@ public final class MainActivity extends Activity implements LocationListener {
         ibisUsb = new RgUsbBridge(this, web, "IBIS", "ibisUsbEvent");
         web.addJavascriptInterface(ibisUsb, "SRGIbisUsb");
         web.addJavascriptInterface(new Object(){
+            @JavascriptInterface public boolean isPhone(){return getResources().getConfiguration().smallestScreenWidthDp < 600;}
             @JavascriptInterface public String version(){try{return getPackageManager().getPackageInfo(getPackageName(),0).versionName;}catch(Exception e){return "";}}
         }, "SRGApp");
         setContentView(web);

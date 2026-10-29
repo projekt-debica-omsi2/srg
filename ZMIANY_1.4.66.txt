@@ -1,0 +1,19 @@
+SRG Mobile 1.4.66 — telefon i tablet w jednym APK
+
+Tablet zachowuje dotychczasowy układ. Telefon (najmniejszy wymiar poniżej
+600 dp) automatycznie otrzymuje dopasowany widok pionowy lub poziomy.
+W pionie nawigacja jest na dole. Formularze i listy można przewijać,
+a przyciski są dopasowane do obsługi dotykiem.
+
+Rozkłady, przesiadki i wyświetlacz pasażerski LCD pozostają wspólne.
+Identyfikator aplikacji oraz konfiguracja stałego podpisu są zachowane.
+Nie trzeba tworzyć nowego klucza.
+
+Wgraj zawartość paczki do głównego katalogu repozytorium srg.
+Folder app ma znajdować się bezpośrednio w katalogu repozytorium,
+nie wewnątrz BRANDING. Dołącz także .github/workflows/android-apk.yml.
+GitHub Actions zbuduje jeden plik APK dla telefonu i tabletu.
+
+Sprawdzono testy JavaScript oraz testy zabezpieczeń podpisywania.
+Kompilacja Androida i sprawdzenie wyglądu na urządzeniu pozostają
+ do wykonania po uruchomieniu GitHub Actions.

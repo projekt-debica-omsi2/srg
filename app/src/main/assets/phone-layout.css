@@ -1,0 +1,146 @@
+/* Phone-only additions. Tablet styles and the passenger LCD are unchanged. */
+html[data-device="phone"] .app{height:100vh;height:100dvh;grid-template-columns:minmax(0,1fr);grid-template-rows:minmax(0,1fr) auto}
+html[data-device="phone"] .content{grid-row:1;min-width:0;min-height:0}
+html[data-device="phone"] .rail{grid-row:2;display:grid;grid-template-columns:repeat(6,minmax(0,1fr));grid-template-rows:20px 48px;gap:4px;padding:4px 6px max(6px,env(safe-area-inset-bottom));border-right:0;border-top:1px solid #31553a}
+html[data-device="phone"] .railBottom{display:contents}
+html[data-device="phone"] .rail .version{grid-row:1;grid-column:1/-1;display:flex;align-items:center;justify-content:space-between;gap:8px;font:700 10px/1.2 Arial;padding:0 4px;min-width:0}
+html[data-device="phone"] .version br{display:none}
+html[data-device="phone"] .rail button{grid-row:2;width:100%;min-width:0;height:48px!important;font-size:12px}
+html[data-device="phone"] .rail .menuBtn{grid-column:6}
+html[data-device="phone"] .rail .iconBtn svg{width:28px;height:28px}
+html[data-device="phone"] .view{padding:8px!important;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain}
+html[data-device="phone"] .view>*{flex-shrink:0;min-width:0}
+html[data-device="phone"] .top,html[data-device="phone"] .flowTop{height:auto;min-height:44px;flex:0 0 auto;gap:8px;font-size:17px;line-height:1.2}
+html[data-device="phone"] .clock{font-size:18px;white-space:nowrap;flex:none}
+html[data-device="phone"] button,html[data-device="phone"] select,html[data-device="phone"] input:not([type="checkbox"]):not([type="range"]){min-height:44px;touch-action:manipulation}
+html[data-device="phone"] input,html[data-device="phone"] select{font-size:16px;max-width:100%;min-width:0}
+html[data-device="phone"] button{overflow-wrap:anywhere}
+html[data-device="phone"] .dest{height:auto;min-height:76px;grid-template-columns:52px minmax(0,1fr);font-size:clamp(20px,6vw,28px);line-height:1.15}
+html[data-device="phone"] #courseDest{padding:10px 6px;overflow-wrap:anywhere}
+html[data-device="phone"] .line{font-size:26px}
+html[data-device="phone"] .extraCourse .dest:has(#courseLine:empty){grid-template-columns:minmax(0,1fr)}
+html[data-device="phone"] #course .meta{padding:12px 2px;gap:8px;font-size:14px;grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+html[data-device="phone"] #course .meta>div{overflow-wrap:anywhere;min-width:0}
+html[data-device="phone"] #course .meta>div:has(#courseRoad){grid-column:1/-1;text-align:left}
+html[data-device="phone"] #courseRoad{font-size:13px;white-space:normal}
+html[data-device="phone"] .autoGpsTiny{display:block;margin:4px 0 0;font-size:10px;white-space:normal}
+html[data-device="phone"] .sched{grid-template-columns:minmax(0,1fr);grid-template-areas:'bar' 'delay' 'upcoming';gap:8px;margin-top:auto}
+html[data-device="phone"] #courseCurrent{grid-template-columns:minmax(0,1fr) auto;min-height:64px;height:auto;gap:6px;padding:9px 6px;font-size:18px;line-height:1.2}
+html[data-device="phone"] .courseStopText{grid-column:1;white-space:normal;overflow-wrap:anywhere;text-overflow:clip}
+html[data-device="phone"] .courseStopId{grid-column:2;font-size:11px}
+html[data-device="phone"] .delay{font-size:38px;min-height:42px}
+html[data-device="phone"] .upcoming{font-size:14px;line-height:1.35;gap:8px;padding:0 3px;overflow-wrap:anywhere}
+html[data-device="phone"] .controls{grid-template-columns:repeat(4,minmax(0,1fr));width:100%;gap:6px;padding-top:12px;margin-top:4px}
+html[data-device="phone"] .controls button{height:48px;font-size:26px}
+html[data-device="phone"] .controls .logout{grid-column:1/-1;font-size:18px!important}
+html[data-device="phone"] .idleGrid{grid-template-columns:minmax(0,1fr);gap:8px;padding:10px 0;flex:none}
+html[data-device="phone"] .idleInfo{padding:4px;text-align:center}
+html[data-device="phone"] .idleTime{font-size:38px}
+html[data-device="phone"] .idleWeekday,html[data-device="phone"] .idleDate{font-size:20px}
+html[data-device="phone"] .idleVehicle{font-size:16px;margin-top:8px}
+html[data-device="phone"] .idleHint{margin-top:12px;font-size:14px}
+html[data-device="phone"] .calendarCard{padding:4px 0}
+html[data-device="phone"] .calendarCell{height:34px}
+html[data-device="phone"] .calendarHead b{font-size:17px}
+html[data-device="phone"] .rgMenuWrap,html[data-device="phone"] .rgMenuPage{flex:1 0 auto;min-height:auto}
+html[data-device="phone"] .rgTiles,html[data-device="phone"] .rgMenuPage.p2 .rgTiles{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:minmax(96px,auto);gap:8px;padding:0;flex:none}
+html[data-device="phone"] .rgTile{font-size:15px;gap:6px;padding:8px}
+html[data-device="phone"] .rgIcon{width:34px;height:34px;font-size:32px}
+html[data-device="phone"] .rgIcon svg{width:32px;height:32px}
+html[data-device="phone"] .rgMenuFooter{grid-template-columns:minmax(0,1fr) 64px;gap:8px;margin-top:10px}
+html[data-device="phone"] .settingsTiles{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:minmax(100px,auto);padding:10px 0;gap:8px;overflow:visible;flex:none}
+html[data-device="phone"] .settingTile{font-size:15px;padding:10px;gap:6px}
+html[data-device="phone"] .settingTile b{font-size:26px}
+html[data-device="phone"] .driverFlow .flowBody{display:flex;flex-direction:column;gap:10px;flex:1 0 auto;min-height:auto}
+html[data-device="phone"] .driverFlow .taskLeft{height:clamp(210px,38dvh,360px);grid-template-columns:44px minmax(0,1fr);gap:6px;flex:none}
+html[data-device="phone"] .driverFlow .taskArrows button{height:48px;flex:none}
+html[data-device="phone"] .driverFlow .taskTabHead{height:auto;grid-template-columns:repeat(2,minmax(0,1fr));min-height:88px;z-index:1}
+html[data-device="phone"] .driverFlow .taskTabHead button{min-height:44px;font-size:12px;padding:6px;line-height:1.2}
+html[data-device="phone"] .driverFlow .taskItem{height:auto;min-height:48px;font-size:15px;padding:10px;white-space:normal;overflow-wrap:anywhere}
+html[data-device="phone"] .driverFlow .taskRight{padding:10px;display:grid;grid-template-columns:1fr 1fr;gap:10px;flex:none}
+html[data-device="phone"] .driverFlow .flowField{margin:0;min-width:0}
+html[data-device="phone"] .driverFlow .availableTypes,html[data-device="phone"] .driverFlow .flowConfirm{grid-column:1/-1;margin:0}
+html[data-device="phone"] .driverFlow .flowConfirm{height:48px}
+html[data-device="phone"] .flowTitleActions{flex:1}
+html[data-device="phone"] .flowTitleActions span{white-space:normal;font-size:14px}
+html[data-device="phone"] .flowTitleActions #dutyBack{width:44px;flex:0 0 44px;height:44px}
+html[data-device="phone"] .tripCard{width:100%;margin-top:10px;padding:12px}
+html[data-device="phone"] .tripBox{height:auto;min-height:48px;padding:8px;font-size:17px;overflow-wrap:anywhere}
+html[data-device="phone"] .tripDual{gap:10px;grid-template-columns:repeat(2,minmax(0,1fr))}
+html[data-device="phone"] .tripControls{grid-template-columns:repeat(4,minmax(0,1fr))}
+html[data-device="phone"] .tripCounter{font-size:16px}
+html[data-device="phone"] .transWrap,html[data-device="phone"] .rjWrap,html[data-device="phone"] .gpsWrap{flex:none;overflow:visible;padding:8px 0;min-height:auto}
+html[data-device="phone"] .transCard{padding:10px}
+html[data-device="phone"] .transCard.grow{flex:none}
+html[data-device="phone"] .transGrid,html[data-device="phone"] .rjInfo{grid-template-columns:repeat(2,minmax(0,1fr))}
+html[data-device="phone"] .transButtons{flex-wrap:wrap}
+html[data-device="phone"] .transButtons button{flex:1 1 120px;height:auto;padding:10px}
+html[data-device="phone"] .variantList{grid-template-columns:minmax(0,1fr)}
+html[data-device="phone"] .transCard pre{max-width:100%;white-space:pre-wrap;overflow-wrap:anywhere}
+html[data-device="phone"] .gpsWrap{grid-template-columns:minmax(0,1fr)}
+html[data-device="phone"] #gps .gpsBtns button{height:auto;min-height:44px;padding:10px;font-size:14px}
+html[data-device="phone"] .gpsVoiceControls button{font-size:13px;padding:10px}
+html[data-device="phone"] .genericPanel{width:100%;margin:12px 0;padding:12px}
+html[data-device="phone"] .genericPanel h2{font-size:22px}
+html[data-device="phone"] .genericPanel p{overflow-wrap:anywhere}
+html[data-device="phone"] .wideBack{height:auto;min-height:44px;padding:10px}
+html[data-device="phone"] .lcdSettingsBody{overflow:visible;flex:none}
+html[data-device="phone"] .lcdCycleRow{grid-template-columns:18px minmax(0,1fr) 52px 12px 44px;gap:4px}
+html[data-device="phone"] .lcdCycleRow select,html[data-device="phone"] .lcdCycleRow input{font-size:14px;padding:4px}
+html[data-device="phone"] #lcdScrollSpeed{display:block;width:100%;margin:12px 0}
+html[data-device="phone"] fieldset{min-width:0;margin:8px 0;padding:8px}
+html[data-device="phone"] .extraForm{flex:none;overflow:visible;padding:12px 0;gap:12px}
+html[data-device="phone"] .extraForm label{display:block;overflow-wrap:anywhere}
+html[data-device="phone"] .extraForm label input:not([type="checkbox"]),html[data-device="phone"] .extraForm select{display:block;width:100%;margin-top:6px}
+html[data-device="phone"] .extraForm button,html[data-device="phone"] .extraForm input,html[data-device="phone"] .extraForm select{font-size:16px}
+html[data-device="phone"] #sound .soundPanel{flex:none;overflow:visible;padding:12px 0}
+html[data-device="phone"] #sound .soundTabs button{font-size:14px;min-height:44px}
+html[data-device="phone"] #sound .soundActions{margin-top:12px}
+html[data-device="phone"] #sound .soundSelect{grid-template-columns:minmax(0,1fr)}
+html[data-device="phone"] .cameraGrid{flex:none;grid-template-rows:120px 120px}
+html[data-device="phone"] .camCourse{grid-template-columns:repeat(2,minmax(0,1fr))}
+html[data-device="phone"] .infoBox{height:auto;min-height:64px;padding:6px}
+html[data-device="phone"] .infoBox b{font-size:14px;overflow-wrap:anywhere}
+html[data-device="phone"] .camLabel{font-size:10px;left:4px;top:4px;padding:4px}
+html[data-device="phone"] .camSelect{left:4px;bottom:4px;font-size:11px;padding:4px}
+html[data-device="phone"] .camEmpty{font-size:10px;text-align:center;padding:4px}
+html[data-device="phone"] .confirmBox,html[data-device="phone"] .coursePickerBox{width:calc(100vw - 24px);max-height:calc(100dvh - 24px);overflow-y:auto;padding:14px}
+html[data-device="phone"] .coursePickerHead b{font-size:18px}
+html[data-device="phone"] .coursePickerList{grid-template-columns:minmax(0,1fr);max-height:65dvh}
+html[data-device="phone"] .logoutOptionsBox{width:calc(100vw - 32px);max-height:calc(100dvh - 32px);overflow-y:auto}
+html[data-device="phone"] .logoutOptionsBox button{font-size:16px;min-height:48px}
+html[data-device="phone"] .driverChangeBox{max-height:calc(100dvh - 24px);overflow-y:auto}
+html[data-device="phone"] .endDutyMain{font-size:25px;padding:16px}
+html[data-device="phone"] .toast{max-width:calc(100vw - 20px);width:max-content;bottom:90px;text-align:center;font-size:14px}
+@media(orientation:landscape){
+ html[data-device="phone"] .app{grid-template-columns:76px minmax(0,1fr);grid-template-rows:minmax(0,1fr)}
+ html[data-device="phone"] .rail{grid-column:1;grid-row:1;display:flex;flex-direction:column;overflow-y:auto;border-top:0;border-right:1px solid #31553a;padding:4px;gap:4px}
+ html[data-device="phone"] .content{grid-column:2;grid-row:1}
+ html[data-device="phone"] .rail button{flex:0 0 44px;height:44px!important}
+ html[data-device="phone"] .railBottom{display:flex;flex-direction:column;gap:4px;margin-top:auto}
+ html[data-device="phone"] .rail .version{display:block;font-size:9px;padding:2px}
+ html[data-device="phone"] .view{padding:6px 10px!important}
+ html[data-device="phone"] .top,html[data-device="phone"] .flowTop{min-height:34px;font-size:16px}
+ html[data-device="phone"] .dest{min-height:48px;font-size:22px;margin-top:4px}
+ html[data-device="phone"] #courseDest{padding:6px}
+ html[data-device="phone"] #course .meta{padding:8px 2px;grid-template-columns:repeat(4,minmax(0,1fr));font-size:12px;gap:8px}
+ html[data-device="phone"] #course .meta>div:has(#courseRoad){grid-column:auto;text-align:right}
+ html[data-device="phone"] .autoGpsTiny{font-size:9px}
+ html[data-device="phone"] .sched{grid-template-columns:110px minmax(0,1fr);grid-template-areas:'bar bar' 'delay upcoming';gap:4px 10px}
+ html[data-device="phone"] #courseCurrent{min-height:46px;font-size:18px;padding:6px}
+ html[data-device="phone"] .delay{font-size:32px}
+ html[data-device="phone"] .upcoming{font-size:12px;gap:4px}
+ html[data-device="phone"] .controls{grid-template-columns:repeat(4,48px) minmax(100px,1fr);padding-top:6px;gap:6px}
+ html[data-device="phone"] .controls .logout{grid-column:auto}
+ html[data-device="phone"] .controls button{height:44px}
+ html[data-device="phone"] .idleGrid{grid-template-columns:minmax(0,1fr) minmax(0,1.2fr);gap:14px;padding:6px 0}
+ html[data-device="phone"] .calendarCell{height:27px}
+ html[data-device="phone"] .calendarHead{margin-bottom:4px}
+ html[data-device="phone"] .rgTiles,html[data-device="phone"] .rgMenuPage.p2 .rgTiles{grid-template-columns:repeat(4,minmax(0,1fr));grid-auto-rows:minmax(90px,auto)}
+ html[data-device="phone"] .settingsTiles{grid-template-columns:repeat(3,minmax(0,1fr))}
+ html[data-device="phone"] .driverFlow .flowBody{display:grid;grid-template-columns:minmax(0,1.3fr) minmax(0,1fr);align-items:start}
+ html[data-device="phone"] .driverFlow .taskLeft{height:240px}
+ html[data-device="phone"] .driverFlow .taskRight{display:flex;flex-direction:column}
+ html[data-device="phone"] .tripCard{margin-top:6px}
+ html[data-device="phone"] .toast{bottom:12px}
+}
