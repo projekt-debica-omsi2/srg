@@ -1,0 +1,52 @@
+plugins { id 'com.android.application' }
+
+android {
+    namespace 'pl.srgmobile.classic'
+    compileSdk 35
+
+    defaultConfig {
+        applicationId 'pl.srgmobile.classic.lcd23'
+        minSdk 26
+        targetSdk 34
+        versionCode 11465
+        versionName '1.4.65'
+    }
+
+    signingConfigs {
+        stableRelease {
+            def signingPath = System.getenv('SRG_KEYSTORE_PATH')
+            if (signingPath) storeFile file(signingPath)
+            storePassword System.getenv('SRG_KEYSTORE_PASSWORD')
+            keyAlias 'srg'
+            keyPassword System.getenv('SRG_KEYSTORE_PASSWORD')
+            storeType 'PKCS12'
+        }
+    }
+    buildTypes {
+        release {
+            signingConfig signingConfigs.stableRelease
+            minifyEnabled false
+        }
+        debug { debuggable true }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+dependencies {
+    implementation 'com.github.mik3y:usb-serial-for-android:3.8.1'
+    implementation 'org.jsoup:jsoup:1.18.3'
+    testImplementation 'junit:junit:4.13.2'
+    testImplementation 'org.json:json:20240303'
+}
+
+// Never silently publish a release signed with a newly generated debug key.
+gradle.taskGraph.whenReady { graph ->
+    if (graph.allTasks.any { it.project == project && it.name.toLowerCase().contains('release') }) {
+        if (!System.getenv('SRG_KEYSTORE_PATH') || !System.getenv('SRG_KEYSTORE_PASSWORD')) {
+            throw new GradleException('Brak stałego podpisu. Uruchom jednorazowo tools/setup_signing.py; nie zmieniaj istniejącego klucza.')
+        }
+    }
+}

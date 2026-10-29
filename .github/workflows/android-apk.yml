@@ -1,4 +1,4 @@
-name: Build SRG Mobile 1.4.64 APK
+name: Build SRG Mobile 1.4.65 APK
 on:
   workflow_dispatch:
   push:
@@ -63,11 +63,40 @@ jobs:
         run: node tests/test-rg-usb.cjs
       - name: Test additional lines, LCD scrolling and IBIS
         run: node tests/test-v1464.cjs
-      - name: Build debug APK
-        run: gradle --no-daemon :app:testDebugUnitTest :app:assembleDebug
+      - name: Test Ropczyce photo timetable
+        run: node tests/test-ropczyce.cjs
+      - name: Test signing publication guards
+        run: python3 -m unittest discover -s tests -p test_signing.py
+      - name: Restore permanent signing key
+        env:
+          SRG_KEYSTORE_BASE64: ${{ secrets.SRG_KEYSTORE_BASE64 }}
+          SRG_KEYSTORE_PASSWORD: ${{ secrets.SRG_KEYSTORE_PASSWORD }}
+          SRG_SIGNING_CERT_SHA256: ${{ secrets.SRG_SIGNING_CERT_SHA256 }}
+        run: |
+          python3 - <<'PYCODE'
+          import os, base64, pathlib, sys
+          names=['SRG_KEYSTORE_BASE64','SRG_KEYSTORE_PASSWORD','SRG_SIGNING_CERT_SHA256']
+          if any(not os.environ.get(n) for n in names):
+              sys.exit('Brak stałego podpisu: uruchom tools/setup_signing.py. Nie publikuję APK z przypadkowym kluczem.')
+          path=pathlib.Path(os.environ['RUNNER_TEMP'])/'srg-release.p12'
+          path.write_bytes(base64.b64decode(os.environ['SRG_KEYSTORE_BASE64'],validate=True))
+          path.chmod(0o600)
+          PYCODE
+      - name: Build signed APK
+        env:
+          SRG_KEYSTORE_PATH: ${{ runner.temp }}/srg-release.p12
+          SRG_KEYSTORE_PASSWORD: ${{ secrets.SRG_KEYSTORE_PASSWORD }}
+        run: gradle --no-daemon :app:testDebugUnitTest :app:assembleRelease
+      - name: Verify signature and package
+        env:
+          SRG_SIGNING_CERT_SHA256: ${{ secrets.SRG_SIGNING_CERT_SHA256 }}
+        run: python3 tools/verify_release.py
+      - name: Remove temporary key
+        if: always()
+        run: rm -f "$RUNNER_TEMP/srg-release.p12"
       - name: Publish APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: SRG-Mobile-v1.4.64-KURSOWKI-LCD-LAN-debug
-          path: app/build/outputs/apk/debug/app-debug.apk
+          name: SRG-Mobile-v1.4.65-KURSOWKI-LCD-LAN-release
+          path: app/build/outputs/apk/release/app-release.apk
           if-no-files-found: error

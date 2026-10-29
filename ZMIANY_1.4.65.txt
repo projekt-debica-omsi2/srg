@@ -1,0 +1,48 @@
+SRG Mobile 1.4.65 / versionCode 11465
+
+ROPCZYCE D.A.
+148 pozycji z 9 zdjęć: Monis, Busik, Bąk-Travel i FlixBus.
+Jeden ekran PRZESIADKI, maksymalnie 8 najbliższych odjazdów od aktualnego
+czasu Europe/Warsaw. Odjazdy minione znikają; następne zajmują ich miejsce.
+Dni szkolne, ferie, przerwy świąteczne, soboty i niedziele zgodnie z symbolami
+na zdjęciach. 7E: niedziele LUB pon.–sob. poza świętami; A: pon.–pt. (bez
+samowolnego dopisywania wyłączenia wszystkich świąt). H/DH/HD: dni robocze
+w przerwach szkolnych, nie każde nieszkole wolne. Wyjątki m/n/w/z/x/p zachowane.
+Kalendarz opracowano dla 2026; przegląd wymagany od 01.01.2027. Lokalne dni
+wolne ustanowione przez poszczególne szkoły nie są znane.
+FlixBus poprawiony na 09:15 Paryż, 21:25 Rzeszów zgodnie z fotografią.
+Bąk-Travel Gnojnica/Witkowice: ręczna poprawka 10:57.
+Dwie zamazane godziny Bąk-Travel (Będziemyśl i Gnojnica Budy) pominięte.
+Trasy okrężne zawierają przebieg w polu kierunku, żeby można je odróżnić.
+To dane ze zdjęć, nie automatycznie odświeżany internetowy rozkład Ropczyc.
+
+STAŁY PODPIS APK — JEDNORAZOWE USTAWIENIE
+Dotychczasowy workflow budował debug APK bez własnego stałego klucza.
+Nowy workflow buduje release, wymaga klucza w GitHub Actions Secrets i
+sprawdza certyfikat podpisu oraz identyfikator pakietu przed publikacją.
+Bez sekretów zatrzymuje się, zamiast wydawać APK z przypadkowym podpisem.
+
+1. Na komputerze zainstaluj Python 3, Java (keytool) i GitHub CLI (gh).
+2. Zaloguj GitHub CLI: gh auth login
+3. Z folderu projektu uruchom: python tools/setup_signing.py
+   Skrypt tworzy klucz tylko raz, zapisuje go w prywatnym folderze użytkownika
+   SRG-signing-backup i przesyła 3 sekrety do projekt-debica-omsi2/srg.
+   Jeśli wszystkie sekrety już istnieją, nie nadpisuje ich.
+4. Zachowaj prywatną kopię całego folderu SRG-signing-backup (klucz i hasło).
+   Nie dodawaj tego folderu do GitHuba ani do paczki ze źródłami.
+5. Wgraj źródła projektu i uruchom ponownie workflow Build SRG Mobile APK.
+
+Nie zmieniaj applicationId pl.srgmobile.classic.lcd23, klucza ani sekretów
+przy następnych wydaniach. Zwiększaj versionCode każdej nowszej wersji.
+Wydania ze wspólnym podpisem mogą aktualizować wcześniejsze wydania z tym
+podpisem, także z pominięciem kilku wersji. Nie cofaj versionCode.
+Obecna 1.4.64 może wymagać jednorazowego odinstalowania, jeśli jej podpis jest
+inny. Jej klucza nie odzyskano; nie obiecujemy zgodnej aktualizacji 1.4.64.
+Odinstalowanie usuwa dane aplikacji: wcześniej zapisz własne linie i ustawienia
+oraz zachowaj pliki reklam/nagrań/rozkładów. Najpierw pobierz nowe gotowe APK.
+
+Źródła kalendarza i podpisywania:
+https://www.gov.pl/attachment/7112b88a-0237-4f83-b133-0d72c4ac83dc
+https://www.gov.pl/web/edukacja/ministerstwo-edukacji-narodowej-oglosilo-kalendarz-roku-szkolnego-20262027
+https://api.sejm.gov.pl/eli/acts/DU/2025/296/text.pdf
+https://developer.android.com/studio/publish/app-signing

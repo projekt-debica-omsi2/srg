@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="pl"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1,user-scalable=no"><meta name="theme-color" content="#065ac4"><title>SRG LCD v4 · 47283</title><link href="/app.css" rel="stylesheet"></head>
+<body><main id="lcd"><header id="info" aria-live="off">
+  <section id="clockPanel" class="panel clock-panel"><div id="time" class="clock-value">6:34</div><div class="calendar"><div id="weekday">poniedziałek</div><div id="longDate">12 października 2026</div></div></section>
+  <section id="routePanel" class="panel paper-panel" hidden><div class="right-info"><div class="route-direction" id="routeDirection">—</div><div class="route-caption"><span>TRASA:</span><div class="ticker-window"><span id="routeText"></span></div></div></div></section>
+  <section id="stopPanel" class="panel paper-panel stop-panel" hidden><div id="stopLabel" class="stop-label">PRZYSTANEK:</div><div id="stopName" class="stop-name">—</div><div id="stopNote" class="stop-note"></div></section>
+</header>
+<section id="ad" class="ads">
+  <div id="adMedia" aria-label="Pole na reklamy"></div>
+  <div id="transfer" class="transfer" hidden aria-label="Informacje o przesiadkach">
+    <div class="transfer-head"><span class="transfer-mark">↔</span><div class="transfer-heading"><div class="transfer-kicker">INFORMACJE PASAŻERSKIE</div><div class="transfer-title">PRZESIADKI</div></div></div>
+    <div class="transfer-stop" id="transferStop">—</div>
+    <div class="transfer-carriers" id="transferCarriers"></div>
+    <div class="transfer-foot">Informacja orientacyjna · sprawdź rozkład wybranego przewoźnika</div>
+  </div>
+<div id="transferDraft" hidden></div></section></main><script src="/lcd-cycle.js"></script><script src="/transfer-draft.js"></script><script src="/app.js"></script></body></html>

@@ -1,0 +1,36 @@
+(function(root){
+'use strict';
+// Wire format cross-checked against pyIBISv2/ibis/ibis_protocol.py and IBIS2USB.
+// A USB-UART alone is not an IBIS electrical interface.
+function ascii(text){return String(text).replace(/ł/g,'l').replace(/Ł/g,'L').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toUpperCase();}
+function telegram(body){if(/[^\x20-\x7e]/.test(body)||body.length>1024)throw Error('Telegram wymaga znaków ASCII, maks. 1024 znaki.');const b=Array.from(body,c=>c.charCodeAt(0));b.push(13);b.push(b.reduce((n,x)=>n^x,127));return b.map(x=>x.toString(16).padStart(2,'0')).join(' ').toUpperCase();}
+function textBody(prefix,text,size){const s=ascii(text);if(/[^\x20-\x7e]/.test(s))throw Error('Tekst zawiera nieobsługiwane znaki.');const blocks=Math.max(1,Math.ceil(s.length/size));if(blocks>15)throw Error('Tekst za długi dla wybranego telegramu.');return prefix+String.fromCharCode(48+blocks)+s.padEnd(blocks*size,' ');}
+function frame(kind,value,date=new Date()){
+ const pad=n=>String(n).padStart(2,'0');let b;
+ switch(kind){
+ case 'time':b='u'+pad(date.getHours())+pad(date.getMinutes());break;
+ case 'date':b='d'+pad(date.getDate())+pad(date.getMonth()+1)+(date.getFullYear()%10);break;
+ case 'destination':b=textBody('zA',value,16);break;
+ case 'stop':b=textBody('zI',value,4);break;
+ case 'validatorText':b=textBody('eT',value,4);break;
+ case 'line':if(!/^\d{1,3}$/.test(value))throw Error('DS001 wymaga numeru 0–999.');b='l'+value.padStart(3,'0');break;
+ case 'destinationId':if(!/^\d{1,3}$/.test(value))throw Error('Id kierunku: 0–999.');b='z'+value.padStart(3,'0');break;
+ case 'validator':if(!/^\d{6}$/.test(value))throw Error('DS004 wymaga 6 cyfr z dokumentacji kasownika.');b='e'+value;break;
+ default:throw Error('Nieznany telegram.');
+ }return telegram(b);
+}
+const api={ascii,telegram,frame};if(typeof module!=='undefined')module.exports=api;if(!root.document)return;root.SRGIbis=api;
+const panel=document.createElement('section');panel.id='ibisSettings';panel.className='view subView';panel.innerHTML=`<div class="top">IBIS / USB</div><div class="extraForm"><p>Osobny adapter IBIS przez hub USB, niezależny od RS-485. Port: 1200 baud, 7E2. Wymagany interfejs elektryczny USB–IBIS.</p><p>SLE MAEB08001-50.00: zgodność niepotwierdzona. Wybierz udokumentowany telegram i sprawdź urządzenie.</p><select id="ibisDevice" aria-label="Adapter IBIS"></select><button id="ibisScan">Szukaj USB</button><button id="ibisConnect">Połącz IBIS</button><button id="ibisDisconnect">Rozłącz IBIS</button><p id="ibisStatus">Niepołączony</p><select id="ibisKind" aria-label="Telegram"><option value="destination">DS003a — kierunek (tekst)</option><option value="destinationId">DS003 — kierunek (identyfikator)</option><option value="stop">DS003c — przystanek (tekst)</option><option value="line">DS001 — numer linii</option><option value="time">DS005 — aktualna godzina</option><option value="date">DS006 — aktualna data</option><option value="validatorText">DS004c — tekst przystanku kasownika</option><option value="validator">DS004 — parametry kasownika</option></select><input id="ibisText" maxlength="240" aria-label="Treść telegramu"><p>Polskie litery w telegramach tekstowych są zamieniane na litery bez znaków diakrytycznych.</p><button id="ibisCourse">Pobierz kierunek aktywnego kursu</button><button id="ibisPreview">Podgląd telegramu</button><button id="ibisSend">Wyślij jeden test</button><label><input type="checkbox" id="ibisVerified"> Potwierdzam działanie DS003a, DS003c, DS005 i DS006 na podłączonym urządzeniu</label><label><input type="checkbox" id="ibisAuto"> Automatycznie wysyłaj kierunek, przystanek, czas i datę</label><label><input type="checkbox" id="externalLine"> Pokazuj numer 1 na tablicy zewnętrznej dla kursów rozkładowych (RS-485 i IBIS)</label><p>Linie dodatkowe używają własnego ustawienia numeru. IBIS wysyła wybrany numer razem z tekstem kierunku.</p><button id="ibisBack">Wróć</button><pre id="ibisLog" style="white-space:pre-wrap;max-height:180px;overflow:auto"></pre></div>`;document.querySelector('main.content').append(panel);
+const $=id=>document.getElementById('ibis'+id),bridge=root.SRGIbisUsb;let connected=false,signature='';
+const log=msg=>{$('Log').textContent=($('Log').textContent+'\n'+msg).slice(-12000)};
+const guard=fn=>()=>{try{fn()}catch(e){log(e.message)}};
+const invalidate=()=>{$('Verified').checked=false;$('Auto').checked=false;signature=''};
+function scan(){const old=$('Device').value;$('Device').replaceChildren();for(const d of bridge?JSON.parse(bridge.devices()):[]){const o=document.createElement('option');o.value=d.id;o.textContent=d.name;$('Device').append(o)}if([...$('Device').options].some(o=>o.value===old))$('Device').value=old;if($('Device').value!==old){invalidate();if(connected)bridge.disconnect();connected=false;}}
+function send(hex){if(!bridge||!connected)throw Error('Najpierw połącz adapter IBIS.');bridge.send(hex);}
+root.ibisUsbEvent=(type,message)=>{if(type==='connected'){connected=true;invalidate()}if(type==='error'||type==='disconnected'){connected=false;invalidate()}$('Status').textContent=message;log(type+': '+message)};
+$('Scan').onclick=guard(scan);$('Connect').onclick=guard(()=>{invalidate();if(!bridge||!$('Device').value)throw Error('Nie wykryto adaptera.');connected=false;bridge.connect(Number($('Device').value),1200,7,2,2)});$('Disconnect').onclick=()=>{connected=false;invalidate();bridge?.disconnect()};$('Device').onchange=()=>{invalidate();connected=false;bridge?.disconnect()};
+$('Course').onclick=()=>{const a=root.__srg;$('Text').value=a?.state.variant?a.finalDirection(a.state.variant):''};$('Preview').onclick=guard(()=>log(frame($('Kind').value,$('Text').value)));$('Send').onclick=guard(()=>send(frame($('Kind').value,$('Text').value)));$('Back').onclick=()=>root.__srg.go('settings');$('Verified').onchange=()=>{if(!$('Verified').checked)$('Auto').checked=false;signature=''};$('Auto').onchange=()=>{if(!connected||!$('Verified').checked){$('Auto').checked=false;log('Połącz i potwierdź test urządzenia.')}signature=''};
+const line=document.getElementById('externalLine');try{line.checked=localStorage.getItem('srgExternalLine')==='1'}catch(e){}line.onchange=()=>{try{localStorage.setItem('srgExternalLine',line.checked?'1':'0');signature=''}catch(e){log(e.message)}};
+root.SRGExternalText=(detail)=>{const show=detail.additional?detail.showLine:line.checked;return (show?(detail.additional?detail.line:'1')+' ':'')+detail.direction;};
+setInterval(()=>{if(!connected||!$('Verified').checked||!$('Auto').checked)return;try{const a=root.__srg,s=a?.state,v=s?.variant;if(!s?.course||!v){signature='';return}const date=new Date(),stop=v.stops[s.routeIndex]?.name||'',direction=root.SRGExternalText({direction:a.finalDirection(v),line:s.course.line||v.line,additional:!!s.course.extra,showLine:s.course.showLine});const key=JSON.stringify([direction,stop,date.getFullYear(),date.getMonth(),date.getDate(),date.getHours(),date.getMinutes()]);if(key===signature)return;const frames=[frame('destination',direction),frame('time','',date),frame('date','',date),frame('stop',stop)];frames.forEach(send);signature=key;}catch(e){invalidate();log(e.message)}},1000);scan();
+})(typeof window==='undefined'?globalThis:window);

@@ -1,0 +1,1216 @@
+{
+  "schema": "SRGPhotoTimetables/1",
+  "źródła": {
+    "S-25:1": "7404–7410.jpg",
+    "S-27:6": "7399–7401.mp4"
+  },
+  "zasada": "numery z ekranu NIE są ID RJ; czasy dla niepotwierdzonych nazw nie są przypisywane do przypadkowych ID",
+  "kursy": {
+    "S-25:1": {
+      "kursowka": "S-25",
+      "numer_kursu": 1,
+      "klucz": "S-25:1",
+      "wariant_RJ": 0,
+      "kierunek": "Dębica Dworzec Autobusowy → Rzeszów Dworzec Autobusowy",
+      "odjazd": "16:00",
+      "koniec": "17:20",
+      "rodzaj_danych": "godziny przepisane ze zdjęć/filmów, bez interpolacji",
+      "liczba_pozycji_z_fotografii": 32,
+      "godziny_wg_id_RJ": {
+        "1": "16:00",
+        "2": "16:02",
+        "4": "16:06",
+        "6": "16:09",
+        "9": "16:14",
+        "10": "16:16",
+        "11": "16:19",
+        "12": "16:22",
+        "13": "16:23",
+        "14": "16:26",
+        "15": "16:28",
+        "16": "16:31",
+        "17": "16:34",
+        "18": "16:37",
+        "19": "16:39",
+        "20": "16:41",
+        "21": "16:43",
+        "22": "16:48",
+        "23": "16:50",
+        "24": "16:53",
+        "25": "16:55",
+        "26": "16:57",
+        "27": "16:59",
+        "28": "17:01",
+        "31": "17:09",
+        "32": "17:11",
+        "33": "17:15",
+        "34": "17:20"
+      },
+      "przystanki_z_ekranu": [
+        {
+          "kolejnosc": 1,
+          "numer_na_ekranie": 1,
+          "godzina": "16:00",
+          "skrot_oryginalny": "DĘBICA D.A.",
+          "id_przystanku_RJ": 1,
+          "nazwa_w_RJ": "DĘBICA DWORZEC AUTOBUSOWY",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 2,
+          "numer_na_ekranie": 3,
+          "godzina": "16:02",
+          "skrot_oryginalny": "D-CA ZURIT",
+          "id_przystanku_RJ": 2,
+          "nazwa_w_RJ": "ZURT",
+          "status": "do_potwierdzenia_skrot",
+          "uwaga": "D-CA ZURIT vs RJ ZURT; skrót wskazuje ten sam przystanek"
+        },
+        {
+          "kolejnosc": 3,
+          "numer_na_ekranie": 4,
+          "godzina": "16:04",
+          "skrot_oryginalny": "D-CA MECHA",
+          "id_przystanku_RJ": null,
+          "nazwa_w_RJ": null,
+          "status": "brak_pewnego_mapowania",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 4,
+          "numer_na_ekranie": 6,
+          "godzina": "16:06",
+          "skrot_oryginalny": "DĘBICA RAJ",
+          "id_przystanku_RJ": 4,
+          "nazwa_w_RJ": "DĘBICA RZESZOWSKA RAJ",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 5,
+          "numer_na_ekranie": 7,
+          "godzina": "16:09",
+          "skrot_oryginalny": "DĘBICA NADL",
+          "id_przystanku_RJ": 6,
+          "nazwa_w_RJ": "DĘBICA RZESZOWSKA NADLEŚNICTWO",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 6,
+          "numer_na_ekranie": 8,
+          "godzina": "16:11",
+          "skrot_oryginalny": "NAGAWCZYNA",
+          "id_przystanku_RJ": null,
+          "nazwa_w_RJ": null,
+          "status": "brak_pewnego_mapowania",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 7,
+          "numer_na_ekranie": 9,
+          "godzina": "16:12",
+          "skrot_oryginalny": "NAGAWCZYN1",
+          "id_przystanku_RJ": null,
+          "nazwa_w_RJ": null,
+          "status": "brak_pewnego_mapowania",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 8,
+          "numer_na_ekranie": 10,
+          "godzina": "16:14",
+          "skrot_oryginalny": "ZAWADA",
+          "id_przystanku_RJ": 9,
+          "nazwa_w_RJ": "ZAWADA E4",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 9,
+          "numer_na_ekranie": 11,
+          "godzina": "16:16",
+          "skrot_oryginalny": "LUBZINA OSI",
+          "id_przystanku_RJ": 10,
+          "nazwa_w_RJ": "LUBZINA OSIEDLE",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 10,
+          "numer_na_ekranie": 12,
+          "godzina": "16:19",
+          "skrot_oryginalny": "LUBZINA E4",
+          "id_przystanku_RJ": 11,
+          "nazwa_w_RJ": "LUBZINA E4",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 11,
+          "numer_na_ekranie": 13,
+          "godzina": "16:22",
+          "skrot_oryginalny": "BRZEZÓWKA",
+          "id_przystanku_RJ": 12,
+          "nazwa_w_RJ": "BRZEZÓWKA",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 12,
+          "numer_na_ekranie": 14,
+          "godzina": "16:23",
+          "skrot_oryginalny": "ROPCZYCE P",
+          "id_przystanku_RJ": 13,
+          "nazwa_w_RJ": "ROPCZYCE PODSŁOŃCE",
+          "status": "do_potwierdzenia_skrot",
+          "uwaga": "ROPCZYCE P vs RJ ROPCZYCE PODSŁOŃCE; dopasowanie po skrócie i kolejności"
+        },
+        {
+          "kolejnosc": 13,
+          "numer_na_ekranie": 15,
+          "godzina": "16:26",
+          "skrot_oryginalny": "ROPCZYC DA",
+          "id_przystanku_RJ": 14,
+          "nazwa_w_RJ": "ROPCZYCE DWORZEC AUTOBUSOWY",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 14,
+          "numer_na_ekranie": 16,
+          "godzina": "16:28",
+          "skrot_oryginalny": "ROPCZ MICK",
+          "id_przystanku_RJ": 15,
+          "nazwa_w_RJ": "ROPCZYCE MICKIEWICZA",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 15,
+          "numer_na_ekranie": 17,
+          "godzina": "16:31",
+          "skrot_oryginalny": "ROPCZ WITK",
+          "id_przystanku_RJ": 16,
+          "nazwa_w_RJ": "ROPCZYCE WITKOWICE",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 16,
+          "numer_na_ekranie": 18,
+          "godzina": "16:34",
+          "skrot_oryginalny": "ROPCZ WESO",
+          "id_przystanku_RJ": 17,
+          "nazwa_w_RJ": "ROPCZYCE WESOŁA",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 17,
+          "numer_na_ekranie": 19,
+          "godzina": "16:37",
+          "skrot_oryginalny": "SĘDZOSMŁO",
+          "id_przystanku_RJ": 18,
+          "nazwa_w_RJ": "SĘDZISZÓW MAŁOPOLSKI OSIEDLE MŁODYCH",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 18,
+          "numer_na_ekranie": 20,
+          "godzina": "16:39",
+          "skrot_oryginalny": "SĘDZMŁPRYN",
+          "id_przystanku_RJ": 19,
+          "nazwa_w_RJ": "SĘDZISZÓW MAŁOPOLSKI RYNEK",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 19,
+          "numer_na_ekranie": 21,
+          "godzina": "16:41",
+          "skrot_oryginalny": "SĘDZPIŁSUD",
+          "id_przystanku_RJ": 20,
+          "nazwa_w_RJ": "SĘDZISZÓW MAŁOPOLSKI PIŁSUDSKIEGO",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 20,
+          "numer_na_ekranie": 22,
+          "godzina": "16:43",
+          "skrot_oryginalny": "SĘDZ GRUNW",
+          "id_przystanku_RJ": 21,
+          "nazwa_w_RJ": "SĘDZISZÓW MAŁOPOLSKI GRUNWALDZKA",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 21,
+          "numer_na_ekranie": 23,
+          "godzina": "16:48",
+          "skrot_oryginalny": "OLCHOWA E4",
+          "id_przystanku_RJ": 22,
+          "nazwa_w_RJ": "OLCHOWA E4",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 22,
+          "numer_na_ekranie": 24,
+          "godzina": "16:50",
+          "skrot_oryginalny": "KLĘCZANSTA",
+          "id_przystanku_RJ": 23,
+          "nazwa_w_RJ": "KLĘCZANY STADION",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 23,
+          "numer_na_ekranie": 25,
+          "godzina": "16:53",
+          "skrot_oryginalny": "DĄBROWA",
+          "id_przystanku_RJ": 24,
+          "nazwa_w_RJ": "DĄBROWA",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 24,
+          "numer_na_ekranie": 27,
+          "godzina": "16:55",
+          "skrot_oryginalny": "DĄBROWA2",
+          "id_przystanku_RJ": 25,
+          "nazwa_w_RJ": "DĄBROWA 2",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 25,
+          "numer_na_ekranie": 28,
+          "godzina": "16:57",
+          "skrot_oryginalny": "TRZCIANA",
+          "id_przystanku_RJ": 26,
+          "nazwa_w_RJ": "TRZCIANA",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 26,
+          "numer_na_ekranie": 29,
+          "godzina": "16:59",
+          "skrot_oryginalny": "TRZCIA WOL",
+          "id_przystanku_RJ": 27,
+          "nazwa_w_RJ": "TRZCIANA WOLICZKA 56 N.Ż.",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 27,
+          "numer_na_ekranie": 30,
+          "godzina": "17:01",
+          "skrot_oryginalny": "ŚWILCZA",
+          "id_przystanku_RJ": 28,
+          "nazwa_w_RJ": "ŚWILCZA 58",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 28,
+          "numer_na_ekranie": 31,
+          "godzina": "17:05",
+          "skrot_oryginalny": "ŚWILCZA GÓ",
+          "id_przystanku_RJ": null,
+          "nazwa_w_RJ": null,
+          "status": "brak_pewnego_mapowania",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 29,
+          "numer_na_ekranie": 32,
+          "godzina": "17:09",
+          "skrot_oryginalny": "RZESZKRAKG",
+          "id_przystanku_RJ": 31,
+          "nazwa_w_RJ": "RZESZÓW KRAKOWSKA GALERIA",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 30,
+          "numer_na_ekranie": 33,
+          "godzina": "17:11",
+          "skrot_oryginalny": "RZ KRA SZP",
+          "id_przystanku_RJ": 32,
+          "nazwa_w_RJ": "RZESZÓW KRAKOWSKA SZPITAL",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 31,
+          "numer_na_ekranie": 34,
+          "godzina": "17:15",
+          "skrot_oryginalny": "RZE DW.LOK",
+          "id_przystanku_RJ": 33,
+          "nazwa_w_RJ": "RZESZÓW DWORZEC LOKALNY",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 32,
+          "numer_na_ekranie": 35,
+          "godzina": "17:20",
+          "skrot_oryginalny": "RZESZÓWDA",
+          "id_przystanku_RJ": 34,
+          "nazwa_w_RJ": "RZESZÓW DWORZEC AUTOBUSOWY",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        }
+      ],
+      "brak_mapowania": [
+        {
+          "kolejnosc": 3,
+          "numer_na_ekranie": 4,
+          "godzina": "16:04",
+          "skrot_oryginalny": "D-CA MECHA",
+          "id_przystanku_RJ": null,
+          "nazwa_w_RJ": null,
+          "status": "brak_pewnego_mapowania",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 6,
+          "numer_na_ekranie": 8,
+          "godzina": "16:11",
+          "skrot_oryginalny": "NAGAWCZYNA",
+          "id_przystanku_RJ": null,
+          "nazwa_w_RJ": null,
+          "status": "brak_pewnego_mapowania",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 7,
+          "numer_na_ekranie": 9,
+          "godzina": "16:12",
+          "skrot_oryginalny": "NAGAWCZYN1",
+          "id_przystanku_RJ": null,
+          "nazwa_w_RJ": null,
+          "status": "brak_pewnego_mapowania",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 28,
+          "numer_na_ekranie": 31,
+          "godzina": "17:05",
+          "skrot_oryginalny": "ŚWILCZA GÓ",
+          "id_przystanku_RJ": null,
+          "nazwa_w_RJ": null,
+          "status": "brak_pewnego_mapowania",
+          "uwaga": ""
+        }
+      ]
+    },
+    "S-27:6": {
+      "kursowka": "S-27",
+      "numer_kursu": 6,
+      "klucz": "S-27:6",
+      "wariant_RJ": 1,
+      "kierunek": "Rzeszów Dworzec Autobusowy → Dębica Dworzec Autobusowy",
+      "odjazd": "14:20",
+      "koniec": "15:45",
+      "rodzaj_danych": "godziny przepisane ze zdjęć/filmów, bez interpolacji",
+      "liczba_pozycji_z_fotografii": 32,
+      "godziny_wg_id_RJ": {
+        "40": "14:20",
+        "41": "14:25",
+        "42": "14:29",
+        "43": "14:31",
+        "37": "14:38",
+        "38": "14:40",
+        "44": "14:42",
+        "46": "14:45",
+        "48": "14:50",
+        "49": "14:55",
+        "50": "14:57",
+        "51": "15:01",
+        "52": "15:05",
+        "53": "15:08",
+        "54": "15:11",
+        "55": "15:14",
+        "56": "15:18",
+        "57": "15:21",
+        "58": "15:23",
+        "59": "15:26",
+        "60": "15:29",
+        "61": "15:31",
+        "64": "15:36",
+        "39": "15:43",
+        "68": "15:45"
+      },
+      "przystanki_z_ekranu": [
+        {
+          "kolejnosc": 1,
+          "numer_na_ekranie": 35,
+          "godzina": "14:20",
+          "skrot_oryginalny": "RZESZÓWDA",
+          "id_przystanku_RJ": 40,
+          "nazwa_w_RJ": "RZESZÓW DWORZEC AUTOBUSOWY",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 2,
+          "numer_na_ekranie": 34,
+          "godzina": "14:25",
+          "skrot_oryginalny": "RZE DW.LOK",
+          "id_przystanku_RJ": 41,
+          "nazwa_w_RJ": "RZESZÓW DWORZEC LOKALNY",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 3,
+          "numer_na_ekranie": 33,
+          "godzina": "14:29",
+          "skrot_oryginalny": "RZ KRA SZP",
+          "id_przystanku_RJ": 42,
+          "nazwa_w_RJ": "RZESZÓW KRAKOWSKA SZPITAL",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 4,
+          "numer_na_ekranie": 32,
+          "godzina": "14:31",
+          "skrot_oryginalny": "RZESZKRAKG",
+          "id_przystanku_RJ": 43,
+          "nazwa_w_RJ": "RZESZÓW KRAKOWSKA GALERIA",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 5,
+          "numer_na_ekranie": 31,
+          "godzina": "14:34",
+          "skrot_oryginalny": "ŚWILCZA,GÓ",
+          "id_przystanku_RJ": null,
+          "nazwa_w_RJ": null,
+          "status": "brak_pewnego_mapowania",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 6,
+          "numer_na_ekranie": 30,
+          "godzina": "14:38",
+          "skrot_oryginalny": "ŚWILCZA",
+          "id_przystanku_RJ": 37,
+          "nazwa_w_RJ": "ŚWILCZA 75",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 7,
+          "numer_na_ekranie": 29,
+          "godzina": "14:40",
+          "skrot_oryginalny": "TRZCIA WOL",
+          "id_przystanku_RJ": 38,
+          "nazwa_w_RJ": "TRZCIANA WOLICZKA 77 N.Ż.",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 8,
+          "numer_na_ekranie": 28,
+          "godzina": "14:42",
+          "skrot_oryginalny": "TRZCIANA",
+          "id_przystanku_RJ": 44,
+          "nazwa_w_RJ": "TRZCIANA",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 9,
+          "numer_na_ekranie": 26,
+          "godzina": "14:44",
+          "skrot_oryginalny": "DĄBROWA1",
+          "id_przystanku_RJ": null,
+          "nazwa_w_RJ": null,
+          "status": "brak_pewnego_mapowania",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 10,
+          "numer_na_ekranie": 25,
+          "godzina": "14:45",
+          "skrot_oryginalny": "DĄBROWA",
+          "id_przystanku_RJ": 46,
+          "nazwa_w_RJ": "DĄBROWA",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 11,
+          "numer_na_ekranie": 24,
+          "godzina": "14:48",
+          "skrot_oryginalny": "KLĘCZANSTA",
+          "id_przystanku_RJ": null,
+          "nazwa_w_RJ": null,
+          "status": "brak_pewnego_mapowania",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 12,
+          "numer_na_ekranie": 23,
+          "godzina": "14:50",
+          "skrot_oryginalny": "OLCHOWA E4",
+          "id_przystanku_RJ": 48,
+          "nazwa_w_RJ": "OLCHOWA E4",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 13,
+          "numer_na_ekranie": 22,
+          "godzina": "14:55",
+          "skrot_oryginalny": "SĘDZ GRUNW",
+          "id_przystanku_RJ": 49,
+          "nazwa_w_RJ": "SĘDZISZÓW MAŁOPOLSKI GRUNWALDZKA",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 14,
+          "numer_na_ekranie": 21,
+          "godzina": "14:57",
+          "skrot_oryginalny": "SĘDZPIŁSUD",
+          "id_przystanku_RJ": 50,
+          "nazwa_w_RJ": "SĘDZISZÓW MAŁOPOLSKI PIŁSUDSKIEGO",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 15,
+          "numer_na_ekranie": 20,
+          "godzina": "15:01",
+          "skrot_oryginalny": "SĘDZMŁPRYN",
+          "id_przystanku_RJ": 51,
+          "nazwa_w_RJ": "SĘDZISZÓW MAŁOPOLSKI RYNEK",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 16,
+          "numer_na_ekranie": 19,
+          "godzina": "15:05",
+          "skrot_oryginalny": "SĘDZOSMŁO",
+          "id_przystanku_RJ": 52,
+          "nazwa_w_RJ": "SĘDZISZÓW MAŁOPOLSKI OSIEDLE MŁODYCH",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 17,
+          "numer_na_ekranie": 18,
+          "godzina": "15:08",
+          "skrot_oryginalny": "ROPCZ WESO",
+          "id_przystanku_RJ": 53,
+          "nazwa_w_RJ": "ROPCZYCE WESOŁA",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 18,
+          "numer_na_ekranie": 17,
+          "godzina": "15:11",
+          "skrot_oryginalny": "ROPCZ WITK",
+          "id_przystanku_RJ": 54,
+          "nazwa_w_RJ": "ROPCZYCE WITKOWICE",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 19,
+          "numer_na_ekranie": 16,
+          "godzina": "15:14",
+          "skrot_oryginalny": "ROPCZ MICK",
+          "id_przystanku_RJ": 55,
+          "nazwa_w_RJ": "ROPCZYCE MICKIEWICZA",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 20,
+          "numer_na_ekranie": 15,
+          "godzina": "15:18",
+          "skrot_oryginalny": "ROPCZYC DA",
+          "id_przystanku_RJ": 56,
+          "nazwa_w_RJ": "ROPCZYCE DWORZEC AUTOBUSOWY",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 21,
+          "numer_na_ekranie": 14,
+          "godzina": "15:21",
+          "skrot_oryginalny": "ROPCZYCE P",
+          "id_przystanku_RJ": 57,
+          "nazwa_w_RJ": "ROPCZYCE PODSŁOŃCE",
+          "status": "do_potwierdzenia_skrot",
+          "uwaga": "ROPCZYCE P vs RJ ROPCZYCE PODSŁOŃCE; dopasowanie po skrócie i kolejności"
+        },
+        {
+          "kolejnosc": 22,
+          "numer_na_ekranie": 13,
+          "godzina": "15:23",
+          "skrot_oryginalny": "BRZEZÓWKA",
+          "id_przystanku_RJ": 58,
+          "nazwa_w_RJ": "BRZEZÓWKA",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 23,
+          "numer_na_ekranie": 12,
+          "godzina": "15:26",
+          "skrot_oryginalny": "LUBZINAE4",
+          "id_przystanku_RJ": 59,
+          "nazwa_w_RJ": "LUBZINA E4",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 24,
+          "numer_na_ekranie": 11,
+          "godzina": "15:29",
+          "skrot_oryginalny": "LUBZINAOSI",
+          "id_przystanku_RJ": 60,
+          "nazwa_w_RJ": "LUBZINA OSIEDLE",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 25,
+          "numer_na_ekranie": 10,
+          "godzina": "15:31",
+          "skrot_oryginalny": "ZAWADA",
+          "id_przystanku_RJ": 61,
+          "nazwa_w_RJ": "ZAWADA E4",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 26,
+          "numer_na_ekranie": 9,
+          "godzina": "15:33",
+          "skrot_oryginalny": "NAGAWCZYN1",
+          "id_przystanku_RJ": null,
+          "nazwa_w_RJ": null,
+          "status": "brak_pewnego_mapowania",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 27,
+          "numer_na_ekranie": 8,
+          "godzina": "15:34",
+          "skrot_oryginalny": "NAGAWCZYNA",
+          "id_przystanku_RJ": null,
+          "nazwa_w_RJ": null,
+          "status": "brak_pewnego_mapowania",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 28,
+          "numer_na_ekranie": 7,
+          "godzina": "15:36",
+          "skrot_oryginalny": "DĘBICANADL",
+          "id_przystanku_RJ": 64,
+          "nazwa_w_RJ": "DĘBICA RZESZOWSKA NADLEŚNICTWO",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 29,
+          "numer_na_ekranie": 5,
+          "godzina": "15:39",
+          "skrot_oryginalny": "D-CA RZCPN",
+          "id_przystanku_RJ": null,
+          "nazwa_w_RJ": null,
+          "status": "brak_pewnego_mapowania",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 30,
+          "numer_na_ekranie": 4,
+          "godzina": "15:41",
+          "skrot_oryginalny": "D-CA MECHA",
+          "id_przystanku_RJ": null,
+          "nazwa_w_RJ": null,
+          "status": "brak_pewnego_mapowania",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 31,
+          "numer_na_ekranie": 2,
+          "godzina": "15:43",
+          "skrot_oryginalny": "D-CAPLACGR",
+          "id_przystanku_RJ": 39,
+          "nazwa_w_RJ": "DĘBICA RZESZOWSKA PLAC GRYFITÓW",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 32,
+          "numer_na_ekranie": 1,
+          "godzina": "15:45",
+          "skrot_oryginalny": "DĘBICA D.A.",
+          "id_przystanku_RJ": 68,
+          "nazwa_w_RJ": "DĘBICA DWORZEC AUTOBUSOWY",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        }
+      ],
+      "brak_mapowania": [
+        {
+          "kolejnosc": 5,
+          "numer_na_ekranie": 31,
+          "godzina": "14:34",
+          "skrot_oryginalny": "ŚWILCZA,GÓ",
+          "id_przystanku_RJ": null,
+          "nazwa_w_RJ": null,
+          "status": "brak_pewnego_mapowania",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 9,
+          "numer_na_ekranie": 26,
+          "godzina": "14:44",
+          "skrot_oryginalny": "DĄBROWA1",
+          "id_przystanku_RJ": null,
+          "nazwa_w_RJ": null,
+          "status": "brak_pewnego_mapowania",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 11,
+          "numer_na_ekranie": 24,
+          "godzina": "14:48",
+          "skrot_oryginalny": "KLĘCZANSTA",
+          "id_przystanku_RJ": null,
+          "nazwa_w_RJ": null,
+          "status": "brak_pewnego_mapowania",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 26,
+          "numer_na_ekranie": 9,
+          "godzina": "15:33",
+          "skrot_oryginalny": "NAGAWCZYN1",
+          "id_przystanku_RJ": null,
+          "nazwa_w_RJ": null,
+          "status": "brak_pewnego_mapowania",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 27,
+          "numer_na_ekranie": 8,
+          "godzina": "15:34",
+          "skrot_oryginalny": "NAGAWCZYNA",
+          "id_przystanku_RJ": null,
+          "nazwa_w_RJ": null,
+          "status": "brak_pewnego_mapowania",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 29,
+          "numer_na_ekranie": 5,
+          "godzina": "15:39",
+          "skrot_oryginalny": "D-CA RZCPN",
+          "id_przystanku_RJ": null,
+          "nazwa_w_RJ": null,
+          "status": "brak_pewnego_mapowania",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 30,
+          "numer_na_ekranie": 4,
+          "godzina": "15:41",
+          "skrot_oryginalny": "D-CA MECHA",
+          "id_przystanku_RJ": null,
+          "nazwa_w_RJ": null,
+          "status": "brak_pewnego_mapowania",
+          "uwaga": ""
+        }
+      ]
+    },
+    "S-27:4": {
+      "kursowka": "S-27",
+      "numer_kursu": 4,
+      "klucz": "S-27:4",
+      "wariant_RJ": 1,
+      "kierunek": "Rzeszów Dworzec Autobusowy → Dębica Dworzec Autobusowy",
+      "odjazd": "10:45",
+      "koniec": "12:04",
+      "rodzaj_danych": "Godziny odczytane z filmu; bez interpolacji",
+      "liczba_pozycji_z_fotografii": 32,
+      "godziny_wg_id_RJ": {
+        "40": "10:45",
+        "41": "10:50",
+        "42": "10:54",
+        "43": "10:56",
+        "35": "10:59",
+        "37": "11:03",
+        "38": "11:05",
+        "44": "11:07",
+        "45": "11:09",
+        "46": "11:10",
+        "47": "11:13",
+        "48": "11:15",
+        "49": "11:20",
+        "50": "11:22",
+        "51": "11:24",
+        "52": "11:26",
+        "53": "11:29",
+        "54": "11:32",
+        "55": "11:35",
+        "56": "11:37",
+        "57": "11:40",
+        "58": "11:42",
+        "59": "11:45",
+        "60": "11:48",
+        "61": "11:50",
+        "62": "11:52",
+        "63": "11:53",
+        "64": "11:55",
+        "66": "11:58",
+        "67": "12:00",
+        "39": "12:02",
+        "68": "12:04"
+      },
+      "przystanki_z_ekranu": [
+        {
+          "kolejnosc": 1,
+          "numer_na_ekranie": 35,
+          "godzina": "10:45",
+          "skrot_oryginalny": "RZESZÓWDA",
+          "id_przystanku_RJ": 40,
+          "nazwa_w_RJ": "RZESZÓW DWORZEC AUTOBUSOWY",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 2,
+          "numer_na_ekranie": 34,
+          "godzina": "10:50",
+          "skrot_oryginalny": "RZE DW.LOK",
+          "id_przystanku_RJ": 41,
+          "nazwa_w_RJ": "RZESZÓW DWORZEC LOKALNY",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 3,
+          "numer_na_ekranie": 33,
+          "godzina": "10:54",
+          "skrot_oryginalny": "RZ KRA SZP",
+          "id_przystanku_RJ": 42,
+          "nazwa_w_RJ": "RZESZÓW KRAKOWSKA SZPITAL",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 4,
+          "numer_na_ekranie": 32,
+          "godzina": "10:56",
+          "skrot_oryginalny": "RZESZKRAKG",
+          "id_przystanku_RJ": 43,
+          "nazwa_w_RJ": "RZESZÓW KRAKOWSKA GALERIA",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 5,
+          "numer_na_ekranie": 31,
+          "godzina": "10:59",
+          "skrot_oryginalny": "ŚWILCZA,GÓ",
+          "id_przystanku_RJ": 35,
+          "nazwa_w_RJ": "ŚWILCZA NOWY DWÓR 71 N.Ż.",
+          "status": "potwierdzone_przez_uzytkownika",
+          "uwaga": "Przypisanie potwierdzone 19.10.2026"
+        },
+        {
+          "kolejnosc": 6,
+          "numer_na_ekranie": 30,
+          "godzina": "11:03",
+          "skrot_oryginalny": "ŚWILCZA",
+          "id_przystanku_RJ": 37,
+          "nazwa_w_RJ": "ŚWILCZA 75",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 7,
+          "numer_na_ekranie": 29,
+          "godzina": "11:05",
+          "skrot_oryginalny": "TRZCIA WOL",
+          "id_przystanku_RJ": 38,
+          "nazwa_w_RJ": "TRZCIANA WOLICZKA 77 N.Ż.",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 8,
+          "numer_na_ekranie": 28,
+          "godzina": "11:07",
+          "skrot_oryginalny": "TRZCIANA",
+          "id_przystanku_RJ": 44,
+          "nazwa_w_RJ": "TRZCIANA",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 9,
+          "numer_na_ekranie": 26,
+          "godzina": "11:09",
+          "skrot_oryginalny": "DĄBROWA1",
+          "id_przystanku_RJ": 45,
+          "nazwa_w_RJ": "DĄBROWA 2",
+          "status": "dopasowanie_wg_kolejnosci_i_dotychczasowej_trasy",
+          "uwaga": "Dopasowanie jak w kursie VIDEO:1010; Klęczany wg pola ulicy KLĘCZANY STADION."
+        },
+        {
+          "kolejnosc": 10,
+          "numer_na_ekranie": 25,
+          "godzina": "11:10",
+          "skrot_oryginalny": "DĄBROWA",
+          "id_przystanku_RJ": 46,
+          "nazwa_w_RJ": "DĄBROWA",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 11,
+          "numer_na_ekranie": 24,
+          "godzina": "11:13",
+          "skrot_oryginalny": "KLĘCZANSTA",
+          "id_przystanku_RJ": 47,
+          "nazwa_w_RJ": "KLĘCZANY SZKOŁA",
+          "status": "dopasowanie_wg_kolejnosci_i_dotychczasowej_trasy",
+          "uwaga": "Dopasowanie jak w kursie VIDEO:1010; Klęczany wg pola ulicy KLĘCZANY STADION."
+        },
+        {
+          "kolejnosc": 12,
+          "numer_na_ekranie": 23,
+          "godzina": "11:15",
+          "skrot_oryginalny": "OLCHOWA E4",
+          "id_przystanku_RJ": 48,
+          "nazwa_w_RJ": "OLCHOWA E4",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 13,
+          "numer_na_ekranie": 22,
+          "godzina": "11:20",
+          "skrot_oryginalny": "SĘDZ GRUNW",
+          "id_przystanku_RJ": 49,
+          "nazwa_w_RJ": "SĘDZISZÓW MAŁOPOLSKI GRUNWALDZKA",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 14,
+          "numer_na_ekranie": 21,
+          "godzina": "11:22",
+          "skrot_oryginalny": "SĘDZPIŁSUD",
+          "id_przystanku_RJ": 50,
+          "nazwa_w_RJ": "SĘDZISZÓW MAŁOPOLSKI PIŁSUDSKIEGO",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 15,
+          "numer_na_ekranie": 20,
+          "godzina": "11:24",
+          "skrot_oryginalny": "SĘDZMŁPRYN",
+          "id_przystanku_RJ": 51,
+          "nazwa_w_RJ": "SĘDZISZÓW MAŁOPOLSKI RYNEK",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 16,
+          "numer_na_ekranie": 19,
+          "godzina": "11:26",
+          "skrot_oryginalny": "SĘDZOSMŁO",
+          "id_przystanku_RJ": 52,
+          "nazwa_w_RJ": "SĘDZISZÓW MAŁOPOLSKI OSIEDLE MŁODYCH",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 17,
+          "numer_na_ekranie": 18,
+          "godzina": "11:29",
+          "skrot_oryginalny": "ROPCZ WESO",
+          "id_przystanku_RJ": 53,
+          "nazwa_w_RJ": "ROPCZYCE WESOŁA",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 18,
+          "numer_na_ekranie": 17,
+          "godzina": "11:32",
+          "skrot_oryginalny": "ROPCZ WITK",
+          "id_przystanku_RJ": 54,
+          "nazwa_w_RJ": "ROPCZYCE WITKOWICE",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 19,
+          "numer_na_ekranie": 16,
+          "godzina": "11:35",
+          "skrot_oryginalny": "ROPCZ MICK",
+          "id_przystanku_RJ": 55,
+          "nazwa_w_RJ": "ROPCZYCE MICKIEWICZA",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 20,
+          "numer_na_ekranie": 15,
+          "godzina": "11:37",
+          "skrot_oryginalny": "ROPCZYC DA",
+          "id_przystanku_RJ": 56,
+          "nazwa_w_RJ": "ROPCZYCE DWORZEC AUTOBUSOWY",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 21,
+          "numer_na_ekranie": 14,
+          "godzina": "11:40",
+          "skrot_oryginalny": "ROPCZYCE P",
+          "id_przystanku_RJ": 57,
+          "nazwa_w_RJ": "ROPCZYCE PODSŁOŃCE",
+          "status": "do_potwierdzenia_skrot",
+          "uwaga": "ROPCZYCE P vs RJ ROPCZYCE PODSŁOŃCE; dopasowanie po skrócie i kolejności"
+        },
+        {
+          "kolejnosc": 22,
+          "numer_na_ekranie": 13,
+          "godzina": "11:42",
+          "skrot_oryginalny": "BRZEZÓWKA",
+          "id_przystanku_RJ": 58,
+          "nazwa_w_RJ": "BRZEZÓWKA",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 23,
+          "numer_na_ekranie": 12,
+          "godzina": "11:45",
+          "skrot_oryginalny": "LUBZINAE4",
+          "id_przystanku_RJ": 59,
+          "nazwa_w_RJ": "LUBZINA E4",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 24,
+          "numer_na_ekranie": 11,
+          "godzina": "11:48",
+          "skrot_oryginalny": "LUBZINAOSI",
+          "id_przystanku_RJ": 60,
+          "nazwa_w_RJ": "LUBZINA OSIEDLE",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 25,
+          "numer_na_ekranie": 10,
+          "godzina": "11:50",
+          "skrot_oryginalny": "ZAWADA",
+          "id_przystanku_RJ": 61,
+          "nazwa_w_RJ": "ZAWADA E4",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 26,
+          "numer_na_ekranie": 9,
+          "godzina": "11:52",
+          "skrot_oryginalny": "NAGAWCZYN1",
+          "id_przystanku_RJ": 62,
+          "nazwa_w_RJ": "NAGAWCZYNA 2",
+          "status": "dopasowanie_wg_kolejnosci_i_dotychczasowej_trasy",
+          "uwaga": "Dopasowanie jak w kursie VIDEO:1010; Klęczany wg pola ulicy KLĘCZANY STADION."
+        },
+        {
+          "kolejnosc": 27,
+          "numer_na_ekranie": 8,
+          "godzina": "11:53",
+          "skrot_oryginalny": "NAGAWCZYNA",
+          "id_przystanku_RJ": 63,
+          "nazwa_w_RJ": "NAGAWCZYNA 1",
+          "status": "dopasowanie_wg_kolejnosci_i_dotychczasowej_trasy",
+          "uwaga": "Dopasowanie jak w kursie VIDEO:1010; Klęczany wg pola ulicy KLĘCZANY STADION."
+        },
+        {
+          "kolejnosc": 28,
+          "numer_na_ekranie": 7,
+          "godzina": "11:55",
+          "skrot_oryginalny": "DĘBICANADL",
+          "id_przystanku_RJ": 64,
+          "nazwa_w_RJ": "DĘBICA RZESZOWSKA NADLEŚNICTWO",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 29,
+          "numer_na_ekranie": 5,
+          "godzina": "11:58",
+          "skrot_oryginalny": "D-CA RZCPN",
+          "id_przystanku_RJ": 66,
+          "nazwa_w_RJ": "DĘBICA RZESZOWSKA RAJ",
+          "status": "potwierdzone_przez_uzytkownika",
+          "uwaga": "Przypisanie potwierdzone 19.10.2026"
+        },
+        {
+          "kolejnosc": 30,
+          "numer_na_ekranie": 4,
+          "godzina": "12:00",
+          "skrot_oryginalny": "D-CA MECHA",
+          "id_przystanku_RJ": 67,
+          "nazwa_w_RJ": "DĘBICA RZESZOWSKA TECHNIKUM",
+          "status": "dopasowanie_wg_kolejnosci_i_dotychczasowej_trasy",
+          "uwaga": "Dopasowanie jak w kursie VIDEO:1010; Klęczany wg pola ulicy KLĘCZANY STADION."
+        },
+        {
+          "kolejnosc": 31,
+          "numer_na_ekranie": 2,
+          "godzina": "12:02",
+          "skrot_oryginalny": "D-CAPLACGR",
+          "id_przystanku_RJ": 39,
+          "nazwa_w_RJ": "DĘBICA RZESZOWSKA PLAC GRYFITÓW",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        },
+        {
+          "kolejnosc": 32,
+          "numer_na_ekranie": 1,
+          "godzina": "12:04",
+          "skrot_oryginalny": "DĘBICA D.A.",
+          "id_przystanku_RJ": 68,
+          "nazwa_w_RJ": "DĘBICA DWORZEC AUTOBUSOWY",
+          "status": "zgodna_nazwa_i_kolejnosc",
+          "uwaga": ""
+        }
+      ],
+      "brak_mapowania": [],
+      "zrodlo": "7712.mp4, 19.10.2026"
+    }
+  }
+}
