@@ -23,3 +23,12 @@ html[data-device] #course .controls .logout{grid-column:auto;width:100%;font-siz
  html[data-device="phone"] #course .controls{width:100%;grid-template-columns:repeat(4,minmax(0,1fr))}
  html[data-device="phone"] #course .controls .logout{grid-column:1/-1;justify-self:end;width:130px;font-size:16px!important}
 }
+
+/* v1.4.68: restore balanced placement below the current stop. */
+html[data-device] #course .sched{grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);grid-template-areas:'bar bar' 'delay upcoming';column-gap:18px;align-items:center}
+html[data-device] #course .delay{justify-self:stretch;text-align:center;place-items:center}
+html[data-device] #course .upcoming{justify-self:center;width:max-content;max-width:100%;min-width:0;text-align:left;overflow-wrap:anywhere}
+@media(orientation:portrait){
+ html[data-device="phone"] #course .sched{grid-template-columns:minmax(0,1fr);grid-template-areas:'bar' 'delay' 'upcoming'}
+ html[data-device="phone"] #course .upcoming{text-align:center}
+}

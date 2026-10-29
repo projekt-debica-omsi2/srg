@@ -1,0 +1,7 @@
+SRG Mobile 1.4.68
+Czas opóźnienia/przyspieszenia i następne przystanki są wyśrodkowane
+w dwóch proporcjonalnych kolumnach, jak w klasycznym układzie.
+Na telefonie w pionie pozostają jeden pod drugim, na środku.
+Pozostałe ustawienia wyglądu z 1.4.67 są zachowane.
+Wgraj zawartość do głównego katalogu repozytorium wraz z .github.
+Jeden APK dla telefonu i tabletu. Klucz podpisywania bez zmian.
