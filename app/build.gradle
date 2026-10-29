@@ -8,12 +8,23 @@ android {
         applicationId 'pl.srgmobile.classic.lcd23'
         minSdk 26
         targetSdk 34
-        versionCode 11464
-        versionName '1.4.64'
+        versionCode 11465
+        versionName '1.4.65'
     }
 
+    signingConfigs {
+        stableRelease {
+            def signingPath = System.getenv('SRG_KEYSTORE_PATH')
+            if (signingPath) storeFile file(signingPath)
+            storePassword System.getenv('SRG_KEYSTORE_PASSWORD')
+            keyAlias 'srg'
+            keyPassword System.getenv('SRG_KEYSTORE_PASSWORD')
+            storeType 'PKCS12'
+        }
+    }
     buildTypes {
         release {
+            signingConfig signingConfigs.stableRelease
             minifyEnabled false
         }
         debug { debuggable true }
@@ -29,4 +40,13 @@ dependencies {
     implementation 'org.jsoup:jsoup:1.18.3'
     testImplementation 'junit:junit:4.13.2'
     testImplementation 'org.json:json:20240303'
+}
+
+// Never silently publish a release signed with a newly generated debug key.
+gradle.taskGraph.whenReady { graph ->
+    if (graph.allTasks.any { it.project == project && it.name.toLowerCase().contains('release') }) {
+        if (!System.getenv('SRG_KEYSTORE_PATH') || !System.getenv('SRG_KEYSTORE_PASSWORD')) {
+            throw new GradleException('Brak stałego podpisu. Uruchom jednorazowo tools/setup_signing.py; nie zmieniaj istniejącego klucza.')
+        }
+    }
 }

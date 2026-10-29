@@ -26,13 +26,13 @@ window.SRGTransferData={
       "station": "ropczyce-da",
       "carrier": "FlixBus",
       "direction": "Paryż (Bercy Seine)",
-      "time": "09:12"
+      "time": "09:15"
     },
     {
       "station": "ropczyce-da",
       "carrier": "FlixBus",
       "direction": "Rzeszów, Dworzec Lokalny",
-      "time": "21:22"
+      "time": "21:25"
     },
     {
       "station": "debica-da",

@@ -10,6 +10,7 @@
  const timeFmt=new Intl.DateTimeFormat('pl-PL',{timeZone:'Europe/Warsaw',hour:'2-digit',minute:'2-digit',hourCycle:'h23'});
  function forStop(stop,feed=root.SRGTransferData,now=Date.now()){
   const station=stations.find(s=>s.ids.includes(stop?.id)&&s.name===String(stop?.name||'').trim().toUpperCase());
+  if(station?.key==='ropczyce-da'&&root.SRGRopczyce)return root.SRGRopczyce.forStop(stop,now);
   const networkRows=Number.isFinite(now)?root.SRGMKS?.rowsFor(stop,dateFmt.format(now),timeFmt.format(now)):null;
   if(networkRows&&station?.key!=='debica-da'){const time=timeFmt.format(now);return {przystanek:stop.name,stop:stop.name,time,rows:networkRows,rowsPerPage:8,pages:[{title:'PRZESIADKI',rows:networkRows,emptyText:'Brak odjazdów MKS w dostępnym kalendarzu na dziś'}]};}
   if(station?.key==='rzeszow-da')return hubForStop(stop,now);
