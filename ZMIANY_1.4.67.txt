@@ -1,0 +1,6 @@
+SRG Mobile 1.4.67 — poprawka ekranu kursu na telefonie i tablecie.
+Pola wracają do dwóch rzędów: Zadanie / Nr pojazdu, Przystanek / Droga.
+Przycisk Wymelduj ma ograniczoną szerokość.
+Dopasowanie aplikacji do ekranu pozostaje bez zmian. Jeden APK dla obu urządzeń.
+Wgraj zawartość paczki do głównego katalogu repozytorium, razem z .github.
+Nie wgrywaj do BRANDING. Stały klucz podpisywania pozostaje bez zmian.
