@@ -122,6 +122,7 @@ public final class MainActivity extends Activity implements LocationListener {
             });}
         },"SRGMksExport");
         web.addJavascriptInterface(new GpsBridge(), "SRGNativeGPS");
+        web.addJavascriptInterface(new OmsiBridge(web), "SRGOmsiNative");
         web.addJavascriptInterface(new AudioBridge(), "SRGNativeAudio");
         web.addJavascriptInterface(new LcdBridge(), "SRGLcd");
         rgUsb = new RgUsbBridge(this, web);
@@ -516,3 +517,4 @@ public final class MainActivity extends Activity implements LocationListener {
         super.onDestroy();
     }
 }
+

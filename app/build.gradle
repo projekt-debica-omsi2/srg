@@ -8,8 +8,8 @@ android {
         applicationId 'pl.srgmobile.classic.lcd23'
         minSdk 26
         targetSdk 34
-        versionCode 11468
-        versionName '1.4.68'
+        versionCode 11469
+        versionName '1.4.69-omsi-test'
     }
 
     signingConfigs {
@@ -50,3 +50,4 @@ gradle.taskGraph.whenReady { graph ->
         }
     }
 }
+

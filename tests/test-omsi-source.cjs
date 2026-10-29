@@ -1,0 +1,10 @@
+const fs=require('fs');const assert=require('node:assert/strict');const vm=require('node:vm');
+const html=fs.readFileSync('app/src/main/assets/index.html','utf8');const js=fs.readFileSync('app/src/main/assets/omsi.js','utf8');
+new vm.Script(js);
+for(const match of html.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/gi))if(match[1].trim())new vm.Script(match[1]);
+assert(html.includes('id=window.SRGOmsi?.route(id)||id;'));
+assert(html.includes('function persistSession(){if(window.SRGOmsi?.enabled)return;'));
+assert(js.includes("localStorage.setItem('srgOmsiConfig'"));
+assert(js.includes("config.transport==='usb'?'127.0.0.1'"));
+assert(js.includes('if(!enabled||id!==pending)return;'));
+console.log('OMSI source syntax and isolation guards: PASS (not a runtime UI test)');

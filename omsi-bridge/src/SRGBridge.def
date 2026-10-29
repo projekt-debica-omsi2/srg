@@ -1,0 +1,8 @@
+LIBRARY SRGBridge
+EXPORTS
+PluginStart=_PluginStart@4
+PluginFinalize=_PluginFinalize@0
+AccessVariable=_AccessVariable@12
+AccessSystemVariable=_AccessSystemVariable@12
+AccessStringVariable=_AccessStringVariable@12
+AccessTrigger=_AccessTrigger@8

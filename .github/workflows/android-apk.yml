@@ -1,4 +1,4 @@
-name: Build SRG Mobile 1.4.68 APK
+name: Build SRG Mobile 1.4.69-omsi-test APK
 on:
   workflow_dispatch:
   push:
@@ -26,6 +26,8 @@ jobs:
           test -n "$SDKMANAGER"
           yes | "$SDKMANAGER" --licenses >/dev/null || true
           "$SDKMANAGER" 'platforms;android-35' 'build-tools;35.0.0'
+      - name: Test OMSI source guards
+        run: node tests/test-omsi-source.cjs
       - name: Test auto GPS stop switching
         run: node tests/test-auto-gps.cjs
       - name: Test arrival and departure announcements
@@ -99,6 +101,7 @@ jobs:
       - name: Publish APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: SRG-Mobile-v1.4.68-KURSOWKI-LCD-LAN-release
+          name: SRG-Mobile-v1.4.69-omsi-test-KURSOWKI-LCD-LAN-release
           path: app/build/outputs/apk/release/app-release.apk
           if-no-files-found: error
+

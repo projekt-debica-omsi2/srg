@@ -1,0 +1,9 @@
+[dll]
+SRGBridge.dll
+
+[varlist]
+4
+Velocity
+IBIS_Linie
+IBIS_Route
+IBIS_Ziel
