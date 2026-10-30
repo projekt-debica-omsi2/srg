@@ -1,7 +1,7 @@
-W .github/workflows/android-apk.yml zmień:
-- name: Build SRG Mobile 1.4.72 APK
-- po teście R&G dodaj:
-      - name: Test R&G raw RX diagnostics
-        run: node tests/test-rg-raw-rx.cjs
-- nazwę artefaktu na:
-  SRG-Mobile-v1.4.72-OMSI-RS485-RAW-RX-release
+W .github/workflows/android-apk.yml:
+1. nazwę buildu zmień na: Build SRG Mobile 1.4.73 APK
+2. dodaj test:
+      - name: Test R&G automatic RX diagnostics
+        run: node tests/test-rg-auto-diag.cjs
+3. nazwę artefaktu zmień na:
+   SRG-Mobile-v1.4.73-OMSI-RS485-AUTO-DIAG-release
