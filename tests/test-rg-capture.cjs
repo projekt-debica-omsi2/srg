@@ -1,0 +1,18 @@
+const fs=require('fs'),assert=require('assert');
+const java=fs.readFileSync('app/src/main/java/pl/srgmobile/classic/RgUsbBridge.java','utf8');
+const js=fs.readFileSync('app/src/main/assets/rg-usb.js','utf8');
+const gradle=fs.readFileSync('app/build.gradle','utf8');
+assert(java.includes('startCapture(String label,String folder)'));
+assert(java.includes('stopCapture()'));
+assert(java.includes('"category","linia_dodatkowa"'));
+assert(java.includes('MediaStore.Downloads.EXTERNAL_CONTENT_URI'));
+assert(java.includes('RELATIVE_PATH'));
+assert(java.includes('"dir","rx"'));
+assert(java.includes('"dt",dt'));
+assert(js.includes('Przechwyć ramki z SRG'));
+assert(js.includes('srgCapturedExtraLines'));
+assert(js.includes('bridge.startCapture(name,folder)'));
+assert(js.includes('bridge.stopCapture()'));
+assert(gradle.includes("versionName '1.4.71'"));
+assert(gradle.includes('versionCode 11471'));
+console.log('R&G capture 1.4.71 source guards OK');

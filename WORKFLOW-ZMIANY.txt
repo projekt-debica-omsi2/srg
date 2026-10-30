@@ -1,0 +1,7 @@
+W .github/workflows/android-apk.yml:
+1) name: Build SRG Mobile 1.4.71 APK
+2) po 'Test R&G frame templates' dodaj:
+      - name: Test R&G capture
+        run: node tests/test-rg-capture.cjs
+3) artefakt:
+   SRG-Mobile-v1.4.71-OMSI-RS485-CAPTURE-KURSOWKI-LCD-LAN-release

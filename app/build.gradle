@@ -8,8 +8,8 @@ android {
         applicationId 'pl.srgmobile.classic.lcd23'
         minSdk 26
         targetSdk 34
-        versionCode 11470
-        versionName '1.4.70'
+        versionCode 11471
+        versionName '1.4.71'
     }
 
     signingConfigs {
@@ -42,7 +42,6 @@ dependencies {
     testImplementation 'org.json:json:20240303'
 }
 
-// Never silently publish a release signed with a newly generated debug key.
 gradle.taskGraph.whenReady { graph ->
     if (graph.allTasks.any { it.project == project && it.name.toLowerCase().contains('release') }) {
         if (!System.getenv('SRG_KEYSTORE_PATH') || !System.getenv('SRG_KEYSTORE_PASSWORD')) {
@@ -50,4 +49,3 @@ gradle.taskGraph.whenReady { graph ->
         }
     }
 }
-

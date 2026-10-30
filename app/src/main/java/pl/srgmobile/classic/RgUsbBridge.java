@@ -5,20 +5,32 @@ import android.app.PendingIntent;
 import android.content.*;
 import android.hardware.usb.*;
 import android.os.Build;
+import android.os.Environment;
+import android.provider.MediaStore;
 import android.webkit.*;
 import com.hoho.android.usbserial.driver.*;
 import com.hoho.android.usbserial.util.SerialInputOutputManager;
 import org.json.*;
+import java.io.*;
+import java.text.SimpleDateFormat;
+import java.util.*;
 import java.util.concurrent.*;
 
-/** Real USB serial transport; deliberately contains no guessed R&G protocol. */
+/** Real USB serial transport plus RX capture for R&G reverse-engineering. */
 public final class RgUsbBridge implements SerialInputOutputManager.Listener {
  private final Activity activity; private final WebView web; private final UsbManager manager;
  private final ExecutorService queue=Executors.newSingleThreadExecutor();
  private UsbSerialPort port; private UsbDeviceConnection connection; private SerialInputOutputManager io;
  private volatile int deviceId=-1; private int generation=0; private volatile boolean destroyed=false;
+ private int currentBaud=9600,currentData=8,currentStop=1,currentParity=0;
  private final String permission,callback;
  private static final ConcurrentHashMap<Integer,RgUsbBridge> owners=new ConcurrentHashMap<>();
+
+ private boolean capturing=false; private long captureStarted=0L,captureLast=0L;
+ private int captureChunks=0,captureBytes=0; private String captureLabel="",captureFolder="SRG-Captures";
+ private StringBuilder captureBuffer=new StringBuilder();
+ private static final int MAX_CAPTURE_CHARS=8*1024*1024;
+
  private void submit(Runnable task){if(destroyed)return;try{queue.execute(task);}catch(RejectedExecutionException ignored){}}
  private final BroadcastReceiver receiver=new BroadcastReceiver(){public void onReceive(Context c,Intent i){
   if(permission.equals(i.getAction())) emit("info",i.getBooleanExtra(UsbManager.EXTRA_PERMISSION_GRANTED,false)?"Zgoda USB udzielona. Naciśnij Połącz ponownie.":"Odmowa dostępu USB");
@@ -30,6 +42,8 @@ public final class RgUsbBridge implements SerialInputOutputManager.Listener {
   if(Build.VERSION.SDK_INT>=33)a.registerReceiver(receiver,f,Context.RECEIVER_NOT_EXPORTED);else a.registerReceiver(receiver,f);
  }
  private void emit(String type,String message){if(destroyed)return;activity.runOnUiThread(()->{if(!destroyed)web.evaluateJavascript("window."+callback+"&&window."+callback+"("+JSONObject.quote(type)+","+JSONObject.quote(message)+")",null);});}
+ private void emitCaptureSaved(JSONObject data){if(destroyed)return;final String json=data.toString();activity.runOnUiThread(()->{if(!destroyed)web.evaluateJavascript("window.rgUsbCaptureSaved&&window.rgUsbCaptureSaved(JSON.parse("+JSONObject.quote(json)+"))",null);});}
+
  @JavascriptInterface public String devices(){JSONArray out=new JSONArray();try{for(UsbSerialDriver d:UsbSerialProber.getDefaultProber().findAllDrivers(manager)){JSONObject o=new JSONObject();o.put("id",d.getDevice().getDeviceId());o.put("name",d.getClass().getSimpleName()+String.format(" · VID %04X PID %04X · ",d.getDevice().getVendorId(),d.getDevice().getProductId())+d.getDevice().getDeviceName());out.put(o);}}catch(Exception e){emit("error",e.toString());}return out.toString();}
  @JavascriptInterface public void connect(int id,int baud,int data,int stop,int parity){submit(()->{
   closePort();try{
@@ -38,7 +52,8 @@ public final class RgUsbBridge implements SerialInputOutputManager.Listener {
    if(driver==null)throw new Exception("Nie znaleziono konwertera USB");
    if(!manager.hasPermission(driver.getDevice())){PendingIntent pi=PendingIntent.getBroadcast(activity,0,new Intent(permission).setPackage(activity.getPackageName()),PendingIntent.FLAG_UPDATE_CURRENT|(Build.VERSION.SDK_INT>=31?PendingIntent.FLAG_MUTABLE:0));manager.requestPermission(driver.getDevice(),pi);emit("info","Zezwól na dostęp USB, następnie naciśnij Połącz.");return;}
    if(owners.putIfAbsent(id,this)!=null)throw new Exception("Ten adapter jest już używany przez drugie połączenie. Wybierz osobny adapter USB.");deviceId=id;
-   connection=manager.openDevice(driver.getDevice());if(connection==null)throw new Exception("Brak dostępu USB");port=driver.getPorts().get(0);port.open(connection);port.setParameters(baud,data,stop,parity);deviceId=id;
+   connection=manager.openDevice(driver.getDevice());if(connection==null)throw new Exception("Brak dostępu USB");port=driver.getPorts().get(0);port.open(connection);port.setParameters(baud,data,stop,parity);
+   currentBaud=baud;currentData=data;currentStop=stop;currentParity=parity;deviceId=id;
    final int openedGeneration=generation;
    io=new SerialInputOutputManager(port,new SerialInputOutputManager.Listener(){
     public void onNewData(byte[] data){RgUsbBridge.this.onNewData(data);}
@@ -48,8 +63,53 @@ public final class RgUsbBridge implements SerialInputOutputManager.Listener {
  });}
  @JavascriptInterface public void send(String hex){submit(()->{try{if(port==null)throw new Exception("USB rozłączone");String s=hex.replaceAll("\\s","");if(s.length()==0||s.length()>8192||s.length()%2!=0||!s.matches("[0-9a-fA-F]+"))throw new Exception("Niepoprawne HEX / limit 4096 bajtów");byte[] b=new byte[s.length()/2];for(int n=0;n<b.length;n++)b[n]=(byte)Integer.parseInt(s.substring(n*2,n*2+2),16);port.write(b,3000);emit("tx",hex);}catch(Exception e){closePort();emit("error",e.toString());}});}
  @JavascriptInterface public void disconnect(){submit(()->{closePort();emit("disconnected","USB rozłączone");});}
- private void closePort(){generation++;if(io!=null){io.stop();io=null;}try{if(port!=null)port.close();}catch(Exception ignored){}port=null;if(connection!=null)connection.close();connection=null;owners.remove(deviceId,this);deviceId=-1;}
- public void onNewData(byte[] data){StringBuilder s=new StringBuilder();for(byte b:data)s.append(String.format("%02X ",b&255));emit("rx",s.toString());}
+
+ @JavascriptInterface public void startCapture(String label,String folder){submit(()->{
+  synchronized(this){
+   if(port==null){emit("capture_error","Najpierw połącz konwerter USB.");return;}
+   if(capturing){emit("capture_error","Przechwytywanie już trwa.");return;}
+   captureLabel=safeLabel(label);captureFolder=safeFolder(folder);captureStarted=System.currentTimeMillis();captureLast=captureStarted;captureChunks=0;captureBytes=0;captureBuffer=new StringBuilder();
+   try{
+    JSONObject meta=new JSONObject();meta.put("type","srg_capture");meta.put("format",1);meta.put("appVersion","1.4.71");meta.put("category","linia_dodatkowa");meta.put("label",captureLabel);meta.put("startedAt",captureStarted);meta.put("baud",currentBaud);meta.put("dataBits",currentData);meta.put("stopBits",currentStop);meta.put("parity",currentParity);
+    captureBuffer.append(meta).append('\n');capturing=true;emit("capture_started","Nasłuch rozpoczęty: "+captureLabel+" · zapis do Pobrane/"+captureFolder);
+   }catch(Exception e){captureBuffer=new StringBuilder();emit("capture_error","Nie można rozpocząć zapisu: "+e.getMessage());}
+  }
+ });}
+ @JavascriptInterface public void stopCapture(){submit(()->{synchronized(this){if(!capturing){emit("capture_error","Przechwytywanie nie jest uruchomione.");return;}saveCaptureLocked("manual");}});}
+ @JavascriptInterface public boolean isCapturing(){synchronized(this){return capturing;}}
+
+ private String safeLabel(String s){String x=s==null?"":s.trim();if(x.isEmpty())x="BEZ_NAZWY";return x.length()>120?x.substring(0,120):x;}
+ private String safeFolder(String s){String x=s==null?"":s.trim().replaceAll("[^\\p{L}\\p{N}._ -]","_");if(x.isEmpty())x="SRG-Captures";return x.length()>60?x.substring(0,60):x;}
+ private String safeFilePart(String s){String x=s.toUpperCase(Locale.ROOT).replaceAll("[^A-Z0-9._-]+","_").replaceAll("_+","_");if(x.isEmpty())x="CAPTURE";return x.length()>45?x.substring(0,45):x;}
+ private void appendCapture(byte[] data){
+  synchronized(this){if(!capturing)return;long now=System.currentTimeMillis();long dt=Math.max(0,now-captureLast),t=Math.max(0,now-captureStarted);captureLast=now;
+   StringBuilder hex=new StringBuilder();for(byte b:data){if(hex.length()>0)hex.append(' ');hex.append(String.format(Locale.ROOT,"%02X",b&255));}
+   try{JSONObject row=new JSONObject();row.put("t",t);row.put("dt",dt);row.put("dir","rx");row.put("hex",hex.toString());captureBuffer.append(row).append('\n');captureChunks++;captureBytes+=data.length;
+    if(captureBuffer.length()>MAX_CAPTURE_CHARS){emit("capture_error","Przechwyt przekroczył limit pamięci 8 MB — zapisuję to, co zebrano.");saveCaptureLocked("limit");}
+   }catch(Exception e){emit("capture_error","Błąd zapisu ramki: "+e.getMessage());}
+  }
+ }
+ private void saveCaptureLocked(String reason){
+  if(!capturing)return;capturing=false;long ended=System.currentTimeMillis();
+  try{JSONObject end=new JSONObject();end.put("type","end");end.put("endedAt",ended);end.put("durationMs",Math.max(0,ended-captureStarted));end.put("chunks",captureChunks);end.put("bytes",captureBytes);end.put("reason",reason);captureBuffer.append(end).append('\n');}catch(Exception ignored){}
+  String stamp=new SimpleDateFormat("yyyyMMdd-HHmmss",Locale.ROOT).format(new Date(captureStarted));
+  String fileName="SRG-capture-"+stamp+"-"+safeFilePart(captureLabel)+".jsonl";String path;try{path=writeCapture(fileName,captureBuffer.toString(),captureFolder);}
+  catch(Exception e){emit("capture_error","Nie udało się zapisać pliku: "+e.getMessage());captureBuffer=new StringBuilder();return;}
+  try{JSONObject saved=new JSONObject();saved.put("label",captureLabel);saved.put("category","linia_dodatkowa");saved.put("file",fileName);saved.put("path",path);saved.put("chunks",captureChunks);saved.put("bytes",captureBytes);saved.put("startedAt",captureStarted);emitCaptureSaved(saved);}catch(Exception ignored){}
+  emit("capture_saved","Zapisano "+captureChunks+" porcji / "+captureBytes+" B: "+path);captureBuffer=new StringBuilder();
+ }
+ private String writeCapture(String fileName,String data,String folder) throws Exception{
+  byte[] bytes=data.getBytes(java.nio.charset.StandardCharsets.UTF_8);
+  if(Build.VERSION.SDK_INT>=29){
+   ContentValues v=new ContentValues();v.put(MediaStore.MediaColumns.DISPLAY_NAME,fileName);v.put(MediaStore.MediaColumns.MIME_TYPE,"application/x-ndjson");v.put(MediaStore.MediaColumns.RELATIVE_PATH,Environment.DIRECTORY_DOWNLOADS+"/"+folder);
+   android.net.Uri uri=activity.getContentResolver().insert(MediaStore.Downloads.EXTERNAL_CONTENT_URI,v);if(uri==null)throw new IOException("Android nie utworzył pliku w Pobrane");
+   try(OutputStream out=activity.getContentResolver().openOutputStream(uri)){if(out==null)throw new IOException("Brak strumienia zapisu");out.write(bytes);}
+   return "Pobrane/"+folder+"/"+fileName;
+  }
+  File base=activity.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);if(base==null)throw new IOException("Brak pamięci zewnętrznej");File dir=new File(base,folder);if(!dir.isDirectory()&&!dir.mkdirs())throw new IOException("Nie można utworzyć folderu");File f=new File(dir,fileName);try(OutputStream out=new FileOutputStream(f)){out.write(bytes);}return f.getAbsolutePath();
+ }
+ private void closePort(){if(capturing)saveCaptureLocked("disconnect");generation++;if(io!=null){io.stop();io=null;}try{if(port!=null)port.close();}catch(Exception ignored){}port=null;if(connection!=null)connection.close();connection=null;owners.remove(deviceId,this);deviceId=-1;}
+ public void onNewData(byte[] data){appendCapture(data);StringBuilder s=new StringBuilder();for(byte b:data)s.append(String.format(Locale.ROOT,"%02X ",b&255));emit("rx",s.toString());}
  public void onRunError(Exception e){if(!destroyed)submit(()->{closePort();emit("error",e.toString());});}
  public synchronized void close(){if(destroyed)return;destroyed=true;try{activity.unregisterReceiver(receiver);}catch(Exception ignored){}queue.execute(this::closePort);queue.shutdown();}
 }
