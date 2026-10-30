@@ -1,0 +1,12 @@
+SRG Mobile 1.4.70
+
+- zachowano integrację OMSI z gałęzi 1.4.69-omsi-test
+- poprawiono Android versionName na semantyczne 1.4.70 (naprawa testu GitHub Actions)
+- versionCode: 11470
+- dodano ukrytą diagnostykę R&G / USB-RS485 w ustawieniach
+- diagnostyka odtwarza dwa znane przechwyty RS-485 z 30.10.2026
+- zachowuje kolejność i przybliżone odstępy między porcjami USB; pierwsza porcja jest wysyłana od razu
+- dodano zatrzymanie odtwarzania i wymóg potwierdzenia, że oryginalny sterownik jest odłączony od RS-485
+- nie usunięto dotychczasowych kursówek, GPS, zapowiedzi, LCD ani OMSI
+
+UWAGA: przechwyty są porcjami odczytu USB, nie zdekodowanymi ramkami protokołu R&G. Funkcja służy wyłącznie diagnostyce.

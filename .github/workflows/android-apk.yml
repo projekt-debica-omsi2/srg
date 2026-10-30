@@ -1,4 +1,4 @@
-name: Build SRG Mobile 1.4.69-omsi-test APK
+name: Build SRG Mobile 1.4.70 APK
 on:
   workflow_dispatch:
   push:
@@ -101,7 +101,7 @@ jobs:
       - name: Publish APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: SRG-Mobile-v1.4.69-omsi-test-KURSOWKI-LCD-LAN-release
+          name: SRG-Mobile-v1.4.70-OMSI-RS485-KURSOWKI-LCD-LAN-release
           path: app/build/outputs/apk/release/app-release.apk
           if-no-files-found: error
 

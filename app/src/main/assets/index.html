@@ -181,6 +181,13 @@
 <label>Ramka HEX: {addr} = jeden bajt adresu, {text} = tekst. Nagłówek i sumę kontrolną należy podać według protokołu.<input id="rgFrame" placeholder="Brak domyślnej ramki — wpisz HEX" maxlength="12000"></label>
 <label>Tekst testowy / kierunek<input id="rgText" value="TEST" maxlength="120"></label><label>Znacznik fontu (opcjonalny, tylko tekstowy)<input id="rgFont" placeholder="np. &lt;f1&gt; — tylko jeśli tablica obsługuje" maxlength="30"></label>
 <div class="transButtons"><button id="rgCourse">Pobierz kierunek kursu</button><button id="rgPreview">Podgląd HEX</button><button id="rgSend">Wyślij test na 17 i 18</button></div>
+<details id="rgDiag" style="margin-top:12px;border:1px solid #50745a;padding:10px"><summary><b>Diagnostyka RS-485 — przechwycona transmisja</b></summary>
+<p style="font-size:15px">Test odtwarza znany zapis z działającego sterownika. Oryginalny sterownik musi być fizycznie odłączony od magistrali RS-485. Tablica może pozostać zasilona.</p>
+<label><input type="checkbox" id="rgReplaySafe"> Potwierdzam: oryginalny sterownik jest odłączony od RS-485</label>
+<label>Przechwyt<select id="rgReplaySelect"></select></label>
+<div class="transButtons"><button id="rgReplayStart" type="button">Odtwórz całą transmisję</button><button id="rgReplayStop" type="button">Zatrzymaj</button></div>
+<p id="rgReplayStatus">Gotowe do testu.</p>
+</details>
 <p><label><input type="checkbox" id="rgVerified"> Potwierdzam, że ten profil i parametry poprawnie wyświetliły napis na tablicy</label></p><p><label><input type="checkbox" id="rgAuto"> Wysyłaj kierunek po wyborze / zmianie kursu (tylko zweryfikowany profil)</label></p><button class="wideBack" id="rgSave">Zapisz ustawienia</button><pre id="rgLog" style="min-height:100px"></pre><button class="wideBack" data-go="settings">Wróć</button></div></div></section><section class="view subView" id="settings"><div class="top"><span>USTAWIENIA</span><span class="clock" data-clock="1">--:--:--</span></div>
 <div class="settingsTiles"><button class="settingTile" data-go="timetableSettings"><b>Wi-Fi</b><span>Aktualizacja rozkładów</span></button><button class="settingTile" data-go="rgSettings"><b>R&G</b><span>Tablica R&G</span></button>
 <button class="settingTile" data-go="transmission"><b>⚙</b><span>Ustawienia<br/>transmisji</span></button>
@@ -1158,5 +1165,5 @@ $('#extraPasswordSave').onclick=async()=>{if(!extraUnlocked)return;try{const p=$
 try{const v=window.SRGApp?.version();if(v){$('#appVersion').textContent='v'+v+' LCD';document.title='SRG Mobile v'+v;generic.info[2]='SRG Mobile v'+v+' · profil REVVL Tab 2.'}}catch(e){}
 
 loadBuiltinRJ(false);renderNoActiveCourse();refreshAutoGpsIndicator();refreshVoiceIndicator();updateClocks();renderIdle();const restored=restoreSession();go(restored?'course':'idle');setInterval(updateDepartureUI,1000);setInterval(renderRoad,5000);window.__srg={state,go,refreshCourse,loadBuiltinRJ,applyRJBuffer,finalDirection,renderCourses,openCoursePicker,closeCoursePicker,selectCourse,renderDutySelect,openTripChoice,renderTripChoice,nearestFutureIndex,dutyEntries,finishCurrentTrip,nextTripSameDuty,askLogout,openDriverChange,startGps,stopGps,departureDateForCourse,formatDepartureDifference,updateDepartureUI,closeCourseStarted,updateGpsFix,processAutoGpsFix,processVoiceGpsFix,refreshAutoGpsIndicator,refreshVoiceIndicator,restoreSession,persistSession,renderRoad,roadMeters,roadProjection};
-})();</script><script src="rg-usb.js"></script><script src="ibis.js"></script><script src="omsi.js"></script></body></html>
+})();</script><script src="rg-replay-data.js"></script><script src="rg-usb.js"></script><script src="ibis.js"></script><script src="omsi.js"></script></body></html>
 
