@@ -15,12 +15,14 @@ import java.io.*;
 import java.text.SimpleDateFormat;
 import java.util.*;
 import java.util.concurrent.*;
+import java.util.concurrent.atomic.AtomicLong;
 
-/** Real USB serial transport plus RX capture for R&G reverse-engineering. */
+/** USB serial transport with normal callback RX and optional diagnostic raw polling RX. */
 public final class RgUsbBridge implements SerialInputOutputManager.Listener {
  private final Activity activity; private final WebView web; private final UsbManager manager;
  private final ExecutorService queue=Executors.newSingleThreadExecutor();
- private UsbSerialPort port; private UsbDeviceConnection connection; private SerialInputOutputManager io;
+ private final ExecutorService rawQueue=Executors.newSingleThreadExecutor();
+ private volatile UsbSerialPort port; private UsbDeviceConnection connection; private SerialInputOutputManager io;
  private volatile int deviceId=-1; private int generation=0; private volatile boolean destroyed=false;
  private int currentBaud=9600,currentData=8,currentStop=1,currentParity=0;
  private final String permission,callback;
@@ -30,6 +32,10 @@ public final class RgUsbBridge implements SerialInputOutputManager.Listener {
  private int captureChunks=0,captureBytes=0; private String captureLabel="",captureFolder="SRG-Captures";
  private StringBuilder captureBuffer=new StringBuilder();
  private static final int MAX_CAPTURE_CHARS=8*1024*1024;
+
+ private volatile boolean rawRx=false;
+ private final AtomicLong rxBytes=new AtomicLong(), rxChunks=new AtomicLong(), rxErrors=new AtomicLong();
+ private volatile long lastRxAt=0L;
 
  private void submit(Runnable task){if(destroyed)return;try{queue.execute(task);}catch(RejectedExecutionException ignored){}}
  private final BroadcastReceiver receiver=new BroadcastReceiver(){public void onReceive(Context c,Intent i){
@@ -45,6 +51,17 @@ public final class RgUsbBridge implements SerialInputOutputManager.Listener {
  private void emitCaptureSaved(JSONObject data){if(destroyed)return;final String json=data.toString();activity.runOnUiThread(()->{if(!destroyed)web.evaluateJavascript("window.rgUsbCaptureSaved&&window.rgUsbCaptureSaved(JSON.parse("+JSONObject.quote(json)+"))",null);});}
 
  @JavascriptInterface public String devices(){JSONArray out=new JSONArray();try{for(UsbSerialDriver d:UsbSerialProber.getDefaultProber().findAllDrivers(manager)){JSONObject o=new JSONObject();o.put("id",d.getDevice().getDeviceId());o.put("name",d.getClass().getSimpleName()+String.format(" · VID %04X PID %04X · ",d.getDevice().getVendorId(),d.getDevice().getProductId())+d.getDevice().getDeviceName());out.put(o);}}catch(Exception e){emit("error",e.toString());}return out.toString();}
+
+ private void startCallbackIo(){
+  if(port==null||rawRx)return;
+  final int openedGeneration=generation;
+  io=new SerialInputOutputManager(port,new SerialInputOutputManager.Listener(){
+   public void onNewData(byte[] data){RgUsbBridge.this.onNewData(data);}
+   public void onRunError(Exception e){submit(()->{if(generation==openedGeneration){rxErrors.incrementAndGet();emitStats();closePort();emit("error",e.toString());}});}
+  });
+  io.start();
+ }
+
  @JavascriptInterface public void connect(int id,int baud,int data,int stop,int parity){submit(()->{
   closePort();try{
    if(baud<300||baud>1000000||data<5||data>8||(stop!=1&&stop!=2)||parity<0||parity>2)throw new Exception("Nieprawidłowe parametry portu");
@@ -54,13 +71,46 @@ public final class RgUsbBridge implements SerialInputOutputManager.Listener {
    if(owners.putIfAbsent(id,this)!=null)throw new Exception("Ten adapter jest już używany przez drugie połączenie. Wybierz osobny adapter USB.");deviceId=id;
    connection=manager.openDevice(driver.getDevice());if(connection==null)throw new Exception("Brak dostępu USB");port=driver.getPorts().get(0);port.open(connection);port.setParameters(baud,data,stop,parity);
    currentBaud=baud;currentData=data;currentStop=stop;currentParity=parity;deviceId=id;
-   final int openedGeneration=generation;
-   io=new SerialInputOutputManager(port,new SerialInputOutputManager.Listener(){
-    public void onNewData(byte[] data){RgUsbBridge.this.onNewData(data);}
-    public void onRunError(Exception e){submit(()->{if(generation==openedGeneration){closePort();emit("error",e.toString());}});}
-   });io.start();emit("connected","USB połączone — odpowiedź tablicy niepotwierdzona");
+   rxBytes.set(0);rxChunks.set(0);rxErrors.set(0);lastRxAt=0;rawRx=false;
+   startCallbackIo();
+   emit("connected","USB połączone · RX callback aktywny · "+baud+" "+data+"N"+stop);
+   emitStats();
   }catch(Exception e){closePort();emit("error",e.toString());}
  });}
+
+ @JavascriptInterface public void startRawRx(){submit(()->{
+  if(port==null){emit("raw_rx_error","USB nie jest połączone.");return;}
+  if(rawRx){emit("raw_rx_status","Surowy RX już działa.");return;}
+  rawRx=true;
+  if(io!=null){io.stop();io=null;}
+  emit("raw_rx_status","RAW RX START — bez callbacku, odczyt port.read() co 250 ms");
+  rawQueue.execute(()->{
+   byte[] buf=new byte[4096];
+   while(rawRx&&!destroyed&&port!=null){
+    try{
+     int n=port.read(buf,250);
+     if(n>0)onNewData(Arrays.copyOf(buf,n));
+    }catch(Exception e){
+     if(rawRx){rxErrors.incrementAndGet();emit("raw_rx_error",e.toString());emitStats();}
+     break;
+    }
+   }
+   emit("raw_rx_status","RAW RX STOP");
+  });
+ });}
+
+ @JavascriptInterface public void stopRawRx(){submit(()->{
+  rawRx=false;
+  if(port!=null&&io==null){try{Thread.sleep(300);}catch(InterruptedException ignored){}startCallbackIo();}
+  emit("raw_rx_status","Powrót do RX callback.");
+  emitStats();
+ });}
+
+ @JavascriptInterface public String rxStats(){
+  try{JSONObject o=new JSONObject();o.put("bytes",rxBytes.get());o.put("chunks",rxChunks.get());o.put("errors",rxErrors.get());o.put("lastRxAt",lastRxAt);o.put("raw",rawRx);o.put("connected",port!=null);o.put("baud",currentBaud);o.put("dataBits",currentData);o.put("stopBits",currentStop);o.put("parity",currentParity);return o.toString();}catch(Exception e){return "{}";}
+ }
+ private void emitStats(){emit("rx_stats",rxStats());}
+
  @JavascriptInterface public void send(String hex){submit(()->{try{if(port==null)throw new Exception("USB rozłączone");String s=hex.replaceAll("\\s","");if(s.length()==0||s.length()>8192||s.length()%2!=0||!s.matches("[0-9a-fA-F]+"))throw new Exception("Niepoprawne HEX / limit 4096 bajtów");byte[] b=new byte[s.length()/2];for(int n=0;n<b.length;n++)b[n]=(byte)Integer.parseInt(s.substring(n*2,n*2+2),16);port.write(b,3000);emit("tx",hex);}catch(Exception e){closePort();emit("error",e.toString());}});}
  @JavascriptInterface public void disconnect(){submit(()->{closePort();emit("disconnected","USB rozłączone");});}
 
@@ -70,8 +120,8 @@ public final class RgUsbBridge implements SerialInputOutputManager.Listener {
    if(capturing){emit("capture_error","Przechwytywanie już trwa.");return;}
    captureLabel=safeLabel(label);captureFolder=safeFolder(folder);captureStarted=System.currentTimeMillis();captureLast=captureStarted;captureChunks=0;captureBytes=0;captureBuffer=new StringBuilder();
    try{
-    JSONObject meta=new JSONObject();meta.put("type","srg_capture");meta.put("format",1);meta.put("appVersion","1.4.71");meta.put("category","linia_dodatkowa");meta.put("label",captureLabel);meta.put("startedAt",captureStarted);meta.put("baud",currentBaud);meta.put("dataBits",currentData);meta.put("stopBits",currentStop);meta.put("parity",currentParity);
-    captureBuffer.append(meta).append('\n');capturing=true;emit("capture_started","Nasłuch rozpoczęty: "+captureLabel+" · zapis do Pobrane/"+captureFolder);
+    JSONObject meta=new JSONObject();meta.put("type","srg_capture");meta.put("format",2);meta.put("appVersion","1.4.72");meta.put("category","linia_dodatkowa");meta.put("label",captureLabel);meta.put("startedAt",captureStarted);meta.put("baud",currentBaud);meta.put("dataBits",currentData);meta.put("stopBits",currentStop);meta.put("parity",currentParity);meta.put("rxMode",rawRx?"raw-poll":"callback");
+    captureBuffer.append(meta).append('\n');capturing=true;emit("capture_started","Nasłuch rozpoczęty: "+captureLabel+" · tryb "+(rawRx?"RAW":"callback"));
    }catch(Exception e){captureBuffer=new StringBuilder();emit("capture_error","Nie można rozpocząć zapisu: "+e.getMessage());}
   }
  });}
@@ -85,17 +135,17 @@ public final class RgUsbBridge implements SerialInputOutputManager.Listener {
   synchronized(this){if(!capturing)return;long now=System.currentTimeMillis();long dt=Math.max(0,now-captureLast),t=Math.max(0,now-captureStarted);captureLast=now;
    StringBuilder hex=new StringBuilder();for(byte b:data){if(hex.length()>0)hex.append(' ');hex.append(String.format(Locale.ROOT,"%02X",b&255));}
    try{JSONObject row=new JSONObject();row.put("t",t);row.put("dt",dt);row.put("dir","rx");row.put("hex",hex.toString());captureBuffer.append(row).append('\n');captureChunks++;captureBytes+=data.length;
-    if(captureBuffer.length()>MAX_CAPTURE_CHARS){emit("capture_error","Przechwyt przekroczył limit pamięci 8 MB — zapisuję to, co zebrano.");saveCaptureLocked("limit");}
+    if(captureBuffer.length()>MAX_CAPTURE_CHARS){emit("capture_error","Przechwyt przekroczył limit 8 MB — zapisuję zebrane dane.");saveCaptureLocked("limit");}
    }catch(Exception e){emit("capture_error","Błąd zapisu ramki: "+e.getMessage());}
   }
  }
  private void saveCaptureLocked(String reason){
   if(!capturing)return;capturing=false;long ended=System.currentTimeMillis();
-  try{JSONObject end=new JSONObject();end.put("type","end");end.put("endedAt",ended);end.put("durationMs",Math.max(0,ended-captureStarted));end.put("chunks",captureChunks);end.put("bytes",captureBytes);end.put("reason",reason);captureBuffer.append(end).append('\n');}catch(Exception ignored){}
+  try{JSONObject end=new JSONObject();end.put("type","end");end.put("endedAt",ended);end.put("durationMs",Math.max(0,ended-captureStarted));end.put("chunks",captureChunks);end.put("bytes",captureBytes);end.put("reason",reason);end.put("rxMode",rawRx?"raw-poll":"callback");captureBuffer.append(end).append('\n');}catch(Exception ignored){}
   String stamp=new SimpleDateFormat("yyyyMMdd-HHmmss",Locale.ROOT).format(new Date(captureStarted));
   String fileName="SRG-capture-"+stamp+"-"+safeFilePart(captureLabel)+".jsonl";String path;try{path=writeCapture(fileName,captureBuffer.toString(),captureFolder);}
   catch(Exception e){emit("capture_error","Nie udało się zapisać pliku: "+e.getMessage());captureBuffer=new StringBuilder();return;}
-  try{JSONObject saved=new JSONObject();saved.put("label",captureLabel);saved.put("category","linia_dodatkowa");saved.put("file",fileName);saved.put("path",path);saved.put("chunks",captureChunks);saved.put("bytes",captureBytes);saved.put("startedAt",captureStarted);emitCaptureSaved(saved);}catch(Exception ignored){}
+  try{JSONObject saved=new JSONObject();saved.put("label",captureLabel);saved.put("category","linia_dodatkowa");saved.put("file",fileName);saved.put("path",path);saved.put("chunks",captureChunks);saved.put("bytes",captureBytes);saved.put("startedAt",captureStarted);saved.put("rxMode",rawRx?"raw-poll":"callback");emitCaptureSaved(saved);}catch(Exception ignored){}
   emit("capture_saved","Zapisano "+captureChunks+" porcji / "+captureBytes+" B: "+path);captureBuffer=new StringBuilder();
  }
  private String writeCapture(String fileName,String data,String folder) throws Exception{
@@ -108,8 +158,8 @@ public final class RgUsbBridge implements SerialInputOutputManager.Listener {
   }
   File base=activity.getExternalFilesDir(Environment.DIRECTORY_DOWNLOADS);if(base==null)throw new IOException("Brak pamięci zewnętrznej");File dir=new File(base,folder);if(!dir.isDirectory()&&!dir.mkdirs())throw new IOException("Nie można utworzyć folderu");File f=new File(dir,fileName);try(OutputStream out=new FileOutputStream(f)){out.write(bytes);}return f.getAbsolutePath();
  }
- private void closePort(){if(capturing)saveCaptureLocked("disconnect");generation++;if(io!=null){io.stop();io=null;}try{if(port!=null)port.close();}catch(Exception ignored){}port=null;if(connection!=null)connection.close();connection=null;owners.remove(deviceId,this);deviceId=-1;}
- public void onNewData(byte[] data){appendCapture(data);StringBuilder s=new StringBuilder();for(byte b:data)s.append(String.format(Locale.ROOT,"%02X ",b&255));emit("rx",s.toString());}
- public void onRunError(Exception e){if(!destroyed)submit(()->{closePort();emit("error",e.toString());});}
- public synchronized void close(){if(destroyed)return;destroyed=true;try{activity.unregisterReceiver(receiver);}catch(Exception ignored){}queue.execute(this::closePort);queue.shutdown();}
+ private void closePort(){rawRx=false;if(capturing)saveCaptureLocked("disconnect");generation++;if(io!=null){io.stop();io=null;}try{if(port!=null)port.close();}catch(Exception ignored){}port=null;if(connection!=null)connection.close();connection=null;owners.remove(deviceId,this);deviceId=-1;emitStats();}
+ public void onNewData(byte[] data){rxBytes.addAndGet(data.length);rxChunks.incrementAndGet();lastRxAt=System.currentTimeMillis();appendCapture(data);StringBuilder s=new StringBuilder();for(byte b:data)s.append(String.format(Locale.ROOT,"%02X ",b&255));emit("rx",s.toString());emitStats();}
+ public void onRunError(Exception e){rxErrors.incrementAndGet();if(!destroyed)submit(()->{closePort();emit("error",e.toString());});}
+ public synchronized void close(){if(destroyed)return;destroyed=true;try{activity.unregisterReceiver(receiver);}catch(Exception ignored){}queue.execute(this::closePort);queue.shutdown();rawRx=false;rawQueue.shutdownNow();}
 }

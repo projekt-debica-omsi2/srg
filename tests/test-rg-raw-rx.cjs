@@ -1,0 +1,17 @@
+const fs=require('fs'),assert=require('assert');
+const j=fs.readFileSync('app/src/main/java/pl/srgmobile/classic/RgUsbBridge.java','utf8');
+const u=fs.readFileSync('app/src/main/assets/rg-usb.js','utf8');
+const g=fs.readFileSync('app/build.gradle','utf8');
+assert(j.includes('startRawRx()'));
+assert(j.includes('port.read(buf,250)'));
+assert(j.includes('rxBytes'));
+assert(j.includes('rxChunks'));
+assert(j.includes('rxErrors'));
+assert(j.includes('rxStats()'));
+assert(j.includes('appVersion","1.4.72'));
+assert(u.includes('WŁĄCZ RAW RX'));
+assert(u.includes('BAJTY RX'));
+assert(u.includes('bridge.startRawRx()'));
+assert(g.includes("versionName '1.4.72'"));
+assert(g.includes('versionCode 11472'));
+console.log('SRG 1.4.72 raw RX diagnostics OK');

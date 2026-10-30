@@ -13,55 +13,71 @@ function frames(cfg,text){
   if(!s||s.length%2||!/^[\da-f]+$/i.test(s)||s.length>8192)throw Error('Niepoprawna ramka HEX (maks. 4096 bajtów).');return s.match(/../g).join(' ').toUpperCase();});
 }
 if(typeof module!=='undefined')module.exports={frames};if(!root.document)return;
-const $=id=>document.getElementById('rg'+id),bridge=root.SRGRgUsb;let connected=false,verified='',saved={},replayToken=0,replayRunning=false,captureRunning=false;
-const log=t=>{ $('Log').textContent=($('Log').textContent+'\n'+new Date().toLocaleTimeString()+' '+t).slice(-18000);$('Log').scrollTop=$('Log').scrollHeight;};
+const $=id=>document.getElementById('rg'+id),bridge=root.SRGRgUsb;let connected=false,verified='',saved={},replayToken=0,replayRunning=false,captureRunning=false,rawMode=false;
+const log=t=>{ $('Log').textContent=($('Log').textContent+'\n'+new Date().toLocaleTimeString()+' '+t).slice(-22000);$('Log').scrollTop=$('Log').scrollHeight;};
 function config(){return {profile:$('Profile').value,frame:$('Frame').value,font:$('Font').value,baud:+$('Baud').value,data:+$('Data').value,stop:+$('Stop').value,parity:+$('Parity').value,device:$('Device').value};}
 function signature(c){return JSON.stringify(c);}
 function guard(fn){return ()=>{try{fn();}catch(e){log('BŁĄD: '+e.message);}};}
 function send(c,text){if(!connected||!bridge)throw Error('Najpierw połącz konwerter USB w APK.');const batch=frames(c,text);batch.forEach(h=>bridge.send(h));log('Zlecono zapis USB — sprawdź fizyczną tablicę.');}
 function sleep(ms){return new Promise(r=>setTimeout(r,ms));}
 
-function captureList(){
- try{return JSON.parse(localStorage.getItem('srgCapturedExtraLines')||'[]');}catch(e){return [];}
-}
+function captureList(){try{return JSON.parse(localStorage.getItem('srgCapturedExtraLines')||'[]');}catch(e){return [];}}
 function renderCaptureList(){
  const box=$('CaptureList');if(!box)return;const list=captureList();box.innerHTML='';
  if(!list.length){box.textContent='Brak zapisanych przechwytów.';return;}
  for(const item of list.slice(0,15)){
   const d=document.createElement('div');d.style.cssText='padding:6px 0;border-bottom:1px solid #31533d;font-size:14px';
-  d.textContent=(item.label||'BEZ NAZWY')+' · '+(item.bytes||0)+' B · '+(item.path||item.file||'');
-  box.appendChild(d);
+  d.textContent=(item.label||'BEZ NAZWY')+' · '+(item.bytes||0)+' B · '+(item.rxMode||'?')+' · '+(item.path||item.file||'');box.appendChild(d);
  }
+}
+function updateStats(raw){
+ let s={};try{s=typeof raw==='string'?JSON.parse(raw):raw||{};}catch(e){}
+ if($('RxBytes'))$('RxBytes').textContent=String(s.bytes??0);
+ if($('RxChunks'))$('RxChunks').textContent=String(s.chunks??0);
+ if($('RxErrors'))$('RxErrors').textContent=String(s.errors??0);
+ if($('RxLast'))$('RxLast').textContent=s.lastRxAt?new Date(s.lastRxAt).toLocaleTimeString():'—';
+ if($('RxMode'))$('RxMode').textContent=s.raw?'RAW POLL':'CALLBACK';
+ if($('RxPort'))$('RxPort').textContent=s.connected?'OTWARTY':'ZAMKNIĘTY';
+ rawMode=!!s.raw;
+ if($('RawStart'))$('RawStart').disabled=!connected||rawMode;
+ if($('RawStop'))$('RawStop').disabled=!rawMode;
 }
 function initCapture(){
  const replay=$('Diag');if(!replay||$('Capture'))return;
  const d=document.createElement('details');d.id='rgCapture';d.open=true;d.style.cssText='margin-top:12px;border:1px solid #50745a;padding:10px';
- d.innerHTML='<summary><b>Przechwyć ramki z SRG</b></summary>'+
- '<p style="font-size:15px">Do nasłuchu oryginalny sterownik SRG ma być PODŁĄCZONY do RS-485. Konwerter podłącz równolegle. Tablet zapisuje każdą porcję RX z czasem i surowym HEX.</p>'+
+ d.innerHTML='<summary><b>Diagnostyka RX + przechwytywanie 1.4.72</b></summary>'+
+ '<div style="display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:10px 0">'+
+ '<div>PORT<br><b id="rgRxPort">—</b></div><div>TRYB RX<br><b id="rgRxMode">—</b></div><div>BAJTY RX<br><b id="rgRxBytes">0</b></div>'+
+ '<div>PORCJE RX<br><b id="rgRxChunks">0</b></div><div>BŁĘDY RX<br><b id="rgRxErrors">0</b></div><div>OSTATNI RX<br><b id="rgRxLast">—</b></div></div>'+
+ '<p style="font-size:15px">Najpierw testuj normalny CALLBACK. Jeżeli dalej jest 0 B, włącz RAW POLL — wtedy Android czyta bezpośrednio port.read() co 250 ms, podobniej do programu windowsowego.</p>'+
+ '<div class="transButtons"><button id="rgRawStart" type="button">WŁĄCZ RAW RX</button><button id="rgRawStop" type="button">WYŁĄCZ RAW RX</button><button id="rgRxRefresh" type="button">ODŚWIEŻ LICZNIKI</button></div>'+
+ '<hr style="border-color:#31533d;margin:12px 0">'+
  '<label>Nazwa / kierunek<input id="rgCaptureName" value="" placeholder="np. DĘBICA, RZESZÓW DWORZEC LOKALNY" maxlength="120"></label>'+
  '<label>Folder w Pobrane<input id="rgCaptureFolder" value="SRG-Captures" maxlength="60"></label>'+
  '<div class="transButtons"><button id="rgCaptureStart" type="button">START — przechwyć ramki</button><button id="rgCaptureStop" type="button">STOP i zapisz</button></div>'+
- '<p id="rgCaptureStatus">Gotowe. Pliki JSONL można potem wysłać do analizy.</p>'+
+ '<p id="rgCaptureStatus">Gotowe. Przy przechwytywaniu oryginalny SRG ma być podłączony do magistrali.</p>'+
  '<div><b>Zapisane jako „linie dodatkowe”:</b><div id="rgCaptureList"></div></div>';
  replay.parentNode.insertBefore(d,replay);
  try{$('CaptureFolder').value=localStorage.getItem('srgCaptureFolder')||'SRG-Captures';}catch(e){}
- $('CaptureStop').disabled=true;
+ $('CaptureStop').disabled=true;$('RawStop').disabled=true;
+ $('RawStart').onclick=guard(()=>{if(!bridge||!connected)throw Error('Najpierw połącz USB.');bridge.startRawRx();});
+ $('RawStop').onclick=guard(()=>{if(bridge)bridge.stopRawRx();});
+ $('RxRefresh').onclick=guard(()=>{if(bridge)updateStats(bridge.rxStats());});
  $('CaptureStart').onclick=guard(()=>{
   if(!bridge||!connected)throw Error('Najpierw połącz konwerter USB.');
   const name=$('CaptureName').value.trim()||$('Text').value.trim()||'BEZ_NAZWY';
-  const folder=$('CaptureFolder').value.trim()||'SRG-Captures';
-  localStorage.setItem('srgCaptureFolder',folder);
-  captureRunning=true;$('CaptureStart').disabled=true;$('CaptureStop').disabled=false;$('CaptureStatus').textContent='Nasłuch trwa… teraz ustaw żądany kierunek na oryginalnym SRG.';
+  const folder=$('CaptureFolder').value.trim()||'SRG-Captures';localStorage.setItem('srgCaptureFolder',folder);
+  captureRunning=true;$('CaptureStart').disabled=true;$('CaptureStop').disabled=false;
+  $('CaptureStatus').textContent='Nasłuch trwa… ustaw kierunek na oryginalnym SRG i obserwuj licznik BAJTY RX.';
   bridge.startCapture(name,folder);
  });
  $('CaptureStop').onclick=guard(()=>{if(!bridge||!captureRunning)throw Error('Przechwytywanie nie jest uruchomione.');$('CaptureStatus').textContent='Kończenie i zapisywanie…';bridge.stopCapture();});
- renderCaptureList();
+ renderCaptureList();if(bridge)updateStats(bridge.rxStats());
 }
 root.rgUsbCaptureSaved=(item)=>{
  const list=captureList();list.unshift(item);try{localStorage.setItem('srgCapturedExtraLines',JSON.stringify(list.slice(0,50)));}catch(e){}
  captureRunning=false;if($('CaptureStart'))$('CaptureStart').disabled=false;if($('CaptureStop'))$('CaptureStop').disabled=true;
- if($('CaptureStatus'))$('CaptureStatus').textContent='Zapisano: '+(item.path||item.file);
- renderCaptureList();
+ if($('CaptureStatus'))$('CaptureStatus').textContent='Zapisano: '+(item.path||item.file);renderCaptureList();
 };
 
 function initReplay(){
@@ -84,7 +100,10 @@ root.rgUsbEvent=(type,msg)=>{
  if(type==='connected')connected=true;if(['error','disconnected'].includes(type))connected=false;
  if(type==='capture_started'){captureRunning=true;if($('CaptureStatus'))$('CaptureStatus').textContent=msg;}
  if(type==='capture_saved'){captureRunning=false;if($('CaptureStart'))$('CaptureStart').disabled=false;if($('CaptureStop'))$('CaptureStop').disabled=true;if($('CaptureStatus'))$('CaptureStatus').textContent=msg;}
- if(type==='capture_error'){if($('CaptureStatus'))$('CaptureStatus').textContent='BŁĄD: '+msg;}
+ if(type==='capture_error'&&$('CaptureStatus'))$('CaptureStatus').textContent='BŁĄD: '+msg;
+ if(type==='rx_stats')updateStats(msg);
+ if(type==='raw_rx_status'&&$('CaptureStatus'))$('CaptureStatus').textContent=msg;
+ if(type==='raw_rx_error'&&$('CaptureStatus'))$('CaptureStatus').textContent='RAW RX BŁĄD: '+msg;
  if(['connected','error','disconnected','info'].includes(type))$('Status').textContent=msg;
  log(type.toUpperCase()+': '+msg);
 };
@@ -100,7 +119,7 @@ $('Profile').addEventListener('change',()=>{$('Send').textContent=$('Profile').v
 $('Send').textContent=$('Profile').value==='hex'?'Wyślij surowe HEX jeden raz':'Wyślij test na 17 i 18';
 $('Verified').onchange=()=>{verified=$('Verified').checked?signature(config()):'';};
 for(const key of ['Device','Profile','Frame','Font','Baud','Data','Stop','Parity'])$(key).addEventListener('change',()=>{verified='';$('Verified').checked=false;$('Auto').checked=false;if(['Device','Baud','Data','Stop','Parity'].includes(key)&&connected){connected=false;bridge.disconnect();}});
-$('Save').onclick=guard(()=>{const c=config();if($('Auto').checked&&(!$('Verified').checked||verified!==signature(c)||c.profile==='hex'))throw Error('Automatyka wymaga potwierdzonej ramki tekstowej.');localStorage.setItem('srgRgUsb',JSON.stringify(c));log('Zapisano profil. Automatyka wymaga ponownego potwierdzenia po restarcie.');});
+$('Save').onclick=guard(()=>{const c=config();if($('Auto').checked&&(!$('Verified').checked||verified!==signature(c)||c.profile==='hex'))throw Error('Automatyka wymaga potwierdzonej ramki tekstowej.');localStorage.setItem('srgRgUsb',JSON.stringify(c));log('Zapisano profil.');});
 initCapture();initReplay();
 root.addEventListener('srg-course-selected',e=>{if(!$('Auto').checked)return;try{const c=config();if(c.profile==='hex'||verified!==signature(c))throw Error('Profil niepotwierdzony.');send(c,root.SRGExternalText?root.SRGExternalText(e.detail):e.detail.direction);}catch(err){log('AUTO: '+err.message);}});scan();
 })(typeof window==='undefined'?globalThis:window);
