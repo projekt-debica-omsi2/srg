@@ -30,7 +30,8 @@ class State:
     def __init__(self, root=ROOT):
         self.root = root
         root.mkdir(parents=True, exist_ok=True)
-        self.token = secrets.token_hex(12)
+        self.token = f'{secrets.randbelow(10000):04d}'
+        self.auth_failures = []
         self.lock = threading.Lock()
         self.session = None
         self.events = []
@@ -59,14 +60,24 @@ class State:
                     self.event('telemetry_contact_started', session=sid)
                 self.session = sid
 
-def handler(state):
+def handler(state, usb=False):
     class Handler(BaseHTTPRequestHandler):
         def log_message(self, *_):
             pass  # Never log credentials or request headers.
         def do_GET(self):
             auth = self.headers.get('Authorization', '')
-            if not secrets.compare_digest(auth, 'Bearer ' + state.token):
-                self.send_error(401); return
+            if not usb:
+                now = time.monotonic()
+                with state.lock:
+                    state.auth_failures = [t for t in state.auth_failures if now - t < 60]
+                    limited = len(state.auth_failures) >= 5
+                    valid = secrets.compare_digest(auth, 'Bearer ' + state.token)
+                    if not valid and not limited:
+                        state.auth_failures.append(now)
+                if limited:
+                    self.send_error(429); return
+                if not valid:
+                    self.send_error(401); return
             if self.path != '/api/status':
                 self.send_error(404); return
             body = json.dumps(state.status(), ensure_ascii=False, allow_nan=False).encode('utf-8')
@@ -85,13 +96,16 @@ def main():
     state = State()
     stop = threading.Event()
     server = ThreadingHTTPServer(('0.0.0.0', 8765), handler(state))
+    usb_server = ThreadingHTTPServer(('127.0.0.1', 8766), handler(state, usb=True))
+    usb_thread = threading.Thread(target=usb_server.serve_forever, daemon=True)
+    usb_thread.start()
     thread = threading.Thread(target=state.monitor, args=(stop,), daemon=True)
     thread.start()
-    print('SRG OMSI Bridge 0.1 — odczyt danych; nie pelna integracja tras i kamer.')
+    print('SRG OMSI Bridge 0.2 — odczyt danych; nie pelna integracja tras i kamer.')
     print('Komputer:', socket.gethostname())
     addresses = sorted(set(socket.gethostbyname_ex(socket.gethostname())[2]))
     print('Wi-Fi: w aplikacji wpisz IPv4 komputera:', ', '.join(addresses))
-    print('USB: uruchom USB.cmd, w aplikacji wybierz USB (127.0.0.1).')
+    print('USB: uruchom USB.cmd, w aplikacji wybierz USB bez kodu (127.0.0.1:8766).')
     print('Kod parowania:', state.token)
     print('Logi:', state.root)
     print('Pozwol na dostep w Zaporze Windows tylko w sieci prywatnej. Ctrl+C konczy.')
@@ -100,7 +114,7 @@ def main():
     except KeyboardInterrupt:
         pass
     finally:
-        stop.set(); server.server_close(); thread.join(timeout=2)
+        stop.set(); server.server_close(); usb_server.shutdown(); usb_server.server_close(); usb_thread.join(timeout=2); thread.join(timeout=2)
         state.event('bridge_stopped')
 if __name__ == '__main__':
     main()

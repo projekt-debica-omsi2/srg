@@ -25,10 +25,12 @@ public final class OmsiBridge {
         new Thread(()->{
             String response;
             try {
-                if(!allowed(host)||token==null||!token.matches("[a-f0-9]{24}"))throw new Exception("Sprawdź lokalny adres IPv4 i kod parowania.");
+                boolean usb = "127.0.0.1".equals(host);
+                int port = usb ? 8766 : 8765;
+                if(!allowed(host)||(!usb&&(token==null||!token.matches("[0-9]{4}"))))throw new Exception("Sprawdź lokalny adres IPv4 i kod parowania.");
                 try(Socket socket=new Socket()){
-                    socket.connect(new InetSocketAddress(host,8765),2000); socket.setSoTimeout(2500);
-                    String request="GET /api/status HTTP/1.0\r\nHost: "+host+":8765\r\nAuthorization: Bearer "+token+"\r\nConnection: close\r\n\r\n";
+                    socket.connect(new InetSocketAddress(host,port),2000); socket.setSoTimeout(2500);
+                    String request="GET /api/status HTTP/1.0\r\nHost: "+host+":"+port+"\r\nAuthorization: Bearer "+token+"\r\nConnection: close\r\n\r\n";
                     socket.getOutputStream().write(request.getBytes(StandardCharsets.US_ASCII));
                     ByteArrayOutputStream out=new ByteArrayOutputStream(); byte[] buf=new byte[4096];int n;
                     while((n=socket.getInputStream().read(buf))!=-1){out.write(buf,0,n);if(out.size()>262144)throw new Exception("Zbyt duża odpowiedź.");}

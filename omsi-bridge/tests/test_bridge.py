@@ -27,4 +27,23 @@ class Tests(unittest.TestCase):
                 with self.assertRaises(urllib.error.HTTPError) as e:urllib.request.urlopen(req)
                 self.assertEqual(e.exception.code,404)
             finally:server.shutdown();server.server_close();t.join()
+    def test_wifi_pin_rate_limit_and_usb_isolation(self):
+        with tempfile.TemporaryDirectory() as d:
+            state=bridge.State(Path(d))
+            self.assertRegex(state.token, r'^[0-9]{4}$')
+            for usb in (False, True):
+                server=bridge.ThreadingHTTPServer(('127.0.0.1',0), bridge.handler(state,usb=usb))
+                thread=threading.Thread(target=server.serve_forever,daemon=True);thread.start()
+                url=f'http://127.0.0.1:{server.server_port}/api/status'
+                try:
+                    if usb:
+                        self.assertEqual(urllib.request.urlopen(url).status,200)
+                    else:
+                        for _ in range(5):
+                            with self.assertRaises(urllib.error.HTTPError) as e: urllib.request.urlopen(url)
+                            self.assertEqual(e.exception.code,401)
+                        with self.assertRaises(urllib.error.HTTPError) as e: urllib.request.urlopen(url)
+                        self.assertEqual(e.exception.code,429)
+                finally:
+                    server.shutdown();server.server_close();thread.join()
 if __name__=='__main__':unittest.main()

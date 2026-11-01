@@ -30,7 +30,7 @@ Kod parowania zmienia siÄ™ po kaÅ¼dym uruchomieniu programu. PoÅ‚Ä…czenie lokaln
 2. Dodaj folder z `adb.exe` do PATH (lub uruchom polecenie poniÅ¼ej w tym folderze).
 3. Na Androidzie wÅ‚Ä…cz opcje programistyczne i debugowanie USB.
 4. PodÅ‚Ä…cz kabel obsÅ‚ugujÄ…cy dane; zatwierdÅº ten komputer na Androidzie.
-5. Uruchom `USB.cmd` albo `adb -d reverse tcp:8765 tcp:8765`.
+5. Uruchom `USB.cmd` albo `adb -d reverse tcp:8766 tcp:8766`.
 6. W sterowniku wybierz USB, wpisz kod i zapisz. UÅ¼ywany adres to 127.0.0.1.
 
 PodÅ‚Ä…cz tylko jeden telefon/tablet na czas uruchamiania USB.cmd.
@@ -71,3 +71,6 @@ PrzeÅ›lij log mostka i `logfile.txt` OMSI, jeÅ›li wtyczka nie startuje. Nie prze
 
 - OMSI plugin API: https://wiki.omnibussimulator.de/omsiwikineu.de/index.php?title=Plug-in-Schnittstelle
 - Android USB reverse forwarding: https://developer.android.com/develop/ui/views/layout/webapps/access-local-server
+
+## Wydanie 1.4.74 / mostek 0.2
+Wi-Fi: czterocyfrowy kod, port 8765. Po piêciu b³êdnych próbach nastêpuje ograniczenie przez maksymalnie minutê. USB: osobny port 8766 dostêpny wy³¹cznie na loopback PC, bez kodu. Wymagana aktualizacja aplikacji i mostka razem oraz ponowne uruchomienie USB.cmd. Stary tunel 8765 nie zastêpuje nowego. Nie potwierdzono jeszcze dzia³ania tego wydania podczas jazdy.

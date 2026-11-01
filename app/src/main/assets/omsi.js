@@ -15,7 +15,7 @@ const main=$('main.content');main.insertAdjacentHTML('beforeend',`
 <label>Tryb OMSI 2<select id="omsiEnabled"><option value="off">Wyłączony</option><option value="on">Włączony</option></select></label>
 <label>Połączenie<select id="omsiTransport"><option value="wifi">Wi-Fi / sieć lokalna</option><option value="usb">USB (ADB)</option></select></label>
 <label>IPv4 komputera<input id="omsiHost" placeholder="192.168.1.10" inputmode="decimal"></label>
-<label>Kod parowania z programu na komputerze<input id="omsiToken" autocomplete="off" maxlength="24"></label>
+<label>Kod Wi-Fi (4 cyfry)<input id="omsiToken" autocomplete="off" inputmode="numeric" pattern="[0-9]{4}" maxlength="4"></label>
 <button id="omsiSave">Zapisz i połącz</button><p id="omsiStatus" role="status">Tryb wyłączony</p>
 <button id="omsiShowLive">Dane z gry</button><button id="omsiShowLogs">Historia połączeń</button><button id="omsiBack">Wróć</button>
 </div></section>
@@ -42,7 +42,9 @@ function setEnabled(on){
  status(on?'Oczekiwanie na połączenie':'Tryb wyłączony');
 }
 $('#omsiHost').value=config.host||'';$('#omsiToken').value=config.token||'';$('#omsiTransport').value=config.transport||'wifi';$('#omsiEnabled').value=config.enabled?'on':'off';
-$('#omsiSave').onclick=()=>{config={host:$('#omsiHost').value.trim(),token:$('#omsiToken').value.trim().toLowerCase(),transport:$('#omsiTransport').value,enabled:$('#omsiEnabled').value==='on'};localStorage.setItem('srgOmsiConfig',JSON.stringify(config));request++;pending=null;lastGood=0;clearReadings();setEnabled(config.enabled);poll();};
+function transportFields(){const usb=$('#omsiTransport').value==='usb';$('#omsiHost').parentElement.hidden=usb;$('#omsiToken').parentElement.hidden=usb;}
+$('#omsiTransport').onchange=transportFields;transportFields();
+$('#omsiSave').onclick=()=>{config={host:$('#omsiHost').value.trim(),token:$('#omsiTransport').value==='usb'?'':$('#omsiToken').value.trim(),transport:$('#omsiTransport').value,enabled:$('#omsiEnabled').value==='on'};localStorage.setItem('srgOmsiConfig',JSON.stringify(config));request++;pending=null;lastGood=0;clearReadings();setEnabled(config.enabled);poll();};
 for(const id of ['omsiLiveBack','omsiLogsBack','omsiCameraBack'])$('#'+id).onclick=()=>app.go('omsiSettings');
 $('#omsiBack').onclick=()=>app.go('settings');$('#omsiShowLive').onclick=()=>{if(enabled)app.go('omsiLive');else status('Najpierw włącz tryb OMSI i zapisz.');};
 $('#omsiShowLogs').onclick=()=>{$('#omsiLogText').textContent=JSON.stringify({tablet:events,computer:current?.events||[]},null,2);app.go('omsiLogs');};
