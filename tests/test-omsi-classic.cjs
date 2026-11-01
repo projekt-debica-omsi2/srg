@@ -35,3 +35,13 @@ assert.equal(vm.runInContext('formatClock24(86400+5)',context),'00:00:05');
 assert.equal(vm.runInContext('formatClock24(null)',context),'—');
 assert(js.includes("omsiClock.className='omsiClockGroup'"));
 console.log('PASS 24-hour game clock follows time jumps and shows separate real clock');
+
+context.data.duty.next_stop=context.data.stops[0];context.data.duty.at_stop=true;context.data.duty.delay=75;
+vm.runInContext('renderCameraDuty(data)',context);
+assert.equal($('#omsiCameraDelay').textContent,'−1:15');assert.equal($('#omsiCameraStopLabel').textContent,'AKTUALNY PRZYSTANEK');assert.equal($('#omsiCameraStop').textContent,'A');assert.equal($('#omsiCameraFollowing').textContent,'B');
+context.data.duty.at_stop=false;context.data.duty.next_stop=context.data.stops[1];context.data.duty.delay=-60;
+vm.runInContext('renderCameraDuty(data)',context);
+assert.equal($('#omsiCameraDelay').textContent,'+1:00');assert.equal($('#omsiCameraStopLabel').textContent,'NASTĘPNY PRZYSTANEK');assert.equal($('#omsiCameraStop').textContent,'B');assert.equal($('#omsiCameraFollowing').textContent,'---------');
+context.data.duty.next_stop=null;vm.runInContext('renderCameraDuty(data)',context);assert.equal($('#omsiCameraStop').textContent,'---------');
+vm.runInContext('renderCameraDuty(null)',context);for(const id of ['omsiCameraDelay','omsiCameraStop','omsiCameraFollowing'])assert.equal($('#'+id).textContent,'---------');
+console.log('PASS camera duty strip: live deviation, current/next stop, following stop, last stop and disconnected placeholders');
