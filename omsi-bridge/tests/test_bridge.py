@@ -63,4 +63,20 @@ class Tests(unittest.TestCase):
             send(kind='status',variables={},duty=None,position={})
             state.ingest(json.dumps(dict(schema=2,kind='status',session='new',route='new',variables={})))
             self.assertEqual(state.status()['stops'],[])
+    def test_commands_are_bound_to_known_game_folder_and_catalog(self):
+        from unittest.mock import patch
+        with tempfile.TemporaryDirectory() as d:
+            state=bridge.State(Path(d)/'state')
+            folder=Path(d)/'Programs/openOMSI/Plugins/SRGOpenOMSI.data'
+            state.ingest(json.dumps(dict(schema=2,kind='status',session='test',route='r',game='openomsi',commands=True,variables={},files_dir=str(folder))))
+            state.catalog=[dict(line='76',tour='1')]
+            with patch.dict(os.environ,{'LOCALAPPDATA':d}):
+                response=state.command(dict(action='select_duty',line='76',tour='1',trip=11))
+                record=json.loads((folder/'command.json').read_text())
+                self.assertEqual(record['session'],'test');self.assertEqual(record['id'],response['id'])
+                self.assertEqual(record['trip'],11)
+                for invalid in [dict(action='shell'),dict(action='select_duty',line='bad',tour='1',trip=1),dict(action='skip_to',stop=-1)]:
+                    with self.assertRaises(ValueError):state.command(invalid)
+                state.rich['files_dir']=str(Path(d)/'somewhere')
+                with self.assertRaises(ValueError):state.command(dict(action='sync_signs'))
 if __name__=='__main__':unittest.main()

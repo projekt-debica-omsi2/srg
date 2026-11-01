@@ -12,6 +12,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 /** Fixed read-only endpoint on numeric private IPv4 addresses. No redirects or arbitrary URLs. */
 public final class OmsiBridge {
     private final WebView web;
+    private final AtomicBoolean commandBusy = new AtomicBoolean(false);
     private final AtomicBoolean busy = new AtomicBoolean(false);
     private android.speech.tts.TextToSpeech speech;
     private boolean speechReady=false;
@@ -34,8 +35,11 @@ public final class OmsiBridge {
         for(int i=0;i<4;i++){a[i]=Integer.parseInt(p[i]); if(a[i]>255)return false;}
         return a[0]==10 || (a[0]==192&&a[1]==168) || (a[0]==172&&a[1]>=16&&a[1]<=31) || host.equals("127.0.0.1");
     }
-    @JavascriptInterface public void poll(String host,String token,String id) {
-        if(!busy.compareAndSet(false,true))return;
+    @JavascriptInterface public void poll(String host,String token,String id) { exchange(host,token,id,null); }
+    @JavascriptInterface public void command(String host,String token,String payload,String id) { if(payload==null||payload.length()>2048)return;exchange(host,token,id,payload); }
+    private void exchange(String host,String token,String id,String payload) {
+        AtomicBoolean gate=payload==null?busy:commandBusy;
+        if(!gate.compareAndSet(false,true))return;
         new Thread(()->{
             String response;
             try {
@@ -44,8 +48,10 @@ public final class OmsiBridge {
                 if(!allowed(host)||(!usb&&(token==null||!token.matches("[0-9]{4}"))))throw new Exception("Sprawdź lokalny adres IPv4 i kod parowania.");
                 try(Socket socket=new Socket()){
                     socket.connect(new InetSocketAddress(host,port),2000); socket.setSoTimeout(2500);
-                    String request="GET /api/status HTTP/1.0\r\nHost: "+host+":"+port+"\r\nAuthorization: Bearer "+token+"\r\nConnection: close\r\n\r\n";
+                    byte[] body=payload==null?new byte[0]:payload.getBytes(StandardCharsets.UTF_8);
+                    String request=(payload==null?"GET /api/status":"POST /api/command")+" HTTP/1.0\r\nHost: "+host+":"+port+"\r\nAuthorization: Bearer "+token+"\r\nContent-Type: application/json\r\nContent-Length: "+body.length+"\r\nConnection: close\r\n\r\n";
                     socket.getOutputStream().write(request.getBytes(StandardCharsets.US_ASCII));
+                    if(body.length>0)socket.getOutputStream().write(body);
                     ByteArrayOutputStream out=new ByteArrayOutputStream(); byte[] buf=new byte[4096];int n;
                     while((n=socket.getInputStream().read(buf))!=-1){out.write(buf,0,n);if(out.size()>262144)throw new Exception("Zbyt duża odpowiedź.");}
                     String raw=new String(out.toByteArray(),StandardCharsets.UTF_8);
@@ -58,8 +64,9 @@ public final class OmsiBridge {
             } catch(Exception e) {
                 response="{\"ok\":false,\"error\":"+JSONObject.quote(e.getMessage()==null?"Brak połączenia":e.getMessage())+"}";
             }
-            final String script="window.SRGOmsiResult&&window.SRGOmsiResult("+JSONObject.quote(id)+","+response+")";
-            busy.set(false);web.post(()->web.evaluateJavascript(script,null));
+            String callback=payload==null?"SRGOmsiResult":"SRGOmsiCommandResult";
+            final String script="window."+callback+"&&window."+callback+"("+JSONObject.quote(id)+","+response+")";
+            gate.set(false);web.post(()->web.evaluateJavascript(script,null));
         },"SRG-OMSI-poll").start();
     }
 }

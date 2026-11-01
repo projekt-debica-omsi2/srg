@@ -7,7 +7,7 @@ const logKey='srgOmsiEvents';
 let events;try{events=JSON.parse(localStorage.getItem(logKey)||'[]')}catch(_){events=[]}
 function log(event){events.push({time:new Date().toISOString(),event});events=events.slice(-500);localStorage.setItem(logKey,JSON.stringify(events));}
 const style=document.createElement('style');style.textContent=`
-.omsiPanel [hidden]{display:none!important}.omsiPanel{flex:1;min-height:0;overflow:auto;padding:12px;display:flex;flex-direction:column;gap:12px}.omsiPanel label{display:flex;flex-direction:column;gap:6px}.omsiPanel input,.omsiPanel select,.omsiPanel button{font:inherit;padding:12px;min-height:44px;color:#fff;background:#123d65;border:1px solid #4099e0;border-radius:5px}.omsiPanel p{margin:0;line-height:1.4}.omsiPanel pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px}.omsiNumbers{display:grid;grid-template-columns:1fr 1fr;gap:12px}.omsiNumber{background:#10314e;padding:16px;border:1px solid #307ab0}.omsiNumber b{display:block;font-size:26px;margin-top:8px}.omsiBlack{flex:1;min-height:120px;background:#000;border:1px solid #555}.omsiPanel .omsiWarning{color:#f5d279}
+body.omsi-mode #omsiCourse .dest,body.omsi-mode #omsiCourse .bar{background:linear-gradient(#258ce0,#124f91)!important;border-color:#4cafff!important}body.omsi-mode #omsiCourse .controls button{background:linear-gradient(#185e9b,#103859)!important;border-color:#4cafff!important}body.omsi-mode #omsiCourse .logout{background:linear-gradient(#258ce0,#124f91)!important}.omsiPanel [hidden]{display:none!important}.omsiPanel{flex:1;min-height:0;overflow:auto;padding:12px;display:flex;flex-direction:column;gap:12px}.omsiPanel label{display:flex;flex-direction:column;gap:6px}.omsiPanel input,.omsiPanel select,.omsiPanel button{font:inherit;padding:12px;min-height:44px;color:#fff;background:#123d65;border:1px solid #4099e0;border-radius:5px}.omsiPanel p{margin:0;line-height:1.4}.omsiPanel pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px}.omsiNumbers{display:grid;grid-template-columns:1fr 1fr;gap:12px}.omsiNumber{background:#10314e;padding:16px;border:1px solid #307ab0}.omsiNumber b{display:block;font-size:26px;margin-top:8px}.omsiBlack{flex:1;min-height:120px;background:#000;border:1px solid #555}.omsiPanel .omsiWarning{color:#f5d279}
 `;document.head.append(style);
 const main=$('main.content');main.insertAdjacentHTML('beforeend',`
 <section id="omsiSettings" class="view"><div class="top">OMSI 2</div><div class="omsiPanel">
@@ -23,6 +23,63 @@ const main=$('main.content');main.insertAdjacentHTML('beforeend',`
 <section id="omsiCameras" class="view"><div class="top">OMSI 2 · KAMERA / LUSTERKO</div><div class="omsiPanel"><div class="omsiBlack"></div><p>Obraz kamery i lusterka nie jest jeszcze dostępny w tym mostku.</p><button id="omsiCameraBack">Wróć</button></div></section>
 <section id="omsiLogs" class="view"><div class="top">OMSI 2 · HISTORIA</div><div class="omsiPanel"><p>Historia kontaktu z mostkiem. Utrata kontaktu nie oznacza pewnego zakończenia gry. Pełne logi komputera: %LOCALAPPDATA%\\SRG-OMSI.</p><pre id="omsiLogText"></pre><button id="omsiLogsBack">Wróć</button></div></section>`);
 const tile=document.createElement('button');tile.className='settingTile';tile.innerHTML='<b>OMSI 2</b><span>Połączenie z grą</span>';tile.onclick=()=>app.go('omsiSettings');$('.settingsTiles').append(tile);
+const courseView=$('#course').cloneNode(true);courseView.id='omsiCourse';courseView.classList.remove('active','extraCourse');
+for(const button of courseView.querySelectorAll('.controls button'))button.disabled=false;
+for(const el of courseView.querySelectorAll('[id]'))el.id='omsiUi'+el.id;
+for(const el of courseView.querySelectorAll('[data-clock]'))el.removeAttribute('data-clock');
+courseView.querySelector('.top span').textContent='OMSI · Linia / Kierunek:';
+courseView.querySelector('.clock').id='omsiUiClock';
+main.append(courseView);
+$('#omsiUilogoutCourse').textContent='Wybierz kurs';$('#omsiUilogoutCourse').onclick=()=>{renderPicker();app.go('omsiPicker');};
+$('#omsiUicourseCurrent').onclick=()=>speakStop(selectedStop(current));
+$('#omsiUiprevStop').onclick=()=>$('#omsiPrevStop').onclick();$('#omsiUinextStop').onclick=()=>$('#omsiNextStop').onclick();
+$('#omsiUicancelStop').onclick=()=>$('#omsiAutoStop').onclick();
+$('#omsiUiconfirmStop').onclick=()=>{const stop=selectedStop(current);if(stop)sendCommand({action:'skip_to',stop:stop.number});};
+$('#omsiUicourseAutoState').onclick=()=>app.go('omsiLive');$('#omsiUicourseAutoState').style.cursor='pointer';
+main.insertAdjacentHTML('beforeend',`<section class="view" id="omsiPicker"><div class="top">OMSI · WYBÓR KURSÓWKI</div><div class="omsiPanel">
+<label>Linia / brygada z gry<select id="omsiDutyChoice"></select></label><button id="omsiLoadTrips">Pokaż kursy</button>
+<label>Kurs<select id="omsiTripChoice"></select></label><button id="omsiStartDuty">Wybierz kurs i ustaw tablice w grze</button><button id="omsiSyncSigns">Ustaw tablice według bieżącego kursu</button>
+<button id="omsiPhysicalSign">Tablica R&G · USB–RS485</button><p id="omsiCommandStatus" role="status">Wybierz kursówkę z uruchomionej gry.</p>
+<button id="omsiPickerBack">Powrót do kursówki</button><button id="omsiPickerSettings">Połączenie OMSI</button></div></section>`);
+let commandRequest=null,commandAt=0,queuedCommand=null,pickerCatalog='',pickerTrips='',signKey='';
+function commandStatus(text){$('#omsiCommandStatus').textContent=text;}
+function sendCommand(payload){
+ if(!enabled||!current?.plugin_running||!current.commands||!lastGood){commandStatus('Brak świeżego połączenia ze sterowaniem gry.');return;}
+ if(commandRequest||queuedCommand){commandStatus('Oczekiwanie na potwierdzenie poprzedniego polecenia.');return;}
+ commandRequest='cmd'+(++request);commandAt=Date.now();commandStatus('Wysyłanie do gry…');
+ window.SRGOmsiNative.command(config.transport==='usb'?'127.0.0.1':config.host||'',config.token||'',JSON.stringify(payload),commandRequest);
+}
+window.SRGOmsiCommandResult=(id,result)=>{if(id!==commandRequest)return;commandRequest=null;if(!result.ok){commandStatus('Nie wysłano: '+result.error);return;}queuedCommand=result.data.id;commandStatus('Polecenie przyjęte przez mostek. Czekam na grę…');};
+function dutyChoice(){try{return JSON.parse($('#omsiDutyChoice').value)}catch(_){return null}}
+$('#omsiLoadTrips').onclick=()=>{const pair=dutyChoice();if(pair)sendCommand({action:'preview',line:pair[0],tour:pair[1]});};
+$('#omsiDutyChoice').onchange=()=>{$('#omsiTripChoice').replaceChildren();pickerTrips='';};
+$('#omsiStartDuty').onclick=()=>{const pair=dutyChoice(),trip=Number($('#omsiTripChoice').value);if(pair&&trip>0)sendCommand({action:'select_duty',line:pair[0],tour:pair[1],trip});else commandStatus('Najpierw pobierz i wybierz kurs.');};
+$('#omsiSyncSigns').onclick=()=>sendCommand({action:'sync_signs'});
+$('#omsiPhysicalSign').onclick=()=>app.go('rgSettings');
+$('#omsiPickerBack').onclick=()=>app.go('omsiCourse');$('#omsiPickerSettings').onclick=()=>app.go('omsiSettings');
+function renderPicker(){
+ const data=current?.plugin_running?current:null;
+ const cat=data?.catalog||[],key=JSON.stringify(cat);if(key!==pickerCatalog){pickerCatalog=key;const select=$('#omsiDutyChoice'),saved=select.value;select.replaceChildren();for(const entry of cat){const opt=document.createElement('option');opt.value=JSON.stringify([String(entry.line),String(entry.tour)]);opt.textContent=`Linia ${entry.line} · Brygada ${entry.tour}${entry.today===false?' · poza dniem kursowania':''}`;select.append(opt);}if([...select.options].some(o=>o.value===saved))select.value=saved;}
+ const pair=dutyChoice(),wanted=pair?pair.join('|'):null,available=data?.trip_key===wanted;
+ const trips=available?(data?.trips||[]):[],tk=JSON.stringify([data?.trip_key,trips]);if(tk!==pickerTrips){pickerTrips=tk;const select=$('#omsiTripChoice'),saved=select.value;select.replaceChildren();for(const trip of trips){const opt=document.createElement('option');opt.value=String(trip.number);opt.textContent=`${clockText(trip.departure)} → ${clockText(trip.arrival)} · ${trip.terminus||trip.name||''}`;select.append(opt);}if([...select.options].some(o=>o.value===saved))select.value=saved;}
+ $('#omsiStartDuty').disabled=!available||!trips.length||!data?.commands;
+ const ack=data?.command_result;if(queuedCommand&&ack?.id===queuedCommand){queuedCommand=null;commandStatus(ack.message||'Potwierdzenie z gry');if(ack.ok&&data.duty){manualStop=null;renderCourse(data);}}
+ if((queuedCommand||commandRequest)&&Date.now()-commandAt>10000){queuedCommand=null;commandRequest=null;commandStatus('Brak potwierdzenia z gry. Sprawdź aktualny kurs przed ponowieniem.');}
+}
+function renderCourse(data){
+ const live=Boolean(data?.plugin_running),d=live?data.duty:null,list=live&&Array.isArray(data.stops)?data.stops:[],stop=live?selectedStop(data):null;
+ const put=(id,text)=>$('#omsiUi'+id).textContent=text;
+ put('courseLine',d?.line??'—');put('courseDest',d?.terminus||'BRAK KURSU Z GRY');put('courseTask',d?`${d.line}/${d.tour}/${d.trip}`:'—');put('vehicleNo',live?(data.vehicle_number||'—'):'—');
+ put('courseStopCount',stop?`${stop.number}/${list.length||'—'}`:'—');put('courseAutoState',live?(manualStop===null?'AUTO OMSI':'PODGLĄD'):'BRAK DANYCH');
+ put('courseRoad',live&&Number.isFinite(data.distance)?`${Math.round(data.distance)} m`:'—');put('courseCurrent',stop?`${clockText(stop.departure??stop.arrival)} ${stop.name}`:'Wybierz kursówkę OMSI');
+ const idx=stop?list.findIndex(s=>s.number===stop.number):-1;
+ for(let n=1;n<=2;n++){const next=idx>=0?list[idx+n]:null;put('courseNext'+n,next?`${clockText(next.departure??next.arrival)} ${next.name}`:'');}
+ put('courseDelay',Number.isFinite(d?.delay)?`${d.delay>=0?'+':'−'}${Math.floor(Math.abs(d.delay)/60)}:${String(Math.floor(Math.abs(d.delay))%60).padStart(2,'0')}`:'—');
+ $('#omsiUiClock').textContent=live?clockText(data.clock):'—';
+ const key=d?`${data.session}|${d.line}|${d.terminus}`:'';
+ if(key&&key!==signKey){signKey=key;window.dispatchEvent(new CustomEvent('srg-course-selected',{detail:{direction:d.terminus,line:d.line,additional:true,showLine:true,source:'omsi'}}));}
+ if(!live)signKey='';
+}
 function paintTheme(){
  const out=[];
  const replaceColors=value=>value.replace(/rgb\(\s*(\d+)\s*,\s*(\d+)\s*,\s*(\d+)\s*\)/g,(all,r,g,b)=>{r=+r;g=+g;b=+b;return g>r*1.15&&g>b*1.1?`rgb(${r}, ${Math.round((r+g)/2)}, ${g})`:all});
@@ -31,13 +88,13 @@ function paintTheme(){
  const theme=document.createElement('style');theme.textContent=out.join('\n');document.head.append(theme);
 }
 paintTheme();
-window.SRGOmsi={get enabled(){return enabled},route(id){if(!enabled)return id;if(['course','dutySelect','tripSelect','extraLines','extraGate','timetableSettings'].includes(id))return 'omsiLive';if(id==='cameras')return 'omsiCameras';return id;}};
+window.SRGOmsi={get enabled(){return enabled},route(id){if(!enabled)return id;if(['course','idle'].includes(id))return 'omsiCourse';if(['dutySelect','tripSelect','extraLines','extraGate','timetableSettings'].includes(id))return 'omsiPicker';if(id==='cameras')return 'omsiCameras';return id;}};
 function clearReadings(){for(const id of ['Speed','Line','Route','Destination'])$('#omsi'+id).textContent='—';}
 function status(text){$('#omsiStatus').textContent=text;$('#omsiLiveStatus').textContent=text;}
 function setEnabled(on){
  if(on===enabled)return;
  enabled=on;request++;pending=null;lastGood=0;current=null;clearReadings();document.body.classList.toggle('omsi-mode',enabled);
- if(on){localState={course:app.state.course,variant:app.state.variant,routeIndex:app.state.routeIndex};app.stopGps();app.state.course=null;app.state.variant=null;app.go('omsiSettings');log('Tryb OMSI włączony');}
+ if(on){localState={course:app.state.course,variant:app.state.variant,routeIndex:app.state.routeIndex};app.stopGps();app.state.course=null;app.state.variant=null;app.go('omsiCourse');log('Tryb OMSI włączony');}
  else{if(localState)Object.assign(app.state,localState);localState=null;log('Tryb OMSI wyłączony');app.go('omsiSettings');}
  status(on?'Oczekiwanie na połączenie':'Tryb wyłączony');
 }
@@ -46,7 +103,7 @@ function transportFields(){const usb=$('#omsiTransport').value==='usb';$('#omsiH
 $('#omsiTransport').onchange=transportFields;transportFields();
 $('#omsiSave').onclick=()=>{config={host:$('#omsiHost').value.trim(),token:$('#omsiTransport').value==='usb'?'':$('#omsiToken').value.trim(),transport:$('#omsiTransport').value,enabled:$('#omsiEnabled').value==='on'};localStorage.setItem('srgOmsiConfig',JSON.stringify(config));request++;pending=null;lastGood=0;clearReadings();setEnabled(config.enabled);poll();};
 for(const id of ['omsiLiveBack','omsiLogsBack','omsiCameraBack'])$('#'+id).onclick=()=>app.go('omsiSettings');
-$('#omsiBack').onclick=()=>app.go('settings');$('#omsiShowLive').onclick=()=>{if(enabled)app.go('omsiLive');else status('Najpierw włącz tryb OMSI i zapisz.');};
+$('#omsiBack').onclick=()=>app.go('settings');$('#omsiShowLive').onclick=()=>{if(enabled)app.go('omsiCourse');else status('Najpierw włącz tryb OMSI i zapisz.');};
 $('#omsiShowLogs').onclick=()=>{$('#omsiLogText').textContent=JSON.stringify({tablet:events,computer:current?.events||[]},null,2);app.go('omsiLogs');};
 function poll(){if(!enabled)return;if(pending&&Date.now()-pendingAt>6500)pending=null;if(pending)return;if(!window.SRGOmsiNative){status('Połączenie wymaga nowej wersji APK z obsługą OMSI.');return;}pending=String(++request);pendingAt=Date.now();window.SRGOmsiNative.poll(config.transport==='usb'?'127.0.0.1':config.host||'',config.token||'',pending);}
 let manualStop=null, routeKey=null, lastSpoken=null;
@@ -72,6 +129,7 @@ $('#omsiAutoStop').onclick=()=>{manualStop=null;renderTrip(current);};
 function renderTrip(data){
  const fresh=Boolean(data?.plugin_running), d=fresh?data.duty:null, list=fresh&&Array.isArray(data.stops)?data.stops:[];
  const key=fresh?data.session+'|'+data.route:null;if(key!==routeKey){routeKey=key;manualStop=null;lastSpoken=null;}
+ renderCourse(data);renderPicker();
  $('#omsiDutyLine').textContent=d?`${d.line??'—'} / ${d.tour??'—'}`:'—';$('#omsiDutyDest').textContent=d?.terminus||'—';
  const delay=Number.isFinite(d?.delay)?`${d.delay>=0?'+':'−'}${Math.floor(Math.abs(d.delay)/60)}:${String(Math.floor(Math.abs(d.delay))%60).padStart(2,'0')}`:'—';
  $('#omsiTripInfo').textContent=fresh?`${data.game==='openomsi'?'openOMSI':'OMSI'} · ${data.map||'—'} · czas gry ${clockText(data.clock)}${data.paused?' · PAUZA':''} · kurs ${d?.trip??'—'} · odchyłka ${delay}`:'Brak świeżych danych z gry';
