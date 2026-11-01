@@ -23,7 +23,15 @@ local function commands()
     local tour=omsi.timetable.tour(c.line,c.tour)
     if tour then preview={key=c.line.."|"..c.tour,trips=tour.trips};ok=true;detail="Kursy pobrane" else detail="Brak brygady" end
   elseif c.action=="select_duty" then
-    ok,detail=omsi.duty.start(c.line,c.tour,c.trip)
+    local tour=omsi.timetable.tour(c.line,c.tour)
+    local trip=tour and tour.trips[c.trip]
+    if not trip then
+      ok=false;detail="Nie ma takiego kursu"
+    elseif c.align_time and not omsi.world.set_time(trip.departure%86400) then
+      ok=false;detail="Gra nie pozwala zmienić czasu"
+    else
+      ok,detail=omsi.duty.start(c.line,c.tour,c.trip)
+    end
     if ok then omsi.duty.type_ibis();detail="Kurs ustawiony w grze; zlecono IBIS/tablice" end
   elseif c.action=="sync_signs" then
     ok=omsi.duty.type_ibis();detail=ok and "Zlecono ustawienie IBIS i tablic według kursu" or "Brak kursu lub pojazdu"

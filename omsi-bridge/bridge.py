@@ -105,6 +105,7 @@ class State:
             key='trip' if action=='select_duty' else 'stop';value=command.get(key)
             if type(value) is not int or not 1<=value<=10000: raise ValueError('Niepoprawny numer kursu/przystanku')
             safe[key]=value
+        if action=='select_duty': safe['align_time']=command.get('align_time') is True
         base=Path(os.environ.get('LOCALAPPDATA',str(Path.home())))
         candidates=[base/'Programs/openOMSI/Plugins/SRGOpenOMSI.data',Path(os.environ.get('ProgramFiles(x86)',r'C:\Program Files (x86)'))/'Steam/steamapps/common/OMSI 2/plugins/SRGOpenOMSI.data']
         reported=str(Path(data.get('files_dir','')).resolve()).casefold()

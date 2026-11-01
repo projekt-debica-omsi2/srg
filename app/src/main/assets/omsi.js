@@ -38,7 +38,7 @@ $('#omsiUiconfirmStop').onclick=()=>{const stop=selectedStop(current);if(stop)se
 $('#omsiUicourseAutoState').onclick=()=>app.go('omsiLive');$('#omsiUicourseAutoState').style.cursor='pointer';
 main.insertAdjacentHTML('beforeend',`<section class="view" id="omsiPicker"><div class="top">OMSI · WYBÓR KURSÓWKI</div><div class="omsiPanel">
 <label>Linia / brygada z gry<select id="omsiDutyChoice"></select></label><button id="omsiLoadTrips">Pokaż kursy</button>
-<label>Kurs<select id="omsiTripChoice"></select></label><button id="omsiStartDuty">Wybierz kurs i ustaw tablice w grze</button><button id="omsiSyncSigns">Ustaw tablice według bieżącego kursu</button>
+<label>Kurs<select id="omsiTripChoice"></select></label><label><input type="checkbox" id="omsiAlignTime" checked> Dopasuj czas gry do odjazdu wybranego kursu</label><button id="omsiStartDuty">Wybierz kurs i ustaw tablice w grze</button><button id="omsiSyncSigns">Ustaw tablice według bieżącego kursu</button>
 <button id="omsiPhysicalSign">Tablica R&G · USB–RS485</button><p id="omsiCommandStatus" role="status">Wybierz kursówkę z uruchomionej gry.</p>
 <button id="omsiPickerBack">Powrót do kursówki</button><button id="omsiPickerSettings">Połączenie OMSI</button></div></section>`);
 let commandRequest=null,commandAt=0,queuedCommand=null,pickerCatalog='',pickerTrips='',signKey='';
@@ -53,7 +53,7 @@ window.SRGOmsiCommandResult=(id,result)=>{if(id!==commandRequest)return;commandR
 function dutyChoice(){try{return JSON.parse($('#omsiDutyChoice').value)}catch(_){return null}}
 $('#omsiLoadTrips').onclick=()=>{const pair=dutyChoice();if(pair)sendCommand({action:'preview',line:pair[0],tour:pair[1]});};
 $('#omsiDutyChoice').onchange=()=>{$('#omsiTripChoice').replaceChildren();pickerTrips='';};
-$('#omsiStartDuty').onclick=()=>{const pair=dutyChoice(),trip=Number($('#omsiTripChoice').value);if(pair&&trip>0)sendCommand({action:'select_duty',line:pair[0],tour:pair[1],trip});else commandStatus('Najpierw pobierz i wybierz kurs.');};
+$('#omsiStartDuty').onclick=()=>{const pair=dutyChoice(),trip=Number($('#omsiTripChoice').value);if(pair&&trip>0)sendCommand({action:'select_duty',line:pair[0],tour:pair[1],trip,align_time:$('#omsiAlignTime').checked});else commandStatus('Najpierw pobierz i wybierz kurs.');};
 $('#omsiSyncSigns').onclick=()=>sendCommand({action:'sync_signs'});
 $('#omsiPhysicalSign').onclick=()=>app.go('rgSettings');
 $('#omsiPickerBack').onclick=()=>app.go('omsiCourse');$('#omsiPickerSettings').onclick=()=>app.go('omsiSettings');
