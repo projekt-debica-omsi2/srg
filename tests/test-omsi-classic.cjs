@@ -62,3 +62,6 @@ console.log('PASS LCD stop events follow game movement/arrival and do not restar
 
 context.current.route='very-long-map-and-vehicle-path/'.repeat(20);lcd=vm.runInContext('omsiLcdState({})',context);assert(lcd.kursId.length<180);const firstId=lcd.kursId;context.current.route+='other-bus';assert.notEqual(vm.runInContext('omsiLcdState({}).kursId',context),firstId);
 console.log('PASS LCD route identity stays within server limit and changes with map/vehicle');
+
+context.current.duty.at_stop=false;context.current.duty.trip_done=true;context.current.duty.next_stop=context.current.stops[2];assert.equal(vm.runInContext('omsiLcdState({}).koniecKursu',context),false);
+console.log('PASS timetable completion does not mislabel the previous stop as terminal');

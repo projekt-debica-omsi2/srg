@@ -142,7 +142,7 @@ function omsiLcdState(lcdConfig){
  if(eventKey!==omsiLcdEventKey){omsiLcdEventKey=eventKey;omsiLcdEvent=null;const type=atStop?'current':'next',seconds=Math.max(0,...(lcdConfig?.steps||[]).filter(s=>s.type===type).map(s=>Number(s.seconds)||0));if(active&&seconds>0)omsiLcdEvent={id:eventKey,courseKey:id,anchorIndex:index,type,index:targetIndex,name:target.name||'',naZadanie:false,expiresAt:Date.now()+seconds*1000};}
  return {kursAktywny:active,kursId:id,linia:active?String(d.line??''):'',kierunek:active?(d.terminus||''):'',
   przystanki:active?stops.map(stop=>({nazwa:stop.name||'',ulica:''})):[],aktualnyIndeks:index,
-  aktualny:stopInfo(currentStop),nastepny:stopInfo(nextStop),koniecKursu:active&&(Boolean(d.trip_done)||(atStop&&targetIndex===stops.length-1)),koncowyNastepny:active&&Boolean(nextStop)&&nextStop.number===stops.at(-1)?.number,
+  aktualny:stopInfo(currentStop),nastepny:stopInfo(nextStop),koniecKursu:active&&atStop&&targetIndex===stops.length-1,koncowyNastepny:active&&Boolean(nextStop)&&nextStop.number===stops.at(-1)?.number,
   przesiadka:null,reklamyPoZapowiedzi:false,additional:false,active,line:active?String(d.line??''):'',direction:active?(d.terminus||''):'',
   current:currentStop?.name||'',next:nextStop?.name||'',following:active?(stops[targetIndex+(atStop?2:1)]?.name||''):'',
   index:active?index+1:0,count:active?stops.length:0,course:active?String(d.trip??''):'',lcdConfig,lcdManual:omsiLcdEvent?.expiresAt>Date.now()?omsiLcdEvent:null,
