@@ -19,7 +19,7 @@ public final class OmsiBridge {
     @JavascriptInterface public void speak(String text,String language) {
         if(text==null||text.length()>300)return;
         web.post(()->{
-            if(speech==null){speech=new android.speech.tts.TextToSpeech(web.getContext(),result->{speechReady=result==android.speech.tts.TextToSpeech.SUCCESS;speechStatus(speechReady?"Głos gotowy — ponów zapowiedź":"Brak silnika głosu systemowego");});return;}
+            if(speech==null){speech=new android.speech.tts.TextToSpeech(web.getContext(),result->{speechReady=result==android.speech.tts.TextToSpeech.SUCCESS;if(speechReady)speak(text,language);else speechStatus("Brak silnika głosu systemowego");});return;}
             if(!speechReady){speechStatus("Głos nie jest jeszcze gotowy");return;}
             java.util.Locale locale="pl".equals(language)?new java.util.Locale("pl"):"en".equals(language)?java.util.Locale.ENGLISH:java.util.Locale.GERMAN;
             if(speech.setLanguage(locale)<0){speechStatus("Brak głosu dla wybranego języka w systemie");return;}
