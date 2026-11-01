@@ -363,6 +363,7 @@ const autoGpsTracker=window.SRGAutoGPS.createTracker();
  }
  function lcdPublish(){
   if(!window.SRGLcd?.publish)return;
+  if(window.SRGOmsi?.enabled){try{window.SRGLcd.publish(JSON.stringify(window.SRGOmsi.lcdState(lcdConfig)))}catch(e){}return;}
   const ss=state.variant?.stops||[],i=Math.min(ss.length-1,Math.max(0,state.routeIndex));
   const active=!!(state.course&&state.variant&&(ss.length||state.course.extra));
   const currentStop=active?ss[i]:null, nextStop=active?ss[i+1]:null;
@@ -1164,6 +1165,6 @@ $('#extraDisplay').onclick=()=>extraAction(false,true);$('#extraSaveDisplay').on
 $('#extraPasswordSave').onclick=async()=>{if(!extraUnlocked)return;try{const p=$('#extraNewPassword').value;if(p.length<4)throw Error('Nowe hasło musi mieć co najmniej 4 znaki.');if(p!==$('#extraConfirmPassword').value)throw Error('Hasła nie są jednakowe.');const hash=await passwordHash(p);if(!extraUnlocked||state.view!=='extraPassword')return;localStorage.setItem('srgExtraPasswordHash',hash);$('#extraNewPassword').value='';$('#extraConfirmPassword').value='';toast('Hasło zmienione');go('settings')}catch(e){$('#extraPasswordStatus').textContent=e.message}};
 try{const v=window.SRGApp?.version();if(v){$('#appVersion').textContent='v'+v+' LCD';document.title='SRG Mobile v'+v;generic.info[2]='SRG Mobile v'+v+' · profil REVVL Tab 2.'}}catch(e){}
 
-loadBuiltinRJ(false);renderNoActiveCourse();refreshAutoGpsIndicator();refreshVoiceIndicator();updateClocks();renderIdle();const restored=restoreSession();go(restored?'course':'idle');setInterval(updateDepartureUI,1000);setInterval(renderRoad,5000);window.__srg={state,go,refreshCourse,loadBuiltinRJ,applyRJBuffer,finalDirection,renderCourses,openCoursePicker,closeCoursePicker,selectCourse,renderDutySelect,openTripChoice,renderTripChoice,nearestFutureIndex,dutyEntries,finishCurrentTrip,nextTripSameDuty,askLogout,openDriverChange,startGps,stopGps,departureDateForCourse,formatDepartureDifference,updateDepartureUI,closeCourseStarted,updateGpsFix,processAutoGpsFix,processVoiceGpsFix,refreshAutoGpsIndicator,refreshVoiceIndicator,restoreSession,persistSession,renderRoad,roadMeters,roadProjection};
+loadBuiltinRJ(false);renderNoActiveCourse();refreshAutoGpsIndicator();refreshVoiceIndicator();updateClocks();renderIdle();const restored=restoreSession();go(restored?'course':'idle');setInterval(updateDepartureUI,1000);setInterval(renderRoad,5000);window.__srg={publishLcd:lcdPublish,state,go,refreshCourse,loadBuiltinRJ,applyRJBuffer,finalDirection,renderCourses,openCoursePicker,closeCoursePicker,selectCourse,renderDutySelect,openTripChoice,renderTripChoice,nearestFutureIndex,dutyEntries,finishCurrentTrip,nextTripSameDuty,askLogout,openDriverChange,startGps,stopGps,departureDateForCourse,formatDepartureDifference,updateDepartureUI,closeCourseStarted,updateGpsFix,processAutoGpsFix,processVoiceGpsFix,refreshAutoGpsIndicator,refreshVoiceIndicator,restoreSession,persistSession,renderRoad,roadMeters,roadProjection};
 })();</script><script src="rg-replay-data.js"></script><script src="rg-usb.js"></script><script src="ibis.js"></script><script src="omsi.js"></script></body></html>
 

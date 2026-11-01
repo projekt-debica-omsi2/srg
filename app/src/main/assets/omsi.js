@@ -126,6 +126,27 @@ function formatClock24(seconds){
  const total=((Math.floor(seconds)%86400)+86400)%86400;
  return [Math.floor(total/3600),Math.floor(total/60)%60,total%60].map(v=>String(v).padStart(2,'0')).join(':');
 }
+let omsiLcdEventKey='',omsiLcdEvent=null;
+function omsiLcdState(lcdConfig){
+ const live=enabled&&lastGood>0&&Date.now()-lastGood<=5000&&current?.plugin_running;
+ const data=live?current:null,d=data?.duty,stops=Array.isArray(data?.stops)?data.stops:[];
+ const target=d?.next_stop,targetIndex=target?stops.findIndex(s=>s.number===target.number):-1;
+ const active=Boolean(d&&stops.length&&targetIndex>=0);
+ const atStop=Boolean(d?.at_stop),index=active?Math.max(0,targetIndex-(atStop?0:1)):0;
+ const currentStop=active?(atStop?target:(d.previous_stop||stops[targetIndex-1])):null;
+ const nextStop=active?(atStop?stops[targetIndex+1]:target):null;
+ const stopInfo=stop=>stop?{nazwa:stop.name||'',naZadanie:false}:null;
+ const id=active?String(data.session)+'|'+String(data.route||[d.line,d.tour,d.trip].join('|')):'';
+ const eventKey=active?[id,targetIndex,atStop].join('|'):'';
+ if(eventKey!==omsiLcdEventKey){omsiLcdEventKey=eventKey;omsiLcdEvent=null;const type=atStop?'current':'next',seconds=Math.max(0,...(lcdConfig?.steps||[]).filter(s=>s.type===type).map(s=>Number(s.seconds)||0));if(active&&seconds>0)omsiLcdEvent={id:eventKey,courseKey:id,anchorIndex:index,type,index:targetIndex,name:target.name||'',naZadanie:false,expiresAt:Date.now()+seconds*1000};}
+ return {kursAktywny:active,kursId:id,linia:active?String(d.line??''):'',kierunek:active?(d.terminus||''):'',
+  przystanki:active?stops.map(stop=>({nazwa:stop.name||'',ulica:''})):[],aktualnyIndeks:index,
+  aktualny:stopInfo(currentStop),nastepny:stopInfo(nextStop),koniecKursu:active&&(Boolean(d.trip_done)||(atStop&&targetIndex===stops.length-1)),koncowyNastepny:active&&Boolean(nextStop)&&nextStop.number===stops.at(-1)?.number,
+  przesiadka:null,reklamyPoZapowiedzi:false,additional:false,active,line:active?String(d.line??''):'',direction:active?(d.terminus||''):'',
+  current:currentStop?.name||'',next:nextStop?.name||'',following:active?(stops[targetIndex+(atStop?2:1)]?.name||''):'',
+  index:active?index+1:0,count:active?stops.length:0,course:active?String(d.trip??''):'',lcdConfig,lcdManual:omsiLcdEvent?.expiresAt>Date.now()?omsiLcdEvent:null,
+  phase:atStop?'ARRIVAL':'NEXT',phaseUntil:0,...(live&&Number.isFinite(data.clock)?{clock:formatClock24(data.clock)}:{})};
+}
 function renderRealClock(){const now=new Date();$('#omsiRealClock').textContent='Rzeczywisty: '+[now.getHours(),now.getMinutes(),now.getSeconds()].map(v=>String(v).padStart(2,'0')).join(':');}
 function renderCourse(data){
  renderCameraDuty(data);
@@ -150,7 +171,7 @@ function paintTheme(){
  const theme=document.createElement('style');theme.textContent=out.join('\n');document.head.append(theme);
 }
 paintTheme();
-window.SRGOmsi={get enabled(){return enabled},route(id){if(!enabled)return id;if(['course','idle'].includes(id))return 'omsiCourse';if(['dutySelect','tripSelect','extraLines','extraGate','timetableSettings'].includes(id))return 'omsiPicker';if(id==='cameras')return 'omsiCameras';return id;}};
+window.SRGOmsi={get enabled(){return enabled},lcdState:omsiLcdState,route(id){if(!enabled)return id;if(['course','idle'].includes(id))return 'omsiCourse';if(['dutySelect','tripSelect','extraLines','extraGate','timetableSettings'].includes(id))return 'omsiPicker';if(id==='cameras')return 'omsiCameras';return id;}};
 function clearReadings(){for(const id of ['Speed','Line','Route','Destination'])$('#omsi'+id).textContent='—';}
 function status(text){$('#omsiStatus').textContent=text;$('#omsiLiveStatus').textContent=text;}
 function setEnabled(on){
@@ -202,7 +223,7 @@ function renderTrip(data){
  if(!list.length)body.textContent=d?'Pobieranie listy przystanków…':'Wybierz linię i brygadę w grze. Podstawowa wtyczka OMSI 2 nie udostępnia pełnego kursu.';
  if(fresh&&d?.next_stop&&manualStop===null){const marker=key+'|'+d.next_stop.number;if(lastSpoken===null)lastSpoken=marker;else if(marker!==lastSpoken){lastSpoken=marker;if($('#omsiVoice').value==='on')speakStop(d.next_stop);}}
 }
-window.SRGOmsiResult=(id,result)=>{if(!enabled||id!==pending)return;pending=null;if(!result.ok){if(lastGood)log('Utrata połączenia');lastGood=0;clearReadings();renderTrip(null);status('Brak połączenia: '+result.error);return;}if(!lastGood)log('Połączono z komputerem '+result.data.computer);lastGood=Date.now();current=result.data;renderTrip(current);status('Komputer: '+current.computer+' · '+(current.plugin_running?'wtyczka przesyła dane':'brak świeżych danych z OMSI')+' · '+(config.transport==='usb'?'USB':'Wi-Fi'));const v=current.variables||{};for(const [id,key] of [['Speed','Velocity'],['Line','IBIS_Linie'],['Route','IBIS_Route'],['Destination','IBIS_Ziel']])$('#omsi'+id).textContent=current.plugin_running&&Number.isFinite(v[key])?String(Math.round(v[key]*10)/10):'—';};
+window.SRGOmsiResult=(id,result)=>{if(!enabled||id!==pending)return;pending=null;if(!result.ok){if(lastGood)log('Utrata połączenia');lastGood=0;clearReadings();renderTrip(null);app.publishLcd?.();status('Brak połączenia: '+result.error);return;}if(!lastGood)log('Połączono z komputerem '+result.data.computer);lastGood=Date.now();current=result.data;renderTrip(current);app.publishLcd?.();status('Komputer: '+current.computer+' · '+(current.plugin_running?'wtyczka przesyła dane':'brak świeżych danych z OMSI')+' · '+(config.transport==='usb'?'USB':'Wi-Fi'));const v=current.variables||{};for(const [id,key] of [['Speed','Velocity'],['Line','IBIS_Linie'],['Route','IBIS_Route'],['Destination','IBIS_Ziel']])$('#omsi'+id).textContent=current.plugin_running&&Number.isFinite(v[key])?String(Math.round(v[key]*10)/10):'—';};
 setInterval(()=>{renderRealClock();if(lastGood&&Date.now()-lastGood>5000){clearReadings();renderTrip(null);status('Utrata połączenia — dane nieaktualne');}poll();},1000);
 if(config.enabled)setEnabled(true);
 })();

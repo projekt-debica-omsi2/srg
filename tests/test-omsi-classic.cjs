@@ -45,3 +45,17 @@ assert.equal($('#omsiCameraDelay').textContent,'+1:00');assert.equal($('#omsiCam
 context.data.duty.next_stop=null;vm.runInContext('renderCameraDuty(data)',context);assert.equal($('#omsiCameraStop').textContent,'---------');
 vm.runInContext('renderCameraDuty(null)',context);for(const id of ['omsiCameraDelay','omsiCameraStop','omsiCameraFollowing'])assert.equal($('#'+id).textContent,'---------');
 console.log('PASS camera duty strip: live deviation, current/next stop, following stop, last stop and disconnected placeholders');
+
+context.enabled=true;context.lastGood=Date.now();context.current={plugin_running:true,session:'game',route:'map|bus|76|1|3',clock:23*3600+5*60,duty:{line:'76',tour:'1',trip:3,terminus:'C',at_stop:false,next_stop:{number:2,name:'B'}},stops:[{number:1,name:'A'},{number:2,name:'B'},{number:3,name:'C'}]};
+let lcd=vm.runInContext('omsiLcdState({steps:[]})',context);assert.equal(lcd.kursAktywny,true);assert.equal(lcd.linia,'76');assert.equal(lcd.clock,'23:05:00');assert.equal(lcd.aktualny.nazwa,'A');assert.equal(lcd.nastepny.nazwa,'B');assert.equal(lcd.following,'C');
+context.current.duty.at_stop=true;lcd=vm.runInContext('omsiLcdState({})',context);assert.equal(lcd.aktualny.nazwa,'B');assert.equal(lcd.nastepny.nazwa,'C');assert.equal(lcd.koncowyNastepny,true);
+context.current.duty.next_stop=context.current.stops[2];lcd=vm.runInContext('omsiLcdState({})',context);assert.equal(lcd.koniecKursu,true);assert.equal(lcd.nastepny,null);
+context.lastGood=Date.now()-6000;lcd=vm.runInContext('omsiLcdState({})',context);assert.equal(lcd.kursAktywny,false);assert.equal(lcd.przystanki.length,0);assert.equal(lcd.clock,undefined);
+context.enabled=false;assert.equal(vm.runInContext('omsiLcdState({}).active',context),false);
+console.log('PASS LCD OMSI live route, game clock, movement/arrival, terminal and stale isolation');
+
+context.enabled=true;context.lastGood=Date.now();context.current.duty.at_stop=false;context.current.duty.next_stop=context.current.stops[1];
+lcd=vm.runInContext("omsiLcdState({steps:[{type:'next',seconds:7},{type:'current',seconds:7}]})",context);assert.equal(lcd.lcdManual.type,'next');assert.equal(lcd.lcdManual.name,'B');const expires=lcd.lcdManual.expiresAt;
+assert.equal(vm.runInContext("omsiLcdState({steps:[{type:'next',seconds:7}]}).lcdManual.expiresAt",context),expires);
+context.current.duty.at_stop=true;assert.equal(vm.runInContext("omsiLcdState({steps:[{type:'current',seconds:7}]}).lcdManual.type",context),'current');
+console.log('PASS LCD stop events follow game movement/arrival and do not restart on every poll');

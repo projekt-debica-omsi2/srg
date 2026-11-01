@@ -12,3 +12,7 @@ api.setState({...state,aktualnyIndeks:3,aktualny:stops[3],nastepny:null,koniecKu
 api.setState({kursAktywny:false});assert.equal(nodes.clockPanel.hidden,false);
 const server=fs.readFileSync('app/src/main/java/pl/srgmobile/classic/LocalPanelServer.java','utf8');assert(server.includes('new ServerSocket(47283)'));assert(server.includes('route.equals("/api/state")'));
 console.log('PASS LCD: remaining stops, intermediate/terminal, clock, LAN endpoint');
+
+api.setState({...state,clock:'23:47:00'});api.tickClock();assert.equal(nodes.time.textContent,'23:47');
+api.setState({...state,clock:'02:03:00'});api.tickClock();assert.equal(nodes.time.textContent,'02:03');
+console.log('PASS LCD clock follows OMSI time changes in 24-hour format');

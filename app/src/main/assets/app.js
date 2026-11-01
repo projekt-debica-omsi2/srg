@@ -9,7 +9,7 @@ const forcedPreview=previewParams.get('preview');
 const weekFormat=new Intl.DateTimeFormat('pl-PL',{weekday:'long'});
 const dateFormat=new Intl.DateTimeFormat('pl-PL',{day:'numeric',month:'long',year:'numeric'});
 function tickClock(){
- const d=new Date();el('time').textContent=`${d.getHours()}:${String(d.getMinutes()).padStart(2,'0')}`;
+ const d=new Date();el('time').textContent=typeof currentState?.clock==='string'&&/^([01]\d|2[0-3]):[0-5]\d:[0-5]\d$/.test(currentState.clock)?currentState.clock.slice(0,5):`${d.getHours()}:${String(d.getMinutes()).padStart(2,'0')}`;
  el('weekday').textContent=weekFormat.format(d);
  el('longDate').textContent=dateFormat.format(d);
 }
