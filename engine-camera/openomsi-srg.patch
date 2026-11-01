@@ -20,7 +20,7 @@
      }
 --- /dev/null
 +++ b/crates/omsi-app/src/srg_camera.rs
-@@ -0,0 +1,153 @@
+@@ -0,0 +1,154 @@
 +//! Opt-in, local-only independent camera output for SRGMobile.
 +//! The driver camera and input are never changed. A short request lease bounds GPU work.
 +use crate::player::Player;
@@ -108,8 +108,9 @@
 +            .filter(|(_,c)|!c.fixed && c.pos[0].abs()<0.8)
 +            .max_by(|a,b|a.1.pos[1].partial_cmp(&b.1.pos[1]).unwrap_or(std::cmp::Ordering::Equal)).map(|(i,_)|i);
 +        if let Some(index)=inside { if index<256 { feeds.push(Feed{channel:16+index as u16,label:"Lusterko wewnętrzne".into()}); } }
-+        else if p.pax_camera_count()>0 { feeds.push(Feed{channel:0,label:"Wnętrze — kamera pasażerska".into()}); }
-+        for index in 0..p.vehicle.ty.def.cameras_reflexion.len().min(256) {
++        if p.pax_camera_count()>0 { feeds.push(Feed{channel:0,label:"Wnętrze — kamera pasażerska".into()}); }
++        let mirrors:Vec<_>=p.vehicle.ty.def.cameras_reflexion.iter().chain(p.vehicle.trailers.iter().flat_map(|t|t.ty.def.cameras_reflexion.iter())).take(256).collect();
++        for index in 0..mirrors.len() {
 +            available.push(16+index as u16);
 +            if Some(index)!=inside { feeds.push(Feed{channel:16+index as u16,label:if Some(index)==left {"Lewe lusterko / kamera".into()} else if Some(index)==right {"Prawe lusterko / kamera".into()} else {format!("Kamera / lusterko {}",index+1)}}); }
 +        }
@@ -122,7 +123,7 @@
 +            3 => inside.map(|n|(p.camera_look(&format!("mirror{n}"),fallback,(0.0,0.0),10.0),"Lusterko wewnętrzne",true,Some(n))),
 +            channel if channel>=16 => {
 +                let index=(channel-16) as usize;
-+                p.vehicle.ty.def.cameras_reflexion.get(index).map(|c|(p.camera_look(&format!("mirror{index}"),fallback,(0.0,0.0),10.0),"Kamera / lusterko z modelu autobusu",!c.fixed,Some(index)))
++                mirrors.get(index).map(|c|(p.camera_look(&format!("mirror{index}"),fallback,(0.0,0.0),10.0),"Kamera / lusterko z modelu autobusu",!c.fixed,Some(index)))
 +            }
 +            _ => None,
 +        }
