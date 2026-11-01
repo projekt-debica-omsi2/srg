@@ -1,36 +1,25 @@
-# Paczka zmian SRG 1.4.69-omsi-test
+# SRGMobile 1.4.74 — OMSI 2 Steam i openOMSI
 
-## Wgraj do GitHuba
+## Wspólny mostek
+Aplikacja Android korzysta z tego samego SRG-OMSI-Bridge 0.2 dla obu gier.
+Wi-Fi: port 8765, kod 4-cyfrowy. USB: adb reverse tcp:8766 tcp:8766, bez kodu aplikacji. Zgoda Androida na debugowanie nadal jest wymagana.
+Kopiuj SRGBridge.dll i SRGBridge.opl do folderu plugins danej instalacji. Dla openOMSI wymagany jest host wtyczek x86 omsi-plugin-host32.exe. Uruchamiaj jedną grę naraz: aktualny format telemetrii współdzieli jeden plik.
 
-To uzupełnienie istniejącego repozytorium `projekt-debica-omsi2/srg`, a nie samodzielny pełny projekt.
+## Potwierdzone na komputerze 2026-11-01
+- Oba buildy GitHub Actions zakończone sukcesem; aplikacja 1.4.74 zainstalowana z zachowaniem danych i zgodnym podpisem.
+- Tablet 9185W łączy się przez USB bez kodu. Pole kodu i adresu Wi-Fi jest w USB ukryte.
+- openOMSI launcher 0.3.45 / Grundorf / MAN GN92: plik telemetrii odnawia się, Velocity=0, IBIS_Route=1. Tablet pokazuje świeże dane z wtyczki przez USB.
+- IBIS_Linie i IBIS_Ziel są niedostępne w tej próbie. MAN udostępnia m.in. IBIS_LinieKurs i IBIS_Linie_Complex; nie mapowano ich automatycznie na gotowy numer linii.
+- Nie potwierdzono zmiany prędkości podczas jazdy ani połączenia Wi-Fi na fizycznym tablecie.
 
-1. Rozpakuj ZIP.
-2. Skopiuj foldery `app`, `tests`, `omsi-bridge` oraz ukryty folder `.github` do GŁÓWNEGO katalogu lokalnego repozytorium SRG. Scal foldery i zastąp wskazane pliki. Nie usuwaj pozostałych plików repozytorium. Nie kopiuj do BRANDING.
-3. W GitHub Desktop przejrzyj zmiany, wykonaj Commit i Push.
-4. W Actions powinny uruchomić się dwa procesy:
-   - Build SRG Mobile 1.4.69-omsi-test APK;
-   - Build OMSI test bridge.
-5. Dopiero gdy oba zakończą się powodzeniem, pobierz ich artefakty. Pierwszy zawiera APK. Drugi zawiera folder plugins z DLL/OPL i program SRG-OMSI-Bridge.exe.
-6. Instalacja dodatku i USB/Wi-Fi: `omsi-bridge/README-PL.md`.
+## OMSI 2 ze Steam — pozostała diagnostyka
+Gra zatrzymywała się przy inicjalizacji wtyczek. W tym momencie załadowana była AUXI.dll, a nie SRGBridge.dll. To wskazuje etap blokady, ale nie dowodzi jeszcze winy AUXI.
+Konfigurację AUXI przywrócono po niedokończonej próbie izolacji. Nie usunięto dodatków.
+Test z izolacją wtyczek i odczyt telemetrii z oryginalnego OMSI pozostają do wykonania. Nie deklarować pełnej zgodności na podstawie samej kompilacji.
 
-Stały klucz podpisu korzysta z istniejących sekretów GitHub Actions. Ta paczka NIE zawiera klucza ani hasła. Nie zmieniaj ustawień podpisu.
+## Zakres obecnej integracji
+Pasywny odczyt czterech zmiennych, status świeżości, historia, USB/Wi-Fi.
+Rozkłady/HOF, pozycja i przełączanie przystanków, zapowiedzi, kamery oraz pełne sterowanie tablicą nadal wymagają rozwoju.
 
-## Faktyczny stan
-
-Zaimplementowano źródła trybu OMSI, konfigurację połączenia, status komputera i danych z gry,
-podgląd czterech zmiennych, historię kontaktu, pasywną wtyczkę x86, mostek Windows i skrypt USB.
-Nie wykonano kompilacji Windows/Android w tej sesji. Zapis do GitHuba zwrócił 403.
-Nie przeprowadzono testu w OMSI ani na Androidzie.
-
-NIE JEST TO pełna uzgodniona integracja. Nie ma jeszcze rozkładów map/HOF,
-pozycji i progu 50 m, generowania/przesyłania zapowiedzi, zapisanej trasy do ręcznej
-obsługi ani obrazu kamer/lusterek. Czarne pole oznacza niezaimplementowany odczyt obrazu.
-OpenOMSI nie zostało zweryfikowane.
-
-## Wykonane sprawdzenia lokalne
-
-- Testy mostka Python: brak pliku, przeterminowanie danych, uszkodzony JSON, zatrzymana wtyczka;
-  odrzucenie żądania bez kodu parowania, poprawna odpowiedź z kodem, odrzucenie innych ścieżek.
-- Sprawdzenie składni JavaScript i zabezpieczeń oddzielających zapis zwykłej sesji od trybu OMSI.
-- Test interfejsu w przeglądarce NIE został uruchomiony: środowisko nie miało Chromium.
-- Test ABI i uruchomienia DLL jest dołączony do procesu Windows, ale nie został tu wykonany.
+## Dokumentacja
+https://github.com/openOMSI-org/openOMSI/blob/main/docs/PLUGINS.md — zgodność .opl/DLL.
