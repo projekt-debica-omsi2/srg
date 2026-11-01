@@ -1,26 +1,1853 @@
---- a/crates/omsi-app/src/lib.rs
+--- /dev/null
 +++ b/crates/omsi-app/src/lib.rs
-@@ -70,6 +70,7 @@
- mod launcher;
- mod menu;
- mod mirror_hud;
+@@ -0,0 +1,1019 @@
++//! `omsi` - load an OMSI 2 map and render it.
++//!
++//! ```text
++//! omsi --root "/path/to/OMSI 2" --map maps/Grundorf/global.cfg            # window
++//! omsi --root ... --map ... --offscreen out.png --size 1600x900            # PNG
++//! ```
++//!
++//! The game is this library; `main.rs` calls [`run`], and on Android the NativeActivity
++//! calls `android_main` (see `android.rs`), which runs the launcher and the game in one
++//! window of one process. On an iPhone or an iPad the Swift app calls `openomsi_ios_main`
++//! (see `ios.rs`); its launcher, and the Mac's Swift launcher, read and change what the
++//! launcher knows through `apple_bridge`.
++
++mod admin;
++mod admin_panel;
++mod auto_announce;
++mod player_list;
++mod voice_chat;
++use omsi_scene::check;
++use omsi_platform::discord;
++#[cfg(steam)]
++mod steam;
++pub(crate) use omsi_scene::head_idle;
++use omsi_input::{head_filter, headtrack, tobii};
++#[cfg(windows)]
++use omsi_xr::openxr;
++#[cfg(target_os = "android")]
++mod android;
++#[cfg(target_os = "android")]
++mod android_launcher;
++#[cfg(target_os = "ios")]
++mod ios;
++#[cfg(target_os = "ios")]
++mod apple;
++#[cfg(any(target_os = "macos", target_os = "ios"))]
++mod apple_bridge;
++mod platform;
++mod touch;
++mod units;
++mod placing;
++use omsi_mt as mt;
++use omsi_platform::updater;
++mod update_watch;
++use omsi_platform::presence;
++use omsi_soundscape::ambience;
++mod soundscape;
++use omsi_scene::wheel_surface;
++use omsi_scene::camera_arm;
++use omsi_vehicle::cam_approach;
++use omsi_career::career;
++use omsi_input::describe;
++pub(crate) use omsi_scene::editor;
++mod duty_book;
++mod game_lists;
++mod game_panels;
++mod game_controller_menu;
++mod rail_drive;
++use omsi_scene::driver;
++use omsi_scene::export;
++pub(crate) use omsi_scene::hud;
++mod humans;
++use omsi_career::journey;
++use omsi_input::keys;
++// (LAN play: the session is omsi-lan's `game`, see `lan_play`; the shared world's mirror
++// stays here: it drives the app's `Traffic`, `Humans` and their view directly)
++mod lan_play;
++use lan_play as lan;
++mod lan_world;
++use omsi_scene::lights;
++mod launcher;
++mod menu;
++mod mirror_hud;
 +mod srg_camera;
- use omsi_navigator as navigator;
- mod vr_navigator;
- use omsi_scene::money;
---- a/crates/omsi-app/src/app_events/frame/present.rs
++use omsi_navigator as navigator;
++mod vr_navigator;
++use omsi_scene::money;
++mod milezero;
++mod radio;
++
++use omsi_scene::puddles;
++use omsi_platform::quit;
++use omsi_weather::condensation;
++use omsi_scene::{rain, window_wipers};
++mod scene;
++mod season_phase;
++mod schedule;
++/// The cab's paper timetable (`omsi_scene::schedule_paper`) in the game's language.
++mod schedule_paper {
++    pub(crate) fn update_vehicle(
++        vehicle: &mut omsi_sim::VehicleInstance,
++        duty: &omsi_sim::timetable_run::PlayerDuty,
++        fonts: &mut omsi_sim::texttex::FontLibrary,
++    ) -> anyhow::Result<()> {
++        omsi_scene::schedule_paper::update_vehicle(vehicle, duty, fonts, || crate::settings::Settings::load().language)
++    }
++}
++mod real_time;
++mod settings;
++mod shell;
++mod photo;
++mod depot_bus;
++mod devtools;
++mod telemetry;
++use omsi_scene::threads;
++use omsi_scene::tiles;
++mod traffic;
++mod view_sync;
++mod watchdog;
++mod ui;
++
++// the game itself, split by what each part does
++mod app;
++mod applog;
++mod app_events;
++mod bus_service;
++mod camera_util;
++// the game controllers, their mappings and force feedback (`omsi-input`), at their old paths
++use omsi_input::{controllers, gamepad_profile, hpattern};
++mod cli;
++use omsi_input::diagnostics;
++mod perf_overlay;
++mod perf_report;
++pub(crate) use omsi_cfg::profile_keys;
++mod frame_stages;
++mod support_bundle;
++mod duty_start;
++mod input_script;
++mod app_impl;
++use omsi_guard::launcher_link;
++use omsi_lan::mods as lan_mods;
++mod memory;
++mod offscreen;
++pub(crate) use omsi_sim::ground_gap;
++mod on_foot;
++mod trolley_hands;
++mod trolley_mouse;
++pub(crate) mod trolley_net;
++mod trolley_sound;
++mod optimiser;
++use omsi_scene::route_arrows;
++mod server;
++mod player;
++mod plugin_io;
++// the plugins' panels (`omsi-plugin-ui`) at their old path, and the app's side of their input
++use omsi_plugin_ui as plugin_ui;
++mod plugin_panels;
++mod process_permissions;
++mod plugins;
++mod services;
++mod sim_thread;
++mod situation;
++mod spawn;
++use omsi_input::stock_keys;
++mod startup;
++mod traffic_link;
++pub(crate) use omsi_content::tutorial;
++mod weather_setup;
++mod weather_tomorrow;
++use omsi_weather::{weather_cycle, weather_model};
++mod world_load;
++
++// the interface's translations (locales/app.yml; the English text is the key)
++rust_i18n::i18n!("locales");
++// (the tables are read when this crate compiles: this makes cargo compile it again when they
++// change - the macro alone left the old texts in the program)
++use omsi_launcher_lib::i18n::TABLES as _LOCALES;
++
++/// Show the interface in `code` (the settings' ENG / DEU / FRA / RUS).
++pub(crate) fn ui_language(code: &str) {
++    omsi_ui::i18n::set_lookup(|lang, text| _rust_i18n_try_translate(lang, text).map(|t| t.into_owned()));
++    static TEMPLATES: std::sync::Once = std::sync::Once::new();
++    TEMPLATES.call_once(|| omsi_ui::i18n::set_templates(locale_keys(_LOCALES)));
++    let iso = omsi_launcher_lib::language_iso(code);
++    omsi_ui::i18n::set_language(iso);
++    omsi_sim::vehicle_api::set_locale(iso);
++}
++
++const MISSING_ORIGINAL: &str = "The original OMSI 2 was not found.\n\n\
++    openOMSI needs a complete installation of the original game (any version). \
++    Choose its folder in the launcher (Setup), or start once with \
++    --root \"/path/to/OMSI 2\", the folder with Omsi.exe, maps and Vehicles in it.\n\n\
++    Missing in {folder}: {missing}";
++
++fn locale_keys(yml: &str) -> impl Iterator<Item = String> + '_ {
++    yml.lines().filter_map(|l| l.strip_prefix('"')?.strip_suffix("\":")).filter(|k| k.contains('{')).filter_map(|k| {
++        let mut out = String::new();
++        let mut chars = k.chars();
++        while let Some(c) = chars.next() {
++            if c != '\\' {
++                out.push(c);
++                continue;
++            }
++            out.push(match chars.next()? {
++                'n' => '\n',
++                't' => '\t',
++                x @ ('"' | '\\') => x,
++                _ => return None,
++            });
++        }
++        Some(out)
++    })
++}
++
++use anyhow::{anyhow, Context, Result};
++use clap::Parser;
++use glam::{DVec3, Vec3};
++use omsi_render::{Camera, Renderer, Scene, SurfaceState};
++use scene::World;
++use std::path::{Path, PathBuf};
++use std::sync::Arc;
++use std::time::Instant;
++use winit::application::ApplicationHandler;
++use winit::event::{DeviceEvent, ElementState, WindowEvent};
++use winit::event_loop::{ActiveEventLoop, EventLoop};
++use winit::keyboard::{KeyCode, PhysicalKey};
++use winit::window::{Window, WindowId};
++use app::*;
++use camera_util::*;
++use cli::*;
++use diagnostics::*;
++use duty_start::*;
++use input_script::*;
++use launcher_link::*;
++use memory::*;
++use offscreen::*;
++use player::*;
++use services::*;
++use situation::*;
++use spawn::*;
++use startup::*;
++use traffic_link::*;
++use weather_setup::*;
++use world_load::*;
++
++/// The game (and its launcher) from the command line: what `main` does.
++pub fn run() -> Result<()> {
++    view_sync::install_sim_decoder();
++    startup::install_scene_settings();
++    omsi_cfg::migrate_legacy_data_dir();
++    omsi_launcher_lib::adopt_own_inputs();
++    #[cfg(target_os = "macos")]
++    restart_with_allocator_settings();
++    #[cfg(windows)]
++    attach_parent_console();
++    // `--check <file or folder>` (`--check-vehicle`, its old name): the loaders' findings
++    // as JSON, no window, no log
++    if matches!(std::env::args().nth(1).as_deref(), Some("--check" | "--check-vehicle")) {
++        let rest: Vec<String> = std::env::args().skip(2).collect();
++        return check::run(&rest, crate::startup::find_root);
++    }
++    env_logger::Builder::from_env(env_logger::Env::default().default_filter_or("info")).init();
++    // a panic goes into the log (which the launcher keeps per session) with where it
++    // happened and a backtrace, not only to a terminal that may not be there
++    let default_hook = std::panic::take_hook();
++    std::panic::set_hook(Box::new(move |info| {
++        if omsi_render::catching() {
++            log::warn!("caught by the renderer: {info}");
++            return;
++        }
++        log::error!(
++            "the game stopped on an error (build {BUILD}): {info}\n{}",
++            std::backtrace::Backtrace::force_capture()
++        );
++        default_hook(info);
++    }));
++    log::info!(
++        "openOMSI {VERSION}, build {BUILD}{}",
++        if std::env::var_os("MallocLargeCache").is_some() {
++            " (large allocations returned at once)"
++        } else {
++            ""
++        }
++    );
++    // the desktop launcher's helper: no window, requests on stdin (see `launcher::service`)
++    if std::env::args().nth(1).as_deref() == Some("--launcher-service") {
++        return launcher::run_service();
++    }
++    let args = Args::parse();
++    // (before the content and the graphics device are looked for: it must work without them)
++    if let Some(out) = &args.export_diagnostics {
++        let value = support_bundle::snapshot(None, &settings::Settings::load(), None, None, "cli");
++        support_bundle::export(out, &value)?;
++        println!("Support package written to {} - look inside before you attach it to an issue", out.display());
++        return Ok(());
++    }
++    // Started by a double click or with no arguments at all: that is the launcher's job.
++    // The launcher itself runs the game with a full command line (--no-menu, --map, ...).
++    let bare = std::env::args().len() == 1;
++    let Some((args, server_cfg)) = prepare(args, bare)? else { return Ok(()) };
++    if bare && !args.menu {
++        // the launcher, another program (it starts the game again with a full command
++        // line): OMSI_LAUNCHER=<program>, else the desktop launcher beside the game
++        if omsi_cfg::flags::OMSI_LAUNCHER.is_set() && open_launcher()? {
++            return Ok(());
++        }
++        return open_app_launcher(fatal_message);
++    }
++    let Some(app) = make_app(args, server_cfg)? else { return Ok(()) };
++    // a game session's start goes into the start guard's journal (a version whose sessions
++    // keep failing before their first frames is healed at the launcher's next start)
++    if app.args.server.is_none() {
++        omsi_guard::start(omsi_guard::journal::Kind::Game);
++    }
++    let event_loop = game_event_loop()?;
++    // SIGTERM (the launcher's Stop) and Ctrl+C end the session the way Escape does
++    let proxy = event_loop.create_proxy();
++    quit::install(move |_| {
++        let _ = proxy.send_event(());
++    });
++    let mut app = app;
++    let r = event_loop.run_app(&mut app);
++    // the host's mods of this session go with it
++    lan_mods::clean_up();
++    r?;
++    Ok(())
++}
++
++/// The game's event loop. With OMSI_HIDDEN_WINDOW the process stays out of the Dock and the
++/// menu bar on macOS, as its window stays out of sight.
++fn game_event_loop() -> Result<EventLoop<()>> {
++    #[cfg(target_os = "macos")]
++    if omsi_cfg::flags::OMSI_HIDDEN_WINDOW.is_set() {
++        use winit::platform::macos::{ActivationPolicy, EventLoopBuilderExtMacOS};
++        return Ok(EventLoop::builder().with_activation_policy(ActivationPolicy::Accessory).build()?);
++    }
++    Ok(EventLoop::new()?)
++}
++
++
++/// Everything before a window: the language, the session's random seed, the original
++/// installation and the content roots (mods, archives). None when the program has
++/// nothing more to do (a fatal error was shown).
++pub(crate) fn prepare(mut args: Args, bare: bool) -> Result<Option<(Args, Option<server::ServerCfg>)>> {
++    optimiser::recover_cut_short();
++    ui_language(&settings::Settings::load().language);
++    units::Units::from_setting(&settings::Settings::load().units).set();
++    // (a server has no interface to translate)
++    mt::enable(settings::Settings::load().machine_translation && args.server.is_none());
++    // the dedicated server: server.cfg decides the world, the rest is a host without a window
++    let server_cfg = match args.server.clone() {
++        // (a start script asking for the maps: server.cfg written when missing, nothing more
++        // of a server's start - no METAR report fetched)
++        Some(p) if args.list_maps => {
++            if let Err(e) = server::ServerCfg::load(&p, game_lists::TRAFFIC_MAX) {
++                eprintln!("server: {e:#}");
++                std::process::exit(2);
++            }
++            None
++        }
++        Some(p) => match server::prepare(&mut args, &p) {
++            Ok(c) => Some(c),
++            Err(e) => {
++                eprintln!("server: {e:#}");
++                std::process::exit(2);
++            }
++        },
++        None => None,
++    };
++    // the scripts' `random` differs from session to session (starting air pressure, part
++    // lifetimes ...); OMSI_SEED=n repeats a session's numbers
++    let seed = omsi_cfg::flags::OMSI_SEED
++        .var()
++        .and_then(|s| s.trim().parse::<u64>().ok())
++        .unwrap_or_else(|| {
++            let t = std::time::SystemTime::now()
++                .duration_since(std::time::UNIX_EPOCH)
++                .map(|d| d.as_nanos() as u64)
++                .unwrap_or(1);
++            (t ^ ((std::process::id() as u64) << 32)) % 1_000_000_000
++        });
++    omsi_script::set_session_seed(seed);
++    log::info!("script random seed {seed} (OMSI_SEED={seed} repeats it)");
++    let launcher_mode = bare && !args.menu;
++    if !is_omsi_root(&args.root) {
++        // (a start script checks the folder it was given: never another one found instead)
++        match find_root().filter(|_| !args.list_maps) {
++            Some(p) => {
++                log::info!("OMSI 2 found at {}", p.display());
++                args.root = p;
++            }
++            None if launcher_mode => {
++                // the launcher opens without the game: its Setup page is where the folder is
++                // chosen (only a session needs the original installation)
++                log::warn!("the original OMSI 2 was not found; the launcher asks for it");
++            }
++            None => {
++                // openOMSI plays on the original game's content: without a complete
++                // installation of it there is nothing to play on, and every player must have
++                // the same base whatever copy of OMSI 2 they own
++                let missing = omsi_cfg::missing_original_essentials(&args.root);
++                let text = omsi_ui::tr(MISSING_ORIGINAL).replace("{folder}", &args.root.display().to_string()).replace("{missing}", &missing.join(", "));
++                if server_cfg.is_some() || args.list_maps {
++                    eprintln!("{text}");
++                } else {
++                    fatal_dialog(&omsi_ui::tr("openOMSI cannot start"), &text);
++                }
++                if cfg!(any(target_os = "android", target_os = "ios")) {
++                    // (a phone's app is not ended from inside: back to the launcher)
++                    return Ok(None);
++                }
++                std::process::exit(1);
++            }
++        }
++    }
++    if let Some(memo) = root_memo().filter(|_| is_omsi_root(&args.root) && server_cfg.is_none() && args.pack_map.is_none()) {
++        let _ = std::fs::write(memo, args.root.to_string_lossy().as_bytes());
++    }
++    // content roots: the game's own folder (mods) first, then the original installation
++    if let Some(c) = content_dir() {
++        match omsi_cfg::ensure_content_layout(&c) {
++            Ok(()) => {
++                omsi_cfg::add_content_root(c.clone());
++                log::info!("content folder (mods): {}", c.display());
++            }
++            Err(e) => log::warn!("content folder {}: {e}", c.display()),
++        }
++    }
++    // archives read in place: searched after the content folder, before the installation
++    // (`--content-zip`, `OMSI_CONTENT_ZIP`, and every .zip in the content folder's `Archives`)
++    for z in &args.content_zip {
++        if let Err(e) = omsi_cfg::add_content_zip(z) {
++            log::warn!("content zip {}: {e}", z.display());
++        }
++    }
++    omsi_cfg::vfs::mount_env_zips();
++    if let Some(c) = content_dir() {
++        omsi_cfg::vfs::mount_dir_zips(&c.join("Archives"));
++    }
++    omsi_cfg::add_content_root(args.root.clone());
++    if args.list_maps {
++        for m in server::installed_maps() {
++            println!("{m}");
++        }
++        std::process::exit(0);
++    }
++    // a server's map must be installed: said now, with the maps there are, rather than as
++    // a file the loading could not read
++    if server_cfg.is_some() {
++        if let Err(e) = server::check_map(&args) {
++            eprintln!("server: {e}");
++            std::process::exit(2);
++        }
++    }
++    Ok(Some((args, server_cfg)))
++}
++
++/// The game for `args`, ready for its window; None when there is no window to open (a
++/// picture or a model was written instead).
++pub(crate) fn make_app(mut args: Args, server_cfg: Option<server::ServerCfg>) -> Result<Option<App>> {
++    if let (Some(map), Some(to)) = (args.pack_map.clone(), args.pack_to.clone()) {
++        omsi_lan::map_pack::run(&map, &to)?;
++        return Ok(None);
++    }
++    // the window's simulation beside the picture or inline, for the whole session (an
++    // offscreen run - a dedicated server, a picture - steps inline and never asks)
++    if args.offscreen.is_none() {
++        let sim_thread = omsi_sim::sim_thread::set_enabled(settings::Settings::load().sim_thread);
++        log::info!("sim thread: {}", if sim_thread { "the AI traffic, the people and the scenery scripts step beside the picture" } else { "off: every step on the main thread" });
++    }
++    let _lan_status = lan::StatusFileGuard;
++    // OMSI's tutorials: the lesson's own situation
++    if let Some(n) = args.tutorial.filter(|n| (1..=4).contains(n)) {
++        args.situation = Some(tutorial::SITUATIONS[n - 1].to_string());
++    }
++    apply_situation(&mut args)?;
++    // `openomsi`: the official server, wherever its tunnel is today (see omsi_net::official)
++    if let Some(t) = args.lan_join.clone().filter(|t| omsi_net::official::is_alias(t)) {
++        match omsi_net::official::resolve_target(&t) {
++            Ok(url) => {
++                log::info!("LAN: the official server is at {url}");
++                args.lan_join = Some(url);
++            }
++            Err(e) => log::warn!("LAN: {e}"),
++        }
++    }
++    // a duty starts at its trip, as in OMSI (not at the map's entry point); a joining
++    // player's once the host's world is known (below): it was never placed at all, and
++    // "Automatic" put it at the map's first entry point, the depot
++    // real-time sync: the game starts at this device's date and time (a joining player's
++    // clock is the host's, a server's is its server.cfg's); a duty does not move it
++    if settings::Settings::load().time_sync && args.lan_join.is_none() && args.server.is_none() && args.offscreen.is_none() {
++        real_time::start_at_now(&mut args);
++    }
++    // a season chosen with its phase moves the date into it (the sun, the weather and the
++    // timetable go by the date); a joining player takes the host's date below
++    season_phase::apply_season_date(&mut args);
++    if args.export_glb.is_none() && args.lan_join.is_none() {
++        place_on_duty(&mut args);
++    }
++    let settings = settings::Settings::load();
++    applog::log_system(&settings);
++    if args.drive_keys.eq_ignore_ascii_case("simple")
++        && !settings.drive_keys.eq_ignore_ascii_case("simple")
++    {
++        args.drive_keys = settings.drive_keys.clone();
++    }
++    args.session_settings = startup::SessionSettings::for_session(&settings, &args);
++    // the LAN session (offscreen too, so that one game's view of another can be rendered);
++    // a joining player's world is the host's (taken over again when the window loads it)
++    let mut lan = if args.export_glb.is_none() {
++        lan::start(&args.lan_config(), &lan::AppLanHost { args: &args, world: None })
++    } else {
++        None
++    };
++    // a dedicated server without its session has nobody to serve: why, and the end (it went
++    // on running alone, unreachable, with a warning among the log's lines)
++    if server_cfg.is_some() && lan.is_none() {
++        // Do not pass the password-bearing server configuration to diagnostics.
++        // The failed bind above already reports the candidate port and socket error.
++        eprintln!("server: cannot open the session (the line above says why): another server or program uses the UDP/TCP port, or the system refuses it. Stop the other one, or choose another `port` in the server configuration.");
++        std::process::exit(3);
++    }
++    // turned away at the door (banned, full, another version): no game to play there
++    if lan.as_ref().and_then(lan::turned_away).is_some() {
++        log::info!("game ends");
++        return Ok(None);
++    }
++    // the host's mods: served by the host, fetched by a joining player before its world is
++    // made (see `lan_mods`)
++    lan_mods::remove_stale();
++    let mut mods_server = None;
++    if let Some(l) = lan.as_mut() {
++        let mut c = args.lan_config();
++        mods_server = lan::share_mods(&mut c, l);
++        lan::take_host_map(&mut c, l);
++        args.take_lan_config(&c);
++    }
++    if let (Some(cfg), Some(l)) = (server_cfg.as_ref(), lan.as_ref()) {
++        lan::open_public_gateway(l, server::info_of(cfg), cfg.web_port, cfg.tunnel);
++        lan::publish_vehicles(args.root.clone(), cfg.vehicles.clone());
++        server::start_public_list(cfg);
++        if cfg.tunnel {
++            // the address to give the players, as soon as cloudflared says it
++            std::thread::spawn(|| {
++                for _ in 0..300 {
++                    if let Some(u) = lan::tunnel_url() {
++                        println!("\n  Server address for the players: {u}\n  (Multiplayer -> Servers -> Add)\n");
++                        return;
++                    }
++                    std::thread::sleep(std::time::Duration::from_millis(200));
++                }
++                println!("  No tunnel address (is cloudflared installed?): players join at this machine's address and the UDP port");
++            });
++        }
++    }
++    // a host's clock runs at its time speed (a server's: its server.cfg)
++    if let (Some(l), None) = (lan.as_mut(), server_cfg.as_ref()) {
++        if l.role == omsi_net::Role::Host {
++            l.clock_speed = if settings.time_sync { 1.0 } else { settings.time_speed.clamp(1.0, 30.0) };
++        }
++    }
++    // a server's voice chat: what its server.cfg allows (a game that hosts has its own settings)
++    if let (Some(l), Some(c)) = (lan.as_mut(), server_cfg.as_ref()) {
++        l.set_voice_policy(c.voice);
++    }
++    let mut lan_game = lan::LanGame::default();
++    if args.export_glb.is_none() && args.lan_join.is_some() {
++        if let Some(t) = lan.as_ref().and_then(lan::host_time_now) {
++            args.time = t;
++        }
++        place_on_duty(&mut args);
++    }
++    if let Some(out) = args.export_glb.clone() {
++        return run_export(&args, &out).map(|_| None);
++    }
++    if let Some(out) = args.offscreen.clone() {
++        if let Some(l) = lan.as_mut() {
++            let mut c = args.lan_config();
++            lan::adopt_host_world(&mut c, &crate::app_impl::lan_tick::AppLanHost { args: &args, world: None }, l, &mut lan_game);
++            args.take_lan_config(&c);
++        }
++        let r = run_offscreen(&args, &out, lan, lan_game);
++        lan_mods::clean_up();
++        return r.map(|_| None);
++    }
++    let mut app = assemble_app(args, settings);
++    app.net.lan = lan;
++    app.net.mods_server = mods_server;
++    app.net.remotes = lan_game;
++    // mouse steering as the player left it (the wheel eases to the cursor for a second)
++    if app.settings.mouse_steering {
++        app.input.mouse_drive = true;
++        app.input.mouse_steer = (0.0, 1.0);
++        app.input.center_cursor = true;
++    }
++    // (the LAN status file stays while the game runs; `exiting` removes it)
++    std::mem::forget(_lan_status);
++    Ok(Some(app))
++}
++
++/// The game's App for `args` and `settings`, every part of it as it starts (the window comes
++/// later).
++fn assemble_app(args: Args, settings: settings::Settings) -> App {
++    let view = args.view.clone();
++    let args_root_for_keys = args.root.clone();
++    let clock_note = args.clock_moved.clone();
++    // (as the last session left it, #1164)
++    let info_bar = settings.info_bar;
++    let is_server = args.server.is_some();
++    let sky = crate::weather_setup::SkyState { look: args.session_settings, ..Default::default() };
++    // What loads, starts or reads the clock, made one after the other in a fixed order before
++    // the App and its groups are put together (their logs and threads come in this order).
++    // Steam must be initialized before the graphics instance and window so its overlay can
++    // hook the rendering process before the first surface is created.
++    #[cfg(steam)]
++    // Fixtures must not create multiple process-global native Steam clients.
++    let steam = if is_server || cfg!(test) {
++        None
++    } else {
++        crate::steam::Steam::start()
++    };
++    let instance = graphics_instance();
++    let vr_nav_profiles = crate::vr_navigator::Profiles::load(crate::vr_navigator::profiles_path().as_deref());
++    let ui = ui::Ui::new();
++    let rain = rain::Rain::new();
++    let cabin_air = crate::condensation::CabinAir::new();
++    let mut spray = puddles::Spray::new();
++    spray.graphics = args.session_settings.graphics();
++    let radio = radio::Radio::load(&args_root_for_keys);
++    let started = Instant::now();
++    let last = Instant::now();
++    let input_script = parse_input_script();
++    let game_keys = omsi_content::KeyboardCfg::load(&crate::startup::keyboard_cfg(&args_root_for_keys)).unwrap_or_default().with_game_defaults().with_vr_defaults().game;
++    let own_keys = crate::startup::own_keys(&args_root_for_keys);
++    let own_shift = crate::startup::own_bindings(&args_root_for_keys, omsi_content::input::KEY_SHIFT);
++    let fps_t = Instant::now();
++    let update_watch = crate::update_watch::UpdateWatch::new();
++    // (a server counts its players by their own games, not itself)
++    let presence = if is_server || cfg!(test) { None } else { crate::presence::Presence::start() };
++    let touch = touch::Touch::new();
++    App {
++        args,
++        gfx: GfxState {
++            instance,
++            surface: None,
++            streamer: None,
++            spanned: false,
++            mirror_budget: 1.0,
++            mirror_dt: 0.0,
++            mirrors_seen: 2,
++            mirror_turn: 0,
++            mirror_panel_cams: Vec::new(),
++            frozen_mirrors: None,
++            mirror_hud: Default::default(),
++            window_hidden: false,
++            route_arrows: Default::default(),
++            hidden_frames: 0,
++            stand_in: None,
++            sim_view: Default::default(),
++            starting: None,
++        },
++        window: None,
++        renderer: None,
++        xr: VrState {
++            #[cfg(windows)]
++            vr: None,
++            vr_nav_profiles,
++            vr_nav_edit: None,
++            vr_cursor_physical: None,
++            vr_cursor_warp_pending: None,
++            vr_zoom_active: false,
++        },
++        scene: None,
++        camera: None,
++        player: None,
++        session: SessionState {
++            placed: Vec::new(),
++            scenery: Default::default(),
++            traffic: None,
++            schedule: None,
++            timetable_book: None,
++            humans: None,
++            duty: None,
++            duty_places: false,
++            rain,
++            cabin_air,
++            spray,
++            lamps_on: None,
++            populate_t: 0.0,
++            humans_populate_t: 0.0,
++            traffic_heavy_frame: false,
++            first_populate: true,
++            envir: None,
++            weather: None,
++            clock_jump: 0.0,
++            seat_bus: String::new(),
++            on_foot: None,
++            safe_pose: None,
++            safe_age: 0.0,
++            pending_time: None,
++            world_day: None,
++            autosave_t: 0.0,
++            pumping: None,
++            career: Default::default(),
++            journey: None,
++            wetness: 0.0,
++            cloud_drift: [0.0; 4],
++            weather_blend: None,
++            weather_cycle: None,
++            metar_rx: None,
++            metar_once: false,
++            metar_next: 0.0,
++            tomorrow: Default::default(),
++            sky,
++        },
++        menus: MenuState {
++            list_dirty: false,
++            page_titles: Default::default(),
++            chooser: None,
++            editor: None,
++            vehicle_list: Vec::new(),
++            dropdown: None,
++            vehicle_meta: std::collections::HashMap::new(),
++            hud: None,
++            navigator: None,
++            menu: None,
++            hover_key: None,
++            hover: None,
++            hover_part: None,
++            hover_hand: false,
++            game_menu: None,
++            menu_top: None,
++            menu_scroll_drag: false,
++            dd_scroll_drag: None,
++            pane_scroll_drag: None,
++            pane_scroll: None,
++            teleport_pick: false,
++            game_panels: Default::default(),
++            tutorial: None,
++            wheel_acc: 0.0,
++            editor_drag: false,
++            editor_sync_t: 0.0,
++            remote_added: Default::default(),
++            placing: None,
++            admin_list: None,
++            list_kind: None,
++            key_capture: None,
++            ctrl_add_action: false,
++            menu_prev_pause: false,
++            info_bar,
++            timetable: false,
++            hud_resize: None,
++            notices: Vec::new(),
++            note_watch: Default::default(),
++            loading: Default::default(),
++            menu_edit: None,
++            menu_edit_icao: false,
++            menu_edit_number: false,
++            menu_edit_ident: false,
++            menu_edit_search: false,
++            menu_search: String::new(),
++            swap_pending: false,
++            pending_placement: None,
++            menu_drag: None,
++            menu_kbd: true,
++        },
++        world: None,
++        cam: ViewState {
++            starting: None,
++            speed: 30.0,
++            f1_reset: None,
++            view_yaw: 0.0,
++            view_fov: None,
++            head_idle_hold: Default::default(),
++            ego: false,
++            flashlight: false,
++            in_cab: false,
++            look: (0.0, 0.0),
++            look_smooth: (0.0, 0.0),
++            view_looks: Default::default(),
++            look_view: String::new(),
++            cam_blend: Default::default(),
++            view_zoom: Default::default(),
++            cam_zooms: Default::default(),
++            orbit: ORBIT_DEFAULT,
++        },
++        ui,
++        perf: PerfState::new(input_script, fps_t),
++        sound: SoundState {
++            radio,
++            milezero: Default::default(),
++            audio: None,
++            ambience: None,
++            soundscape: None,
++            voice: None,
++            voice_mutes: crate::voice_chat::load_mutes(),
++            foot_in: None,
++            voices_waiting: Vec::new(),
++        },
++        clock: omsi_sim::SimClock::default(),
++        started,
++        view,
++        input: InputState {
++            cursor: (0.0, 0.0),
++            window_focused: false,
++            input_away: false,
++            keys: Default::default(),
++            door_key_triggers: Default::default(),
++            mouse_look: false,
++            buttons_held: (false, false),
++            mmb_held: false,
++            both_drag: None,
++            clock_hold: 0.0,
++            pad_look: [false; 4],
++            pad_repeat: Vec::new(),
++            pad_voice_radio: false,
++            pad_voice_nearby: false,
++            arrow_glance: false,
++            headtrack: None,
++            head_filter: Default::default(),
++            headtrack_failed: None,
++            headtrack_scale_last: None,
++            headtrack_scale_bias: [0.0; 6],
++            headtrack_invert_last: None,
++            controllers: None,
++            mouse_drive: false,
++            mouse_steer: (0.0, 0.0),
++            mouse_grab: Default::default(),
++            steer_cursor: None,
++            center_cursor: false,
++            cruise: None,
++            look_lock: None,
++            cursor_hidden: None,
++            last_ctl_steer: None,
++            mouse_pedals: (0.0, 0.0),
++            mouse_kmh: 0.0,
++            wheel_zoomed_at: None,
++            camera_keys_off: false,
++            pad_kmh: 0.0,
++            pad_steer_target: 0.0,
++            game_keys,
++            own_keys,
++            own_shift,
++            dragging: false,
++            html_pressed: None,
++            html_object_pressed: None,
++            pressed_scenery_object: None,
++            drag_delta: (0.0, 0.0),
++            cursor_kind: 0,
++            touch,
++        },
++        last,
++        paused: false,
++        integrations: Integrations {
++            plugin_keys: Vec::new(),
++            plugin_events: Vec::new(),
++            plugin_events_ex: Vec::new(),
++            plugin_ticket_asks: Vec::new(),
++            plugin_pointer: Default::default(),
++            plugin_voices: Vec::new(),
++            plugin_seen: Default::default(),
++            plugin_command: false,
++            plugin_panels: Default::default(),
++            discord: None,
++            discord_t: 0.0,
++            #[cfg(steam)]
++            steam,
++            update_watch,
++            presence,
++            plugins: None,
++            vehicle_scripts_of: None,
++            object_scripts: Default::default(),
++        },
++        net: NetState::default(),
++        service_msg: clock_note.map(|m| (m, 10.0)),
++        settings,
++        exiting: false,
++        shell: crate::shell::Shell::new(),
++        photo: None,
++        photo_settings: None,
++        devtools: None,
++        fixed_tick: omsi_sim::tick::SimTicks::default(),
++        pipeline: Default::default(),
++    }
++}
++
++#[cfg(test)]
++mod tests {
++    use super::*;
++
++    #[test]
++    fn streaming_starts_around_the_bus() {
++        let cam = Camera {
++            position: DVec3::new(5000.0, 6000.0, 50.0),
++            yaw: 0.0,
++            pitch: 0.0,
++            roll: 0.0,
++            fov_deg: 60.0,
++            near: 0.5,
++            far: 100.0,
++        };
++        let args = |extra: &[&str]| Args::parse_from(["omsi"].iter().chain(extra.iter()).copied());
++        // the camera alone
++        assert_eq!(start_centers(&args(&[]), &cam, None), vec![cam.position]);
++        // a bus viewed from its seat: only where it stands, even with a camera given (the
++        // view follows the bus)
++        let seat = vec![DVec3::new(10.0, 20.0, 0.0)];
++        assert_eq!(
++            start_centers(
++                &args(&["--bus", "Vehicles/x.bus", "--spawn", "10,20,90"]),
++                &cam,
++                None
++            ),
++            seat
++        );
++        assert_eq!(
++            start_centers(
++                &args(&[
++                    "--bus",
++                    "Vehicles/x.bus",
++                    "--spawn",
++                    "10,20,90",
++                    "--cam",
++                    "5000,6000,50,0,0"
++                ]),
++                &cam,
++                None
++            ),
++            seat
++        );
++        // ... and with the free camera: both places
++        let both = start_centers(
++            &args(&[
++                "--bus",
++                "Vehicles/x.bus",
++                "--spawn",
++                "10,20,90",
++                "--cam",
++                "5000,6000,50,0,0",
++                "--view",
++                "free",
++            ]),
++            &cam,
++            None,
++        );
++        assert_eq!(both, vec![DVec3::new(10.0, 20.0, 0.0), cam.position]);
++    }
++}
++
++#[cfg(test)]
++pub(crate) fn with_test_language<T>(code: &str, f: impl FnOnce() -> T) -> T {
++    use std::sync::{Mutex, OnceLock};
++    static LANGUAGE_LOCK: OnceLock<Mutex<()>> = OnceLock::new();
++    let _guard = LANGUAGE_LOCK.get_or_init(|| Mutex::new(())).lock().unwrap_or_else(|e| e.into_inner());
++    ui_language(code);
++    let result = f();
++    ui_language("ENG");
++    result
++}
++
++#[cfg(test)]
++mod locale_tests {
++    use omsi_ui::i18n::{templated, templates, Piece};
++
++    #[test]
++    fn the_template_keys_of_the_tables_are_read_as_the_code_writes_them() {
++        let raw = super::_LOCALES.lines().filter(|l| l.starts_with('"') && l.contains('{')).count();
++        assert_eq!(super::locale_keys(super::_LOCALES).count(), raw);
++        let used: Vec<String> = templates(super::locale_keys(super::_LOCALES)).into_iter().map(|(k, _)| k).collect();
++        for k in ["Graphics profile \"{name}\" not found", "Mirror panel added ({} in all)", "Head tracking with opentrack (UDP port {})"] {
++            assert!(used.iter().any(|x| x == k), "{k}");
++        }
++    }
++
++    #[test]
++    fn multiplayer_messages_are_translated_in_traditional_chinese() {
++        for key in [
++            "Host's mods could not be fetched: {e}",
++            "Host's mods: everything the host uses is installed here",
++            "LAN: other players join with the code {}  (or by an address: {})",
++            "LAN: the host's weather: {}",
++            "Sent to the server: {action}",
++            "The server does not offer {name}",
++            "Online: {n} other players",
++            "Online: nobody else yet",
++            "Online: 1 other player",
++            "Online: connecting ...",
++            "Online: not connected: {reason} (chat /reconnect)",
++            "Online: in {host}'s game, {others}",
++            "Online: {warning}",
++            "nobody else yet",
++            "1 other player",
++            "{n} other players",
++        ] {
++            let translated = super::_rust_i18n_try_translate("zh-tw", key).map(|text| text.into_owned());
++            assert!(translated.as_ref().is_some_and(|text| !text.trim().is_empty() && text != key), "zh-tw: {key}");
++        }
++    }
++
++    #[test]
++    fn a_translated_template_is_left_as_it_is_when_translated_again() {
++        let t = templates(super::locale_keys(super::_LOCALES));
++        for lang in super::_rust_i18n_available_locales() {
++            let tr = |key: &str| super::_rust_i18n_try_translate(&lang, key).map(|t| t.into_owned());
++            for (key, pieces) in &t {
++                // the text the code would draw: a value per placeholder, the same one for a name used twice
++                let mut names: Vec<&str> = Vec::new();
++                let sample: String = pieces
++                    .iter()
++                    .map(|p| match p {
++                        Piece::Text(s) => s.clone(),
++                        Piece::Hole(n) => {
++                            if n.is_empty() || !names.contains(&n.as_str()) {
++                                names.push(n);
++                            }
++                            format!("V{}", if n.is_empty() { names.len() } else { names.iter().position(|x| x == n).unwrap() + 1 })
++                        }
++                    })
++                    .collect();
++                let Some(once) = templated(&t, &sample, tr) else { continue };
++                // no value is lost (a named one may be used twice: "{e} electrics ... with {e}")
++                for v in sample.split('V').skip(1).filter_map(|s| s.split(|c: char| !c.is_ascii_digit()).next()) {
++                    assert!(once.contains(&format!("V{v}")), "{lang}: {key}: {once}");
++                }
++                assert!(templated(&t, &once, tr).is_none_or(|twice| twice == once), "{lang}: {key}: {once}");
++            }
++        }
++    }
++}
+--- /dev/null
 +++ b/crates/omsi-app/src/app_events/frame/present.rs
-@@ -532,6 +532,7 @@
-                 );
-             }
-         }
+@@ -0,0 +1,822 @@
++//! The picture in the window's frame: its lighting, the mirrors, the headset, the window's
++//! picture and its presentation, the frame rate's limit and the session's statistics.
++
++use super::*;
++
++crate::app::stage_ctx!(
++    /// The lighting stage's part of the game.
++    LightingCx { reads: [net, world, clock], writes: [weather, player] }
++);
++
++/// The lighting the frame is drawn with.
++pub(super) fn lighting(cx: LightingCx, dt: f32, daylight: omsi_sim::Daylight) -> omsi_render::Lighting {
++    if let Some(w) = cx.weather.weather.as_ref() {
++        *cx.weather.wetness = road_wetness(precip_of(w).1, dt as f64, *cx.weather.wetness);
++    }
++    let inside = match cx.net.inside_remote.and_then(|id| cx.net.remotes.remotes.get(&id)) {
++        // (in another player's bus: its box is the one the camera is in)
++        Some(rv) => Some(rv.vehicle()),
++        None => cx.player.player.as_ref().map(|p| &p.vehicle),
++    };
++    steps::picture_lighting(
++        &daylight,
++        cx.weather.weather.as_ref(),
++        *cx.weather.cloud_drift,
++        *cx.weather.wetness,
++        cx.weather.rain.snow_cover(),
++        cx.world.world.as_deref(),
++        inside,
++        cx.player.player.as_ref().map(|p| &p.vehicle),
++        cx.weather.cabin_air.appearance(),
++        cx.common.settings,
++        cx.clock.clock.run_time as f32,
++        &*cx.weather.sky,
++    )
++}
++
++impl App {
++    /// The frame drawn and shown (or, with the window hidden, the simulation kept at a
++    /// display's pace), the frame rate limited, the session's statistics.
++    pub(super) fn frame_render(
++        &mut self,
++        event_loop: &ActiveEventLoop,
++        time: &FrameTime,
++        lighting: &omsi_render::Lighting,
++        vr_nav_display: Option<crate::vr_navigator::Display>,
++    ) {
++        let mut finish = false;
++        let mut reconfigure = false;
++        let shot = self.perf.shot.take();
++        if let Some(s) = self.gfx.surface.as_ref() {
++            let (w, h) = (s.config.width, s.config.height);
++            self.touch_prepare(w, h);
++        }
++        if self.gfx.surface.is_some()
++            && self.renderer.is_some()
++            && self.scene.is_some()
++            && self.camera.is_some()
++            && self.window.is_some()
++        {
++            if let Some(shot) = shot {
++                let file = shot.0.to_string_lossy().into_owned();
++                self.frame_shot(shot, lighting);
++                if self.integrations.plugins.as_ref().is_some_and(|p| !p.is_empty()) {
++                    crate::plugins::queue_event(&mut self.integrations.plugin_events, "screenshot", vec![omsi_plugin::InfoValue::Text(file)]);
++                }
++            }
++            // the photo mode's pictures (the window shows the developed photo)
++            if self.photo.is_some() {
++                self.photo_render(lighting);
++            }
++            let (frame, view, shown_nothing) = self.frame_acquire(&mut reconfigure);
++            let presented = frame.is_some();
++            match view {
++                Some(view) => self.frame_draw(time.raw_dt, lighting, vr_nav_display, frame, view),
++                None => self.frame_hidden(time.now),
++            }
++            self.frame_pace(time.now, shown_nothing, presented);
++            // (what the sim thread stepped meanwhile is back before the frame is counted or
++            // the session finished, see `sim_thread`)
++            self.join_sim_thread();
++            finish = self.frame_count(event_loop);
++            if let Some(win) = self.window.as_ref() {
++                win.request_redraw();
++            }
++        }
++        if reconfigure {
++            // the drawable went away under us (display change, lost surface)
++            if let (Some(s), Some(r), Some(win)) = (
++                self.gfx.surface.as_mut(),
++                self.renderer.as_ref(),
++                self.window.as_ref(),
++            ) {
++                let size = crate::platform::surface_size(win);
++                s.resize(r, size.width, size.height);
++            }
++        }
++        if finish {
++            self.finish_session();
++        }
++    }
++
++    /// `shot <file>` from the input script.
++    fn frame_shot(&mut self, shot: (PathBuf, bool), lighting: &omsi_render::Lighting) {
++        let (Some(s), Some(r), Some(scene), Some(cam)) = (
++            self.gfx.surface.as_ref(),
++            self.renderer.as_mut(),
++            self.scene.as_mut(),
++            self.camera.as_ref(),
++        ) else {
++            return;
++        };
++        // `shot <file>` from the input script: the scene the window is showing,
++        // from its camera and lighting, into a PNG - the only way to look at
++        // what an automated window run draws (also when the window is hidden,
++        // so it does not depend on a frame being acquired)
++        let (path, include_touch) = shot;
++        // the photo mode: its developed photo (stretched to the window) under its panel
++        let developed = self.photo.as_ref().filter(|ph| ph.render.showing_photo()).and_then(|ph| ph.shown()).map(|(w, h, px)| crate::photo::stretch(w, h, px, s.config.width, s.config.height));
++        // a player's screenshot is the world without the interface over it, as OMSI's
++        // (#1265); the input script's pictures keep it for the visual tests
++        let hud = (!include_touch).then(|| std::mem::take(&mut scene.overlays));
++        let picture = developed.map(Ok).unwrap_or_else(|| r.render_to_image(
++            scene,
++            s.config.width,
++            s.config.height,
++            cam,
++            lighting,
++        ));
++        if let Some(hud) = hud {
++            scene.overlays = hud;
++        }
++        match picture {
++            Ok(mut px) => match {
++                // (with the on-screen controls, when there are)
++                if let Some(over) = self.shell.picture_for_shot(r, s.config.width, s.config.height) {
++                    crate::touch::composite(&mut px, &over);
++                }
++                if include_touch {
++                    if let Some(over) = self.input.touch.picture(r, s.config.width, s.config.height) {
++                        crate::touch::composite(&mut px, &over);
++                    }
++                }
++                image::save_buffer(
++                    &path,
++                    &px,
++                    s.config.width,
++                    s.config.height,
++                    image::ColorType::Rgba8,
++                ) } {
++                Ok(()) => {
++                    log::info!("input script: window picture written to {}", path.display());
++                    if !include_touch {
++                        crate::platform::to_gallery(&path);
++                        if cfg!(target_os = "android") {
++                            self.service_msg = Some((omsi_ui::tr("Screenshot saved to the gallery").into_owned(), 4.0));
++                        }
++                    }
++                }
++                Err(e) => log::warn!(
++                    "input script: {} could not be written: {e}",
++                    path.display()
++                ),
++            },
++            Err(e) => log::warn!(
++                "input script: the window picture could not be rendered: {e}"
++            ),
++        }
++    }
++
++    /// The window's picture to draw into (none: the window is hidden; `reconfigure`: the
++    /// drawable went away), and whether nothing is shown this frame.
++    fn frame_acquire(&mut self, reconfigure: &mut bool) -> (Option<wgpu::SurfaceTexture>, Option<wgpu::TextureView>, bool) {
++        let (Some(s), Some(r)) = (self.gfx.surface.as_ref(), self.renderer.as_ref()) else {
++            return (None, None, true);
++        };
++        // A window that is hidden (another app covers it, another Space) gets
++        // no frames on macOS. OMSI_RENDER_OCCLUDED=1 draws them into a texture
++        // of the window's size anyway and waits for the GPU as a present would,
++        // so frame times can be measured with the window out of sight.
++        let __t = Instant::now();
++        // OMSI_HIDE_WINDOW=from,to: treat the window as hidden between these
++        // seconds of the session (the frame is acquired and dropped unshown), to
++        // check the hidden-window path without covering the window by hand
++        let hide_test = omsi_cfg::flags::OMSI_HIDE_WINDOW.var().and_then(|v| {
++            let mut it = v.split(',').filter_map(|x| x.trim().parse::<f32>().ok());
++            Some((it.next()?, it.next()?))
++        });
++        let hidden_now = hide_test
++            .map(|(a, b)| (a..b).contains(&self.started.elapsed().as_secs_f32()))
++            .unwrap_or(false);
++        let acquired = match s.acquire() {
++            wgpu::CurrentSurfaceTexture::Success(_)
++            | wgpu::CurrentSurfaceTexture::Suboptimal(_)
++            if hidden_now =>
++                {
++                    wgpu::CurrentSurfaceTexture::Occluded
++                }
++            other => other,
++        };
++        let (frame, stand_in) = match acquired {
++            wgpu::CurrentSurfaceTexture::Success(frame)
++            | wgpu::CurrentSurfaceTexture::Suboptimal(frame) => (Some(frame), None),
++            wgpu::CurrentSurfaceTexture::Occluded
++            if omsi_cfg::flags::OMSI_RENDER_OCCLUDED.is_set() || omsi_cfg::flags::OMSI_HIDDEN_WINDOW.is_set() =>
++                {
++                    let (w, h) = (s.config.width, s.config.height);
++                    if self
++                        .gfx.stand_in
++                        .as_ref()
++                        .map(|t| (t.width(), t.height()) != (w, h))
++                        .unwrap_or(true)
++                    {
++                        self.gfx.stand_in =
++                            Some(r.device.create_texture(&wgpu::TextureDescriptor {
++                                label: Some("hidden window"),
++                                size: wgpu::Extent3d {
++                                    width: w,
++                                    height: h,
++                                    depth_or_array_layers: 1,
++                                },
++                                mip_level_count: 1,
++                                sample_count: 1,
++                                dimension: wgpu::TextureDimension::D2,
++                                format: r.format(),
++                                usage: wgpu::TextureUsages::RENDER_ATTACHMENT,
++                                view_formats: &[],
++                            }));
++                    }
++                    (
++                        None,
++                        self.gfx.stand_in
++                            .as_ref()
++                            .map(|t| t.create_view(&Default::default())),
++                    )
++                }
++            wgpu::CurrentSurfaceTexture::Outdated
++            | wgpu::CurrentSurfaceTexture::Lost => {
++                *reconfigure = true;
++                (None, None)
++            }
++            _ => (None, None),
++        };
++        self.perf.profile.add(crate::profile_keys::ProfKey::Acquire, __t.elapsed().as_secs_f64());
++        if frame.is_none() {
++            self.gfx.hidden_frames += 1;
++        }
++        let shown_nothing = frame.is_none() && stand_in.is_none();
++        let view = frame
++            .as_ref()
++            .map(|f| s.view(&r.device, f))
++            .or(stand_in);
++        (frame, view, shown_nothing)
++    }
++
++    /// The mirrors, the headset's picture, the mirror panels, the window's picture and the
++    /// on-screen controls, and the picture shown.
++    fn frame_draw(
++        &mut self,
++        raw_dt: f32,
++        lighting: &omsi_render::Lighting,
++        vr_nav_display: Option<crate::vr_navigator::Display>,
++        frame: Option<wgpu::SurfaceTexture>,
++        view: wgpu::TextureView,
++    ) {
++        #[cfg(not(windows))]
++        let _ = vr_nav_display;
++        // (the photo mode draws the live picture while its camera moves, the photo once it
++        // stands - as its panel decided when it was drawn this frame: asked again here, after
++        // the photo's pictures were taken, the photo had become ready meanwhile, the scene was
++        // left out and the panel had no photo in it - the window flashed black)
++        let photo = self.photo.is_some() && self.shell.opaque;
++        if !photo {
++            self.frame_mirrors(raw_dt, lighting);
++        }
++        let (Some(s), Some(r), Some(scene), Some(cam), Some(win)) = (
++            self.gfx.surface.as_ref(),
++            self.renderer.as_mut(),
++            self.scene.as_mut(),
++            self.camera.as_ref(),
++            self.window.as_ref(),
++        ) else {
++            return;
++        };
++        let __t = Instant::now();
++        #[cfg(windows)]
++        let mut mirrored = false;
++        #[cfg(not(windows))]
++        let mirrored = false;
++        #[cfg(windows)]
++        if let Some(vr) = self.xr.vr.as_mut() {
++            let menu_range = self.ui.as_ref().map(|u| u.menu_overlay_range.clone()).unwrap_or(0..0);
++            let cursor_overlay = self.ui.as_ref().and_then(|u| u.vr_cursor_overlay).filter(|_| self.xr.vr_nav_edit.is_none());
++            let tooltip_overlay = self.ui.as_ref().and_then(|u| u.vr_tooltip_overlay).filter(|_| self.xr.vr_nav_edit.is_none());
++            match vr.render(
++                r,
++                scene,
++                cam,
++                &lighting,
++                &view,
++                (s.config.width, s.config.height),
++                menu_range,
++                cursor_overlay,
++                tooltip_overlay,
++                self.input.cursor,
++                self.player.as_ref().map(|p| (p.vehicle.position, p.vehicle.body_rotation())),
++                vr_nav_display.filter(|d| d.placement.enabled).and_then(|d| {
++                    self.menus.navigator.as_ref().and_then(|n| n.panel_overlay).map(|index| (index, d))
++                }),
++                self.player.as_ref().map(|p| p.uid),
++                self.settings.vr_head_smoothing_ms,
++                !self.input.mouse_drive,
++                self.xr.vr_zoom_active,
++            ) {
++                Ok(visible) => mirrored = visible,
++                Err(e) => {
++                    log::error!("OpenXR rendering stopped: {e:#}");
++                    self.xr.vr = None;
++                }
++            }
++        }
++        if photo {
++            // (the developed photo covers the window: the screens draw it)
++        } else if !mirrored
++            && self.settings.triple.enabled
++            && !self.settings.vr_requested()
++        {
++            let rig = self.settings.triple.zoomed(
++                s.config.width,
++                s.config.height,
++                self.cam.view_zoom.get(&self.view).copied().unwrap_or(1.0),
++            );
++            r.render_triple(
++                scene,
++                &view,
++                s.config.width,
++                s.config.height,
++                cam,
++                lighting,
++                &rig,
++            );
++        } else if !mirrored {
++            r.render(
++                scene,
++                &view,
++                s.config.width,
++                s.config.height,
++                cam,
++                lighting,
++            );
++        }
++        // the pause menu and the photo mode's panel
++        self.shell.render(r, &view, s.config.width, s.config.height);
++        // the on-screen controls over the picture (a phone)
++        self.input.touch.render(r, &view, s.config.width, s.config.height);
++        self.perf.profile.add(crate::profile_keys::ProfKey::Render, __t.elapsed().as_secs_f64());
++        if omsi_cfg::flags::OMSI_PROFILE_GPU.is_set() {
++            // wait for the GPU here, so that its time shows as a stage of its own
++            let __t = Instant::now();
++            let _ = omsi_render::wait_gpu(&r.device, None);
++            self.perf.profile.add(crate::profile_keys::ProfKey::Gpu, __t.elapsed().as_secs_f64());
++        }
++        let __t = Instant::now();
++        match frame {
++            Some(frame) => {
++                // (without V-sync max_fps paces the frames: waiting for the compositor's frame callback cost a missed refresh each slow frame)
++                if self.settings.vsync {
++                    win.pre_present_notify();
++                }
++                s.present(&r.device, &r.queue, frame);
++            }
++            None => {
++                let _ = omsi_render::wait_gpu(&r.device, None);
++            }
++        }
++        self.perf.profile.add(crate::profile_keys::ProfKey::Present, __t.elapsed().as_secs_f64());
++    }
++
++    /// The bus's mirrors redrawn, in turn, within their budget.
++    fn frame_mirrors(&mut self, raw_dt: f32, lighting: &omsi_render::Lighting) {
++        let (Some(s), Some(r), Some(scene), Some(cam)) = (
++            self.gfx.surface.as_ref(),
++            self.renderer.as_mut(),
++            self.scene.as_mut(),
++            self.camera.as_ref(),
++        ) else {
++            return;
++        };
++        let __t = Instant::now();
++        // One mirror a turn, in turn, at most MIRROR_RATE pictures a second in
++        // all: a mirror costs half the main picture's CPU time, and at 140 fps
++        // five mirrors were each redrawn 28 times a second, a small picture
++        // that nobody can tell from 15.
++        // Every mirror at least MIRROR_MIN_HZ, though: with eight of them (the
++        // Procity) at 25 fps each was redrawn three times a second, and the
++        // street jerked past in them - up to two a frame then (each costs a
++        // few milliseconds of the frame).
++        if let (Some(p), Some(w)) = (self.player.as_ref(), self.world.as_ref()) {
++            steps::mirror_hud_sync(&mut self.gfx.mirror_hud, w, p, self.settings.mirror_hud);
++        }
++        r.options.mirror_enhanced = self.settings.mirror_quality == "enhanced";
++        #[cfg(windows)]
++        let vr_active = self.xr.vr.is_some();
++        #[cfg(not(windows))]
++        let vr_active = false;
++        let mirrors_shown = self.settings.mirror_size != 0
++            && self.settings.mirror_refresh != "off"
++            && (self.cam.in_cab || self.player.as_ref().is_some_and(|p| (p.vehicle.position - cam.position).length() < 12.0));
++        self.gfx.sim_view.people.mirror_hz = if vr_active {
++            None
++        } else if !mirrors_shown {
++            Some(0.0)
++        } else if self.settings.mirror_refresh == "every" || (self.settings.mirror_hud_every_frame && self.gfx.mirror_hud.active()) {
++            None
++        } else if self.settings.mirror_refresh == "full" {
++            Some(MIRROR_MAX_HZ_FULL)
++        } else {
++            Some(MIRROR_MAX_HZ_ECO)
++        };
++        // With `mirror_hud_every_frame` the mirror panels in the cab (Ctrl+M) are drawn every
++        // frame, whatever the refresh setting, seen in the glass or not: a driving aid on the
++        // screen, not a small picture far off. The other mirrors take their turns below without
++        // them. (In VR the panels are not drawn.)
++        let mut panel_cams = std::mem::take(&mut self.gfx.mirror_panel_cams);
++        if self.settings.mirror_size != 0 && !vr_active && self.cam.in_cab && self.gfx.mirror_hud.active() {
++            self.gfx.mirror_hud.cams_into(&mut panel_cams);
++        } else {
++            panel_cams.clear();
++        }
++        let every_frame = self.settings.mirror_hud_every_frame;
++        let (skip, on_screen): (&[usize], &[usize]) = if every_frame { (&panel_cams, &[]) } else { (&[], &panel_cams) };
++        if every_frame && !panel_cams.is_empty() {
++            if let (Some(w), Some(p)) = (self.world.as_ref(), self.player.as_ref()) {
++                let view = (*cam, s.config.width as f32 / s.config.height.max(1) as f32);
++                render_mirrors(r, scene, w, p, lighting, MirrorPick::Only(&panel_cams), Some(view), &[]);
++            }
++        }
++        if self.settings.mirror_size == 0 {
++            self.gfx.mirror_budget = 0.0;
++            self.gfx.mirrors_seen = 0;
++        } else if self.settings.mirror_refresh == "every" && !vr_active {
++            // every mirror in the picture every frame: the street goes by in them as smoothly
++            // as through the windscreen (in turns, each picture was a step behind, and the
++            // steps grew with the speed - the mirrors seemed to shake)
++            self.gfx.mirror_budget = 0.0;
++            let mirror_view = if self.settings.triple.enabled {
++                None
++            } else {
++                Some((*cam, s.config.width as f32 / s.config.height.max(1) as f32))
++            };
++            let near = self.player.as_ref().is_some_and(|p| (p.vehicle.position - cam.position).length() < 12.0);
++            if let (Some(w), Some(p)) = (self.world.as_ref(), self.player.as_ref()) {
++                if self.cam.in_cab || near {
++                    self.gfx.mirrors_seen = render_mirrors(r, scene, w, p, lighting, MirrorPick::All(skip), mirror_view, on_screen);
++                }
++            }
++        } else if self.settings.mirror_refresh == "off" {
++            self.gfx.mirror_budget = 0.0;
++            if let (Some(w), Some(p)) = (self.world.as_ref(), self.player.as_ref()) {
++                let since = match &self.gfx.frozen_mirrors {
++                    Some(m) if m.bus == p.uid => m.since,
++                    _ => -1.0,
++                };
++                let next = since.max(0.0) + raw_dt.min(0.1);
++                // (and while the driver turns a mirror, so it can be aimed)
++                if since < 0.0 || (since < MIRROR_FREEZE_REDRAW && next >= MIRROR_FREEZE_REDRAW) || p.mirrors_dirty {
++                    self.gfx.mirrors_seen = render_mirrors(r, scene, w, p, lighting, MirrorPick::All(skip), None, on_screen);
++                }
++                self.gfx.frozen_mirrors = Some(FrozenMirrors { bus: p.uid, since: next });
++            }
++        } else {
++            let mirrors = self.player.as_ref().map(|p| p.vehicle.ty.def.cameras_reflexion.len()).unwrap_or(0);
++            let rate = {
++                if vr_active {
++                    // Preserve the user's total redraw budget. A negative
++                    // value explicitly requests every mirror each frame.
++                    omsi_cfg::flags::OMSI_OPENXR_MIRROR_RATE.parse::<f32>()
++                        .filter(|rate| rate.is_finite() && *rate >= -1.0)
++                        .unwrap_or(self.settings.vr_mirror_rate)
++                } else {
++                    let max_hz = if self.settings.mirror_refresh == "full" { MIRROR_MAX_HZ_FULL } else { MIRROR_MAX_HZ_ECO };
++                    MIRROR_RATE.max(mirrors as f32 * MIRROR_MIN_HZ).min(max_hz * self.gfx.mirrors_seen.max(1) as f32)
++                }
++            };
++            // The desktop camera does not follow the headset. Culling by
++            // its frustum can leave a mirror visible in VR uninitialised
++            // (black). Refresh all bus mirrors in VR, still taking turns
++            // within the configured budget; keep desktop visibility culling.
++            // (Panels taking their turns keep their mirrors in the turns, in the picture or
++            // not. Panels drawn every frame above are left out of the turns instead.)
++            let mirror_view = if vr_active || self.settings.triple.enabled {
++                None
++            } else {
++                Some((*cam, s.config.width as f32 / s.config.height.max(1) as f32))
++            };
++            // (in the cab, and from outside too while the bus is near: its
++            // mirrors are seen from the pavement and stood frozen)
++            let near = self.player.as_ref().zip(self.camera.as_ref()).is_some_and(|(p, c)| (p.vehicle.position - c.position).length() < 12.0);
++            let draw_limit = if vr_active {
++                if self.cam.in_cab || near {
++                    vr_mirror_updates(&mut self.gfx.mirror_budget, raw_dt, rate, mirrors)
++                } else {
++                    self.gfx.mirror_budget = 0.0;
++                    0
++                }
++            } else {
++                let min_rate = self.gfx.mirrors_seen.max(1) as f32 * MIRROR_MIN_HZ;
++                mirror_updates(&mut self.gfx.mirror_budget, &mut self.gfx.mirror_dt, raw_dt, rate, min_rate, self.gfx.mirrors_seen.clamp(1, 2))
++            };
++            let mut drawn = 0;
++            if vr_active && draw_limit > 0 && draw_limit == mirrors {
++                // Prepare the cameras and textures only once when all
++                // mirrors are due, including the Every frame mode.
++                if let (Some(w), Some(p)) = (self.world.as_ref(), self.player.as_ref()) {
++                    self.gfx.mirror_turn = self.gfx.mirror_turn.wrapping_add(draw_limit);
++                    self.gfx.mirrors_seen = render_mirrors(r, scene, w, p, lighting, MirrorPick::All(skip), mirror_view, on_screen);
++                    drawn = draw_limit;
++                }
++            }
++            while (self.cam.in_cab || near) && drawn < draw_limit {
++                let (Some(w), Some(p)) = (self.world.as_ref(), self.player.as_ref()) else { break };
++                drawn += 1;
++                self.gfx.mirror_turn = self.gfx.mirror_turn.wrapping_add(1);
++                self.gfx.mirrors_seen = render_mirrors(
++                    r,
++                    scene,
++                    w,
++                    p,
++                    lighting,
++                    MirrorPick::Turn(self.gfx.mirror_turn, skip),
++                    mirror_view,
++                    on_screen,
++                );
++            }
++        }
 +        crate::srg_camera::tick(r, scene, self.player.as_ref(), cam, lighting);
-         self.gfx.mirror_panel_cams = panel_cams;
-         self.perf.profile.add(crate::profile_keys::ProfKey::Mirrors, __t.elapsed().as_secs_f64());
-     }
++        self.gfx.mirror_panel_cams = panel_cams;
++        self.perf.profile.add(crate::profile_keys::ProfKey::Mirrors, __t.elapsed().as_secs_f64());
++    }
++
++    /// Nothing to draw into: what was uploaded let go, the simulation at a display's pace.
++    fn frame_hidden(&mut self, now: Instant) {
++        let Some(r) = self.renderer.as_ref() else { return };
++        // Nothing to draw into (a hidden window): the simulation goes on at
++        // a display's pace instead of spinning a core a thousand times a
++        // second. What it uploaded (traffic instances, streamed tiles,
++        // people, the navigator) waits in wgpu's staging buffers until the
++        // next submit, so submit nothing to let them go: without it a hidden
++        // window on Ahlheim grew by 100 MB a second (5.6 GB after 55 s).
++        let __t = Instant::now();
++        r.queue.submit(std::iter::empty::<wgpu::CommandBuffer>());
++        let _ = r.device.poll(wgpu::PollType::Poll);
++        self.perf.profile.add(crate::profile_keys::ProfKey::Present, __t.elapsed().as_secs_f64());
++        if let Some(rest) =
++            std::time::Duration::from_millis(16).checked_sub(now.elapsed())
++        {
++            std::thread::sleep(rest);
++        }
++    }
++
++    /// The frame rate's limit: the rest of the frame's time slept. `presented`: the frame
++    /// went to the window's surface (with V-sync its present already waits for the screen).
++    fn frame_pace(&mut self, now: Instant, shown_nothing: bool, presented: bool) {
++        // max_fps (the original's [maxFPS]; OMSI_MAX_FPS for a test): the rest of
++        // the frame's time is slept, not spun, so a limit gives the CPU back
++        // (and keeps a laptop cool enough not to slow itself down)
++        let max_fps = if self.optimiser_holds_frame_rate() { 1000 } else { omsi_cfg::flags::OMSI_MAX_FPS.parse::<u32>().unwrap_or(self.settings.max_fps) };
++        let asked = max_fps;
++        // 0 = the screen's refresh rate: frames the screen never shows only heat the
++        // machine (with V-sync off and no limit an M4 drew 300 frames a second in the
++        // depot and ran hot); 1000 and more = no limit at all
++        let max_fps = if max_fps == 0 {
++            // (asked of the system once a second, not every frame: it is a round trip to
++            // the window server, and a window only moves to another screen now and then)
++            static RATE: parking_lot::Mutex<Option<(Instant, u32)>> = parking_lot::Mutex::new(None);
++            let mut rate = RATE.lock();
++            match *rate {
++                Some((at, r)) if now.duration_since(at) < std::time::Duration::from_secs(1) => r,
++                _ => {
++                    let r = self.window.as_ref().and_then(|w| w.current_monitor()).and_then(|m| m.refresh_rate_millihertz()).map(|mhz| (mhz as f64 / 1000.0).round() as u32).filter(|r| *r >= 30).unwrap_or(120);
++                    *rate = Some((now, r));
++                    r
++                }
++            }
++        } else if max_fps >= 1000 {
++            0
++        } else {
++            max_fps
++        };
++        // a frame not shown (the window minimised or out of sight): 30 frames a
++        // second keep the simulation and the sound going; more is only heat
++        // (OMSI_RENDER_OCCLUDED, which draws them anyway, keeps its pace)
++        let max_fps = if shown_nothing { if max_fps == 0 { 30 } else { max_fps.min(30) } } else { max_fps };
++        #[cfg(windows)]
++        let vr_active = self.xr.vr.is_some();
++        #[cfg(not(windows))]
++        let vr_active = false;
++        // With V-sync and no limit of the player's own (0 = the screen's rate) the present
++        // already holds the frames to the screen's refresh. Sleeping a refresh from each
++        // frame's start on top of it drifted against the screen's vblank: now and then a
++        // frame slept past one and waited for the next, two refreshes for one frame.
++        let vsync_paces = presented
++            && asked == 0
++            && self.gfx.surface.as_ref().is_some_and(|s| matches!(s.config.present_mode, wgpu::PresentMode::Fifo | wgpu::PresentMode::FifoRelaxed | wgpu::PresentMode::AutoVsync));
++        if max_fps > 0 && !vr_active && !vsync_paces {
++            let __t = Instant::now();
++            pace_until(now, std::time::Duration::from_secs_f64(1.0 / max_fps as f64));
++            self.perf.profile.add(crate::profile_keys::ProfKey::Limiter, __t.elapsed().as_secs_f64());
++        }
++    }
++
++    /// The frames counted, `--exit-after` with its statistics (true: the session ends), and
++    /// the window's title once a second.
++    fn frame_count(&mut self, event_loop: &ActiveEventLoop) -> bool {
++        let (Some(_), Some(r), Some(cam), Some(win)) = (
++            self.gfx.surface.as_ref(),
++            self.renderer.as_mut(),
++            self.camera.as_ref(),
++            self.window.as_ref(),
++        ) else {
++            return false;
++        };
++        let mut finish = false;
++        self.perf.frames += 1;
++        // (a second of play drawn: this session started well, see omsi-guard)
++        if self.perf.frames == 60 {
++            omsi_guard::healthy(omsi_guard::journal::Kind::Game);
++        }
++        let profiling = omsi_cfg::flags::OMSI_PROFILE.is_set();
++        // (the warm-up: 15 s of play, not of the process - a big map's loading took most of
++        // 15 s, and the summary then held the first heavy frames of play; marked whether or not
++        // the CPU time can be read)
++        let playing = *self.perf.play_started.get_or_insert_with(Instant::now);
++        if profiling
++            && self.perf.profile_mark.is_none()
++            && playing.elapsed().as_secs_f32() > 15.0
++        {
++            self.perf.cpu_mark =
++                process_cpu_seconds().map(|c| (c, Instant::now(), self.perf.total_frames));
++            self.perf.thread_cpu_mark = crate::startup::thread_cpu_seconds();
++            self.perf.instructions_mark = crate::startup::process_instructions();
++            self.perf.profile_mark = Some(crate::perf_report::ProfileMark::take(&self.perf.profile, r));
++        }
++        if let (Some(limit), false) = (self.args.exit_after, self.exiting) {
++            if self.started.elapsed().as_secs_f32() > limit {
++                self.exiting = true;
++                log::info!("exit after {limit} s: {} frames total ({} with the window hidden{}), {:.1} fps average, {} frames over 50 ms, worst {:.0} ms", self.perf.total_frames, self.gfx.hidden_frames, if omsi_cfg::flags::OMSI_RENDER_OCCLUDED.is_set() || omsi_cfg::flags::OMSI_HIDDEN_WINDOW.is_set() { ", drawn off-screen" } else { ", not drawn" }, self.perf.total_frames as f32 / self.started.elapsed().as_secs_f32(), self.perf.spikes, self.perf.worst_ms);
++                if let (Some(st), Some(w)) =
++                    (self.gfx.streamer.as_ref(), self.world.as_ref())
++                {
++                    log::info!("tile streaming: {} tiles loaded now, {} loaded and {} unloaded in all, {:.1} s preparing on the worker, slowest upload {:.0} ms, streaming over 16 ms in {} frames (worst {:.0} ms); {} objects + {} trees, {} rows, {} attached ({} without parent), {} unresolved", w.loaded_tiles().len(), st.loaded_total, st.unloaded_total, st.prepare_secs, st.worst_upload_ms, st.slow_frames, st.worst_frame_ms, st.stats.objects, st.stats.trees, st.stats.rows, st.stats.attached, st.stats.unattached, st.stats.failed_objects);
++                    st.stats.log_ground();
++                }
++                finish = true;
++                crate::platform::exit(event_loop);
++            }
++        }
++        self.perf.total_frames += 1;
++        if self.perf.fps_t.elapsed().as_secs_f32() >= 1.0 {
++            if omsi_cfg::flags::OMSI_PROFILE.is_set() {
++                let secs = self.perf.fps_t.elapsed().as_secs_f32();
++                log::info!("profile interval: {:.1} fps over {secs:.2} s", self.perf.frames as f32 / secs);
++            }
++            let speed = self
++                .player
++                .as_ref()
++                .map(|p| format!(" - {:.0} km/h", p.vehicle.physics.velocity_kmh()))
++                .unwrap_or_default();
++            self.perf.fps = self.perf.frames as f32;
++            let title = format!(
++                "openOMSI - {} fps{speed} - {:.0},{:.0},{:.0} yaw {:.0}",
++                self.perf.frames,
++                cam.position.x,
++                cam.position.y,
++                cam.position.z,
++                cam.yaw.rem_euclid(360.0)
++            );
++            // (a new title is a synchronous round trip to the window server: only when it
++            // says something new - standing still at a steady rate it does not)
++            static SHOWN: parking_lot::Mutex<String> = parking_lot::Mutex::new(String::new());
++            let mut shown = SHOWN.lock();
++            if *shown != title {
++                win.set_title(&title);
++                *shown = title;
++            }
++            self.perf.frames = 0;
++            self.perf.fps_t = Instant::now();
++        }
++        if finish {
++            self.log_profile_summary();
++        }
++        finish
++    }
++
++    /// OMSI_PROFILE's summary of the session: the stages per frame, the GPU passes, counts and
++    /// percentiles. Written once, by whichever way out comes first - `--exit-after`, or the
++    /// player closing the game (`exiting`), so a tester can play as usual and quit instead of
++    /// guessing a duration beforehand.
++    pub(crate) fn log_profile_summary(&mut self) {
++        if !omsi_cfg::flags::OMSI_PROFILE.is_set() || self.perf.profile_written {
++            return;
++        }
++        let (Some(s), Some(r)) = (self.gfx.surface.as_ref(), self.renderer.as_ref()) else {
++            return;
++        };
++        self.perf.profile_written = true;
++        let n = self.perf.total_frames.max(1) as f64;
++        for (k, v) in &self.perf.profile {
++            log::info!("profile {k:10}: {:.1} ms/frame", v / n * 1000.0);
++        }
++        if let Some(h) = self.session.humans.as_ref() {
++            log::info!(
++                "profile people: {} ({})",
++                h.people.len(),
++                h.summary(&self.gfx.sim_view.people)
++            );
++        }
++        for (k, v) in r.stats.borrow().iter() {
++            log::info!(
++                "profile render.{k:10}: {:.2} ms/frame",
++                v / n * 1000.0
++            );
++        }
++        for (k, v) in r.counts.borrow().iter() {
++            log::info!("profile count {k}: {:.0} a frame", v / n);
++        }
++        if let Some(memory) = r.allocator_summary() {
++            log::info!("profile graphics memory: {memory}");
++        }
++        for (pass, ms, frames) in r.gpu_pass_times() {
++            log::info!("profile gpu pass {pass:12}: {ms:.2} ms ({frames} frames measured)");
++        }
++        if let (Some((c0, t0, f0)), Some(c1)) =
++            (self.perf.cpu_mark, process_cpu_seconds())
++        {
++            let frames = self.perf.total_frames.saturating_sub(f0).max(1) as f64;
++            let main = self.perf.thread_cpu_mark.zip(crate::startup::thread_cpu_seconds()).map(|(m0, m1)| format!(", {:.2} ms CPU of the frame's own thread", (m1 - m0) / frames * 1000.0)).unwrap_or_default();
++            log::info!("profile: since 15 s {:.1} ms wall and {:.1} ms CPU (all threads) per frame{main}, {:.1} cores busy", t0.elapsed().as_secs_f64() / frames * 1000.0, (c1 - c0) / frames * 1000.0, (c1 - c0) / t0.elapsed().as_secs_f64().max(1e-3));
++        }
++        let (sw, sh) = r.scene_size(s.config.width, s.config.height);
++        log::info!(
++            "profile: window {}x{}, scene drawn at {sw}x{sh}, {}x MSAA",
++            s.config.width,
++            s.config.height,
++            r.options.msaa
++        );
++        let frames = crate::perf_report::frame_summary(&self.perf.frame_times);
++        log::info!("{}", crate::perf_report::log_line(&frames));
++        if let Some(path) = omsi_cfg::flags::OMSI_PROFILE_JSON.var() {
++            let report = crate::perf_report::report(crate::perf_report::Run { perf: &self.perf, settings: &self.settings, args: &self.args, lan: self.net.lan.is_some() }, r, (s.config.width, s.config.height), (sw, sh), frames);
++            match serde_json::to_vec_pretty(&report).map_err(anyhow::Error::from).and_then(|b| Ok(std::fs::write(path, b)?)) {
++                Ok(()) => log::info!("profile: the summary is in {path}"),
++                Err(e) => log::warn!("profile: the summary could not be written to {path}: {e}"),
++            }
++        }
++    }
++}
++
++/// Waits for the next frame's deadline (see [`next_deadline`]).
++fn pace_until(frame_start: Instant, period: std::time::Duration) {
++    use std::time::Duration;
++    static NEXT: parking_lot::Mutex<Option<(Instant, Duration)>> = parking_lot::Mutex::new(None);
++    static LATE_NS: std::sync::atomic::AtomicU64 = std::sync::atomic::AtomicU64::new(1_000_000);
++    let mut next = NEXT.lock();
++    let deadline = next_deadline(*next, frame_start, Instant::now(), period);
++    *next = Some((deadline, period));
++    drop(next);
++    let late = LATE_NS.load(std::sync::atomic::Ordering::Relaxed);
++    let margin = Duration::from_nanos(late.min(1_000_000));
++    if let Some(rest) = deadline.checked_duration_since(Instant::now()) {
++        if rest > margin {
++            let wake = Instant::now() + (rest - margin);
++            std::thread::sleep(rest - margin);
++            let seen = Instant::now().saturating_duration_since(wake).as_nanos() as u64;
++            LATE_NS.store((seen * 3 / 2).max(late - late / 8), std::sync::atomic::Ordering::Relaxed);
++        }
++    }
++    while Instant::now() < deadline {
++        std::thread::yield_now();
++    }
++}
++
++/// When the frame that started at `frame_start` (and ends `now`) gives way to the next, the
++/// last deadline `last` (with its period). The deadlines lie a period apart on one clock
++/// (`next += period`), not a period after each frame's start: a frame's own jitter then
++/// does not shift all the frames after it, and the pace stays even. A little late - a
++/// quarter period - is made up in the next frame; later than that a new count starts from
++/// now: making up a whole frame's delay drew the next frame at once, two frames shown
++/// close together. A new limit starts its count from the frame's start.
++fn next_deadline(last: Option<(Instant, std::time::Duration)>, frame_start: Instant, now: Instant, period: std::time::Duration) -> Instant {
++    match last {
++        Some((at, p)) if p == period => {
++            let at = at + period;
++            if at + period / 4 < now { now } else { at }
++        }
++        _ => frame_start + period,
++    }
++}
++
++#[cfg(test)]
++mod pace_tests {
++    use super::next_deadline;
++    use std::time::{Duration, Instant};
++
++    /// Frames of uneven length keep to deadlines a period apart; a little late is made up,
++    /// a long frame starts the count anew; a new limit starts from the frame's start.
++    #[test]
++    fn deadlines_keep_one_clock() {
++        let ms = |x: u64| Duration::from_millis(x);
++        let (t0, p) = (Instant::now(), ms(10));
++        let d1 = next_deadline(None, t0, t0 + ms(3), p);
++        assert_eq!(d1, t0 + ms(10));
++        // a frame of 7 ms or of 2 ms: the next deadline is still 10 ms on
++        assert_eq!(next_deadline(Some((d1, p)), d1, d1 + ms(7), p), t0 + ms(20));
++        assert_eq!(next_deadline(Some((d1, p)), d1, d1 + ms(2), p), t0 + ms(20));
++        // 2 ms late: kept (the next frame makes it up)
++        assert_eq!(next_deadline(Some((d1, p)), d1, d1 + ms(12), p), t0 + ms(20));
++        // 5 ms late: a new count from now
++        assert_eq!(next_deadline(Some((d1, p)), d1, d1 + ms(15), p), d1 + ms(15));
++        // another limit
++        assert_eq!(next_deadline(Some((d1, p)), d1, d1 + ms(1), ms(20)), d1 + ms(20));
++    }
++}
 --- /dev/null
 +++ b/crates/omsi-app/src/srg_camera.rs
-@@ -0,0 +1,108 @@
+@@ -0,0 +1,122 @@
 +//! Opt-in, local-only independent camera output for SRGMobile.
 +//! The driver camera and input are never changed. A short request lease bounds GPU work.
 +use crate::player::Player;
@@ -41,6 +1868,7 @@
 +fn folder() -> Option<std::path::PathBuf> {
 +    std::env::var_os("LOCALAPPDATA").map(|p| std::path::PathBuf::from(p).join("SRG-OMSI"))
 +}
++fn active_request(request:&Request,now:f64)->bool { request.channel<=3 && request.updated.is_finite() && now-request.updated<=2.0 && request.updated-now<=2.0 }
 +fn unix_now() -> f64 { SystemTime::now().duration_since(UNIX_EPOCH).unwrap_or_default().as_secs_f64() }
 +fn exporter() -> &'static Mutex<Exporter> {
 +    EXPORT.get_or_init(|| {
@@ -87,7 +1915,7 @@
 +    if bytes.len()>1024 { return; }
 +    let Ok(request)=serde_json::from_slice::<Request>(&bytes) else { return };
 +    let now=unix_now();
-+    if request.channel>3 || !request.updated.is_finite() || now-request.updated>2.0 || request.updated-now>2.0 { return; }
++    if !active_request(&request,now) { return; }
 +    let Ok(mut output)=exporter().try_lock() else { return };
 +    if output.last.is_some_and(|last|last.elapsed()<Duration::from_millis(250)) { return; }
 +    output.last=Some(Instant::now());
@@ -127,5 +1955,18 @@
 +            meta.source=label.into();let _=output.tx.try_send(Frame{rgba,meta});
 +        }
 +        Err(error)=>{meta.error=Some(format!("Camera render failed: {error}"));let _=output.tx.try_send(Frame{rgba:Vec::new(),meta});}
++    }
++}
++
++#[cfg(test)]
++mod tests {
++    use super::*;
++    #[test]
++    fn request_lease_expires_and_never_accepts_unknown_channels() {
++        assert!(active_request(&Request{channel:0,updated:100.0},101.0));
++        assert!(!active_request(&Request{channel:0,updated:100.0},103.0));
++        assert!(!active_request(&Request{channel:4,updated:100.0},100.0));
++        assert!(!active_request(&Request{channel:0,updated:f64::NAN},100.0));
++        assert!(!active_request(&Request{channel:0,updated:110.0},100.0));
 +    }
 +}

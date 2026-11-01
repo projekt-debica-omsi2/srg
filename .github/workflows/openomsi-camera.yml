@@ -3,6 +3,9 @@ on:
   workflow_dispatch:
   push:
     paths: ['engine-camera/**', '.github/workflows/openomsi-camera.yml']
+concurrency:
+  group: srg-camera-${{ github.ref }}
+  cancel-in-progress: true
 permissions:
   contents: read
 jobs:
@@ -33,6 +36,9 @@ jobs:
       - name: Build experimental game
         working-directory: engine
         run: cargo build --locked --release -p omsi-app --bin openomsi
+      - name: Test camera request lease
+        working-directory: engine
+        run: cargo test --locked --release -p omsi-app --lib srg_camera::tests -- --nocapture
       - name: Package separate test executable and sources
         shell: pwsh
         run: |

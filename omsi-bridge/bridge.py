@@ -1,5 +1,6 @@
 """SRG OMSI LAN bridge. Read-only, token-authenticated; no external dependencies."""
 import datetime as dt
+import base64
 import json
 import os
 from pathlib import Path
@@ -41,6 +42,7 @@ class State:
         self.catalog = []
         self.trips = []
         self.trip_key = None
+        self.camera_seen = 0
         self.list_parts = {}
         self.events = []
         self.log_path = root / ('bridge-' + dt.datetime.now().strftime('%Y%m%d-%H%M%S') + '.jsonl')
@@ -90,6 +92,29 @@ class State:
                         self.route_stops = [s for i in range(1,total+1) for s in self.parts[i]]
         except (ValueError, TypeError, AttributeError):
             return
+    def camera(self, channel):
+        if type(channel) is not int or not 0 <= channel <= 3: raise ValueError('Unknown camera')
+        now=time.time()
+        request=self.root/'camera-request.json'
+        temp=self.root/'camera-request.tmp'
+        with self.lock:
+            temp.write_text(json.dumps(dict(channel=channel,updated=now)),encoding='utf-8');temp.replace(request)
+        empty=dict(schema=1,channel=channel,image=None,source=None,error='Oczekiwanie na niezależną kamerę. Wymagana testowa wersja openOMSI SRG Camera.')
+        try:
+            meta_file=self.root/f'camera-{channel}.json'
+            if meta_file.stat().st_size>4096: return empty
+            meta=json.loads(meta_file.read_text(encoding='utf-8'))
+            updated=meta.get('updated')
+            if not isinstance(updated,(float,int)) or not -1 <= now-updated <= 2 or meta.get('channel')!=channel: return empty
+            if meta.get('error'):
+                return dict(empty,error=str(meta['error'])[:300],available=meta.get('available',[]))
+            path=self.root/f'camera-{channel}.jpg'
+            if path.stat().st_size>524288: return empty
+            jpeg=path.read_bytes()
+            if not jpeg.startswith(b'\xff\xd8') or not jpeg.endswith(b'\xff\xd9'): return empty
+            self.camera_seen=time.monotonic()
+            return dict(schema=1,channel=channel,updated=updated,source=str(meta.get('source','Kamera'))[:120],available=meta.get('available',[]),error=None,image='data:image/jpeg;base64,'+base64.b64encode(jpeg).decode('ascii'))
+        except (OSError,ValueError,TypeError,AttributeError): return empty
     def command(self, command):
         data=self.telemetry()
         if not data.get('commands') or data.get('game')!='openomsi': raise ValueError('Gra nie udostępnia sterowania')
@@ -133,7 +158,7 @@ class State:
     def status(self):
         data = self.telemetry()
         return dict(schema=1, computer=socket.gethostname(), **{k:data.get(k) for k in ('session','plugin_running','variables','game','map','clock','paused','duty','position','distance','stops','route','commands','command_result','catalog','trips','trip_key','vehicle_number','vehicle','game_version')},
-                    capabilities=dict(timetable=bool(data.get('duty')), position=bool(data.get('position',{}).get('x') is not None), announcements=False, cameras=False, mirror=False),
+                    capabilities=dict(timetable=bool(data.get('duty')), position=bool(data.get('position',{}).get('x') is not None), announcements=False, cameras=time.monotonic()-self.camera_seen<3, mirror=time.monotonic()-self.camera_seen<3),
                     events=list(self.events))
     def monitor(self, stop):
         while not stop.wait(.5):
@@ -178,6 +203,8 @@ def handler(state, usb=False):
             self.json_response(result)
         def do_GET(self):
             if not self.authorized(): return
+            if self.path in ('/api/camera/0','/api/camera/1','/api/camera/2','/api/camera/3'):
+                self.json_response(state.camera(int(self.path[-1]))); return
             if self.path != '/api/status':
                 self.send_error(404); return
             self.json_response(state.status())
@@ -207,7 +234,7 @@ def main():
     usb_thread.start()
     thread = threading.Thread(target=state.monitor, args=(stop,), daemon=True)
     thread.start()
-    print('SRG OMSI Bridge 0.5 — odczyt danych; nie pelna integracja tras i kamer.')
+    print('SRG OMSI Bridge 0.6 — odczyt danych; nie pelna integracja tras i kamer.')
     print('Komputer:', socket.gethostname())
     addresses = sorted(set(socket.gethostbyname_ex(socket.gethostname())[2]))
     print('Wi-Fi: w aplikacji wpisz IPv4 komputera:', ', '.join(addresses))

@@ -87,4 +87,16 @@ class Tests(unittest.TestCase):
                 self.assertEqual(state.status()['stops'],[])
                 self.assertEqual(state.status()['catalog'],[])
                 state.route_stops=[{'name':'previous stop'}];state.catalog=[{'line':'old'}]
+    def test_camera_requires_fresh_frame_and_only_writes_local_lease(self):
+        with tempfile.TemporaryDirectory() as d:
+            root=Path(d);state=bridge.State(root)
+            self.assertIsNone(state.camera(0)['image'])
+            self.assertEqual(json.loads((root/'camera-request.json').read_text())['channel'],0)
+            (root/'camera-0.jpg').write_bytes(b'\xff\xd8test\xff\xd9')
+            meta=dict(channel=0,updated=time.time(),source='Interior',available=[0],error=None)
+            (root/'camera-0.json').write_text(json.dumps(meta))
+            frame=state.camera(0);self.assertTrue(frame['image'].startswith('data:image/jpeg;base64,'))
+            meta['updated']=time.time()-3;(root/'camera-0.json').write_text(json.dumps(meta))
+            self.assertIsNone(state.camera(0)['image'])
+            with self.assertRaises(ValueError):state.camera(4)
 if __name__=='__main__':unittest.main()
