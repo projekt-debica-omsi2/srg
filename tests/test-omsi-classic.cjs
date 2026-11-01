@@ -1,0 +1,13 @@
+const fs=require('fs'),vm=require('vm'),assert=require('node:assert/strict');
+const js=fs.readFileSync('app/src/main/assets/omsi.js','utf8');
+const start=js.indexOf('function renderCourse(data){'),end=js.indexOf('\nfunction paintTheme()',start);
+assert(start>0&&end>start);
+const elements=new Map(),$=id=>{if(!elements.has(id))elements.set(id,{textContent:''});return elements.get(id)};
+const events=[];
+const context=vm.createContext({$,manualStop:null,signKey:'',clockText:v=>v===32400?'09:00':'09:01',selectedStop:d=>d.stops[0],window:{dispatchEvent:e=>events.push(e)},CustomEvent:function(type,options){this.type=type;this.detail=options.detail;}});
+vm.runInContext(js.slice(start,end),context);
+context.data={plugin_running:true,session:'s',route:'r',vehicle_number:'123',clock:32400,distance:25,duty:{line:'76',tour:'1',trip:21,terminus:'Hospital',delay:0},stops:[{number:1,name:'A',departure:32400},{number:2,name:'B',departure:32460}]};
+vm.runInContext('renderCourse(data);renderCourse(data)',context);
+assert.equal($('#omsiUicourseLine').textContent,'76');assert.equal($('#omsiUicourseCurrent').textContent,'09:00 A');assert.equal($('#omsiUicourseNext1').textContent,'09:01 B');assert.equal(events.length,1);assert.equal(events[0].detail.source,'omsi');
+vm.runInContext('renderCourse(null)',context);assert.equal($('#omsiUicourseLine').textContent,'—');
+console.log('PASS classic OMSI course rendering, live-only values and deduplicated R&G course event');

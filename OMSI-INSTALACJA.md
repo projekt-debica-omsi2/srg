@@ -33,3 +33,12 @@ Strzałki zmieniają podgląd na tablecie, bez sterowania grą. Przycisk śledze
 APK: build 41330067850, mostek: build 41330003474; sukces. APK 1.4.75 zainstalowane na tablecie, zgodny podpis i zachowane dane. Rozszerzony panel sprawdzono z działającą grą i USB.
 
 Pozostało: test podczas jazdy i ponownego łączenia; Wi-Fi na fizycznym tablecie; pełny odczyt tras w oryginalnym OMSI 2 ze Steam; sterowanie grą, ręczna trasa offline, nagrania z gry, kamery/lusterka i sterowanie fizyczną tablicą. Nie przedstawiać tych funkcji jako ukończonych.
+
+## Sterownik OMSI 1.4.76 / mostek 0.4
+Główny ekran OMSI powiela układ zwykłej kursówki, w niebieskiej kolorystyce. KURS otwiera wyłącznie dane gry. Przycisk Wybierz kurs prowadzi do listy linii/brygad i kursów odczytanych z gry; nie są to lokalne kursówki MKS.
+Przy wyborze kursu można jawnie dopasować czas gry do odjazdu. Bez tego openOMSI może przejść do kursu odpowiadającego aktualnemu czasowi. Na Grundorfie potwierdzono wybór 76/1/11 z dopasowaniem czasu i potwierdzeniem z gry. Ustawianie tablic w grze wykorzystuje duty.type_ibis; zakres efektu zależy od skryptu autobusu.
+Strzałki pokazują przystanek, zatwierdzenie zleca skip_to w grze, anulowanie przywraca śledzenie. Szczegóły, głos i historia pozostają w osobnym widoku.
+
+Polecenia POST /api/command są chronione tym samym uwierzytelnianiem co status. USB dostępne tylko przez loopback. Do gry trafia wyłącznie lista dozwolonych akcji i atomowy plik command.json w znanym katalogu danych dodatku. Polecenie zawiera identyfikator aktualnej sesji; aplikacja czeka na potwierdzenie gry, nie utożsamia samego przyjęcia przez mostek z wykonaniem.
+
+Fizyczna tablica R&G: zmiana linii/kierunku z OMSI emituje zdarzenie do istniejącego modułu USB-RS485. Automatyczne wysyłanie nadal wymaga podłączonego konwertera i wcześniej potwierdzonego profilu ramki tekstowej. Nie potwierdzono sterowania fizyczną tablicą w tej sesji. Przycisk Tablica R&G otwiera jej ustawienia. W czasie bezpośredniego połączenia konwertera z tabletem połączenie z PC należy zestawić przez Wi-Fi.
