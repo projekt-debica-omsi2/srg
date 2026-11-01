@@ -30,6 +30,7 @@ jobs:
       - uses: Swatinem/rust-cache@v2
         with:
           workspaces: engine -> target
+          cache-workspace-crates: true
       - name: Apply independent camera output
         working-directory: engine
         run: git apply --ignore-whitespace ../srg/engine-camera/openomsi-srg.patch

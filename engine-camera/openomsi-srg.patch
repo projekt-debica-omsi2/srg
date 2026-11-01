@@ -203,7 +203,7 @@
              view_formats: &[],
          });
          let view = texture.create_view(&Default::default());
-@@ -820,6 +820,37 @@
+@@ -820,6 +820,26 @@
              generation: next_gen(),
          });
          scene.textures.len() - 1
@@ -211,23 +211,12 @@
 +
 +    /// A camera-only pass: keep the driver's post-processing and HUD out of the capture.
 +    pub fn render_camera_image(&mut self, scene:&mut Scene,width:u32,height:u32,camera:&Camera,lighting:&Lighting)->anyhow::Result<Vec<u8>> {
-+        let texture=self.device.create_texture(&wgpu::TextureDescriptor {
-+            label:Some("SRG camera output"),
-+            size:wgpu::Extent3d{width,height,depth_or_array_layers:1},
-+            mip_level_count:1,sample_count:1,dimension:wgpu::TextureDimension::D2,
-+            format:self.format,
-+            usage:wgpu::TextureUsages::RENDER_ATTACHMENT|wgpu::TextureUsages::COPY_SRC,
-+            view_formats:&[],
-+        });
-+        let view=texture.create_view(&Default::default());
-+        self.texture_aspect=Some(width as f32/height as f32);
-+        self.render_inner(scene,&view,width,height,camera,lighting,false,None,None,false);
-+        self.texture_aspect=None;
-+        let mut rgba=self.read_texture(&texture,wgpu::TextureAspect::All)?;
-+        if matches!(texture.format(),wgpu::TextureFormat::Bgra8Unorm|wgpu::TextureFormat::Bgra8UnormSrgb) {
-+            for pixel in rgba.chunks_exact_mut(4){pixel.swap(0,2);}
-+        }
-+        Ok(rgba)
++        let id=self.add_render_texture(scene,width,height);
++        self.render_to_texture(scene,id,camera,lighting,width as f32/height as f32);
++        let result=self.read_render_texture(scene,id).map(|(_,_,rgba)|rgba);
++        // read_render_texture waits for the GPU, so the temporary target can be released.
++        if scene.textures.len()==id+1 { scene.textures.pop(); }
++        result
 +    }
 +
 +    /// Read a completed render target without changing the player's view.
