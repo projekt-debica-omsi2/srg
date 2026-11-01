@@ -20,7 +20,7 @@ function setRoute(d){
  const key=JSON.stringify([d.kursId,d.linia,d.kierunek,d.aktualnyIndeks,d.przystanki.map(x=>[x.nazwa,x.ulica])]);
  if(key===routeSignature)return;routeSignature=key;
  // Nazwy ulic i kolejność przystanków pochodzą z aktywnego wariantu wczytanego z pliku RJ.
- const line=String(d.linia||'').trim();el('routeLine').textContent=line;el('routeLine').hidden=!line;el('routePanel').classList.toggle('no-line',!line);
+ const line=String(d.linia||'').trim();el('routeLine').textContent=line;el('routeLine').hidden=!line;el('routePanel').classList.toggle('no-line',!line);el('routePanel').classList.toggle('four-digit-line',Array.from(line).length>3);
  el('routeDirection').textContent=(d.kierunek||d.przystanki.at(-1)?.nazwa||'—').toLocaleUpperCase('pl-PL');
  el('routeText').textContent=(d.additional?((d.linia?d.linia+' → ':'')+d.kierunek):routeText(d.przystanki.slice(Math.max(0,d.aktualnyIndeks||0)))).toLocaleUpperCase('pl-PL');
  const r=el('routeText');setTimeout(()=>fitMarquee(r,r.parentElement,'route'),0);

@@ -58,10 +58,12 @@
 
 .td-eight .td-row{min-height:7vh;font-size:2vw}
 
-/* Line number precedes the arrow; reserve room for four digits and a two-line destination. */
-.route-line{position:absolute;left:2%;top:0;bottom:0;width:24%;display:flex;align-items:center;justify-content:center;font-size:clamp(38px,7vw,140px);font-weight:900;line-height:1;letter-spacing:-.04em;font-variant-numeric:tabular-nums;white-space:nowrap}
+/* Center one or two characters in three slots; expand to four only when needed. */
+.route-line{position:absolute;left:2%;top:0;bottom:0;width:18%;display:flex;align-items:center;justify-content:center;font-size:clamp(38px,7vw,140px);font-weight:900;line-height:1;letter-spacing:0;font-variant-numeric:tabular-nums;white-space:nowrap}
 .route-line[hidden]{display:none!important}
-#routePanel .right-info{left:28%;right:2%;gap:.6vh}
+#routePanel .right-info{left:22%;right:2%;gap:.6vh}
+#routePanel.four-digit-line .route-line{width:24%}
+#routePanel.four-digit-line .right-info{left:28%}
 #routePanel.no-line .right-info{left:2%}
 .route-heading{display:flex;align-items:center;gap:1.2vw;min-width:0}
 .route-arrow{flex:none;font-size:clamp(40px,5.2vw,100px);font-weight:900;line-height:1}
