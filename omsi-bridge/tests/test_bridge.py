@@ -99,4 +99,15 @@ class Tests(unittest.TestCase):
             meta['updated']=time.time()-3;(root/'camera-0.json').write_text(json.dumps(meta))
             self.assertIsNone(state.camera(0)['image'])
             with self.assertRaises(ValueError):state.camera(4)
+    def test_camera_pages_have_four_unique_feeds_and_keep_last_remainder(self):
+        with tempfile.TemporaryDirectory() as d:
+            state=bridge.State(Path(d))
+            for count,expected in [(4,[4]),(5,[4,1]),(6,[4,2]),(65,[4]*16+[1])]:
+                state.camera_feeds=[dict(channel=16+i,label=f'Camera {i+1}') for i in range(count)]
+                pages=[state.camera_page(i) for i in range(len(expected))]
+                self.assertEqual([len(p['feeds']) for p in pages],expected)
+                self.assertTrue(all(p['total']==count and p['pages']==len(expected) for p in pages))
+                self.assertEqual(len({f['channel'] for p in pages for f in p['feeds']}),count)
+                request=json.loads((Path(d)/'camera-request.json').read_text())
+                self.assertLessEqual(len(request['channels']),4)
 if __name__=='__main__':unittest.main()

@@ -36,11 +36,13 @@ public final class OmsiBridge {
         for(int i=0;i<4;i++){a[i]=Integer.parseInt(p[i]); if(a[i]>255)return false;}
         return a[0]==10 || (a[0]==192&&a[1]==168) || (a[0]==172&&a[1]>=16&&a[1]<=31) || host.equals("127.0.0.1");
     }
-    @JavascriptInterface public void poll(String host,String token,String id) { exchange(host,token,id,null,-1); }
-    @JavascriptInterface public void command(String host,String token,String payload,String id) { if(payload==null||payload.length()>2048)return;exchange(host,token,id,payload,-1); }
-    @JavascriptInterface public void camera(String host,String token,int channel,String id) { if(!((channel>=0&&channel<=3)||(channel>=16&&channel<80)))return;exchange(host,token,id,null,channel); }
-    private void exchange(String host,String token,String id,String payload,int channel) {
-        AtomicBoolean gate=channel>=0?cameraBusy:payload==null?busy:commandBusy;
+    @JavascriptInterface public void poll(String host,String token,String id) { exchange(host,token,id,null,-1,-1); }
+    @JavascriptInterface public void command(String host,String token,String payload,String id) { if(payload==null||payload.length()>2048)return;exchange(host,token,id,payload,-1,-1); }
+    @JavascriptInterface public void camera(String host,String token,int channel,String id) { if(!((channel>=0&&channel<=3)||(channel>=16&&channel<272)))return;exchange(host,token,id,null,channel,-1); }
+    @JavascriptInterface public void cameraPage(String host,String token,int page,String id) { if(page<0||page>256)return;exchange(host,token,id,null,-1,page); }
+    private void exchange(String host,String token,String id,String payload,int channel,int page) {
+        boolean cameraCall=channel>=0||page>=0;
+        AtomicBoolean gate=cameraCall?cameraBusy:payload==null?busy:commandBusy;
         if(!gate.compareAndSet(false,true))return;
         new Thread(()->{
             String response;
@@ -51,7 +53,7 @@ public final class OmsiBridge {
                 try(Socket socket=new Socket()){
                     socket.connect(new InetSocketAddress(host,port),2000); socket.setSoTimeout(2500);
                     byte[] body=payload==null?new byte[0]:payload.getBytes(StandardCharsets.UTF_8);
-                    String request=(channel>=0?"GET /api/camera/"+channel:payload==null?"GET /api/status":"POST /api/command")+" HTTP/1.0\r\nHost: "+host+":"+port+"\r\nAuthorization: Bearer "+token+"\r\nContent-Type: application/json\r\nContent-Length: "+body.length+"\r\nConnection: close\r\n\r\n";
+                    String request=(page>=0?"GET /api/cameras/page/"+page:channel>=0?"GET /api/camera/"+channel:payload==null?"GET /api/status":"POST /api/command")+" HTTP/1.0\r\nHost: "+host+":"+port+"\r\nAuthorization: Bearer "+token+"\r\nContent-Type: application/json\r\nContent-Length: "+body.length+"\r\nConnection: close\r\n\r\n";
                     socket.getOutputStream().write(request.getBytes(StandardCharsets.US_ASCII));
                     if(body.length>0)socket.getOutputStream().write(body);
                     ByteArrayOutputStream out=new ByteArrayOutputStream(); byte[] buf=new byte[4096];int n;
@@ -66,7 +68,7 @@ public final class OmsiBridge {
             } catch(Exception e) {
                 response="{\"ok\":false,\"error\":"+JSONObject.quote(e.getMessage()==null?"Brak połączenia":e.getMessage())+"}";
             }
-            String callback=channel>=0?"SRGOmsiCameraResult":payload==null?"SRGOmsiResult":"SRGOmsiCommandResult";
+            String callback=cameraCall?"SRGOmsiCameraResult":payload==null?"SRGOmsiResult":"SRGOmsiCommandResult";
             final String script="window."+callback+"&&window."+callback+"("+JSONObject.quote(id)+","+response+")";
             gate.set(false);web.post(()->web.evaluateJavascript(script,null));
         },"SRG-OMSI-poll").start();

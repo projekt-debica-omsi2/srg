@@ -44,6 +44,7 @@ class State:
         self.trips = []
         self.trip_key = None
         self.camera_seen = 0
+        self.camera_feeds = []
         self.list_parts = {}
         self.events = []
         self.log_path = root / ('bridge-' + dt.datetime.now().strftime('%Y%m%d-%H%M%S') + '.jsonl')
@@ -93,29 +94,51 @@ class State:
                         self.route_stops = [s for i in range(1,total+1) for s in self.parts[i]]
         except (ValueError, TypeError, AttributeError):
             return
-    def camera(self, channel):
-        if type(channel) is not int or not (0 <= channel <= 3 or 16 <= channel < 80): raise ValueError('Unknown camera')
-        now=time.time()
-        request=self.root/'camera-request.json'
+    @staticmethod
+    def camera_channel(channel):
+        return type(channel) is int and (0 <= channel <= 3 or 16 <= channel < 272)
+    def camera_request(self, channels):
         temp=self.root/'camera-request.tmp'
         with self.lock:
-            temp.write_text(json.dumps(dict(channel=channel,updated=now)),encoding='utf-8');temp.replace(request)
-        empty=dict(schema=1,channel=channel,image=None,source=None,error='Oczekiwanie na niezależną kamerę. Wymagana testowa wersja openOMSI SRG Camera.')
+            temp.write_text(json.dumps(dict(channel=channels[0],channels=channels,updated=time.time())),encoding='utf-8')
+            temp.replace(self.root/'camera-request.json')
+    def camera_frame(self, channel):
+        now=time.time()
+        empty=dict(schema=1,channel=channel,image=None,source=None,error='Oczekiwanie na niezależną kamerę z testowej wersji openOMSI.')
         try:
             meta_file=self.root/f'camera-{channel}.json'
-            if meta_file.stat().st_size>4096: return empty
+            if meta_file.stat().st_size>65536: return empty
             meta=json.loads(meta_file.read_text(encoding='utf-8'))
             updated=meta.get('updated')
             if not isinstance(updated,(float,int)) or not -1 <= now-updated <= 2 or meta.get('channel')!=channel: return empty
-            if meta.get('error'):
-                return dict(empty,error=str(meta['error'])[:300],available=meta.get('available',[]))
+            feeds=meta.get('feeds')
+            if isinstance(feeds,list) and len(feeds)<=257:
+                self.camera_feeds=[dict(channel=f['channel'],label=str(f.get('label','Kamera'))[:100]) for f in feeds if isinstance(f,dict) and self.camera_channel(f.get('channel'))]
+            elif isinstance(meta.get('available'),list):
+                labels={3:'Lusterko wewnętrzne',0:'Wnętrze',1:'Lewe lusterko',2:'Prawe lusterko'}
+                self.camera_feeds=[dict(channel=c,label=labels.get(c,f'Kamera / lusterko {c-15}')) for c in [3,0,1,2]+list(range(16,272)) if c in meta['available']]
+            if meta.get('error'): return dict(empty,error=str(meta['error'])[:300])
             path=self.root/f'camera-{channel}.jpg'
-            if path.stat().st_size>524288: return empty
+            if path.stat().st_size>160000: return empty
             jpeg=path.read_bytes()
             if not jpeg.startswith(b'\xff\xd8') or not jpeg.endswith(b'\xff\xd9'): return empty
             self.camera_seen=time.monotonic()
-            return dict(schema=1,channel=channel,updated=updated,source=str(meta.get('source','Kamera'))[:120],available=meta.get('available',[]),error=None,image='data:image/jpeg;base64,'+base64.b64encode(jpeg).decode('ascii'))
+            return dict(schema=1,channel=channel,updated=updated,source=str(meta.get('source','Kamera'))[:120],error=None,image='data:image/jpeg;base64,'+base64.b64encode(jpeg).decode('ascii'))
         except (OSError,ValueError,TypeError,AttributeError): return empty
+    def camera(self, channel):
+        if not self.camera_channel(channel): raise ValueError('Unknown camera')
+        self.camera_request([channel]);return self.camera_frame(channel)
+    def camera_page(self, page):
+        if type(page) is not int or not 0<=page<=256: raise ValueError('Unknown camera page')
+        # Ask for discovery while no renderer metadata is available yet.
+        if not self.camera_feeds:
+            self.camera_request([3,0,1,2])
+            for channel in (3,0,1,2): self.camera_frame(channel)
+        total=len(self.camera_feeds);pages=max(1,(total+3)//4);page=min(page,pages-1)
+        feeds=self.camera_feeds[page*4:page*4+4]
+        if feeds: self.camera_request([f['channel'] for f in feeds])
+        frames=[self.camera_frame(f['channel']) for f in feeds]
+        return dict(schema=1,page=page,pages=pages,total=total,feeds=feeds,frames=frames,error=None if total else 'Oczekiwanie na listę kamer z testowej wersji openOMSI')
     def command(self, command):
         data=self.telemetry()
         if not data.get('commands') or data.get('game')!='openomsi': raise ValueError('Gra nie udostępnia sterowania')
@@ -204,7 +227,12 @@ def handler(state, usb=False):
             self.json_response(result)
         def do_GET(self):
             if not self.authorized(): return
-            camera=re.fullmatch(r'/api/camera/([0-9]{1,2})',self.path)
+            page=re.fullmatch(r'/api/cameras/page/([0-9]{1,3})',self.path)
+            if page:
+                try: self.json_response(state.camera_page(int(page.group(1))))
+                except ValueError: self.json_response(dict(schema=1,error='Unknown camera page'),400)
+                return
+            camera=re.fullmatch(r'/api/camera/([0-9]{1,3})',self.path)
             if camera:
                 try: self.json_response(state.camera(int(camera.group(1))))
                 except ValueError: self.json_response(dict(schema=1,error='Unknown camera'),400)
@@ -238,7 +266,7 @@ def main():
     usb_thread.start()
     thread = threading.Thread(target=state.monitor, args=(stop,), daemon=True)
     thread.start()
-    print('SRG OMSI Bridge 0.6 — odczyt danych; nie pelna integracja tras i kamer.')
+    print('SRG OMSI Bridge 0.7 — odczyt danych; nie pelna integracja tras i kamer.')
     print('Komputer:', socket.gethostname())
     addresses = sorted(set(socket.gethostbyname_ex(socket.gethostname())[2]))
     print('Wi-Fi: w aplikacji wpisz IPv4 komputera:', ', '.join(addresses))

@@ -22,3 +22,8 @@ road.position=null;assert.equal(vm.runInContext('omsiRoad(road,road.stops[1])',c
 road.plugin_running=false;assert.equal(vm.runInContext('omsiRoad(road,road.stops[1])',context),'—');
 road.plugin_running=true;road.stops[1].x=0;assert.equal(vm.runInContext('omsiRoad(road,road.stops[1])',context),'BRAK DŁUGOŚCI ODCINKA');
 console.log('PASS OMSI road progress, arrival, overshoot, next segment, missing/stale position and zero-length segment');
+
+context.data.duty.delay=61;vm.runInContext('renderCourse(data)',context);assert.equal($('#omsiUicourseDelay').textContent,'−1:01');
+context.data.duty.delay=-61;vm.runInContext('renderCourse(data)',context);assert.equal($('#omsiUicourseDelay').textContent,'+1:01');
+context.data.duty.delay=0;vm.runInContext('renderCourse(data)',context);assert.equal($('#omsiUicourseDelay').textContent,'0:00');
+console.log('PASS late is negative, early is positive and on-time has no sign');
