@@ -66,12 +66,29 @@ function renderPicker(){
  const ack=data?.command_result;if(queuedCommand&&ack?.id===queuedCommand){queuedCommand=null;commandStatus(ack.message||'Potwierdzenie z gry');if(ack.ok&&data.duty){manualStop=null;renderCourse(data);}}
  if((queuedCommand||commandRequest)&&Date.now()-commandAt>10000){queuedCommand=null;commandRequest=null;commandStatus('Brak potwierdzenia z gry. Sprawdź aktualny kurs przed ponowieniem.');}
 }
+function omsiRoad(data,stop){
+ if(!data?.plugin_running)return '—';
+ const list=Array.isArray(data.stops)?data.stops:[],pos=data.position;
+ if(list.length<2||!stop)return 'BRAK ODCINKA';
+ const index=list.findIndex(s=>s.number===stop.number);if(index<0)return 'BRAK ODCINKA';
+ const target=Math.max(1,index),a=list[target-1],b=list[target];
+ if(![a?.x,a?.y,b?.x,b?.y].every(Number.isFinite))return 'BRAK POZYCJI PRZYSTANKÓW';
+ const dx=b.x-a.x,dy=b.y-a.y,length2=dx*dx+dy*dy,length=Math.round(Math.sqrt(length2));
+ if(length<2)return 'BRAK DŁUGOŚCI ODCINKA';
+ if(![pos?.x,pos?.y].every(Number.isFinite))return `— / ~${length} (—)`;
+ const px=pos.x-a.x,py=pos.y-a.y,projection=(px*dx+py*dy)/length2;
+ const lateral=Math.abs(px*dy-py*dx)/Math.sqrt(length2);
+ if(lateral>Math.max(300,length*.35))return `POZA ODCINKIEM / ~${length}`;
+ const fraction=Math.max(0,Math.min(index===list.length-1?2:1.25,projection));
+ const travelled=Math.round(length*fraction),delta=travelled-length;
+ return `~${travelled} / ~${length} (${delta>0?'+':''}${delta})`;
+}
 function renderCourse(data){
  const live=Boolean(data?.plugin_running),d=live?data.duty:null,list=live&&Array.isArray(data.stops)?data.stops:[],stop=live?selectedStop(data):null;
  const put=(id,text)=>$('#omsiUi'+id).textContent=text;
  put('courseLine',d?.line??'—');put('courseDest',d?.terminus||'BRAK KURSU Z GRY');put('courseTask',d?`${d.line}/${d.tour}/${d.trip}`:'—');put('vehicleNo',live?(data.vehicle_number||'—'):'—');
  put('courseStopCount',stop?`${stop.number}/${list.length||'—'}`:'—');put('courseAutoState',live?(manualStop===null?'AUTO OMSI':'PODGLĄD'):'BRAK DANYCH');
- put('courseRoad',live&&Number.isFinite(data.distance)?`${Math.round(data.distance)} m`:'—');put('courseCurrent',stop?`${clockText(stop.departure??stop.arrival)} ${stop.name}`:'Wybierz kursówkę OMSI');
+ put('courseRoad',omsiRoad(data,stop));$('#omsiUicourseRoad').title='Przebyte / długość odcinka (różnica), w metrach. ~ = szacunek z pozycji gry w linii prostej między przystankami.';put('courseCurrent',stop?`${clockText(stop.departure??stop.arrival)} ${stop.name}`:'Wybierz kursówkę OMSI');
  const idx=stop?list.findIndex(s=>s.number===stop.number):-1;
  for(let n=1;n<=2;n++){const next=idx>=0?list[idx+n]:null;put('courseNext'+n,next?`${clockText(next.departure??next.arrival)} ${next.name}`:'');}
  put('courseDelay',Number.isFinite(d?.delay)?`${d.delay>=0?'+':'−'}${Math.floor(Math.abs(d.delay)/60)}:${String(Math.floor(Math.abs(d.delay))%60).padStart(2,'0')}`:'—');

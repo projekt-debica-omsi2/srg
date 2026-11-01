@@ -1,6 +1,6 @@
 const fs=require('fs'),vm=require('vm'),assert=require('node:assert/strict');
 const js=fs.readFileSync('app/src/main/assets/omsi.js','utf8');
-const start=js.indexOf('function renderCourse(data){'),end=js.indexOf('\nfunction paintTheme()',start);
+const start=js.indexOf('function omsiRoad(data,stop){'),end=js.indexOf('\nfunction paintTheme()',start);
 assert(start>0&&end>start);
 const elements=new Map(),$=id=>{if(!elements.has(id))elements.set(id,{textContent:''});return elements.get(id)};
 const events=[];
@@ -11,3 +11,14 @@ vm.runInContext('renderCourse(data);renderCourse(data)',context);
 assert.equal($('#omsiUicourseLine').textContent,'76');assert.equal($('#omsiUicourseCurrent').textContent,'09:00 A');assert.equal($('#omsiUicourseNext1').textContent,'09:01 B');assert.equal(events.length,1);assert.equal(events[0].detail.source,'omsi');
 vm.runInContext('renderCourse(null)',context);assert.equal($('#omsiUicourseLine').textContent,'—');
 console.log('PASS classic OMSI course rendering, live-only values and deduplicated R&G course event');
+
+const road={plugin_running:true,position:{x:50,y:0},stops:[{number:1,x:0,y:0},{number:2,x:100,y:0},{number:3,x:200,y:0}]};context.road=road;
+assert.equal(vm.runInContext('omsiRoad(road,road.stops[1])',context),'~50 / ~100 (-50)');
+road.position.x=100;assert.equal(vm.runInContext('omsiRoad(road,road.stops[1])',context),'~100 / ~100 (0)');
+road.position.x=120;assert.equal(vm.runInContext('omsiRoad(road,road.stops[1])',context),'~120 / ~100 (+20)');
+road.position={x:150,y:0};assert.equal(vm.runInContext('omsiRoad(road,road.stops[2])',context),'~50 / ~100 (-50)');
+road.position.y=500;assert.equal(vm.runInContext('omsiRoad(road,road.stops[1])',context),'POZA ODCINKIEM / ~100');
+road.position=null;assert.equal(vm.runInContext('omsiRoad(road,road.stops[1])',context),'— / ~100 (—)');
+road.plugin_running=false;assert.equal(vm.runInContext('omsiRoad(road,road.stops[1])',context),'—');
+road.plugin_running=true;road.stops[1].x=0;assert.equal(vm.runInContext('omsiRoad(road,road.stops[1])',context),'BRAK DŁUGOŚCI ODCINKA');
+console.log('PASS OMSI road progress, arrival, overshoot, next segment, missing/stale position and zero-length segment');
