@@ -79,4 +79,12 @@ class Tests(unittest.TestCase):
                     with self.assertRaises(ValueError):state.command(invalid)
                 state.rich['files_dir']=str(Path(d)/'somewhere')
                 with self.assertRaises(ValueError):state.command(dict(action='sync_signs'))
+    def test_map_or_vehicle_change_clears_previous_route_and_catalog(self):
+        with tempfile.TemporaryDirectory() as d:
+            state=bridge.State(Path(d))
+            for map_name,vehicle in [('Map A','bus-a.bus'),('Map B','bus-a.bus'),('Map B','bus-b.bus')]:
+                state.ingest(json.dumps(dict(schema=2,kind='status',session='same',route='same',map=map_name,vehicle={'file':vehicle},variables={})))
+                self.assertEqual(state.status()['stops'],[])
+                self.assertEqual(state.status()['catalog'],[])
+                state.route_stops=[{'name':'previous stop'}];state.catalog=[{'line':'old'}]
 if __name__=='__main__':unittest.main()

@@ -1,9 +1,28 @@
--- Read-only rich telemetry, local PC only. No game controls.
+-- Generic openOMSI adapter: runtime map/vehicle data and explicit controller commands.
 local session = tostring({})
 local ticks = 0
 local last_command = nil
 local result = nil
 local preview = nil
+local context_key = nil
+local function has(name)
+  return omsi.game.has(name)
+end
+local function signs()
+  local duty=omsi.duty.get()
+  if not duty or not omsi.has_vehicle() then return false,"Brak kursu lub pojazdu" end
+  local line_ok=omsi.bus.set_line(tostring(duty.line))
+  local typed=has("duty.type_ibis") and omsi.duty.type_ibis() or false
+  local destination_ok=false
+  for _,destination in ipairs(omsi.bus.destinations()) do
+    if type(destination.name)=="string" and type(duty.terminus)=="string" and string.lower(destination.name)==string.lower(duty.terminus) then
+      destination_ok=omsi.bus.set_destination(destination.index);break
+    end
+  end
+  if destination_ok then return line_ok==true,"Ustawiono linię i kierunek z HOF autobusu" end
+  if typed then return true,"Zlecono IBIS; sprawdź zgodność tablic i pliku HOF autobusu" end
+  return false,"Autobus nie udostępnia zgodnego kierunku HOF/IBIS"
+end
 local function publish_list(kind,key,list)
   local total=math.max(1,math.ceil(#list/10))
   for part=1,total do
@@ -32,9 +51,9 @@ local function commands()
     else
       ok,detail=omsi.duty.start(c.line,c.tour,c.trip)
     end
-    if ok then omsi.duty.type_ibis();detail="Kurs ustawiony w grze; zlecono IBIS/tablice" end
+    if ok then local _,message=signs();detail="Kurs ustawiony. "..message end
   elseif c.action=="sync_signs" then
-    ok=omsi.duty.type_ibis();detail=ok and "Zlecono ustawienie IBIS i tablic według kursu" or "Brak kursu lub pojazdu"
+    ok,detail=signs()
   elseif c.action=="skip_to" then
     ok=omsi.duty.skip_to(c.stop);detail=ok and "Przystanek ustawiony w grze" or "Nie udało się zmienić przystanku"
   end
@@ -48,11 +67,14 @@ omsi.every(0.5, function()
   commands()
   local info = omsi.info()
   local duty = omsi.duty.get()
-  local route = duty and table.concat({tostring(duty.line),tostring(duty.tour),tostring(duty.trip),tostring(duty.trip_name)}, "|") or ""
+  local vehicle_file=omsi.bus.file()
+  local active_context=tostring(info.map_path or info.map).."|"..tostring(vehicle_file)
+  if active_context~=context_key then context_key=active_context;preview=nil end
+  local route = duty and table.concat({active_context,tostring(duty.line),tostring(duty.tour),tostring(duty.trip),tostring(duty.trip_name)}, "|") or active_context
   local x,y,z,heading = omsi.position()
-  local v = {Velocity=omsi.speed(),IBIS_Linie=omsi.var("IBIS_Linie"),IBIS_Route=omsi.var("IBIS_Route"),IBIS_Ziel=omsi.var("IBIS_Ziel")}
+  local v = {Velocity=omsi.has_vehicle() and omsi.speed() or nil,IBIS_Linie=omsi.var("IBIS_Linie"),IBIS_Route=omsi.var("IBIS_Route"),IBIS_Ziel=omsi.var("IBIS_Ziel")}
   local d = duty and {line=duty.line,tour=duty.tour,trip=duty.trip,trip_name=duty.trip_name,terminus=duty.terminus,delay=duty.delay,at_stop=duty.at_stop,trip_done=duty.trip_done,next_stop=compact(duty.next_stop),previous_stop=compact(duty.previous_stop)} or nil
-  omsi.send(47851,omsi.json.encode({schema=2,kind="status",session=session,route=route,variables=v,game="openomsi",map=info.map,clock=info.clock,paused=info.paused,duty=d,position={x=x,y=y,z=z,heading=heading},distance=info.next_stop_distance,commands=true,command_result=result,files_dir=omsi.files.dir(),vehicle_number=omsi.bus.number()}))
+  omsi.send(47851,omsi.json.encode({schema=2,kind="status",session=session,route=route,variables=v,game="openomsi",map=info.map,clock=info.clock,paused=info.paused,duty=d,position={x=x,y=y,z=z,heading=heading},distance=info.next_stop_distance,commands=true,command_result=result,files_dir=omsi.files.dir(),vehicle_number=omsi.bus.number(),vehicle={file=vehicle_file,manufacturer=info.vehicle_manufacturer,model=info.vehicle_model,present=omsi.has_vehicle()},game_version=omsi.game.version()}))
   ticks=ticks+1
   if ticks%4==1 then
     local catalog={}

@@ -75,9 +75,10 @@ class State:
                         else: self.trips=result;self.trip_key=data['route']
                 elif data.get('kind') == 'status':
                     if not isinstance(data.get('variables'), dict): return
-                    if self.rich is None or key != (self.rich['session'], self.rich['route']):
+                    context_changed=self.rich is None or data.get('map')!=self.rich.get('map') or (data.get('vehicle') or {}).get('file')!=(self.rich.get('vehicle') or {}).get('file')
+                    if context_changed or key != (self.rich['session'], self.rich['route']):
                         self.parts = {}; self.route_stops = []
-                    if self.rich is None or data['session']!=self.rich['session']:
+                    if context_changed or data['session']!=self.rich['session']:
                         self.catalog=[];self.trips=[];self.trip_key=None;self.list_parts={}
                     self.rich = data; self.rich_seen = time.monotonic()
                 elif data.get('kind') == 'stops' and self.rich and key == (self.rich['session'], self.rich['route']):
@@ -131,7 +132,7 @@ class State:
         return read_telemetry(self.root)
     def status(self):
         data = self.telemetry()
-        return dict(schema=1, computer=socket.gethostname(), **{k:data.get(k) for k in ('session','plugin_running','variables','game','map','clock','paused','duty','position','distance','stops','route','commands','command_result','catalog','trips','trip_key','vehicle_number')},
+        return dict(schema=1, computer=socket.gethostname(), **{k:data.get(k) for k in ('session','plugin_running','variables','game','map','clock','paused','duty','position','distance','stops','route','commands','command_result','catalog','trips','trip_key','vehicle_number','vehicle','game_version')},
                     capabilities=dict(timetable=bool(data.get('duty')), position=bool(data.get('position',{}).get('x') is not None), announcements=False, cameras=False, mirror=False),
                     events=list(self.events))
     def monitor(self, stop):
@@ -206,7 +207,7 @@ def main():
     usb_thread.start()
     thread = threading.Thread(target=state.monitor, args=(stop,), daemon=True)
     thread.start()
-    print('SRG OMSI Bridge 0.4 — odczyt danych; nie pelna integracja tras i kamer.')
+    print('SRG OMSI Bridge 0.5 — odczyt danych; nie pelna integracja tras i kamer.')
     print('Komputer:', socket.gethostname())
     addresses = sorted(set(socket.gethostbyname_ex(socket.gethostname())[2]))
     print('Wi-Fi: w aplikacji wpisz IPv4 komputera:', ', '.join(addresses))
