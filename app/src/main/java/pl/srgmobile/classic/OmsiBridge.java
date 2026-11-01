@@ -13,6 +13,20 @@ import java.util.concurrent.atomic.AtomicBoolean;
 public final class OmsiBridge {
     private final WebView web;
     private final AtomicBoolean busy = new AtomicBoolean(false);
+    private android.speech.tts.TextToSpeech speech;
+    private boolean speechReady=false;
+    private void speechStatus(String message) { web.evaluateJavascript("window.SRGOmsiSpeechStatus&&window.SRGOmsiSpeechStatus("+JSONObject.quote(message)+")",null); }
+    @JavascriptInterface public void speak(String text,String language) {
+        if(text==null||text.length()>300)return;
+        web.post(()->{
+            if(speech==null){speech=new android.speech.tts.TextToSpeech(web.getContext(),result->{speechReady=result==android.speech.tts.TextToSpeech.SUCCESS;speechStatus(speechReady?"Głos gotowy — ponów zapowiedź":"Brak silnika głosu systemowego");});return;}
+            if(!speechReady){speechStatus("Głos nie jest jeszcze gotowy");return;}
+            java.util.Locale locale="pl".equals(language)?new java.util.Locale("pl"):"en".equals(language)?java.util.Locale.ENGLISH:java.util.Locale.GERMAN;
+            if(speech.setLanguage(locale)<0){speechStatus("Brak głosu dla wybranego języka w systemie");return;}
+            int result=speech.speak(text,android.speech.tts.TextToSpeech.QUEUE_FLUSH,null,"omsi-stop");speechStatus(result==android.speech.tts.TextToSpeech.SUCCESS?"Zapowiedź przekazana do głosu systemowego":"Błąd zapowiedzi");
+        });
+    }
+    public void close(){if(speech!=null){speech.stop();speech.shutdown();speech=null;}speechReady=false;}
     public OmsiBridge(WebView web) { this.web = web; }
     static boolean allowed(String host) {
         if(host == null || !host.matches("[0-9]{1,3}(\\.[0-9]{1,3}){3}")) return false;

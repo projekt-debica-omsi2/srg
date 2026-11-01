@@ -36,10 +36,11 @@ jobs:
           Copy-Item dist/SRG-OMSI-Bridge.exe .
       - uses: actions/upload-artifact@v4
         with:
-          name: SRG-OMSI-Bridge-0.2-test
+          name: SRG-OMSI-Bridge-0.3-test
           path: |
             omsi-bridge/plugins/*.dll
             omsi-bridge/plugins/*.opl
+            omsi-bridge/plugins/*.lua
             omsi-bridge/SRG-OMSI-Bridge.exe
             omsi-bridge/USB.cmd
             omsi-bridge/README-PL.md

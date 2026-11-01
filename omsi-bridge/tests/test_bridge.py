@@ -46,4 +46,21 @@ class Tests(unittest.TestCase):
                         self.assertEqual(e.exception.code,429)
                 finally:
                     server.shutdown();server.server_close();thread.join()
+    def test_rich_route_chunks_freshness_and_bad_packets(self):
+        with tempfile.TemporaryDirectory() as d:
+            state=bridge.State(Path(d))
+            def send(**fields): state.ingest(json.dumps(dict(schema=2,session='run',route='76|2|1',**fields)))
+            send(kind='status',variables={'Velocity':12},game='openomsi',duty={'line':'76'},position={'x':0,'y':1})
+            send(kind='stops',part=2,total=2,stops=[{'number':2,'name':'B'}])
+            self.assertEqual(state.status()['stops'],[])
+            send(kind='stops',part=1,total=2,stops=[{'number':1,'name':'A'}])
+            result=state.status();self.assertEqual([s['name'] for s in result['stops']],['A','B'])
+            self.assertTrue(result['capabilities']['timetable']);self.assertTrue(result['capabilities']['position'])
+            for packet in ['[]','{','{"schema":2,"variables":NaN}']:
+                state.ingest(packet)
+            state.rich_seen-=4
+            self.assertFalse(state.status()['plugin_running'])
+            send(kind='status',variables={},duty=None,position={})
+            state.ingest(json.dumps(dict(schema=2,kind='status',session='new',route='new',variables={})))
+            self.assertEqual(state.status()['stops'],[])
 if __name__=='__main__':unittest.main()

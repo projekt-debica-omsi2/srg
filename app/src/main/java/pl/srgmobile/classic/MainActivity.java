@@ -41,6 +41,7 @@ public final class MainActivity extends Activity implements LocationListener {
     private PermissionRequest pendingMediaRequest;
     private float voiceVolume = 0.9f;
     private WebView web;
+    private OmsiBridge omsi;
     private LocationManager gps;
     private boolean requested = false;
     private boolean listening = false;
@@ -122,7 +123,8 @@ public final class MainActivity extends Activity implements LocationListener {
             });}
         },"SRGMksExport");
         web.addJavascriptInterface(new GpsBridge(), "SRGNativeGPS");
-        web.addJavascriptInterface(new OmsiBridge(web), "SRGOmsiNative");
+        omsi = new OmsiBridge(web);
+        web.addJavascriptInterface(omsi, "SRGOmsiNative");
         web.addJavascriptInterface(new AudioBridge(), "SRGNativeAudio");
         web.addJavascriptInterface(new LcdBridge(), "SRGLcd");
         rgUsb = new RgUsbBridge(this, web);
@@ -506,6 +508,7 @@ public final class MainActivity extends Activity implements LocationListener {
         if (requested && pageReady) handler.postDelayed(() -> { if (requested) startGpsNative(); }, 300L);
     }
     @Override protected void onDestroy() {
+        if(omsi!=null)omsi.close();
         stopListening();
         if (rgUsb != null) rgUsb.close();
         if (ibisUsb != null) ibisUsb.close();
