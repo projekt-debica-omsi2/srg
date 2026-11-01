@@ -1,0 +1,47 @@
+name: Build independent openOMSI cameras
+on:
+  workflow_dispatch:
+  push:
+    paths: ['engine-camera/**', '.github/workflows/openomsi-camera.yml']
+permissions:
+  contents: read
+jobs:
+  windows-camera:
+    runs-on: windows-latest
+    timeout-minutes: 90
+    env:
+      OPENOMSI_VERSION: 0.3.45-srg-camera-test
+      CARGO_PROFILE_RELEASE_DEBUG: 0
+      CARGO_PROFILE_RELEASE_LTO: 'false'
+      CARGO_PROFILE_RELEASE_CODEGEN_UNITS: 16
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          path: srg
+      - uses: actions/checkout@v4
+        with:
+          repository: openOMSI-org/openOMSI
+          ref: c24a86d0a79f2fb377212d96c0181d7beca9e16d
+          path: engine
+      - uses: dtolnay/rust-toolchain@stable
+      - uses: Swatinem/rust-cache@v2
+        with:
+          workspaces: engine -> target
+      - name: Apply independent camera output
+        working-directory: engine
+        run: git apply --ignore-whitespace ../srg/engine-camera/openomsi-srg.patch
+      - name: Build experimental game
+        working-directory: engine
+        run: cargo build --locked --release -p omsi-app --bin openomsi
+      - name: Package separate test executable and sources
+        shell: pwsh
+        run: |
+          New-Item -ItemType Directory out -Force | Out-Null
+          Copy-Item engine/target/release/openomsi.exe out/openomsi-srg-camera.exe
+          Copy-Item engine/LICENSE out/LICENSE-openOMSI
+          Copy-Item srg/engine-camera/* out/
+      - uses: actions/upload-artifact@v4
+        with:
+          name: openOMSI-SRG-independent-cameras-test
+          path: out/*
+          if-no-files-found: error
