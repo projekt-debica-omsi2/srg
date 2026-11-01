@@ -23,3 +23,13 @@ Rozkłady/HOF, pozycja i przełączanie przystanków, zapowiedzi, kamery oraz pe
 
 ## Dokumentacja
 https://github.com/openOMSI-org/openOMSI/blob/main/docs/PLUGINS.md — zgodność .opl/DLL.
+
+## Rozszerzenie 1.4.75 / mostek 0.3
+W openOMSI dodaj również plugins/SRGOpenOMSI.lua. Dodatek odczytuje duty/info/position i wysyła dane wyłącznie na loopback UDP 47851. Mostek składa listę przystanków z części (limit 8 KB na datagram); pełne dane mają pierwszeństwo przed podstawowym plikiem DLL, tylko przez 3 sekundy od ostatniej aktualizacji.
+
+Na tablecie potwierdzono rzeczywistą linię 76, brygadę 2, kierunek Krankenhaus, osiem pozycji rozkładu Grundorfu, bieżący przystanek Bauernhof, czas gry, odchyłkę i pozycję z odległością. Podwójny Bauernhof pochodzi z danych gry; nie łączono przystanków wyłącznie po nazwie.
+Strzałki zmieniają podgląd na tablecie, bez sterowania grą. Przycisk śledzenia przywraca automatyczne wskazanie z gry. Zapowiedzi korzystają z głosu systemowego Androida w wybranym języku; to nie nagrania Marek. Test ręcznej zapowiedzi został przyjęty przez TTS. Automatyczne zapowiedzi są domyślnie wyłączone; kolejne nazwy są odczytywane przy zmianie przystanku gry, bez powtarzania przy każdym odpytywaniu.
+
+APK: build 41330067850, mostek: build 41330003474; sukces. APK 1.4.75 zainstalowane na tablecie, zgodny podpis i zachowane dane. Rozszerzony panel sprawdzono z działającą grą i USB.
+
+Pozostało: test podczas jazdy i ponownego łączenia; Wi-Fi na fizycznym tablecie; pełny odczyt tras w oryginalnym OMSI 2 ze Steam; sterowanie grą, ręczna trasa offline, nagrania z gry, kamery/lusterka i sterowanie fizyczną tablicą. Nie przedstawiać tych funkcji jako ukończonych.
