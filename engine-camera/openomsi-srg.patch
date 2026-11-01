@@ -203,7 +203,7 @@
              view_formats: &[],
          });
          let view = texture.create_view(&Default::default());
-@@ -820,6 +820,26 @@
+@@ -820,6 +820,35 @@
              generation: next_gen(),
          });
          scene.textures.len() - 1
@@ -211,9 +211,18 @@
 +
 +    /// A camera-only pass: keep the driver's post-processing and HUD out of the capture.
 +    pub fn render_camera_image(&mut self, scene:&mut Scene,width:u32,height:u32,camera:&Camera,lighting:&Lighting)->anyhow::Result<Vec<u8>> {
-+        let id=self.add_render_texture(scene,width,height);
++        // Use the same square target size as the game's working mirror path.
++        let id=self.add_render_texture(scene,512,512);
 +        self.render_to_texture(scene,id,camera,lighting,width as f32/height as f32);
-+        let result=self.read_render_texture(scene,id).map(|(_,_,rgba)|rgba);
++        let result=self.read_render_texture(scene,id).map(|(w,h,source)|{
++            let mut rgba=vec![0;(width*height*4) as usize];
++            for y in 0..height { for x in 0..width {
++                let from=(((y*h/height)*w+x*w/width)*4) as usize;
++                let to=((y*width+x)*4) as usize;
++                rgba[to..to+4].copy_from_slice(&source[from..from+4]);
++            }}
++            rgba
++        });
 +        // read_render_texture waits for the GPU, so the temporary target can be released.
 +        if scene.textures.len()==id+1 { scene.textures.pop(); }
 +        result
