@@ -20,7 +20,7 @@
      }
 --- /dev/null
 +++ b/crates/omsi-app/src/srg_camera.rs
-@@ -0,0 +1,122 @@
+@@ -0,0 +1,142 @@
 +//! Opt-in, local-only independent camera output for SRGMobile.
 +//! The driver camera and input are never changed. A short request lease bounds GPU work.
 +use crate::player::Player;
@@ -30,18 +30,21 @@
 +use std::time::{Duration, Instant, SystemTime, UNIX_EPOCH};
 +
 +#[derive(Deserialize)]
-+struct Request { channel: u8, updated: f64 }
++struct Request { channel: u16, #[serde(default)] channels: Vec<u16>, updated: f64 }
++#[derive(Clone, Serialize)]
++struct Feed { channel: u16, label: String }
 +#[derive(Serialize)]
-+struct Meta { channel: u8, updated: f64, source: String, available: Vec<u8>, error: Option<String> }
++struct Meta { channel: u16, updated: f64, source: String, available: Vec<u16>, feeds: Vec<Feed>, error: Option<String> }
 +struct Frame { rgba: Vec<u8>, meta: Meta }
-+struct Exporter { last: Option<Instant>, tx: mpsc::SyncSender<Frame> }
++struct Exporter { next: usize, last: Option<Instant>, tx: mpsc::SyncSender<Frame> }
 +static EXPORT: OnceLock<Mutex<Exporter>> = OnceLock::new();
 +const WIDTH: u32 = 480;
 +const HEIGHT: u32 = 270;
 +fn folder() -> Option<std::path::PathBuf> {
 +    std::env::var_os("LOCALAPPDATA").map(|p| std::path::PathBuf::from(p).join("SRG-OMSI"))
 +}
-+fn active_request(request:&Request,now:f64)->bool { request.channel<=3 && request.updated.is_finite() && now-request.updated<=2.0 && request.updated-now<=2.0 }
++fn camera_channel(channel:u16)->bool { channel<=3 || (16..272).contains(&channel) }
++fn active_request(request:&Request,now:f64)->bool { camera_channel(request.channel) && request.channels.len()<=4 && request.channels.iter().all(|&c|camera_channel(c)) && request.updated.is_finite() && now-request.updated<=2.0 && request.updated-now<=2.0 }
 +fn unix_now() -> f64 { SystemTime::now().duration_since(UNIX_EPOCH).unwrap_or_default().as_secs_f64() }
 +fn exporter() -> &'static Mutex<Exporter> {
 +    EXPORT.get_or_init(|| {
@@ -77,7 +80,7 @@
 +                }
 +            }
 +        });
-+        Mutex::new(Exporter { last: None, tx })
++        Mutex::new(Exporter { next: 0, last: None, tx })
 +    })
 +}
 +
@@ -86,29 +89,45 @@
 +    // An absent request costs no extra render pass and starts no worker.
 +    let Ok(bytes)=std::fs::read(root.join("camera-request.json")) else { return };
 +    if bytes.len()>1024 { return; }
-+    let Ok(request)=serde_json::from_slice::<Request>(&bytes) else { return };
++    let Ok(mut request)=serde_json::from_slice::<Request>(&bytes) else { return };
 +    let now=unix_now();
 +    if !active_request(&request,now) { return; }
 +    let Ok(mut output)=exporter().try_lock() else { return };
 +    if output.last.is_some_and(|last|last.elapsed()<Duration::from_millis(250)) { return; }
 +    output.last=Some(Instant::now());
++    if !request.channels.is_empty() {
++        request.channel=request.channels[output.next%request.channels.len()];output.next=output.next.wrapping_add(1);
++    }
 +    let mut available=Vec::new();
++    let mut feeds=Vec::new();
 +    let selected=player.and_then(|p| {
 +        if p.pax_camera_count()>0 { available.push(0); }
 +        let left=crate::mirror_hud::side_mirror(p,false);
 +        let right=crate::mirror_hud::side_mirror(p,true);
-+        let inside=crate::mirror_hud::front_mirror(p);
++        let inside=p.vehicle.ty.def.cameras_reflexion.iter().enumerate()
++            .filter(|(_,c)|!c.fixed && c.pos[0].abs()<0.8)
++            .max_by(|a,b|a.1.pos[1].partial_cmp(&b.1.pos[1]).unwrap_or(std::cmp::Ordering::Equal)).map(|(i,_)|i);
++        if let Some(index)=inside { if index<256 { feeds.push(Feed{channel:16+index as u16,label:"Lusterko wewnętrzne".into()}); } }
++        else if p.pax_camera_count()>0 { feeds.push(Feed{channel:0,label:"Wnętrze — kamera pasażerska".into()}); }
++        for index in 0..p.vehicle.ty.def.cameras_reflexion.len().min(256) {
++            available.push(16+index as u16);
++            if Some(index)!=inside { feeds.push(Feed{channel:16+index as u16,label:if Some(index)==left {"Lewe lusterko / kamera".into()} else if Some(index)==right {"Prawe lusterko / kamera".into()} else {format!("Kamera / lusterko {}",index+1)}}); }
++        }
 +        if left.is_some(){available.push(1);}if right.is_some(){available.push(2);}if inside.is_some(){available.push(3);if !available.contains(&0){available.push(0);}}
 +        match request.channel {
 +            0 if p.pax_camera_count()>0 => Some((p.camera_look("pax",fallback,(0.0,0.0),10.0),"Wnętrze — kamera pasażerska",false)),
 +            0 => inside.map(|n|(p.camera_look(&format!("mirror{n}"),fallback,(0.0,0.0),10.0),"Wnętrze — lusterko",true)),
 +            1 => left.map(|n|(p.camera_look(&format!("mirror{n}"),fallback,(0.0,0.0),10.0),"Lusterko lewe",true)),
 +            2 => right.map(|n|(p.camera_look(&format!("mirror{n}"),fallback,(0.0,0.0),10.0),"Lusterko prawe",true)),
-+            3 => inside.map(|n|(p.camera_look(&format!("mirror{n}"),fallback,(0.0,0.0),10.0),"Lusterko przednie / wewnętrzne",true)),
++            3 => inside.map(|n|(p.camera_look(&format!("mirror{n}"),fallback,(0.0,0.0),10.0),"Lusterko wewnętrzne",true)),
++            channel if channel>=16 => {
++                let index=(channel-16) as usize;
++                p.vehicle.ty.def.cameras_reflexion.get(index).map(|c|(p.camera_look(&format!("mirror{index}"),fallback,(0.0,0.0),10.0),"Kamera / lusterko z modelu autobusu",!c.fixed))
++            }
 +            _ => None,
 +        }
 +    });
-+    let mut meta=Meta { channel:request.channel,updated:now,source:String::new(),available,error:None };
++    let mut meta=Meta { channel:request.channel,updated:now,source:String::new(),available,feeds,error:None };
 +    let Some((mut camera,label,mirror))=selected else {
 +        meta.error=Some("Ten autobus nie udostępnia wybranej kamery/lusterka".into());
 +        let _=output.tx.try_send(Frame{rgba:Vec::new(),meta});return;
@@ -136,10 +155,11 @@
 +    use super::*;
 +    #[test]
 +    fn request_lease_expires_and_never_accepts_unknown_channels() {
-+        assert!(active_request(&Request{channel:0,updated:100.0},101.0));
-+        assert!(!active_request(&Request{channel:0,updated:100.0},103.0));
-+        assert!(!active_request(&Request{channel:4,updated:100.0},100.0));
-+        assert!(!active_request(&Request{channel:0,updated:f64::NAN},100.0));
-+        assert!(!active_request(&Request{channel:0,updated:110.0},100.0));
++        assert!(active_request(&Request{channels:vec![],channel:0,updated:100.0},101.0));
++        assert!(active_request(&Request{channels:vec![],channel:16,updated:100.0},101.0));
++        assert!(!active_request(&Request{channels:vec![],channel:0,updated:100.0},103.0));
++        assert!(!active_request(&Request{channels:vec![],channel:4,updated:100.0},100.0));
++        assert!(!active_request(&Request{channels:vec![],channel:0,updated:f64::NAN},100.0));
++        assert!(!active_request(&Request{channels:vec![],channel:0,updated:110.0},100.0));
 +    }
 +}
