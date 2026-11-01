@@ -50,3 +50,11 @@ Odchyłka rozkładu: spóźnienie ma znak minus, przyspieszenie plus, zero bez z
 Kamery mają maksymalnie cztery różne ujęcia na stronie i strzałki stron; 5 daje 4+1, 65 daje 17 stron. Testy stron i świeżości obrazu przeszły.
 
 Stan rzeczywistego obrazu: w oddzielnej testowej kompilacji openOMSI potwierdzono czyste lusterko wewnętrzne i prawe oraz cztery odbierane kanały. Poprawki zakłóceń widoku pasażerskiego i czarnego lewego lusterka są w kolejnym buildzie; wymagają ponownego testu. Dla pustej lewej refleksji przewidziano oznaczoną kamerę zewnętrzną lewego boku. Nie jest to jeszcze potwierdzenie pełnej obsługi kamer w standardowym OMSI 2 ze Steam ani wszystkich modeli autobusów.
+
+
+## LCD z OMSI — 1.4.83
+W trybie OMSI istniejący serwer tabletu na porcie 47283 publikuje dane bieżącej gry: linię, kierunek, pełną listę przystanków, aktualny i następny przystanek oraz zegar gry 24 h. Lokalna kursówka RJ nie jest używana jako zastępstwo. Po utracie telemetrii pola kursu są czyszczone. Przejście do następnego przystanku i dojazd do niego uruchamiają odpowiedni ekran LCD na czas ustawiony w konfiguracji; cykl i reklamy pozostają obsługiwane przez istniejący moduł.
+Numer linii ma osobne duże pole przed strzałką, z miejscem na cztery cyfry. Kierunek może zajmować dwa duże wiersze. Przy braku numeru pole jest ukrywane. Sprawdzono podgląd 1234 z długim kierunkiem i dwuwierszowym zawijaniem. Testy obejmują przesuwanie trasy, dojazd, koniec trasy, zmianę godziny gry i brak świeżych danych.
+Na tablecie z poprzednim buildem 1.4.82 potwierdzono rzeczywisty odczyt LCD: linia 76, Krankenhaus, osiem przystanków i czas OMSI przez endpoint /api/state. W 1.4.83 doprecyzowano oznaczanie przystanku końcowego: samo upłynięcie czasu kursu nie oznacza, że poprzedni przystanek jest końcowy.
+
+Po instalacji 1.4.83 sprawdzono rzeczywisty serwer tabletu: aktywna linia 76, kierunek Bauernhof, aktualny Gaussdorf, następny Elsterplatz i zegar 08:20:39. Strona LCD po odświeżeniu pokazuje duże „76 → BAUERNHOF” oraz bieżącą pozostałą trasę. Zapis podglądu: wydania/1.4.83/lcd-omsi-live.jpg; osobny test układu 1234 z długim kierunkiem: lcd-four-digit-layout-test.jpg. Dane testowe nie były publikowane do rzeczywistej tablicy.
