@@ -7,7 +7,7 @@ const logKey='srgOmsiEvents';
 let events;try{events=JSON.parse(localStorage.getItem(logKey)||'[]')}catch(_){events=[]}
 function log(event){events.push({time:new Date().toISOString(),event});events=events.slice(-500);localStorage.setItem(logKey,JSON.stringify(events));}
 const style=document.createElement('style');style.textContent=`
-body.omsi-mode #omsiCourse .dest,body.omsi-mode #omsiCourse .bar{background:linear-gradient(#258ce0,#124f91)!important;border-color:#4cafff!important}body.omsi-mode #omsiCourse .controls button{background:linear-gradient(#185e9b,#103859)!important;border-color:#4cafff!important}body.omsi-mode #omsiCourse .logout{background:linear-gradient(#258ce0,#124f91)!important}.omsiCameraNav{display:flex;align-items:center;justify-content:center;gap:18px}.omsiPanel [hidden]{display:none!important}.omsiPanel{flex:1;min-height:0;overflow:auto;padding:12px;display:flex;flex-direction:column;gap:12px}.omsiPanel label{display:flex;flex-direction:column;gap:6px}.omsiPanel input,.omsiPanel select,.omsiPanel button{font:inherit;padding:12px;min-height:44px;color:#fff;background:#123d65;border:1px solid #4099e0;border-radius:5px}.omsiPanel p{margin:0;line-height:1.4}.omsiPanel pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px}.omsiNumbers{display:grid;grid-template-columns:1fr 1fr;gap:12px}.omsiNumber{background:#10314e;padding:16px;border:1px solid #307ab0}.omsiNumber b{display:block;font-size:26px;margin-top:8px}.omsiBlack{flex:1;min-height:120px;background:#000;border:1px solid #555}.omsiPanel .omsiWarning{color:#f5d279}
+body.omsi-mode #omsiCourse .dest,body.omsi-mode #omsiCourse .bar{background:linear-gradient(#258ce0,#124f91)!important;border-color:#4cafff!important}body.omsi-mode #omsiCourse .controls button{background:linear-gradient(#185e9b,#103859)!important;border-color:#4cafff!important}body.omsi-mode #omsiCourse .logout{background:linear-gradient(#258ce0,#124f91)!important}.omsiClockGroup{display:flex;flex-direction:column;align-items:flex-end;line-height:1.25;font-family:monospace;letter-spacing:.08em;white-space:nowrap}.omsiRealClock{font:12px system-ui;letter-spacing:0;color:#a9c7e4}.omsiCameraNav{display:flex;align-items:center;justify-content:center;gap:18px}.omsiPanel [hidden]{display:none!important}.omsiPanel{flex:1;min-height:0;overflow:auto;padding:12px;display:flex;flex-direction:column;gap:12px}.omsiPanel label{display:flex;flex-direction:column;gap:6px}.omsiPanel input,.omsiPanel select,.omsiPanel button{font:inherit;padding:12px;min-height:44px;color:#fff;background:#123d65;border:1px solid #4099e0;border-radius:5px}.omsiPanel p{margin:0;line-height:1.4}.omsiPanel pre{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px}.omsiNumbers{display:grid;grid-template-columns:1fr 1fr;gap:12px}.omsiNumber{background:#10314e;padding:16px;border:1px solid #307ab0}.omsiNumber b{display:block;font-size:26px;margin-top:8px}.omsiBlack{flex:1;min-height:120px;background:#000;border:1px solid #555}.omsiPanel .omsiWarning{color:#f5d279}
 `;document.head.append(style);
 const main=$('main.content');main.insertAdjacentHTML('beforeend',`
 <section id="omsiSettings" class="view"><div class="top">OMSI 2</div><div class="omsiPanel">
@@ -28,7 +28,7 @@ for(const button of courseView.querySelectorAll('.controls button'))button.disab
 for(const el of courseView.querySelectorAll('[id]'))el.id='omsiUi'+el.id;
 for(const el of courseView.querySelectorAll('[data-clock]'))el.removeAttribute('data-clock');
 courseView.querySelector('.top span').textContent='OMSI · Linia / Kierunek:';
-courseView.querySelector('.clock').id='omsiUiClock';
+const omsiClock=courseView.querySelector('.clock');omsiClock.className='omsiClockGroup';omsiClock.innerHTML='<span id="omsiUiClock">Gra: —</span><small id="omsiRealClock" class="omsiRealClock"></small>';
 main.append(courseView);
 $('#omsiUilogoutCourse').textContent='Wybierz kurs';$('#omsiUilogoutCourse').onclick=()=>{renderPicker();app.go('omsiPicker');};
 $('#omsiUicourseCurrent').onclick=()=>speakStop(selectedStop(current));
@@ -110,6 +110,12 @@ function omsiRoad(data,stop){
  const travelled=Math.round(length*fraction),delta=travelled-length;
  return `~${travelled} / ~${length} (${delta>0?'+':''}${delta})`;
 }
+function formatClock24(seconds){
+ if(!Number.isFinite(seconds))return '—';
+ const total=((Math.floor(seconds)%86400)+86400)%86400;
+ return [Math.floor(total/3600),Math.floor(total/60)%60,total%60].map(v=>String(v).padStart(2,'0')).join(':');
+}
+function renderRealClock(){const now=new Date();$('#omsiRealClock').textContent='Rzeczywisty: '+[now.getHours(),now.getMinutes(),now.getSeconds()].map(v=>String(v).padStart(2,'0')).join(':');}
 function renderCourse(data){
  const live=Boolean(data?.plugin_running),d=live?data.duty:null,list=live&&Array.isArray(data.stops)?data.stops:[],stop=live?selectedStop(data):null;
  const put=(id,text)=>$('#omsiUi'+id).textContent=text;
@@ -119,7 +125,7 @@ function renderCourse(data){
  const idx=stop?list.findIndex(s=>s.number===stop.number):-1;
  for(let n=1;n<=2;n++){const next=idx>=0?list[idx+n]:null;put('courseNext'+n,next?`${clockText(next.departure??next.arrival)} ${next.name}`:'');}
  put('courseDelay',Number.isFinite(d?.delay)?`${d.delay>0?'−':d.delay<0?'+':''}${Math.floor(Math.abs(d.delay)/60)}:${String(Math.floor(Math.abs(d.delay))%60).padStart(2,'0')}`:'—');
- $('#omsiUiClock').textContent=live?clockText(data.clock):'—';
+ $('#omsiUiClock').textContent='Gra: '+(live?formatClock24(data.clock):'—');renderRealClock();
  const key=d?`${data.session}|${d.line}|${d.terminus}`:'';
  if(key&&key!==signKey){signKey=key;window.dispatchEvent(new CustomEvent('srg-course-selected',{detail:{direction:d.terminus,line:d.line,additional:true,showLine:true,source:'omsi'}}));}
  if(!live)signKey='';
@@ -185,6 +191,6 @@ function renderTrip(data){
  if(fresh&&d?.next_stop&&manualStop===null){const marker=key+'|'+d.next_stop.number;if(lastSpoken===null)lastSpoken=marker;else if(marker!==lastSpoken){lastSpoken=marker;if($('#omsiVoice').value==='on')speakStop(d.next_stop);}}
 }
 window.SRGOmsiResult=(id,result)=>{if(!enabled||id!==pending)return;pending=null;if(!result.ok){if(lastGood)log('Utrata połączenia');lastGood=0;clearReadings();renderTrip(null);status('Brak połączenia: '+result.error);return;}if(!lastGood)log('Połączono z komputerem '+result.data.computer);lastGood=Date.now();current=result.data;renderTrip(current);status('Komputer: '+current.computer+' · '+(current.plugin_running?'wtyczka przesyła dane':'brak świeżych danych z OMSI')+' · '+(config.transport==='usb'?'USB':'Wi-Fi'));const v=current.variables||{};for(const [id,key] of [['Speed','Velocity'],['Line','IBIS_Linie'],['Route','IBIS_Route'],['Destination','IBIS_Ziel']])$('#omsi'+id).textContent=current.plugin_running&&Number.isFinite(v[key])?String(Math.round(v[key]*10)/10):'—';};
-setInterval(()=>{if(lastGood&&Date.now()-lastGood>5000){clearReadings();renderTrip(null);status('Utrata połączenia — dane nieaktualne');}poll();},1000);
+setInterval(()=>{renderRealClock();if(lastGood&&Date.now()-lastGood>5000){clearReadings();renderTrip(null);status('Utrata połączenia — dane nieaktualne');}poll();},1000);
 if(config.enabled)setEnabled(true);
 })();

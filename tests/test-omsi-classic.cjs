@@ -27,3 +27,11 @@ context.data.duty.delay=61;vm.runInContext('renderCourse(data)',context);assert.
 context.data.duty.delay=-61;vm.runInContext('renderCourse(data)',context);assert.equal($('#omsiUicourseDelay').textContent,'+1:01');
 context.data.duty.delay=0;vm.runInContext('renderCourse(data)',context);assert.equal($('#omsiUicourseDelay').textContent,'0:00');
 console.log('PASS late is negative, early is positive and on-time has no sign');
+
+context.data.clock=23*3600+59*60+58;vm.runInContext('renderCourse(data)',context);assert.equal($('#omsiUiClock').textContent,'Gra: 23:59:58');
+context.data.clock=2*3600+3*60+4;vm.runInContext('renderCourse(data)',context);assert.equal($('#omsiUiClock').textContent,'Gra: 02:03:04');
+assert.match($('#omsiRealClock').textContent,/^Rzeczywisty: \d{2}:\d{2}:\d{2}$/);
+assert.equal(vm.runInContext('formatClock24(86400+5)',context),'00:00:05');
+assert.equal(vm.runInContext('formatClock24(null)',context),'—');
+assert(js.includes("omsiClock.className='omsiClockGroup'"));
+console.log('PASS 24-hour game clock follows time jumps and shows separate real clock');
