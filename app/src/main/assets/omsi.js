@@ -136,7 +136,8 @@ function omsiLcdState(lcdConfig){
  const currentStop=active?(atStop?target:(d.previous_stop||stops[targetIndex-1])):null;
  const nextStop=active?(atStop?stops[targetIndex+1]:target):null;
  const stopInfo=stop=>stop?{nazwa:stop.name||'',naZadanie:false}:null;
- const id=active?String(data.session)+'|'+String(data.route||[d.line,d.tour,d.trip].join('|')):'';
+ let routeHash=2166136261;for(const char of String(data?.route||[d?.line,d?.tour,d?.trip].join('|')))routeHash=Math.imul(routeHash^char.charCodeAt(0),16777619)>>>0;
+ const id=active?'omsi|'+String(data.session)+'|'+routeHash.toString(16):'';
  const eventKey=active?[id,targetIndex,atStop].join('|'):'';
  if(eventKey!==omsiLcdEventKey){omsiLcdEventKey=eventKey;omsiLcdEvent=null;const type=atStop?'current':'next',seconds=Math.max(0,...(lcdConfig?.steps||[]).filter(s=>s.type===type).map(s=>Number(s.seconds)||0));if(active&&seconds>0)omsiLcdEvent={id:eventKey,courseKey:id,anchorIndex:index,type,index:targetIndex,name:target.name||'',naZadanie:false,expiresAt:Date.now()+seconds*1000};}
  return {kursAktywny:active,kursId:id,linia:active?String(d.line??''):'',kierunek:active?(d.terminus||''):'',

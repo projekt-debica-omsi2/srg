@@ -59,3 +59,6 @@ lcd=vm.runInContext("omsiLcdState({steps:[{type:'next',seconds:7},{type:'current
 assert.equal(vm.runInContext("omsiLcdState({steps:[{type:'next',seconds:7}]}).lcdManual.expiresAt",context),expires);
 context.current.duty.at_stop=true;assert.equal(vm.runInContext("omsiLcdState({steps:[{type:'current',seconds:7}]}).lcdManual.type",context),'current');
 console.log('PASS LCD stop events follow game movement/arrival and do not restart on every poll');
+
+context.current.route='very-long-map-and-vehicle-path/'.repeat(20);lcd=vm.runInContext('omsiLcdState({})',context);assert(lcd.kursId.length<180);const firstId=lcd.kursId;context.current.route+='other-bus';assert.notEqual(vm.runInContext('omsiLcdState({}).kursId',context),firstId);
+console.log('PASS LCD route identity stays within server limit and changes with map/vehicle');
