@@ -20,7 +20,7 @@
      }
 --- /dev/null
 +++ b/crates/omsi-app/src/srg_camera.rs
-@@ -0,0 +1,154 @@
+@@ -0,0 +1,171 @@
 +//! Opt-in, local-only independent camera output for SRGMobile.
 +//! The driver camera and input are never changed. A short request lease bounds GPU work.
 +use crate::player::Player;
@@ -129,7 +129,7 @@
 +        }
 +    });
 +    let mut meta=Meta { channel:request.channel,updated:now,source:String::new(),available,feeds,error:None };
-+    let Some((mut camera,label,mirror,mirror_index))=selected else {
++    let Some((mut camera,mut label,mut mirror,mirror_index))=selected else {
 +        meta.error=Some("Ten autobus nie udostępnia wybranej kamery/lusterka".into());
 +        let _=output.tx.try_send(Frame{rgba:Vec::new(),meta});return;
 +    };
@@ -151,6 +151,23 @@
 +    };
 +    match image {
 +        Ok(mut rgba)=>{
++            // Some models leave their left reflection entirely blank. Use a real,
++            // independent side camera outside its housing instead of publishing black pixels.
++            if rgba.chunks_exact(4).all(|p|p[0]<2 && p[1]<2 && p[2]<2) {
++                if let (Some(p),Some(index))=(player,mirror_index) {
++                    if crate::mirror_hud::side_mirror(p,false)==Some(index) {
++                        if let Some(def)=p.vehicle.ty.def.cameras_reflexion.get(index) {
++                            let mut def=def.clone();def.pos[0]-=0.5;def.yaw=180.0;def.pitch=-5.0;
++                            let (position,yaw,pitch,roll)=p.vehicle.camera_world_full(&def);
++                            let side=Camera{position,yaw,pitch,roll,fov_deg:60.0,near:0.1,far:450.0};
++                            if let Ok(side)=renderer.render_camera_image(scene,WIDTH,HEIGHT,&side,lighting) {
++                                rgba=side;mirror=false;label="Lewy bok — kamera zewnętrzna";
++                                if let Some(feed)=meta.feeds.iter_mut().find(|f|f.channel==request.channel){feed.label=label.into();}
++                            }
++                        }
++                    }
++                }
++            }
 +            if mirror {
 +                for row in rgba.chunks_exact_mut(WIDTH as usize*4) {
 +                    for x in 0..WIDTH as usize/2 { for c in 0..4 { row.swap(x*4+c,(WIDTH as usize-1-x)*4+c); } }
