@@ -38,7 +38,7 @@ public final class OmsiBridge {
     }
     @JavascriptInterface public void poll(String host,String token,String id) { exchange(host,token,id,null,-1); }
     @JavascriptInterface public void command(String host,String token,String payload,String id) { if(payload==null||payload.length()>2048)return;exchange(host,token,id,payload,-1); }
-    @JavascriptInterface public void camera(String host,String token,int channel,String id) { if(channel<0||channel>3)return;exchange(host,token,id,null,channel); }
+    @JavascriptInterface public void camera(String host,String token,int channel,String id) { if(!((channel>=0&&channel<=3)||(channel>=16&&channel<80)))return;exchange(host,token,id,null,channel); }
     private void exchange(String host,String token,String id,String payload,int channel) {
         AtomicBoolean gate=channel>=0?cameraBusy:payload==null?busy:commandBusy;
         if(!gate.compareAndSet(false,true))return;

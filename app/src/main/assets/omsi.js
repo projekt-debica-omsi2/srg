@@ -20,7 +20,7 @@ const main=$('main.content');main.insertAdjacentHTML('beforeend',`
 <button id="omsiShowLive">Dane z gry</button><button id="omsiShowLogs">Historia połączeń</button><button id="omsiBack">Wróć</button>
 </div></section>
 <section id="omsiLive" class="view"><div class="top">OMSI 2 · DANE Z GRY</div><div class="omsiPanel"><p id="omsiLiveStatus">Brak połączenia</p><div class="omsiNumbers"><div class="omsiNumber">Prędkość (km/h)<b id="omsiSpeed">—</b></div><div class="omsiNumber">Kod linii IBIS (surowy)<b id="omsiLine">—</b></div><div class="omsiNumber">Kod trasy IBIS<b id="omsiRoute">—</b></div><div class="omsiNumber">Kod kierunku IBIS<b id="omsiDestination">—</b></div></div><p class="omsiWarning">Dane kursu pochodzą z gry. Brakujące wartości są oznaczone kreską. Zwykłe kursówki pozostają zapisane.</p><button id="omsiLiveBack">Ustawienia OMSI</button></div></section>
-<section id="omsiCameras" class="view"><div class="top">OMSI 2 · KAMERA / LUSTERKO</div><div class="omsiPanel"><label>Widok niezależny od kierowcy<select id="omsiCameraChannel"><option value="0">Wnętrze autobusu</option><option value="1">Lewe lusterko</option><option value="2">Prawe lusterko</option><option value="3">Lusterko wewnętrzne / przednie</option></select></label><div class="omsiBlack" style="display:flex;align-items:center;justify-content:center;min-height:0;overflow:hidden"><img id="omsiCameraImage" alt="Niezależna kamera z gry" hidden style="max-width:100%;max-height:100%;object-fit:contain"></div><p id="omsiCameraStatus" role="status">Oczekiwanie na niezależny obraz z gry</p><button id="omsiCameraBack">Wróć</button></div></section>
+<section id="omsiCameras" class="view"><div class="top">OMSI 2 · KAMERA / LUSTERKO</div><div class="omsiPanel"><label>Widok niezależny od kierowcy<select id="omsiCameraChannel"><option value="0">Wnętrze autobusu</option><option value="1">Lewe lusterko</option><option value="2">Prawe lusterko</option><option value="3" selected>Lusterko wewnętrzne (automatycznie)</option></select></label><div class="omsiBlack" style="display:flex;align-items:center;justify-content:center;min-height:0;overflow:hidden"><img id="omsiCameraImage" alt="Niezależna kamera z gry" hidden style="max-width:100%;max-height:100%;object-fit:contain"></div><p id="omsiCameraStatus" role="status">Oczekiwanie na niezależny obraz z gry</p><button id="omsiCameraBack">Wróć</button></div></section>
 <section id="omsiLogs" class="view"><div class="top">OMSI 2 · HISTORIA</div><div class="omsiPanel"><p>Historia kontaktu z mostkiem. Utrata kontaktu nie oznacza pewnego zakończenia gry. Pełne logi komputera: %LOCALAPPDATA%\\SRG-OMSI.</p><pre id="omsiLogText"></pre><button id="omsiLogsBack">Wróć</button></div></section>`);
 const tile=document.createElement('button');tile.className='settingTile';tile.innerHTML='<b>OMSI 2</b><span>Połączenie z grą</span>';tile.onclick=()=>app.go('omsiSettings');$('.settingsTiles').append(tile);
 const courseView=$('#course').cloneNode(true);courseView.id='omsiCourse';courseView.classList.remove('active','extraCourse');
@@ -68,11 +68,12 @@ function renderPicker(){
 }
 let cameraRequest=null,cameraAt=0,cameraGood=0;
 function clearCamera(text){const img=$('#omsiCameraImage');img.hidden=true;img.removeAttribute('src');$('#omsiCameraStatus').textContent=text;}
-$('#omsiCameraChannel').onchange=()=>{cameraRequest=null;cameraGood=0;clearCamera('Zmiana kamery…');};
+$('#omsiCameraChannel').onchange=()=>{localStorage.setItem('srgOmsiCameraChannel',$('#omsiCameraChannel').value);cameraRequest=null;cameraGood=0;clearCamera('Zmiana kamery…');};
 window.SRGOmsiCameraResult=(id,result)=>{
  if(id!==cameraRequest)return;cameraRequest=null;
  if(!enabled||app.state.view!=='omsiCameras')return;
  const frame=result.ok?result.data:null;
+ for(const channel of frame?.available||[]){if(Number.isInteger(channel)&&channel>=16&&channel<80&&!$('#omsiCameraChannel').querySelector(`option[value="${channel}"]`)){const option=document.createElement('option');option.value=String(channel);option.textContent=`Kamera / lusterko nr ${channel-15} z autobusu`;$('#omsiCameraChannel').append(option);}}
  if(!frame?.image||frame.channel!==Number($('#omsiCameraChannel').value)){clearCamera(frame?.error||'Brak świeżego obrazu z kamery');return;}
  if(!frame.image.startsWith('data:image/jpeg;base64,')){clearCamera('Niepoprawny obraz');return;}
  const img=$('#omsiCameraImage');img.src=frame.image;img.hidden=false;cameraGood=Date.now();

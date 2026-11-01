@@ -1,6 +1,7 @@
 """SRG OMSI LAN bridge. Read-only, token-authenticated; no external dependencies."""
 import datetime as dt
 import base64
+import re
 import json
 import os
 from pathlib import Path
@@ -93,7 +94,7 @@ class State:
         except (ValueError, TypeError, AttributeError):
             return
     def camera(self, channel):
-        if type(channel) is not int or not 0 <= channel <= 3: raise ValueError('Unknown camera')
+        if type(channel) is not int or not (0 <= channel <= 3 or 16 <= channel < 80): raise ValueError('Unknown camera')
         now=time.time()
         request=self.root/'camera-request.json'
         temp=self.root/'camera-request.tmp'
@@ -203,8 +204,11 @@ def handler(state, usb=False):
             self.json_response(result)
         def do_GET(self):
             if not self.authorized(): return
-            if self.path in ('/api/camera/0','/api/camera/1','/api/camera/2','/api/camera/3'):
-                self.json_response(state.camera(int(self.path[-1]))); return
+            camera=re.fullmatch(r'/api/camera/([0-9]{1,2})',self.path)
+            if camera:
+                try: self.json_response(state.camera(int(camera.group(1))))
+                except ValueError: self.json_response(dict(schema=1,error='Unknown camera'),400)
+                return
             if self.path != '/api/status':
                 self.send_error(404); return
             self.json_response(state.status())
