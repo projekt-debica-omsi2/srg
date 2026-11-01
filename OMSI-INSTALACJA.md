@@ -42,3 +42,11 @@ Strzałki pokazują przystanek, zatwierdzenie zleca skip_to w grze, anulowanie p
 Polecenia POST /api/command są chronione tym samym uwierzytelnianiem co status. USB dostępne tylko przez loopback. Do gry trafia wyłącznie lista dozwolonych akcji i atomowy plik command.json w znanym katalogu danych dodatku. Polecenie zawiera identyfikator aktualnej sesji; aplikacja czeka na potwierdzenie gry, nie utożsamia samego przyjęcia przez mostek z wykonaniem.
 
 Fizyczna tablica R&G: zmiana linii/kierunku z OMSI emituje zdarzenie do istniejącego modułu USB-RS485. Automatyczne wysyłanie nadal wymaga podłączonego konwertera i wcześniej potwierdzonego profilu ramki tekstowej. Nie potwierdzono sterowania fizyczną tablicą w tej sesji. Przycisk Tablica R&G otwiera jej ustawienia. W czasie bezpośredniego połączenia konwertera z tabletem połączenie z PC należy zestawić przez Wi-Fi.
+
+
+## Zegary i strony kamer — 1.4.80 / mostek 0.7
+Na głównym ekranie OMSI duży zegar pokazuje czas gry HH:MM:SS (24 h), a mniejszy pod nim czas rzeczywisty tabletu, także 24 h. Czas gry jest brany z każdej aktualizacji telemetrii; zmiany i cofnięcia godziny nie są zastępowane zegarem Androida. Przy utracie danych gry wyświetlane jest „Gra: —”. Potwierdzono oba odczyty na tablecie 9185W; test obejmuje skok z 23:59:58 na 02:03:04.
+Odchyłka rozkładu: spóźnienie ma znak minus, przyspieszenie plus, zero bez znaku.
+Kamery mają maksymalnie cztery różne ujęcia na stronie i strzałki stron; 5 daje 4+1, 65 daje 17 stron. Testy stron i świeżości obrazu przeszły.
+
+Stan rzeczywistego obrazu: w oddzielnej testowej kompilacji openOMSI potwierdzono czyste lusterko wewnętrzne i prawe oraz cztery odbierane kanały. Poprawki zakłóceń widoku pasażerskiego i czarnego lewego lusterka są w kolejnym buildzie; wymagają ponownego testu. Dla pustej lewej refleksji przewidziano oznaczoną kamerę zewnętrzną lewego boku. Nie jest to jeszcze potwierdzenie pełnej obsługi kamer w standardowym OMSI 2 ze Steam ani wszystkich modeli autobusów.
