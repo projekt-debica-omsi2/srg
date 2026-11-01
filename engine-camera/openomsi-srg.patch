@@ -14,13 +14,13 @@
                  );
              }
          }
-+        crate::srg_camera::tick(r, scene, self.player.as_ref(), cam, lighting);
++        crate::srg_camera::tick(r, scene, self.player.as_ref(), cam, lighting, self.world.as_deref());
          self.gfx.mirror_panel_cams = panel_cams;
          self.perf.profile.add(crate::profile_keys::ProfKey::Mirrors, __t.elapsed().as_secs_f64());
      }
 --- /dev/null
 +++ b/crates/omsi-app/src/srg_camera.rs
-@@ -0,0 +1,142 @@
+@@ -0,0 +1,153 @@
 +//! Opt-in, local-only independent camera output for SRGMobile.
 +//! The driver camera and input are never changed. A short request lease bounds GPU work.
 +use crate::player::Player;
@@ -84,7 +84,7 @@
 +    })
 +}
 +
-+pub(crate) fn tick(renderer:&mut Renderer,scene:&mut Scene,player:Option<&Player>,fallback:&Camera,lighting:&Lighting) {
++pub(crate) fn tick(renderer:&mut Renderer,scene:&mut Scene,player:Option<&Player>,fallback:&Camera,lighting:&Lighting,world:Option<&crate::scene::World>) {
 +    let Some(root)=folder() else { return };
 +    // An absent request costs no extra render pass and starts no worker.
 +    let Ok(bytes)=std::fs::read(root.join("camera-request.json")) else { return };
@@ -115,28 +115,39 @@
 +        }
 +        if left.is_some(){available.push(1);}if right.is_some(){available.push(2);}if inside.is_some(){available.push(3);if !available.contains(&0){available.push(0);}}
 +        match request.channel {
-+            0 if p.pax_camera_count()>0 => Some((p.camera_look("pax",fallback,(0.0,0.0),10.0),"Wnętrze — kamera pasażerska",false)),
-+            0 => inside.map(|n|(p.camera_look(&format!("mirror{n}"),fallback,(0.0,0.0),10.0),"Wnętrze — lusterko",true)),
-+            1 => left.map(|n|(p.camera_look(&format!("mirror{n}"),fallback,(0.0,0.0),10.0),"Lusterko lewe",true)),
-+            2 => right.map(|n|(p.camera_look(&format!("mirror{n}"),fallback,(0.0,0.0),10.0),"Lusterko prawe",true)),
-+            3 => inside.map(|n|(p.camera_look(&format!("mirror{n}"),fallback,(0.0,0.0),10.0),"Lusterko wewnętrzne",true)),
++            0 if p.pax_camera_count()>0 => Some((p.camera_look("pax",fallback,(0.0,0.0),10.0),"Wnętrze — kamera pasażerska",false,None)),
++            0 => inside.map(|n|(p.camera_look(&format!("mirror{n}"),fallback,(0.0,0.0),10.0),"Wnętrze — lusterko",true,Some(n))),
++            1 => left.map(|n|(p.camera_look(&format!("mirror{n}"),fallback,(0.0,0.0),10.0),"Lusterko lewe",true,Some(n))),
++            2 => right.map(|n|(p.camera_look(&format!("mirror{n}"),fallback,(0.0,0.0),10.0),"Lusterko prawe",true,Some(n))),
++            3 => inside.map(|n|(p.camera_look(&format!("mirror{n}"),fallback,(0.0,0.0),10.0),"Lusterko wewnętrzne",true,Some(n))),
 +            channel if channel>=16 => {
 +                let index=(channel-16) as usize;
-+                p.vehicle.ty.def.cameras_reflexion.get(index).map(|c|(p.camera_look(&format!("mirror{index}"),fallback,(0.0,0.0),10.0),"Kamera / lusterko z modelu autobusu",!c.fixed))
++                p.vehicle.ty.def.cameras_reflexion.get(index).map(|c|(p.camera_look(&format!("mirror{index}"),fallback,(0.0,0.0),10.0),"Kamera / lusterko z modelu autobusu",!c.fixed,Some(index)))
 +            }
 +            _ => None,
 +        }
 +    });
 +    let mut meta=Meta { channel:request.channel,updated:now,source:String::new(),available,feeds,error:None };
-+    let Some((mut camera,label,mirror))=selected else {
++    let Some((mut camera,label,mirror,mirror_index))=selected else {
 +        meta.error=Some("Ten autobus nie udostępnia wybranej kamery/lusterka".into());
 +        let _=output.tx.try_send(Frame{rgba:Vec::new(),meta});return;
 +    };
 +    camera.far=camera.far.min(450.0);
-+    // No HUD or menu from the driver's display belongs in the independent picture.
-+    let overlays=std::mem::take(&mut scene.overlays);
-+    let image=renderer.render_to_image(scene,WIDTH,HEIGHT,&camera,lighting);
-+    scene.overlays=overlays;
++    let image=if let (Some(index),Some(world),Some(player))=(mirror_index,world,player) {
++        crate::camera_util::render_mirrors(renderer,scene,world,player,lighting,crate::camera_util::MirrorPick::Only(&[index]),None,&[index]);
++        let id=world.mirror_textures.lock().get(index).copied().flatten();
++        match id {
++            Some(id)=>renderer.read_render_texture(scene,id).and_then(|(w,h,rgba)|{
++                let image=image::RgbaImage::from_raw(w,h,rgba).ok_or_else(||anyhow::anyhow!("Invalid mirror image"))?;
++                Ok(image::imageops::resize(&image,WIDTH,HEIGHT,image::imageops::FilterType::Triangle).into_raw())
++            }),
++            None=>Err(anyhow::anyhow!("Lusterka są wyłączone lub brak tekstury w modelu")),
++        }
++    } else {
++        let overlays=std::mem::take(&mut scene.overlays);
++        let image=renderer.render_to_image(scene,WIDTH,HEIGHT,&camera,lighting);
++        scene.overlays=overlays;image
++    };
 +    match image {
 +        Ok(mut rgba)=>{
 +            if mirror {
@@ -163,3 +174,31 @@
 +        assert!(!active_request(&Request{channels:vec![],channel:0,updated:110.0},100.0));
 +    }
 +}
+--- a/crates/omsi-render/src/resources/textures.rs
++++ b/crates/omsi-render/src/resources/textures.rs
+@@ -806,7 +806,7 @@
+             sample_count: 1,
+             dimension: wgpu::TextureDimension::D2,
+             format: self.format,
+-            usage: wgpu::TextureUsages::RENDER_ATTACHMENT | wgpu::TextureUsages::TEXTURE_BINDING,
++            usage: wgpu::TextureUsages::RENDER_ATTACHMENT | wgpu::TextureUsages::TEXTURE_BINDING | wgpu::TextureUsages::COPY_SRC,
+             view_formats: &[],
+         });
+         let view = texture.create_view(&Default::default());
+@@ -820,6 +820,16 @@
+             generation: next_gen(),
+         });
+         scene.textures.len() - 1
++    }
++
++    /// Read a completed render target without changing the player's view.
++    pub fn read_render_texture(&self, scene:&Scene,id:TextureId)->anyhow::Result<(u32,u32,Vec<u8>)> {
++        let texture=scene.textures.get(id).ok_or_else(||anyhow::anyhow!("No mirror texture"))?;
++        let mut rgba=self.read_texture(&texture.texture,wgpu::TextureAspect::All)?;
++        if matches!(texture.texture.format(),wgpu::TextureFormat::Bgra8Unorm|wgpu::TextureFormat::Bgra8UnormSrgb) {
++            for pixel in rgba.chunks_exact_mut(4){pixel.swap(0,2);}
++        }
++        Ok((texture.size.0,texture.size.1,rgba))
+     }
+ 
+     /// Render the scene from `camera` into a texture made by `add_render_texture`.
