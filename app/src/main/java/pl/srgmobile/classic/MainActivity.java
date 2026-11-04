@@ -181,6 +181,7 @@ public final class MainActivity extends Activity implements LocationListener {
     }
 
     public final class LocalFilesBridge {
+        @JavascriptInterface public void chooseDocument(){runOnUiThread(()->{Intent pick=new Intent(Intent.ACTION_OPEN_DOCUMENT);pick.addCategory(Intent.CATEGORY_OPENABLE);pick.setType("*/*");try{startActivityForResult(pick,47);}catch(Exception e){android.widget.Toast.makeText(MainActivity.this,"Nie otwarto wyboru rozkładu",android.widget.Toast.LENGTH_LONG).show();}});}
         @JavascriptInterface public void exportText(String text){
             if(text==null||text.length()>2*1024*1024)return;
             runOnUiThread(()->{localExportText=text;Intent intent=new Intent(Intent.ACTION_CREATE_DOCUMENT);intent.addCategory(Intent.CATEGORY_OPENABLE);intent.setType("text/plain");intent.putExtra(Intent.EXTRA_TITLE,"kursowki-srg.txt");try{startActivityForResult(intent,46);}catch(Exception e){localExportText=null;android.widget.Toast.makeText(MainActivity.this,"Nie otwarto zapisu TXT",android.widget.Toast.LENGTH_LONG).show();}});
@@ -228,6 +229,19 @@ public final class MainActivity extends Activity implements LocationListener {
     }
     @Override protected void onActivityResult(int requestCode,int resultCode,Intent data) {
         super.onActivityResult(requestCode,resultCode,data);
+        if(requestCode==47){
+            if(resultCode!=RESULT_OK||data==null||data.getData()==null)return;
+            final android.net.Uri uri=data.getData();
+            new Thread(()->{JSONObject payload=new JSONObject();try{
+                String name="rozklad.011";
+                try(android.database.Cursor cursor=getContentResolver().query(uri,new String[]{android.provider.OpenableColumns.DISPLAY_NAME},null,null,null)){if(cursor!=null&&cursor.moveToFirst())name=cursor.getString(0);}
+                try(java.io.InputStream in=getContentResolver().openInputStream(uri);java.io.ByteArrayOutputStream out=new java.io.ByteArrayOutputStream()){
+                    if(in==null)throw new IOException("Brak dostępu do pliku");byte[] buffer=new byte[8192];int n;while((n=in.read(buffer))!=-1){if(out.size()+n>2*1024*1024)throw new IOException("Maksymalnie 2 MB");out.write(buffer,0,n);}
+                    payload.put("name",name);payload.put("base64",android.util.Base64.encodeToString(out.toByteArray(),android.util.Base64.NO_WRAP));
+                }
+            }catch(Exception e){try{payload.put("error",e.getMessage());}catch(Exception ignored){}}
+            final String json=payload.toString();runOnUiThread(()->{if(web!=null)web.evaluateJavascript("window.srgLocalDocument && window.srgLocalDocument("+json+")",null);});},"SRG-local-import").start();return;
+        }
         if(requestCode==45){if(localFileCallback!=null){localFileCallback.onReceiveValue(resultCode==RESULT_OK&&data!=null&&data.getData()!=null?new android.net.Uri[]{data.getData()}:null);localFileCallback=null;}return;}
         if(requestCode==46){
             final String text=localExportText;localExportText=null;
