@@ -44,7 +44,7 @@ def prepare(output):
     a=s.index("out.push({index:'video-1010'");b=s.index(';return out.flatMap',a)
     s=s[:a]+s[b:]
     (out/'index.html').write_text(s,encoding='utf-8')
-    (out/'edition.js').write_text("window.SRGEdition={public:true,name:'Public'};\n",encoding='utf-8')
+    (out/'edition.js').write_text("window.SRGEdition={public:true,name:'SRGMobile Public'};\n",encoding='utf-8')
     (out/'transfers.js').write_text('window.SRGTransfers={forStop:()=>null,stations:[],railRows:()=>[]};\n',encoding='utf-8')
     print('Public assets ready: no bundled RJ, stop/direction recordings, GPS or captures; generic sounds retained')
 if __name__=='__main__':

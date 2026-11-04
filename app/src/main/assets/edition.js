@@ -1,1 +1,1 @@
-window.SRGEdition={public:false,name:'Kierowca'};
+window.SRGEdition={public:false,name:'SRGMobile'};

@@ -1,6 +1,6 @@
-# SRG Mobile 1.4.87 — Public i Kierowca
+# SRG Mobile 1.4.88 — SRGMobile i SRGMobile Public
 
-Public ma pakiet `pl.srgmobile.publicapp`, Kierowca zachowuje `pl.srgmobile.classic.lcd23` i aktualizuje poprzednie APK. Można zainstalować oba. Każdy ma własne kursówki, ustawienia i zapis. W Public nie ma rozkładów, nagrań, GPS ani przechwytów R&G kierowcy.
+Public ma pakiet `pl.srgmobile.publicapp`, SRGMobile zachowuje `pl.srgmobile.classic.lcd23` i aktualizuje poprzednie APK. Można zainstalować oba. Każdy ma własne kursówki, ustawienia i zapis. W Public nie ma rozkładów, nagrań, GPS ani przechwytów R&G kierowcy.
 
 ## Wpisanie kursówki na telefonie
 
@@ -34,13 +34,13 @@ Aplikacja zachowuje prywatną kopię importu. Zmiana pliku na komputerze wymaga 
 
 Obie wersje importują własny binarny RJ `.011` przez ten sam parser; plik LG nie jest rozkładem. Funkcje dostępne po imporcie zależą od danych w pliku. Nie dopisujemy prywatnego GPS do Public. Dla GPS można wpisać współrzędne w TXT. Edytor nie generuje plików `.011` dla fizycznego sterownika.
 
-Własne kursówki i rozkłady Public korzystają z polskiego głosu offline Androida. Wymaga on zainstalowanego polskiego głosu niewymagającego sieci; nie musi to być Marek. Wersja Kierowca zachowuje dotychczasowe nagrania Marka dla wbudowanego rozkładu.
+Własne kursówki i rozkłady Public korzystają z polskiego głosu offline Androida. Wymaga on zainstalowanego polskiego głosu niewymagającego sieci; nie musi to być Marek. Wersja SRGMobile zachowuje dotychczasowe nagrania Marka dla wbudowanego rozkładu.
 
 W Ustawienia → Rozkład jazdy → Zapowiedzi offline wybierz silnik i głos, sprawdź próbkę, następnie wybierz „Generuj dla wczytanego RJ”. Obsługiwane są aplikacje, które rejestrują silnik TTS w Androidzie i udostępniają polski głos oznaczony jako offline; nie każda aplikacja do czytania tekstu udostępnia taki interfejs. Dane głosu trzeba wcześniej zainstalować w aplikacji dostawcy. Samo generowanie w SRG nie używa chmury.
 
 Generator tworzy komunikaty przystanków, następnego przystanku, końcowego i kierunków, deduplikuje jednakowe teksty i zapisuje pliki WAV w prywatnej pamięci aplikacji. Zapisany tekst, silnik i wybrany głos określają nagranie: po zmianie nazwy lub głosu stare nagranie nie zostanie przypisane do nowej nazwy. Odtwarzanie używa gotowego pliku; jeśli jeszcze go nie ma, korzysta z wybranego TTS offline. Tempo jest stałe: 96%. Generuj z aplikacją na ekranie; wyjście do tła przerywa operację. Anulowanie zachowuje gotowe pliki. Ponowienie pomija gotowe nagrania. Limit prywatnej biblioteki wynosi 100 MB.
 
-Wygląd głównego ekranu, kamery, LCD i obsługa kursu są wspólne z wersją Kierowca. Wybór silnika/głosu odbywa się w systemowym oknie, a nowe przyciski są w ustawieniach RJ. Nagrania lokalne i ustawienia głosu pozostają oddzielne w obu APK. Usunięcie danych lub odinstalowanie aplikacji usuwa jej wygenerowane nagrania.
+Wygląd głównego ekranu, kamery, LCD i obsługa kursu są wspólne z wersją SRGMobile. Wybór silnika/głosu odbywa się w systemowym oknie, a nowe przyciski są w ustawieniach RJ. Nagrania lokalne i ustawienia głosu pozostają oddzielne w obu APK. Usunięcie danych lub odinstalowanie aplikacji usuwa jej wygenerowane nagrania.
 
 ## Wspólne OMSI
 
@@ -50,4 +50,4 @@ Uruchamiaj do obsługi jedną aplikację naraz: oba panele LCD używają portu 4
 
 ## Budowanie
 
-Kierowca: `gradle :app:assembleRelease`. Public: `gradle -PsrgPublic=true :app:assembleRelease`. Wymagany ten sam stały podpis co wcześniej. CI tworzy dwa osobne artefakty; kontrola Public odrzuca APK zawierające prywatne RJ lub MP3. Nie kopiuj katalogu z danymi kierowcy do wersji Public.
+SRGMobile: `gradle :app:assembleRelease`. Public: `gradle -PsrgPublic=true :app:assembleRelease`. Wymagany ten sam stały podpis co wcześniej. CI tworzy dwa osobne artefakty; kontrola Public odrzuca APK zawierające prywatne RJ lub MP3. Nie kopiuj katalogu z danymi kierowcy do wersji Public.
