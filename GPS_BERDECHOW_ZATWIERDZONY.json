@@ -1,0 +1,853 @@
+{
+  "stops": [
+    {
+      "id": 1,
+      "name": "DĘBICA DWORZEC AUTOBUSOWY",
+      "lat": 50.053823,
+      "lon": 21.406459
+    },
+    {
+      "id": 2,
+      "name": "ZURT",
+      "lat": 50.051913,
+      "lon": 21.413043
+    },
+    {
+      "id": 3,
+      "name": "DĘBICA RZESZOWSKA TECHNIKUM",
+      "lat": 50.053822,
+      "lon": 21.425586
+    },
+    {
+      "id": 4,
+      "name": "DĘBICA RZESZOWSKA RAJ",
+      "lat": 50.054918,
+      "lon": 21.436174
+    },
+    {
+      "id": 5,
+      "name": "DĘBICA RZESZOWSKA MKS",
+      "lat": 50.055699,
+      "lon": 21.443685
+    },
+    {
+      "id": 6,
+      "name": "DĘBICA RZESZOWSKA NADLEŚNICTWO",
+      "lat": 50.056249,
+      "lon": 21.449251
+    },
+    {
+      "id": 7,
+      "name": "NAGAWCZYNA 1",
+      "lat": 50.057621,
+      "lon": 21.462417
+    },
+    {
+      "id": 8,
+      "name": "NAGAWCZYNA 2",
+      "lat": 50.058577,
+      "lon": 21.471733
+    },
+    {
+      "id": 9,
+      "name": "ZAWADA E4",
+      "lat": 50.059833,
+      "lon": 21.483642
+    },
+    {
+      "id": 10,
+      "name": "LUBZINA OSIEDLE",
+      "lat": 50.0620407,
+      "lon": 21.5045144
+    },
+    {
+      "id": 11,
+      "name": "LUBZINA E4",
+      "lat": 50.0624325,
+      "lon": 21.5185452
+    },
+    {
+      "id": 12,
+      "name": "BRZEZÓWKA",
+      "lat": 50.0620426,
+      "lon": 21.542991,
+      "street": "BRZEZÓWKA"
+    },
+    {
+      "id": 13,
+      "name": "ROPCZYCE PODSŁOŃCE",
+      "lat": 50.0616079,
+      "lon": 21.5694649
+    },
+    {
+      "id": 14,
+      "name": "ROPCZYCE DWORZEC AUTOBUSOWY",
+      "lat": 50.05252520688053,
+      "lon": 21.60426825284958
+    },
+    {
+      "id": 15,
+      "name": "ROPCZYCE MICKIEWICZA",
+      "lat": 50.05404244671849,
+      "lon": 21.61877900362015
+    },
+    {
+      "id": 16,
+      "name": "ROPCZYCE WITKOWICE",
+      "lat": 50.0599736,
+      "lon": 21.6373635
+    },
+    {
+      "id": 17,
+      "name": "ROPCZYCE WESOŁA",
+      "lat": 50.066924,
+      "lon": 21.6587487
+    },
+    {
+      "id": 18,
+      "name": "SĘDZISZÓW MAŁOPOLSKI OSIEDLE MŁODYCH",
+      "lat": 50.0691856,
+      "lon": 21.6879728
+    },
+    {
+      "id": 19,
+      "name": "SĘDZISZÓW MAŁOPOLSKI RYNEK",
+      "lat": 50.0698148,
+      "lon": 21.6998686
+    },
+    {
+      "id": 20,
+      "name": "SĘDZISZÓW MAŁOPOLSKI PIŁSUDSKIEGO",
+      "lat": 50.0706515,
+      "lon": 21.7113932
+    },
+    {
+      "id": 21,
+      "name": "SĘDZISZÓW MAŁOPOLSKI GRUNWALDZKA",
+      "lat": 50.0697977,
+      "lon": 21.7274294
+    },
+    {
+      "id": 22,
+      "name": "OLCHOWA E4",
+      "lat": 50.0702671,
+      "lon": 21.7550767
+    },
+    {
+      "id": 23,
+      "name": "KLĘCZANY STADION",
+      "lat": 50.0709121,
+      "lon": 21.7810494
+    },
+    {
+      "id": 24,
+      "name": "DĄBROWA",
+      "lat": 50.0715475,
+      "lon": 21.8058767
+    },
+    {
+      "id": 25,
+      "name": "DĄBROWA 2",
+      "lat": 50.0718007,
+      "lon": 21.820075
+    },
+    {
+      "id": 26,
+      "name": "TRZCIANA",
+      "lat": 50.0715551,
+      "lon": 21.8379229
+    },
+    {
+      "id": 27,
+      "name": "TRZCIANA WOLICZKA 56 N.Ż.",
+      "lat": 50.0714562,
+      "lon": 21.8673544
+    },
+    {
+      "id": 28,
+      "name": "ŚWILCZA 58",
+      "lat": 50.0716827,
+      "lon": 21.8966562
+    },
+    {
+      "id": 29,
+      "name": "ŚWILCZA OSIEDLE 60 N.Ż.",
+      "lat": 50.0698546,
+      "lon": 21.9106875
+    },
+    {
+      "id": 30,
+      "name": "ŚWILCZA NOWY DWÓR 62 N.Ż.",
+      "lat": 50.0650148,
+      "lon": 21.9299834
+    },
+    {
+      "id": 31,
+      "name": "RZESZÓW KRAKOWSKA GALERIA",
+      "lat": 50.0484339,
+      "lon": 21.9750921
+    },
+    {
+      "id": 32,
+      "name": "RZESZÓW KRAKOWSKA SZPITAL",
+      "lat": 50.0458578,
+      "lon": 21.9807497
+    },
+    {
+      "id": 33,
+      "name": "RZESZÓW DWORZEC LOKALNY",
+      "lat": 50.0427306,
+      "lon": 21.993837
+    },
+    {
+      "id": 34,
+      "name": "RZESZÓW DWORZEC AUTOBUSOWY",
+      "lat": 50.042142,
+      "lon": 22.003124
+    },
+    {
+      "id": 35,
+      "name": "ŚWILCZA NOWY DWÓR 71 N.Ż.",
+      "lat": 50.066665,
+      "lon": 21.924328
+    },
+    {
+      "id": 36,
+      "name": "ŚWILCZA OSIEDLE 73 N.Ż.",
+      "lat": 50.070693,
+      "lon": 21.907476
+    },
+    {
+      "id": 37,
+      "name": "ŚWILCZA 75",
+      "lat": 50.071904,
+      "lon": 21.896568
+    },
+    {
+      "id": 38,
+      "name": "TRZCIANA WOLICZKA 77 N.Ż.",
+      "lat": 50.071601,
+      "lon": 21.866263
+    },
+    {
+      "id": 39,
+      "name": "DĘBICA RZESZOWSKA PLAC GRYFITÓW",
+      "lat": 50.0524284,
+      "lon": 21.415306
+    },
+    {
+      "id": 40,
+      "name": "RZESZÓW DWORZEC AUTOBUSOWY",
+      "lat": 50.042318,
+      "lon": 22.002638
+    },
+    {
+      "id": 41,
+      "name": "RZESZÓW DWORZEC LOKALNY",
+      "lat": 50.042954,
+      "lon": 21.9947375
+    },
+    {
+      "id": 42,
+      "name": "RZESZÓW KRAKOWSKA SZPITAL",
+      "lat": 50.046089,
+      "lon": 21.981827
+    },
+    {
+      "id": 43,
+      "name": "RZESZÓW KRAKOWSKA GALERIA",
+      "lat": 50.048107,
+      "lon": 21.976277
+    },
+    {
+      "id": 44,
+      "name": "TRZCIANA",
+      "lat": 50.071305,
+      "lon": 21.8413188
+    },
+    {
+      "id": 45,
+      "name": "DĄBROWA 2",
+      "lat": 50.071805,
+      "lon": 21.81728
+    },
+    {
+      "id": 46,
+      "name": "DĄBROWA",
+      "lat": 50.0714978,
+      "lon": 21.8043087
+    },
+    {
+      "id": 47,
+      "name": "KLĘCZANY SZKOŁA",
+      "lat": 50.0709129,
+      "lon": 21.7792319
+    },
+    {
+      "id": 48,
+      "name": "OLCHOWA E4",
+      "lat": 50.0703704,
+      "lon": 21.7567765
+    },
+    {
+      "id": 49,
+      "name": "SĘDZISZÓW MAŁOPOLSKI GRUNWALDZKA",
+      "lat": 50.069872,
+      "lon": 21.7268972
+    },
+    {
+      "id": 50,
+      "name": "SĘDZISZÓW MAŁOPOLSKI PIŁSUDSKIEGO",
+      "lat": 50.0706732,
+      "lon": 21.7106835
+    },
+    {
+      "id": 51,
+      "name": "SĘDZISZÓW MAŁOPOLSKI RYNEK",
+      "lat": 50.0698148,
+      "lon": 21.6998686
+    },
+    {
+      "id": 52,
+      "name": "SĘDZISZÓW MAŁOPOLSKI OSIEDLE MŁODYCH",
+      "lat": 50.0691701,
+      "lon": 21.6872574
+    },
+    {
+      "id": 53,
+      "name": "ROPCZYCE WESOŁA",
+      "lat": 50.0667562,
+      "lon": 21.6577844
+    },
+    {
+      "id": 54,
+      "name": "ROPCZYCE WITKOWICE",
+      "lat": 50.0592805,
+      "lon": 21.6354096
+    },
+    {
+      "id": 55,
+      "name": "ROPCZYCE MICKIEWICZA",
+      "lat": 50.05418194082218,
+      "lon": 21.618639528751377
+    },
+    {
+      "id": 56,
+      "name": "ROPCZYCE DWORZEC AUTOBUSOWY",
+      "lat": 50.0525443,
+      "lon": 21.6042519
+    },
+    {
+      "id": 57,
+      "name": "ROPCZYCE PODSŁOŃCE",
+      "lat": 50.0616829,
+      "lon": 21.5694048
+    },
+    {
+      "id": 58,
+      "name": "BRZEZÓWKA",
+      "lat": 50.0620802,
+      "lon": 21.5448616,
+      "street": "BRZEZÓWKA"
+    },
+    {
+      "id": 59,
+      "name": "LUBZINA E4",
+      "lat": 50.0624817,
+      "lon": 21.5200717
+    },
+    {
+      "id": 60,
+      "name": "LUBZINA OSIEDLE",
+      "lat": 50.0619292,
+      "lon": 21.5029012
+    },
+    {
+      "id": 61,
+      "name": "ZAWADA E4",
+      "lat": 50.0601422,
+      "lon": 21.4857899
+    },
+    {
+      "id": 62,
+      "name": "NAGAWCZYNA 2",
+      "lat": 50.0585513,
+      "lon": 21.4705012
+    },
+    {
+      "id": 63,
+      "name": "NAGAWCZYNA 1",
+      "lat": 50.0578201,
+      "lon": 21.4633498
+    },
+    {
+      "id": 64,
+      "name": "DĘBICA RZESZOWSKA NADLEŚNICTWO",
+      "lat": 50.0560323,
+      "lon": 21.4469312
+    },
+    {
+      "id": 65,
+      "name": "DĘBICA RZESZOWSKA MKS",
+      "lat": 50.0556242,
+      "lon": 21.4425001
+    },
+    {
+      "id": 66,
+      "name": "DĘBICA RZESZOWSKA RAJ",
+      "lat": 50.0548371,
+      "lon": 21.4353362
+    },
+    {
+      "id": 67,
+      "name": "DĘBICA RZESZOWSKA TECHNIKUM",
+      "lat": 50.0539792,
+      "lon": 21.4270437
+    },
+    {
+      "id": 68,
+      "name": "DĘBICA DWORZEC AUTOBUSOWY",
+      "lat": 50.053873,
+      "lon": 21.406634
+    },
+    {
+      "id": 69,
+      "name": "3-MAJA CHECHŁY 1",
+      "lat": 50.04306763982272,
+      "lon": 21.589422225952152
+    },
+    {
+      "id": 70,
+      "name": "3-MAJA CHECHŁY 2",
+      "lat": 50.03532761772727,
+      "lon": 21.577521264553074
+    },
+    {
+      "id": 71,
+      "name": "3-MAJA CHECHŁY 3",
+      "lat": 50.03020539026247,
+      "lon": 21.568787992000583
+    },
+    {
+      "id": 72,
+      "name": "OKONIN",
+      "lat": 50.0317646865386,
+      "lon": 21.556039452552795
+    },
+    {
+      "id": 73,
+      "name": "ŁĄCZKI KUCHARSKIE ŁOPUCHOWA 1",
+      "lat": 50.01982487275605,
+      "lon": 21.546785831451416
+    },
+    {
+      "id": 74,
+      "name": "ŁĄCZKI KUCHARSKIE ŁOPUCHOWA 2",
+      "lat": 50.009766176180676,
+      "lon": 21.553507447242737
+    },
+    {
+      "id": 75,
+      "name": "ŁĄCZKI KUCHARSKIE KOŚCIÓŁ",
+      "lat": 49.99859503989411,
+      "lon": 21.56143069267273
+    },
+    {
+      "id": 76,
+      "name": "BRONISZÓW",
+      "lat": 49.98883196188719,
+      "lon": 21.561811566352848
+    },
+    {
+      "id": 77,
+      "name": "GLINIK ŁYSA GÓRA",
+      "lat": 49.98003280307929,
+      "lon": 21.55927956104279
+    },
+    {
+      "id": 78,
+      "name": "GLINIK SZKOŁA",
+      "lat": 49.974092202208716,
+      "lon": 21.575877070426944
+    },
+    {
+      "id": 79,
+      "name": "GLINIK OSP",
+      "lat": 49.96625652520014,
+      "lon": 21.579251289367676
+    },
+    {
+      "id": 80,
+      "name": "GLINIK GÓRA",
+      "lat": 49.96145304894919,
+      "lon": 21.582791805267338
+    },
+    {
+      "id": 81,
+      "name": "WIELOPOLE SKRZYŃSKIE RZEGOCIN",
+      "lat": 49.95326671070068,
+      "lon": 21.59848272800446
+    },
+    {
+      "id": 82,
+      "name": "WIELOPOLE SKRZYŃSKIE",
+      "lat": 49.9460948,
+      "lon": 21.6147598
+    },
+    {
+      "id": 83,
+      "name": "WIELOPOLE SKRZYŃSKIE 1 19",
+      "lat": 49.9478932,
+      "lon": 21.59926
+    },
+    {
+      "id": 84,
+      "name": "BRZEZINY 17",
+      "lat": 49.9453592,
+      "lon": 21.5862604
+    },
+    {
+      "id": 85,
+      "name": "BRZEZINY SKLEP 15",
+      "lat": 49.9370248,
+      "lon": 21.5738603
+    },
+    {
+      "id": 86,
+      "name": "BRZEZINY KLUB 13",
+      "lat": 49.9313486,
+      "lon": 21.5541834
+    },
+    {
+      "id": 87,
+      "name": "BRZEZINY SKRZYŻOWANIE 11",
+      "lat": 49.9309539,
+      "lon": 21.5366224
+    },
+    {
+      "id": 88,
+      "name": "BRZEZINY BERDECHÓW 1 02 (NOWA WIEŚ)",
+      "lat": 49.9233192,
+      "lon": 21.5387678
+    },
+    {
+      "id": 89,
+      "name": "BRZEZINY BERDECHÓW",
+      "lat": 49.918051667471154,
+      "lon": 21.543344557285312
+    },
+    {
+      "id": 90,
+      "name": "BRZEZINY BERDECHÓW 1 03 (NOWA WIEŚ)",
+      "lat": 49.923512219874866,
+      "lon": 21.538894772529606
+    },
+    {
+      "id": 91,
+      "name": "BRZEZINY SKRZYŻOWANIE 10",
+      "lat": 49.93076436922053,
+      "lon": 21.53645664453507
+    },
+    {
+      "id": 92,
+      "name": "BRZEZINY KLUB 08",
+      "lat": 49.93150333651239,
+      "lon": 21.553424298763275
+    },
+    {
+      "id": 93,
+      "name": "BRZEZINY SKLEP 06",
+      "lat": 49.937021061173084,
+      "lon": 21.574144363403324
+    },
+    {
+      "id": 94,
+      "name": "BRZEZINY 04",
+      "lat": 49.94533443670768,
+      "lon": 21.586512029170994
+    },
+    {
+      "id": 95,
+      "name": "WIELOPOLE SKRZYŃSKIE 1 02",
+      "lat": 49.94768353389157,
+      "lon": 21.599526107311252
+    },
+    {
+      "id": 96,
+      "name": "BRZEZINY BERDECHÓW",
+      "lat": 49.91815701604678,
+      "lon": 21.543433070182804
+    },
+    {
+      "id": 97,
+      "name": "WIELOPOLE SKRZYŃSKIE",
+      "lat": 49.946080084668296,
+      "lon": 21.61483883857727
+    },
+    {
+      "id": 98,
+      "name": "WIELOPOLE SKRZYŃSKIE RZEGOCIN",
+      "lat": 49.95400878438722,
+      "lon": 21.596948504447937
+    },
+    {
+      "id": 99,
+      "name": "GLINIK GÓRA",
+      "lat": 49.9614927348042,
+      "lon": 21.582990288734436
+    },
+    {
+      "id": 100,
+      "name": "GLINIK OSP",
+      "lat": 49.96637212019492,
+      "lon": 21.57942295074463
+    },
+    {
+      "id": 101,
+      "name": "GLINIK SZKOŁA",
+      "lat": 49.974133602661986,
+      "lon": 21.57614260911942
+    },
+    {
+      "id": 102,
+      "name": "GLINIK ŁYSA GÓRA",
+      "lat": 49.98050539778371,
+      "lon": 21.55969262123108
+    },
+    {
+      "id": 103,
+      "name": "BRONISZÓW",
+      "lat": 49.989238940085436,
+      "lon": 21.56224608421326
+    },
+    {
+      "id": 104,
+      "name": "ŁĄCZKI KUCHARSKIE KOŚCIÓŁ",
+      "lat": 49.99769847816067,
+      "lon": 21.563361883163452
+    },
+    {
+      "id": 105,
+      "name": "ŁĄCZKI KUCHARSKIE ŁOPUCHOWA 2",
+      "lat": 50.01016952975807,
+      "lon": 21.553754210472107
+    },
+    {
+      "id": 106,
+      "name": "ŁĄCZKI KUCHARSKIE ŁOPUCHOWA 1",
+      "lat": 50.018763259146645,
+      "lon": 21.5481698513031
+    },
+    {
+      "id": 107,
+      "name": "OKONIN",
+      "lat": 50.03165958639193,
+      "lon": 21.555961668491367
+    },
+    {
+      "id": 108,
+      "name": "3-MAJA CHECHŁY 3",
+      "lat": 50.030236404383544,
+      "lon": 21.56887382268906
+    },
+    {
+      "id": 109,
+      "name": "3-MAJA CHECHŁY 2",
+      "lat": 50.03539825343903,
+      "lon": 21.577907502651218
+    },
+    {
+      "id": 110,
+      "name": "3-MAJA CHECHŁY 1",
+      "lat": 50.043205443287334,
+      "lon": 21.589998900890354
+    }
+  ],
+  "requiredStops": [
+    {
+      "id": 55,
+      "name": "ROPCZYCE MICKIEWICZA"
+    },
+    {
+      "id": 56,
+      "name": "ROPCZYCE DWORZEC AUTOBUSOWY"
+    },
+    {
+      "id": 69,
+      "name": "3-MAJA CHECHŁY 1"
+    },
+    {
+      "id": 70,
+      "name": "3-MAJA CHECHŁY 2"
+    },
+    {
+      "id": 71,
+      "name": "3-MAJA CHECHŁY 3"
+    },
+    {
+      "id": 72,
+      "name": "OKONIN"
+    },
+    {
+      "id": 73,
+      "name": "ŁĄCZKI KUCHARSKIE ŁOPUCHOWA 1"
+    },
+    {
+      "id": 74,
+      "name": "ŁĄCZKI KUCHARSKIE ŁOPUCHOWA 2"
+    },
+    {
+      "id": 75,
+      "name": "ŁĄCZKI KUCHARSKIE KOŚCIÓŁ"
+    },
+    {
+      "id": 76,
+      "name": "BRONISZÓW"
+    },
+    {
+      "id": 77,
+      "name": "GLINIK ŁYSA GÓRA"
+    },
+    {
+      "id": 78,
+      "name": "GLINIK SZKOŁA"
+    },
+    {
+      "id": 79,
+      "name": "GLINIK OSP"
+    },
+    {
+      "id": 80,
+      "name": "GLINIK GÓRA"
+    },
+    {
+      "id": 81,
+      "name": "WIELOPOLE SKRZYŃSKIE RZEGOCIN"
+    },
+    {
+      "id": 82,
+      "name": "WIELOPOLE SKRZYŃSKIE"
+    },
+    {
+      "id": 83,
+      "name": "WIELOPOLE SKRZYŃSKIE 1 19"
+    },
+    {
+      "id": 84,
+      "name": "BRZEZINY 17"
+    },
+    {
+      "id": 85,
+      "name": "BRZEZINY SKLEP 15"
+    },
+    {
+      "id": 86,
+      "name": "BRZEZINY KLUB 13"
+    },
+    {
+      "id": 87,
+      "name": "BRZEZINY SKRZYŻOWANIE 11"
+    },
+    {
+      "id": 88,
+      "name": "BRZEZINY BERDECHÓW 1 02 (NOWA WIEŚ)"
+    },
+    {
+      "id": 89,
+      "name": "BRZEZINY BERDECHÓW"
+    },
+    {
+      "id": 96,
+      "name": "BRZEZINY BERDECHÓW"
+    },
+    {
+      "id": 90,
+      "name": "BRZEZINY BERDECHÓW 1 03 (NOWA WIEŚ)"
+    },
+    {
+      "id": 91,
+      "name": "BRZEZINY SKRZYŻOWANIE 10"
+    },
+    {
+      "id": 92,
+      "name": "BRZEZINY KLUB 08"
+    },
+    {
+      "id": 93,
+      "name": "BRZEZINY SKLEP 06"
+    },
+    {
+      "id": 94,
+      "name": "BRZEZINY 04"
+    },
+    {
+      "id": 95,
+      "name": "WIELOPOLE SKRZYŃSKIE 1 02"
+    },
+    {
+      "id": 97,
+      "name": "WIELOPOLE SKRZYŃSKIE"
+    },
+    {
+      "id": 98,
+      "name": "WIELOPOLE SKRZYŃSKIE RZEGOCIN"
+    },
+    {
+      "id": 99,
+      "name": "GLINIK GÓRA"
+    },
+    {
+      "id": 100,
+      "name": "GLINIK OSP"
+    },
+    {
+      "id": 101,
+      "name": "GLINIK SZKOŁA"
+    },
+    {
+      "id": 102,
+      "name": "GLINIK ŁYSA GÓRA"
+    },
+    {
+      "id": 103,
+      "name": "BRONISZÓW"
+    },
+    {
+      "id": 104,
+      "name": "ŁĄCZKI KUCHARSKIE KOŚCIÓŁ"
+    },
+    {
+      "id": 105,
+      "name": "ŁĄCZKI KUCHARSKIE ŁOPUCHOWA 2"
+    },
+    {
+      "id": 106,
+      "name": "ŁĄCZKI KUCHARSKIE ŁOPUCHOWA 1"
+    },
+    {
+      "id": 107,
+      "name": "OKONIN"
+    },
+    {
+      "id": 108,
+      "name": "3-MAJA CHECHŁY 3"
+    },
+    {
+      "id": 109,
+      "name": "3-MAJA CHECHŁY 2"
+    },
+    {
+      "id": 110,
+      "name": "3-MAJA CHECHŁY 1"
+    },
+    {
+      "id": 14,
+      "name": "ROPCZYCE DWORZEC AUTOBUSOWY"
+    },
+    {
+      "id": 15,
+      "name": "ROPCZYCE MICKIEWICZA"
+    }
+  ],
+  "expectedVariantCount": 11
+}

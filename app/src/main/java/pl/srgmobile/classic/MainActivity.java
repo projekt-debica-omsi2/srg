@@ -41,6 +41,7 @@ public final class MainActivity extends Activity implements LocationListener {
     private PermissionRequest pendingMediaRequest;
     private float voiceVolume = 0.9f;
     private WebView web;
+    private OmsiBridge omsi;
     private LocationManager gps;
     private boolean requested = false;
     private boolean listening = false;
@@ -122,7 +123,8 @@ public final class MainActivity extends Activity implements LocationListener {
             });}
         },"SRGMksExport");
         web.addJavascriptInterface(new GpsBridge(), "SRGNativeGPS");
-        web.addJavascriptInterface(new OmsiBridge(web), "SRGOmsiNative");
+        omsi = new OmsiBridge(web);
+        web.addJavascriptInterface(omsi, "SRGOmsiNative");
         web.addJavascriptInterface(new AudioBridge(), "SRGNativeAudio");
         web.addJavascriptInterface(new LcdBridge(), "SRGLcd");
         rgUsb = new RgUsbBridge(this, web);
@@ -247,6 +249,29 @@ public final class MainActivity extends Activity implements LocationListener {
 
     /** Each utterance starts with the selected short chime (1..4). */
     public final class AudioBridge {
+        @JavascriptInterface public void announceGRG(String file, String mode, boolean onRequest) {
+            if (file == null || !file.matches("[PK][0-9A-F]{4}\\.mp3")) return;
+            if (!"next".equals(mode) && !"terminal".equals(mode) && !"arrival".equals(mode) && !"start".equals(mode)) return;
+            runOnUiThread(() -> {
+                java.util.ArrayList<String> files = new java.util.ArrayList<>();
+                files.add(chimeFile());
+                if ("next".equals(mode) || "terminal".equals(mode)) files.add("next.mp3");
+                files.add("grg/" + file);
+                if (onRequest) files.add("na_zadanie.mp3");
+                if ("terminal".equals(mode)) files.add("terminal.mp3");
+                queueVoice(files.toArray(new String[0]));
+            });
+        }
+        @JavascriptInterface public void announceBerdechow(String file, String mode) {
+            if (file == null || !file.matches("(?:stop-[0-9]{3}|start-[1-4])\\.mp3")) return;
+            if (!"next".equals(mode) && !"terminal".equals(mode) && !"arrival".equals(mode) && !"start".equals(mode)) return;
+            runOnUiThread(() -> {
+                String path = "berdechow/" + file;
+                if ("terminal".equals(mode)) queueVoice(chimeFile(), "next.mp3", path, "terminal.mp3");
+                else if ("next".equals(mode)) queueVoice(chimeFile(), "next.mp3", path);
+                else queueVoice(chimeFile(), path);
+            });
+        }
         @JavascriptInterface public void announceStop(int stopId, boolean onRequest) {
             if (stopId < 1 || stopId > 68) return;
             runOnUiThread(() -> {
@@ -312,7 +337,7 @@ public final class MainActivity extends Activity implements LocationListener {
             return;
         }
         String file = pendingVoice.removeFirst();
-        if (!file.matches("(?:chimes/[1-4]\\.mp3|next\\.mp3|stops/[0-9]{1,2}\\.mp3|start/[0-6]\\.mp3|terminal\\.mp3|inspection\\.mp3|na_zadanie\\.mp3)")) {
+        if (!file.matches("(?:chimes/[1-4]\\.mp3|next\\.mp3|stops/[0-9]{1,2}\\.mp3|start/[0-6]\\.mp3|berdechow/(?:stop-[0-9]{3}|start-[1-4])\\.mp3|grg/[PK][0-9A-F]{4}\\.mp3|terminal\\.mp3|inspection\\.mp3|na_zadanie\\.mp3)")) {
             sendAudioError("Nieprawidłowy plik audio");
             playVoiceNext();
             return;
@@ -506,6 +531,7 @@ public final class MainActivity extends Activity implements LocationListener {
         if (requested && pageReady) handler.postDelayed(() -> { if (requested) startGpsNative(); }, 300L);
     }
     @Override protected void onDestroy() {
+        if(omsi!=null)omsi.close();
         stopListening();
         if (rgUsb != null) rgUsb.close();
         if (ibisUsb != null) ibisUsb.close();

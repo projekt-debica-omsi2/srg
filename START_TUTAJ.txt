@@ -1,0 +1,10 @@
+SRG Mobile 1.4.85 - kompletny projekt do repo
+
+Zawiera aktualny kod, RJ z AutoEdit i wszystkie 121 poprawionych nagran.
+Aktywny rozklad: rj/rj261104.011. Kopia eksportow RJ oraz LG: EKSPORT_AUTOEDIT.
+Sprawdzenie: PRZYGOTUJ_RJ.cmd. Nagrania sa juz gotowe.
+Do istniejacego repo skopiuj zawartosc tego folderu (takze .github), a potem wyslij commit.
+Nie wysylaj samego ZIP jako kodu. GitHub Actions zbuduje APK.
+Paczka nie zawiera historii .git ani lokalnych kluczy podpisu.
+
+UWAGA: wspolrzedne w eksporcie .011 sa zerowe; aplikacja korzysta z dolaczonego, zatwierdzonego GPS. GPS w eksporcie dla fizycznego sterownika nadal wymaga poprawienia w AutoEdit.

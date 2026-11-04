@@ -1,0 +1,4 @@
+Tu umieść JEDEN nowy plik RJ .011 wygenerowany z dołączonego wspólnego projektu AutoEdit v16.
+Nie wkładaj tu LG .011 ani starych RJ z DBF/zsat/bin.
+Uruchom PRZYGOTUJ_RJ.cmd. GitHub Actions także sprawdzi ten plik przed budową APK.
+Stare RJ przenieś poza ten folder. Nazwa nowego pliku może być dowolna; musi mieć rozszerzenie .011.

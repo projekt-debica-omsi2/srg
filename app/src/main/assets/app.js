@@ -9,7 +9,7 @@ const forcedPreview=previewParams.get('preview');
 const weekFormat=new Intl.DateTimeFormat('pl-PL',{weekday:'long'});
 const dateFormat=new Intl.DateTimeFormat('pl-PL',{day:'numeric',month:'long',year:'numeric'});
 function tickClock(){
- const d=new Date();el('time').textContent=`${d.getHours()}:${String(d.getMinutes()).padStart(2,'0')}`;
+ const d=new Date();el('time').textContent=typeof currentState?.clock==='string'&&/^([01]\d|2[0-3]):[0-5]\d:[0-5]\d$/.test(currentState.clock)?currentState.clock.slice(0,5):`${d.getHours()}:${String(d.getMinutes()).padStart(2,'0')}`;
  el('weekday').textContent=weekFormat.format(d);
  el('longDate').textContent=dateFormat.format(d);
 }
@@ -20,7 +20,8 @@ function setRoute(d){
  const key=JSON.stringify([d.kursId,d.linia,d.kierunek,d.aktualnyIndeks,d.przystanki.map(x=>[x.nazwa,x.ulica])]);
  if(key===routeSignature)return;routeSignature=key;
  // Nazwy ulic i kolejność przystanków pochodzą z aktywnego wariantu wczytanego z pliku RJ.
- el('routeDirection').textContent=(d.additional&&d.linia?d.linia+' → ':'→ ')+(d.kierunek||d.przystanki.at(-1)?.nazwa||'—').toLocaleUpperCase('pl-PL');
+ const line=String(d.linia||'').trim();el('routeLine').textContent=line;el('routeLine').hidden=!line;el('routePanel').classList.toggle('no-line',!line);el('routePanel').classList.toggle('four-digit-line',Array.from(line).length>3);
+ el('routeDirection').textContent=(d.kierunek||d.przystanki.at(-1)?.nazwa||'—').toLocaleUpperCase('pl-PL');
  el('routeText').textContent=(d.additional?((d.linia?d.linia+' → ':'')+d.kierunek):routeText(d.przystanki.slice(Math.max(0,d.aktualnyIndeks||0)))).toLocaleUpperCase('pl-PL');
  const r=el('routeText');setTimeout(()=>fitMarquee(r,r.parentElement,'route'),0);
 }

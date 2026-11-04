@@ -8,8 +8,8 @@ android {
         applicationId 'pl.srgmobile.classic.lcd23'
         minSdk 26
         targetSdk 34
-        versionCode 11473
-        versionName '1.4.73'
+        versionCode 11485
+        versionName '1.4.85'
     }
 
     signingConfigs {

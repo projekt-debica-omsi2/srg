@@ -1,10 +1,16 @@
-name: Build SRG Mobile 1.4.70 APK
+name: Build SRG Mobile 1.4.85 APK
 on:
   workflow_dispatch:
   push:
     paths:
       - 'app/**'
       - 'tests/**'
+      - 'rj/**'
+      - 'tools/prepare_rj.py'
+      - 'GENERUJ_BERDECHOW.py'
+      - 'ZAPOWIEDZI_BERDECHOW.json'
+      - 'NAGRANIA_BERDECHOW_SHA256.json'
+      - 'GPS_BERDECHOW_ZATWIERDZONY.json'
       - 'gradle.properties'
       - '*.gradle'
       - 'settings.gradle'
@@ -26,8 +32,16 @@ jobs:
           test -n "$SDKMANAGER"
           yes | "$SDKMANAGER" --licenses >/dev/null || true
           "$SDKMANAGER" 'platforms;android-35' 'build-tools;35.0.0'
+      - name: Prepare user-generated RJ and verify new recordings
+        run: |
+          python3 tools/prepare_rj.py --require
+          python3 tools/prepare_grg.py
       - name: Test OMSI source guards
-        run: node tests/test-omsi-source.cjs
+        run: |
+          node tests/test-omsi-source.cjs
+          node tests/test-omsi-route.cjs
+          node tests/test-omsi-classic.cjs
+          node tests/test-omsi-camera.cjs
       - name: Test auto GPS stop switching
         run: node tests/test-auto-gps.cjs
       - name: Test arrival and departure announcements
@@ -49,6 +63,11 @@ jobs:
           node tests/test-manual-lcd.cjs
           node tests/test-s27-1045.cjs
           node tests/test-transfers.cjs
+          node tests/test-monis-brzezowka.cjs
+          node tests/test-berdechow-audio.cjs
+          node tests/test-grg-audio.cjs
+          python3 -m unittest discover -s tests -p test_user_rj.py
+          python3 -m unittest discover -s tests -p test_grg_pronunciation.py
           node tests/test-pks-transfers.cjs
           node tests/test-rzeszow-rail.cjs
           node tests/test-weekend-hubs.cjs
@@ -101,7 +120,7 @@ jobs:
       - name: Publish APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: SRG-Mobile-v1.4.70-OMSI-RS485-KURSOWKI-LCD-LAN-release
+          name: SRG-Mobile-v1.4.85-OMSI-RS485-KURSOWKI-LCD-LAN-release
           path: app/build/outputs/apk/release/app-release.apk
           if-no-files-found: error
 

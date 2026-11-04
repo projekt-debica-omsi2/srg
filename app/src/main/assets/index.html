@@ -253,7 +253,7 @@ function parseStops(b,h){const s=h.sections.Prz;if(!s||!s.recSize||!s.count)retu
 function parseVariants(b,h,stopByAddress){const v=h.sections.Vtr;if(!v||!v.recSize||!v.count||v.recSize<32)return[];const variants=[];for(let i=0;i<v.count;i++){const a=v.offset+i*v.recSize;if(a+v.recSize>b.length)break;const code=u16(b,a),variantNo=u16(b,a+2),line=decodeCP852(b.slice(a+4,a+9)).replace(/\0/g,'').trim()||String(code),directionPtr=u32(b,a+9),direction2Ptr=u32(b,a+13),descriptionPtr=u32(b,a+19),segmentCount=u16(b,a+25),routePtr=u32(b,a+27),transport=b[a+31]?String.fromCharCode(b[a+31]):'',routeStops=[],trs=h.sections.Trs,odc=h.sections.Odc;if(trs&&odc&&trs.recSize>=4&&odc.recSize>=10&&routePtr>=trs.offset){for(let j=0;j<segmentCount;j++){const trAddr=routePtr+j*trs.recSize;if(trAddr+4>b.length)break;const odcAddr=u32(b,trAddr);if(odcAddr<odc.offset||odcAddr+10>b.length)continue;const fromAddr=u32(b,odcAddr+2),toAddr=u32(b,odcAddr+6),from=stopByAddress.get(fromAddr),to=stopByAddress.get(toAddr);if(j===0&&from)routeStops.push(from);if(to&&(!routeStops.length||routeStops[routeStops.length-1].address!==to.address))routeStops.push(to)}}variants.push({index:i,address:a,code,variantNo,line,direction:resolveText(b,h,directionPtr),direction2:resolveText(b,h,direction2Ptr),description:resolveText(b,h,descriptionPtr),segmentCount,routePtr,transport,stops:routeStops})}return variants}
 function parseCourses(b,h,variants){const k=h.sections.Krs;if(!k||!k.recSize||!k.count||k.recSize<8)return[];const byAddress=new Map(variants.map(v=>[v.address,v])),courses=[];for(let i=0;i<k.count;i++){const a=k.offset+i*k.recSize;if(a+k.recSize>b.length)break;const variantPtr=u32(b,a),lineCode=u16(b,a+4),courseNo=u16(b,a+6),v=byAddress.get(variantPtr);courses.push({index:i,address:a,variantPtr,variantIndex:v?.index??null,line:v?.line||String(lineCode),courseNo,raw:[...b.slice(a,a+k.recSize)]})}return courses}
 function parse(input){const b=input instanceof Uint8Array?input:new Uint8Array(input),header=parseHeader(b),stops=parseStops(b,header),stopByAddress=new Map(stops.map(s=>[s.address,s])),variants=parseVariants(b,header,stopByAddress),courses=parseCourses(b,header,variants);return{header,stops,variants,courses,bytes:b.length}}
-root.RJParser={parse,parseHeader,decodeCP852,readZ,resolveText,hex};})(window);</script><script src="transfers-data.js"></script><script src="pks-rzeszow-data.js"></script><script src="mpk-rzeszow-data.js"></script><script src="rail-rzeszow-data.js"></script><script src="station-rail-data.js"></script><script src="ropczyce-data.js"></script><script src="ropczyce.js"></script><script src="transfers.js"></script><script src="mks-debica-data.js"></script><script src="mks-network-data.js"></script><script src="mks-network.js"></script><script src="timetable-sync.js"></script><script src="auto-gps.js"></script><script src="voice-gps.js"></script><script src="schedule-deviation.js"></script><script src="lcd-cycle.js"></script><script>(()=>{'use strict';
+root.RJParser={parse,parseHeader,decodeCP852,readZ,resolveText,hex};})(window);</script><script src="grg-audio-data.js"></script><script src="grg-audio.js"></script><script src="berdechow-audio-data.js"></script><script src="berdechow-audio.js"></script><script src="bundled-rj.js"></script><script src="reviewed-gps.js"></script><script src="user-rj.js"></script><script src="transfers-data.js"></script><script src="pks-rzeszow-data.js"></script><script src="mpk-rzeszow-data.js"></script><script src="rail-rzeszow-data.js"></script><script src="station-rail-data.js"></script><script src="ropczyce-data.js"></script><script src="ropczyce.js"></script><script src="monis-transfers-data.js"></script><script src="monis-transfers.js"></script><script src="transfers.js"></script><script src="mks-debica-data.js"></script><script src="mks-network-data.js"></script><script src="mks-network.js"></script><script src="timetable-sync.js"></script><script src="auto-gps.js"></script><script src="voice-gps.js"></script><script src="schedule-deviation.js"></script><script src="lcd-cycle.js"></script><script>(()=>{'use strict';
 const $=s=>document.querySelector(s), $$=s=>[...document.querySelectorAll(s)];
 let vehicleNumber='75';try{const n=localStorage.getItem('srgVehicleNumber');if(/^\d{1,8}$/.test(n||''))vehicleNumber=n}catch(e){}
 const state={nativeGpsCode:'INIT',gpsRequested:false,roadStatus:'GPS NIEURUCHOMIONY',view:'idle',returnView:'idle',menuPage:1,validatorOn:false,volume:90,speaker:'Wewn.',pendingStop:null,routeIndex:0,rj:null,course:null,variant:null,streams:[],serial:null,writer:null,reader:null,connected:false,mode:'mock',selectedDuty:'S-25',dayType:'O',tripChoiceIndex:0,tripChoiceEntries:[],tripChoiceFromNext:false,tripChoiceNoFuture:false,calendarMonth:new Date().getMonth(),calendarYear:new Date().getFullYear(),gpsWatch:null,gpsLast:null,driverLoggedIn:true,driverNumber:'',driverChangeReason:null,courseDepartureAt:null,courseStartedNotified:false};
@@ -321,6 +321,8 @@ const autoGpsTracker=window.SRGAutoGPS.createTracker();
  }
  function playNextStopAudio(stop){
   markManualLcdScreen('next',state.variant?.stops.indexOf(stop));
+  if(window.SRGGRGAudio?.playStop(stop,stop===state.variant?.stops?.at(-1)?'terminal':'next',isStopOnRequest(stop),nativeOrWebAudio,chimePath)){markLcdPhase('NEXT');return;}
+  if(window.SRGBerdechowAudio?.playStop(stop,stop===state.variant?.stops?.at(-1)?'terminal':'next',nativeOrWebAudio,chimePath)){markLcdPhase('NEXT');return;}
   if(!stop||!Number.isInteger(stop.id)||stop.id<1||stop.id>68||!stop.referenceCompatible)return;
   const isTerminal=stop===state.variant?.stops?.at(-1);
   if(state.variant){const old=state.variant.stops[state.routeIndex-1];if(old)transferAdState=String(old.id)}
@@ -335,6 +337,8 @@ const autoGpsTracker=window.SRGAutoGPS.createTracker();
  }
  function playArrivalAudio(stop){
   markManualLcdScreen('current',state.variant?.stops.indexOf(stop));
+  if(window.SRGGRGAudio?.playStop(stop,'arrival',isStopOnRequest(stop),nativeOrWebAudio,chimePath)){markLcdPhase('ARRIVAL');return;}
+  if(window.SRGBerdechowAudio?.playStop(stop,'arrival',nativeOrWebAudio,chimePath)){markLcdPhase('ARRIVAL');return;}
   if(!stop||!Number.isInteger(stop.id)||stop.id<1||stop.id>68||!stop.referenceCompatible)return;
   markLcdPhase('ARRIVAL');
   if(window.SRGNativeAudio?.announceName){try{window.SRGNativeAudio.announceName(stop.id,isStopOnRequest(stop));return}catch(e){}}
@@ -345,7 +349,7 @@ const autoGpsTracker=window.SRGAutoGPS.createTracker();
   nativeOrWebAudio([chimePath(),'inspection.mp3']);
  }
  function playStartAudio(){
-  if(!state.variant)return;const n=Number(state.variant.index);if(!Number.isInteger(n)||n<0||n>6)return;
+  if(!state.variant)return;if(window.SRGGRGAudio?.playStart(state.variant,nativeOrWebAudio,chimePath)){markLcdPhase('NORMAL');return;}if(window.SRGBerdechowAudio?.playStart(state.variant,nativeOrWebAudio,chimePath)){markLcdPhase('NORMAL');return;}const n=Number(state.variant.index);if(!Number.isInteger(n)||n<0||n>6)return;
   markLcdPhase('NORMAL');
   if(window.SRGNativeAudio?.announceStart){try{window.SRGNativeAudio.announceStart(n);return}catch(e){}}
   nativeOrWebAudio([chimePath(),'start/'+n+'.mp3']);
@@ -363,6 +367,7 @@ const autoGpsTracker=window.SRGAutoGPS.createTracker();
  }
  function lcdPublish(){
   if(!window.SRGLcd?.publish)return;
+  if(window.SRGOmsi?.enabled){try{window.SRGLcd.publish(JSON.stringify(window.SRGOmsi.lcdState(lcdConfig)))}catch(e){}return;}
   const ss=state.variant?.stops||[],i=Math.min(ss.length-1,Math.max(0,state.routeIndex));
   const active=!!(state.course&&state.variant&&(ss.length||state.course.extra));
   const currentStop=active?ss[i]:null, nextStop=active?ss[i+1]:null;
@@ -441,7 +446,7 @@ $('#gpsAutoToggle').onclick=()=>{
   autoGpsTracker.reset();autoGpsMessage=autoGpsEnabled?'CZEKAM NA ODJAZD +50 m':'WYŁĄCZONY';
   refreshAutoGpsIndicator();toast(autoGpsEnabled?'Automatyczne przystanki WŁ.':'Automatyczne przystanki WYŁ.');
 };
-const BUILTIN_RJ_NAME='rj261014.011';
+const BUILTIN_RJ_NAME=window.SRGBundledRJ?.name||'rj261014.011';
 const BUILTIN_STOP_GPS={"1":[50.053823,21.406459,50],"2":[50.051913,21.413043,50],"3":[50.053822,21.425586,50],"4":[50.054918,21.436174,50],"5":[50.055699,21.443685,50],"6":[50.056249,21.449251,50],"7":[50.057621,21.462417,50],"8":[50.058577,21.471733,50],"9":[50.059833,21.483642,50],"10":[50.0620407,21.5045144,50],"11":[50.0624325,21.5185452,50],"12":[50.0620426,21.542991,50],"13":[50.0616079,21.5694649,50],"14":[50.0525443,21.6042519,50],"15":[50.0541128,21.6186379,50],"16":[50.0599736,21.6373635,50],"17":[50.066924,21.6587487,50],"18":[50.0691856,21.6879728,50],"19":[50.0698148,21.6998686,50],"20":[50.0706515,21.7113932,50],"21":[50.0697977,21.7274294,50],"22":[50.0702671,21.7550767,50],"23":[50.0709121,21.7810494,50],"24":[50.0715475,21.8058767,50],"25":[50.0718007,21.820075,50],"26":[50.0715551,21.8379229,50],"27":[50.0714562,21.8673544,50],"28":[50.0716827,21.8966562,50],"29":[50.0698546,21.9106875,50],"30":[50.0650148,21.9299834,50],"31":[50.0484339,21.9750921,50],"32":[50.0458578,21.9807497,50],"33":[50.0427306,21.993837,50],"34":[50.042142,22.003124,50],"35":[50.066665,21.924328,50],"36":[50.070693,21.907476,50],"37":[50.071904,21.896568,50],"38":[50.071601,21.866263,50],"39":[50.0524284,21.415306,50],"40":[50.042318,22.002638,50],"41":[50.042954,21.9947375,50],"42":[50.046089,21.981827,50],"43":[50.048107,21.976277,50],"44":[50.071305,21.8413188,50],"45":[50.071805,21.81728,50],"46":[50.0714978,21.8043087,50],"47":[50.0709129,21.7792319,50],"48":[50.0703704,21.7567765,50],"49":[50.069872,21.7268972,50],"50":[50.0706732,21.7106835,50],"51":[50.0698148,21.6998686,50],"52":[50.0691701,21.6872574,50],"53":[50.0667562,21.6577844,50],"54":[50.0592805,21.6354096,50],"55":[50.0540577,21.6179497,50],"56":[50.0525443,21.6042519,50],"57":[50.0616829,21.5694048,50],"58":[50.0620802,21.5448616,50],"59":[50.0624817,21.5200717,50],"60":[50.0619292,21.5029012,50],"61":[50.0601422,21.4857899,50],"62":[50.0585513,21.4705012,50],"63":[50.0578201,21.4633498,50],"64":[50.0560323,21.4469312,50],"65":[50.0556242,21.4425001,50],"66":[50.0548371,21.4353362,50],"67":[50.0539792,21.4270437,50],"68":[50.053873,21.406634,50]};
 
 // Rzeczywiste godziny kursów S-25/1 i S-27/6 z fotografii.
@@ -468,6 +473,972 @@ const MANUAL_DUTIES=[
     {tripNo:4,variantIndex:1,startTime:'10:45',endTime:'12:04',photoTimesKey:'S-27:4',exactTimesOnly:true},
     {tripNo:5,variantIndex:0,startTime:'12:45',endTime:'14:05'},
     {tripNo:6,variantIndex:1,startTime:'14:20',endTime:'15:45',photoTimesKey:'S-27:6'}
+  ]
+},
+{
+  "id": "B",
+  "label": "Kursówka B",
+  "trips": [
+    {
+      "tripNo": 1,
+      "variantIndex": 10001,
+      "startTime": "07:10",
+      "endTime": "07:40",
+      "serviceCode": "DN",
+      "serviceDescription": "Od poniedziałku do piątku, oprócz świąt",
+      "endpointTimesOnly": true,
+      "routeStops": [
+        {
+          "id": 56,
+          "name": "Ropczyce Dworzec Autobusowy",
+          "street": "ZIELONA",
+          "lat": 50.0525443,
+          "lon": 21.6042519,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 69,
+          "name": "3-Maja Chechły 1",
+          "street": "3-MAJA",
+          "lat": 50.04306763982272,
+          "lon": 21.589422225952152,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 70,
+          "name": "3-Maja Chechły 2",
+          "street": "3-MAJA",
+          "lat": 50.03532761772727,
+          "lon": 21.577521264553074,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 71,
+          "name": "3-Maja Chechły 3",
+          "street": "3-MAJA",
+          "lat": 50.03020539026247,
+          "lon": 21.568787992000583,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 72,
+          "name": "Okonin",
+          "street": "OKONIN",
+          "lat": 50.0317646865386,
+          "lon": 21.556039452552795,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 73,
+          "name": "Łączki Kucharskie Łopuchowa 1",
+          "street": "ŁĄCZKI KUCHARSKIE",
+          "lat": 50.01982487275605,
+          "lon": 21.546785831451416,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 74,
+          "name": "Łączki Kucharskie Łopuchowa 2",
+          "street": "ŁĄCZKI KUCHARSKIE",
+          "lat": 50.009766176180676,
+          "lon": 21.553507447242737,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 75,
+          "name": "Łączki Kucharskie Kościół",
+          "street": "ŁĄCZKI KUCHARSKIE",
+          "lat": 49.99859503989411,
+          "lon": 21.56143069267273,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 76,
+          "name": "Broniszów",
+          "street": "BRONISZÓW",
+          "lat": 49.98883196188719,
+          "lon": 21.561811566352848,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 77,
+          "name": "Glinik Łysa Góra",
+          "street": "GLINIK",
+          "lat": 49.98003280307929,
+          "lon": 21.55927956104279,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 78,
+          "name": "Glinik Szkoła",
+          "street": "GLINIK",
+          "lat": 49.974092202208716,
+          "lon": 21.575877070426944,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 79,
+          "name": "Glinik OSP",
+          "street": "GLINIK",
+          "lat": 49.96625652520014,
+          "lon": 21.579251289367676,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 80,
+          "name": "Glinik Góra",
+          "street": "GLINIK",
+          "lat": 49.96145304894919,
+          "lon": 21.582791805267338,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 81,
+          "name": "Wielopole Skrzyńskie Rzegocin",
+          "street": "WIELOPOLE SKRZYŃSKIE",
+          "lat": 49.95326671070068,
+          "lon": 21.59848272800446,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 82,
+          "name": "Wielopole Skrzyńskie",
+          "street": "WIELOPOLE SKRZYŃSKIE",
+          "lat": 49.9460948,
+          "lon": 21.6147598,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 83,
+          "name": "Wielopole Skrzyńskie 1 19",
+          "street": "WIELOPOLE SKRZYŃSKIE",
+          "lat": 49.9478932,
+          "lon": 21.59926,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 84,
+          "name": "Brzeziny 17",
+          "street": "BRZEZINY",
+          "lat": 49.9453592,
+          "lon": 21.5862604,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 85,
+          "name": "Brzeziny Sklep 15",
+          "street": "BRZEZINY",
+          "lat": 49.9370248,
+          "lon": 21.5738603,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 86,
+          "name": "Brzeziny Klub 13",
+          "street": "BRZEZINY",
+          "lat": 49.9313486,
+          "lon": 21.5541834,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 87,
+          "name": "Brzeziny Skrzyżowanie 11",
+          "street": "BRZEZINY",
+          "lat": 49.9309539,
+          "lon": 21.5366224,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 88,
+          "name": "Brzeziny Berdechów 1 02 (Nowa Wieś)",
+          "street": "BRZEZINY",
+          "lat": 49.9233192,
+          "lon": 21.5387678,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 89,
+          "name": "Brzeziny Berdechów",
+          "street": "BRZEZINY",
+          "lat": 49.918051667471154,
+          "lon": 21.543344557285312,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        }
+      ],
+      "stopTimes": {
+        "69": "07:13",
+        "76": "07:29"
+      }
+    },
+    {
+      "tripNo": 2,
+      "variantIndex": 10002,
+      "startTime": "07:40",
+      "endTime": "08:30",
+      "serviceCode": "DN",
+      "serviceDescription": "Od poniedziałku do piątku, oprócz świąt",
+      "endpointTimesOnly": true,
+      "routeStops": [
+        {
+          "id": 96,
+          "name": "Brzeziny Berdechów",
+          "street": "BRZEZINY",
+          "lat": 49.91815701604678,
+          "lon": 21.543433070182804,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 90,
+          "name": "Brzeziny Berdechów 1 03 (Nowa Wieś)",
+          "street": "BRZEZINY",
+          "lat": 49.923512219874866,
+          "lon": 21.538894772529606,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 91,
+          "name": "Brzeziny Skrzyżowanie 10",
+          "street": "BRZEZINY",
+          "lat": 49.93076436922053,
+          "lon": 21.53645664453507,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 92,
+          "name": "Brzeziny Klub 08",
+          "street": "BRZEZINY",
+          "lat": 49.93150333651239,
+          "lon": 21.553424298763275,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 93,
+          "name": "Brzeziny Sklep 06",
+          "street": "BRZEZINY",
+          "lat": 49.937021061173084,
+          "lon": 21.574144363403324,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 94,
+          "name": "Brzeziny 04",
+          "street": "BRZEZINY",
+          "lat": 49.94533443670768,
+          "lon": 21.586512029170994,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 95,
+          "name": "Wielopole Skrzyńskie 1 02",
+          "street": "WIELOPOLE SKRZYŃSKIE",
+          "lat": 49.94768353389157,
+          "lon": 21.599526107311252,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 97,
+          "name": "Wielopole Skrzyńskie",
+          "street": "WIELOPOLE SKRZYŃSKIE",
+          "lat": 49.946080084668296,
+          "lon": 21.61483883857727,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 98,
+          "name": "Wielopole Skrzyńskie Rzegocin",
+          "street": "WIELOPOLE SKRZYŃSKIE",
+          "lat": 49.95400878438722,
+          "lon": 21.596948504447937,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 99,
+          "name": "Glinik Góra",
+          "street": "GLINIK",
+          "lat": 49.9614927348042,
+          "lon": 21.582990288734436,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 100,
+          "name": "Glinik OSP",
+          "street": "GLINIK",
+          "lat": 49.96637212019492,
+          "lon": 21.57942295074463,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 101,
+          "name": "Glinik Szkoła",
+          "street": "GLINIK",
+          "lat": 49.974133602661986,
+          "lon": 21.57614260911942,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 102,
+          "name": "Glinik Łysa Góra",
+          "street": "GLINIK",
+          "lat": 49.98050539778371,
+          "lon": 21.55969262123108,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 103,
+          "name": "Broniszów",
+          "street": "BRONISZÓW",
+          "lat": 49.989238940085436,
+          "lon": 21.56224608421326,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 104,
+          "name": "Łączki Kucharskie Kościół",
+          "street": "ŁĄCZKI KUCHARSKIE",
+          "lat": 49.99769847816067,
+          "lon": 21.563361883163452,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 105,
+          "name": "Łączki Kucharskie Łopuchowa 2",
+          "street": "ŁĄCZKI KUCHARSKIE",
+          "lat": 50.01016952975807,
+          "lon": 21.553754210472107,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 106,
+          "name": "Łączki Kucharskie Łopuchowa 1",
+          "street": "ŁĄCZKI KUCHARSKIE",
+          "lat": 50.018763259146645,
+          "lon": 21.5481698513031,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 107,
+          "name": "Okonin",
+          "street": "OKONIN",
+          "lat": 50.03165958639193,
+          "lon": 21.555961668491367,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 108,
+          "name": "3-Maja Chechły 3",
+          "street": "3-MAJA",
+          "lat": 50.030236404383544,
+          "lon": 21.56887382268906,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 109,
+          "name": "3-Maja Chechły 2",
+          "street": "3-MAJA",
+          "lat": 50.03539825343903,
+          "lon": 21.577907502651218,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 110,
+          "name": "3-Maja Chechły 1",
+          "street": "3-MAJA",
+          "lat": 50.043205443287334,
+          "lon": 21.589998900890354,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 14,
+          "name": "Ropczyce Dworzec Autobusowy",
+          "street": "ZIELONA",
+          "lat": 50.05252520688053,
+          "lon": 21.60426825284958,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 15,
+          "name": "Ropczyce Mickiewicza",
+          "street": "MICKIEWICZA",
+          "lat": 50.05404244671849,
+          "lon": 21.61877900362015,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        }
+      ],
+      "stopTimes": {
+        "92": "07:46"
+      }
+    },
+    {
+      "tripNo": 3,
+      "variantIndex": 10003,
+      "startTime": "13:18",
+      "endTime": "14:05",
+      "serviceCode": "SX",
+      "serviceDescription": "Wyłącznie w dni nauki szkolnej",
+      "endpointTimesOnly": true,
+      "routeStops": [
+        {
+          "id": 55,
+          "name": "Ropczyce Mickiewicza",
+          "street": "MICKIEWICZA",
+          "lat": 50.05418194082218,
+          "lon": 21.618639528751377,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 56,
+          "name": "Ropczyce Dworzec Autobusowy",
+          "street": "ZIELONA",
+          "lat": 50.0525443,
+          "lon": 21.6042519,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 69,
+          "name": "3-Maja Chechły 1",
+          "street": "3-MAJA",
+          "lat": 50.04306763982272,
+          "lon": 21.589422225952152,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 70,
+          "name": "3-Maja Chechły 2",
+          "street": "3-MAJA",
+          "lat": 50.03532761772727,
+          "lon": 21.577521264553074,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 71,
+          "name": "3-Maja Chechły 3",
+          "street": "3-MAJA",
+          "lat": 50.03020539026247,
+          "lon": 21.568787992000583,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 72,
+          "name": "Okonin",
+          "street": "OKONIN",
+          "lat": 50.0317646865386,
+          "lon": 21.556039452552795,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 73,
+          "name": "Łączki Kucharskie Łopuchowa 1",
+          "street": "ŁĄCZKI KUCHARSKIE",
+          "lat": 50.01982487275605,
+          "lon": 21.546785831451416,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 74,
+          "name": "Łączki Kucharskie Łopuchowa 2",
+          "street": "ŁĄCZKI KUCHARSKIE",
+          "lat": 50.009766176180676,
+          "lon": 21.553507447242737,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 75,
+          "name": "Łączki Kucharskie Kościół",
+          "street": "ŁĄCZKI KUCHARSKIE",
+          "lat": 49.99859503989411,
+          "lon": 21.56143069267273,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 76,
+          "name": "Broniszów",
+          "street": "BRONISZÓW",
+          "lat": 49.98883196188719,
+          "lon": 21.561811566352848,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 77,
+          "name": "Glinik Łysa Góra",
+          "street": "GLINIK",
+          "lat": 49.98003280307929,
+          "lon": 21.55927956104279,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 78,
+          "name": "Glinik Szkoła",
+          "street": "GLINIK",
+          "lat": 49.974092202208716,
+          "lon": 21.575877070426944,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 79,
+          "name": "Glinik OSP",
+          "street": "GLINIK",
+          "lat": 49.96625652520014,
+          "lon": 21.579251289367676,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 80,
+          "name": "Glinik Góra",
+          "street": "GLINIK",
+          "lat": 49.96145304894919,
+          "lon": 21.582791805267338,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 81,
+          "name": "Wielopole Skrzyńskie Rzegocin",
+          "street": "WIELOPOLE SKRZYŃSKIE",
+          "lat": 49.95326671070068,
+          "lon": 21.59848272800446,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 82,
+          "name": "Wielopole Skrzyńskie",
+          "street": "WIELOPOLE SKRZYŃSKIE",
+          "lat": 49.9460948,
+          "lon": 21.6147598,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 83,
+          "name": "Wielopole Skrzyńskie 1 19",
+          "street": "WIELOPOLE SKRZYŃSKIE",
+          "lat": 49.9478932,
+          "lon": 21.59926,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 84,
+          "name": "Brzeziny 17",
+          "street": "BRZEZINY",
+          "lat": 49.9453592,
+          "lon": 21.5862604,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 85,
+          "name": "Brzeziny Sklep 15",
+          "street": "BRZEZINY",
+          "lat": 49.9370248,
+          "lon": 21.5738603,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 86,
+          "name": "Brzeziny Klub 13",
+          "street": "BRZEZINY",
+          "lat": 49.9313486,
+          "lon": 21.5541834,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 87,
+          "name": "Brzeziny Skrzyżowanie 11",
+          "street": "BRZEZINY",
+          "lat": 49.9309539,
+          "lon": 21.5366224,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 88,
+          "name": "Brzeziny Berdechów 1 02 (Nowa Wieś)",
+          "street": "BRZEZINY",
+          "lat": 49.9233192,
+          "lon": 21.5387678,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 89,
+          "name": "Brzeziny Berdechów",
+          "street": "BRZEZINY",
+          "lat": 49.918051667471154,
+          "lon": 21.543344557285312,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        }
+      ],
+      "stopTimes": {
+        "56": "13:20",
+        "69": "13:23",
+        "76": "13:39",
+        "86": "13:58"
+      }
+    },
+    {
+      "tripNo": 4,
+      "variantIndex": 10004,
+      "startTime": "14:05",
+      "endTime": "14:50",
+      "serviceCode": "SX",
+      "serviceDescription": "Wyłącznie w dni nauki szkolnej",
+      "endpointTimesOnly": true,
+      "routeStops": [
+        {
+          "id": 96,
+          "name": "Brzeziny Berdechów",
+          "street": "BRZEZINY",
+          "lat": 49.91815701604678,
+          "lon": 21.543433070182804,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 90,
+          "name": "Brzeziny Berdechów 1 03 (Nowa Wieś)",
+          "street": "BRZEZINY",
+          "lat": 49.923512219874866,
+          "lon": 21.538894772529606,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 91,
+          "name": "Brzeziny Skrzyżowanie 10",
+          "street": "BRZEZINY",
+          "lat": 49.93076436922053,
+          "lon": 21.53645664453507,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 92,
+          "name": "Brzeziny Klub 08",
+          "street": "BRZEZINY",
+          "lat": 49.93150333651239,
+          "lon": 21.553424298763275,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 93,
+          "name": "Brzeziny Sklep 06",
+          "street": "BRZEZINY",
+          "lat": 49.937021061173084,
+          "lon": 21.574144363403324,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 94,
+          "name": "Brzeziny 04",
+          "street": "BRZEZINY",
+          "lat": 49.94533443670768,
+          "lon": 21.586512029170994,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 95,
+          "name": "Wielopole Skrzyńskie 1 02",
+          "street": "WIELOPOLE SKRZYŃSKIE",
+          "lat": 49.94768353389157,
+          "lon": 21.599526107311252,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 97,
+          "name": "Wielopole Skrzyńskie",
+          "street": "WIELOPOLE SKRZYŃSKIE",
+          "lat": 49.946080084668296,
+          "lon": 21.61483883857727,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 98,
+          "name": "Wielopole Skrzyńskie Rzegocin",
+          "street": "WIELOPOLE SKRZYŃSKIE",
+          "lat": 49.95400878438722,
+          "lon": 21.596948504447937,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 99,
+          "name": "Glinik Góra",
+          "street": "GLINIK",
+          "lat": 49.9614927348042,
+          "lon": 21.582990288734436,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 100,
+          "name": "Glinik OSP",
+          "street": "GLINIK",
+          "lat": 49.96637212019492,
+          "lon": 21.57942295074463,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 101,
+          "name": "Glinik Szkoła",
+          "street": "GLINIK",
+          "lat": 49.974133602661986,
+          "lon": 21.57614260911942,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 102,
+          "name": "Glinik Łysa Góra",
+          "street": "GLINIK",
+          "lat": 49.98050539778371,
+          "lon": 21.55969262123108,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 103,
+          "name": "Broniszów",
+          "street": "BRONISZÓW",
+          "lat": 49.989238940085436,
+          "lon": 21.56224608421326,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 104,
+          "name": "Łączki Kucharskie Kościół",
+          "street": "ŁĄCZKI KUCHARSKIE",
+          "lat": 49.99769847816067,
+          "lon": 21.563361883163452,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 105,
+          "name": "Łączki Kucharskie Łopuchowa 2",
+          "street": "ŁĄCZKI KUCHARSKIE",
+          "lat": 50.01016952975807,
+          "lon": 21.553754210472107,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 106,
+          "name": "Łączki Kucharskie Łopuchowa 1",
+          "street": "ŁĄCZKI KUCHARSKIE",
+          "lat": 50.018763259146645,
+          "lon": 21.5481698513031,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 107,
+          "name": "Okonin",
+          "street": "OKONIN",
+          "lat": 50.03165958639193,
+          "lon": 21.555961668491367,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 108,
+          "name": "3-Maja Chechły 3",
+          "street": "3-MAJA",
+          "lat": 50.030236404383544,
+          "lon": 21.56887382268906,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 109,
+          "name": "3-Maja Chechły 2",
+          "street": "3-MAJA",
+          "lat": 50.03539825343903,
+          "lon": 21.577907502651218,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 110,
+          "name": "3-Maja Chechły 1",
+          "street": "3-MAJA",
+          "lat": 50.043205443287334,
+          "lon": 21.589998900890354,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        },
+        {
+          "id": 14,
+          "name": "Ropczyce Dworzec Autobusowy",
+          "street": "ZIELONA",
+          "lat": 50.05252520688053,
+          "lon": 21.60426825284958,
+          "gpsRadius": 50,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-03"
+        }
+      ],
+      "stopTimes": {
+        "92": "14:11"
+      }
+    }
   ]
 }
 ];
@@ -517,7 +1488,7 @@ function renderDutySelect(){
    if(!entries.some(c=>String(c.index)===String(state.selectedManual)))state.selectedManual=entries[0]?.index;
    for(const c of entries){const v=state.rj?.variants?.find(v=>v.index===c.variantIndex),b=document.createElement('button');
     b.className='taskItem manualCourse'+(String(state.selectedManual)===String(c.index)?' active':'');
-    b.textContent=(c.startTime||'--:--')+' → '+(c.endTime||'--:--')+' · '+finalDirection(v)+' · '+(c.task||'RJ')+(c.standalone?'':' / '+(c.tripNo||c.courseNo||c.index+1));
+    b.textContent=(c.startTime||'--:--')+' → '+(c.endTime||'--:--')+' · '+finalDirection(v)+' · '+(c.task||'RJ')+(c.standalone?'':' / '+(c.tripNo||c.courseNo||c.index+1))+(c.serviceCode?' · '+c.serviceCode:'');b.title=c.serviceDescription||'';
     b.onclick=()=>{state.selectedManual=c.index;renderDutySelect()};el.appendChild(b);
    }
    $('#dutyConfirm').disabled=!entries.length;
@@ -613,7 +1584,7 @@ function renderTripChoice(){
  $('#tripLine').textContent=v?.line||c.line||'1';$('#tripBrigade').textContent=c.brigade||'1';
  $('#tripCounter').textContent=`${state.tripChoiceIndex+1}/${es.length} (${c.startTime})`;
  const departed=hhmmToMinutes(c.startTime)<nowMinutes();
- $('#tripDepartureHint').textContent=departed?'Odjazd z pierwszego przystanku już minął':'Odjazd z pierwszego przystanku: '+c.startTime;
+ $('#tripDepartureHint').textContent=(departed?'Odjazd z pierwszego przystanku już minął':'Odjazd z pierwszego przystanku: '+c.startTime)+(c.serviceCode?' · '+c.serviceCode+' — '+c.serviceDescription:'');
  $('#tripNoFuture').hidden=!state.tripChoiceNoFuture;
  $('#tripOk').disabled=false;
 }
@@ -1042,13 +2013,14 @@ function applyRJBuffer(buf,name,source='plik'){
   linkRJReference(r,reference);
   const standardNames=new Map(reference.stops.map(x=>[x.id,String(x.name).trim().toUpperCase()]));
   for(const s of r.stops){const gps=BUILTIN_STOP_GPS[s.id];
-    if(gps&&standardNames.get(s.id)===String(s.name).trim().toUpperCase()){s.lat=gps[0];s.lon=gps[1];s.gpsRadius=gps[2];s.gpsVerified=false;}}state.rj=r;state.course=null;state.variant=null;state.routeIndex=0;state.pendingStop=null;resetAutoGpsCandidate();lcdManualScreen=null;transferAdState='';lcdPhase='NORMAL';lcdPhaseUntil=0;
+    if(gps&&standardNames.get(s.id)===String(s.name).trim().toUpperCase()){s.lat=gps[0];s.lon=gps[1];s.gpsRadius=gps[2];s.gpsVerified=false;}}window.SRGUserRJ?.attachGPS(r);state.rj=r;state.course=null;state.variant=null;state.routeIndex=0;state.pendingStop=null;resetAutoGpsCandidate();lcdManualScreen=null;transferAdState='';lcdPhase='NORMAL';lcdPhaseUntil=0;
   $('#rjStatusBox').textContent=`Wczytano: ${name} · ${r.bytes} B · ${source}`;
   $('#rjInfo').innerHTML=`<div><small>Data RJ</small><b>${r.header.date||'?'}</b></div><div><small>Przystanki</small><b>${r.stops.length}</b></div><div><small>Warianty</small><b>${r.variants.length}</b></div><div><small>Kursy Krs</small><b>${r.courses?.length||0}</b></div>`;
   renderVariants();renderCourses();renderNoActiveCourse();lcdPublish();return r;
 }
 function builtinBytes(){const raw=atob(BUILTIN_RJ_B64),a=new Uint8Array(raw.length);for(let i=0;i<raw.length;i++)a[i]=raw.charCodeAt(i);return a.buffer}
-function loadBuiltinRJ(showToast=true){try{const r=applyRJBuffer(builtinBytes(),BUILTIN_RJ_NAME,'wbudowany');if(showToast)toast(`Wbudowany RJ: ${r.variants.length} wariantów`);return r}catch(err){$('#rjStatusBox').textContent='Błąd wbudowanego RJ: '+err.message;if(showToast)toast('Błąd wbudowanego RJ');return null}}
+function loadBuiltinRJ(showToast=true){try{const r=applyRJBuffer(window.SRGUserRJ?window.SRGUserRJ.bytes(builtinBytes):builtinBytes(),BUILTIN_RJ_NAME,'wbudowany');if(showToast)toast(`Wbudowany RJ: ${r.variants.length} wariantów`);return r}catch(err){$('#rjStatusBox').textContent='Błąd wbudowanego RJ: '+err.message;if(showToast)toast('Błąd wbudowanego RJ');return null}}
+$('#rjBuiltin').textContent='Wbudowany RJ: '+BUILTIN_RJ_NAME;
 $('#rjBuiltin').onclick=()=>loadBuiltinRJ(true);
 $('#rjChoose').onclick=()=>$('#rjFile').click();
 $('#rjFile').onchange=async e=>{const f=e.target.files?.[0];if(!f)return;try{const buf=await f.arrayBuffer();applyRJBuffer(buf,f.name,'plik użytkownika');toast('RJ wczytany')}catch(err){$('#rjStatusBox').textContent='Błąd RJ: '+err.message;toast('Nie udało się wczytać RJ')}};
@@ -1068,6 +2040,7 @@ function minutesToHHMM(v){v=((Math.round(v)%1440)+1440)%1440;return String(Math.
 function plannedTimeInfo(index,total){
  const c=state.course,ss=state.variant?.stops||[];
  if(!c?.manualDuty||!c.startTime||!c.endTime||index<0||index>=ss.length)return {time:null,estimated:false};
+ if(c.endpointTimesOnly)return {time:index===0?c.startTime:index===ss.length-1?c.endTime:c.stopTimes?.[ss[index]?.id]||null,estimated:false};
  if(c.photoTimesKey){
    const photo=PHOTO_STOP_TIMES_BY_COURSE[c.photoTimesKey]||{};
    const id=ss[index]?.id,exact=id==null?null:photo[id];
@@ -1090,7 +2063,16 @@ function plannedTimeInfo(index,total){
  return {time:times[index]||null,estimated:true};
 }
 function plannedTimeAtStop(index,total){return plannedTimeInfo(index,total).time;}
-function manualCourseEntries(){const out=[];for(const duty of MANUAL_DUTIES){for(const t of duty.trips){out.push({index:'manual-'+duty.id+'-'+t.tripNo,manualDuty:true,task:duty.id,tripNo:t.tripNo,variantIndex:t.variantIndex,startTime:t.startTime,endTime:t.endTime,photoTimesKey:t.photoTimesKey||null,exactTimesOnly:!!t.exactTimesOnly,line:'1',courseNo:duty.id})}}out.push({index:'video-1010',manualDuty:true,standalone:true,task:'Bez kursówki',tripNo:1,variantIndex:1,startTime:'10:10',endTime:'11:29',photoTimesKey:'VIDEO:1010',exactTimesOnly:true,line:'1',courseNo:'10:10'});return out.flatMap(c=>{const index=state.rj?.referenceVariants?.[c.variantIndex];return Number.isInteger(index)?[{...c,variantIndex:index,line:state.rj.variants.find(v=>v.index===index)?.line||c.line}]:[]})}
+function manualCourseEntries(){const out=[];for(const duty of MANUAL_DUTIES){for(const t of duty.trips){out.push({...t,index:'manual-'+duty.id+'-'+t.tripNo,manualDuty:true,task:duty.id,tripNo:t.tripNo,variantIndex:t.variantIndex,startTime:t.startTime,endTime:t.endTime,photoTimesKey:t.photoTimesKey||null,exactTimesOnly:!!t.exactTimesOnly,line:'1',courseNo:duty.id})}}out.push({index:'video-1010',manualDuty:true,standalone:true,task:'Bez kursówki',tripNo:1,variantIndex:1,startTime:'10:10',endTime:'11:29',photoTimesKey:'VIDEO:1010',exactTimesOnly:true,line:'1',courseNo:'10:10'});return out.flatMap(c=>{let index=state.rj?.referenceVariants?.[c.variantIndex];
+ if(c.routeStops&&state.rj){
+   let v=state.rj.variants.find(v=>v.srgDutyCourse===c.index);
+   if(!v){const used=new Set(state.rj.variants.map(v=>v.index));index=c.variantIndex;while(used.has(index))index++;
+     v={index,srgDutyCourse:c.index,line:'—',code:'B-'+c.tripNo,variantNo:c.tripNo,stops:c.routeStops.map(stop=>({...stop}))};
+     state.rj.variants.push(v);
+   }
+   index=v.index;
+ }
+return Number.isInteger(index)?[{...c,variantIndex:index,line:state.rj.variants.find(v=>v.index===index)?.line||c.line}]:[]})}
 function renderNoActiveCourse(){if(state.variant)return;$('#courseLine').textContent='—';$('#courseDest').textContent='WYBIERZ KURS';$('#courseTask').textContent='—';$('#courseStopCount').textContent='0/0';$('#courseRoad').textContent='—';$('#courseCurrent').textContent='--:-- BRAK AKTYWNEGO KURSU';$('#courseNext1').textContent='--:-- —';$('#courseNext2').textContent='--:-- —';$('#courseDelay').textContent='00:00';$('#camCurrent').textContent='—';$('#camEnd').textContent='—';$('#camDelay').textContent='00:00'}
 function renderCourses(){
  const el=$('#coursePickerList');if(!el)return;el.innerHTML='';
@@ -1102,7 +2084,7 @@ function renderCourses(){
  for(const duty of MANUAL_DUTIES){
    const entries=manualCourseEntries().filter(c=>c.task===duty.id);
    if(!entries.length)continue;
-   const g=document.createElement('div');g.className='coursePickerGroup';g.textContent=`Kursówka ${duty.label}`;el.appendChild(g);
+   const g=document.createElement('div');g.className='coursePickerGroup';g.textContent=(duty.id==='B'?duty.label:`Kursówka ${duty.label}`);el.appendChild(g);
    entries.forEach(c=>{const v=state.rj?.variants?.find(x=>x.index===c.variantIndex);const dir=finalDirection(v);const b=document.createElement('button');b.className='coursePickBtn manualDuty';b.type='button';b.innerHTML=`<strong>${duty.label} · przejazd ${c.tripNo}/${duty.trips.length} · ${c.startTime}–${c.endTime}</strong><span>${dir}</span>`;b.onclick=()=>selectCourse(c);el.appendChild(b)})
  }
  if(!cs.length&&!MANUAL_DUTIES.length)el.innerHTML='<div class="dim">Brak kursów.</div>';
@@ -1164,6 +2146,6 @@ $('#extraDisplay').onclick=()=>extraAction(false,true);$('#extraSaveDisplay').on
 $('#extraPasswordSave').onclick=async()=>{if(!extraUnlocked)return;try{const p=$('#extraNewPassword').value;if(p.length<4)throw Error('Nowe hasło musi mieć co najmniej 4 znaki.');if(p!==$('#extraConfirmPassword').value)throw Error('Hasła nie są jednakowe.');const hash=await passwordHash(p);if(!extraUnlocked||state.view!=='extraPassword')return;localStorage.setItem('srgExtraPasswordHash',hash);$('#extraNewPassword').value='';$('#extraConfirmPassword').value='';toast('Hasło zmienione');go('settings')}catch(e){$('#extraPasswordStatus').textContent=e.message}};
 try{const v=window.SRGApp?.version();if(v){$('#appVersion').textContent='v'+v+' LCD';document.title='SRG Mobile v'+v;generic.info[2]='SRG Mobile v'+v+' · profil REVVL Tab 2.'}}catch(e){}
 
-loadBuiltinRJ(false);renderNoActiveCourse();refreshAutoGpsIndicator();refreshVoiceIndicator();updateClocks();renderIdle();const restored=restoreSession();go(restored?'course':'idle');setInterval(updateDepartureUI,1000);setInterval(renderRoad,5000);window.__srg={state,go,refreshCourse,loadBuiltinRJ,applyRJBuffer,finalDirection,renderCourses,openCoursePicker,closeCoursePicker,selectCourse,renderDutySelect,openTripChoice,renderTripChoice,nearestFutureIndex,dutyEntries,finishCurrentTrip,nextTripSameDuty,askLogout,openDriverChange,startGps,stopGps,departureDateForCourse,formatDepartureDifference,updateDepartureUI,closeCourseStarted,updateGpsFix,processAutoGpsFix,processVoiceGpsFix,refreshAutoGpsIndicator,refreshVoiceIndicator,restoreSession,persistSession,renderRoad,roadMeters,roadProjection};
+loadBuiltinRJ(false);renderNoActiveCourse();refreshAutoGpsIndicator();refreshVoiceIndicator();updateClocks();renderIdle();const restored=restoreSession();go(restored?'course':'idle');setInterval(updateDepartureUI,1000);setInterval(renderRoad,5000);window.__srg={publishLcd:lcdPublish,state,go,refreshCourse,loadBuiltinRJ,applyRJBuffer,finalDirection,renderCourses,openCoursePicker,closeCoursePicker,selectCourse,renderDutySelect,openTripChoice,renderTripChoice,nearestFutureIndex,dutyEntries,finishCurrentTrip,nextTripSameDuty,askLogout,openDriverChange,startGps,stopGps,departureDateForCourse,formatDepartureDifference,updateDepartureUI,closeCourseStarted,updateGpsFix,processAutoGpsFix,processVoiceGpsFix,refreshAutoGpsIndicator,refreshVoiceIndicator,restoreSession,persistSession,renderRoad,roadMeters,roadProjection};
 })();</script><script src="rg-replay-data.js"></script><script src="rg-usb.js"></script><script src="ibis.js"></script><script src="omsi.js"></script></body></html>
 

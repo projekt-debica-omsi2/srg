@@ -1,0 +1,8 @@
+SRG Mobile 1.4.85 - komplet do recznego wyslania do repo
+
+Gotowe MP3: 110 przystankow + 11 kierunkow, Marek Neural, tempo -4%.
+RJ: oryginalny eksport uzytkownika rj261104.011, bez modyfikacji bajtow.
+Uruchom PRZYGOTUJ_RJ.cmd, potem SPAKUJ_DO_REPO.cmd.
+Rozpakuj ZIP do lokalnej kopii repo i wyslij pliki jako commit. Sam ZIP nie jest APK.
+
+UWAGA: eksport RJ zawiera zerowe wspolrzedne GPS. Aplikacja uzywa zatwierdzonego GPS dolaczonego osobno. GPS dla fizycznego sterownika wymaga poprawnego ponownego eksportu i sprawdzenia.

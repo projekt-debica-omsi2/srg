@@ -1,0 +1,57 @@
+[
+  {
+    "number": 1,
+    "code": "K0001",
+    "name": "DĘBICA DWORZEC AUTOBUSOWY > RZESZÓW DWORZEC AUTOBUSOWY"
+  },
+  {
+    "number": 2,
+    "code": "K0002",
+    "name": "RZESZÓW DWORZEC AUTOBUSOWY > DĘBICA DWORZEC AUTOBUSOWY"
+  },
+  {
+    "number": 3,
+    "code": "K0003",
+    "name": "DĘBICA DWORZEC AUTOBUSOWY > ROPCZYCE DWORZEC AUTOBUSOWY"
+  },
+  {
+    "number": 4,
+    "code": "K0004",
+    "name": "ROPCZYCE DWORZEC AUTOBUSOWY > RZESZÓW DWORZEC AUTOBUSOWY"
+  },
+  {
+    "number": 5,
+    "code": "K0005",
+    "name": "DĘBICA DWORZEC AUTOBUSOWY > RZESZÓW DWORZEC LOKALNY"
+  },
+  {
+    "number": 6,
+    "code": "K0006",
+    "name": "RZESZÓW DWORZEC LOKALNY > DĘBICA DWORZEC AUTOBUSOWY"
+  },
+  {
+    "number": 7,
+    "code": "K0007",
+    "name": "RZESZÓW DWORZEC LOKALNY > ROPCZYCE DWORZEC AUTOBUSOWY"
+  },
+  {
+    "number": 8,
+    "code": "K0008",
+    "name": "ROPCZYCE DWORZEC AUTOBUSOWY > BRZEZINY BERDECHÓW"
+  },
+  {
+    "number": 9,
+    "code": "K0009",
+    "name": "BRZEZINY BERDECHÓW > ROPCZYCE MICKIEWICZA"
+  },
+  {
+    "number": 10,
+    "code": "K000A",
+    "name": "ROPCZYCE MICKIEWICZA > BRZEZINY BERDECHÓW"
+  },
+  {
+    "number": 11,
+    "code": "K000B",
+    "name": "BRZEZINY BERDECHÓW > ROPCZYCE DWORZEC AUTOBUSOWY"
+  }
+]
