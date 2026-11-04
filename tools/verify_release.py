@@ -18,7 +18,8 @@ if os.environ.get('SRG_EDITION')=='public':
     import zipfile
     with zipfile.ZipFile(apk) as z:
         names=z.namelist()
-        forbidden=[n for n in names if n.startswith('assets/') and (n.lower().endswith(('.011','.mp3')) or any(x in n for x in ['bundled-rj','reviewed-gps','grg-audio-data','transfers-data','replay-data']))]
+        generic={'assets/audio/chimes/'+str(i)+'.mp3' for i in range(1,5)}|{'assets/audio/'+n+'.mp3' for n in ['next','terminal','inspection','na_zadanie']}
+        forbidden=[n for n in names if n.startswith('assets/') and (n.lower().endswith('.011') or (n.lower().endswith('.mp3') and n not in generic) or any(x in n for x in ['bundled-rj','reviewed-gps','grg-audio-data','transfers-data','replay-data']))]
         if forbidden:raise SystemExit('Public APK zawiera dane kierowcy: '+str(forbidden))
         if b"public:true" not in z.read('assets/edition.js'):raise SystemExit('Brak flagi wersji publicznej')
 print('Zweryfikowano stały podpis, pakiet i wersję APK.')
