@@ -1,10 +1,18 @@
-name: Build SRG Mobile 1.4.84 APK
+name: Build SRG Mobile 1.4.86 Public and Driver APK
 on:
   workflow_dispatch:
   push:
     paths:
       - 'app/**'
       - 'tests/**'
+      - 'rj/**'
+      - 'tools/prepare_rj.py'
+      - 'tools/prepare_public.py'
+      - 'generator-grg/**'
+      - 'GENERUJ_BERDECHOW.py'
+      - 'ZAPOWIEDZI_BERDECHOW.json'
+      - 'NAGRANIA_BERDECHOW_SHA256.json'
+      - 'GPS_BERDECHOW_ZATWIERDZONY.json'
       - 'gradle.properties'
       - '*.gradle'
       - 'settings.gradle'
@@ -12,6 +20,12 @@ on:
 jobs:
   build:
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        edition: [driver, public]
+    env:
+      SRG_EDITION: ${{ matrix.edition }}
     permissions:
       contents: read
     steps:
@@ -26,6 +40,10 @@ jobs:
           test -n "$SDKMANAGER"
           yes | "$SDKMANAGER" --licenses >/dev/null || true
           "$SDKMANAGER" 'platforms;android-35' 'build-tools;35.0.0'
+      - name: Prepare user-generated RJ and verify new recordings
+        run: |
+          python3 tools/prepare_rj.py --require
+          python3 tools/prepare_grg.py
       - name: Test OMSI source guards
         run: |
           node tests/test-omsi-source.cjs
@@ -53,6 +71,13 @@ jobs:
           node tests/test-manual-lcd.cjs
           node tests/test-s27-1045.cjs
           node tests/test-transfers.cjs
+          node tests/test-monis-brzezowka.cjs
+          node tests/test-berdechow-audio.cjs
+          node tests/test-grg-audio.cjs
+          python3 -m unittest discover -s tests -p test_user_rj.py
+          python3 -m unittest discover -s tests -p test_grg_pronunciation.py
+          node tests/test-local-timetable.cjs
+          python3 -m unittest discover -s tests -p test_public_assets.py
           node tests/test-pks-transfers.cjs
           node tests/test-rzeszow-rail.cjs
           node tests/test-weekend-hubs.cjs
@@ -94,7 +119,7 @@ jobs:
         env:
           SRG_KEYSTORE_PATH: ${{ runner.temp }}/srg-release.p12
           SRG_KEYSTORE_PASSWORD: ${{ secrets.SRG_KEYSTORE_PASSWORD }}
-        run: gradle --no-daemon :app:testDebugUnitTest :app:assembleRelease
+        run: gradle --no-daemon -PsrgPublic=${{ matrix.edition == 'public' }} :app:testDebugUnitTest :app:assembleRelease
       - name: Verify signature and package
         env:
           SRG_SIGNING_CERT_SHA256: ${{ secrets.SRG_SIGNING_CERT_SHA256 }}
@@ -105,7 +130,7 @@ jobs:
       - name: Publish APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: SRG-Mobile-v1.4.84-OMSI-RS485-KURSOWKI-LCD-LAN-release
+          name: SRG-Mobile-v1.4.86-${{ matrix.edition }}-release
           path: app/build/outputs/apk/release/app-release.apk
           if-no-files-found: error
 

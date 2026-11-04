@@ -1,0 +1,9 @@
+﻿GENERATOR Z GRG — POPRAWKA WSZYSTKICH 11 KIERUNKÓW
+1. Rozpakuj tę NOWĄ paczkę. Uruchom GENERUJ_Z_GRG.cmd.
+2. Domyślnie czyta dołączony grgmonis.skl z kodami zgodnymi z projektem AutoEdit v18. Nie wybiera już starej listy z Pulpitu, która miała siedem K0001.
+3. Wynik zapisuje do Pulpit/grg/MP3, jeżeli folder istnieje. Zachowaj znajdujący się tam NAGRANIA_GRG_SHA256.json: niezmienione nagrania zostaną pominięte. Poprzednie zmienione MP3 trafią do _kopie.
+4. Powstaje 110 plików przystankowych P oraz 11 kierunkowych K, razem 121. Każdy kierunek mówi: Kierunek: [początek], [koniec].
+5. Do fizycznego sterownika wygeneruj nowy RJ i GRG z projektu AutoEdit v18, żeby kody K0001–K000B zgadzały się z nagraniami. Nie łącz nowych plików K z poprzednim RJ z v17.
+6. Lista grgmonis.skl w tej paczce jest Twoim eksportem z poprawionymi wyłącznie kodami siedmiu starych kierunków, zgodnie z NR_KOM projektu v18. Nazwy i numery przystanków zachowane.
+Teksty przed generowaniem: PODGLAD_BEZ_GENEROWANIA.cmd. Numery słupków pomijane w mowie jak wcześniej. Komentarze techniczne i znaczniki !/* nie są czytane. Głos Marek Neural, wymagany internet i Python 3.
+Nie wykonano generowania mowy online ani nowego eksportu RJ w tej sesji.

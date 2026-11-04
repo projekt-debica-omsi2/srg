@@ -1,0 +1,13 @@
+const fs=require('fs'),vm=require('vm'),assert=require('assert/strict');
+const ctx={TextEncoder};vm.createContext(ctx);vm.runInContext(fs.readFileSync('app/src/main/assets/local-timetable.js','utf8'),ctx);
+const {parse,example}=ctx.SRGLocalTimetable;
+const p=parse(example);assert.equal(p.duties.length,1);assert.equal(p.rj.courses.length,2);assert.equal(p.rj.variants[1].stops[0].name,'Centrum powrót');assert.equal(p.rj.courses[0].localStopTimes[1],'07:15');
+assert.throws(()=>parse(example.replace('07:00','25:00')),/godzina/);
+assert.throws(()=>parse(example.replace('3 | Centrum powrót','1 | Centrum powrót')),/To samo ID/);
+assert.throws(()=>parse(example.replace('07:15 | 2 | Centrum | Rynek','07:15 | 2 | Centrum | Rynek | 95 | 20')),/GPS/);
+assert.throws(()=>parse(example.slice(0,example.lastIndexOf('KONIEC'))),/KONIEC/);
+assert.throws(()=>parse(''),/Każda kursówka/);
+const overnight=parse(example.replace('07:00','23:55').replace('07:15','00:10'));assert.equal(overnight.rj.courses[0].endTime,'00:10');
+const gps=parse(example.replace('Dworzec | Kolejowa','Dworzec | Kolejowa | 50,1 | 21,2'));assert.equal(gps.rj.stops[0].lat,50.1);
+const h=fs.readFileSync('app/src/main/assets/index.html','utf8');for(const s of h.matchAll(/<script(?:\s[^>]*)?>([\s\S]*?)<\/script>/g))new vm.Script(s[1]);
+console.log('Local timetable: round trip, GPS, times, duplicate IDs, midnight and script syntax OK');

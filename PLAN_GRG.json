@@ -1,0 +1,904 @@
+{
+  "source": "C:\\srg mobile\\wydania\\1.4.85\\GENERATOR_Z_GRG\\grgmonis.skl",
+  "sourceSHA256": "bd2ff05592ee68819c385c3152d6e4d366d4bde9c2f83b932932173867fbf392",
+  "voice": "pl-PL-MarekNeural",
+  "rate": "-4%",
+  "jobs": [
+    {
+      "id": 1,
+      "file": "P0001.mp3",
+      "name": "DĘBICA DWORZEC AUTOBUSOWY",
+      "text": "Dębica, dworzec autobusowy.",
+      "onRequest": false
+    },
+    {
+      "id": 2,
+      "file": "P0002.mp3",
+      "name": "ZURT",
+      "text": "Zurt.",
+      "onRequest": false
+    },
+    {
+      "id": 3,
+      "file": "P0003.mp3",
+      "name": "DĘBICA RZESZOWSKA TECHNIKUM",
+      "text": "Dębica, rzeszowska technikum.",
+      "onRequest": false
+    },
+    {
+      "id": 4,
+      "file": "P0004.mp3",
+      "name": "DĘBICA RZESZOWSKA RAJ",
+      "text": "Dębica, rzeszowska raj.",
+      "onRequest": false
+    },
+    {
+      "id": 5,
+      "file": "P0005.mp3",
+      "name": "DĘBICA RZESZOWSKA MKS",
+      "text": "Dębica, Rzeszowska MKS.",
+      "onRequest": false
+    },
+    {
+      "id": 6,
+      "file": "P0006.mp3",
+      "name": "DĘBICA RZESZOWSKA NADLEŚNICTWO",
+      "text": "Dębica, rzeszowska nadleśnictwo.",
+      "onRequest": false
+    },
+    {
+      "id": 7,
+      "file": "P0007.mp3",
+      "name": "NAGAWCZYNA 1",
+      "text": "Nagawczyna jeden.",
+      "onRequest": false
+    },
+    {
+      "id": 8,
+      "file": "P0008.mp3",
+      "name": "NAGAWCZYNA 2",
+      "text": "Nagawczyna dwa.",
+      "onRequest": false
+    },
+    {
+      "id": 9,
+      "file": "P0009.mp3",
+      "name": "ZAWADA E4",
+      "text": "Zawada e cztery.",
+      "onRequest": false
+    },
+    {
+      "id": 10,
+      "file": "P000A.mp3",
+      "name": "LUBZINA OSIEDLE",
+      "text": "Lubzina osiedle.",
+      "onRequest": false
+    },
+    {
+      "id": 11,
+      "file": "P000B.mp3",
+      "name": "LUBZINA E4",
+      "text": "Lubzina e cztery.",
+      "onRequest": false
+    },
+    {
+      "id": 12,
+      "file": "P000C.mp3",
+      "name": "BRZEZÓWKA",
+      "text": "Brzezówka.",
+      "onRequest": false
+    },
+    {
+      "id": 13,
+      "file": "P000D.mp3",
+      "name": "ROPCZYCE PODSŁOŃCE",
+      "text": "Ropczyce, podsłońce.",
+      "onRequest": false
+    },
+    {
+      "id": 14,
+      "file": "P000E.mp3",
+      "name": "ROPCZYCE DWORZEC AUTOBUSOWY",
+      "text": "Ropczyce, dworzec autobusowy.",
+      "onRequest": false
+    },
+    {
+      "id": 15,
+      "file": "P000F.mp3",
+      "name": "ROPCZYCE MICKIEWICZA",
+      "text": "Ropczyce, mickiewicza.",
+      "onRequest": false
+    },
+    {
+      "id": 16,
+      "file": "P0010.mp3",
+      "name": "ROPCZYCE WITKOWICE",
+      "text": "Ropczyce, witkowice.",
+      "onRequest": false
+    },
+    {
+      "id": 17,
+      "file": "P0011.mp3",
+      "name": "ROPCZYCE WESOŁA",
+      "text": "Ropczyce, wesoła.",
+      "onRequest": false
+    },
+    {
+      "id": 18,
+      "file": "P0012.mp3",
+      "name": "SĘDZISZÓW MAŁOPOLSKI OSIEDLE MŁODYCH",
+      "text": "Sędziszów Małopolski, osiedle młodych.",
+      "onRequest": false
+    },
+    {
+      "id": 19,
+      "file": "P0013.mp3",
+      "name": "SĘDZISZÓW MAŁOPOLSKI RYNEK",
+      "text": "Sędziszów Małopolski, rynek.",
+      "onRequest": false
+    },
+    {
+      "id": 20,
+      "file": "P0014.mp3",
+      "name": "SĘDZISZÓW MAŁOPOLSKI PIŁSUDSKIEGO",
+      "text": "Sędziszów Małopolski, piłsudskiego.",
+      "onRequest": false
+    },
+    {
+      "id": 21,
+      "file": "P0015.mp3",
+      "name": "SĘDZISZÓW MAŁOPOLSKI GRUNWALDZKA",
+      "text": "Sędziszów Małopolski, grunwaldzka.",
+      "onRequest": false
+    },
+    {
+      "id": 22,
+      "file": "P0016.mp3",
+      "name": "OLCHOWA E4",
+      "text": "Olchowa e cztery.",
+      "onRequest": false
+    },
+    {
+      "id": 23,
+      "file": "P0017.mp3",
+      "name": "KLĘCZANY STADION",
+      "text": "Klęczany stadion.",
+      "onRequest": false
+    },
+    {
+      "id": 24,
+      "file": "P0018.mp3",
+      "name": "DĄBROWA",
+      "text": "Dąbrowa.",
+      "onRequest": false
+    },
+    {
+      "id": 25,
+      "file": "P0019.mp3",
+      "name": "DĄBROWA 2",
+      "text": "Dąbrowa dwa.",
+      "onRequest": false
+    },
+    {
+      "id": 26,
+      "file": "P001A.mp3",
+      "name": "TRZCIANA",
+      "text": "Trzciana.",
+      "onRequest": false
+    },
+    {
+      "id": 27,
+      "file": "P001B.mp3",
+      "name": "TRZCIANA WOLICZKA 56 N.Ż.",
+      "text": "Trzciana woliczka.",
+      "onRequest": true
+    },
+    {
+      "id": 28,
+      "file": "P001C.mp3",
+      "name": "ŚWILCZA 58",
+      "text": "Świlcza.",
+      "onRequest": false
+    },
+    {
+      "id": 29,
+      "file": "P001D.mp3",
+      "name": "ŚWILCZA OSIEDLE 60 N.Ż.",
+      "text": "Świlcza osiedle.",
+      "onRequest": true
+    },
+    {
+      "id": 30,
+      "file": "P001E.mp3",
+      "name": "ŚWILCZA NOWY DWÓR 62 N.Ż.",
+      "text": "Świlcza nowy dwór.",
+      "onRequest": true
+    },
+    {
+      "id": 31,
+      "file": "P001F.mp3",
+      "name": "RZESZÓW KRAKOWSKA GALERIA",
+      "text": "Rzeszów, krakowska galeria.",
+      "onRequest": false
+    },
+    {
+      "id": 32,
+      "file": "P0020.mp3",
+      "name": "RZESZÓW KRAKOWSKA SZPITAL",
+      "text": "Rzeszów, krakowska szpital.",
+      "onRequest": false
+    },
+    {
+      "id": 33,
+      "file": "P0021.mp3",
+      "name": "RZESZÓW DWORZEC LOKALNY",
+      "text": "Rzeszów, dworzec lokalny.",
+      "onRequest": false
+    },
+    {
+      "id": 34,
+      "file": "P0022.mp3",
+      "name": "RZESZÓW DWORZEC AUTOBUSOWY",
+      "text": "Rzeszów, dworzec autobusowy.",
+      "onRequest": false
+    },
+    {
+      "id": 35,
+      "file": "P0023.mp3",
+      "name": "ŚWILCZA NOWY DWÓR 71 N.Ż.",
+      "text": "Świlcza nowy dwór.",
+      "onRequest": true
+    },
+    {
+      "id": 36,
+      "file": "P0024.mp3",
+      "name": "ŚWILCZA OSIEDLE 73 N.Ż.",
+      "text": "Świlcza osiedle.",
+      "onRequest": true
+    },
+    {
+      "id": 37,
+      "file": "P0025.mp3",
+      "name": "ŚWILCZA 75",
+      "text": "Świlcza.",
+      "onRequest": false
+    },
+    {
+      "id": 38,
+      "file": "P0026.mp3",
+      "name": "TRZCIANA WOLICZKA 77 N.Ż.",
+      "text": "Trzciana woliczka.",
+      "onRequest": true
+    },
+    {
+      "id": 39,
+      "file": "P0027.mp3",
+      "name": "DĘBICA RZESZOWSKA PLAC GRYFITÓW",
+      "text": "Dębica, rzeszowska plac gryfitów.",
+      "onRequest": false
+    },
+    {
+      "id": 40,
+      "file": "P0028.mp3",
+      "name": "RZESZÓW DWORZEC AUTOBUSOWY",
+      "text": "Rzeszów, dworzec autobusowy.",
+      "onRequest": false
+    },
+    {
+      "id": 41,
+      "file": "P0029.mp3",
+      "name": "RZESZÓW DWORZEC LOKALNY",
+      "text": "Rzeszów, dworzec lokalny.",
+      "onRequest": false
+    },
+    {
+      "id": 42,
+      "file": "P002A.mp3",
+      "name": "RZESZÓW KRAKOWSKA SZPITAL",
+      "text": "Rzeszów, krakowska szpital.",
+      "onRequest": false
+    },
+    {
+      "id": 43,
+      "file": "P002B.mp3",
+      "name": "RZESZÓW KRAKOWSKA GALERIA",
+      "text": "Rzeszów, krakowska galeria.",
+      "onRequest": false
+    },
+    {
+      "id": 44,
+      "file": "P002C.mp3",
+      "name": "TRZCIANA",
+      "text": "Trzciana.",
+      "onRequest": false
+    },
+    {
+      "id": 45,
+      "file": "P002D.mp3",
+      "name": "DĄBROWA 2",
+      "text": "Dąbrowa dwa.",
+      "onRequest": false
+    },
+    {
+      "id": 46,
+      "file": "P002E.mp3",
+      "name": "DĄBROWA",
+      "text": "Dąbrowa.",
+      "onRequest": false
+    },
+    {
+      "id": 47,
+      "file": "P002F.mp3",
+      "name": "KLĘCZANY SZKOŁA",
+      "text": "Klęczany szkoła.",
+      "onRequest": false
+    },
+    {
+      "id": 48,
+      "file": "P0030.mp3",
+      "name": "OLCHOWA E4",
+      "text": "Olchowa e cztery.",
+      "onRequest": false
+    },
+    {
+      "id": 49,
+      "file": "P0031.mp3",
+      "name": "SĘDZISZÓW MAŁOPOLSKI GRUNWALDZKA",
+      "text": "Sędziszów Małopolski, grunwaldzka.",
+      "onRequest": false
+    },
+    {
+      "id": 50,
+      "file": "P0032.mp3",
+      "name": "SĘDZISZÓW MAŁOPOLSKI PIŁSUDSKIEGO",
+      "text": "Sędziszów Małopolski, piłsudskiego.",
+      "onRequest": false
+    },
+    {
+      "id": 51,
+      "file": "P0033.mp3",
+      "name": "SĘDZISZÓW MAŁOPOLSKI RYNEK",
+      "text": "Sędziszów Małopolski, rynek.",
+      "onRequest": false
+    },
+    {
+      "id": 52,
+      "file": "P0034.mp3",
+      "name": "SĘDZISZÓW MAŁOPOLSKI OSIEDLE MŁODYCH",
+      "text": "Sędziszów Małopolski, osiedle młodych.",
+      "onRequest": false
+    },
+    {
+      "id": 53,
+      "file": "P0035.mp3",
+      "name": "ROPCZYCE WESOŁA",
+      "text": "Ropczyce, wesoła.",
+      "onRequest": false
+    },
+    {
+      "id": 54,
+      "file": "P0036.mp3",
+      "name": "ROPCZYCE WITKOWICE",
+      "text": "Ropczyce, witkowice.",
+      "onRequest": false
+    },
+    {
+      "id": 55,
+      "file": "P0037.mp3",
+      "name": "ROPCZYCE MICKIEWICZA",
+      "text": "Ropczyce, mickiewicza.",
+      "onRequest": false
+    },
+    {
+      "id": 56,
+      "file": "P0038.mp3",
+      "name": "ROPCZYCE DWORZEC AUTOBUSOWY",
+      "text": "Ropczyce, dworzec autobusowy.",
+      "onRequest": false
+    },
+    {
+      "id": 57,
+      "file": "P0039.mp3",
+      "name": "ROPCZYCE PODSŁOŃCE",
+      "text": "Ropczyce, podsłońce.",
+      "onRequest": false
+    },
+    {
+      "id": 58,
+      "file": "P003A.mp3",
+      "name": "BRZEZÓWKA",
+      "text": "Brzezówka.",
+      "onRequest": false
+    },
+    {
+      "id": 59,
+      "file": "P003B.mp3",
+      "name": "LUBZINA E4",
+      "text": "Lubzina e cztery.",
+      "onRequest": false
+    },
+    {
+      "id": 60,
+      "file": "P003C.mp3",
+      "name": "LUBZINA OSIEDLE",
+      "text": "Lubzina osiedle.",
+      "onRequest": false
+    },
+    {
+      "id": 61,
+      "file": "P003D.mp3",
+      "name": "ZAWADA E4",
+      "text": "Zawada e cztery.",
+      "onRequest": false
+    },
+    {
+      "id": 62,
+      "file": "P003E.mp3",
+      "name": "NAGAWCZYNA 2",
+      "text": "Nagawczyna dwa.",
+      "onRequest": false
+    },
+    {
+      "id": 63,
+      "file": "P003F.mp3",
+      "name": "NAGAWCZYNA 1",
+      "text": "Nagawczyna jeden.",
+      "onRequest": false
+    },
+    {
+      "id": 64,
+      "file": "P0040.mp3",
+      "name": "DĘBICA RZESZOWSKA NADLEŚNICTWO",
+      "text": "Dębica, rzeszowska nadleśnictwo.",
+      "onRequest": false
+    },
+    {
+      "id": 65,
+      "file": "P0041.mp3",
+      "name": "DĘBICA RZESZOWSKA MKS",
+      "text": "Dębica, Rzeszowska MKS.",
+      "onRequest": false
+    },
+    {
+      "id": 66,
+      "file": "P0042.mp3",
+      "name": "DĘBICA RZESZOWSKA RAJ",
+      "text": "Dębica, rzeszowska raj.",
+      "onRequest": false
+    },
+    {
+      "id": 67,
+      "file": "P0043.mp3",
+      "name": "DĘBICA RZESZOWSKA TECHNIKUM",
+      "text": "Dębica, rzeszowska technikum.",
+      "onRequest": false
+    },
+    {
+      "id": 68,
+      "file": "P0044.mp3",
+      "name": "DĘBICA DWORZEC AUTOBUSOWY",
+      "text": "Dębica, dworzec autobusowy.",
+      "onRequest": false
+    },
+    {
+      "id": 69,
+      "file": "P0045.mp3",
+      "name": "3-MAJA CHECHŁY 1",
+      "text": "Trzeciego maja chechły jeden.",
+      "onRequest": false
+    },
+    {
+      "id": 70,
+      "file": "P0046.mp3",
+      "name": "3-MAJA CHECHŁY 2",
+      "text": "Trzeciego maja chechły dwa.",
+      "onRequest": false
+    },
+    {
+      "id": 71,
+      "file": "P0047.mp3",
+      "name": "3-MAJA CHECHŁY 3",
+      "text": "Trzeciego maja chechły trzy.",
+      "onRequest": false
+    },
+    {
+      "id": 72,
+      "file": "P0048.mp3",
+      "name": "OKONIN",
+      "text": "Okonin.",
+      "onRequest": false
+    },
+    {
+      "id": 73,
+      "file": "P0049.mp3",
+      "name": "ŁĄCZKI KUCHARSKIE ŁOPUCHOWA 1",
+      "text": "Łączki kucharskie łopuchowa jeden.",
+      "onRequest": false
+    },
+    {
+      "id": 74,
+      "file": "P004A.mp3",
+      "name": "ŁĄCZKI KUCHARSKIE ŁOPUCHOWA 2",
+      "text": "Łączki kucharskie łopuchowa dwa.",
+      "onRequest": false
+    },
+    {
+      "id": 75,
+      "file": "P004B.mp3",
+      "name": "ŁĄCZKI KUCHARSKIE KOŚCIÓŁ",
+      "text": "Łączki kucharskie kościół.",
+      "onRequest": false
+    },
+    {
+      "id": 76,
+      "file": "P004C.mp3",
+      "name": "BRONISZÓW",
+      "text": "Broniszów.",
+      "onRequest": false
+    },
+    {
+      "id": 77,
+      "file": "P004D.mp3",
+      "name": "GLINIK ŁYSA GÓRA",
+      "text": "Glinik łysa góra.",
+      "onRequest": false
+    },
+    {
+      "id": 78,
+      "file": "P004E.mp3",
+      "name": "GLINIK SZKOŁA",
+      "text": "Glinik szkoła.",
+      "onRequest": false
+    },
+    {
+      "id": 79,
+      "file": "P004F.mp3",
+      "name": "GLINIK OSP",
+      "text": "Glinik o es pe.",
+      "onRequest": false
+    },
+    {
+      "id": 80,
+      "file": "P0050.mp3",
+      "name": "GLINIK GÓRA",
+      "text": "Glinik góra.",
+      "onRequest": false
+    },
+    {
+      "id": 81,
+      "file": "P0051.mp3",
+      "name": "WIELOPOLE SKRZYŃSKIE RZEGOCIN",
+      "text": "Wielopole skrzyńskie rzegocin.",
+      "onRequest": false
+    },
+    {
+      "id": 82,
+      "file": "P0052.mp3",
+      "name": "WIELOPOLE SKRZYŃSKIE",
+      "text": "Wielopole skrzyńskie.",
+      "onRequest": false
+    },
+    {
+      "id": 83,
+      "file": "P0053.mp3",
+      "name": "WIELOPOLE SKRZYŃSKIE 1 19",
+      "text": "Wielopole skrzyńskie jeden.",
+      "onRequest": false
+    },
+    {
+      "id": 84,
+      "file": "P0054.mp3",
+      "name": "BRZEZINY 17",
+      "text": "Brzeziny.",
+      "onRequest": false
+    },
+    {
+      "id": 85,
+      "file": "P0055.mp3",
+      "name": "BRZEZINY SKLEP 15",
+      "text": "Brzeziny sklep.",
+      "onRequest": false
+    },
+    {
+      "id": 86,
+      "file": "P0056.mp3",
+      "name": "BRZEZINY KLUB 13",
+      "text": "Brzeziny klub.",
+      "onRequest": false
+    },
+    {
+      "id": 87,
+      "file": "P0057.mp3",
+      "name": "BRZEZINY SKRZYŻOWANIE 11",
+      "text": "Brzeziny skrzyżowanie.",
+      "onRequest": false
+    },
+    {
+      "id": 88,
+      "file": "P0058.mp3",
+      "name": "BRZEZINY BERDECHÓW 1 02 (NOWA WIEŚ)",
+      "text": "Brzeziny berdechów jeden, nowa wieś.",
+      "onRequest": false
+    },
+    {
+      "id": 89,
+      "file": "P0059.mp3",
+      "name": "BRZEZINY BERDECHÓW",
+      "text": "Brzeziny berdechów.",
+      "onRequest": false
+    },
+    {
+      "id": 90,
+      "file": "P005A.mp3",
+      "name": "BRZEZINY BERDECHÓW 1 03 (NOWA WIEŚ)",
+      "text": "Brzeziny berdechów jeden, nowa wieś.",
+      "onRequest": false
+    },
+    {
+      "id": 91,
+      "file": "P005B.mp3",
+      "name": "BRZEZINY SKRZYŻOWANIE 10",
+      "text": "Brzeziny skrzyżowanie.",
+      "onRequest": false
+    },
+    {
+      "id": 92,
+      "file": "P005C.mp3",
+      "name": "BRZEZINY KLUB 08",
+      "text": "Brzeziny klub.",
+      "onRequest": false
+    },
+    {
+      "id": 93,
+      "file": "P005D.mp3",
+      "name": "BRZEZINY SKLEP 06",
+      "text": "Brzeziny sklep.",
+      "onRequest": false
+    },
+    {
+      "id": 94,
+      "file": "P005E.mp3",
+      "name": "BRZEZINY 04",
+      "text": "Brzeziny.",
+      "onRequest": false
+    },
+    {
+      "id": 95,
+      "file": "P005F.mp3",
+      "name": "WIELOPOLE SKRZYŃSKIE 1 02",
+      "text": "Wielopole skrzyńskie jeden.",
+      "onRequest": false
+    },
+    {
+      "id": 96,
+      "file": "P0060.mp3",
+      "name": "BRZEZINY BERDECHÓW",
+      "text": "Brzeziny berdechów.",
+      "onRequest": false
+    },
+    {
+      "id": 97,
+      "file": "P0061.mp3",
+      "name": "WIELOPOLE SKRZYŃSKIE",
+      "text": "Wielopole skrzyńskie.",
+      "onRequest": false
+    },
+    {
+      "id": 98,
+      "file": "P0062.mp3",
+      "name": "WIELOPOLE SKRZYŃSKIE RZEGOCIN",
+      "text": "Wielopole skrzyńskie rzegocin.",
+      "onRequest": false
+    },
+    {
+      "id": 99,
+      "file": "P0063.mp3",
+      "name": "GLINIK GÓRA",
+      "text": "Glinik góra.",
+      "onRequest": false
+    },
+    {
+      "id": 100,
+      "file": "P0064.mp3",
+      "name": "GLINIK OSP",
+      "text": "Glinik o es pe.",
+      "onRequest": false
+    },
+    {
+      "id": 101,
+      "file": "P0065.mp3",
+      "name": "GLINIK SZKOŁA",
+      "text": "Glinik szkoła.",
+      "onRequest": false
+    },
+    {
+      "id": 102,
+      "file": "P0066.mp3",
+      "name": "GLINIK ŁYSA GÓRA",
+      "text": "Glinik łysa góra.",
+      "onRequest": false
+    },
+    {
+      "id": 103,
+      "file": "P0067.mp3",
+      "name": "BRONISZÓW",
+      "text": "Broniszów.",
+      "onRequest": false
+    },
+    {
+      "id": 104,
+      "file": "P0068.mp3",
+      "name": "ŁĄCZKI KUCHARSKIE KOŚCIÓŁ",
+      "text": "Łączki kucharskie kościół.",
+      "onRequest": false
+    },
+    {
+      "id": 105,
+      "file": "P0069.mp3",
+      "name": "ŁĄCZKI KUCHARSKIE ŁOPUCHOWA 2",
+      "text": "Łączki kucharskie łopuchowa dwa.",
+      "onRequest": false
+    },
+    {
+      "id": 106,
+      "file": "P006A.mp3",
+      "name": "ŁĄCZKI KUCHARSKIE ŁOPUCHOWA 1",
+      "text": "Łączki kucharskie łopuchowa jeden.",
+      "onRequest": false
+    },
+    {
+      "id": 107,
+      "file": "P006B.mp3",
+      "name": "OKONIN",
+      "text": "Okonin.",
+      "onRequest": false
+    },
+    {
+      "id": 108,
+      "file": "P006C.mp3",
+      "name": "3-MAJA CHECHŁY 3",
+      "text": "Trzeciego maja chechły trzy.",
+      "onRequest": false
+    },
+    {
+      "id": 109,
+      "file": "P006D.mp3",
+      "name": "3-MAJA CHECHŁY 2",
+      "text": "Trzeciego maja chechły dwa.",
+      "onRequest": false
+    },
+    {
+      "id": 110,
+      "file": "P006E.mp3",
+      "name": "3-MAJA CHECHŁY 1",
+      "text": "Trzeciego maja chechły jeden.",
+      "onRequest": false
+    }
+  ],
+  "directionJobs": [
+    {
+      "id": "K0001",
+      "file": "K0001.mp3",
+      "name": "DĘBICA DWORZEC AUTOBUSOWY > RZESZÓW DWORZEC AUTOBUSOWY",
+      "text": "Kierunek: Dębica, dworzec autobusowy. Rzeszów, dworzec autobusowy.",
+      "onRequest": false
+    },
+    {
+      "id": "K0002",
+      "file": "K0002.mp3",
+      "name": "RZESZÓW DWORZEC AUTOBUSOWY > DĘBICA DWORZEC AUTOBUSOWY",
+      "text": "Kierunek: Rzeszów, dworzec autobusowy. Dębica, dworzec autobusowy.",
+      "onRequest": false
+    },
+    {
+      "id": "K0003",
+      "file": "K0003.mp3",
+      "name": "DĘBICA DWORZEC AUTOBUSOWY > ROPCZYCE DWORZEC AUTOBUSOWY",
+      "text": "Kierunek: Dębica, dworzec autobusowy. Ropczyce, dworzec autobusowy.",
+      "onRequest": false
+    },
+    {
+      "id": "K0004",
+      "file": "K0004.mp3",
+      "name": "ROPCZYCE DWORZEC AUTOBUSOWY > RZESZÓW DWORZEC AUTOBUSOWY",
+      "text": "Kierunek: Ropczyce, dworzec autobusowy. Rzeszów, dworzec autobusowy.",
+      "onRequest": false
+    },
+    {
+      "id": "K0005",
+      "file": "K0005.mp3",
+      "name": "DĘBICA DWORZEC AUTOBUSOWY > RZESZÓW DWORZEC LOKALNY",
+      "text": "Kierunek: Dębica, dworzec autobusowy. Rzeszów, dworzec lokalny.",
+      "onRequest": false
+    },
+    {
+      "id": "K0006",
+      "file": "K0006.mp3",
+      "name": "RZESZÓW DWORZEC LOKALNY > DĘBICA DWORZEC AUTOBUSOWY",
+      "text": "Kierunek: Rzeszów, dworzec lokalny. Dębica, dworzec autobusowy.",
+      "onRequest": false
+    },
+    {
+      "id": "K0007",
+      "file": "K0007.mp3",
+      "name": "RZESZÓW DWORZEC LOKALNY > ROPCZYCE DWORZEC AUTOBUSOWY",
+      "text": "Kierunek: Rzeszów, dworzec lokalny. Ropczyce, dworzec autobusowy.",
+      "onRequest": false
+    },
+    {
+      "id": "K0008",
+      "file": "K0008.mp3",
+      "name": "ROPCZYCE DWORZEC AUTOBUSOWY > BRZEZINY BERDECHÓW",
+      "text": "Kierunek: Ropczyce, dworzec autobusowy. Brzeziny berdechów.",
+      "onRequest": false
+    },
+    {
+      "id": "K0009",
+      "file": "K0009.mp3",
+      "name": "BRZEZINY BERDECHÓW > ROPCZYCE MICKIEWICZA",
+      "text": "Kierunek: Brzeziny berdechów. Ropczyce, mickiewicza.",
+      "onRequest": false
+    },
+    {
+      "id": "K000A",
+      "file": "K000A.mp3",
+      "name": "ROPCZYCE MICKIEWICZA > BRZEZINY BERDECHÓW",
+      "text": "Kierunek: Ropczyce, mickiewicza. Brzeziny berdechów.",
+      "onRequest": false
+    },
+    {
+      "id": "K000B",
+      "file": "K000B.mp3",
+      "name": "BRZEZINY BERDECHÓW > ROPCZYCE DWORZEC AUTOBUSOWY",
+      "text": "Kierunek: Brzeziny berdechów. Ropczyce, dworzec autobusowy.",
+      "onRequest": false
+    }
+  ],
+  "directions": [
+    {
+      "code": "K0001",
+      "name": "DĘBICA DWORZEC AUTOBUSOWY > RZESZÓW DWORZEC AUTOBUSOWY"
+    },
+    {
+      "code": "K0002",
+      "name": "RZESZÓW DWORZEC AUTOBUSOWY > DĘBICA DWORZEC AUTOBUSOWY"
+    },
+    {
+      "code": "K0003",
+      "name": "DĘBICA DWORZEC AUTOBUSOWY > ROPCZYCE DWORZEC AUTOBUSOWY"
+    },
+    {
+      "code": "K0004",
+      "name": "ROPCZYCE DWORZEC AUTOBUSOWY > RZESZÓW DWORZEC AUTOBUSOWY"
+    },
+    {
+      "code": "K0005",
+      "name": "DĘBICA DWORZEC AUTOBUSOWY > RZESZÓW DWORZEC LOKALNY"
+    },
+    {
+      "code": "K0006",
+      "name": "RZESZÓW DWORZEC LOKALNY > DĘBICA DWORZEC AUTOBUSOWY"
+    },
+    {
+      "code": "K0007",
+      "name": "RZESZÓW DWORZEC LOKALNY > ROPCZYCE DWORZEC AUTOBUSOWY"
+    },
+    {
+      "code": "K0008",
+      "name": "ROPCZYCE DWORZEC AUTOBUSOWY > BRZEZINY BERDECHÓW"
+    },
+    {
+      "code": "K0009",
+      "name": "BRZEZINY BERDECHÓW > ROPCZYCE MICKIEWICZA"
+    },
+    {
+      "code": "K000A",
+      "name": "ROPCZYCE MICKIEWICZA > BRZEZINY BERDECHÓW"
+    },
+    {
+      "code": "K000B",
+      "name": "BRZEZINY BERDECHÓW > ROPCZYCE DWORZEC AUTOBUSOWY"
+    }
+  ],
+  "directionCodeConflicts": {}
+}

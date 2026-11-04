@@ -9,6 +9,7 @@
  const dateFmt=new Intl.DateTimeFormat('sv-SE',{timeZone:'Europe/Warsaw',year:'numeric',month:'2-digit',day:'2-digit'});
  const timeFmt=new Intl.DateTimeFormat('pl-PL',{timeZone:'Europe/Warsaw',hour:'2-digit',minute:'2-digit',hourCycle:'h23'});
  function forStop(stop,feed=root.SRGTransferData,now=Date.now()){
+  const monis=root.SRGMonisTransfers?.forStop(stop,now);if(monis)return monis;
   const station=stations.find(s=>s.ids.includes(stop?.id)&&s.name===String(stop?.name||'').trim().toUpperCase());
   if(station?.key==='ropczyce-da'&&root.SRGRopczyce)return root.SRGRopczyce.forStop(stop,now);
   const networkRows=Number.isFinite(now)?root.SRGMKS?.rowsFor(stop,dateFmt.format(now),timeFmt.format(now)):null;

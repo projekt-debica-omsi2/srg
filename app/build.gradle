@@ -1,15 +1,22 @@
 plugins { id 'com.android.application' }
+def publicEdition = providers.gradleProperty('srgPublic').getOrElse('false').toBoolean()
 
 android {
     namespace 'pl.srgmobile.classic'
     compileSdk 35
 
     defaultConfig {
-        applicationId 'pl.srgmobile.classic.lcd23'
+        applicationId publicEdition ? 'pl.srgmobile.publicapp' : 'pl.srgmobile.classic.lcd23'
         minSdk 26
         targetSdk 34
-        versionCode 11484
-        versionName '1.4.84'
+        versionCode 11486
+        versionName '1.4.86'
+        buildConfigField 'boolean', 'SRG_PUBLIC', publicEdition.toString()
+        manifestPlaceholders = [appLabel: publicEdition ? 'SRG Mobile Public' : 'SRG Mobile Kierowca']
+    }
+    buildFeatures { buildConfig true }
+    if (publicEdition) {
+        sourceSets.main.assets.srcDirs = [layout.buildDirectory.dir('generated/publicAssets').get().asFile]
     }
 
     signingConfigs {
@@ -33,6 +40,17 @@ android {
         sourceCompatibility JavaVersion.VERSION_17
         targetCompatibility JavaVersion.VERSION_17
     }
+}
+
+if (publicEdition) {
+    tasks.register('preparePublicAssets', Exec) {
+        workingDir rootProject.projectDir
+        commandLine 'python3', 'tools/prepare_public.py', '--output', layout.buildDirectory.dir('generated/publicAssets').get().asFile.absolutePath
+        inputs.dir 'src/main/assets'
+        inputs.file rootProject.file('tools/prepare_public.py')
+        outputs.dir layout.buildDirectory.dir('generated/publicAssets')
+    }
+    tasks.named('preBuild').configure { dependsOn 'preparePublicAssets' }
 }
 
 dependencies {

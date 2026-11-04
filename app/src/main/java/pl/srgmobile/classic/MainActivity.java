@@ -55,6 +55,11 @@ public final class MainActivity extends Activity implements LocationListener {
     private final ArrayDeque<String> pendingVoice = new ArrayDeque<>();
     private LocalPanelServer lcdServer;
     private int chimeIndex = 1;
+    private android.webkit.ValueCallback<android.net.Uri[]> localFileCallback;
+    private String localExportText;
+    private android.speech.tts.TextToSpeech localSpeech;
+    private boolean localSpeechReady;
+    private String localSpeechPending;
 
     @Override public void onCreate(Bundle state) {
         super.onCreate(state);
@@ -79,6 +84,13 @@ public final class MainActivity extends Activity implements LocationListener {
         cfg.setAllowFileAccessFromFileURLs(false);
         cfg.setAllowUniversalAccessFromFileURLs(false);
         web.setWebChromeClient(new WebChromeClient() {
+            @Override public boolean onShowFileChooser(WebView view, android.webkit.ValueCallback<android.net.Uri[]> callback, FileChooserParams params) {
+                if(localFileCallback!=null)localFileCallback.onReceiveValue(null);
+                localFileCallback=callback;
+                Intent pick=new Intent(Intent.ACTION_OPEN_DOCUMENT);pick.addCategory(Intent.CATEGORY_OPENABLE);pick.setType("*/*");
+                try{startActivityForResult(pick,45);}catch(Exception e){localFileCallback=null;callback.onReceiveValue(null);}
+                return true;
+            }
             @Override public void onPermissionRequest(PermissionRequest request) {
                 runOnUiThread(() -> {
                     // WebView wczytuje wyłącznie lokalne, zaufane assety aplikacji.
@@ -114,7 +126,9 @@ public final class MainActivity extends Activity implements LocationListener {
                 if (requested) startGpsNative(); else explainStatus();
             }
         });
-        TimetableSync.install(this);
+        if(!BuildConfig.SRG_PUBLIC)TimetableSync.install(this);
+        web.addJavascriptInterface(new LocalFilesBridge(),"SRGLocalFiles");
+        web.addJavascriptInterface(new LocalSpeechBridge(),"SRGLocalVoice");
         web.addJavascriptInterface(new TimetableSync.Bridge(this), "SRGTimetables");
         web.addJavascriptInterface(new Object(){
             @JavascriptInterface public void exportFile(){runOnUiThread(()->{
@@ -166,6 +180,27 @@ public final class MainActivity extends Activity implements LocationListener {
         }
     }
 
+    public final class LocalFilesBridge {
+        @JavascriptInterface public void exportText(String text){
+            if(text==null||text.length()>2*1024*1024)return;
+            runOnUiThread(()->{localExportText=text;Intent intent=new Intent(Intent.ACTION_CREATE_DOCUMENT);intent.addCategory(Intent.CATEGORY_OPENABLE);intent.setType("text/plain");intent.putExtra(Intent.EXTRA_TITLE,"kursowki-srg.txt");try{startActivityForResult(intent,46);}catch(Exception e){localExportText=null;android.widget.Toast.makeText(MainActivity.this,"Nie otwarto zapisu TXT",android.widget.Toast.LENGTH_LONG).show();}});
+        }
+    }
+    public final class LocalSpeechBridge {
+        @JavascriptInterface public void speak(String text){if(text==null||text.length()>1000)return;runOnUiThread(()->{
+            localSpeechPending=text;
+            if(localSpeech==null){localSpeech=new android.speech.tts.TextToSpeech(MainActivity.this,status->{
+                if(status==android.speech.tts.TextToSpeech.SUCCESS){
+                    java.util.Set<android.speech.tts.Voice> voices=localSpeech.getVoices();
+                    if(voices!=null)for(android.speech.tts.Voice voice:voices)if("pl".equals(voice.getLocale().getLanguage())&&!voice.isNetworkConnectionRequired()){localSpeech.setVoice(voice);localSpeech.setSpeechRate(0.96f);localSpeechReady=true;break;}
+                }
+                if(localSpeechReady&&localSpeechPending!=null)localSpeech.speak(localSpeechPending,android.speech.tts.TextToSpeech.QUEUE_FLUSH,null,"srg-local");
+                else android.widget.Toast.makeText(MainActivity.this,"Zainstaluj polski głos offline w ustawieniach zamiany tekstu na mowę Androida.",android.widget.Toast.LENGTH_LONG).show();
+                localSpeechPending=null;
+            });}else if(localSpeechReady){localSpeech.speak(text,android.speech.tts.TextToSpeech.QUEUE_FLUSH,null,"srg-local");localSpeechPending=null;}
+            else android.widget.Toast.makeText(MainActivity.this,"Polski głos offline nie jest gotowy. Sprawdź ustawienia TTS Androida.",android.widget.Toast.LENGTH_LONG).show();
+        });}
+    }
     /** Publish ONLY passenger-facing course data; never expose coordinates or driver ID. */
     public final class LcdBridge {
         @JavascriptInterface public void chooseAds() {
@@ -193,6 +228,13 @@ public final class MainActivity extends Activity implements LocationListener {
     }
     @Override protected void onActivityResult(int requestCode,int resultCode,Intent data) {
         super.onActivityResult(requestCode,resultCode,data);
+        if(requestCode==45){if(localFileCallback!=null){localFileCallback.onReceiveValue(resultCode==RESULT_OK&&data!=null&&data.getData()!=null?new android.net.Uri[]{data.getData()}:null);localFileCallback=null;}return;}
+        if(requestCode==46){
+            final String text=localExportText;localExportText=null;
+            if(resultCode==RESULT_OK&&data!=null&&data.getData()!=null&&text!=null){final android.net.Uri uri=data.getData();
+                new Thread(()->{String message;try(java.io.OutputStream out=getContentResolver().openOutputStream(uri)){if(out==null)throw new IOException("Brak dostępu");out.write(text.getBytes(java.nio.charset.StandardCharsets.UTF_8));message="Zapisano kursówki TXT";}catch(Exception e){message="Błąd eksportu TXT: "+e.getMessage();}final String result=message;runOnUiThread(()->android.widget.Toast.makeText(this,result,android.widget.Toast.LENGTH_LONG).show());},"SRG-local-export").start();
+            }return;
+        }
         if(requestCode==44){
             if(resultCode==RESULT_OK&&data!=null&&data.getData()!=null){final android.net.Uri uri=data.getData();new Thread(()->{
                 String message;
@@ -249,6 +291,29 @@ public final class MainActivity extends Activity implements LocationListener {
 
     /** Each utterance starts with the selected short chime (1..4). */
     public final class AudioBridge {
+        @JavascriptInterface public void announceGRG(String file, String mode, boolean onRequest) {
+            if (file == null || !file.matches("[PK][0-9A-F]{4}\\.mp3")) return;
+            if (!"next".equals(mode) && !"terminal".equals(mode) && !"arrival".equals(mode) && !"start".equals(mode)) return;
+            runOnUiThread(() -> {
+                java.util.ArrayList<String> files = new java.util.ArrayList<>();
+                files.add(chimeFile());
+                if ("next".equals(mode) || "terminal".equals(mode)) files.add("next.mp3");
+                files.add("grg/" + file);
+                if (onRequest) files.add("na_zadanie.mp3");
+                if ("terminal".equals(mode)) files.add("terminal.mp3");
+                queueVoice(files.toArray(new String[0]));
+            });
+        }
+        @JavascriptInterface public void announceBerdechow(String file, String mode) {
+            if (file == null || !file.matches("(?:stop-[0-9]{3}|start-[1-4])\\.mp3")) return;
+            if (!"next".equals(mode) && !"terminal".equals(mode) && !"arrival".equals(mode) && !"start".equals(mode)) return;
+            runOnUiThread(() -> {
+                String path = "berdechow/" + file;
+                if ("terminal".equals(mode)) queueVoice(chimeFile(), "next.mp3", path, "terminal.mp3");
+                else if ("next".equals(mode)) queueVoice(chimeFile(), "next.mp3", path);
+                else queueVoice(chimeFile(), path);
+            });
+        }
         @JavascriptInterface public void announceStop(int stopId, boolean onRequest) {
             if (stopId < 1 || stopId > 68) return;
             runOnUiThread(() -> {
@@ -301,6 +366,8 @@ public final class MainActivity extends Activity implements LocationListener {
         playVoiceNext();
     }
     private void stopVoice() {
+        if(localSpeech!=null)localSpeech.stop();
+        localSpeechPending=null;
         pendingVoice.clear();
         if (voicePlayer != null) {
             try { voicePlayer.setOnCompletionListener(null); voicePlayer.stop(); } catch (Exception ignored) {}
@@ -314,7 +381,7 @@ public final class MainActivity extends Activity implements LocationListener {
             return;
         }
         String file = pendingVoice.removeFirst();
-        if (!file.matches("(?:chimes/[1-4]\\.mp3|next\\.mp3|stops/[0-9]{1,2}\\.mp3|start/[0-6]\\.mp3|terminal\\.mp3|inspection\\.mp3|na_zadanie\\.mp3)")) {
+        if (!file.matches("(?:chimes/[1-4]\\.mp3|next\\.mp3|stops/[0-9]{1,2}\\.mp3|start/[0-6]\\.mp3|berdechow/(?:stop-[0-9]{3}|start-[1-4])\\.mp3|grg/[PK][0-9A-F]{4}\\.mp3|terminal\\.mp3|inspection\\.mp3|na_zadanie\\.mp3)")) {
             sendAudioError("Nieprawidłowy plik audio");
             playVoiceNext();
             return;
@@ -508,6 +575,8 @@ public final class MainActivity extends Activity implements LocationListener {
         if (requested && pageReady) handler.postDelayed(() -> { if (requested) startGpsNative(); }, 300L);
     }
     @Override protected void onDestroy() {
+        if(localFileCallback!=null){localFileCallback.onReceiveValue(null);localFileCallback=null;}
+        if(localSpeech!=null){localSpeech.stop();localSpeech.shutdown();localSpeech=null;}
         if(omsi!=null)omsi.close();
         stopListening();
         if (rgUsb != null) rgUsb.close();
