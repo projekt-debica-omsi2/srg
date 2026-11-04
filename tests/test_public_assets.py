@@ -21,4 +21,7 @@ class PublicAssets(unittest.TestCase):
    m.prepare(tmp)
    for name in ['omsi.js','ibis.js','rg-usb.js','lcd.html']:
     self.assertEqual((Path(tmp)/name).read_bytes(),(m.ASSETS/name).read_bytes())
+   public=(Path(tmp)/'index.html').read_text(encoding='utf-8');driver=(m.ASSETS/'index.html').read_text(encoding='utf-8')
+   self.assertEqual(re.findall(r'<style[^>]*>([\s\S]*?)</style>',public),re.findall(r'<style[^>]*>([\s\S]*?)</style>',driver))
+   for name in ['phone-layout.css','course-layout.css']:self.assertEqual((Path(tmp)/name).read_bytes(),(m.ASSETS/name).read_bytes())
 if __name__=='__main__':unittest.main()

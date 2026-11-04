@@ -57,9 +57,7 @@ public final class MainActivity extends Activity implements LocationListener {
     private int chimeIndex = 1;
     private android.webkit.ValueCallback<android.net.Uri[]> localFileCallback;
     private String localExportText;
-    private android.speech.tts.TextToSpeech localSpeech;
-    private boolean localSpeechReady;
-    private String localSpeechPending;
+    private LocalVoiceStore localVoices;
 
     @Override public void onCreate(Bundle state) {
         super.onCreate(state);
@@ -187,20 +185,18 @@ public final class MainActivity extends Activity implements LocationListener {
             runOnUiThread(()->{localExportText=text;Intent intent=new Intent(Intent.ACTION_CREATE_DOCUMENT);intent.addCategory(Intent.CATEGORY_OPENABLE);intent.setType("text/plain");intent.putExtra(Intent.EXTRA_TITLE,"kursowki-srg.txt");try{startActivityForResult(intent,46);}catch(Exception e){localExportText=null;android.widget.Toast.makeText(MainActivity.this,"Nie otwarto zapisu TXT",android.widget.Toast.LENGTH_LONG).show();}});
         }
     }
+    private LocalVoiceStore localVoices(){
+        if(localVoices==null)localVoices=new LocalVoiceStore(this,message->{
+            if(web!=null)web.evaluateJavascript("window.srgLocalVoiceStatus && window.srgLocalVoiceStatus("+JSONObject.quote(message)+")",null);
+            if(!message.startsWith("Generowanie offline:"))android.widget.Toast.makeText(this,message,android.widget.Toast.LENGTH_LONG).show();
+        },()->voiceVolume);
+        return localVoices;
+    }
     public final class LocalSpeechBridge {
-        @JavascriptInterface public void speak(String text){if(text==null||text.length()>1000)return;runOnUiThread(()->{
-            localSpeechPending=text;
-            if(localSpeech==null){localSpeech=new android.speech.tts.TextToSpeech(MainActivity.this,status->{
-                if(status==android.speech.tts.TextToSpeech.SUCCESS){
-                    java.util.Set<android.speech.tts.Voice> voices=localSpeech.getVoices();
-                    if(voices!=null)for(android.speech.tts.Voice voice:voices)if("pl".equals(voice.getLocale().getLanguage())&&!voice.isNetworkConnectionRequired()){localSpeech.setVoice(voice);localSpeech.setSpeechRate(0.96f);localSpeechReady=true;break;}
-                }
-                if(localSpeechReady&&localSpeechPending!=null)localSpeech.speak(localSpeechPending,android.speech.tts.TextToSpeech.QUEUE_FLUSH,null,"srg-local");
-                else android.widget.Toast.makeText(MainActivity.this,"Zainstaluj polski głos offline w ustawieniach zamiany tekstu na mowę Androida.",android.widget.Toast.LENGTH_LONG).show();
-                localSpeechPending=null;
-            });}else if(localSpeechReady){localSpeech.speak(text,android.speech.tts.TextToSpeech.QUEUE_FLUSH,null,"srg-local");localSpeechPending=null;}
-            else android.widget.Toast.makeText(MainActivity.this,"Polski głos offline nie jest gotowy. Sprawdź ustawienia TTS Androida.",android.widget.Toast.LENGTH_LONG).show();
-        });}
+        @JavascriptInterface public void speak(String text){if(text!=null&&text.length()<=1000)runOnUiThread(()->localVoices().speak(text));}
+        @JavascriptInterface public void chooseVoice(){runOnUiThread(()->localVoices().choose());}
+        @JavascriptInterface public void generate(String json){if(json!=null&&json.length()<=2*1024*1024)runOnUiThread(()->localVoices().generate(json));}
+        @JavascriptInterface public void cancelGeneration(){runOnUiThread(()->{localVoices().cancel();if(web!=null)web.evaluateJavascript("window.srgLocalVoiceStatus && window.srgLocalVoiceStatus('Anulowano generowanie. Gotowe pliki zachowano.')",null);});}
     }
     /** Publish ONLY passenger-facing course data; never expose coordinates or driver ID. */
     public final class LcdBridge {
@@ -380,8 +376,7 @@ public final class MainActivity extends Activity implements LocationListener {
         playVoiceNext();
     }
     private void stopVoice() {
-        if(localSpeech!=null)localSpeech.stop();
-        localSpeechPending=null;
+        if(localVoices!=null)localVoices.cancel();
         pendingVoice.clear();
         if (voicePlayer != null) {
             try { voicePlayer.setOnCompletionListener(null); voicePlayer.stop(); } catch (Exception ignored) {}
@@ -590,7 +585,7 @@ public final class MainActivity extends Activity implements LocationListener {
     }
     @Override protected void onDestroy() {
         if(localFileCallback!=null){localFileCallback.onReceiveValue(null);localFileCallback=null;}
-        if(localSpeech!=null){localSpeech.stop();localSpeech.shutdown();localSpeech=null;}
+        if(localVoices!=null){localVoices.close();localVoices=null;}
         if(omsi!=null)omsi.close();
         stopListening();
         if (rgUsb != null) rgUsb.close();

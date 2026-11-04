@@ -9,8 +9,8 @@ android {
         applicationId publicEdition ? 'pl.srgmobile.publicapp' : 'pl.srgmobile.classic.lcd23'
         minSdk 26
         targetSdk 34
-        versionCode 11486
-        versionName '1.4.86'
+        versionCode 11487
+        versionName '1.4.87'
         buildConfigField 'boolean', 'SRG_PUBLIC', publicEdition.toString()
         manifestPlaceholders = [appLabel: publicEdition ? 'SRG Mobile Public' : 'SRG Mobile Kierowca']
     }

@@ -3,7 +3,7 @@ from pathlib import Path
 import argparse,re,shutil
 ROOT=Path(__file__).resolve().parents[1]
 ASSETS=ROOT/'app/src/main/assets'
-COMMON=['index.html','phone-layout.css','phone-layout.js','course-layout.css','local-timetable.js','auto-gps.js','voice-gps.js','schedule-deviation.js','lcd-cycle.js','rg-usb.js','ibis.js','omsi.js','lcd.html']
+COMMON=['index.html','phone-layout.css','phone-layout.js','course-layout.css','local-timetable.js','local-speech.js','auto-gps.js','voice-gps.js','schedule-deviation.js','lcd-cycle.js','rg-usb.js','ibis.js','omsi.js','lcd.html']
 GENERIC_AUDIO=['audio/chimes/'+str(i)+'.mp3' for i in range(1,5)]+['audio/'+n+'.mp3' for n in ['next','terminal','inspection','na_zadanie']]
 def replace_constant(source,name,value):
     m=re.search(r'\bconst '+name+r'\s*=',source)
