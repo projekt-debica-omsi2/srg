@@ -1,4 +1,4 @@
-name: Build SRG Mobile 1.4.87 Public and Driver APK
+name: Build SRGMobile 1.4.88 and SRGMobile Public
 on:
   workflow_dispatch:
   push:
@@ -131,7 +131,7 @@ jobs:
       - name: Publish APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: SRG-Mobile-v1.4.87-${{ matrix.edition }}-release
+          name: ${{ matrix.edition == 'public' && 'SRGMobile-Public-1.4.88' || 'SRGMobile-1.4.88' }}
           path: app/build/outputs/apk/release/app-release.apk
           if-no-files-found: error
 
