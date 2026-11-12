@@ -33,7 +33,7 @@ def build(bridge,engine,output):
  (output/'SOURCES.md').write_text('# Sources and provenance\n\nSRG source commit: '+commit+'\nhttps://github.com/projekt-debica-omsi2/srg/tree/'+commit+'\n\nCamera engine: GPL-3.0, upstream '+REVISION+' plus included openomsi-srg.patch.\nhttps://github.com/openOMSI-org/openOMSI/tree/'+REVISION+'\nEngine ZIP SHA256: '+ENGINE_SHA+'\n\nRuntime downloaded only by end-user setup: official openOMSI 0.3.45 ZIP, pinned URL/SHA256 in runtime-source.json. No runtime/game-content copied from the author PC.\n\nADB: optional user-installed Google Android Platform Tools; not redistributed.\nhttps://developer.android.com/tools/releases/platform-tools\n',encoding='utf-8')
  files={p.relative_to(output).as_posix():digest(p.read_bytes()) for p in output.rglob('*') if p.is_file()}
  (output/'payload-sha256.json').write_text(json.dumps(files,indent=2)+'\n',encoding='utf-8')
- archive=output.with_suffix('.zip')
+ archive=Path(str(output)+'.zip')
  with zipfile.ZipFile(archive,'w',zipfile.ZIP_DEFLATED) as z:
   for p in output.rglob('*'):
    if p.is_file():z.write(p,p.relative_to(output).as_posix())
