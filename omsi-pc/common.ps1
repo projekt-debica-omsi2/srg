@@ -1,5 +1,10 @@
 Set-StrictMode -Version 2
 $ErrorActionPreference = 'Stop'
+# A parent program may pass PowerShell 7 module paths to Windows PowerShell 5.1.
+# Load the standard modules belonging to THIS process instead of a different runtime.
+foreach ($moduleName in @('Microsoft.PowerShell.Utility','Microsoft.PowerShell.Management')) {
+    Import-Module ([IO.Path]::Combine($PSHOME,"Modules\$moduleName\$moduleName.psd1")) -Force
+}
 
 function Get-FullPath([string]$Path) { [IO.Path]::GetFullPath($Path) }
 function Assert-Within([string]$Parent,[string]$Path) {

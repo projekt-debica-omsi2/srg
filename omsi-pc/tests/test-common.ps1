@@ -39,6 +39,7 @@ try {
     [IO.File]::WriteAllText((Join-Path $package 'probe.txt'),'ok');$hash=(Get-FileHash -LiteralPath (Join-Path $package 'probe.txt')).Hash
     Save-Json (Join-Path $package 'payload-sha256.json') @{'probe.txt'=$hash};Assert-Payload $package
     [IO.File]::WriteAllText((Join-Path $package 'probe.txt'),'tampered');Assert-Throws { Assert-Payload $package }
+    Assert-True ((Get-Command Get-FileHash).Module.Path.StartsWith($PSHOME,[StringComparison]::OrdinalIgnoreCase)) 'Hash command loaded from a different PowerShell installation'
     foreach ($file in (Get-ChildItem -LiteralPath (Split-Path $PSScriptRoot) -Filter '*.ps1')) {
         $tokens=$null;$errors=$null;[System.Management.Automation.Language.Parser]::ParseFile($file.FullName,[ref]$tokens,[ref]$errors) | Out-Null
         Assert-True ($errors.Count -eq 0) ('Syntax: '+$file.Name)
