@@ -36,7 +36,8 @@ function Assert-PeMachine([string]$Path,[int]$Machine) {
     if ((Get-PeMachine $Path) -ne $Machine) { throw "Zla architektura pliku: $Path" }
 }
 function Test-GameRoot([string]$Path) {
-    return (Test-Path -LiteralPath (Join-Path $Path 'Omsi.exe') -PathType Leaf) -and (Test-Path -LiteralPath (Join-Path $Path 'maps') -PathType Container) -and (Test-Path -LiteralPath (Join-Path $Path 'Vehicles') -PathType Container)
+    $engine=(Test-Path -LiteralPath (Join-Path $Path 'Omsi.exe') -PathType Leaf) -or (Test-Path -LiteralPath (Join-Path $Path 'openomsi.exe') -PathType Leaf) -or (Test-Path -LiteralPath (Join-Path $Path 'openomsi-srg-camera.exe') -PathType Leaf)
+    return $engine -and (Test-Path -LiteralPath (Join-Path $Path 'maps') -PathType Container) -and (Test-Path -LiteralPath (Join-Path $Path 'Vehicles') -PathType Container)
 }
 function Get-SteamLibraries([string[]]$SteamRoots=@()) {
     $roots=@($SteamRoots)
@@ -63,10 +64,14 @@ function Get-GameRoots([string[]]$SteamRoots=@()) {
         $path=Join-Path $library 'steamapps\common\OMSI 2'
         if (Test-GameRoot $path) { $found+=(Get-FullPath $path) }
     }
+    if ($env:LOCALAPPDATA) {
+        $open=Join-Path $env:LOCALAPPDATA 'Programs\openOMSI'
+        if (Test-GameRoot $open) { $found+=(Get-FullPath $open) }
+    }
     return @($found | Select-Object -Unique)
 }
 function Resolve-GameRoot([string]$Requested) {
-    if ($Requested) { $full=Get-FullPath $Requested; if (!(Test-GameRoot $full)) { throw 'Wskaz folder zawierajacy Omsi.exe, maps i Vehicles (wlasna instalacja OMSI 2).' };return $full }
+    if ($Requested) { $full=Get-FullPath $Requested; if (!(Test-GameRoot $full)) { throw 'Wskaz wlasny folder z maps, Vehicles oraz Omsi.exe lub openomsi.exe. Sam pusty folder programu nie zawiera danych gry.' };return $full }
     $found=@(Get-GameRoots)
     if ($found.Count -eq 1) { return $found[0] }
     if ($found.Count -gt 1) { Write-Host ($found -join "`n") }

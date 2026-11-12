@@ -16,6 +16,11 @@ try {
     [IO.File]::WriteAllText((Join-Path $steam 'steamapps\libraryfolders.vdf'),$vdf,(New-Object Text.UTF8Encoding($false)))
     $games=@(Get-GameRoots @($steam));Assert-True ($games -contains $game) 'Custom Steam library with spaces / Unicode not detected'
     Assert-True ((Resolve-GameRoot $game) -eq $game) 'Explicit root failed'
+    $open=Join-Path $testRoot 'standalone openOMSI'
+    New-Item -ItemType Directory -Path (Join-Path $open 'maps'),(Join-Path $open 'Vehicles') -Force | Out-Null
+    Write-FakePe (Join-Path $open 'openomsi.exe') 0x8664
+    Assert-True (Test-GameRoot $open) 'Standalone openOMSI content root rejected'
+    Assert-True ((Resolve-GameRoot $open) -eq $open) 'Standalone openOMSI explicit root failed'
     Assert-Throws { Resolve-GameRoot (Join-Path $testRoot 'not-game') }
     Assert-PeMachine (Join-Path $game 'Omsi.exe') 0x14c
     Assert-Throws { Assert-PeMachine (Join-Path $game 'Omsi.exe') 0x8664 }

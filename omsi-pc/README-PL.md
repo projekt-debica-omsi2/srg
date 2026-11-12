@@ -5,7 +5,7 @@ Ta sama paczka obsługuje **SRGMobile** i **SRGMobile Public**. APK instalujesz 
 ## Wymagania i rzeczywisty zakres
 
 - Windows **x64**, Windows 10 1809 lub nowszy / Windows 11, PowerShell 5.1 lub 7. Windows 32-bit, ARM64, Linux i macOS nie są obsługiwane przez ten instalator.
-- Własna działająca instalacja OMSI 2 z `Omsi.exe`, `maps` i `Vehicles`, np. ze Steam. Gry nie ma w tej paczce.
+- Własna działająca instalacja OMSI 2 z `Omsi.exe`, `maps` i `Vehicles`, np. ze Steam, albo folder openOMSI zawierający własne dane `maps`, `Vehicles` i `openomsi.exe`. Pusty folder samego programu openOMSI nie wystarczy. Gry nie ma w tej paczce.
 - Tryb **openOMSI** używa osobnego testowego silnika 0.3.45 z kamerami SRG. Pobiera ok. 67 MB oficjalnych bibliotek przypiętego openOMSI; instalator sprawdza SHA256 całego archiwum i architekturę DLL. Nie pobiera najnowszego losowego wydania. Jeśli pobieranie jest niedostępne, instalacja kończy się błędem zamiast uruchamiać niekompletną grę.
 - Potrzebny jest działający sterownik karty graficznej obsługujący renderer openOMSI (Vulkan/DirectX 12; dostępność pozostałych backendów zależy od silnika). Sama obecność bibliotek nie potwierdza zgodności GPU. Nie obiecujemy działania na każdym komputerze.
 - Tryb **Steam** instaluje plugin x86 i uruchamia oryginalny Omsi.exe. Nie dodaje niezależnych kamer do oryginalnego OMSI 2. Pełniejsza obsługa rozkładu i kamer dotyczy openOMSI.
@@ -14,7 +14,7 @@ Ta sama paczka obsługuje **SRGMobile** i **SRGMobile Public**. APK instalujesz 
 
 1. Rozpakuj cały ZIP do osobnego zapisywalnego folderu, np. `Dokumenty\SRG-OMSI-PC`. Nie uruchamiaj z podglądu ZIP. Nie rozpakowuj całej paczki do folderu gry.
 2. Zamknij samodzielnie OMSI i zapisz swój postęp. Uruchom `INSTALUJ.cmd`. Domyślnie wybierany jest openOMSI.
-3. Wykrywanie sprawdza Steam i jego dodatkowe biblioteki, także na innym dysku. Jeśli znajdzie kilka instalacji albo żadnej, wpisz właściwy folder. Możesz też podać go jawnie:
+3. Wykrywanie sprawdza Steam i jego dodatkowe biblioteki, także na innym dysku, oraz standardowy folder openOMSI w profilu użytkownika, jeśli ma dane gry. Jeśli znajdzie kilka instalacji albo żadnej, wpisz właściwy folder. Możesz też podać go jawnie:
 
 ```bat
 INSTALUJ.cmd -OmsiRoot "D:\SteamLibrary\steamapps\common\OMSI 2"

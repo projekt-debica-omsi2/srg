@@ -8,7 +8,8 @@ try {
     if ([Environment]::OSVersion.Version.Build -lt 17763) { throw 'Wymagany Windows 10 1809 lub nowszy / Windows 11.' }
     Assert-Payload $PSScriptRoot
     $game=Resolve-GameRoot $OmsiRoot
-    Assert-PeMachine (Join-Path $game 'Omsi.exe') 0x14c
+    if ($Mode -eq 'Steam' -and !(Test-Path -LiteralPath (Join-Path $game 'Omsi.exe'))) { throw 'Tryb Steam wymaga Omsi.exe. Dla folderu openOMSI wybierz -Mode openOMSI.' }
+    if (Test-Path -LiteralPath (Join-Path $game 'Omsi.exe')) { Assert-PeMachine (Join-Path $game 'Omsi.exe') 0x14c }
     Assert-PeMachine (Join-Path $PSScriptRoot 'bridge\plugins\SRGBridge.dll') 0x14c
     Assert-PeMachine (Join-Path $PSScriptRoot 'bridge\SRG-OMSI-Bridge.exe') 0x14c
     Assert-PeMachine (Join-Path $PSScriptRoot 'engine\openomsi-srg-camera.exe') 0x8664
