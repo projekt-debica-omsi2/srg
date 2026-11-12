@@ -9,6 +9,7 @@ import secrets
 import socket
 import threading
 import time
+import argparse
 from http.server import BaseHTTPRequestHandler, ThreadingHTTPServer
 
 ROOT = Path(os.environ.get('LOCALAPPDATA', str(Path.home()))) / 'SRG-OMSI'
@@ -29,8 +30,9 @@ def read_telemetry(root=ROOT, now=None):
         return empty
 
 class State:
-    def __init__(self, root=ROOT):
+    def __init__(self, root=ROOT, allowed_plugin_dirs=()):
         self.root = root
+        self.allowed_plugin_dirs = tuple(Path(p).resolve() for p in allowed_plugin_dirs)
         root.mkdir(parents=True, exist_ok=True)
         self.token = f'{secrets.randbelow(10000):04d}'
         self.auth_failures = []
@@ -158,6 +160,7 @@ class State:
         if action=='select_duty': safe['align_time']=command.get('align_time') is True
         base=Path(os.environ.get('LOCALAPPDATA',str(Path.home())))
         candidates=[base/'Programs/openOMSI/Plugins/SRGOpenOMSI.data',Path(os.environ.get('ProgramFiles(x86)',r'C:\Program Files (x86)'))/'Steam/steamapps/common/OMSI 2/plugins/SRGOpenOMSI.data']
+        candidates.extend(self.allowed_plugin_dirs)
         reported=str(Path(data.get('files_dir','')).resolve()).casefold()
         folder=next((p for p in candidates if str(p.resolve()).casefold()==reported),None)
         if folder is None: raise ValueError('Nieznany katalog dodatku openOMSI')
@@ -254,7 +257,15 @@ def handler(state, usb=False):
     return Handler
 
 def main():
-    state = State()
+    parser=argparse.ArgumentParser(description='SRGMobile / SRGMobile Public: wspolny mostek OMSI')
+    parser.add_argument('--omsi-root',type=Path,help='Wlasny folder OMSI 2: takze inny dysk lub biblioteka Steam')
+    args=parser.parse_args()
+    allowed=[]
+    if args.omsi_root:
+        folder=args.omsi_root.resolve()
+        if not (folder/'maps').is_dir() or not (folder/'Vehicles').is_dir():parser.error('Folder OMSI musi zawierac maps i Vehicles')
+        allowed=[folder/'plugins/SRGOpenOMSI.data']
+    state = State(allowed_plugin_dirs=allowed)
     stop = threading.Event()
     udp = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
     udp.bind(('127.0.0.1', 47851))
@@ -266,14 +277,17 @@ def main():
     usb_thread.start()
     thread = threading.Thread(target=state.monitor, args=(stop,), daemon=True)
     thread.start()
-    print('SRG OMSI Bridge 0.7 — odczyt danych; nie pelna integracja tras i kamer.')
+    print('SRG OMSI Bridge 0.8 — SRGMobile i SRGMobile Public')
+    if args.omsi_root: print('Folder OMSI:',args.omsi_root.resolve())
     print('Komputer:', socket.gethostname())
-    addresses = sorted(set(socket.gethostbyname_ex(socket.gethostname())[2]))
+    try: addresses = sorted(set(socket.gethostbyname_ex(socket.gethostname())[2]))
+    except OSError: addresses = []
+    if not addresses: addresses=['sprawdz IPv4 w ustawieniach sieci Windows']
     print('Wi-Fi: w aplikacji wpisz IPv4 komputera:', ', '.join(addresses))
     print('USB: uruchom USB.cmd, w aplikacji wybierz USB bez kodu (127.0.0.1:8766).')
     print('Kod parowania:', state.token)
     print('Logi:', state.root)
-    print('Pozwol na dostep w Zaporze Windows tylko w sieci prywatnej. Ctrl+C konczy.')
+    print('Pozwol na dostep w Zaporze Windows tylko w sieci prywatnej. Ctrl+C konczy.',flush=True)
     try:
         server.serve_forever(poll_interval=.5)
     except KeyboardInterrupt:
@@ -282,4 +296,5 @@ def main():
         stop.set(); udp.close(); receiver.join(timeout=2); server.server_close(); usb_server.shutdown(); usb_server.server_close(); usb_thread.join(timeout=2); thread.join(timeout=2)
         state.event('bridge_stopped')
 if __name__ == '__main__':
-    main()
+    try: main()
+    except OSError as error: raise SystemExit('Nie uruchomiono mostka: '+str(error)+'. Sprawdz uprawnienia folderu i czy porty 8765, 8766 lub 47851 nie sa zajete przez inny mostek.')

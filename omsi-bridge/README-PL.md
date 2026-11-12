@@ -1,76 +1,27 @@
-# SRG OMSI — wersja testowa 0.1 / aplikacja 1.4.69-omsi-test
+# SRG OMSI Bridge 0.8
 
-To działający kod pierwszego połączenia, nie ukończona realizacja pełnego zakresu.
-Kompilacja i testy automatyczne nie zastępują testu w OMSI 2.
+Wspolny mostek dla SRGMobile i SRGMobile Public. Zalecana pelna instalacja komputerowa: paczka SRG-OMSI-PC-0.8-Windows-x64 i jej aktualny README.
 
-## Instalacja na komputerze
+## Osobna instalacja mostka / pluginu
 
-1. Zamknij OMSI 2.
-2. Z paczki skopiuj `plugins/SRGBridge.dll` i `plugins/SRGBridge.opl` do
-   folderu `plugins` w katalogu OMSI 2 (obok innych wtyczek). Nie kopiuj kodu źródłowego.
-3. Uruchom `SRG-OMSI-Bridge.exe`. Pozostaw okno otwarte.
-4. Jeśli Zapora Windows zapyta, zezwól na komunikację tylko w zaufanej sieci prywatnej.
-5. Uruchom OMSI 2 i wczytaj mapę oraz autobus. Pierwszy test: podstawowy MAN i Grundorf.
-6. Zainstaluj dołączone APK testowe; w aplikacji: Menu → Ustawienia → OMSI 2.
-7. Włącz tryb, wybierz połączenie, wpisz kod parowania z okna programu i naciśnij „Zapisz i połącz”.
+Przy zamknietej grze zachowaj kopie poprzednich plikow, a nastepnie skopiuj plugins/SRGBridge.dll, plugins/SRGBridge.opl i plugins/SRGOpenOMSI.lua do plugins wlasnej instalacji OMSI 2. Nie zmieniaj Omsi.exe, map ani autobusow.
 
-Nie nadpisuj żadnych plików autobusu, map ani HOF. Aby wyłączyć dodatek, zamknij grę i usuń tylko te dwa pliki SRGBridge.
+Uruchom SRG-OMSI-Bridge.exe. Dla niestandardowej lokalizacji gry (inny dysk/biblioteka Steam) podaj:
 
-## Wi-Fi
+```
+SRG-OMSI-Bridge.exe --omsi-root "D:\SteamLibrary\steamapps\common\OMSI 2"
+```
 
-Komputer i Android muszą znajdować się w tej samej sieci lokalnej. W aplikacji wpisz
-prywatny adres IPv4 komputera podany w programie, np. 192.168.1.10.
-Komputer może być podłączony do tego samego routera kablem Ethernet.
-Port TCP: 8765. Nie przekierowuj go w routerze do internetu. Sieć gościnna może blokować połączenia.
-Kod parowania zmienia się po każdym uruchomieniu programu. Połączenie lokalne nie jest szyfrowane.
+Opcja rejestruje konkretny katalog pluginu, do ktorego wolno zapisac polecenia sterownika. Nie uznajemy dowolnego katalogu podanego przez pakiet telemetryczny. Zalecany instalator wybiera ta sciezke automatycznie.
 
-## USB
+## Polaczenie
 
-1. Zainstaluj oficjalne Android SDK Platform Tools: https://developer.android.com/tools/releases/platform-tools
-2. Dodaj folder z `adb.exe` do PATH (lub uruchom polecenie poniżej w tym folderze).
-3. Na Androidzie włącz opcje programistyczne i debugowanie USB.
-4. Podłącz kabel obsługujący dane; zatwierdź ten komputer na Androidzie.
-5. Uruchom `USB.cmd` albo `adb -d reverse tcp:8766 tcp:8766`.
-6. W sterowniku wybierz USB, wpisz kod i zapisz. Używany adres to 127.0.0.1.
+Wi-Fi: wspolna prywatna siec, IPv4 PC, TCP 8765, czterocyfrowy kod z okna/logu mostka. USB: adb reverse tcp:8766 tcp:8766, aplikacja w trybie USB bez kodu; port 8766 tylko na loopback. Nie trzeba dwoch mostkow dla dwoch APK. Przy wielu urzadzeniach uzyj skryptu USB z pelnej paczki lub wybierz serial jawnie. USB.cmd z tej osobnej paczki wymaga adb w PATH i jednego urzadzenia.
 
-Podłącz tylko jeden telefon/tablet na czas uruchamiania USB.cmd.
-Po ponownym podłączeniu może być potrzebne ponowienie polecenia.
-Samo ładowanie kablem nie ustanawia połączenia z grą.
+Zapora moze wymagac zgody dla prywatnej sieci. Nie zmieniamy jej automatycznie, nie otwieramy routera. Zajete porty 8765/8766/47851 oznaczaja zwykle uruchomiony poprzedni mostek; nie zabijamy go automatycznie.
 
-## Co jest zaimplementowane
+## Zakres i testy
 
-- Wtyczka x86: pasywny odczyt `Velocity`, `IBIS_Linie`, `IBIS_Route`, `IBIS_Ziel`.
-- Brakujące i nieaktualne zmienne są oznaczane jako niedostępne, a nie jako zero.
-- Mostek Windows, parowanie kodem, Wi-Fi i transport USB przez ADB.
-- Kafelek OMSI, przełącznik, niebieskie akcenty z wyłączeniem kalendarza.
-- Widok rzeczywistych wartości, nazwa komputera, osobny status świeżych danych z gry.
-- Oddzielenie zwykłych kursówek od trybu OMSI, zachowanie lokalnych zapisów.
-- Historia połączeń w aplikacji oraz logi JSONL komputera w `%LOCALAPPDATA%\SRG-OMSI`.
-  Logi wskazują czas zaobserwowania kontaktu, nie gwarantowany początek/koniec gry.
+Plugin oryginalnego OMSI ma podstawowa telemetrie. Pelniejszy rozklad, komendy i niezalezne kamery wymagaja testowego silnika openOMSI z patchem SRG. Sama DLL nie dodaje niezaleznych kamer do oryginalnej gry Steam. Dotychczasowe testy obrazu dotyczyly MAN GN92 i Grundorfu w openOMSI, nie wszystkich autobusow/map/GPU.
 
-Kody IBIS są surowymi wartościami skryptu, nie gotowym numerem linii ani rozkładem.
-
-## Jeszcze niezaimplementowane / niepotwierdzone
-
-Pełny odczyt kursówek, HOF i rozkładów map, współrzędne i przełączanie przystanków,
-próg 50 m, generowanie/przesyłanie/cache zapowiedzi, ręczna obsługa zapisanej trasy,
-sterowanie tablicami oraz przechwytywanie kamery/lusterka. Obecny ekran kamer jest
-czarny, bo mostek nie dostarcza jeszcze obrazu. Docelowo kamera ma pierwszeństwo,
-a jej brak powinien uruchamiać obraz wewnętrznego lusterka.
-
-Nie potwierdzono zgodności z OpenOMSI ani wszystkimi podstawowymi autobusami i mapami.
-Nie należy utożsamiać udanej kompilacji z testem w grze.
-
-## Test na twoim komputerze
-
-Sprawdź: wykrycie wtyczki, prędkość podczas jazdy, zmianę statusu po zamknięciu gry,
-rozłączenie i powrót Wi-Fi, to samo przez USB, powrót zwykłych kursówek po wyłączeniu trybu.
-Prześlij log mostka i `logfile.txt` OMSI, jeśli wtyczka nie startuje. Nie przesyłaj kluczy podpisu ani haseł.
-
-## Źródła interfejsów
-
-- OMSI plugin API: https://wiki.omnibussimulator.de/omsiwikineu.de/index.php?title=Plug-in-Schnittstelle
-- Android USB reverse forwarding: https://developer.android.com/develop/ui/views/layout/webapps/access-local-server
-
-## Wydanie 1.4.74 / mostek 0.2
-Wi-Fi: czterocyfrowy kod, port 8765. Po pi�ciu b��dnych pr�bach nast�puje ograniczenie przez maksymalnie minut�. USB: osobny port 8766 dost�pny wy��cznie na loopback PC, bez kodu. Wymagana aktualizacja aplikacji i mostka razem oraz ponowne uruchomienie USB.cmd. Stary tunel 8765 nie zast�puje nowego. Nie potwierdzono jeszcze dzia�ania tego wydania podczas jazdy.
+Logi lokalne: LOCALAPPDATA/SRG-OMSI. Dane wymagaja aktualnosci; brak swiezych danych nie jest zastepowany zerami. Protokoly obu APK sa wspolne. Poprawka 0.8 dotyczy przenosnych sciezek i komunikatow uruchamiania, bez zmian w funkcjach zegara, opoznienia i czterech kamer.

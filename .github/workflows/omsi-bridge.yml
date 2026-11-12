@@ -1,7 +1,7 @@
 name: Build OMSI test bridge
 on:
   push:
-    paths: ['omsi-bridge/**', '.github/workflows/omsi-bridge.yml']
+    paths: ['omsi-bridge/**', 'omsi-pc/**', 'tools/package_omsi_pc.py', '.github/workflows/omsi-bridge.yml']
   workflow_dispatch:
 permissions:
   contents: read
@@ -34,9 +34,25 @@ jobs:
           python -m PyInstaller --onefile --name SRG-OMSI-Bridge bridge.py
           if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
           Copy-Item dist/SRG-OMSI-Bridge.exe .
+      - name: Test portable Windows configuration without running the game
+        shell: powershell
+        run: .\omsi-pc\tests\test-common.ps1
+      - name: Package portable computer setup
+        shell: pwsh
+        run: |
+          Invoke-WebRequest 'https://github.com/projekt-debica-omsi2/srg/releases/download/v1.4.86/openOMSI-SRG-kamery.zip' -OutFile camera-engine.zip
+          python tools/package_omsi_pc.py --bridge omsi-bridge --engine camera-engine.zip --output SRG-OMSI-PC-0.8-Windows-x64
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
       - uses: actions/upload-artifact@v4
         with:
-          name: SRG-OMSI-Bridge-0.7-test
+          name: SRG-OMSI-PC-0.8-Windows-x64
+          path: |
+            SRG-OMSI-PC-0.8-Windows-x64.zip
+            SRG-OMSI-PC-0.8-Windows-x64.zip.sha256
+          if-no-files-found: error
+      - uses: actions/upload-artifact@v4
+        with:
+          name: SRG-OMSI-Bridge-0.8
           path: |
             omsi-bridge/plugins/*.dll
             omsi-bridge/plugins/*.opl
