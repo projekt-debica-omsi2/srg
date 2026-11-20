@@ -2,8 +2,8 @@ const fs=require('fs'),vm=require('vm'),assert=require('assert');
 const root=__dirname+'/../app/src/main/assets/';
 const ctx={};ctx.window=ctx;vm.createContext(ctx);
 for(const f of ['grg-audio-data.js','grg-audio.js'])vm.runInContext(fs.readFileSync(root+f,'utf8'),ctx);
-assert.equal(Object.keys(ctx.SRGGRGAudioData.stops).length,110);
-assert.equal(Object.keys(ctx.SRGGRGAudioData.starts).length,11);
+assert.equal(Object.keys(ctx.SRGGRGAudioData.stops).length,192);
+assert.equal(Object.keys(ctx.SRGGRGAudioData.starts).length,13);
 const api=ctx.SRGGRGAudio;
 assert.equal(api.stopFile({id:5,name:'DĘBICA RZESZOWSKA MKS'}),'P0005.mp3');
 assert.equal(api.stopFile({id:5,name:'Inny przystanek'}),null);
@@ -18,3 +18,6 @@ ctx.SRGNativeAudio={announceGRG:(...args)=>native=args};
 api.playStart(variant,()=>{throw Error('Unexpected web fallback')},()=> 'chime.mp3');
 assert.deepEqual(native,['K000A.mp3','start',false]);
 console.log('GRG audio: mapping, unknown stops, direction, NZ and native playback OK');
+
+const nz=Object.entries(ctx.SRGGRGAudioData.stops).find(([id,row])=>row.containsOnRequest);
+assert(nz);native=null;api.playStop({id:Number(nz[0]),name:nz[1].name},'arrival',true,()=>{throw Error('Unexpected fallback')},()=> 'chime.mp3');assert.deepEqual(native,[nz[1].file,'arrival',false]);

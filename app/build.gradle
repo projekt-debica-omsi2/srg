@@ -1,18 +1,19 @@
 plugins { id 'com.android.application' }
 def publicEdition = providers.gradleProperty('srgPublic').getOrElse('false').toBoolean()
+def testEdition = providers.gradleProperty('srgTest').getOrElse('false').toBoolean()
 
 android {
     namespace 'pl.srgmobile.classic'
     compileSdk 35
 
     defaultConfig {
-        applicationId publicEdition ? 'pl.srgmobile.publicapp' : 'pl.srgmobile.classic.lcd23'
+        applicationId testEdition ? 'pl.srgmobile.test' : publicEdition ? 'pl.srgmobile.publicapp' : 'pl.srgmobile.classic.lcd23'
         minSdk 26
         targetSdk 34
-        versionCode 11488
-        versionName '1.4.88'
+        versionCode 11489
+        versionName testEdition ? '1.4.89-test' : '1.4.89'
         buildConfigField 'boolean', 'SRG_PUBLIC', publicEdition.toString()
-        manifestPlaceholders = [appLabel: publicEdition ? 'SRGMobile Public' : 'SRGMobile']
+        manifestPlaceholders = [appLabel: testEdition ? 'SRGMobile Test' : publicEdition ? 'SRGMobile Public' : 'SRGMobile']
     }
     buildFeatures { buildConfig true }
     if (publicEdition) {

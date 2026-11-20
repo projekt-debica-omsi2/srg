@@ -1,0 +1,772 @@
+[
+  {
+    "sourceId": "node/7743492434",
+    "autoeditId": 111,
+    "name": "GRUDNA SKRZYŻOWANIE",
+    "lat": 49.9293546,
+    "lon": 21.4699658,
+    "added": true,
+    "direction": "Grudna → Dębica",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/7745111835",
+    "autoeditId": 112,
+    "name": "GRUDNA DOLNA",
+    "lat": 49.9278863,
+    "lon": 21.4632495,
+    "added": true,
+    "direction": "Grudna → Dębica",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "user/1795212858046-o3y5c",
+    "autoeditId": 113,
+    "name": "SMARŻOWA OŚRODEK ZDROWIA",
+    "lat": 49.9215665,
+    "lon": 21.4569193,
+    "added": true,
+    "direction": "Grudna → Dębica",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "user/1795212532744-0zzpp",
+    "autoeditId": 114,
+    "name": "SMARŻOWA CPN",
+    "lat": 49.9174143,
+    "lon": 21.439419,
+    "added": true,
+    "direction": "Grudna → Dębica",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/7745091432",
+    "autoeditId": 115,
+    "name": "SIEDLISKA-BOGUSZ",
+    "lat": 49.9146424,
+    "lon": 21.4153716,
+    "added": true,
+    "direction": "Grudna → Dębica",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/4057792500",
+    "autoeditId": 116,
+    "name": "SIEDLISKA-BOGUSZ SKRZYŻOWANIE",
+    "lat": 49.9222342,
+    "lon": 21.4013246,
+    "added": true,
+    "direction": "Grudna → Dębica",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/4057792486",
+    "autoeditId": 117,
+    "name": "GORZEJOWA SZKOŁA",
+    "lat": 49.9217091,
+    "lon": 21.3832465,
+    "added": true,
+    "direction": "Grudna → Dębica",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "user/1795211784008-5m7bf",
+    "autoeditId": 118,
+    "name": "GORZEJOWA MŁYN",
+    "lat": 49.9177129,
+    "lon": 21.3733952,
+    "added": true,
+    "direction": "Grudna → Dębica",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "user/1795211634679-a2atm",
+    "autoeditId": 119,
+    "name": "GORZEJOWA N.Ż.",
+    "lat": 49.9151274,
+    "lon": 21.3645206,
+    "added": true,
+    "direction": "Grudna → Dębica",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/7198251578",
+    "autoeditId": 120,
+    "name": "KAMIENICA DOLNA",
+    "lat": 49.9103166,
+    "lon": 21.3519363,
+    "added": true,
+    "direction": "Grudna → Dębica",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/3184726044",
+    "autoeditId": 121,
+    "name": "JAWORZE GÓRNE/KAMIENICA DOLNA",
+    "lat": 49.9224953,
+    "lon": 21.3411655,
+    "added": true,
+    "direction": "Grudna → Dębica",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "user/1795210649664-wl5l0",
+    "autoeditId": 122,
+    "name": "JAWORZE GÓRNE KAPLICZKA",
+    "lat": 49.925579625300635,
+    "lon": 21.340580284595493,
+    "added": true,
+    "direction": "Grudna → Dębica",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/3184731095",
+    "autoeditId": 123,
+    "name": "JAWORZE GÓRNE",
+    "lat": 49.9308472,
+    "lon": 21.3470319,
+    "added": true,
+    "direction": "Grudna → Dębica",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/3184348778",
+    "autoeditId": 124,
+    "name": "JAWORZE GÓRNE OSIEDLE",
+    "lat": 49.9378352,
+    "lon": 21.3488169,
+    "added": true,
+    "direction": "Grudna → Dębica",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/3184746800",
+    "autoeditId": 125,
+    "name": "JAWORZE GÓRNE N.Ż.",
+    "lat": 49.945834,
+    "lon": 21.3536975,
+    "added": true,
+    "direction": "Grudna → Dębica",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "user/1795210084589-8thg6",
+    "autoeditId": 126,
+    "name": "JAWORZE DOLNE SZ.",
+    "lat": 49.95006099355763,
+    "lon": 21.352398097515106,
+    "added": true,
+    "direction": "Grudna → Dębica",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "user/1795209441961-xbeej",
+    "autoeditId": 127,
+    "name": "JAWORZE DOLNE N.Ż.",
+    "lat": 49.9568806,
+    "lon": 21.3525867,
+    "added": true,
+    "direction": "Grudna → Dębica",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "user/1795209177612-vxryj",
+    "autoeditId": 128,
+    "name": "JAWORZE DOLNE OŚ. W.",
+    "lat": 49.97101639391777,
+    "lon": 21.34602047502995,
+    "added": true,
+    "direction": "Grudna → Dębica",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/3169070630",
+    "autoeditId": 129,
+    "name": "GOŁĘCZYNA",
+    "lat": 49.9783433,
+    "lon": 21.3413145,
+    "added": true,
+    "direction": "Grudna → Dębica",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/3169070579",
+    "autoeditId": 130,
+    "name": "DOBRKÓW",
+    "lat": 49.9808099,
+    "lon": 21.3323693,
+    "added": true,
+    "direction": "Grudna → Dębica",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "user/1795191313742-v7ywb",
+    "autoeditId": 131,
+    "name": "DOBRKÓW N.Ż",
+    "lat": 49.9860125,
+    "lon": 21.3251974,
+    "added": true,
+    "direction": "Grudna → Dębica",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/4305173143",
+    "autoeditId": 132,
+    "name": "PARKOSZ/ŁABUZIE",
+    "lat": 49.9890103,
+    "lon": 21.3111957,
+    "added": true,
+    "direction": "Grudna → Dębica",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/5233653257",
+    "autoeditId": 133,
+    "name": "PILZNO LWOWSKA",
+    "lat": 49.983399,
+    "lon": 21.3005274,
+    "added": true,
+    "direction": "Grudna → Dębica",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "user/1795190157955-rcjlo",
+    "autoeditId": 134,
+    "name": "PILZNO ZAJEZDNIA",
+    "lat": 49.98053989356576,
+    "lon": 21.288797557353973,
+    "added": true,
+    "direction": "Grudna → Dębica",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "user/1795189948639-s9has",
+    "autoeditId": 135,
+    "name": "PILZNO LWOWSKA",
+    "lat": 49.98259665986569,
+    "lon": 21.29903018474579,
+    "added": true,
+    "direction": "Grudna → Dębica",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/4305173147",
+    "autoeditId": 136,
+    "name": "PARKOSZ/ŁABUZIE",
+    "lat": 49.9895759,
+    "lon": 21.3135019,
+    "added": true,
+    "direction": "Grudna → Dębica",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/4837154515",
+    "autoeditId": 137,
+    "name": "PARKOSZ",
+    "lat": 49.9928026,
+    "lon": 21.3200417,
+    "added": true,
+    "direction": "Grudna → Dębica",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/4839690646",
+    "autoeditId": 138,
+    "name": "PODGRODZIE /PĘTLA",
+    "lat": 50.0042959,
+    "lon": 21.3338263,
+    "added": true,
+    "direction": "Grudna → Dębica",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/2915055646",
+    "autoeditId": 139,
+    "name": "PODGRODZIE 2",
+    "lat": 50.0098631,
+    "lon": 21.3435079,
+    "added": true,
+    "direction": "Grudna → Dębica",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/2915055724",
+    "autoeditId": 140,
+    "name": "PODGRODZIE 1",
+    "lat": 50.017162,
+    "lon": 21.3612817,
+    "added": true,
+    "direction": "Grudna → Dębica",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/4839689860",
+    "autoeditId": 141,
+    "name": "LATOSZYN E40",
+    "lat": 50.0225226,
+    "lon": 21.3668946,
+    "added": true,
+    "direction": "Grudna → Dębica",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/8288363439",
+    "autoeditId": 142,
+    "name": "DĘBICA KRAKOWSKA RONDO",
+    "lat": 50.0339078,
+    "lon": 21.3840213,
+    "added": true,
+    "direction": "Grudna → Dębica",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/8288363438",
+    "autoeditId": 143,
+    "name": "DĘBICA KRAKOWSKA KĘPA",
+    "lat": 50.0366168,
+    "lon": 21.3876352,
+    "added": true,
+    "direction": "Grudna → Dębica",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/8288363437",
+    "autoeditId": 144,
+    "name": "DĘBICA KRAKOWSKA SZPITAL",
+    "lat": 50.0403172,
+    "lon": 21.3944947,
+    "added": true,
+    "direction": "Grudna → Dębica",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/8288363436",
+    "autoeditId": 145,
+    "name": "DĘBICA OSIEDLE MATEJKI",
+    "lat": 50.0426916,
+    "lon": 21.3984806,
+    "added": true,
+    "direction": "Grudna → Dębica",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/8288363435",
+    "autoeditId": 146,
+    "name": "DĘBICA OSIEDLE CHEMIK",
+    "lat": 50.0440344,
+    "lon": 21.4008669,
+    "added": true,
+    "direction": "Grudna → Dębica",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/8288363434",
+    "autoeditId": 147,
+    "name": "DĘBICA OSIEDLE METALOWIEC",
+    "lat": 50.0473736,
+    "lon": 21.4053935,
+    "added": true,
+    "direction": "Grudna → Dębica",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/8288363433",
+    "autoeditId": 148,
+    "name": "DĘBICA KRAKOWSKA KLASZTOR",
+    "lat": 50.0491513,
+    "lon": 21.4074381,
+    "added": true,
+    "direction": "Grudna → Dębica",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "user/1795213526458-b8jil",
+    "autoeditId": 68,
+    "name": "DĘBICA DWORZEC AUTOBUSOWY",
+    "lat": 50.05391156299318,
+    "lon": 21.40632390975952,
+    "added": false,
+    "direction": "Grudna → Dębica",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "S24-debica-departure-user",
+    "autoeditId": 1,
+    "name": "DĘBICA DWORZEC AUTOBUSOWY",
+    "lat": 50.05382631616432,
+    "lon": 21.40648685395718,
+    "added": false,
+    "direction": "Dębica → Grudna",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/8282425782",
+    "autoeditId": 149,
+    "name": "DĘBICA OSIEDLE METALOWIEC",
+    "lat": 50.0466296,
+    "lon": 21.4041623,
+    "added": true,
+    "direction": "Dębica → Grudna",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/8282425781",
+    "autoeditId": 150,
+    "name": "DĘBICA OSIEDLE CHEMIK",
+    "lat": 50.0439989,
+    "lon": 21.4004866,
+    "added": true,
+    "direction": "Dębica → Grudna",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/8282425780",
+    "autoeditId": 151,
+    "name": "DĘBICA OSIEDLE MATEJKI",
+    "lat": 50.0417429,
+    "lon": 21.3964769,
+    "added": true,
+    "direction": "Dębica → Grudna",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/8282425779",
+    "autoeditId": 152,
+    "name": "DĘBICA KRAKOWSKA SZPITAL",
+    "lat": 50.0391631,
+    "lon": 21.3918184,
+    "added": true,
+    "direction": "Dębica → Grudna",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/8282425778",
+    "autoeditId": 153,
+    "name": "DĘBICA KRAKOWSKA KĘPA",
+    "lat": 50.0363939,
+    "lon": 21.3868996,
+    "added": true,
+    "direction": "Dębica → Grudna",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/8349493473",
+    "autoeditId": 154,
+    "name": "LATOSZYN OBWODNICA (STARZYŃSKIEGO)",
+    "lat": 50.0318055,
+    "lon": 21.3788453,
+    "added": true,
+    "direction": "Dębica → Grudna",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/4839689861",
+    "autoeditId": 155,
+    "name": "LATOSZYN E40",
+    "lat": 50.0220082,
+    "lon": 21.3659101,
+    "added": true,
+    "direction": "Dębica → Grudna",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/4839690057",
+    "autoeditId": 156,
+    "name": "PODGRODZIE 1",
+    "lat": 50.0163377,
+    "lon": 21.3575949,
+    "added": true,
+    "direction": "Dębica → Grudna",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/2915055626",
+    "autoeditId": 157,
+    "name": "PODGRODZIE 2",
+    "lat": 50.0097246,
+    "lon": 21.3427886,
+    "added": true,
+    "direction": "Dębica → Grudna",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "user/1795189603177-o0500",
+    "autoeditId": 158,
+    "name": "PODGRODZIE/PĘTLA",
+    "lat": 50.003911997036425,
+    "lon": 21.33288770914078,
+    "added": true,
+    "direction": "Dębica → Grudna",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/4837154514",
+    "autoeditId": 159,
+    "name": "PARKOSZ",
+    "lat": 49.9925249,
+    "lon": 21.3189527,
+    "added": true,
+    "direction": "Dębica → Grudna",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/4305173143",
+    "autoeditId": 161,
+    "name": "PARKOSZ/ŁABUZIE",
+    "lat": 49.9890103,
+    "lon": 21.3111957,
+    "added": true,
+    "direction": "Dębica → Grudna",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "user/1795189948639-s9has",
+    "autoeditId": 162,
+    "name": "PILZNO LWOWSKA",
+    "lat": 49.98259665986569,
+    "lon": 21.29903018474579,
+    "added": true,
+    "direction": "Dębica → Grudna",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "user/1795190157955-rcjlo",
+    "autoeditId": 163,
+    "name": "PILZNO ZAJEZDNIA",
+    "lat": 49.98053989356576,
+    "lon": 21.288797557353973,
+    "added": true,
+    "direction": "Dębica → Grudna",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/5233653257",
+    "autoeditId": 164,
+    "name": "PILZNO LWOWSKA",
+    "lat": 49.983399,
+    "lon": 21.3005274,
+    "added": true,
+    "direction": "Dębica → Grudna",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/4305173147",
+    "autoeditId": 165,
+    "name": "PARKOSZ/ŁABUZIE",
+    "lat": 49.9895759,
+    "lon": 21.3135019,
+    "added": true,
+    "direction": "Dębica → Grudna",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "user/1795191313742-v7ywb",
+    "autoeditId": 166,
+    "name": "DOBRKÓW N.Ż.",
+    "lat": 49.9860125,
+    "lon": 21.3251974,
+    "added": true,
+    "direction": "Dębica → Grudna",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/3169070579",
+    "autoeditId": 167,
+    "name": "DOBRKÓW",
+    "lat": 49.9808099,
+    "lon": 21.3323693,
+    "added": true,
+    "direction": "Dębica → Grudna",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/3169070630",
+    "autoeditId": 168,
+    "name": "GOŁĘCZYNA",
+    "lat": 49.9783433,
+    "lon": 21.3413145,
+    "added": true,
+    "direction": "Dębica → Grudna",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "user/1795209177612-vxryj",
+    "autoeditId": 169,
+    "name": "JAWORZE DOLNE OŚ. W.",
+    "lat": 49.97101639391777,
+    "lon": 21.34602047502995,
+    "added": true,
+    "direction": "Dębica → Grudna",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "user/1795209441961-xbeej",
+    "autoeditId": 170,
+    "name": "JAWORZE DOLNE N.Ż.",
+    "lat": 49.9568806,
+    "lon": 21.3525867,
+    "added": true,
+    "direction": "Dębica → Grudna",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "user/1795210084589-8thg6",
+    "autoeditId": 171,
+    "name": "JAWORZE DOLNE SZ.",
+    "lat": 49.95006099355763,
+    "lon": 21.352398097515106,
+    "added": true,
+    "direction": "Dębica → Grudna",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/3184746800",
+    "autoeditId": 172,
+    "name": "JAWORZE GÓRNE N.Ż.",
+    "lat": 49.945834,
+    "lon": 21.3536975,
+    "added": true,
+    "direction": "Dębica → Grudna",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/3184348778",
+    "autoeditId": 173,
+    "name": "JAWORZE GÓRNE OSIEDLE",
+    "lat": 49.9378352,
+    "lon": 21.3488169,
+    "added": true,
+    "direction": "Dębica → Grudna",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/3184731095",
+    "autoeditId": 174,
+    "name": "JAWORZE GÓRNE",
+    "lat": 49.9308472,
+    "lon": 21.3470319,
+    "added": true,
+    "direction": "Dębica → Grudna",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "user/1795210649664-wl5l0",
+    "autoeditId": 175,
+    "name": "JAWORZE GÓRNE KAPLICZKA",
+    "lat": 49.925579625300635,
+    "lon": 21.340580284595493,
+    "added": true,
+    "direction": "Dębica → Grudna",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/3184726044",
+    "autoeditId": 176,
+    "name": "JAWORZE GÓRNE/KAMIENICA DOLNA",
+    "lat": 49.9224953,
+    "lon": 21.3411655,
+    "added": true,
+    "direction": "Dębica → Grudna",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "user/1795211425142-4aalx",
+    "autoeditId": 160,
+    "name": "KAMIENICA DOLNA",
+    "lat": 49.909880407059916,
+    "lon": 21.35386794805527,
+    "added": true,
+    "direction": "Dębica → Grudna",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "user/1795211634679-a2atm",
+    "autoeditId": 177,
+    "name": "GORZEJOWA N.Ż.",
+    "lat": 49.9151274,
+    "lon": 21.3645206,
+    "added": true,
+    "direction": "Dębica → Grudna",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "user/1795211784008-5m7bf",
+    "autoeditId": 178,
+    "name": "GORZEJOWA MŁYN",
+    "lat": 49.9177129,
+    "lon": 21.3733952,
+    "added": true,
+    "direction": "Dębica → Grudna",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/4057792486",
+    "autoeditId": 179,
+    "name": "GORZEJOWA SZKOŁA",
+    "lat": 49.9217091,
+    "lon": 21.3832465,
+    "added": true,
+    "direction": "Dębica → Grudna",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/4057792500",
+    "autoeditId": 180,
+    "name": "SIEDLISKA-BOGUSZ SKRZYŻOWANIE",
+    "lat": 49.9222342,
+    "lon": 21.4013246,
+    "added": true,
+    "direction": "Dębica → Grudna",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/7745091432",
+    "autoeditId": 181,
+    "name": "SIEDLISKA-BOGUSZ",
+    "lat": 49.9146424,
+    "lon": 21.4153716,
+    "added": true,
+    "direction": "Dębica → Grudna",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "user/1795212532744-0zzpp",
+    "autoeditId": 182,
+    "name": "SMARŻOWA CPN",
+    "lat": 49.9174143,
+    "lon": 21.439419,
+    "added": true,
+    "direction": "Dębica → Grudna",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "user/1795212858046-o3y5c",
+    "autoeditId": 183,
+    "name": "SMARŻOWA OŚRODEK ZDROWIA",
+    "lat": 49.9215665,
+    "lon": 21.4569193,
+    "added": true,
+    "direction": "Dębica → Grudna",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/7745111835",
+    "autoeditId": 184,
+    "name": "GRUDNA DOLNA",
+    "lat": 49.9278863,
+    "lon": 21.4632495,
+    "added": true,
+    "direction": "Dębica → Grudna",
+    "sharedGPSAllowed": true
+  },
+  {
+    "sourceId": "node/7743492434",
+    "autoeditId": 185,
+    "name": "GRUDNA SKRZYŻOWANIE",
+    "lat": 49.9293546,
+    "lon": 21.4699658,
+    "added": true,
+    "direction": "Dębica → Grudna",
+    "sharedGPSAllowed": true
+  }
+]

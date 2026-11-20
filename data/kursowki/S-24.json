@@ -1,0 +1,2767 @@
+{
+  "schema": "SRGDutyDraft/1",
+  "id": "S-24!",
+  "label": "S-24!",
+  "mode": "normal",
+  "source": "9087.jpg",
+  "status": "added_pending_intermediate_stops_and_times",
+  "serviceCode": null,
+  "trips": [
+    {
+      "tripNo": 1,
+      "from": "Grudna",
+      "to": "Dębica Dworzec Autobusowy",
+      "via": [
+        "Jaworze Dolne"
+      ],
+      "startTime": "08:00",
+      "endTime": "09:05",
+      "routeStops": [
+        {
+          "id": 111,
+          "name": "GRUDNA SKRZYŻOWANIE",
+          "street": "",
+          "lat": 49.9293546,
+          "lon": 21.4699658,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "node/7743492434"
+        },
+        {
+          "id": 112,
+          "name": "GRUDNA DOLNA",
+          "street": "",
+          "lat": 49.9278863,
+          "lon": 21.4632495,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "node/7745111835"
+        },
+        {
+          "id": 113,
+          "name": "SMARŻOWA OŚRODEK ZDROWIA",
+          "street": "",
+          "lat": 49.9215665,
+          "lon": 21.4569193,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "user/1795212858046-o3y5c"
+        },
+        {
+          "id": 114,
+          "name": "SMARŻOWA CPN",
+          "street": "",
+          "lat": 49.9174143,
+          "lon": 21.439419,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "user/1795212532744-0zzpp"
+        },
+        {
+          "id": 115,
+          "name": "SIEDLISKA-BOGUSZ",
+          "street": "",
+          "lat": 49.9146424,
+          "lon": 21.4153716,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "node/7745091432"
+        },
+        {
+          "id": 116,
+          "name": "SIEDLISKA-BOGUSZ SKRZYŻOWANIE",
+          "street": "",
+          "lat": 49.9222342,
+          "lon": 21.4013246,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "node/4057792500"
+        },
+        {
+          "id": 117,
+          "name": "GORZEJOWA SZKOŁA",
+          "street": "",
+          "lat": 49.9217091,
+          "lon": 21.3832465,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "node/4057792486"
+        },
+        {
+          "id": 118,
+          "name": "GORZEJOWA MŁYN",
+          "street": "",
+          "lat": 49.9177129,
+          "lon": 21.3733952,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "user/1795211784008-5m7bf"
+        },
+        {
+          "id": 119,
+          "name": "GORZEJOWA N.Ż.",
+          "street": "",
+          "lat": 49.9151274,
+          "lon": 21.3645206,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "naZadanie": true,
+          "gpsSourceId": "user/1795211634679-a2atm"
+        },
+        {
+          "id": 120,
+          "name": "KAMIENICA DOLNA",
+          "street": "",
+          "lat": 49.9103166,
+          "lon": 21.3519363,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "node/7198251578"
+        },
+        {
+          "id": 121,
+          "name": "JAWORZE GÓRNE/KAMIENICA DOLNA",
+          "street": "",
+          "lat": 49.9224953,
+          "lon": 21.3411655,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": true,
+          "gpsSourceId": "node/3184726044"
+        },
+        {
+          "id": 122,
+          "name": "JAWORZE GÓRNE KAPLICZKA",
+          "street": "",
+          "lat": 49.925579625300635,
+          "lon": 21.340580284595493,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": true,
+          "gpsSourceId": "user/1795210649664-wl5l0"
+        },
+        {
+          "id": 123,
+          "name": "JAWORZE GÓRNE",
+          "street": "",
+          "lat": 49.9308472,
+          "lon": 21.3470319,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "node/3184731095"
+        },
+        {
+          "id": 124,
+          "name": "JAWORZE GÓRNE OSIEDLE",
+          "street": "",
+          "lat": 49.9378352,
+          "lon": 21.3488169,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "node/3184348778"
+        },
+        {
+          "id": 125,
+          "name": "JAWORZE GÓRNE N.Ż.",
+          "street": "",
+          "lat": 49.945834,
+          "lon": 21.3536975,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "naZadanie": true,
+          "gpsSourceId": "node/3184746800"
+        },
+        {
+          "id": 126,
+          "name": "JAWORZE DOLNE SZ.",
+          "street": "",
+          "lat": 49.95006099355763,
+          "lon": 21.352398097515106,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "user/1795210084589-8thg6"
+        },
+        {
+          "id": 127,
+          "name": "JAWORZE DOLNE N.Ż.",
+          "street": "",
+          "lat": 49.9568806,
+          "lon": 21.3525867,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "naZadanie": true,
+          "gpsSourceId": "user/1795209441961-xbeej"
+        },
+        {
+          "id": 128,
+          "name": "JAWORZE DOLNE OŚ. W.",
+          "street": "",
+          "lat": 49.97101639391777,
+          "lon": 21.34602047502995,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "user/1795209177612-vxryj"
+        },
+        {
+          "id": 129,
+          "name": "GOŁĘCZYNA",
+          "street": "",
+          "lat": 49.9783433,
+          "lon": 21.3413145,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "node/3169070630"
+        },
+        {
+          "id": 130,
+          "name": "DOBRKÓW",
+          "street": "",
+          "lat": 49.9808099,
+          "lon": 21.3323693,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "naZadanie": false,
+          "gpsSourceId": "node/3169070579"
+        },
+        {
+          "id": 131,
+          "name": "DOBRKÓW N.Ż",
+          "street": "",
+          "lat": 49.9860125,
+          "lon": 21.3251974,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "naZadanie": true,
+          "gpsSourceId": "user/1795191313742-v7ywb"
+        },
+        {
+          "id": 132,
+          "name": "PARKOSZ/ŁABUZIE",
+          "street": "",
+          "lat": 49.9890103,
+          "lon": 21.3111957,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "node/4305173143"
+        },
+        {
+          "id": 133,
+          "name": "PILZNO LWOWSKA",
+          "street": "",
+          "lat": 49.983399,
+          "lon": 21.3005274,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "node/5233653257"
+        },
+        {
+          "id": 134,
+          "name": "PILZNO ZAJEZDNIA",
+          "street": "",
+          "lat": 49.98053989356576,
+          "lon": 21.288797557353973,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "user/1795190157955-rcjlo"
+        },
+        {
+          "id": 135,
+          "name": "PILZNO LWOWSKA",
+          "street": "",
+          "lat": 49.98259665986569,
+          "lon": 21.29903018474579,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "user/1795189948639-s9has"
+        },
+        {
+          "id": 136,
+          "name": "PARKOSZ/ŁABUZIE",
+          "street": "",
+          "lat": 49.9895759,
+          "lon": 21.3135019,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "node/4305173147"
+        },
+        {
+          "id": 137,
+          "name": "PARKOSZ",
+          "street": "",
+          "lat": 49.9928026,
+          "lon": 21.3200417,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "node/4837154515"
+        },
+        {
+          "id": 138,
+          "name": "PODGRODZIE /PĘTLA",
+          "street": "",
+          "lat": 50.0042959,
+          "lon": 21.3338263,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "node/4839690646"
+        },
+        {
+          "id": 139,
+          "name": "PODGRODZIE 2",
+          "street": "",
+          "lat": 50.0098631,
+          "lon": 21.3435079,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "node/2915055646"
+        },
+        {
+          "id": 140,
+          "name": "PODGRODZIE 1",
+          "street": "",
+          "lat": 50.017162,
+          "lon": 21.3612817,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "node/2915055724"
+        },
+        {
+          "id": 141,
+          "name": "LATOSZYN E40",
+          "street": "",
+          "lat": 50.0225226,
+          "lon": 21.3668946,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "node/4839689860"
+        },
+        {
+          "id": 142,
+          "name": "DĘBICA KRAKOWSKA RONDO",
+          "street": "",
+          "lat": 50.0339078,
+          "lon": 21.3840213,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "node/8288363439"
+        },
+        {
+          "id": 143,
+          "name": "DĘBICA KRAKOWSKA KĘPA",
+          "street": "",
+          "lat": 50.0366168,
+          "lon": 21.3876352,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "node/8288363438"
+        },
+        {
+          "id": 144,
+          "name": "DĘBICA KRAKOWSKA SZPITAL",
+          "street": "",
+          "lat": 50.0403172,
+          "lon": 21.3944947,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "node/8288363437"
+        },
+        {
+          "id": 145,
+          "name": "DĘBICA OSIEDLE MATEJKI",
+          "street": "",
+          "lat": 50.0426916,
+          "lon": 21.3984806,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "node/8288363436"
+        },
+        {
+          "id": 146,
+          "name": "DĘBICA OSIEDLE CHEMIK",
+          "street": "",
+          "lat": 50.0440344,
+          "lon": 21.4008669,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": true,
+          "gpsSourceId": "node/8288363435"
+        },
+        {
+          "id": 147,
+          "name": "DĘBICA OSIEDLE METALOWIEC",
+          "street": "",
+          "lat": 50.0473736,
+          "lon": 21.4053935,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": true,
+          "gpsSourceId": "node/8288363434"
+        },
+        {
+          "id": 148,
+          "name": "DĘBICA KRAKOWSKA KLASZTOR",
+          "street": "",
+          "lat": 50.0491513,
+          "lon": 21.4074381,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "node/8288363433"
+        },
+        {
+          "id": 68,
+          "name": "DĘBICA DWORZEC AUTOBUSOWY",
+          "street": "",
+          "lat": 50.05391156299318,
+          "lon": 21.40632390975952,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "user/1795213526458-b8jil"
+        }
+      ],
+      "serviceCode": "Dnj",
+      "serviceDescription": "Dni robocze; ograniczenie n; j — przez Jaworze Dolne",
+      "calendarConfirmed": false,
+      "symbolDefinitions": {
+        "j": "przez Jaworze Dolne"
+      },
+      "photoStopObservations": [
+        {
+          "order": 1,
+          "screenNumber": 35,
+          "rawLabel": "GRUDNA SK.",
+          "fullNameConfirmed": false,
+          "rjStopId": null,
+          "time": "08:00",
+          "source": "20261118_151638.mp4",
+          "timeConfirmed": true,
+          "name": "GRUDNA SK."
+        },
+        {
+          "order": 2,
+          "screenNumber": 34,
+          "rawLabel": "GRUDNA D.",
+          "fullNameConfirmed": true,
+          "rjStopId": null,
+          "time": "08:02",
+          "source": "20261118_151638.mp4",
+          "timeConfirmed": true,
+          "name": "Grudna Dolna"
+        },
+        {
+          "order": 3,
+          "screenNumber": 33,
+          "rawLabel": "SMAR O.ZDR",
+          "fullNameConfirmed": false,
+          "rjStopId": null,
+          "time": "08:04",
+          "source": "20261118_151638.mp4",
+          "timeConfirmed": true,
+          "name": "SMAR O.ZDR"
+        },
+        {
+          "order": 4,
+          "screenNumber": 32,
+          "rawLabel": "SMARŻO CPN",
+          "fullNameConfirmed": false,
+          "rjStopId": null,
+          "time": "08:06",
+          "source": "20261118_151638.mp4",
+          "timeConfirmed": true,
+          "name": "SMARŻO CPN"
+        },
+        {
+          "order": 5,
+          "screenNumber": 31,
+          "rawLabel": "SIE D.LUDO",
+          "fullNameConfirmed": false,
+          "rjStopId": null,
+          "time": "08:09",
+          "source": "20261118_151638.mp4",
+          "timeConfirmed": true,
+          "name": "SIE D.LUDO"
+        },
+        {
+          "order": 6,
+          "screenNumber": 30,
+          "rawLabel": "SIEDL.SKRZ",
+          "fullNameConfirmed": true,
+          "rjStopId": null,
+          "time": "08:10",
+          "source": "20261118_151638.mp4",
+          "timeConfirmed": true,
+          "name": "Siedliska Bogusz Skrzyżowanie"
+        },
+        {
+          "order": 7,
+          "screenNumber": 29,
+          "rawLabel": "GORZEJ SZK",
+          "fullNameConfirmed": false,
+          "rjStopId": null,
+          "time": "08:12",
+          "source": "20261118_151638.mp4",
+          "timeConfirmed": true,
+          "name": "GORZEJ SZK"
+        },
+        {
+          "order": 8,
+          "screenNumber": 28,
+          "rawLabel": "GORZEJMŁYN",
+          "fullNameConfirmed": false,
+          "rjStopId": null,
+          "time": "08:14",
+          "source": "20261118_151638.mp4",
+          "timeConfirmed": true,
+          "name": "GORZEJMŁYN"
+        },
+        {
+          "order": 9,
+          "screenNumber": 27,
+          "rawLabel": "GORZEJO NŻ",
+          "fullNameConfirmed": false,
+          "rjStopId": null,
+          "time": "08:16",
+          "source": "20261118_151638.mp4",
+          "timeConfirmed": true,
+          "name": "GORZEJO NŻ"
+        },
+        {
+          "order": 10,
+          "screenNumber": 26,
+          "rawLabel": "KAMIEDOLNA",
+          "fullNameConfirmed": false,
+          "rjStopId": null,
+          "time": "08:18",
+          "source": "20261118_151638.mp4",
+          "timeConfirmed": true,
+          "name": "KAMIEDOLNA"
+        },
+        {
+          "order": 11,
+          "screenNumber": 25,
+          "rawLabel": "JAWORZE G",
+          "fullNameConfirmed": true,
+          "rjStopId": null,
+          "time": "08:21",
+          "source": "20261118_151638.mp4",
+          "timeConfirmed": true,
+          "name": "Jaworze Górne"
+        },
+        {
+          "order": 12,
+          "screenNumber": 24,
+          "rawLabel": "JAWG.OSIED",
+          "fullNameConfirmed": true,
+          "rjStopId": null,
+          "time": "08:23",
+          "source": "20261118_151638.mp4",
+          "timeConfirmed": true,
+          "name": "Jaworze Górne Osiedle"
+        },
+        {
+          "order": 13,
+          "screenNumber": 23,
+          "rawLabel": "JAWORZEGNŻ",
+          "fullNameConfirmed": true,
+          "rjStopId": null,
+          "time": "08:24",
+          "source": "20261118_151638.mp4",
+          "timeConfirmed": true,
+          "name": "Jaworze Górne N.Ż."
+        },
+        {
+          "order": 14,
+          "screenNumber": 22,
+          "rawLabel": "JAWORZEDSZ",
+          "fullNameConfirmed": true,
+          "rjStopId": null,
+          "time": "08:26",
+          "source": "20261118_151638.mp4",
+          "timeConfirmed": true,
+          "name": "Jaworze Dolne Szkoła"
+        },
+        {
+          "order": 15,
+          "screenNumber": 21,
+          "rawLabel": "JAWOR D.NŻ",
+          "fullNameConfirmed": true,
+          "rjStopId": null,
+          "time": "08:28",
+          "source": "20261118_151638.mp4",
+          "timeConfirmed": true,
+          "name": "Jaworze Dolne N.Ż."
+        },
+        {
+          "order": 16,
+          "screenNumber": 20,
+          "rawLabel": "JAW.D.OŚ.W",
+          "fullNameConfirmed": true,
+          "rjStopId": null,
+          "time": "08:30",
+          "source": "20261118_151638.mp4",
+          "timeConfirmed": true,
+          "name": "Jaworze Dolne Oś. W."
+        },
+        {
+          "order": 17,
+          "screenNumber": 19,
+          "rawLabel": "GOŁĘCZYNA",
+          "fullNameConfirmed": false,
+          "rjStopId": null,
+          "time": "08:32",
+          "source": "20261118_151638.mp4",
+          "timeConfirmed": true,
+          "name": "GOŁĘCZYNA"
+        },
+        {
+          "order": 18,
+          "screenNumber": 18,
+          "rawLabel": "DOBRKÓW",
+          "fullNameConfirmed": false,
+          "rjStopId": null,
+          "time": "08:33",
+          "source": "20261118_151638.mp4",
+          "timeConfirmed": true,
+          "name": "DOBRKÓW"
+        },
+        {
+          "order": 19,
+          "screenNumber": 17,
+          "rawLabel": "DOBRKÓW NŻ",
+          "fullNameConfirmed": false,
+          "rjStopId": null,
+          "time": "08:35",
+          "source": "20261118_151638.mp4",
+          "timeConfirmed": true,
+          "name": "DOBRKÓW NŻ"
+        },
+        {
+          "order": 20,
+          "screenNumber": 16,
+          "rawLabel": "PARŁABUZIE",
+          "fullNameConfirmed": false,
+          "rjStopId": null,
+          "time": "08:36",
+          "source": "20261118_151638.mp4",
+          "timeConfirmed": true,
+          "name": "PARŁABUZIE"
+        },
+        {
+          "order": 21,
+          "screenNumber": 15,
+          "rawLabel": "PILLWOWSKA",
+          "fullNameConfirmed": true,
+          "rjStopId": null,
+          "time": "08:38",
+          "source": "20261118_151638.mp4",
+          "timeConfirmed": true,
+          "name": "Pilzno Lwowska"
+        },
+        {
+          "order": 22,
+          "screenNumber": 14,
+          "rawLabel": "PILZZAJEZD",
+          "fullNameConfirmed": true,
+          "rjStopId": null,
+          "time": "08:40",
+          "source": "20261118_151638.mp4",
+          "timeConfirmed": true,
+          "name": "Pilzno Zajezdnia"
+        },
+        {
+          "order": 23,
+          "screenNumber": 13,
+          "rawLabel": "PILLWOWSKA",
+          "fullNameConfirmed": true,
+          "rjStopId": null,
+          "time": "08:42",
+          "source": "20261118_151638.mp4",
+          "timeConfirmed": true,
+          "name": "Pilzno Lwowska"
+        },
+        {
+          "order": 24,
+          "screenNumber": 12,
+          "rawLabel": "PARŁABUZIE",
+          "fullNameConfirmed": false,
+          "rjStopId": null,
+          "time": "08:44",
+          "source": "20261118_151638.mp4",
+          "timeConfirmed": true,
+          "name": "PARŁABUZIE"
+        },
+        {
+          "order": 25,
+          "screenNumber": 11,
+          "rawLabel": "PARKOSZ",
+          "fullNameConfirmed": false,
+          "rjStopId": null,
+          "time": "08:45",
+          "source": "20261118_151638.mp4",
+          "timeConfirmed": true,
+          "name": "PARKOSZ"
+        },
+        {
+          "order": 26,
+          "screenNumber": 10,
+          "rawLabel": "PODGR MAGA",
+          "fullNameConfirmed": true,
+          "rjStopId": null,
+          "time": "08:46",
+          "source": "20261118_151638.mp4",
+          "timeConfirmed": true,
+          "name": "Podgrodzie Pętla"
+        },
+        {
+          "order": 27,
+          "screenNumber": 9,
+          "rawLabel": "PODGRODZIE",
+          "fullNameConfirmed": true,
+          "rjStopId": null,
+          "time": "08:48",
+          "source": "20261118_151638.mp4",
+          "timeConfirmed": true,
+          "name": "Podgrodzie 2"
+        },
+        {
+          "order": 28,
+          "screenNumber": 8,
+          "rawLabel": "PODGR. NŻ.",
+          "fullNameConfirmed": true,
+          "rjStopId": null,
+          "time": "08:50",
+          "source": "20261118_151638.mp4",
+          "timeConfirmed": true,
+          "name": "Podgrodzie 1"
+        },
+        {
+          "order": 29,
+          "screenNumber": 7,
+          "rawLabel": "LATOSZYN",
+          "fullNameConfirmed": true,
+          "rjStopId": null,
+          "time": "08:52",
+          "source": "20261118_151638.mp4",
+          "timeConfirmed": true,
+          "name": "Latoszyn E4"
+        },
+        {
+          "order": 30,
+          "screenNumber": 6,
+          "rawLabel": "DĘBICAOBWO",
+          "fullNameConfirmed": true,
+          "rjStopId": null,
+          "time": "08:54",
+          "source": "20261118_151638.mp4",
+          "timeConfirmed": true,
+          "name": "Dębica Krakowska Rondo"
+        },
+        {
+          "order": 31,
+          "screenNumber": 5,
+          "rawLabel": "DĘBICAKĘPA",
+          "fullNameConfirmed": false,
+          "rjStopId": null,
+          "time": "08:56",
+          "source": "20261118_151638.mp4",
+          "timeConfirmed": true,
+          "name": "DĘBICAKĘPA"
+        },
+        {
+          "order": 32,
+          "screenNumber": 4,
+          "rawLabel": "D-CA SZ",
+          "fullNameConfirmed": true,
+          "rjStopId": null,
+          "time": "08:58",
+          "source": "20261118_151638.mp4",
+          "timeConfirmed": true,
+          "name": "Dębica Szpital"
+        },
+        {
+          "order": 33,
+          "screenNumber": 3,
+          "rawLabel": "DĘBICA OS",
+          "fullNameConfirmed": true,
+          "rjStopId": null,
+          "time": "08:59",
+          "source": "20261118_151638.mp4",
+          "timeConfirmed": true,
+          "name": "Dębica Osiedle Matejki"
+        },
+        {
+          "rawLabel": null,
+          "name": "Dębica Osiedle Chemik",
+          "fullNameConfirmed": true,
+          "rjStopId": null,
+          "time": null,
+          "source": "user-voice-correction",
+          "timeConfirmed": false,
+          "screenNumber": null,
+          "order": 34
+        },
+        {
+          "rawLabel": null,
+          "name": "Dębica Osiedle Metalowiec",
+          "fullNameConfirmed": true,
+          "rjStopId": null,
+          "time": null,
+          "source": "user-voice-correction",
+          "timeConfirmed": false,
+          "screenNumber": null,
+          "order": 35
+        },
+        {
+          "order": 36,
+          "screenNumber": 2,
+          "rawLabel": "D-CA KLASZ",
+          "fullNameConfirmed": true,
+          "rjStopId": null,
+          "time": "09:04",
+          "source": "20261118_151638.mp4",
+          "timeConfirmed": true,
+          "name": "Dębica Krakowska Klasztor"
+        },
+        {
+          "order": 37,
+          "screenNumber": 1,
+          "rawLabel": "DĘBICA D.A",
+          "fullNameConfirmed": true,
+          "rjStopId": null,
+          "time": "09:05",
+          "source": "20261118_151638.mp4",
+          "timeConfirmed": true,
+          "name": "Dębica Dworzec Autobusowy"
+        }
+      ],
+      "arrivalConflict": {
+        "card": "09:10",
+        "controller": "09:05",
+        "resolution": "09:05 — potwierdzone przez użytkownika"
+      },
+      "routePending": false,
+      "stopTimes": {
+        "111": "08:00",
+        "112": "08:02",
+        "113": "08:04",
+        "114": "08:06",
+        "115": "08:09",
+        "116": "08:10",
+        "117": "08:12",
+        "118": "08:14",
+        "119": "08:16",
+        "120": "08:18",
+        "123": "08:21",
+        "124": "08:23",
+        "125": "08:24",
+        "126": "08:26",
+        "127": "08:28",
+        "128": "08:30",
+        "129": "08:32",
+        "130": "08:33",
+        "131": "08:35",
+        "132": "08:36",
+        "133": "08:38",
+        "134": "08:40",
+        "135": "08:42",
+        "136": "08:44",
+        "137": "08:45",
+        "138": "08:46",
+        "139": "08:48",
+        "140": "08:50",
+        "141": "08:52",
+        "142": "08:54",
+        "143": "08:56",
+        "144": "08:58",
+        "145": "08:59",
+        "148": "09:04",
+        "68": "09:05"
+      },
+      "gpsPending": false,
+      "endpointTimesOnly": true,
+      "detour": "Przez Osiedle Metalowiec i Osiedle Chemik",
+      "unknownTimeDisplay": "–"
+    },
+    {
+      "tripNo": 2,
+      "from": "Dębica Dworzec Autobusowy",
+      "to": "Rzeszów Dworzec Autobusowy",
+      "startTime": "12:20",
+      "endTime": "13:40",
+      "candidateVariantIndex": 0,
+      "routeStops": [
+        {
+          "id": 1,
+          "name": "DĘBICA DWORZEC AUTOBUSOWY",
+          "street": "GŁOWACKIEGO",
+          "lat": 50.05382,
+          "lon": 21.40646
+        },
+        {
+          "id": 2,
+          "name": "ZURT",
+          "street": "RZESZOWSKA",
+          "lat": 50.05191,
+          "lon": 21.41304
+        },
+        {
+          "id": 186,
+          "name": "DĘBICA RZESZOWSKA MECHANIK",
+          "street": "RZESZOWSKA"
+        },
+        {
+          "id": 4,
+          "name": "DĘBICA RZESZOWSKA RAJ",
+          "street": "RZESZOWSKA",
+          "lat": 50.05492,
+          "lon": 21.43617
+        },
+        {
+          "id": 6,
+          "name": "DĘBICA RZESZOWSKA NADLEŚNICTWO",
+          "street": "RZESZOWSKA",
+          "lat": 50.05625,
+          "lon": 21.44925
+        },
+        {
+          "id": 7,
+          "name": "NAGAWCZYNA 1",
+          "street": "NAGAWCZYNA",
+          "lat": 50.05762,
+          "lon": 21.46242
+        },
+        {
+          "id": 8,
+          "name": "NAGAWCZYNA 2",
+          "street": "NAGAWCZYNA",
+          "lat": 50.05858,
+          "lon": 21.47173
+        },
+        {
+          "id": 9,
+          "name": "ZAWADA E4",
+          "street": "ZAWADA",
+          "lat": 50.05983,
+          "lon": 21.48364
+        },
+        {
+          "id": 10,
+          "name": "LUBZINA OSIEDLE",
+          "street": "LUBZINA",
+          "lat": 50.06204,
+          "lon": 21.50451
+        },
+        {
+          "id": 11,
+          "name": "LUBZINA E4",
+          "street": "LUBZINA",
+          "lat": 50.06243,
+          "lon": 21.51855
+        },
+        {
+          "id": 12,
+          "name": "BRZEZÓWKA",
+          "street": "BRZEZÓWKA",
+          "lat": 50.06204,
+          "lon": 21.54299
+        },
+        {
+          "id": 13,
+          "name": "ROPCZYCE PODSŁOŃCE",
+          "street": "POD SŁOŃCE",
+          "lat": 50.06161,
+          "lon": 21.56946
+        },
+        {
+          "id": 14,
+          "name": "ROPCZYCE DWORZEC AUTOBUSOWY",
+          "street": "ZIELONA",
+          "lat": 50.05253,
+          "lon": 21.60427
+        },
+        {
+          "id": 15,
+          "name": "ROPCZYCE MICKIEWICZA",
+          "street": "MICKIEWICZA",
+          "lat": 50.05404,
+          "lon": 21.61878
+        },
+        {
+          "id": 16,
+          "name": "ROPCZYCE WITKOWICE",
+          "street": "ROPCZYCE WITKOWICE",
+          "lat": 50.05997,
+          "lon": 21.63736
+        },
+        {
+          "id": 17,
+          "name": "ROPCZYCE WESOŁA",
+          "street": "ROPCZYCE WESOŁA",
+          "lat": 50.06692,
+          "lon": 21.65875
+        },
+        {
+          "id": 18,
+          "name": "SĘDZISZÓW MAŁOPOLSKI OSIEDLE MŁODYCH",
+          "street": "WESOŁA",
+          "lat": 50.06919,
+          "lon": 21.68797
+        },
+        {
+          "id": 19,
+          "name": "SĘDZISZÓW MAŁOPOLSKI RYNEK",
+          "street": "SĘDZISZÓW MŁP. RYNEK",
+          "lat": 50.06981,
+          "lon": 21.69987
+        },
+        {
+          "id": 20,
+          "name": "SĘDZISZÓW MAŁOPOLSKI PIŁSUDSKIEGO",
+          "street": "PIŁSUDSKIEGO",
+          "lat": 50.07065,
+          "lon": 21.71139
+        },
+        {
+          "id": 21,
+          "name": "SĘDZISZÓW MAŁOPOLSKI GRUNWALDZKA",
+          "street": "GRUNWALDZKA",
+          "lat": 50.0698,
+          "lon": 21.72743
+        },
+        {
+          "id": 22,
+          "name": "OLCHOWA E4",
+          "street": "OLCHOWA",
+          "lat": 50.07027,
+          "lon": 21.75508
+        },
+        {
+          "id": 23,
+          "name": "KLĘCZANY STADION",
+          "street": "KLĘCZANY STADION",
+          "lat": 50.07091,
+          "lon": 21.78105
+        },
+        {
+          "id": 24,
+          "name": "DĄBROWA",
+          "street": "DĄBROWA",
+          "lat": 50.07155,
+          "lon": 21.80588
+        },
+        {
+          "id": 25,
+          "name": "DĄBROWA 2",
+          "street": "DĄBROWA",
+          "lat": 50.0718,
+          "lon": 21.82008
+        },
+        {
+          "id": 26,
+          "name": "TRZCIANA",
+          "street": "TRZCIANA",
+          "lat": 50.07156,
+          "lon": 21.83792
+        },
+        {
+          "id": 27,
+          "name": "TRZCIANA WOLICZKA 56 N.Ż.",
+          "street": "TRZCIANA",
+          "lat": 50.07146,
+          "lon": 21.86735
+        },
+        {
+          "id": 28,
+          "name": "ŚWILCZA 58",
+          "street": "ŚWILCZA",
+          "lat": 50.07168,
+          "lon": 21.89666
+        },
+        {
+          "id": 187,
+          "name": "ŚWILCZA GÓRKA",
+          "street": "ŚWILCZA"
+        },
+        {
+          "id": 31,
+          "name": "RZESZÓW KRAKOWSKA GALERIA",
+          "street": "RZESZÓW KRAKOWSKA",
+          "lat": 50.04843,
+          "lon": 21.97509
+        },
+        {
+          "id": 32,
+          "name": "RZESZÓW KRAKOWSKA SZPITAL",
+          "street": "RZESZÓW KRAKOWSKA",
+          "lat": 50.04586,
+          "lon": 21.98075
+        },
+        {
+          "id": 33,
+          "name": "RZESZÓW DWORZEC LOKALNY",
+          "street": "RZESZÓW TOWARNICKIEGO",
+          "lat": 50.04273,
+          "lon": 21.99384
+        },
+        {
+          "id": 34,
+          "name": "RZESZÓW DWORZEC AUTOBUSOWY",
+          "street": "RZESZÓW GROTTGERA",
+          "lat": 50.04214,
+          "lon": 22.00312
+        }
+      ],
+      "serviceCode": "Sx",
+      "serviceDescription": "Dni nauki szkolnej; dodatkowe ograniczenie x",
+      "calendarConfirmed": false,
+      "photoStopObservations": [
+        {
+          "order": 1,
+          "rawLabel": "DĘBICA D.A",
+          "time": "12:20",
+          "rjStopId": 1,
+          "source": "9194.jpg"
+        },
+        {
+          "order": 2,
+          "rawLabel": "D-CA ZURIT",
+          "time": "12:22",
+          "rjStopId": 2,
+          "source": "9194.jpg"
+        },
+        {
+          "order": 3,
+          "rawLabel": "D-CA MECHA",
+          "time": "12:24",
+          "rjStopId": null,
+          "source": "9194.jpg"
+        },
+        {
+          "order": 4,
+          "rawLabel": "DĘBICA RAJ",
+          "time": "12:26",
+          "rjStopId": 4,
+          "source": "9194.jpg",
+          "timeConfirmed": true,
+          "timeSource": "user-confirmed"
+        },
+        {
+          "order": 5,
+          "rawLabel": "DĘBICA NADL",
+          "time": "12:29",
+          "rjStopId": 6,
+          "source": "9194.jpg"
+        },
+        {
+          "order": 6,
+          "rawLabel": "NAGAWCZYNA",
+          "time": "12:31",
+          "rjStopId": 7,
+          "source": "9194.jpg"
+        },
+        {
+          "order": 7,
+          "rawLabel": "NAGAWCZYN1",
+          "time": "12:33",
+          "rjStopId": 8,
+          "source": "9194.jpg"
+        },
+        {
+          "order": 8,
+          "rawLabel": "ZAWADA",
+          "time": "12:34",
+          "rjStopId": 9,
+          "source": "9194.jpg"
+        },
+        {
+          "order": 9,
+          "rawLabel": "LUBZINA OSI",
+          "time": "12:38",
+          "rjStopId": 10,
+          "source": "9194.jpg"
+        },
+        {
+          "order": 10,
+          "rawLabel": "LUBZINA E4",
+          "time": "12:39",
+          "rjStopId": 11,
+          "source": "9194.jpg"
+        },
+        {
+          "order": 11,
+          "rawLabel": "BRZEZÓWKA",
+          "time": "12:42",
+          "rjStopId": 12,
+          "source": "9194.jpg"
+        },
+        {
+          "order": 12,
+          "rawLabel": "ROPCZYCE P",
+          "time": "12:43",
+          "rjStopId": 13,
+          "source": "9194.jpg"
+        },
+        {
+          "order": 13,
+          "rawLabel": "ROPCZYC DA",
+          "time": "12:46",
+          "rjStopId": 14,
+          "source": "9194.jpg"
+        },
+        {
+          "order": 14,
+          "rawLabel": "ROPCZ MICK",
+          "time": "12:48",
+          "rjStopId": 15,
+          "source": "9194.jpg"
+        },
+        {
+          "order": 15,
+          "rawLabel": "ROPCZ WITK",
+          "time": "12:51",
+          "rjStopId": 16,
+          "source": "9194.jpg"
+        },
+        {
+          "order": 16,
+          "rawLabel": "ROPCZ WESO",
+          "time": "12:54",
+          "rjStopId": 17,
+          "source": "9196.jpg"
+        },
+        {
+          "order": 17,
+          "rawLabel": "SĘDZOSMŁO",
+          "time": "12:57",
+          "rjStopId": 18,
+          "source": "9196.jpg"
+        },
+        {
+          "order": 18,
+          "rawLabel": "SĘDZMŁPRYN",
+          "time": "12:59",
+          "rjStopId": 19,
+          "source": "9196.jpg"
+        },
+        {
+          "order": 19,
+          "rawLabel": "SĘDZPIŁSUD",
+          "time": "13:01",
+          "rjStopId": 20,
+          "source": "9196.jpg"
+        },
+        {
+          "order": 20,
+          "rawLabel": "SĘDZ GRUNW",
+          "time": "13:03",
+          "rjStopId": 21,
+          "source": "9196.jpg"
+        },
+        {
+          "order": 21,
+          "rawLabel": "OLCHOWA E4",
+          "time": "13:08",
+          "rjStopId": 22,
+          "source": "9196.jpg"
+        },
+        {
+          "order": 22,
+          "rawLabel": "KLĘCZANSTA",
+          "time": "13:10",
+          "rjStopId": 23,
+          "source": "9196.jpg"
+        },
+        {
+          "order": 23,
+          "rawLabel": "DĄBROWA",
+          "time": "13:13",
+          "rjStopId": 24,
+          "source": "9196.jpg"
+        },
+        {
+          "order": 24,
+          "rawLabel": "DĄBROWA2",
+          "time": "13:16",
+          "rjStopId": 25,
+          "source": "9196.jpg"
+        },
+        {
+          "order": 25,
+          "rawLabel": "TRZCIANA",
+          "time": "13:17",
+          "rjStopId": 26,
+          "source": "9196.jpg"
+        },
+        {
+          "order": 26,
+          "rawLabel": "TRZCIA WOL",
+          "time": "13:19",
+          "rjStopId": 27,
+          "source": "9196.jpg"
+        },
+        {
+          "order": 27,
+          "rawLabel": "ŚWILCZA",
+          "time": "13:21",
+          "rjStopId": 28,
+          "source": "9196.jpg"
+        },
+        {
+          "order": 28,
+          "rawLabel": "ŚWILCZA GÓ",
+          "time": "13:25",
+          "rjStopId": null,
+          "source": "9196.jpg"
+        },
+        {
+          "order": 29,
+          "rawLabel": "RZESZKRAKG",
+          "time": "13:29",
+          "rjStopId": 31,
+          "source": "9196.jpg"
+        },
+        {
+          "order": 30,
+          "rawLabel": "RZ KRA SZP",
+          "time": "13:31",
+          "rjStopId": 32,
+          "source": "9196.jpg"
+        },
+        {
+          "order": 31,
+          "rawLabel": "RZE DW.LOK",
+          "time": "13:35",
+          "rjStopId": 33,
+          "source": "9198.jpg"
+        },
+        {
+          "order": 32,
+          "rawLabel": "RZESZÓW DA",
+          "time": "13:40",
+          "rjStopId": 34,
+          "source": "9198.jpg"
+        }
+      ],
+      "unreadableTimes": [],
+      "stopTimes": {
+        "1": "12:20",
+        "2": "12:22",
+        "186": "12:24",
+        "4": "12:26",
+        "6": "12:29",
+        "7": "12:31",
+        "8": "12:33",
+        "9": "12:34",
+        "10": "12:38",
+        "11": "12:39",
+        "12": "12:42",
+        "13": "12:43",
+        "14": "12:46",
+        "15": "12:48",
+        "16": "12:51",
+        "17": "12:54",
+        "18": "12:57",
+        "19": "12:59",
+        "20": "13:01",
+        "21": "13:03",
+        "22": "13:08",
+        "23": "13:10",
+        "24": "13:13",
+        "25": "13:16",
+        "26": "13:17",
+        "27": "13:19",
+        "28": "13:21",
+        "187": "13:25",
+        "31": "13:29",
+        "32": "13:31",
+        "33": "13:35",
+        "34": "13:40"
+      },
+      "variantIndex": 10014,
+      "endpointTimesOnly": true
+    },
+    {
+      "tripNo": 3,
+      "from": "Rzeszów Dworzec Autobusowy",
+      "to": "Dębica Dworzec Autobusowy",
+      "startTime": "14:00",
+      "endTime": "15:25",
+      "candidateVariantIndex": 1,
+      "routeStops": [
+        {
+          "id": 40,
+          "name": "RZESZÓW DWORZEC AUTOBUSOWY",
+          "street": "RZESZÓW GROTTGERA",
+          "lat": 50.04232,
+          "lon": 22.00264
+        },
+        {
+          "id": 41,
+          "name": "RZESZÓW DWORZEC LOKALNY",
+          "street": "RZESZÓW TOWARNICKIEGO",
+          "lat": 50.04295,
+          "lon": 21.99474
+        },
+        {
+          "id": 42,
+          "name": "RZESZÓW KRAKOWSKA SZPITAL",
+          "street": "RZESZÓW KRAKOWSKA",
+          "lat": 50.04609,
+          "lon": 21.98183
+        },
+        {
+          "id": 43,
+          "name": "RZESZÓW KRAKOWSKA GALERIA",
+          "street": "RZESZÓW KRAKOWSKA",
+          "lat": 50.04811,
+          "lon": 21.97628
+        },
+        {
+          "id": 188,
+          "name": "ŚWILCZA GÓRKA",
+          "street": "ŚWILCZA"
+        },
+        {
+          "id": 37,
+          "name": "ŚWILCZA 75",
+          "street": "ŚWILCZA",
+          "lat": 50.0719,
+          "lon": 21.89657
+        },
+        {
+          "id": 38,
+          "name": "TRZCIANA WOLICZKA 77 N.Ż.",
+          "street": "TRZCIANA",
+          "lat": 50.0716,
+          "lon": 21.86626
+        },
+        {
+          "id": 44,
+          "name": "TRZCIANA",
+          "street": "TRZCIANA",
+          "lat": 50.07131,
+          "lon": 21.84132
+        },
+        {
+          "id": 189,
+          "name": "DĄBROWA 1",
+          "street": "DĄBROWA"
+        },
+        {
+          "id": 46,
+          "name": "DĄBROWA",
+          "street": "DĄBROWA",
+          "lat": 50.0715,
+          "lon": 21.80431
+        },
+        {
+          "id": 190,
+          "name": "KLĘCZANY STADION",
+          "street": "KLĘCZANY STADION"
+        },
+        {
+          "id": 48,
+          "name": "OLCHOWA E4",
+          "street": "OLCHOWA",
+          "lat": 50.07037,
+          "lon": 21.75678
+        },
+        {
+          "id": 49,
+          "name": "SĘDZISZÓW MAŁOPOLSKI GRUNWALDZKA",
+          "street": "GRUNWALDZKA",
+          "lat": 50.06987,
+          "lon": 21.7269
+        },
+        {
+          "id": 50,
+          "name": "SĘDZISZÓW MAŁOPOLSKI PIŁSUDSKIEGO",
+          "street": "PIŁSUDSKIEGO",
+          "lat": 50.07067,
+          "lon": 21.71068
+        },
+        {
+          "id": 51,
+          "name": "SĘDZISZÓW MAŁOPOLSKI RYNEK",
+          "street": "SĘDZISZÓW MŁP. RYNEK",
+          "lat": 50.06981,
+          "lon": 21.69987
+        },
+        {
+          "id": 52,
+          "name": "SĘDZISZÓW MAŁOPOLSKI OSIEDLE MŁODYCH",
+          "street": "WESOŁA",
+          "lat": 50.06917,
+          "lon": 21.68726
+        },
+        {
+          "id": 53,
+          "name": "ROPCZYCE WESOŁA",
+          "street": "ROPCZYCE WESOŁA",
+          "lat": 50.06676,
+          "lon": 21.65778
+        },
+        {
+          "id": 54,
+          "name": "ROPCZYCE WITKOWICE",
+          "street": "ROPCZYCE WITKOWICE",
+          "lat": 50.05928,
+          "lon": 21.63541
+        },
+        {
+          "id": 55,
+          "name": "ROPCZYCE MICKIEWICZA",
+          "street": "MICKIEWICZA",
+          "lat": 50.05418,
+          "lon": 21.61864
+        },
+        {
+          "id": 56,
+          "name": "ROPCZYCE DWORZEC AUTOBUSOWY",
+          "street": "ZIELONA",
+          "lat": 50.05254,
+          "lon": 21.60425
+        },
+        {
+          "id": 57,
+          "name": "ROPCZYCE PODSŁOŃCE",
+          "street": "POD SŁOŃCE",
+          "lat": 50.06168,
+          "lon": 21.5694
+        },
+        {
+          "id": 58,
+          "name": "BRZEZÓWKA",
+          "street": "BRZEZÓWKA",
+          "lat": 50.06208,
+          "lon": 21.54486
+        },
+        {
+          "id": 59,
+          "name": "LUBZINA E4",
+          "street": "LUBZINA",
+          "lat": 50.06248,
+          "lon": 21.52007
+        },
+        {
+          "id": 60,
+          "name": "LUBZINA OSIEDLE",
+          "street": "LUBZINA",
+          "lat": 50.06193,
+          "lon": 21.5029
+        },
+        {
+          "id": 61,
+          "name": "ZAWADA E4",
+          "street": "ZAWADA",
+          "lat": 50.06014,
+          "lon": 21.48579
+        },
+        {
+          "id": 62,
+          "name": "NAGAWCZYNA 2",
+          "street": "NAGAWCZYNA",
+          "lat": 50.05855,
+          "lon": 21.4705
+        },
+        {
+          "id": 63,
+          "name": "NAGAWCZYNA 1",
+          "street": "NAGAWCZYNA",
+          "lat": 50.05782,
+          "lon": 21.46335
+        },
+        {
+          "id": 64,
+          "name": "DĘBICA RZESZOWSKA NADLEŚNICTWO",
+          "street": "RZESZOWSKA",
+          "lat": 50.05603,
+          "lon": 21.44693
+        },
+        {
+          "id": 191,
+          "name": "DĘBICA RZESZOWSKA CPN",
+          "street": "RZESZOWSKA"
+        },
+        {
+          "id": 192,
+          "name": "DĘBICA RZESZOWSKA MECHANIK",
+          "street": "RZESZOWSKA"
+        },
+        {
+          "id": 39,
+          "name": "DĘBICA RZESZOWSKA PLAC GRYFITÓW",
+          "street": "GŁOWACKIEGO",
+          "lat": 50.05243,
+          "lon": 21.41531
+        },
+        {
+          "id": 68,
+          "name": "DĘBICA DWORZEC AUTOBUSOWY",
+          "street": "GŁOWACKIEGO",
+          "lat": 50.05387,
+          "lon": 21.40663
+        }
+      ],
+      "serviceCode": "Dn",
+      "serviceDescription": "Dni robocze; dodatkowe ograniczenie n",
+      "calendarConfirmed": false,
+      "photoStopObservations": [
+        {
+          "order": 1,
+          "rawLabel": "RZESZÓW DA",
+          "time": "14:00",
+          "rjStopId": 40,
+          "source": "9206.jpg"
+        },
+        {
+          "order": 2,
+          "rawLabel": "RZE DW.LOK",
+          "time": "14:05",
+          "rjStopId": 41,
+          "source": "9206.jpg"
+        },
+        {
+          "order": 3,
+          "rawLabel": "RZ KRA SZP",
+          "time": "14:08",
+          "rjStopId": 42,
+          "source": "9206.jpg"
+        },
+        {
+          "order": 4,
+          "rawLabel": "RZESZKRAKG",
+          "time": "14:11",
+          "rjStopId": 43,
+          "source": "9206.jpg"
+        },
+        {
+          "order": 5,
+          "rawLabel": "ŚWILCZA GÓ",
+          "time": "14:14",
+          "rjStopId": null,
+          "source": "9206.jpg"
+        },
+        {
+          "order": 6,
+          "rawLabel": "ŚWILCZA",
+          "time": "14:18",
+          "rjStopId": 37,
+          "source": "9206.jpg"
+        },
+        {
+          "order": 7,
+          "rawLabel": "TRZCIA WOL",
+          "time": "14:20",
+          "rjStopId": 38,
+          "source": "9206.jpg"
+        },
+        {
+          "order": 8,
+          "rawLabel": "TRZCIANA",
+          "time": "14:22",
+          "rjStopId": 44,
+          "source": "9206.jpg"
+        },
+        {
+          "order": 9,
+          "rawLabel": "DĄBROWA1",
+          "time": "14:24",
+          "rjStopId": null,
+          "source": "9206.jpg"
+        },
+        {
+          "order": 10,
+          "rawLabel": "DĄBROWA",
+          "time": "14:25",
+          "rjStopId": 46,
+          "source": "9206.jpg"
+        },
+        {
+          "order": 11,
+          "rawLabel": "KLĘCZANSTA",
+          "time": "14:28",
+          "rjStopId": null,
+          "source": "9206.jpg"
+        },
+        {
+          "order": 12,
+          "rawLabel": "OLCHOWA E4",
+          "time": "14:30",
+          "rjStopId": 48,
+          "source": "9206.jpg"
+        },
+        {
+          "order": 13,
+          "rawLabel": "SĘDZ GRUNW",
+          "time": "14:35",
+          "rjStopId": 49,
+          "source": "9206.jpg"
+        },
+        {
+          "order": 14,
+          "rawLabel": "SĘDZPIŁSUD",
+          "time": "14:37",
+          "rjStopId": 50,
+          "source": "9206.jpg"
+        },
+        {
+          "order": 15,
+          "rawLabel": "SĘDZMŁPRYN",
+          "time": "14:41",
+          "rjStopId": 51,
+          "source": "9206.jpg"
+        },
+        {
+          "order": 16,
+          "rawLabel": "SĘDZOSMŁO",
+          "time": "14:45",
+          "rjStopId": 52,
+          "source": "9208.jpg"
+        },
+        {
+          "order": 17,
+          "rawLabel": "ROPCZ WESO",
+          "time": "14:48",
+          "rjStopId": 53,
+          "source": "9208.jpg"
+        },
+        {
+          "order": 18,
+          "rawLabel": "ROPCZ WITK",
+          "time": "14:51",
+          "rjStopId": 54,
+          "source": "9208.jpg"
+        },
+        {
+          "order": 19,
+          "rawLabel": "ROPCZ MICK",
+          "time": "14:54",
+          "rjStopId": 55,
+          "source": "9208.jpg"
+        },
+        {
+          "order": 20,
+          "rawLabel": "ROPCZYC DA",
+          "time": "14:58",
+          "rjStopId": 56,
+          "source": "9208.jpg"
+        },
+        {
+          "order": 21,
+          "rawLabel": "ROPCZYCE P",
+          "time": "15:01",
+          "rjStopId": 57,
+          "source": "9208.jpg"
+        },
+        {
+          "order": 22,
+          "rawLabel": "BRZEZÓWKA",
+          "time": "15:03",
+          "rjStopId": 58,
+          "source": "9208.jpg"
+        },
+        {
+          "order": 23,
+          "rawLabel": "LUBZINA E4",
+          "time": "15:06",
+          "rjStopId": 59,
+          "source": "9208.jpg"
+        },
+        {
+          "order": 24,
+          "rawLabel": "LUBZINA OSI",
+          "time": "15:08",
+          "rjStopId": 60,
+          "source": "9208.jpg"
+        },
+        {
+          "order": 25,
+          "rawLabel": "ZAWADA",
+          "time": "15:11",
+          "rjStopId": 61,
+          "source": "9208.jpg"
+        },
+        {
+          "order": 26,
+          "rawLabel": "NAGAWCZYN1",
+          "time": "15:13",
+          "rjStopId": null,
+          "source": "9208.jpg"
+        },
+        {
+          "order": 27,
+          "rawLabel": "NAGAWCZYNA",
+          "time": "15:14",
+          "rjStopId": null,
+          "source": "9208.jpg"
+        },
+        {
+          "order": 28,
+          "rawLabel": "DĘBICA NADL",
+          "time": "15:16",
+          "rjStopId": 64,
+          "source": "9208.jpg"
+        },
+        {
+          "order": 29,
+          "rawLabel": "D-CA RZCPN",
+          "time": "15:19",
+          "rjStopId": null,
+          "source": "9208.jpg"
+        },
+        {
+          "order": 30,
+          "rawLabel": "D-CA MECHA",
+          "time": "15:21",
+          "rjStopId": null,
+          "source": "9208.jpg"
+        },
+        {
+          "order": 31,
+          "rawLabel": "D-CA PLACGR",
+          "time": "15:23",
+          "rjStopId": 39,
+          "source": "9210.jpg"
+        },
+        {
+          "order": 32,
+          "rawLabel": "DĘBICA DA",
+          "time": "15:25",
+          "rjStopId": 68,
+          "source": "9210.jpg"
+        }
+      ],
+      "stopTimes": {
+        "40": "14:00",
+        "41": "14:05",
+        "42": "14:08",
+        "43": "14:11",
+        "188": "14:14",
+        "37": "14:18",
+        "38": "14:20",
+        "44": "14:22",
+        "189": "14:24",
+        "46": "14:25",
+        "190": "14:28",
+        "48": "14:30",
+        "49": "14:35",
+        "50": "14:37",
+        "51": "14:41",
+        "52": "14:45",
+        "53": "14:48",
+        "54": "14:51",
+        "55": "14:54",
+        "56": "14:58",
+        "57": "15:01",
+        "58": "15:03",
+        "59": "15:06",
+        "60": "15:08",
+        "61": "15:11",
+        "62": "15:13",
+        "63": "15:14",
+        "64": "15:16",
+        "191": "15:19",
+        "192": "15:21",
+        "39": "15:23",
+        "68": "15:25"
+      },
+      "arrivalConflict": {
+        "card": "15:15",
+        "controller": "15:25",
+        "resolution": "Bileterka — zgodnie z poleceniem użytkownika"
+      },
+      "variantIndex": 10015,
+      "endpointTimesOnly": true
+    },
+    {
+      "tripNo": 4,
+      "from": "Dębica Dworzec Autobusowy",
+      "to": "Grudna",
+      "via": [
+        "Jaworze"
+      ],
+      "startTime": "15:40",
+      "endTime": "16:43",
+      "routeStops": [
+        {
+          "id": 1,
+          "name": "DĘBICA DWORZEC AUTOBUSOWY",
+          "street": "",
+          "lat": 50.05382631616432,
+          "lon": 21.40648685395718,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "S24-debica-departure-user"
+        },
+        {
+          "id": 149,
+          "name": "DĘBICA OSIEDLE METALOWIEC",
+          "street": "",
+          "lat": 50.0466296,
+          "lon": 21.4041623,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": true,
+          "gpsSourceId": "node/8282425782"
+        },
+        {
+          "id": 150,
+          "name": "DĘBICA OSIEDLE CHEMIK",
+          "street": "",
+          "lat": 50.0439989,
+          "lon": 21.4004866,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": true,
+          "gpsSourceId": "node/8282425781"
+        },
+        {
+          "id": 151,
+          "name": "DĘBICA OSIEDLE MATEJKI",
+          "street": "",
+          "lat": 50.0417429,
+          "lon": 21.3964769,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "node/8282425780"
+        },
+        {
+          "id": 152,
+          "name": "DĘBICA KRAKOWSKA SZPITAL",
+          "street": "",
+          "lat": 50.0391631,
+          "lon": 21.3918184,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "node/8282425779"
+        },
+        {
+          "id": 153,
+          "name": "DĘBICA KRAKOWSKA KĘPA",
+          "street": "",
+          "lat": 50.0363939,
+          "lon": 21.3868996,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "node/8282425778"
+        },
+        {
+          "id": 154,
+          "name": "LATOSZYN OBWODNICA (STARZYŃSKIEGO)",
+          "street": "",
+          "lat": 50.0318055,
+          "lon": 21.3788453,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "node/8349493473"
+        },
+        {
+          "id": 155,
+          "name": "LATOSZYN E40",
+          "street": "",
+          "lat": 50.0220082,
+          "lon": 21.3659101,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "node/4839689861"
+        },
+        {
+          "id": 156,
+          "name": "PODGRODZIE 1",
+          "street": "",
+          "lat": 50.0163377,
+          "lon": 21.3575949,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "node/4839690057"
+        },
+        {
+          "id": 157,
+          "name": "PODGRODZIE 2",
+          "street": "",
+          "lat": 50.0097246,
+          "lon": 21.3427886,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "node/2915055626"
+        },
+        {
+          "id": 158,
+          "name": "PODGRODZIE/PĘTLA",
+          "street": "",
+          "lat": 50.003911997036425,
+          "lon": 21.33288770914078,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "user/1795189603177-o0500"
+        },
+        {
+          "id": 159,
+          "name": "PARKOSZ",
+          "street": "",
+          "lat": 49.9925249,
+          "lon": 21.3189527,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "node/4837154514"
+        },
+        {
+          "id": 161,
+          "name": "PARKOSZ/ŁABUZIE",
+          "street": "",
+          "lat": 49.9890103,
+          "lon": 21.3111957,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "node/4305173143"
+        },
+        {
+          "id": 162,
+          "name": "PILZNO LWOWSKA",
+          "street": "",
+          "lat": 49.98259665986569,
+          "lon": 21.29903018474579,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "user/1795189948639-s9has"
+        },
+        {
+          "id": 163,
+          "name": "PILZNO ZAJEZDNIA",
+          "street": "",
+          "lat": 49.98053989356576,
+          "lon": 21.288797557353973,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "user/1795190157955-rcjlo"
+        },
+        {
+          "id": 164,
+          "name": "PILZNO LWOWSKA",
+          "street": "",
+          "lat": 49.983399,
+          "lon": 21.3005274,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "node/5233653257"
+        },
+        {
+          "id": 165,
+          "name": "PARKOSZ/ŁABUZIE",
+          "street": "",
+          "lat": 49.9895759,
+          "lon": 21.3135019,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "node/4305173147"
+        },
+        {
+          "id": 166,
+          "name": "DOBRKÓW N.Ż.",
+          "street": "",
+          "lat": 49.9860125,
+          "lon": 21.3251974,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "naZadanie": true,
+          "gpsSourceId": "user/1795191313742-v7ywb"
+        },
+        {
+          "id": 167,
+          "name": "DOBRKÓW",
+          "street": "",
+          "lat": 49.9808099,
+          "lon": 21.3323693,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "naZadanie": false,
+          "gpsSourceId": "node/3169070579"
+        },
+        {
+          "id": 168,
+          "name": "GOŁĘCZYNA",
+          "street": "",
+          "lat": 49.9783433,
+          "lon": 21.3413145,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "node/3169070630"
+        },
+        {
+          "id": 169,
+          "name": "JAWORZE DOLNE OŚ. W.",
+          "street": "",
+          "lat": 49.97101639391777,
+          "lon": 21.34602047502995,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "user/1795209177612-vxryj"
+        },
+        {
+          "id": 170,
+          "name": "JAWORZE DOLNE N.Ż.",
+          "street": "",
+          "lat": 49.9568806,
+          "lon": 21.3525867,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "naZadanie": true,
+          "gpsSourceId": "user/1795209441961-xbeej"
+        },
+        {
+          "id": 171,
+          "name": "JAWORZE DOLNE SZ.",
+          "street": "",
+          "lat": 49.95006099355763,
+          "lon": 21.352398097515106,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "user/1795210084589-8thg6"
+        },
+        {
+          "id": 172,
+          "name": "JAWORZE GÓRNE N.Ż.",
+          "street": "",
+          "lat": 49.945834,
+          "lon": 21.3536975,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "naZadanie": true,
+          "gpsSourceId": "node/3184746800"
+        },
+        {
+          "id": 173,
+          "name": "JAWORZE GÓRNE OSIEDLE",
+          "street": "",
+          "lat": 49.9378352,
+          "lon": 21.3488169,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "node/3184348778"
+        },
+        {
+          "id": 174,
+          "name": "JAWORZE GÓRNE",
+          "street": "",
+          "lat": 49.9308472,
+          "lon": 21.3470319,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "node/3184731095"
+        },
+        {
+          "id": 175,
+          "name": "JAWORZE GÓRNE KAPLICZKA",
+          "street": "",
+          "lat": 49.925579625300635,
+          "lon": 21.340580284595493,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": true,
+          "gpsSourceId": "user/1795210649664-wl5l0"
+        },
+        {
+          "id": 176,
+          "name": "JAWORZE GÓRNE/KAMIENICA DOLNA",
+          "street": "",
+          "lat": 49.9224953,
+          "lon": 21.3411655,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": true,
+          "gpsSourceId": "node/3184726044"
+        },
+        {
+          "id": 160,
+          "name": "KAMIENICA DOLNA",
+          "street": "",
+          "lat": 49.909880407059916,
+          "lon": 21.35386794805527,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "user/1795211425142-4aalx"
+        },
+        {
+          "id": 177,
+          "name": "GORZEJOWA N.Ż.",
+          "street": "",
+          "lat": 49.9151274,
+          "lon": 21.3645206,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "naZadanie": true,
+          "gpsSourceId": "user/1795211634679-a2atm"
+        },
+        {
+          "id": 178,
+          "name": "GORZEJOWA MŁYN",
+          "street": "",
+          "lat": 49.9177129,
+          "lon": 21.3733952,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "user/1795211784008-5m7bf"
+        },
+        {
+          "id": 179,
+          "name": "GORZEJOWA SZKOŁA",
+          "street": "",
+          "lat": 49.9217091,
+          "lon": 21.3832465,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "node/4057792486"
+        },
+        {
+          "id": 180,
+          "name": "SIEDLISKA-BOGUSZ SKRZYŻOWANIE",
+          "street": "",
+          "lat": 49.9222342,
+          "lon": 21.4013246,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "node/4057792500"
+        },
+        {
+          "id": 181,
+          "name": "SIEDLISKA-BOGUSZ",
+          "street": "",
+          "lat": 49.9146424,
+          "lon": 21.4153716,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "node/7745091432"
+        },
+        {
+          "id": 182,
+          "name": "SMARŻOWA CPN",
+          "street": "",
+          "lat": 49.9174143,
+          "lon": 21.439419,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "user/1795212532744-0zzpp"
+        },
+        {
+          "id": 183,
+          "name": "SMARŻOWA OŚRODEK ZDROWIA",
+          "street": "",
+          "lat": 49.9215665,
+          "lon": 21.4569193,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "user/1795212858046-o3y5c"
+        },
+        {
+          "id": 184,
+          "name": "GRUDNA DOLNA",
+          "street": "",
+          "lat": 49.9278863,
+          "lon": 21.4632495,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "node/7745111835"
+        },
+        {
+          "id": 185,
+          "name": "GRUDNA SKRZYŻOWANIE",
+          "street": "",
+          "lat": 49.9293546,
+          "lon": 21.4699658,
+          "gpsVerified": true,
+          "gpsSource": "user-reviewed-2026-11-20",
+          "timeUnknown": false,
+          "gpsSourceId": "node/7743492434"
+        }
+      ],
+      "serviceCode": "S",
+      "serviceDescription": "Dni nauki szkolnej",
+      "calendarConfirmed": true,
+      "photoStopObservations": [
+        {
+          "order": 1,
+          "screenNumber": 1,
+          "rawLabel": "DĘBICA D.A",
+          "name": "Dębica Dworzec Autobusowy",
+          "time": "15:40",
+          "source": "20261118_151418.mp4",
+          "fullNameConfirmed": true
+        },
+        {
+          "order": 2,
+          "screenNumber": 3,
+          "rawLabel": "DĘBICA OS",
+          "name": "Dębica Osiedle Matejki",
+          "time": "15:45",
+          "source": "20261118_151418.mp4",
+          "fullNameConfirmed": true
+        },
+        {
+          "order": 3,
+          "screenNumber": 4,
+          "rawLabel": "D-CA SZ",
+          "name": "Dębica Szpital",
+          "time": "15:46",
+          "source": "20261118_151418.mp4",
+          "fullNameConfirmed": true
+        },
+        {
+          "order": 4,
+          "screenNumber": 5,
+          "rawLabel": "DĘBICAKĘPA",
+          "name": "DĘBICAKĘPA",
+          "time": "15:48",
+          "source": "20261118_151418.mp4",
+          "fullNameConfirmed": false
+        },
+        {
+          "order": 5,
+          "screenNumber": 6,
+          "rawLabel": "DĘBICAOBWO",
+          "name": "Dębica Krakowska Rondo",
+          "time": "15:50",
+          "source": "20261118_151418.mp4",
+          "fullNameConfirmed": true
+        },
+        {
+          "order": 6,
+          "screenNumber": 7,
+          "rawLabel": "LATOSZYN",
+          "name": "Latoszyn E4",
+          "time": "15:52",
+          "source": "20261118_151418.mp4",
+          "fullNameConfirmed": true
+        },
+        {
+          "order": 7,
+          "screenNumber": 8,
+          "rawLabel": "PODGR. NŻ.",
+          "name": "Podgrodzie 1",
+          "time": "15:54",
+          "source": "20261118_151418.mp4",
+          "fullNameConfirmed": true
+        },
+        {
+          "order": 8,
+          "screenNumber": 9,
+          "rawLabel": "PODGRODZIE",
+          "name": "Podgrodzie 2",
+          "time": "15:56",
+          "source": "20261118_151418.mp4",
+          "fullNameConfirmed": true
+        },
+        {
+          "order": 9,
+          "screenNumber": 10,
+          "rawLabel": "PODGR MAGA",
+          "name": "Podgrodzie Pętla",
+          "time": "15:58",
+          "source": "20261118_151418.mp4",
+          "fullNameConfirmed": true
+        },
+        {
+          "order": 10,
+          "screenNumber": 11,
+          "rawLabel": "PARKOSZ",
+          "name": "PARKOSZ",
+          "time": "15:59",
+          "source": "20261118_151418.mp4",
+          "fullNameConfirmed": false
+        },
+        {
+          "order": 11,
+          "screenNumber": 12,
+          "rawLabel": "PARŁABUZIE",
+          "name": "PARŁABUZIE",
+          "time": "16:00",
+          "source": "20261118_151418.mp4",
+          "fullNameConfirmed": false
+        },
+        {
+          "order": 12,
+          "screenNumber": 13,
+          "rawLabel": "PILLWOWSKA",
+          "name": "Pilzno Lwowska",
+          "time": "16:02",
+          "source": "20261118_151418.mp4",
+          "fullNameConfirmed": true
+        },
+        {
+          "order": 13,
+          "screenNumber": 14,
+          "rawLabel": "PILZZAJEZD",
+          "name": "Pilzno Zajezdnia",
+          "time": "16:04",
+          "source": "20261118_151418.mp4",
+          "fullNameConfirmed": true
+        },
+        {
+          "order": 14,
+          "screenNumber": 15,
+          "rawLabel": "PILLWOWSKA",
+          "name": "Pilzno Lwowska",
+          "time": "16:06",
+          "source": "20261118_151418.mp4",
+          "fullNameConfirmed": true
+        },
+        {
+          "order": 15,
+          "screenNumber": 16,
+          "rawLabel": "PARŁABUZIE",
+          "name": "PARŁABUZIE",
+          "time": "16:08",
+          "source": "20261118_151418.mp4",
+          "fullNameConfirmed": false
+        },
+        {
+          "order": 16,
+          "screenNumber": 17,
+          "rawLabel": "DOBRKÓW NŻ",
+          "name": "DOBRKÓW NŻ",
+          "time": "16:09",
+          "source": "20261118_151418.mp4",
+          "fullNameConfirmed": false
+        },
+        {
+          "order": 17,
+          "screenNumber": 18,
+          "rawLabel": "DOBRKÓW",
+          "name": "DOBRKÓW",
+          "time": "16:11",
+          "source": "20261118_151418.mp4",
+          "fullNameConfirmed": false
+        },
+        {
+          "order": 18,
+          "screenNumber": 19,
+          "rawLabel": "GOŁĘCZYNA",
+          "name": "GOŁĘCZYNA",
+          "time": "16:12",
+          "source": "20261118_151418.mp4",
+          "fullNameConfirmed": false
+        },
+        {
+          "order": 19,
+          "screenNumber": 20,
+          "rawLabel": "JAW.D.OŚ.W",
+          "name": "Jaworze Dolne Oś. W.",
+          "time": "16:14",
+          "source": "20261118_151418.mp4",
+          "fullNameConfirmed": true
+        },
+        {
+          "order": 20,
+          "screenNumber": 21,
+          "rawLabel": "JAWOR D.NŻ",
+          "name": "Jaworze Dolne N.Ż.",
+          "time": "16:16",
+          "source": "20261118_151418.mp4",
+          "fullNameConfirmed": true
+        },
+        {
+          "order": 21,
+          "screenNumber": 22,
+          "rawLabel": "JAWORZEDSZ",
+          "name": "Jaworze Dolne Szkoła",
+          "time": "16:18",
+          "source": "20261118_151418.mp4",
+          "fullNameConfirmed": true
+        },
+        {
+          "order": 22,
+          "screenNumber": 23,
+          "rawLabel": "JAWORZEGNŻ",
+          "name": "Jaworze Górne N.Ż.",
+          "time": "16:20",
+          "source": "20261118_151418.mp4",
+          "fullNameConfirmed": true
+        },
+        {
+          "order": 23,
+          "screenNumber": 24,
+          "rawLabel": "JAWG.OSIED",
+          "name": "Jaworze Górne Osiedle",
+          "time": "16:21",
+          "source": "20261118_151418.mp4",
+          "fullNameConfirmed": true
+        },
+        {
+          "order": 24,
+          "screenNumber": 25,
+          "rawLabel": "JAWORZE G",
+          "name": "Jaworze Górne",
+          "time": "16:23",
+          "source": "20261118_151418.mp4",
+          "fullNameConfirmed": true
+        },
+        {
+          "order": 25,
+          "screenNumber": 26,
+          "rawLabel": "KAMIEDOLNA",
+          "name": "KAMIEDOLNA",
+          "time": "16:26",
+          "source": "20261118_151418.mp4",
+          "fullNameConfirmed": false
+        },
+        {
+          "order": 26,
+          "screenNumber": 27,
+          "rawLabel": "GORZEJO NŻ",
+          "name": "GORZEJO NŻ",
+          "time": "16:28",
+          "source": "20261118_151418.mp4",
+          "fullNameConfirmed": false
+        },
+        {
+          "order": 27,
+          "screenNumber": 28,
+          "rawLabel": "GORZEJMŁYN",
+          "name": "GORZEJMŁYN",
+          "time": "16:29",
+          "source": "20261118_151418.mp4",
+          "fullNameConfirmed": false
+        },
+        {
+          "order": 28,
+          "screenNumber": 29,
+          "rawLabel": "GORZEJ SZK",
+          "name": "GORZEJ SZK",
+          "time": "16:31",
+          "source": "20261118_151418.mp4",
+          "fullNameConfirmed": false
+        },
+        {
+          "order": 29,
+          "screenNumber": 30,
+          "rawLabel": "SIEDL.SKRZ",
+          "name": "Siedliska Bogusz Skrzyżowanie",
+          "time": "16:33",
+          "source": "20261118_151418.mp4",
+          "fullNameConfirmed": true
+        },
+        {
+          "order": 30,
+          "screenNumber": 31,
+          "rawLabel": "SIE D.LUDO",
+          "name": "SIE D.LUDO",
+          "time": "16:35",
+          "source": "20261118_151418.mp4",
+          "fullNameConfirmed": false
+        },
+        {
+          "order": 31,
+          "screenNumber": 32,
+          "rawLabel": "SMARŻO CPN",
+          "name": "SMARŻO CPN",
+          "time": "16:37",
+          "source": "20261118_151418.mp4",
+          "fullNameConfirmed": false
+        },
+        {
+          "order": 32,
+          "screenNumber": 33,
+          "rawLabel": "SMAR O.ZDR",
+          "name": "SMAR O.ZDR",
+          "time": "16:39",
+          "source": "20261118_151418.mp4",
+          "fullNameConfirmed": false
+        },
+        {
+          "order": 33,
+          "screenNumber": 34,
+          "rawLabel": "GRUDNA D.",
+          "name": "Grudna Dolna",
+          "time": "16:41",
+          "source": "20261118_151418.mp4",
+          "fullNameConfirmed": true
+        },
+        {
+          "order": 34,
+          "screenNumber": 35,
+          "rawLabel": "GRUDNA SK.",
+          "name": "GRUDNA SK.",
+          "time": "16:43",
+          "source": "20261118_151418.mp4",
+          "fullNameConfirmed": false
+        }
+      ],
+      "stopTimes": {
+        "1": "15:40",
+        "151": "15:45",
+        "152": "15:46",
+        "153": "15:48",
+        "154": "15:50",
+        "155": "15:52",
+        "156": "15:54",
+        "157": "15:56",
+        "158": "15:58",
+        "159": "15:59",
+        "161": "16:00",
+        "162": "16:02",
+        "163": "16:04",
+        "164": "16:06",
+        "165": "16:08",
+        "166": "16:09",
+        "167": "16:11",
+        "168": "16:12",
+        "169": "16:14",
+        "170": "16:16",
+        "171": "16:18",
+        "172": "16:20",
+        "173": "16:21",
+        "174": "16:23",
+        "160": "16:26",
+        "177": "16:28",
+        "178": "16:29",
+        "179": "16:31",
+        "180": "16:33",
+        "181": "16:35",
+        "182": "16:37",
+        "183": "16:39",
+        "184": "16:41",
+        "185": "16:43"
+      },
+      "departureConflict": {
+        "card": "15:45",
+        "controller": "15:40",
+        "resolution": "15:40 — użytkownik potwierdził godzinę z bileterki"
+      },
+      "routePending": false,
+      "gpsPending": false,
+      "endpointTimesOnly": true,
+      "detour": "Przez Osiedle Metalowiec i Osiedle Chemik",
+      "unknownTimeDisplay": "–"
+    }
+  ],
+  "notes": [
+    "Dokładne godziny z fotografii. Nie interpolować czasów pośrednich.",
+    "Pełna nazwa przystanku Grudna i dni kursowania wymagają potwierdzenia.",
+    "Warianty Rzeszów/Dębica są kandydatami do ponownego użycia, po potwierdzeniu przebiegu."
+  ],
+  "implementationPlan": {
+    "target": "S-24! jako czwarta osobna kursówka w istniejącym projekcie AutoEdit; wszystkie cztery kursy. Nie nadpisywać poprzednich kursówek ani przystanków.",
+    "authoritativeSource": "Eksport RJ .011 z AutoEdit: kursy, warianty, przystanki i godziny. Dotychczasowe wpisy MANUAL_DUTIES to materiał roboczy do migracji, nie rozwiązanie docelowe.",
+    "preserveExistingDuties": true,
+    "reuseDirectionalStopIds": true,
+    "checkFullNamesAgainstOfflineMonis": true,
+    "checkTimesAgainstControllerAndOfflineMonis": true,
+    "gpsBeforeMissingTimes": true,
+    "announcementsLater": true,
+    "directionAnnouncements": {
+      "format": "Kierunek {cel}",
+      "viaFormat": "Kierunek {cel} przez {przebieg}",
+      "examples": [
+        "Kierunek Dębica",
+        "Kierunek Dębica przez Jaworze Dolne"
+      ]
+    },
+    "autoeditCandidate": "C:\\srg mobile\\AE18-1104-010802\\DBF\\MONIS_DEBICA",
+    "offlineSource": "C:\\Users\\mateusz\\Downloads\\PKS_Debica_mapa_z_trwalym_zapisem\\PKS_Debica\\rozklady.json"
+  },
+  "gpsResearch": {
+    "requestedSource": "e-podroznik.pl — kursy Bąk Travel lub Orgotrans na odpowiednich odcinkach",
+    "confirmedCarrierUrl": "https://www.e-podroznik.pl/public/carrierSearcherResults.do?formCompositeCarrierSearcherResults.carrierId=19527",
+    "status": "offline_review_map_ready",
+    "rules": [
+      "Dopasować faktyczny słupek i kierunek jazdy, nie środek miejscowości.",
+      "Zachować istniejące zatwierdzone GPS i ID.",
+      "Punkty kandydackie muszą zostać zweryfikowane przed aktywacją GPS."
+    ],
+    "coordinatesApplied": false,
+    "otherCarrierResolved": "F.P.H.U. OGRO-TRANS Paweł Szumowicz",
+    "referenceRoutes": [
+      {
+        "carrier": "BĄK TRAVEL",
+        "url": "https://www.e-podroznik.pl/19527,82478,81020,rozklad-jazdy-pks-debica-baczalka.html"
+      },
+      {
+        "carrier": "OGRO-TRANS",
+        "url": "https://www.e-podroznik.pl/9905,82478,81020,rozklad-jazdy-busy-debica-baczalka.html"
+      }
+    ],
+    "warning": "Trasa na Bączałkę prowadzi przez Strzegocice i Bielowy; nie zastępuje trasy S-24 przez Dobrków i Gołęczynę. Dopasowywać wyłącznie rzeczywiście wspólne przystanki.",
+    "specificJourneyReference": "S-24-gps-reference-bak-baczalka.json",
+    "osmCandidatesFile": "S-24-osm-stops.json",
+    "osmReviewMap": "S-24-mapa-GPS-do-weryfikacji.html",
+    "streetViewReview": {
+      "status": "blocked_not_visually_verified",
+      "browserError": "GetCursorPos failed: Odmowa dostępu (0x80070005)",
+      "webError": "Google Maps panorama niedostępna przez narzędzie web",
+      "reviewLinksAdded": true,
+      "gpsApplied": false
+    },
+    "offlineStopCount": 1587,
+    "offlineMapRoadCount": 68472,
+    "approvedGrudnaFile": "S-24-Grudna-GPS-zatwierdzone.json",
+    "approvedGrudnaCount": 52,
+    "selectionRule": "Tylko confirmed === true (zielone) z najnowszego eksportu użytkownika. Pozostałych punktów nie używać do Grudnej."
+  },
+  "detourDescription": "Objazd przez Osiedle Metalowiec i Osiedle Chemik; Jaworze Górne Kapliczka i Jaworze Górne/Kamienica Dolna w obu kierunkach"
+}

@@ -9,6 +9,7 @@ def clean_name(parts):
     text=re.sub(r'\s+',' ',' '.join(parts)).strip()
     # Technical annotations may wrap over several lines; keep (NOWA WIEŚ).
     text=re.sub(r'\((?:MONIS\s+DĘBICA|GPS\s+ZATWIERDZONY\s+PRZEZ\s+UŻYTKOWNIKA)[^)]*\)','',text,flags=re.I)
+    text=re.sub(r'\(\s*\)','',text)
     return re.sub(r'\s+',' ',text).strip()
 
 def read_grg(path):
@@ -29,6 +30,9 @@ def read_grg(path):
             hint=re.fullmatch(r'(?:HEX:\s*)?(P[0-9A-Fa-f]{4}\.mp3)',line.strip(),flags=re.I)
             if hint:current['hints'].append(hint[1].upper())
             else:current['parts'].append(line.strip())
+        elif routes and line.strip():
+            # AutoEdit wraps long direction labels onto a separate line.
+            routes[-1]['name']+=' '+line.strip()
     if current:records.append(current)
     normal={};star={}
     for record in records:
@@ -46,6 +50,8 @@ def read_grg(path):
     return normal,routes,hashlib.sha256(raw).hexdigest()
 
 def spoken(name):
+    on_request=bool(re.search(r"(?:N\.?\s*Ż\.?|NZ|NA ŻĄDANIE)\s*$",name,re.I))
+    if re.fullmatch(r'Jaworze Dolne (?:sz\.?|o[śs]\.?\s*w\.?)',name.strip(),re.I):return 'Jaworze Dolne.'
     name=re.sub(r'\s+(?:N\.?\s*Ż\.?|NZ|NA ŻĄDANIE)\s*$','',name,flags=re.I).strip()
     name=re.sub(r'\b(BRZEZINY BERDECHÓW|WIELOPOLE SKRZYŃSKIE)\s+[I1]\s+\d{2}\b',r'\1 jeden',name,flags=re.I)
     name=re.sub(r'\s+\d{2,4}\s*$','',name)
@@ -58,11 +64,16 @@ def spoken(name):
     for city in ['Dębica','Rzeszów','Ropczyce','Sędziszów Małopolski']:
         if name.casefold().startswith(city.casefold()+' '):
             name=city+', '+name[len(city)+1:];break
+    # A comma gives a short natural break without changing voice or speech rate.
+    name=name.replace('/', ', ')
+    for place in ['Jaworze dolne','Jaworze górne','Siedliska-bogusz','Łączki kucharskie','Wielopole skrzyńskie','Smarżowa','Gorzejowa','Latoszyn','Podgrodzie','Pilzno','Świlcza']:
+        if name.casefold().startswith(place.casefold()+' '):
+            name=name[:len(place)]+', '+name[len(place)+1:];break
     # Keep the user's approved acronym pronunciation; do not phoneticize MKS.
     for code,words in [('OSP','o es pe'),('MKS','MKS')]:name=re.sub(r'\b'+code+r'\b',words,name,flags=re.I)
     if re.fullmatch(r'Dębica, rzeszowska MKS',name,re.I):
         name='Dębica, Rzeszowska MKS'
-    return name+'.'
+    return name+(' na żądanie' if on_request else '')+'.'
 
 def make_plan(path):
     stops,routes,sha=read_grg(path)
@@ -75,6 +86,7 @@ def make_plan(path):
         if code in conflicts:continue
         name=names[0];parts=name.split('>')
         text=('Kierunek: '+spoken(parts[0].strip())+' '+spoken(parts[1].strip())) if len(parts)==2 else 'Kierunek: '+spoken(name)
+        text={'K000C':'Kierunek Dębica przez Jaworze Dolne.','K000D':'Kierunek Rzeszów.','K000E':'Kierunek Dębica.','K000F':'Kierunek Grudna.'}.get(code,text)
         direction_jobs.append({'id':code,'file':code+'.mp3','name':name,'text':text,'onRequest':False})
     return {'source':str(path),'sourceSHA256':sha,'voice':VOICE,'rate':RATE,'jobs':jobs,'directionJobs':direction_jobs,'directions':routes,'directionCodeConflicts':conflicts}
 

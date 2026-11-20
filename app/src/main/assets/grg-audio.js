@@ -7,5 +7,5 @@
   if(root.SRGNativeAudio?.announceGRG){try{root.SRGNativeAudio.announceGRG(file,mode,onRequest);return true}catch(e){}}
   webAudio([chime(),...(mode==='next'||mode==='terminal'?['next.mp3']:[]),'grg/'+file,...(onRequest?['na_zadanie.mp3']:[]),...(mode==='terminal'?['terminal.mp3']:[])]);return true;
  }
- root.SRGGRGAudio={stopFile,startFile,playStop:(stop,mode,onRequest,webAudio,chime)=>play(stopFile(stop),mode,onRequest,webAudio,chime),playStart:(variant,webAudio,chime)=>play(startFile(variant),'start',false,webAudio,chime)};
+ root.SRGGRGAudio={stopFile,startFile,playStop:(stop,mode,onRequest,webAudio,chime)=>play(stopFile(stop),mode,onRequest&&!root.SRGGRGAudioData?.stops?.[stop?.id]?.containsOnRequest,webAudio,chime),playStart:(variant,webAudio,chime)=>play(startFile(variant),'start',false,webAudio,chime)};
 })(typeof window==='object'?window:globalThis);

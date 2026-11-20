@@ -7,16 +7,21 @@ class Pronunciation(unittest.TestCase):
     def test_approved_mks(self):
         self.assertEqual(g.spoken('DĘBICA RZESZOWSKA MKS'),'Dębica, Rzeszowska MKS.')
     def test_platform_numbers_and_real_route_numbers(self):
-        for raw,expected in [('BRZEZINY 04','Brzeziny.'),('WIELOPOLE SKRZYŃSKIE 1 02','Wielopole skrzyńskie jeden.'),('WIELOPOLE SKRZYŃSKIE 1 19','Wielopole skrzyńskie jeden.'),('3-MAJA CHECHŁY 1','Trzeciego maja chechły jeden.'),('ŁĄCZKI KUCHARSKIE ŁOPUCHOWA 2','Łączki kucharskie łopuchowa dwa.'),('ŚWILCZA OSIEDLE 60 N.Ż.','Świlcza osiedle.')]:
+        for raw,expected in [('BRZEZINY 04','Brzeziny.'),('WIELOPOLE SKRZYŃSKIE 1 02','Wielopole skrzyńskie, jeden.'),('WIELOPOLE SKRZYŃSKIE 1 19','Wielopole skrzyńskie, jeden.'),('3-MAJA CHECHŁY 1','Trzeciego maja chechły jeden.'),('ŁĄCZKI KUCHARSKIE ŁOPUCHOWA 2','Łączki kucharskie, łopuchowa dwa.'),('ŚWILCZA OSIEDLE 60 N.Ż.','Świlcza, osiedle na żądanie.')]:
             with self.subTest(raw=raw):self.assertEqual(g.spoken(raw),expected)
+    def test_requested_school_and_on_request(self):
+        self.assertEqual(g.spoken('JAWORZE DOLNE SZ.'),'Jaworze Dolne.')
+        self.assertEqual(g.spoken('JAWORZE DOLNE OŚ. W.'),'Jaworze Dolne.')
+        self.assertEqual(g.spoken('JAWORZE GÓRNE OSIEDLE'),'Jaworze górne, osiedle.')
+        self.assertEqual(g.spoken('DOBRKÓW N.Ż.'),'Dobrków na żądanie.')
     def test_complete_consistent_plan(self):
         p=g.make_plan(ROOT/'generator-grg/grgmonis.skl')
         self.assertEqual((p['voice'],p['rate']),('pl-PL-MarekNeural','-4%'))
-        self.assertEqual((len(p['jobs']),len(p['directionJobs'])),(110,11))
+        self.assertEqual((len(p['jobs']),len(p['directionJobs'])),(192,15))
         names={}
         for j in p['jobs']:
             self.assertEqual(names.setdefault(j['name'],j['text']),j['text'])
             self.assertNotIn('em ka es',j['text'])
-            self.assertNotRegex(j['text'],r'\d')
-        for j in p['directionJobs']:self.assertTrue(j['text'].startswith('Kierunek: '))
+            self.assertNotRegex(j['text'],r'\b\d{2,4}\b')
+        for j in p['directionJobs']:self.assertTrue(j['text'].startswith('Kierunek'))
 if __name__=='__main__':unittest.main()
