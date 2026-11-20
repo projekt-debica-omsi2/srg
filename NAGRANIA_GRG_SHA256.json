@@ -4,846 +4,1448 @@
     "name": "DĘBICA DWORZEC AUTOBUSOWY",
     "text": "Dębica, dworzec autobusowy.",
     "textHash": "0eb56e2ac720e3691baa06cca438f3ab6e903873770124f2106f9bbec9608d26",
-    "sha256": "766dc2d5d1a9dc5c44a41c2208fa43eaf4c7c334b903e78f976c5e1ff5cdbe47"
+    "sha256": "dac46e1394a34a8b04695045a0c23eaa5bcb81fb30fb53ea6b525ddd72097425"
   },
   "P0002.mp3": {
     "id": 2,
     "name": "ZURT",
     "text": "Zurt.",
     "textHash": "7eb90266dd67a2b3dddfff489e8db74e0f36c5767cf4ff2281187cb1d8903692",
-    "sha256": "d05810d159389f659131207b3d6272b8188cbb2468142dde6ff92a557b3e0ebe"
+    "sha256": "68d0e330a4e174697bae36a5138571ebb6fd41b40eb4796e3a2193da11f887af"
   },
   "P0003.mp3": {
     "id": 3,
     "name": "DĘBICA RZESZOWSKA TECHNIKUM",
     "text": "Dębica, rzeszowska technikum.",
     "textHash": "5900ed172c7a123e0acb0fced57da23af29d5231344154183da7ae4b7135ee61",
-    "sha256": "cbe2f55944f8bb99e7994e36c888346c322f26455479dd68340e4ab626ad7752"
+    "sha256": "152d974100b444d275a86e1bb4e16bcac39b85f791a42a82d232b47d1eaab6ff"
   },
   "P0004.mp3": {
     "id": 4,
     "name": "DĘBICA RZESZOWSKA RAJ",
     "text": "Dębica, rzeszowska raj.",
     "textHash": "791fe67ede90acfe27a65def34941760a8a3d1ff546fd427ff93ffcab0cce036",
-    "sha256": "fa39468184849efc968b7ce31240e8d21b078827c1f61b7180ab6c22ee824631"
+    "sha256": "19710d090bca1fad9ab8cb255f95b00a1df7488ba23b03c4790928942574e838"
   },
   "P0005.mp3": {
     "id": 5,
     "name": "DĘBICA RZESZOWSKA MKS",
     "text": "Dębica, Rzeszowska MKS.",
     "textHash": "f6911af1e18123908ad08998613b99db695ff7250532b41f2fe7f7d2611d5e61",
-    "sha256": "a709203d17003131c0325e675c76ee33beb6b0395b3f3b8bd7f520a6591114c2"
+    "sha256": "963072bdbc0ed1da5c60c7fee686b475bb5a34a91b18f009c7fd07ab09eccc89"
   },
   "P0006.mp3": {
     "id": 6,
     "name": "DĘBICA RZESZOWSKA NADLEŚNICTWO",
     "text": "Dębica, rzeszowska nadleśnictwo.",
     "textHash": "219618ee82dcfa6ddbc532216d24a9b2c4b2e67a7f4c0f4bc6b5a44295e2423a",
-    "sha256": "b344f95fbe6a1590e8a77b7fc6e005c61570d8317347054ff139cac1691273da"
+    "sha256": "4a376e7e0e1096fe6585880f4325e28e459e078fed7f7f1fd740c10f0f2a7fdd"
   },
   "P0007.mp3": {
     "id": 7,
     "name": "NAGAWCZYNA 1",
     "text": "Nagawczyna jeden.",
     "textHash": "0b843b52655bf421a4fcd6b9c7990015a981da80fc5fd49a93066570389473c7",
-    "sha256": "a4aab46713c670ae074f6beeddbf08c9c8f672874706aa9d5ac4b16f5734fe81"
+    "sha256": "e3af41a40c658ac580805bde3bcc31f09da7c8fcca4cac774446fe9a751f93c6"
   },
   "P0008.mp3": {
     "id": 8,
     "name": "NAGAWCZYNA 2",
     "text": "Nagawczyna dwa.",
     "textHash": "10062dc448ccbe9f074cae196ec2cde0cf119de417732c799cd868f439368b20",
-    "sha256": "7a3542f81907e76bd8a7c40d17112e22ff9a0ee6b84ff0a414e642f99fdb1637"
+    "sha256": "73396a8b06f453f2306928524de7cd824bee64308c818366edc555298b569668"
   },
   "P0009.mp3": {
     "id": 9,
     "name": "ZAWADA E4",
     "text": "Zawada e cztery.",
     "textHash": "18cec4a9892a35cbe2f594b019ee298ad83805be16257b544fae75a87041bee5",
-    "sha256": "fd1dc15ad06f38f1bb44bdc3cd509c61a929aadc639d9fe10db18996db5cc96a"
+    "sha256": "8ead2a60743886eaeca6aea6a1daf1c9d3aa973d4df0b1c400864bd175befbf2"
   },
   "P000A.mp3": {
     "id": 10,
     "name": "LUBZINA OSIEDLE",
     "text": "Lubzina osiedle.",
     "textHash": "b36fd7588b90979bd55df27a22ed8fe0e1818c1d6a9e18367706f8c248e3db0a",
-    "sha256": "282a9c6eb615cb36a34cf3c7a7a082c07672e8a9f95d85dd849e8f182e8dbb90"
+    "sha256": "69ed67f2710fbfe458d87e4749772297c9eb23cc5774d67dae3b6ba1b2067c0b"
   },
   "P000B.mp3": {
     "id": 11,
     "name": "LUBZINA E4",
     "text": "Lubzina e cztery.",
     "textHash": "186ef800130d07c3d11056aef447b2dfaa20c32bbfedf83723c5061b35c1ca9d",
-    "sha256": "7591d528d9491a59e24328b63add5c6271809ff650872897361212f6535eaa55"
+    "sha256": "9204ce4667844ac60e49db18a2442e133ddc26c06fb90572ba06d88972355e7d"
   },
   "P000C.mp3": {
     "id": 12,
     "name": "BRZEZÓWKA",
     "text": "Brzezówka.",
     "textHash": "fc6868181e8ea329dc62307d99e35c3d948410000c1639ccb319a68c88a5059b",
-    "sha256": "8f67b2287bc70e465c3953316958f8a597d5cce87a252d41d20be23c5e491647"
+    "sha256": "06a6f0cbb26be2b4426e0d5879566e8c03e0f16a08a2906751695679745928ec"
   },
   "P000D.mp3": {
     "id": 13,
     "name": "ROPCZYCE PODSŁOŃCE",
     "text": "Ropczyce, podsłońce.",
     "textHash": "e52539600491ffb97afbc9e6134cbf5a77b32d1ae32dcfe03cea314d556a08aa",
-    "sha256": "b56dbbd3c21954a7e47b3f64ee8c4fe810e1c537301d6a11a8d6778c2ad65679"
+    "sha256": "0ee3696e4a480766dd6a6bf12afa78dea0c4126dd3dcb922a0360fd06c45de72"
   },
   "P000E.mp3": {
     "id": 14,
     "name": "ROPCZYCE DWORZEC AUTOBUSOWY",
     "text": "Ropczyce, dworzec autobusowy.",
     "textHash": "85ec2e3839170ae49e9ab31202a2e206f5b8bc7c49f26a87e2d403e11bd5f981",
-    "sha256": "74de4e5683aec81ab5b3c891b37a5008bb4e0fa6b76c480e84f48ff1160065b5"
+    "sha256": "4e75ac1f392f9d333ff3b49e19211451243e47a94822003a41170e7e8d9e3e13"
   },
   "P000F.mp3": {
     "id": 15,
     "name": "ROPCZYCE MICKIEWICZA",
     "text": "Ropczyce, mickiewicza.",
     "textHash": "2da969899d786a5dad55618791f99d305a076eba394a06f655cce714bcdbcde5",
-    "sha256": "b948b74ae3f1cf683797e3683124f9e71ea8ece0a4898b6e69eee361abb52420"
+    "sha256": "fcab8d05674255dce3d6e7f9cf820e60c9face623b8b2fe0a825312d7dd490bd"
   },
   "P0010.mp3": {
     "id": 16,
     "name": "ROPCZYCE WITKOWICE",
     "text": "Ropczyce, witkowice.",
     "textHash": "37040ebde9c882770efde4ee1dff5015542ba5d058ac4c80c444880cfa26b568",
-    "sha256": "43d61435c4d45caad60583eadc2cb17302470e45a42eba031789be6eb50c1c86"
+    "sha256": "7367ed71872ba9dfff6fa66a08568821865d81dd778f427890bf614e421d0009"
   },
   "P0011.mp3": {
     "id": 17,
     "name": "ROPCZYCE WESOŁA",
     "text": "Ropczyce, wesoła.",
     "textHash": "815cbc356940e4352ba5b6af4c236b88a0ff07871702cfb6a4ff49f45d4ec2a0",
-    "sha256": "74facc34fddacb5f9e5f1ebd70518d94dbe5ed5eb01a565304c8ffb24e0d982b"
+    "sha256": "b34980e65b872fe6926e3b1ab98cc833252d022478db97ed31a9652d7c6cf8ed"
   },
   "P0012.mp3": {
     "id": 18,
     "name": "SĘDZISZÓW MAŁOPOLSKI OSIEDLE MŁODYCH",
     "text": "Sędziszów Małopolski, osiedle młodych.",
     "textHash": "ee68df7388c0d440716f4c4091c4904c86b97543d002f553d78afd6d5cf25520",
-    "sha256": "2ab78787c88b3ed0a5962e593606191297f9ccc7ec62f35b8ef3a65b5ab9f836"
+    "sha256": "dc6d9ed375c6c42b082badc11695304f11ccefbb62acf044f13194b6d9cef411"
   },
   "P0013.mp3": {
     "id": 19,
     "name": "SĘDZISZÓW MAŁOPOLSKI RYNEK",
     "text": "Sędziszów Małopolski, rynek.",
     "textHash": "24d58b1225fa0a29d4ba6fbe57f8ac0e47a9daebb67c6cd58a0b0add738fd5f7",
-    "sha256": "0500e3f2f3f5d1e2713582046c7c36b62470dc0db56a2930df81fd269c5f8266"
+    "sha256": "4d4ded270383752387f228be392df25592873fdc55f32a7ef3ef6178b8cf9cd0"
   },
   "P0014.mp3": {
     "id": 20,
     "name": "SĘDZISZÓW MAŁOPOLSKI PIŁSUDSKIEGO",
     "text": "Sędziszów Małopolski, piłsudskiego.",
     "textHash": "eb99a635760c77add42bde341eb5a220f1c91ba3f196433b75615599ecadea7f",
-    "sha256": "68e132ebed7102e3eea74bb8fed348b82a5d5dc932a30434bdaa3beaaaaf9eac"
+    "sha256": "fc29ec435554324bd27efb9d34f50be2e1a19cdefed616700bea187eb8db8c48"
   },
   "P0015.mp3": {
     "id": 21,
     "name": "SĘDZISZÓW MAŁOPOLSKI GRUNWALDZKA",
     "text": "Sędziszów Małopolski, grunwaldzka.",
     "textHash": "45e2dbec5318960af4aa2c8fdafb8cdec90c19b5d4fdfb2554887b25be0e4fbb",
-    "sha256": "1871a1aeae3cb9bf0a0baa54236f806859deaf698e59c46245897f32500590a4"
+    "sha256": "d4f1ed683fe74f49c5be7fb15f9b0a216a2bcb2320c749f86167e327172f544e"
   },
   "P0016.mp3": {
     "id": 22,
     "name": "OLCHOWA E4",
     "text": "Olchowa e cztery.",
     "textHash": "0626cdb95e729b78a200d7b34927ea22678f2e3de0f6d36bc0945baea23ef52b",
-    "sha256": "a87846658ccca48b9ab77af2f3c033aeaf7558e3226f340c6d63e3824d7ba018"
+    "sha256": "ed4de83fdd654d35d52e47c45de27eb6d271e29bdf106c6b95a2a85f8262144a"
   },
   "P0017.mp3": {
     "id": 23,
     "name": "KLĘCZANY STADION",
     "text": "Klęczany stadion.",
     "textHash": "ae057f988767f66f9d9dcc837c6d3abfa9a4bf0e5817707e608282d192763bda",
-    "sha256": "914f94b53e996f7ed9d29a7aecf6f616016a9817b3d9ca4db5743ecadf7e9956"
+    "sha256": "d9ae03bb5e37634cc816bdd45a21153ec1f7de971dcff10ff62df173cf7bf242"
   },
   "P0018.mp3": {
     "id": 24,
     "name": "DĄBROWA",
     "text": "Dąbrowa.",
     "textHash": "f4a6be318f4ca284570803c74f1188e775419ea90b1b9f8b41ea03209eed80a4",
-    "sha256": "b9afa998b1e0f539cb5c0db3fb4b841839c2fd96a25fde27b52936758cf99932"
+    "sha256": "b7239f624251ba023fa424bd0aad00bb0ae4b4ada2ebac4cb4b14c22809071b0"
   },
   "P0019.mp3": {
     "id": 25,
     "name": "DĄBROWA 2",
     "text": "Dąbrowa dwa.",
     "textHash": "55d6913ea80ef04ec258aecd9b4c2094ec043799b5bee72cfcdf23ee67996d7a",
-    "sha256": "a65d491be1daefd22883e253dd4114731d59906230735d700b6561767007a228"
+    "sha256": "020511d5839c6a1b12b7f1a1d3f34767364fbbfc654b1b0a0299fa5fb49e6394"
   },
   "P001A.mp3": {
     "id": 26,
     "name": "TRZCIANA",
     "text": "Trzciana.",
     "textHash": "0377b7a956b4218cc9ea7aaf9a9778f4a890334d560f0b1ca0c864515795c09a",
-    "sha256": "ed08dae2d2838cafa875f830ee2735301d99c7ab402bf475383469826a99160d"
+    "sha256": "d89eadfb2be201d8c59827ea7c6b7505c458edf8568535f71273cf402e822449"
   },
   "P001B.mp3": {
     "id": 27,
     "name": "TRZCIANA WOLICZKA 56 N.Ż.",
-    "text": "Trzciana woliczka.",
-    "textHash": "038fa9a118b0fa837e2769d984f42523a028dc52ee4696a976b9363e1f41e213",
-    "sha256": "3e344bdbcfe49dd7cba468ce060b9c6244156b8dc8f1c776c86d3cb4280bd4da"
+    "text": "Trzciana woliczka na żądanie.",
+    "textHash": "ce7cff0a74f1ecd7d86e0bf4f632976edfe3d5140827887ad580812129b75c29",
+    "sha256": "af7cedaf818a03f69a317bc03787572a181a4b01da57863afe8d87c6d509eab7"
   },
   "P001C.mp3": {
     "id": 28,
     "name": "ŚWILCZA 58",
     "text": "Świlcza.",
     "textHash": "4ed563e833fce5e1f3e3310dbc5f79cafc9c6b43f45e7be4dd7937baf9c8ab9c",
-    "sha256": "7abd9aeb6d8919c876fa24cac8997979ff926c67554b1f542dc69c7efc4557e3"
+    "sha256": "2f99e741dacece4ebddf9cd220880390e67e4033636679ed62edcf12211d7205"
   },
   "P001D.mp3": {
     "id": 29,
     "name": "ŚWILCZA OSIEDLE 60 N.Ż.",
-    "text": "Świlcza osiedle.",
-    "textHash": "5afea5eaae93aaf912a5ca73fab2d31a6e57f3523e4ce754ce6fce0a8e2b2852",
-    "sha256": "134cfcca13d2837888fde411761f22995415095e070e206a31bd075943df19d8"
+    "text": "Świlcza, osiedle na żądanie.",
+    "textHash": "2b9be3a07e55c7652fd5185234bc2b12a760d8a2148c14fc8ae62f8bf3729066",
+    "sha256": "56018599ad0d6b6ed1f81bcd8098cc7112c23125a6e72f4f264c7bf258dc776c"
   },
   "P001E.mp3": {
     "id": 30,
     "name": "ŚWILCZA NOWY DWÓR 62 N.Ż.",
-    "text": "Świlcza nowy dwór.",
-    "textHash": "31509ee71303c3892a506e6fed3ec1446f091709dab24633178f581ba46d4ecb",
-    "sha256": "993fef106548f6dec3b3b73738ac2c1c05bbf736c214896ac463a912ea489def"
+    "text": "Świlcza, nowy dwór na żądanie.",
+    "textHash": "f491a00138682ecd2549bc8fd79b35f0a3d899a767f9544eb6181f7cba291eea",
+    "sha256": "df80d9db6f3ad4dc6f81038fa5a8f6c03a00ba8bf444da44fee80b13e035f299"
   },
   "P001F.mp3": {
     "id": 31,
     "name": "RZESZÓW KRAKOWSKA GALERIA",
     "text": "Rzeszów, krakowska galeria.",
     "textHash": "51c67a9847d6010b9a4e0870bcbdd8371c1d776ebba32cef8fba1178c2277f5a",
-    "sha256": "b79cc0103f10700658935a4166ef3710fca5abfcfe87417dd624a415edaefac4"
+    "sha256": "d4faf06271f375202b032adfea9c39d933935904c4fd6ffb98e65f7d683591e7"
   },
   "P0020.mp3": {
     "id": 32,
     "name": "RZESZÓW KRAKOWSKA SZPITAL",
     "text": "Rzeszów, krakowska szpital.",
     "textHash": "d0e0e443539a7825f5639595a2de916433d0bdab75e68c6440e904bed92031bc",
-    "sha256": "cf115091d2eb29f31c9060d79cc7fe6b589b81ab80f902b28acc11c172a277e6"
+    "sha256": "ba75484e3f6dddddc263b56efeb5d970407b8c7ff3611a15ac803013d0cd42a3"
   },
   "P0021.mp3": {
     "id": 33,
     "name": "RZESZÓW DWORZEC LOKALNY",
     "text": "Rzeszów, dworzec lokalny.",
     "textHash": "c49aaa7b0ff130db1e887459109129a55265fd2cebb01266a7ce3a545eb5e77e",
-    "sha256": "53b492b999477f68a66647357cfbc96de194832143dc97ae371bb9abff2a4546"
+    "sha256": "41b2637bf4e4b05b963b72263328f44409aaf02561f40b434296fb801bed3301"
   },
   "P0022.mp3": {
     "id": 34,
     "name": "RZESZÓW DWORZEC AUTOBUSOWY",
     "text": "Rzeszów, dworzec autobusowy.",
     "textHash": "e68eb4419d177f853525986d90b1279cd70d14b916a8fc1a078bef7b4d59f37c",
-    "sha256": "42a5ecdf409325c3d1c253c6f558d01f24ceaa2e1a24088e58f206e65bc8dbc4"
+    "sha256": "0855138e9fbfb377fe4efc3a6b16b1ec71913f4d7ba789707bd28cb52b2071b9"
   },
   "P0023.mp3": {
     "id": 35,
     "name": "ŚWILCZA NOWY DWÓR 71 N.Ż.",
-    "text": "Świlcza nowy dwór.",
-    "textHash": "31509ee71303c3892a506e6fed3ec1446f091709dab24633178f581ba46d4ecb",
-    "sha256": "993fef106548f6dec3b3b73738ac2c1c05bbf736c214896ac463a912ea489def"
+    "text": "Świlcza, nowy dwór na żądanie.",
+    "textHash": "f491a00138682ecd2549bc8fd79b35f0a3d899a767f9544eb6181f7cba291eea",
+    "sha256": "df80d9db6f3ad4dc6f81038fa5a8f6c03a00ba8bf444da44fee80b13e035f299"
   },
   "P0024.mp3": {
     "id": 36,
     "name": "ŚWILCZA OSIEDLE 73 N.Ż.",
-    "text": "Świlcza osiedle.",
-    "textHash": "5afea5eaae93aaf912a5ca73fab2d31a6e57f3523e4ce754ce6fce0a8e2b2852",
-    "sha256": "134cfcca13d2837888fde411761f22995415095e070e206a31bd075943df19d8"
+    "text": "Świlcza, osiedle na żądanie.",
+    "textHash": "2b9be3a07e55c7652fd5185234bc2b12a760d8a2148c14fc8ae62f8bf3729066",
+    "sha256": "56018599ad0d6b6ed1f81bcd8098cc7112c23125a6e72f4f264c7bf258dc776c"
   },
   "P0025.mp3": {
     "id": 37,
     "name": "ŚWILCZA 75",
     "text": "Świlcza.",
     "textHash": "4ed563e833fce5e1f3e3310dbc5f79cafc9c6b43f45e7be4dd7937baf9c8ab9c",
-    "sha256": "7abd9aeb6d8919c876fa24cac8997979ff926c67554b1f542dc69c7efc4557e3"
+    "sha256": "2f99e741dacece4ebddf9cd220880390e67e4033636679ed62edcf12211d7205"
   },
   "P0026.mp3": {
     "id": 38,
     "name": "TRZCIANA WOLICZKA 77 N.Ż.",
-    "text": "Trzciana woliczka.",
-    "textHash": "038fa9a118b0fa837e2769d984f42523a028dc52ee4696a976b9363e1f41e213",
-    "sha256": "3e344bdbcfe49dd7cba468ce060b9c6244156b8dc8f1c776c86d3cb4280bd4da"
+    "text": "Trzciana woliczka na żądanie.",
+    "textHash": "ce7cff0a74f1ecd7d86e0bf4f632976edfe3d5140827887ad580812129b75c29",
+    "sha256": "af7cedaf818a03f69a317bc03787572a181a4b01da57863afe8d87c6d509eab7"
   },
   "P0027.mp3": {
     "id": 39,
     "name": "DĘBICA RZESZOWSKA PLAC GRYFITÓW",
     "text": "Dębica, rzeszowska plac gryfitów.",
     "textHash": "6860fa699ccf5eaaa11cf03fd5e0b5678e11536194fd72e9378efa69e933b81b",
-    "sha256": "db0fcd26ecad6b234ad515855611e9e555e3bfed651e6bc2759edb3d9e3166be"
+    "sha256": "bc5a755df7f3243539cf67a60a769cadf6b27cd36472797e4f9507e6ec1bf2d8"
   },
   "P0028.mp3": {
     "id": 40,
     "name": "RZESZÓW DWORZEC AUTOBUSOWY",
     "text": "Rzeszów, dworzec autobusowy.",
     "textHash": "e68eb4419d177f853525986d90b1279cd70d14b916a8fc1a078bef7b4d59f37c",
-    "sha256": "42a5ecdf409325c3d1c253c6f558d01f24ceaa2e1a24088e58f206e65bc8dbc4"
+    "sha256": "0855138e9fbfb377fe4efc3a6b16b1ec71913f4d7ba789707bd28cb52b2071b9"
   },
   "P0029.mp3": {
     "id": 41,
     "name": "RZESZÓW DWORZEC LOKALNY",
     "text": "Rzeszów, dworzec lokalny.",
     "textHash": "c49aaa7b0ff130db1e887459109129a55265fd2cebb01266a7ce3a545eb5e77e",
-    "sha256": "53b492b999477f68a66647357cfbc96de194832143dc97ae371bb9abff2a4546"
+    "sha256": "41b2637bf4e4b05b963b72263328f44409aaf02561f40b434296fb801bed3301"
   },
   "P002A.mp3": {
     "id": 42,
     "name": "RZESZÓW KRAKOWSKA SZPITAL",
     "text": "Rzeszów, krakowska szpital.",
     "textHash": "d0e0e443539a7825f5639595a2de916433d0bdab75e68c6440e904bed92031bc",
-    "sha256": "cf115091d2eb29f31c9060d79cc7fe6b589b81ab80f902b28acc11c172a277e6"
+    "sha256": "ba75484e3f6dddddc263b56efeb5d970407b8c7ff3611a15ac803013d0cd42a3"
   },
   "P002B.mp3": {
     "id": 43,
     "name": "RZESZÓW KRAKOWSKA GALERIA",
     "text": "Rzeszów, krakowska galeria.",
     "textHash": "51c67a9847d6010b9a4e0870bcbdd8371c1d776ebba32cef8fba1178c2277f5a",
-    "sha256": "b79cc0103f10700658935a4166ef3710fca5abfcfe87417dd624a415edaefac4"
+    "sha256": "d4faf06271f375202b032adfea9c39d933935904c4fd6ffb98e65f7d683591e7"
   },
   "P002C.mp3": {
     "id": 44,
     "name": "TRZCIANA",
     "text": "Trzciana.",
     "textHash": "0377b7a956b4218cc9ea7aaf9a9778f4a890334d560f0b1ca0c864515795c09a",
-    "sha256": "ed08dae2d2838cafa875f830ee2735301d99c7ab402bf475383469826a99160d"
+    "sha256": "d89eadfb2be201d8c59827ea7c6b7505c458edf8568535f71273cf402e822449"
   },
   "P002D.mp3": {
     "id": 45,
     "name": "DĄBROWA 2",
     "text": "Dąbrowa dwa.",
     "textHash": "55d6913ea80ef04ec258aecd9b4c2094ec043799b5bee72cfcdf23ee67996d7a",
-    "sha256": "a65d491be1daefd22883e253dd4114731d59906230735d700b6561767007a228"
+    "sha256": "020511d5839c6a1b12b7f1a1d3f34767364fbbfc654b1b0a0299fa5fb49e6394"
   },
   "P002E.mp3": {
     "id": 46,
     "name": "DĄBROWA",
     "text": "Dąbrowa.",
     "textHash": "f4a6be318f4ca284570803c74f1188e775419ea90b1b9f8b41ea03209eed80a4",
-    "sha256": "b9afa998b1e0f539cb5c0db3fb4b841839c2fd96a25fde27b52936758cf99932"
+    "sha256": "b7239f624251ba023fa424bd0aad00bb0ae4b4ada2ebac4cb4b14c22809071b0"
   },
   "P002F.mp3": {
     "id": 47,
     "name": "KLĘCZANY SZKOŁA",
     "text": "Klęczany szkoła.",
     "textHash": "81920729bf2a7ea951b9badd3836950b5f55714de8fa2e86193265d03f2bd9ff",
-    "sha256": "2686b03d2ccb74f03065ba0fa39b30945847f5e5e4b57e3f9b33308eff5d6efa"
+    "sha256": "5e94e8b5e1c1ddc2183827660da896f9ea78c75351dd4537b757c5a724304ef3"
   },
   "P0030.mp3": {
     "id": 48,
     "name": "OLCHOWA E4",
     "text": "Olchowa e cztery.",
     "textHash": "0626cdb95e729b78a200d7b34927ea22678f2e3de0f6d36bc0945baea23ef52b",
-    "sha256": "a87846658ccca48b9ab77af2f3c033aeaf7558e3226f340c6d63e3824d7ba018"
+    "sha256": "ed4de83fdd654d35d52e47c45de27eb6d271e29bdf106c6b95a2a85f8262144a"
   },
   "P0031.mp3": {
     "id": 49,
     "name": "SĘDZISZÓW MAŁOPOLSKI GRUNWALDZKA",
     "text": "Sędziszów Małopolski, grunwaldzka.",
     "textHash": "45e2dbec5318960af4aa2c8fdafb8cdec90c19b5d4fdfb2554887b25be0e4fbb",
-    "sha256": "1871a1aeae3cb9bf0a0baa54236f806859deaf698e59c46245897f32500590a4"
+    "sha256": "d4f1ed683fe74f49c5be7fb15f9b0a216a2bcb2320c749f86167e327172f544e"
   },
   "P0032.mp3": {
     "id": 50,
     "name": "SĘDZISZÓW MAŁOPOLSKI PIŁSUDSKIEGO",
     "text": "Sędziszów Małopolski, piłsudskiego.",
     "textHash": "eb99a635760c77add42bde341eb5a220f1c91ba3f196433b75615599ecadea7f",
-    "sha256": "68e132ebed7102e3eea74bb8fed348b82a5d5dc932a30434bdaa3beaaaaf9eac"
+    "sha256": "fc29ec435554324bd27efb9d34f50be2e1a19cdefed616700bea187eb8db8c48"
   },
   "P0033.mp3": {
     "id": 51,
     "name": "SĘDZISZÓW MAŁOPOLSKI RYNEK",
     "text": "Sędziszów Małopolski, rynek.",
     "textHash": "24d58b1225fa0a29d4ba6fbe57f8ac0e47a9daebb67c6cd58a0b0add738fd5f7",
-    "sha256": "0500e3f2f3f5d1e2713582046c7c36b62470dc0db56a2930df81fd269c5f8266"
+    "sha256": "4d4ded270383752387f228be392df25592873fdc55f32a7ef3ef6178b8cf9cd0"
   },
   "P0034.mp3": {
     "id": 52,
     "name": "SĘDZISZÓW MAŁOPOLSKI OSIEDLE MŁODYCH",
     "text": "Sędziszów Małopolski, osiedle młodych.",
     "textHash": "ee68df7388c0d440716f4c4091c4904c86b97543d002f553d78afd6d5cf25520",
-    "sha256": "2ab78787c88b3ed0a5962e593606191297f9ccc7ec62f35b8ef3a65b5ab9f836"
+    "sha256": "dc6d9ed375c6c42b082badc11695304f11ccefbb62acf044f13194b6d9cef411"
   },
   "P0035.mp3": {
     "id": 53,
     "name": "ROPCZYCE WESOŁA",
     "text": "Ropczyce, wesoła.",
     "textHash": "815cbc356940e4352ba5b6af4c236b88a0ff07871702cfb6a4ff49f45d4ec2a0",
-    "sha256": "74facc34fddacb5f9e5f1ebd70518d94dbe5ed5eb01a565304c8ffb24e0d982b"
+    "sha256": "b34980e65b872fe6926e3b1ab98cc833252d022478db97ed31a9652d7c6cf8ed"
   },
   "P0036.mp3": {
     "id": 54,
     "name": "ROPCZYCE WITKOWICE",
     "text": "Ropczyce, witkowice.",
     "textHash": "37040ebde9c882770efde4ee1dff5015542ba5d058ac4c80c444880cfa26b568",
-    "sha256": "43d61435c4d45caad60583eadc2cb17302470e45a42eba031789be6eb50c1c86"
+    "sha256": "7367ed71872ba9dfff6fa66a08568821865d81dd778f427890bf614e421d0009"
   },
   "P0037.mp3": {
     "id": 55,
     "name": "ROPCZYCE MICKIEWICZA",
     "text": "Ropczyce, mickiewicza.",
     "textHash": "2da969899d786a5dad55618791f99d305a076eba394a06f655cce714bcdbcde5",
-    "sha256": "b948b74ae3f1cf683797e3683124f9e71ea8ece0a4898b6e69eee361abb52420"
+    "sha256": "fcab8d05674255dce3d6e7f9cf820e60c9face623b8b2fe0a825312d7dd490bd"
   },
   "P0038.mp3": {
     "id": 56,
     "name": "ROPCZYCE DWORZEC AUTOBUSOWY",
     "text": "Ropczyce, dworzec autobusowy.",
     "textHash": "85ec2e3839170ae49e9ab31202a2e206f5b8bc7c49f26a87e2d403e11bd5f981",
-    "sha256": "74de4e5683aec81ab5b3c891b37a5008bb4e0fa6b76c480e84f48ff1160065b5"
+    "sha256": "4e75ac1f392f9d333ff3b49e19211451243e47a94822003a41170e7e8d9e3e13"
   },
   "P0039.mp3": {
     "id": 57,
     "name": "ROPCZYCE PODSŁOŃCE",
     "text": "Ropczyce, podsłońce.",
     "textHash": "e52539600491ffb97afbc9e6134cbf5a77b32d1ae32dcfe03cea314d556a08aa",
-    "sha256": "b56dbbd3c21954a7e47b3f64ee8c4fe810e1c537301d6a11a8d6778c2ad65679"
+    "sha256": "0ee3696e4a480766dd6a6bf12afa78dea0c4126dd3dcb922a0360fd06c45de72"
   },
   "P003A.mp3": {
     "id": 58,
     "name": "BRZEZÓWKA",
     "text": "Brzezówka.",
     "textHash": "fc6868181e8ea329dc62307d99e35c3d948410000c1639ccb319a68c88a5059b",
-    "sha256": "8f67b2287bc70e465c3953316958f8a597d5cce87a252d41d20be23c5e491647"
+    "sha256": "06a6f0cbb26be2b4426e0d5879566e8c03e0f16a08a2906751695679745928ec"
   },
   "P003B.mp3": {
     "id": 59,
     "name": "LUBZINA E4",
     "text": "Lubzina e cztery.",
     "textHash": "186ef800130d07c3d11056aef447b2dfaa20c32bbfedf83723c5061b35c1ca9d",
-    "sha256": "7591d528d9491a59e24328b63add5c6271809ff650872897361212f6535eaa55"
+    "sha256": "9204ce4667844ac60e49db18a2442e133ddc26c06fb90572ba06d88972355e7d"
   },
   "P003C.mp3": {
     "id": 60,
     "name": "LUBZINA OSIEDLE",
     "text": "Lubzina osiedle.",
     "textHash": "b36fd7588b90979bd55df27a22ed8fe0e1818c1d6a9e18367706f8c248e3db0a",
-    "sha256": "282a9c6eb615cb36a34cf3c7a7a082c07672e8a9f95d85dd849e8f182e8dbb90"
+    "sha256": "69ed67f2710fbfe458d87e4749772297c9eb23cc5774d67dae3b6ba1b2067c0b"
   },
   "P003D.mp3": {
     "id": 61,
     "name": "ZAWADA E4",
     "text": "Zawada e cztery.",
     "textHash": "18cec4a9892a35cbe2f594b019ee298ad83805be16257b544fae75a87041bee5",
-    "sha256": "fd1dc15ad06f38f1bb44bdc3cd509c61a929aadc639d9fe10db18996db5cc96a"
+    "sha256": "8ead2a60743886eaeca6aea6a1daf1c9d3aa973d4df0b1c400864bd175befbf2"
   },
   "P003E.mp3": {
     "id": 62,
     "name": "NAGAWCZYNA 2",
     "text": "Nagawczyna dwa.",
     "textHash": "10062dc448ccbe9f074cae196ec2cde0cf119de417732c799cd868f439368b20",
-    "sha256": "7a3542f81907e76bd8a7c40d17112e22ff9a0ee6b84ff0a414e642f99fdb1637"
+    "sha256": "73396a8b06f453f2306928524de7cd824bee64308c818366edc555298b569668"
   },
   "P003F.mp3": {
     "id": 63,
     "name": "NAGAWCZYNA 1",
     "text": "Nagawczyna jeden.",
     "textHash": "0b843b52655bf421a4fcd6b9c7990015a981da80fc5fd49a93066570389473c7",
-    "sha256": "a4aab46713c670ae074f6beeddbf08c9c8f672874706aa9d5ac4b16f5734fe81"
+    "sha256": "e3af41a40c658ac580805bde3bcc31f09da7c8fcca4cac774446fe9a751f93c6"
   },
   "P0040.mp3": {
     "id": 64,
     "name": "DĘBICA RZESZOWSKA NADLEŚNICTWO",
     "text": "Dębica, rzeszowska nadleśnictwo.",
     "textHash": "219618ee82dcfa6ddbc532216d24a9b2c4b2e67a7f4c0f4bc6b5a44295e2423a",
-    "sha256": "b344f95fbe6a1590e8a77b7fc6e005c61570d8317347054ff139cac1691273da"
+    "sha256": "4a376e7e0e1096fe6585880f4325e28e459e078fed7f7f1fd740c10f0f2a7fdd"
   },
   "P0041.mp3": {
     "id": 65,
     "name": "DĘBICA RZESZOWSKA MKS",
     "text": "Dębica, Rzeszowska MKS.",
     "textHash": "f6911af1e18123908ad08998613b99db695ff7250532b41f2fe7f7d2611d5e61",
-    "sha256": "a709203d17003131c0325e675c76ee33beb6b0395b3f3b8bd7f520a6591114c2"
+    "sha256": "963072bdbc0ed1da5c60c7fee686b475bb5a34a91b18f009c7fd07ab09eccc89"
   },
   "P0042.mp3": {
     "id": 66,
     "name": "DĘBICA RZESZOWSKA RAJ",
     "text": "Dębica, rzeszowska raj.",
     "textHash": "791fe67ede90acfe27a65def34941760a8a3d1ff546fd427ff93ffcab0cce036",
-    "sha256": "fa39468184849efc968b7ce31240e8d21b078827c1f61b7180ab6c22ee824631"
+    "sha256": "19710d090bca1fad9ab8cb255f95b00a1df7488ba23b03c4790928942574e838"
   },
   "P0043.mp3": {
     "id": 67,
     "name": "DĘBICA RZESZOWSKA TECHNIKUM",
     "text": "Dębica, rzeszowska technikum.",
     "textHash": "5900ed172c7a123e0acb0fced57da23af29d5231344154183da7ae4b7135ee61",
-    "sha256": "cbe2f55944f8bb99e7994e36c888346c322f26455479dd68340e4ab626ad7752"
+    "sha256": "152d974100b444d275a86e1bb4e16bcac39b85f791a42a82d232b47d1eaab6ff"
   },
   "P0044.mp3": {
     "id": 68,
     "name": "DĘBICA DWORZEC AUTOBUSOWY",
     "text": "Dębica, dworzec autobusowy.",
     "textHash": "0eb56e2ac720e3691baa06cca438f3ab6e903873770124f2106f9bbec9608d26",
-    "sha256": "766dc2d5d1a9dc5c44a41c2208fa43eaf4c7c334b903e78f976c5e1ff5cdbe47"
+    "sha256": "dac46e1394a34a8b04695045a0c23eaa5bcb81fb30fb53ea6b525ddd72097425"
   },
   "P0045.mp3": {
     "id": 69,
     "name": "3-MAJA CHECHŁY 1",
     "text": "Trzeciego maja chechły jeden.",
     "textHash": "bf3f8fdc73a94e41debe150704bb0a758f60bb2027dfb255a2abfd8041449b4e",
-    "sha256": "bc7970f3590456b469b94c83c014e0f14cf2016812d4a048a83cc7ebfa662d88"
+    "sha256": "1fa495ca20845e93df5c83599719e0f8c7f79828b0b76ecfc18d78f557d4a7cd"
   },
   "P0046.mp3": {
     "id": 70,
     "name": "3-MAJA CHECHŁY 2",
     "text": "Trzeciego maja chechły dwa.",
     "textHash": "bd6605e5de07f4808733a4fac50276f96c3a635a18a60875a6b2c8babda79be8",
-    "sha256": "601f5ef142e262a883bfadec53ddd5c140b862e81f97a7706d0b99db959f839b"
+    "sha256": "0bb9d6226f63864508d2fac19882842fd54e117a1915a6c3f882a6c9fe6f1b6d"
   },
   "P0047.mp3": {
     "id": 71,
     "name": "3-MAJA CHECHŁY 3",
     "text": "Trzeciego maja chechły trzy.",
     "textHash": "a5902c2bd72cd1f1273cb21125add7a367c22b0ba99b01bb06765a758bebf72c",
-    "sha256": "714fa2c149d950204ea5b6299dbe3cdffd20f8ac1b0ed6c47a5cc0a7ef1c4568"
+    "sha256": "d47225745b1e6651784c7bd0ef49082805004ce7081aa9cfb9580f803a9e5793"
   },
   "P0048.mp3": {
     "id": 72,
     "name": "OKONIN",
     "text": "Okonin.",
     "textHash": "2b1f3571ad0e15059645987797b163b03963eecae3bb76da09aaa9b26fb1cf51",
-    "sha256": "a0038e10c5ad8fa6bf68f544b8b8728ae03b24630da30c183739e09ec1d1ae41"
+    "sha256": "aa1d986baef33df2c11fe130e24fa12955a93bc5fe77e43b386be93b1c483033"
   },
   "P0049.mp3": {
     "id": 73,
     "name": "ŁĄCZKI KUCHARSKIE ŁOPUCHOWA 1",
-    "text": "Łączki kucharskie łopuchowa jeden.",
-    "textHash": "7f106718b6d03f2080800f0ed8d49a4384a6ffa6bfe1f758046303ff189a17a0",
-    "sha256": "35ea95f5371029596df7769fcb791b7ff9da9241a8b561282b9f3361d6c836d5"
+    "text": "Łączki kucharskie, łopuchowa jeden.",
+    "textHash": "ab9eb2760ad10eb9bdd2e250fd62f61501e2b224b5b188a2db40b85c0e8e5b31",
+    "sha256": "c89955b246e833e61447f2f7f23cf6f1d91a26a46b2a047c9da7c416113d4b5e"
   },
   "P004A.mp3": {
     "id": 74,
     "name": "ŁĄCZKI KUCHARSKIE ŁOPUCHOWA 2",
-    "text": "Łączki kucharskie łopuchowa dwa.",
-    "textHash": "480c2cafbe7ab30ead9b80d10e5407d4cc1deb048e081f1aedcc41669ebaf670",
-    "sha256": "14151268915d992004fa6358e5ebb9d002ae525ec8fbb515b21816038ccccdb4"
+    "text": "Łączki kucharskie, łopuchowa dwa.",
+    "textHash": "82b93cf4f15ef999b7cf24d26fb8a13eeae2471df0535edeab46d540fc88a2c5",
+    "sha256": "7a41cefb0e7a47361c2e53f01493cafb5d90077fc67bb4fc07b5508627c2cea3"
   },
   "P004B.mp3": {
     "id": 75,
     "name": "ŁĄCZKI KUCHARSKIE KOŚCIÓŁ",
-    "text": "Łączki kucharskie kościół.",
-    "textHash": "62ceafe639d2dcd283549126223a07fec1080592b9fb126d2142ecef45ac34b8",
-    "sha256": "9da068f3fdda07bd8bdf7e70a4ade1c5aa9b5cabe95735daabcfa18d6424bec8"
+    "text": "Łączki kucharskie, kościół.",
+    "textHash": "19ae276b847bf1f4ce0add7e47a4c70e716fa8e833f4d8fc3e5a3e8f9e280334",
+    "sha256": "750caea62a308dd9ca7c561758cbd20c435da46001f0e510af5cf3fd64067ae0"
   },
   "P004C.mp3": {
     "id": 76,
     "name": "BRONISZÓW",
     "text": "Broniszów.",
     "textHash": "42f3e7e3534347978c68641f1720b39c6ab8ce0ecee3b60fcf4dfe9644150470",
-    "sha256": "f901cda8be9df3cf3702153970cc453fb30bf8102ba62ad8dd0f0c63a58de188"
+    "sha256": "ee3fb5d9c6b5ca0e1d8a79adaa3f768361b404f0bf32f5b87cf7ef5fcf71cd24"
   },
   "P004D.mp3": {
     "id": 77,
     "name": "GLINIK ŁYSA GÓRA",
     "text": "Glinik łysa góra.",
     "textHash": "89667112c86dbbd37705295e3830e84ebebbabf9a20178c6112c99f171a6c7f0",
-    "sha256": "8f0c2c65f3e95495c2420c099f336577f89aa88246446c686771ed65a7ca3e82"
+    "sha256": "d5a4158687a82c4a76a8201c5a39d66d14fa2876cb708d7048792a92b42f4195"
   },
   "P004E.mp3": {
     "id": 78,
     "name": "GLINIK SZKOŁA",
     "text": "Glinik szkoła.",
     "textHash": "11c3a837aef06fac0a1ca1ea79c4adecd70e20af9c67e9d13b6a31f1cdc85147",
-    "sha256": "f771b7b15c07ef355595fc2202da39a525043251aa4003e622de2a3fbe4112ba"
+    "sha256": "f1512e2950816e223d2a72d4df9fcc87cc356528c2ea49c17d862b7241f9723b"
   },
   "P004F.mp3": {
     "id": 79,
     "name": "GLINIK OSP",
     "text": "Glinik o es pe.",
     "textHash": "ee631d7316903a40574688da8d71b89d90d28c7fcedb90c5b2d6b8bd633d70a9",
-    "sha256": "9ccd19f446981af06797000d7c3c48c1132d07ea38a91852f3b85556ca24348b"
+    "sha256": "99212f709fbe330540f410a44ab5208b33d860468594db393d1f6b9d888a2f4e"
   },
   "P0050.mp3": {
     "id": 80,
     "name": "GLINIK GÓRA",
     "text": "Glinik góra.",
     "textHash": "f2077259bd3787356c0ac987145cec0eaa87fa315028209248f26a2d136389e2",
-    "sha256": "1a2950f47d3ae7ca782130fd033e8dd9b09885daf7ed76fbd2fe9ae39da39463"
+    "sha256": "9e574956394cdda046e607760685cee925d67a513d098e12e840d949608109aa"
   },
   "P0051.mp3": {
     "id": 81,
     "name": "WIELOPOLE SKRZYŃSKIE RZEGOCIN",
-    "text": "Wielopole skrzyńskie rzegocin.",
-    "textHash": "42b9d53ef6bac29ecc194b1a019116e3417a8093039dd03c52934aadd438ddee",
-    "sha256": "d08a2e419b5c7b73365989f8c111fbf3eb911bc7cdef8f90d991adb0c76ec342"
+    "text": "Wielopole skrzyńskie, rzegocin.",
+    "textHash": "442a5844e047bac4f79000a8a985ef6ff5d3619875fe6f46d44b8d75c7d5d4a9",
+    "sha256": "11b00332d087b00a77d618e14a95ef34385b9ef18dc329f9b91a2d612baf54cf"
   },
   "P0052.mp3": {
     "id": 82,
     "name": "WIELOPOLE SKRZYŃSKIE",
     "text": "Wielopole skrzyńskie.",
     "textHash": "5c57d44251956d51cb137920cc3971f06067085f694fb3cbf594173509155432",
-    "sha256": "0c37c784467e4e14af1b556d4bcad45e3b4aad6ee51b024251325e0b81dc067a"
+    "sha256": "9a47a867e7cbb8d1ead8daabf3b47dae3636f028e4d1db696115e2c6df61d5dd"
   },
   "P0053.mp3": {
     "id": 83,
     "name": "WIELOPOLE SKRZYŃSKIE 1 19",
-    "text": "Wielopole skrzyńskie jeden.",
-    "textHash": "16ac1344f5b1d4cf02242922a602b308a8d51283e7e0bfa3bfbc6617abb3a4ef",
-    "sha256": "b1663ca270880f08847bc7a942d2182db4fc65e232645e451e83758374c81a7e"
+    "text": "Wielopole skrzyńskie, jeden.",
+    "textHash": "59f4b6cc30238996761e276eb0d86e753b71a64c8ec9541136e460f47d996daa",
+    "sha256": "85237e5a7ff951defea5132afdd71ff1f7d897f9dc54cf9994c9693f186b95f8"
   },
   "P0054.mp3": {
     "id": 84,
     "name": "BRZEZINY 17",
     "text": "Brzeziny.",
     "textHash": "9af34d79d34a49bb70a71945d1eccdcd7d08ecfbcf64a213a4c83e1ba4d0166c",
-    "sha256": "26b8009dc14d957e3fc074a96e1914672328bde64888f003c99f4a27f7316838"
+    "sha256": "2e2f3a33e2ede7060be6c980b2752103372a59eab3470e21ca16cdf4c2145749"
   },
   "P0055.mp3": {
     "id": 85,
     "name": "BRZEZINY SKLEP 15",
     "text": "Brzeziny sklep.",
     "textHash": "37983326b4f1f98d591f73363c0c04014dc8a97ee474de4292756f4a7b75d330",
-    "sha256": "1c91250c123fcea750f2acb8fc08f786bf123a1ad9b9b399c8d6a30d8b39e091"
+    "sha256": "43b22db9f491e6317fb62718d09a225a28a22c03b64690161f303c7922c7a838"
   },
   "P0056.mp3": {
     "id": 86,
     "name": "BRZEZINY KLUB 13",
     "text": "Brzeziny klub.",
     "textHash": "5c20953ed72257ea557bd43b09a08dda92ef7cbb5d67a4a4ebddbc0b8372d47b",
-    "sha256": "779806df02eec20c44fa3d5ee1de21876ac3ef629a1f67b0eebf74324c5cac95"
+    "sha256": "8faef6434bb540aa8d0452fd29a5a83094680521c77c26551d02436e3f34efbb"
   },
   "P0057.mp3": {
     "id": 87,
     "name": "BRZEZINY SKRZYŻOWANIE 11",
     "text": "Brzeziny skrzyżowanie.",
     "textHash": "21d2462a7dd8e0d4763723ab0df4554e2f94521b22ef1cef93511df851cd6e3b",
-    "sha256": "9a92f25588ef83e76fa6cd628a730b3be1da5a64ecbba9592c2804d54ae8c8a8"
+    "sha256": "8e444abe70faca65cdf0a476dca074891ff9a522f44183fee1c204084853360e"
   },
   "P0058.mp3": {
     "id": 88,
     "name": "BRZEZINY BERDECHÓW 1 02 (NOWA WIEŚ)",
     "text": "Brzeziny berdechów jeden, nowa wieś.",
     "textHash": "d56cce993316f196e94ffcd1c27d2d867f182e470cd9150df03b115e2b03300c",
-    "sha256": "6f2529a83b5e9bb36a629f783e3104bea29e9e9222300e181468f420731f6e3b"
+    "sha256": "607411184fc373bee140b6ce1b69ba7b4419eb9f52e81a4d036b4008ba3a5d25"
   },
   "P0059.mp3": {
     "id": 89,
     "name": "BRZEZINY BERDECHÓW",
     "text": "Brzeziny berdechów.",
     "textHash": "2bc986800a82a58ff0f7b5423e545de69637ccfd82cfd43c38352d90f2b6dbfa",
-    "sha256": "0cb8723bc961feda2039197b53f1883b7c21059109cfc5c1fca1d219c5cc8487"
+    "sha256": "0dcd36f210743dc60cfa1dadf641dd478a69d9c88f962bf88be686b873170db9"
   },
   "P005A.mp3": {
     "id": 90,
     "name": "BRZEZINY BERDECHÓW 1 03 (NOWA WIEŚ)",
     "text": "Brzeziny berdechów jeden, nowa wieś.",
     "textHash": "d56cce993316f196e94ffcd1c27d2d867f182e470cd9150df03b115e2b03300c",
-    "sha256": "6f2529a83b5e9bb36a629f783e3104bea29e9e9222300e181468f420731f6e3b"
+    "sha256": "607411184fc373bee140b6ce1b69ba7b4419eb9f52e81a4d036b4008ba3a5d25"
   },
   "P005B.mp3": {
     "id": 91,
     "name": "BRZEZINY SKRZYŻOWANIE 10",
     "text": "Brzeziny skrzyżowanie.",
     "textHash": "21d2462a7dd8e0d4763723ab0df4554e2f94521b22ef1cef93511df851cd6e3b",
-    "sha256": "9a92f25588ef83e76fa6cd628a730b3be1da5a64ecbba9592c2804d54ae8c8a8"
+    "sha256": "8e444abe70faca65cdf0a476dca074891ff9a522f44183fee1c204084853360e"
   },
   "P005C.mp3": {
     "id": 92,
     "name": "BRZEZINY KLUB 08",
     "text": "Brzeziny klub.",
     "textHash": "5c20953ed72257ea557bd43b09a08dda92ef7cbb5d67a4a4ebddbc0b8372d47b",
-    "sha256": "779806df02eec20c44fa3d5ee1de21876ac3ef629a1f67b0eebf74324c5cac95"
+    "sha256": "8faef6434bb540aa8d0452fd29a5a83094680521c77c26551d02436e3f34efbb"
   },
   "P005D.mp3": {
     "id": 93,
     "name": "BRZEZINY SKLEP 06",
     "text": "Brzeziny sklep.",
     "textHash": "37983326b4f1f98d591f73363c0c04014dc8a97ee474de4292756f4a7b75d330",
-    "sha256": "1c91250c123fcea750f2acb8fc08f786bf123a1ad9b9b399c8d6a30d8b39e091"
+    "sha256": "43b22db9f491e6317fb62718d09a225a28a22c03b64690161f303c7922c7a838"
   },
   "P005E.mp3": {
     "id": 94,
     "name": "BRZEZINY 04",
     "text": "Brzeziny.",
     "textHash": "9af34d79d34a49bb70a71945d1eccdcd7d08ecfbcf64a213a4c83e1ba4d0166c",
-    "sha256": "26b8009dc14d957e3fc074a96e1914672328bde64888f003c99f4a27f7316838"
+    "sha256": "2e2f3a33e2ede7060be6c980b2752103372a59eab3470e21ca16cdf4c2145749"
   },
   "P005F.mp3": {
     "id": 95,
     "name": "WIELOPOLE SKRZYŃSKIE 1 02",
-    "text": "Wielopole skrzyńskie jeden.",
-    "textHash": "16ac1344f5b1d4cf02242922a602b308a8d51283e7e0bfa3bfbc6617abb3a4ef",
-    "sha256": "b1663ca270880f08847bc7a942d2182db4fc65e232645e451e83758374c81a7e"
+    "text": "Wielopole skrzyńskie, jeden.",
+    "textHash": "59f4b6cc30238996761e276eb0d86e753b71a64c8ec9541136e460f47d996daa",
+    "sha256": "85237e5a7ff951defea5132afdd71ff1f7d897f9dc54cf9994c9693f186b95f8"
   },
   "P0060.mp3": {
     "id": 96,
     "name": "BRZEZINY BERDECHÓW",
     "text": "Brzeziny berdechów.",
     "textHash": "2bc986800a82a58ff0f7b5423e545de69637ccfd82cfd43c38352d90f2b6dbfa",
-    "sha256": "0cb8723bc961feda2039197b53f1883b7c21059109cfc5c1fca1d219c5cc8487"
+    "sha256": "0dcd36f210743dc60cfa1dadf641dd478a69d9c88f962bf88be686b873170db9"
   },
   "P0061.mp3": {
     "id": 97,
     "name": "WIELOPOLE SKRZYŃSKIE",
     "text": "Wielopole skrzyńskie.",
     "textHash": "5c57d44251956d51cb137920cc3971f06067085f694fb3cbf594173509155432",
-    "sha256": "0c37c784467e4e14af1b556d4bcad45e3b4aad6ee51b024251325e0b81dc067a"
+    "sha256": "9a47a867e7cbb8d1ead8daabf3b47dae3636f028e4d1db696115e2c6df61d5dd"
   },
   "P0062.mp3": {
     "id": 98,
     "name": "WIELOPOLE SKRZYŃSKIE RZEGOCIN",
-    "text": "Wielopole skrzyńskie rzegocin.",
-    "textHash": "42b9d53ef6bac29ecc194b1a019116e3417a8093039dd03c52934aadd438ddee",
-    "sha256": "d08a2e419b5c7b73365989f8c111fbf3eb911bc7cdef8f90d991adb0c76ec342"
+    "text": "Wielopole skrzyńskie, rzegocin.",
+    "textHash": "442a5844e047bac4f79000a8a985ef6ff5d3619875fe6f46d44b8d75c7d5d4a9",
+    "sha256": "11b00332d087b00a77d618e14a95ef34385b9ef18dc329f9b91a2d612baf54cf"
   },
   "P0063.mp3": {
     "id": 99,
     "name": "GLINIK GÓRA",
     "text": "Glinik góra.",
     "textHash": "f2077259bd3787356c0ac987145cec0eaa87fa315028209248f26a2d136389e2",
-    "sha256": "1a2950f47d3ae7ca782130fd033e8dd9b09885daf7ed76fbd2fe9ae39da39463"
+    "sha256": "9e574956394cdda046e607760685cee925d67a513d098e12e840d949608109aa"
   },
   "P0064.mp3": {
     "id": 100,
     "name": "GLINIK OSP",
     "text": "Glinik o es pe.",
     "textHash": "ee631d7316903a40574688da8d71b89d90d28c7fcedb90c5b2d6b8bd633d70a9",
-    "sha256": "9ccd19f446981af06797000d7c3c48c1132d07ea38a91852f3b85556ca24348b"
+    "sha256": "99212f709fbe330540f410a44ab5208b33d860468594db393d1f6b9d888a2f4e"
   },
   "P0065.mp3": {
     "id": 101,
     "name": "GLINIK SZKOŁA",
     "text": "Glinik szkoła.",
     "textHash": "11c3a837aef06fac0a1ca1ea79c4adecd70e20af9c67e9d13b6a31f1cdc85147",
-    "sha256": "f771b7b15c07ef355595fc2202da39a525043251aa4003e622de2a3fbe4112ba"
+    "sha256": "f1512e2950816e223d2a72d4df9fcc87cc356528c2ea49c17d862b7241f9723b"
   },
   "P0066.mp3": {
     "id": 102,
     "name": "GLINIK ŁYSA GÓRA",
     "text": "Glinik łysa góra.",
     "textHash": "89667112c86dbbd37705295e3830e84ebebbabf9a20178c6112c99f171a6c7f0",
-    "sha256": "8f0c2c65f3e95495c2420c099f336577f89aa88246446c686771ed65a7ca3e82"
+    "sha256": "d5a4158687a82c4a76a8201c5a39d66d14fa2876cb708d7048792a92b42f4195"
   },
   "P0067.mp3": {
     "id": 103,
     "name": "BRONISZÓW",
     "text": "Broniszów.",
     "textHash": "42f3e7e3534347978c68641f1720b39c6ab8ce0ecee3b60fcf4dfe9644150470",
-    "sha256": "f901cda8be9df3cf3702153970cc453fb30bf8102ba62ad8dd0f0c63a58de188"
+    "sha256": "ee3fb5d9c6b5ca0e1d8a79adaa3f768361b404f0bf32f5b87cf7ef5fcf71cd24"
   },
   "P0068.mp3": {
     "id": 104,
     "name": "ŁĄCZKI KUCHARSKIE KOŚCIÓŁ",
-    "text": "Łączki kucharskie kościół.",
-    "textHash": "62ceafe639d2dcd283549126223a07fec1080592b9fb126d2142ecef45ac34b8",
-    "sha256": "9da068f3fdda07bd8bdf7e70a4ade1c5aa9b5cabe95735daabcfa18d6424bec8"
+    "text": "Łączki kucharskie, kościół.",
+    "textHash": "19ae276b847bf1f4ce0add7e47a4c70e716fa8e833f4d8fc3e5a3e8f9e280334",
+    "sha256": "750caea62a308dd9ca7c561758cbd20c435da46001f0e510af5cf3fd64067ae0"
   },
   "P0069.mp3": {
     "id": 105,
     "name": "ŁĄCZKI KUCHARSKIE ŁOPUCHOWA 2",
-    "text": "Łączki kucharskie łopuchowa dwa.",
-    "textHash": "480c2cafbe7ab30ead9b80d10e5407d4cc1deb048e081f1aedcc41669ebaf670",
-    "sha256": "14151268915d992004fa6358e5ebb9d002ae525ec8fbb515b21816038ccccdb4"
+    "text": "Łączki kucharskie, łopuchowa dwa.",
+    "textHash": "82b93cf4f15ef999b7cf24d26fb8a13eeae2471df0535edeab46d540fc88a2c5",
+    "sha256": "7a41cefb0e7a47361c2e53f01493cafb5d90077fc67bb4fc07b5508627c2cea3"
   },
   "P006A.mp3": {
     "id": 106,
     "name": "ŁĄCZKI KUCHARSKIE ŁOPUCHOWA 1",
-    "text": "Łączki kucharskie łopuchowa jeden.",
-    "textHash": "7f106718b6d03f2080800f0ed8d49a4384a6ffa6bfe1f758046303ff189a17a0",
-    "sha256": "35ea95f5371029596df7769fcb791b7ff9da9241a8b561282b9f3361d6c836d5"
+    "text": "Łączki kucharskie, łopuchowa jeden.",
+    "textHash": "ab9eb2760ad10eb9bdd2e250fd62f61501e2b224b5b188a2db40b85c0e8e5b31",
+    "sha256": "c89955b246e833e61447f2f7f23cf6f1d91a26a46b2a047c9da7c416113d4b5e"
   },
   "P006B.mp3": {
     "id": 107,
     "name": "OKONIN",
     "text": "Okonin.",
     "textHash": "2b1f3571ad0e15059645987797b163b03963eecae3bb76da09aaa9b26fb1cf51",
-    "sha256": "a0038e10c5ad8fa6bf68f544b8b8728ae03b24630da30c183739e09ec1d1ae41"
+    "sha256": "aa1d986baef33df2c11fe130e24fa12955a93bc5fe77e43b386be93b1c483033"
   },
   "P006C.mp3": {
     "id": 108,
     "name": "3-MAJA CHECHŁY 3",
     "text": "Trzeciego maja chechły trzy.",
     "textHash": "a5902c2bd72cd1f1273cb21125add7a367c22b0ba99b01bb06765a758bebf72c",
-    "sha256": "714fa2c149d950204ea5b6299dbe3cdffd20f8ac1b0ed6c47a5cc0a7ef1c4568"
+    "sha256": "d47225745b1e6651784c7bd0ef49082805004ce7081aa9cfb9580f803a9e5793"
   },
   "P006D.mp3": {
     "id": 109,
     "name": "3-MAJA CHECHŁY 2",
     "text": "Trzeciego maja chechły dwa.",
     "textHash": "bd6605e5de07f4808733a4fac50276f96c3a635a18a60875a6b2c8babda79be8",
-    "sha256": "601f5ef142e262a883bfadec53ddd5c140b862e81f97a7706d0b99db959f839b"
+    "sha256": "0bb9d6226f63864508d2fac19882842fd54e117a1915a6c3f882a6c9fe6f1b6d"
   },
   "P006E.mp3": {
     "id": 110,
     "name": "3-MAJA CHECHŁY 1",
     "text": "Trzeciego maja chechły jeden.",
     "textHash": "bf3f8fdc73a94e41debe150704bb0a758f60bb2027dfb255a2abfd8041449b4e",
-    "sha256": "bc7970f3590456b469b94c83c014e0f14cf2016812d4a048a83cc7ebfa662d88"
+    "sha256": "1fa495ca20845e93df5c83599719e0f8c7f79828b0b76ecfc18d78f557d4a7cd"
+  },
+  "P006F.mp3": {
+    "id": 111,
+    "name": "GRUDNA SKRZYŻOWANIE",
+    "text": "Grudna skrzyżowanie.",
+    "textHash": "9c43c9d1bb1a01df6f44ef5bc81a8ba369ad7a1c26419b0b6bd659fdc9c52af3",
+    "sha256": "fc2a4563ff3b05f95faacf5e82ab6f4c05f284146e7c8c3ff8b73a7c173d4c61"
+  },
+  "P0070.mp3": {
+    "id": 112,
+    "name": "GRUDNA DOLNA",
+    "text": "Grudna dolna.",
+    "textHash": "504c759d87fb49939b8c2a9b2d5f6148b009cec350658af1b07ad7b31ae3aee6",
+    "sha256": "b970f1f60f3aa605d4916b8d0710c14fad7898ea2e5b5558347886f4594b2d04"
+  },
+  "P0071.mp3": {
+    "id": 113,
+    "name": "SMARŻOWA OŚRODEK ZDROWIA",
+    "text": "Smarżowa, ośrodek zdrowia.",
+    "textHash": "cc2fdc1055c90785078d255bb8bc3f1f05c27317c5cb8c5a2268d7a65aa139f9",
+    "sha256": "6344c4357c2510d7098240c0fa4a51909dd998905d9c1c1363223cbfe5084ced"
+  },
+  "P0072.mp3": {
+    "id": 114,
+    "name": "SMARŻOWA CPN",
+    "text": "Smarżowa, cpn.",
+    "textHash": "b126cf979219b73ba8455c0015533df53750bd37f770895619184c4b1c9853dc",
+    "sha256": "5276bdeab29157ad0ece859ffe6b21db471bc8c6a6885c00f98d9823d829eacd"
+  },
+  "P0073.mp3": {
+    "id": 115,
+    "name": "SIEDLISKA-BOGUSZ",
+    "text": "Siedliska-bogusz.",
+    "textHash": "6fa7dd65c51b2a2efe613b71adc82d389749d7b99fc3affccb9a3eaa77faa4a8",
+    "sha256": "4ed55ea56c1d4649950532fb6eb5826fa7b61a2e0dd98202633d7fd4aa35c7d8"
+  },
+  "P0074.mp3": {
+    "id": 116,
+    "name": "SIEDLISKA-BOGUSZ SKRZYŻOWANIE",
+    "text": "Siedliska-bogusz, skrzyżowanie.",
+    "textHash": "23035f7a5a4d279d31c1dde1c68a42958ff8c20f358663764820b56ebfd62099",
+    "sha256": "9f2f717e28f223d3d6f4cdf480b74999e48b0975009dddf4db028d074a0cf1fe"
+  },
+  "P0075.mp3": {
+    "id": 117,
+    "name": "GORZEJOWA SZKOŁA",
+    "text": "Gorzejowa, szkoła.",
+    "textHash": "84388b30b722825e4dfe9135ac0955497f0d03fa2198230968d594cb85747dc9",
+    "sha256": "5362a5edc30c1ff575a160867c59a843d43a9a7ae3d86ecc234dc4017a499b7a"
+  },
+  "P0076.mp3": {
+    "id": 118,
+    "name": "GORZEJOWA MŁYN",
+    "text": "Gorzejowa, młyn.",
+    "textHash": "8ed928f8e014358fcf9405435b78482d2a66394fcea17323b336395e7532ad63",
+    "sha256": "8fbcefefdfc8233e4cf51934971a0c1ef5ee5347cdfd11a534969f782a2fa154"
+  },
+  "P0077.mp3": {
+    "id": 119,
+    "name": "GORZEJOWA N.Ż.",
+    "text": "Gorzejowa na żądanie.",
+    "textHash": "2d8dd7cde5fd623ae2b69925e92f40efc3d360146e5d3a63563dbe344be169b8",
+    "sha256": "631fee8153664b257b33e179d323edcf9117583cd0d25bc7c05aa9e42358212c"
+  },
+  "P0078.mp3": {
+    "id": 120,
+    "name": "KAMIENICA DOLNA",
+    "text": "Kamienica dolna.",
+    "textHash": "f00d57353fc907e3445ab28006b977ed0b48860d068b555bb877b3c484155f9a",
+    "sha256": "1b6f1c0e51e44f100e2ecc920080fa3dcd53bdc3b97499fdb740c605fbdd5048"
+  },
+  "P0079.mp3": {
+    "id": 121,
+    "name": "JAWORZE GÓRNE/KAMIENICA DOLNA",
+    "text": "Jaworze górne, kamienica dolna.",
+    "textHash": "a04115526d5319d86281f3c1f5a3d1f2ebea0f4685af582a1f773fb6ef9ffd6b",
+    "sha256": "649150a610eed242d420ea61b438f20032e3621a31405c6d5125856fdf206ce8"
+  },
+  "P007A.mp3": {
+    "id": 122,
+    "name": "JAWORZE GÓRNE KAPLICZKA",
+    "text": "Jaworze górne, kapliczka.",
+    "textHash": "4023c52968a935cea8e81783a97147e936141ad988969cc8a392cd06de4bfd73",
+    "sha256": "0d83b2819da47f7313c00a5b3ab724252b711889a8bbcc8c4774ca2ae269b9ca"
+  },
+  "P007B.mp3": {
+    "id": 123,
+    "name": "JAWORZE GÓRNE",
+    "text": "Jaworze górne.",
+    "textHash": "d1012d66dc623b207bdd851405836114204848ac1278106e2255c50f2f5f7a30",
+    "sha256": "f7b869eec90f96604008201b4c3fc81cf77ac9794afef59371f2ebfad595b71f"
+  },
+  "P007C.mp3": {
+    "id": 124,
+    "name": "JAWORZE GÓRNE OSIEDLE",
+    "text": "Jaworze górne, osiedle.",
+    "textHash": "30c656e53a17ab4b4aa1734174b73b61442ca6d2a5b653d34d196d02f736c61d",
+    "sha256": "3f8337f2017bb889a9a7a5fac27b66f61a0fd09f9bb1fc14bed10d5a0368572c"
+  },
+  "P007D.mp3": {
+    "id": 125,
+    "name": "JAWORZE GÓRNE N.Ż.",
+    "text": "Jaworze górne na żądanie.",
+    "textHash": "07e04b019b5fb923e67e512e7a3b17f9dc26f931b564cf76f30d8c95c65a2d6b",
+    "sha256": "fa20286d6d336f850fde366c0f77820cc47f0e8843bbe48c2a6570647ddfbf4a"
+  },
+  "P007E.mp3": {
+    "id": 126,
+    "name": "JAWORZE DOLNE SZ.",
+    "text": "Jaworze Dolne.",
+    "textHash": "bab094e51cef751fecd4ab44988af42de70df76a2233b550624090ee632b9b8e",
+    "sha256": "4f8a97ffd2514faa689084179fd9094a278200960bae115312ee84e1b6664ea4"
+  },
+  "P007F.mp3": {
+    "id": 127,
+    "name": "JAWORZE DOLNE N.Ż.",
+    "text": "Jaworze dolne na żądanie.",
+    "textHash": "908c2fba821b6538f0e86be98866bdf361ba85710c0971293d322276dd6560ff",
+    "sha256": "1e7641b6ec4e3234e46e82045167fa7fb5d9db24fbcd8c87faddf7298c742c41"
+  },
+  "P0080.mp3": {
+    "id": 128,
+    "name": "JAWORZE DOLNE OŚ. W.",
+    "text": "Jaworze Dolne.",
+    "textHash": "bab094e51cef751fecd4ab44988af42de70df76a2233b550624090ee632b9b8e",
+    "sha256": "4f8a97ffd2514faa689084179fd9094a278200960bae115312ee84e1b6664ea4"
+  },
+  "P0081.mp3": {
+    "id": 129,
+    "name": "GOŁĘCZYNA",
+    "text": "Gołęczyna.",
+    "textHash": "1f5dcd0f26a63e1651ada18e8e0a8b954cc7630ad376dac306fc0eeaf830229f",
+    "sha256": "9f7dfe887937c134ed36d02de359b4b8c2cbfb7f34b3ea2f623143f1d5d297eb"
+  },
+  "P0082.mp3": {
+    "id": 130,
+    "name": "DOBRKÓW",
+    "text": "Dobrków.",
+    "textHash": "721b2a770257b29df600c2475db9179363defdb5a185fe22dfc3c527055a22a7",
+    "sha256": "102d1dc25f2271047f79c48543563553502c9550872344dadc6f9698e09c6485"
+  },
+  "P0083.mp3": {
+    "id": 131,
+    "name": "DOBRKÓW N.Ż",
+    "text": "Dobrków na żądanie.",
+    "textHash": "971770fe58373f4147d34c88ab01ec67fa27e666521ec72dfbe73e8808a0738c",
+    "sha256": "61d8337f5f955c853e3ffaf0e8b71271e9d9510e3461292b79254e4d11a0ef9b"
+  },
+  "P0084.mp3": {
+    "id": 132,
+    "name": "PARKOSZ/ŁABUZIE",
+    "text": "Parkosz, łabuzie.",
+    "textHash": "6680cc07e00a521ddf0e53f883d17b51c611da8f290545127024fafab3f84c31",
+    "sha256": "063fe54bfa77c36d633a6963d3ab0766fd547f695a1ee99382ac841b7c4275f3"
+  },
+  "P0085.mp3": {
+    "id": 133,
+    "name": "PILZNO LWOWSKA",
+    "text": "Pilzno, lwowska.",
+    "textHash": "a2bb12c11788f6c34a6e40ccc320b2ca95fd66830c44b4f0c5e88bdfc7a5901c",
+    "sha256": "1b3cb641bbaf0b6f92edd3942329863220543d93055895d6249152d3464e59f8"
+  },
+  "P0086.mp3": {
+    "id": 134,
+    "name": "PILZNO ZAJEZDNIA",
+    "text": "Pilzno, zajezdnia.",
+    "textHash": "a5f8ed188d823e411878ddfeecf273c15211565919fba15a1acadded84c50aea",
+    "sha256": "e2f43fa5165c1b2a6025610101add06544fb091b11aa17b2c3f32ac68e4b00c6"
+  },
+  "P0087.mp3": {
+    "id": 135,
+    "name": "PILZNO LWOWSKA",
+    "text": "Pilzno, lwowska.",
+    "textHash": "a2bb12c11788f6c34a6e40ccc320b2ca95fd66830c44b4f0c5e88bdfc7a5901c",
+    "sha256": "1b3cb641bbaf0b6f92edd3942329863220543d93055895d6249152d3464e59f8"
+  },
+  "P0088.mp3": {
+    "id": 136,
+    "name": "PARKOSZ/ŁABUZIE",
+    "text": "Parkosz, łabuzie.",
+    "textHash": "6680cc07e00a521ddf0e53f883d17b51c611da8f290545127024fafab3f84c31",
+    "sha256": "063fe54bfa77c36d633a6963d3ab0766fd547f695a1ee99382ac841b7c4275f3"
+  },
+  "P0089.mp3": {
+    "id": 137,
+    "name": "PARKOSZ",
+    "text": "Parkosz.",
+    "textHash": "c03cecc3bc8645766f344fde60226afe1391c738c0b9dca49a23297c172a6989",
+    "sha256": "44df7d56d29b74c39b607575ca1cf936ed6f04b87d44b7e1a25076e6976a6479"
+  },
+  "P008A.mp3": {
+    "id": 138,
+    "name": "PODGRODZIE /PĘTLA",
+    "text": "Podgrodzie, , pętla.",
+    "textHash": "b43f6c0e883c4584cd19a637f58611d549f12000f03cc6992a11a756b7b02df9",
+    "sha256": "2fc0a0ab8619e43a98845a6e787216534187af4602d72b64d01ef42aafef9437"
+  },
+  "P008B.mp3": {
+    "id": 139,
+    "name": "PODGRODZIE 2",
+    "text": "Podgrodzie, dwa.",
+    "textHash": "c18876afe9cb5884ae3636e4f1639545b2171ad620641d7ed1b10d8d49a03841",
+    "sha256": "0c3dcf255b90ed0e4fe94aa86b20bacd117ebaf1d26df575aacbd70308204e65"
+  },
+  "P008C.mp3": {
+    "id": 140,
+    "name": "PODGRODZIE 1",
+    "text": "Podgrodzie, jeden.",
+    "textHash": "3b749f77227b4cf3ebc510e618a36f49ed8bf1414917fec9f303f5b685e552fb",
+    "sha256": "8784fb8e9eea1d79426a18156aa954e9c6ad052772d8b9b36730485768924549"
+  },
+  "P008D.mp3": {
+    "id": 141,
+    "name": "LATOSZYN E40",
+    "text": "Latoszyn, e40.",
+    "textHash": "458160ced5612438b2a07e373f5184d86aabd9ea18b592d73f64c625e6020d6e",
+    "sha256": "bcdf746a3669d5955a96a7fbdaec45448908ea750df0600b699d90aa16e6042a"
+  },
+  "P008E.mp3": {
+    "id": 142,
+    "name": "DĘBICA KRAKOWSKA RONDO",
+    "text": "Dębica, krakowska rondo.",
+    "textHash": "f5084f6ffc027ef32a9379c738284ec6e5160a23d9f0bc92978bd5b2048fed2f",
+    "sha256": "74fe2e8376d6e5dbf8ff7a81f974b89424cde14cc926516a2228847252f576f0"
+  },
+  "P008F.mp3": {
+    "id": 143,
+    "name": "DĘBICA KRAKOWSKA KĘPA",
+    "text": "Dębica, krakowska kępa.",
+    "textHash": "bc246c64d1718c241ab7d0faf342db9d6c99a7931df0dcfd9a3b76821e7bbdd3",
+    "sha256": "5577f15cd5262dc3f12da426e083ff8c7cddb4b3921cb899d03a2fdfacb62dd2"
+  },
+  "P0090.mp3": {
+    "id": 144,
+    "name": "DĘBICA KRAKOWSKA SZPITAL",
+    "text": "Dębica, krakowska szpital.",
+    "textHash": "1f9ce7e9935c3d594526da418767e4516d6ee8ff447ce25fcc74c1088ee960eb",
+    "sha256": "b6473cd09d5c27e8b7e41a2c8474ce04011ae8d82e1299518588fc668a25d9a9"
+  },
+  "P0091.mp3": {
+    "id": 145,
+    "name": "DĘBICA OSIEDLE MATEJKI",
+    "text": "Dębica, osiedle matejki.",
+    "textHash": "0ccd5eaf6ce5e91d168eb604403374dc91d87bf6e8cc87cc7b936bee3edc8fa1",
+    "sha256": "5f92ca3ce560b705f6fc5e76b5bb12f09af176e6747710457699e671de3057cf"
+  },
+  "P0092.mp3": {
+    "id": 146,
+    "name": "DĘBICA OSIEDLE CHEMIK",
+    "text": "Dębica, osiedle chemik.",
+    "textHash": "dd16ac2240e98f150d100d40e544e98ceab6d16a67a8a931ea27eb1976d4a21d",
+    "sha256": "622610299d2287f63ffc583d29a0b8b47839445289a8ee363042c53fc29d2c7a"
+  },
+  "P0093.mp3": {
+    "id": 147,
+    "name": "DĘBICA OSIEDLE METALOWIEC",
+    "text": "Dębica, osiedle metalowiec.",
+    "textHash": "b91fcd29100195cf01f199ba7fc98a0fc595a5dd967f2f3383d9319cbf5f8252",
+    "sha256": "d70a0dab212a6c6808044577445eee7d248a424d88f0b34ced3590113751e271"
+  },
+  "P0094.mp3": {
+    "id": 148,
+    "name": "DĘBICA KRAKOWSKA KLASZTOR",
+    "text": "Dębica, krakowska klasztor.",
+    "textHash": "29754d14815cd1d14debed47da1ac0a21cec346012dd8dad239435563fe05775",
+    "sha256": "ce46b08418c4e9ef62458f4d6f80e9bb82957036e9ce03eb1388ecbd665296b5"
+  },
+  "P0095.mp3": {
+    "id": 149,
+    "name": "DĘBICA OSIEDLE METALOWIEC",
+    "text": "Dębica, osiedle metalowiec.",
+    "textHash": "b91fcd29100195cf01f199ba7fc98a0fc595a5dd967f2f3383d9319cbf5f8252",
+    "sha256": "d70a0dab212a6c6808044577445eee7d248a424d88f0b34ced3590113751e271"
+  },
+  "P0096.mp3": {
+    "id": 150,
+    "name": "DĘBICA OSIEDLE CHEMIK",
+    "text": "Dębica, osiedle chemik.",
+    "textHash": "dd16ac2240e98f150d100d40e544e98ceab6d16a67a8a931ea27eb1976d4a21d",
+    "sha256": "622610299d2287f63ffc583d29a0b8b47839445289a8ee363042c53fc29d2c7a"
+  },
+  "P0097.mp3": {
+    "id": 151,
+    "name": "DĘBICA OSIEDLE MATEJKI",
+    "text": "Dębica, osiedle matejki.",
+    "textHash": "0ccd5eaf6ce5e91d168eb604403374dc91d87bf6e8cc87cc7b936bee3edc8fa1",
+    "sha256": "5f92ca3ce560b705f6fc5e76b5bb12f09af176e6747710457699e671de3057cf"
+  },
+  "P0098.mp3": {
+    "id": 152,
+    "name": "DĘBICA KRAKOWSKA SZPITAL",
+    "text": "Dębica, krakowska szpital.",
+    "textHash": "1f9ce7e9935c3d594526da418767e4516d6ee8ff447ce25fcc74c1088ee960eb",
+    "sha256": "b6473cd09d5c27e8b7e41a2c8474ce04011ae8d82e1299518588fc668a25d9a9"
+  },
+  "P0099.mp3": {
+    "id": 153,
+    "name": "DĘBICA KRAKOWSKA KĘPA",
+    "text": "Dębica, krakowska kępa.",
+    "textHash": "bc246c64d1718c241ab7d0faf342db9d6c99a7931df0dcfd9a3b76821e7bbdd3",
+    "sha256": "5577f15cd5262dc3f12da426e083ff8c7cddb4b3921cb899d03a2fdfacb62dd2"
+  },
+  "P009A.mp3": {
+    "id": 154,
+    "name": "LATOSZYN OBWODNICA (STARZYŃSKIEGO)",
+    "text": "Latoszyn, obwodnica, starzyńskiego.",
+    "textHash": "7d77a7b5150b460c501ee3691fa82b9b65c190603932a58db1c58fca697671e0",
+    "sha256": "24bc09488369c1cd8ac68b63ae310be496a613a66cba74d48286e7956182a461"
+  },
+  "P009B.mp3": {
+    "id": 155,
+    "name": "LATOSZYN E40",
+    "text": "Latoszyn, e40.",
+    "textHash": "458160ced5612438b2a07e373f5184d86aabd9ea18b592d73f64c625e6020d6e",
+    "sha256": "bcdf746a3669d5955a96a7fbdaec45448908ea750df0600b699d90aa16e6042a"
+  },
+  "P009C.mp3": {
+    "id": 156,
+    "name": "PODGRODZIE 1",
+    "text": "Podgrodzie, jeden.",
+    "textHash": "3b749f77227b4cf3ebc510e618a36f49ed8bf1414917fec9f303f5b685e552fb",
+    "sha256": "8784fb8e9eea1d79426a18156aa954e9c6ad052772d8b9b36730485768924549"
+  },
+  "P009D.mp3": {
+    "id": 157,
+    "name": "PODGRODZIE 2",
+    "text": "Podgrodzie, dwa.",
+    "textHash": "c18876afe9cb5884ae3636e4f1639545b2171ad620641d7ed1b10d8d49a03841",
+    "sha256": "0c3dcf255b90ed0e4fe94aa86b20bacd117ebaf1d26df575aacbd70308204e65"
+  },
+  "P009E.mp3": {
+    "id": 158,
+    "name": "PODGRODZIE/PĘTLA",
+    "text": "Podgrodzie, pętla.",
+    "textHash": "3072e8d24f5bd5e813e92b178b189a6a2543082aac107c78bd4e97be106fe975",
+    "sha256": "5d5a307e54b13d819ce40ffb8932b1de3eb1b4032f7be079da1b0561ff89c6c9"
+  },
+  "P009F.mp3": {
+    "id": 159,
+    "name": "PARKOSZ",
+    "text": "Parkosz.",
+    "textHash": "c03cecc3bc8645766f344fde60226afe1391c738c0b9dca49a23297c172a6989",
+    "sha256": "44df7d56d29b74c39b607575ca1cf936ed6f04b87d44b7e1a25076e6976a6479"
+  },
+  "P00A0.mp3": {
+    "id": 160,
+    "name": "KAMIENICA DOLNA",
+    "text": "Kamienica dolna.",
+    "textHash": "f00d57353fc907e3445ab28006b977ed0b48860d068b555bb877b3c484155f9a",
+    "sha256": "1b6f1c0e51e44f100e2ecc920080fa3dcd53bdc3b97499fdb740c605fbdd5048"
+  },
+  "P00A1.mp3": {
+    "id": 161,
+    "name": "PARKOSZ/ŁABUZIE",
+    "text": "Parkosz, łabuzie.",
+    "textHash": "6680cc07e00a521ddf0e53f883d17b51c611da8f290545127024fafab3f84c31",
+    "sha256": "063fe54bfa77c36d633a6963d3ab0766fd547f695a1ee99382ac841b7c4275f3"
+  },
+  "P00A2.mp3": {
+    "id": 162,
+    "name": "PILZNO LWOWSKA",
+    "text": "Pilzno, lwowska.",
+    "textHash": "a2bb12c11788f6c34a6e40ccc320b2ca95fd66830c44b4f0c5e88bdfc7a5901c",
+    "sha256": "1b3cb641bbaf0b6f92edd3942329863220543d93055895d6249152d3464e59f8"
+  },
+  "P00A3.mp3": {
+    "id": 163,
+    "name": "PILZNO ZAJEZDNIA",
+    "text": "Pilzno, zajezdnia.",
+    "textHash": "a5f8ed188d823e411878ddfeecf273c15211565919fba15a1acadded84c50aea",
+    "sha256": "e2f43fa5165c1b2a6025610101add06544fb091b11aa17b2c3f32ac68e4b00c6"
+  },
+  "P00A4.mp3": {
+    "id": 164,
+    "name": "PILZNO LWOWSKA",
+    "text": "Pilzno, lwowska.",
+    "textHash": "a2bb12c11788f6c34a6e40ccc320b2ca95fd66830c44b4f0c5e88bdfc7a5901c",
+    "sha256": "1b3cb641bbaf0b6f92edd3942329863220543d93055895d6249152d3464e59f8"
+  },
+  "P00A5.mp3": {
+    "id": 165,
+    "name": "PARKOSZ/ŁABUZIE",
+    "text": "Parkosz, łabuzie.",
+    "textHash": "6680cc07e00a521ddf0e53f883d17b51c611da8f290545127024fafab3f84c31",
+    "sha256": "063fe54bfa77c36d633a6963d3ab0766fd547f695a1ee99382ac841b7c4275f3"
+  },
+  "P00A6.mp3": {
+    "id": 166,
+    "name": "DOBRKÓW N.Ż.",
+    "text": "Dobrków na żądanie.",
+    "textHash": "971770fe58373f4147d34c88ab01ec67fa27e666521ec72dfbe73e8808a0738c",
+    "sha256": "61d8337f5f955c853e3ffaf0e8b71271e9d9510e3461292b79254e4d11a0ef9b"
+  },
+  "P00A7.mp3": {
+    "id": 167,
+    "name": "DOBRKÓW",
+    "text": "Dobrków.",
+    "textHash": "721b2a770257b29df600c2475db9179363defdb5a185fe22dfc3c527055a22a7",
+    "sha256": "102d1dc25f2271047f79c48543563553502c9550872344dadc6f9698e09c6485"
+  },
+  "P00A8.mp3": {
+    "id": 168,
+    "name": "GOŁĘCZYNA",
+    "text": "Gołęczyna.",
+    "textHash": "1f5dcd0f26a63e1651ada18e8e0a8b954cc7630ad376dac306fc0eeaf830229f",
+    "sha256": "9f7dfe887937c134ed36d02de359b4b8c2cbfb7f34b3ea2f623143f1d5d297eb"
+  },
+  "P00A9.mp3": {
+    "id": 169,
+    "name": "JAWORZE DOLNE OŚ. W.",
+    "text": "Jaworze Dolne.",
+    "textHash": "bab094e51cef751fecd4ab44988af42de70df76a2233b550624090ee632b9b8e",
+    "sha256": "4f8a97ffd2514faa689084179fd9094a278200960bae115312ee84e1b6664ea4"
+  },
+  "P00AA.mp3": {
+    "id": 170,
+    "name": "JAWORZE DOLNE N.Ż.",
+    "text": "Jaworze dolne na żądanie.",
+    "textHash": "908c2fba821b6538f0e86be98866bdf361ba85710c0971293d322276dd6560ff",
+    "sha256": "1e7641b6ec4e3234e46e82045167fa7fb5d9db24fbcd8c87faddf7298c742c41"
+  },
+  "P00AB.mp3": {
+    "id": 171,
+    "name": "JAWORZE DOLNE SZ.",
+    "text": "Jaworze Dolne.",
+    "textHash": "bab094e51cef751fecd4ab44988af42de70df76a2233b550624090ee632b9b8e",
+    "sha256": "4f8a97ffd2514faa689084179fd9094a278200960bae115312ee84e1b6664ea4"
+  },
+  "P00AC.mp3": {
+    "id": 172,
+    "name": "JAWORZE GÓRNE N.Ż.",
+    "text": "Jaworze górne na żądanie.",
+    "textHash": "07e04b019b5fb923e67e512e7a3b17f9dc26f931b564cf76f30d8c95c65a2d6b",
+    "sha256": "fa20286d6d336f850fde366c0f77820cc47f0e8843bbe48c2a6570647ddfbf4a"
+  },
+  "P00AD.mp3": {
+    "id": 173,
+    "name": "JAWORZE GÓRNE OSIEDLE",
+    "text": "Jaworze górne, osiedle.",
+    "textHash": "30c656e53a17ab4b4aa1734174b73b61442ca6d2a5b653d34d196d02f736c61d",
+    "sha256": "3f8337f2017bb889a9a7a5fac27b66f61a0fd09f9bb1fc14bed10d5a0368572c"
+  },
+  "P00AE.mp3": {
+    "id": 174,
+    "name": "JAWORZE GÓRNE",
+    "text": "Jaworze górne.",
+    "textHash": "d1012d66dc623b207bdd851405836114204848ac1278106e2255c50f2f5f7a30",
+    "sha256": "f7b869eec90f96604008201b4c3fc81cf77ac9794afef59371f2ebfad595b71f"
+  },
+  "P00AF.mp3": {
+    "id": 175,
+    "name": "JAWORZE GÓRNE KAPLICZKA",
+    "text": "Jaworze górne, kapliczka.",
+    "textHash": "4023c52968a935cea8e81783a97147e936141ad988969cc8a392cd06de4bfd73",
+    "sha256": "0d83b2819da47f7313c00a5b3ab724252b711889a8bbcc8c4774ca2ae269b9ca"
+  },
+  "P00B0.mp3": {
+    "id": 176,
+    "name": "JAWORZE GÓRNE/KAMIENICA DOLNA",
+    "text": "Jaworze górne, kamienica dolna.",
+    "textHash": "a04115526d5319d86281f3c1f5a3d1f2ebea0f4685af582a1f773fb6ef9ffd6b",
+    "sha256": "649150a610eed242d420ea61b438f20032e3621a31405c6d5125856fdf206ce8"
+  },
+  "P00B1.mp3": {
+    "id": 177,
+    "name": "GORZEJOWA N.Ż.",
+    "text": "Gorzejowa na żądanie.",
+    "textHash": "2d8dd7cde5fd623ae2b69925e92f40efc3d360146e5d3a63563dbe344be169b8",
+    "sha256": "631fee8153664b257b33e179d323edcf9117583cd0d25bc7c05aa9e42358212c"
+  },
+  "P00B2.mp3": {
+    "id": 178,
+    "name": "GORZEJOWA MŁYN",
+    "text": "Gorzejowa, młyn.",
+    "textHash": "8ed928f8e014358fcf9405435b78482d2a66394fcea17323b336395e7532ad63",
+    "sha256": "8fbcefefdfc8233e4cf51934971a0c1ef5ee5347cdfd11a534969f782a2fa154"
+  },
+  "P00B3.mp3": {
+    "id": 179,
+    "name": "GORZEJOWA SZKOŁA",
+    "text": "Gorzejowa, szkoła.",
+    "textHash": "84388b30b722825e4dfe9135ac0955497f0d03fa2198230968d594cb85747dc9",
+    "sha256": "5362a5edc30c1ff575a160867c59a843d43a9a7ae3d86ecc234dc4017a499b7a"
+  },
+  "P00B4.mp3": {
+    "id": 180,
+    "name": "SIEDLISKA-BOGUSZ SKRZYŻOWANIE",
+    "text": "Siedliska-bogusz, skrzyżowanie.",
+    "textHash": "23035f7a5a4d279d31c1dde1c68a42958ff8c20f358663764820b56ebfd62099",
+    "sha256": "9f2f717e28f223d3d6f4cdf480b74999e48b0975009dddf4db028d074a0cf1fe"
+  },
+  "P00B5.mp3": {
+    "id": 181,
+    "name": "SIEDLISKA-BOGUSZ",
+    "text": "Siedliska-bogusz.",
+    "textHash": "6fa7dd65c51b2a2efe613b71adc82d389749d7b99fc3affccb9a3eaa77faa4a8",
+    "sha256": "4ed55ea56c1d4649950532fb6eb5826fa7b61a2e0dd98202633d7fd4aa35c7d8"
+  },
+  "P00B6.mp3": {
+    "id": 182,
+    "name": "SMARŻOWA CPN",
+    "text": "Smarżowa, cpn.",
+    "textHash": "b126cf979219b73ba8455c0015533df53750bd37f770895619184c4b1c9853dc",
+    "sha256": "5276bdeab29157ad0ece859ffe6b21db471bc8c6a6885c00f98d9823d829eacd"
+  },
+  "P00B7.mp3": {
+    "id": 183,
+    "name": "SMARŻOWA OŚRODEK ZDROWIA",
+    "text": "Smarżowa, ośrodek zdrowia.",
+    "textHash": "cc2fdc1055c90785078d255bb8bc3f1f05c27317c5cb8c5a2268d7a65aa139f9",
+    "sha256": "6344c4357c2510d7098240c0fa4a51909dd998905d9c1c1363223cbfe5084ced"
+  },
+  "P00B8.mp3": {
+    "id": 184,
+    "name": "GRUDNA DOLNA",
+    "text": "Grudna dolna.",
+    "textHash": "504c759d87fb49939b8c2a9b2d5f6148b009cec350658af1b07ad7b31ae3aee6",
+    "sha256": "b970f1f60f3aa605d4916b8d0710c14fad7898ea2e5b5558347886f4594b2d04"
+  },
+  "P00B9.mp3": {
+    "id": 185,
+    "name": "GRUDNA SKRZYŻOWANIE",
+    "text": "Grudna skrzyżowanie.",
+    "textHash": "9c43c9d1bb1a01df6f44ef5bc81a8ba369ad7a1c26419b0b6bd659fdc9c52af3",
+    "sha256": "fc2a4563ff3b05f95faacf5e82ab6f4c05f284146e7c8c3ff8b73a7c173d4c61"
+  },
+  "P00BA.mp3": {
+    "id": 186,
+    "name": "DĘBICA RZESZOWSKA MECHANIK",
+    "text": "Dębica, rzeszowska mechanik.",
+    "textHash": "f1632ea3edc3962c22cd73571af955d5564c82d9fc2a00716c2536b5f38e79b9",
+    "sha256": "78340e892432ed4297d39bb74ab6960ec6116c58d7a8553736b6b8c2bf2fbb13"
+  },
+  "P00BB.mp3": {
+    "id": 187,
+    "name": "ŚWILCZA GÓRKA",
+    "text": "Świlcza, górka.",
+    "textHash": "b34ab785ca8af99d258bdbb1a6ce3654bdfe5e343613364b53d37513523bda49",
+    "sha256": "7087d8481281be61e9cfb0135094a834c137a53c4edc5e6b230a9b4118e68283"
+  },
+  "P00BC.mp3": {
+    "id": 188,
+    "name": "ŚWILCZA GÓRKA",
+    "text": "Świlcza, górka.",
+    "textHash": "b34ab785ca8af99d258bdbb1a6ce3654bdfe5e343613364b53d37513523bda49",
+    "sha256": "7087d8481281be61e9cfb0135094a834c137a53c4edc5e6b230a9b4118e68283"
+  },
+  "P00BD.mp3": {
+    "id": 189,
+    "name": "DĄBROWA 1",
+    "text": "Dąbrowa jeden.",
+    "textHash": "0708f9309769a8512b69606982b68e99c3f4aeecafdd539e7e0a02d9b4cc1975",
+    "sha256": "176cb4a1baa4ac9ca0a1c77e6989482b1b55dfc60015148d5285022fbb8f477b"
+  },
+  "P00BE.mp3": {
+    "id": 190,
+    "name": "KLĘCZANY STADION",
+    "text": "Klęczany stadion.",
+    "textHash": "ae057f988767f66f9d9dcc837c6d3abfa9a4bf0e5817707e608282d192763bda",
+    "sha256": "d9ae03bb5e37634cc816bdd45a21153ec1f7de971dcff10ff62df173cf7bf242"
+  },
+  "P00BF.mp3": {
+    "id": 191,
+    "name": "DĘBICA RZESZOWSKA CPN",
+    "text": "Dębica, rzeszowska cpn.",
+    "textHash": "6217f910b5bfd977519407d8ac61021c8b00b57398dd07bc3d77d30c6d0679dd",
+    "sha256": "4373bbeb308949d6bf31637f6e56290735910fb035545dbede8f934646aa19e7"
+  },
+  "P00C0.mp3": {
+    "id": 192,
+    "name": "DĘBICA RZESZOWSKA MECHANIK",
+    "text": "Dębica, rzeszowska mechanik.",
+    "textHash": "f1632ea3edc3962c22cd73571af955d5564c82d9fc2a00716c2536b5f38e79b9",
+    "sha256": "78340e892432ed4297d39bb74ab6960ec6116c58d7a8553736b6b8c2bf2fbb13"
   },
   "K0001.mp3": {
     "id": "K0001",
     "name": "DĘBICA DWORZEC AUTOBUSOWY > RZESZÓW DWORZEC AUTOBUSOWY",
     "text": "Kierunek: Dębica, dworzec autobusowy. Rzeszów, dworzec autobusowy.",
     "textHash": "6909c338f40844cf8320a584f2dc296f7c7d1d4724d9eeb07786d63aa76e9d8e",
-    "sha256": "218a33732b76831b8f32d5d43693ab12185fae1da526cb9f8f3fd92d23784a26"
+    "sha256": "99ce3bbd059e7af7a9b454bd746ac98f925dc09e801908012167d167be1ee3a0"
   },
   "K0002.mp3": {
     "id": "K0002",
     "name": "RZESZÓW DWORZEC AUTOBUSOWY > DĘBICA DWORZEC AUTOBUSOWY",
     "text": "Kierunek: Rzeszów, dworzec autobusowy. Dębica, dworzec autobusowy.",
     "textHash": "459d12a90fabdd32066bf2f5dfe1179f73d3c2fba9384407c4fada5e8a63fb92",
-    "sha256": "18e75a4afd93d2e3e273bb2281384a728524ebff68175ed2a3f0ae0b66350fdc"
+    "sha256": "3012abed89338abea7ea5e7812f2298bb6d79e2744382250bf5c40877ea4b85f"
   },
   "K0003.mp3": {
     "id": "K0003",
     "name": "DĘBICA DWORZEC AUTOBUSOWY > ROPCZYCE DWORZEC AUTOBUSOWY",
     "text": "Kierunek: Dębica, dworzec autobusowy. Ropczyce, dworzec autobusowy.",
     "textHash": "7a3234961a18aee7ba4b452bb61ce0e343ff8861c50c723683c53d7c8d43f2d9",
-    "sha256": "03ab1804abb5106e6989b039740df86bff125579e1072e08833a462525e16f64"
+    "sha256": "32c0f1da257ad99d761dd19cceda6c8531a0dbcb3befe127b07e3b9829cccf3c"
   },
   "K0004.mp3": {
     "id": "K0004",
     "name": "ROPCZYCE DWORZEC AUTOBUSOWY > RZESZÓW DWORZEC AUTOBUSOWY",
     "text": "Kierunek: Ropczyce, dworzec autobusowy. Rzeszów, dworzec autobusowy.",
     "textHash": "c81dcadcbb56306b61474b2309bbeb5d7bfb9107cdeb76fa91b1e6c7bf4286bf",
-    "sha256": "034733338675391385efa7c904bbb6d2fab529c5179f8be9b1e05d6bb7f113c2"
+    "sha256": "8b1102805a88d6b4d4514b01b987716639fc4d4762b5f9f4e4ecd3b085e542f3"
   },
   "K0005.mp3": {
     "id": "K0005",
     "name": "DĘBICA DWORZEC AUTOBUSOWY > RZESZÓW DWORZEC LOKALNY",
     "text": "Kierunek: Dębica, dworzec autobusowy. Rzeszów, dworzec lokalny.",
     "textHash": "06b26f5340f54296c016bfbd391a4b2bbb3f77377eed02bcf7c612613af69237",
-    "sha256": "4a32ac48c1b96a8251d2efa3d13e3ea7e6e8380481834088adca0ec23017f795"
+    "sha256": "dad31d278cf6a585da0b424a14f5d944f449de0278a78958c2e46f7020a4006b"
   },
   "K0006.mp3": {
     "id": "K0006",
     "name": "RZESZÓW DWORZEC LOKALNY > DĘBICA DWORZEC AUTOBUSOWY",
     "text": "Kierunek: Rzeszów, dworzec lokalny. Dębica, dworzec autobusowy.",
     "textHash": "20b673be95172bb342fe56280d93ffbe507a21fce11fd5e4289ae21dfcb23602",
-    "sha256": "9f6e025c815c14cfabeb6b0399a4f86b8f88c2ed8229c826b72c1d1342024823"
+    "sha256": "c84490f9e647037cd6c35fcea2aa9234f22637cf54e534414fd7493a921e7514"
   },
   "K0007.mp3": {
     "id": "K0007",
     "name": "RZESZÓW DWORZEC LOKALNY > ROPCZYCE DWORZEC AUTOBUSOWY",
     "text": "Kierunek: Rzeszów, dworzec lokalny. Ropczyce, dworzec autobusowy.",
     "textHash": "a6fb5b0f30113543a9e6751a307c64e142203ad797905a57fc9c12eb310318c8",
-    "sha256": "6deb22bce42242cb20564895685b5e21d5a68f2d57e12109e7a5e0f411e2bc9a"
+    "sha256": "cd6742791edcd600aed3389f44557c5cd85e12ba1a6ad4929e5de19d26e73ff7"
   },
   "K0008.mp3": {
     "id": "K0008",
     "name": "ROPCZYCE DWORZEC AUTOBUSOWY > BRZEZINY BERDECHÓW",
     "text": "Kierunek: Ropczyce, dworzec autobusowy. Brzeziny berdechów.",
     "textHash": "924897f108aa6783bd6f2e81af25fa8adad4e694f9a109e5a5dbf39573e5bff1",
-    "sha256": "9c4c934bb51643a062c424b2eede671a672551739ab1e2c6750b2aae65996e3a"
+    "sha256": "df3fdd6788dbcc18d661b52cc13b9c097057e8a4b29803393964aab3cbd1b404"
   },
   "K0009.mp3": {
     "id": "K0009",
     "name": "BRZEZINY BERDECHÓW > ROPCZYCE MICKIEWICZA",
     "text": "Kierunek: Brzeziny berdechów. Ropczyce, mickiewicza.",
     "textHash": "1f4e3ff5da4f857c588b7825747626bd46a0ffe53b893d564f8aade01c43c9f4",
-    "sha256": "19e09bf6776d01ed1fe02d36dc465fa396f7d258346e0cd6cf018ce6eab34d1b"
+    "sha256": "6e4b35b0dbfd4472f0f90881ae9ad752c53ee24f8e4ae8bdf2b9c41a00d59c04"
   },
   "K000A.mp3": {
     "id": "K000A",
     "name": "ROPCZYCE MICKIEWICZA > BRZEZINY BERDECHÓW",
     "text": "Kierunek: Ropczyce, mickiewicza. Brzeziny berdechów.",
     "textHash": "46cf17e4ff7af9ece718e073fe9369b4eb29e6063f28d78a536e03a0e4e16ec7",
-    "sha256": "34f51cb6177bccf2872120a1ca5698b78c06214e1b3dc51561434b823705a3f6"
+    "sha256": "a3bd2ac12dcee53b24792ae462277cbef4e435311857f4de625789b573fe8b62"
   },
   "K000B.mp3": {
     "id": "K000B",
     "name": "BRZEZINY BERDECHÓW > ROPCZYCE DWORZEC AUTOBUSOWY",
     "text": "Kierunek: Brzeziny berdechów. Ropczyce, dworzec autobusowy.",
     "textHash": "3521c8903d167d36aeae5306985fb1131a311274785c44a7cf5137b1bf31e1d8",
-    "sha256": "855ce21c7fd08ed7816d2e1e63c9df0afd07659a2830a3fa0e353ffb5cfcd2d7"
+    "sha256": "ce46c005f918d35cf9ba1e69c9b8834189465864cff6c1227bc200a86fe0fc18"
+  },
+  "K000C.mp3": {
+    "id": "K000C",
+    "name": "GRUDNA SKRZYŻOWANIE > DĘBICA DWORZEC AUTOBUSOWY",
+    "text": "Kierunek Dębica przez Jaworze Dolne.",
+    "textHash": "1f8b84913606e4fb7ccd053796a8f5b76780689854098997128c2e12513bef5c",
+    "sha256": "22dee7aa705c6b4359fe8ef2267df1cec53781b3256b8bf4ab8d0f354a748822"
+  },
+  "K000D.mp3": {
+    "id": "K000D",
+    "name": "DĘBICA DWORZEC AUTOBUSOWY > RZESZÓW DWORZEC AUTOBUSOWY",
+    "text": "Kierunek Rzeszów.",
+    "textHash": "86665ad8966f06c24e383b2dbef003b6de2eb18a11e5848c4af1731faea10085",
+    "sha256": "43f84e9757ec9efd55b7f0dee91ecd444593e841720e80a3daaa92e8f44ad696"
+  },
+  "K000E.mp3": {
+    "id": "K000E",
+    "name": "RZESZÓW DWORZEC AUTOBUSOWY > DĘBICA DWORZEC AUTOBUSOWY",
+    "text": "Kierunek Dębica.",
+    "textHash": "767766001910f303b94c2d0670664336e095dfd4ba1f5fd9b1c867bd784de35c",
+    "sha256": "03ec5aa59f3bee1cedc0e5009d364dcaab179097058235665111db3b88b0e006"
+  },
+  "K000F.mp3": {
+    "id": "K000F",
+    "name": "DĘBICA DWORZEC AUTOBUSOWY > GRUDNA SKRZYŻOWANIE",
+    "text": "Kierunek Grudna.",
+    "textHash": "4fd0c300d0adacc905481ef85116830f10ab3086ee610063705ae2c8c2aaae4f",
+    "sha256": "e45a9a2fd554259de8bafd36fdff878bebecb5bd29a7ab41deaae41bab5a6109"
   }
 }

@@ -1,6 +1,6 @@
 {
-  "source": "C:\\srg mobile\\wydania\\1.4.85\\GENERATOR_Z_GRG\\grgmonis.skl",
-  "sourceSHA256": "bd2ff05592ee68819c385c3152d6e4d366d4bde9c2f83b932932173867fbf392",
+  "source": "generator-grg/grgmonis.skl",
+  "sourceSHA256": "590a6b64110258eacbde6b65d917af1aee3cd69351846ddee390b68e0488bc08",
   "voice": "pl-PL-MarekNeural",
   "rate": "-4%",
   "jobs": [
@@ -190,7 +190,7 @@
       "id": 27,
       "file": "P001B.mp3",
       "name": "TRZCIANA WOLICZKA 56 N.Ż.",
-      "text": "Trzciana woliczka.",
+      "text": "Trzciana woliczka na żądanie.",
       "onRequest": true
     },
     {
@@ -204,14 +204,14 @@
       "id": 29,
       "file": "P001D.mp3",
       "name": "ŚWILCZA OSIEDLE 60 N.Ż.",
-      "text": "Świlcza osiedle.",
+      "text": "Świlcza, osiedle na żądanie.",
       "onRequest": true
     },
     {
       "id": 30,
       "file": "P001E.mp3",
       "name": "ŚWILCZA NOWY DWÓR 62 N.Ż.",
-      "text": "Świlcza nowy dwór.",
+      "text": "Świlcza, nowy dwór na żądanie.",
       "onRequest": true
     },
     {
@@ -246,14 +246,14 @@
       "id": 35,
       "file": "P0023.mp3",
       "name": "ŚWILCZA NOWY DWÓR 71 N.Ż.",
-      "text": "Świlcza nowy dwór.",
+      "text": "Świlcza, nowy dwór na żądanie.",
       "onRequest": true
     },
     {
       "id": 36,
       "file": "P0024.mp3",
       "name": "ŚWILCZA OSIEDLE 73 N.Ż.",
-      "text": "Świlcza osiedle.",
+      "text": "Świlcza, osiedle na żądanie.",
       "onRequest": true
     },
     {
@@ -267,7 +267,7 @@
       "id": 38,
       "file": "P0026.mp3",
       "name": "TRZCIANA WOLICZKA 77 N.Ż.",
-      "text": "Trzciana woliczka.",
+      "text": "Trzciana woliczka na żądanie.",
       "onRequest": true
     },
     {
@@ -512,21 +512,21 @@
       "id": 73,
       "file": "P0049.mp3",
       "name": "ŁĄCZKI KUCHARSKIE ŁOPUCHOWA 1",
-      "text": "Łączki kucharskie łopuchowa jeden.",
+      "text": "Łączki kucharskie, łopuchowa jeden.",
       "onRequest": false
     },
     {
       "id": 74,
       "file": "P004A.mp3",
       "name": "ŁĄCZKI KUCHARSKIE ŁOPUCHOWA 2",
-      "text": "Łączki kucharskie łopuchowa dwa.",
+      "text": "Łączki kucharskie, łopuchowa dwa.",
       "onRequest": false
     },
     {
       "id": 75,
       "file": "P004B.mp3",
       "name": "ŁĄCZKI KUCHARSKIE KOŚCIÓŁ",
-      "text": "Łączki kucharskie kościół.",
+      "text": "Łączki kucharskie, kościół.",
       "onRequest": false
     },
     {
@@ -568,7 +568,7 @@
       "id": 81,
       "file": "P0051.mp3",
       "name": "WIELOPOLE SKRZYŃSKIE RZEGOCIN",
-      "text": "Wielopole skrzyńskie rzegocin.",
+      "text": "Wielopole skrzyńskie, rzegocin.",
       "onRequest": false
     },
     {
@@ -582,7 +582,7 @@
       "id": 83,
       "file": "P0053.mp3",
       "name": "WIELOPOLE SKRZYŃSKIE 1 19",
-      "text": "Wielopole skrzyńskie jeden.",
+      "text": "Wielopole skrzyńskie, jeden.",
       "onRequest": false
     },
     {
@@ -666,7 +666,7 @@
       "id": 95,
       "file": "P005F.mp3",
       "name": "WIELOPOLE SKRZYŃSKIE 1 02",
-      "text": "Wielopole skrzyńskie jeden.",
+      "text": "Wielopole skrzyńskie, jeden.",
       "onRequest": false
     },
     {
@@ -687,7 +687,7 @@
       "id": 98,
       "file": "P0062.mp3",
       "name": "WIELOPOLE SKRZYŃSKIE RZEGOCIN",
-      "text": "Wielopole skrzyńskie rzegocin.",
+      "text": "Wielopole skrzyńskie, rzegocin.",
       "onRequest": false
     },
     {
@@ -729,21 +729,21 @@
       "id": 104,
       "file": "P0068.mp3",
       "name": "ŁĄCZKI KUCHARSKIE KOŚCIÓŁ",
-      "text": "Łączki kucharskie kościół.",
+      "text": "Łączki kucharskie, kościół.",
       "onRequest": false
     },
     {
       "id": 105,
       "file": "P0069.mp3",
       "name": "ŁĄCZKI KUCHARSKIE ŁOPUCHOWA 2",
-      "text": "Łączki kucharskie łopuchowa dwa.",
+      "text": "Łączki kucharskie, łopuchowa dwa.",
       "onRequest": false
     },
     {
       "id": 106,
       "file": "P006A.mp3",
       "name": "ŁĄCZKI KUCHARSKIE ŁOPUCHOWA 1",
-      "text": "Łączki kucharskie łopuchowa jeden.",
+      "text": "Łączki kucharskie, łopuchowa jeden.",
       "onRequest": false
     },
     {
@@ -772,6 +772,580 @@
       "file": "P006E.mp3",
       "name": "3-MAJA CHECHŁY 1",
       "text": "Trzeciego maja chechły jeden.",
+      "onRequest": false
+    },
+    {
+      "id": 111,
+      "file": "P006F.mp3",
+      "name": "GRUDNA SKRZYŻOWANIE",
+      "text": "Grudna skrzyżowanie.",
+      "onRequest": false
+    },
+    {
+      "id": 112,
+      "file": "P0070.mp3",
+      "name": "GRUDNA DOLNA",
+      "text": "Grudna dolna.",
+      "onRequest": false
+    },
+    {
+      "id": 113,
+      "file": "P0071.mp3",
+      "name": "SMARŻOWA OŚRODEK ZDROWIA",
+      "text": "Smarżowa, ośrodek zdrowia.",
+      "onRequest": false
+    },
+    {
+      "id": 114,
+      "file": "P0072.mp3",
+      "name": "SMARŻOWA CPN",
+      "text": "Smarżowa, cpn.",
+      "onRequest": false
+    },
+    {
+      "id": 115,
+      "file": "P0073.mp3",
+      "name": "SIEDLISKA-BOGUSZ",
+      "text": "Siedliska-bogusz.",
+      "onRequest": false
+    },
+    {
+      "id": 116,
+      "file": "P0074.mp3",
+      "name": "SIEDLISKA-BOGUSZ SKRZYŻOWANIE",
+      "text": "Siedliska-bogusz, skrzyżowanie.",
+      "onRequest": false
+    },
+    {
+      "id": 117,
+      "file": "P0075.mp3",
+      "name": "GORZEJOWA SZKOŁA",
+      "text": "Gorzejowa, szkoła.",
+      "onRequest": false
+    },
+    {
+      "id": 118,
+      "file": "P0076.mp3",
+      "name": "GORZEJOWA MŁYN",
+      "text": "Gorzejowa, młyn.",
+      "onRequest": false
+    },
+    {
+      "id": 119,
+      "file": "P0077.mp3",
+      "name": "GORZEJOWA N.Ż.",
+      "text": "Gorzejowa na żądanie.",
+      "onRequest": true
+    },
+    {
+      "id": 120,
+      "file": "P0078.mp3",
+      "name": "KAMIENICA DOLNA",
+      "text": "Kamienica dolna.",
+      "onRequest": false
+    },
+    {
+      "id": 121,
+      "file": "P0079.mp3",
+      "name": "JAWORZE GÓRNE/KAMIENICA DOLNA",
+      "text": "Jaworze górne, kamienica dolna.",
+      "onRequest": false
+    },
+    {
+      "id": 122,
+      "file": "P007A.mp3",
+      "name": "JAWORZE GÓRNE KAPLICZKA",
+      "text": "Jaworze górne, kapliczka.",
+      "onRequest": false
+    },
+    {
+      "id": 123,
+      "file": "P007B.mp3",
+      "name": "JAWORZE GÓRNE",
+      "text": "Jaworze górne.",
+      "onRequest": false
+    },
+    {
+      "id": 124,
+      "file": "P007C.mp3",
+      "name": "JAWORZE GÓRNE OSIEDLE",
+      "text": "Jaworze górne, osiedle.",
+      "onRequest": false
+    },
+    {
+      "id": 125,
+      "file": "P007D.mp3",
+      "name": "JAWORZE GÓRNE N.Ż.",
+      "text": "Jaworze górne na żądanie.",
+      "onRequest": true
+    },
+    {
+      "id": 126,
+      "file": "P007E.mp3",
+      "name": "JAWORZE DOLNE SZ.",
+      "text": "Jaworze Dolne.",
+      "onRequest": false
+    },
+    {
+      "id": 127,
+      "file": "P007F.mp3",
+      "name": "JAWORZE DOLNE N.Ż.",
+      "text": "Jaworze dolne na żądanie.",
+      "onRequest": true
+    },
+    {
+      "id": 128,
+      "file": "P0080.mp3",
+      "name": "JAWORZE DOLNE OŚ. W.",
+      "text": "Jaworze Dolne.",
+      "onRequest": false
+    },
+    {
+      "id": 129,
+      "file": "P0081.mp3",
+      "name": "GOŁĘCZYNA",
+      "text": "Gołęczyna.",
+      "onRequest": false
+    },
+    {
+      "id": 130,
+      "file": "P0082.mp3",
+      "name": "DOBRKÓW",
+      "text": "Dobrków.",
+      "onRequest": false
+    },
+    {
+      "id": 131,
+      "file": "P0083.mp3",
+      "name": "DOBRKÓW N.Ż",
+      "text": "Dobrków na żądanie.",
+      "onRequest": true
+    },
+    {
+      "id": 132,
+      "file": "P0084.mp3",
+      "name": "PARKOSZ/ŁABUZIE",
+      "text": "Parkosz, łabuzie.",
+      "onRequest": false
+    },
+    {
+      "id": 133,
+      "file": "P0085.mp3",
+      "name": "PILZNO LWOWSKA",
+      "text": "Pilzno, lwowska.",
+      "onRequest": false
+    },
+    {
+      "id": 134,
+      "file": "P0086.mp3",
+      "name": "PILZNO ZAJEZDNIA",
+      "text": "Pilzno, zajezdnia.",
+      "onRequest": false
+    },
+    {
+      "id": 135,
+      "file": "P0087.mp3",
+      "name": "PILZNO LWOWSKA",
+      "text": "Pilzno, lwowska.",
+      "onRequest": false
+    },
+    {
+      "id": 136,
+      "file": "P0088.mp3",
+      "name": "PARKOSZ/ŁABUZIE",
+      "text": "Parkosz, łabuzie.",
+      "onRequest": false
+    },
+    {
+      "id": 137,
+      "file": "P0089.mp3",
+      "name": "PARKOSZ",
+      "text": "Parkosz.",
+      "onRequest": false
+    },
+    {
+      "id": 138,
+      "file": "P008A.mp3",
+      "name": "PODGRODZIE /PĘTLA",
+      "text": "Podgrodzie, , pętla.",
+      "onRequest": false
+    },
+    {
+      "id": 139,
+      "file": "P008B.mp3",
+      "name": "PODGRODZIE 2",
+      "text": "Podgrodzie, dwa.",
+      "onRequest": false
+    },
+    {
+      "id": 140,
+      "file": "P008C.mp3",
+      "name": "PODGRODZIE 1",
+      "text": "Podgrodzie, jeden.",
+      "onRequest": false
+    },
+    {
+      "id": 141,
+      "file": "P008D.mp3",
+      "name": "LATOSZYN E40",
+      "text": "Latoszyn, e40.",
+      "onRequest": false
+    },
+    {
+      "id": 142,
+      "file": "P008E.mp3",
+      "name": "DĘBICA KRAKOWSKA RONDO",
+      "text": "Dębica, krakowska rondo.",
+      "onRequest": false
+    },
+    {
+      "id": 143,
+      "file": "P008F.mp3",
+      "name": "DĘBICA KRAKOWSKA KĘPA",
+      "text": "Dębica, krakowska kępa.",
+      "onRequest": false
+    },
+    {
+      "id": 144,
+      "file": "P0090.mp3",
+      "name": "DĘBICA KRAKOWSKA SZPITAL",
+      "text": "Dębica, krakowska szpital.",
+      "onRequest": false
+    },
+    {
+      "id": 145,
+      "file": "P0091.mp3",
+      "name": "DĘBICA OSIEDLE MATEJKI",
+      "text": "Dębica, osiedle matejki.",
+      "onRequest": false
+    },
+    {
+      "id": 146,
+      "file": "P0092.mp3",
+      "name": "DĘBICA OSIEDLE CHEMIK",
+      "text": "Dębica, osiedle chemik.",
+      "onRequest": false
+    },
+    {
+      "id": 147,
+      "file": "P0093.mp3",
+      "name": "DĘBICA OSIEDLE METALOWIEC",
+      "text": "Dębica, osiedle metalowiec.",
+      "onRequest": false
+    },
+    {
+      "id": 148,
+      "file": "P0094.mp3",
+      "name": "DĘBICA KRAKOWSKA KLASZTOR",
+      "text": "Dębica, krakowska klasztor.",
+      "onRequest": false
+    },
+    {
+      "id": 149,
+      "file": "P0095.mp3",
+      "name": "DĘBICA OSIEDLE METALOWIEC",
+      "text": "Dębica, osiedle metalowiec.",
+      "onRequest": false
+    },
+    {
+      "id": 150,
+      "file": "P0096.mp3",
+      "name": "DĘBICA OSIEDLE CHEMIK",
+      "text": "Dębica, osiedle chemik.",
+      "onRequest": false
+    },
+    {
+      "id": 151,
+      "file": "P0097.mp3",
+      "name": "DĘBICA OSIEDLE MATEJKI",
+      "text": "Dębica, osiedle matejki.",
+      "onRequest": false
+    },
+    {
+      "id": 152,
+      "file": "P0098.mp3",
+      "name": "DĘBICA KRAKOWSKA SZPITAL",
+      "text": "Dębica, krakowska szpital.",
+      "onRequest": false
+    },
+    {
+      "id": 153,
+      "file": "P0099.mp3",
+      "name": "DĘBICA KRAKOWSKA KĘPA",
+      "text": "Dębica, krakowska kępa.",
+      "onRequest": false
+    },
+    {
+      "id": 154,
+      "file": "P009A.mp3",
+      "name": "LATOSZYN OBWODNICA (STARZYŃSKIEGO)",
+      "text": "Latoszyn, obwodnica, starzyńskiego.",
+      "onRequest": false
+    },
+    {
+      "id": 155,
+      "file": "P009B.mp3",
+      "name": "LATOSZYN E40",
+      "text": "Latoszyn, e40.",
+      "onRequest": false
+    },
+    {
+      "id": 156,
+      "file": "P009C.mp3",
+      "name": "PODGRODZIE 1",
+      "text": "Podgrodzie, jeden.",
+      "onRequest": false
+    },
+    {
+      "id": 157,
+      "file": "P009D.mp3",
+      "name": "PODGRODZIE 2",
+      "text": "Podgrodzie, dwa.",
+      "onRequest": false
+    },
+    {
+      "id": 158,
+      "file": "P009E.mp3",
+      "name": "PODGRODZIE/PĘTLA",
+      "text": "Podgrodzie, pętla.",
+      "onRequest": false
+    },
+    {
+      "id": 159,
+      "file": "P009F.mp3",
+      "name": "PARKOSZ",
+      "text": "Parkosz.",
+      "onRequest": false
+    },
+    {
+      "id": 160,
+      "file": "P00A0.mp3",
+      "name": "KAMIENICA DOLNA",
+      "text": "Kamienica dolna.",
+      "onRequest": false
+    },
+    {
+      "id": 161,
+      "file": "P00A1.mp3",
+      "name": "PARKOSZ/ŁABUZIE",
+      "text": "Parkosz, łabuzie.",
+      "onRequest": false
+    },
+    {
+      "id": 162,
+      "file": "P00A2.mp3",
+      "name": "PILZNO LWOWSKA",
+      "text": "Pilzno, lwowska.",
+      "onRequest": false
+    },
+    {
+      "id": 163,
+      "file": "P00A3.mp3",
+      "name": "PILZNO ZAJEZDNIA",
+      "text": "Pilzno, zajezdnia.",
+      "onRequest": false
+    },
+    {
+      "id": 164,
+      "file": "P00A4.mp3",
+      "name": "PILZNO LWOWSKA",
+      "text": "Pilzno, lwowska.",
+      "onRequest": false
+    },
+    {
+      "id": 165,
+      "file": "P00A5.mp3",
+      "name": "PARKOSZ/ŁABUZIE",
+      "text": "Parkosz, łabuzie.",
+      "onRequest": false
+    },
+    {
+      "id": 166,
+      "file": "P00A6.mp3",
+      "name": "DOBRKÓW N.Ż.",
+      "text": "Dobrków na żądanie.",
+      "onRequest": true
+    },
+    {
+      "id": 167,
+      "file": "P00A7.mp3",
+      "name": "DOBRKÓW",
+      "text": "Dobrków.",
+      "onRequest": false
+    },
+    {
+      "id": 168,
+      "file": "P00A8.mp3",
+      "name": "GOŁĘCZYNA",
+      "text": "Gołęczyna.",
+      "onRequest": false
+    },
+    {
+      "id": 169,
+      "file": "P00A9.mp3",
+      "name": "JAWORZE DOLNE OŚ. W.",
+      "text": "Jaworze Dolne.",
+      "onRequest": false
+    },
+    {
+      "id": 170,
+      "file": "P00AA.mp3",
+      "name": "JAWORZE DOLNE N.Ż.",
+      "text": "Jaworze dolne na żądanie.",
+      "onRequest": true
+    },
+    {
+      "id": 171,
+      "file": "P00AB.mp3",
+      "name": "JAWORZE DOLNE SZ.",
+      "text": "Jaworze Dolne.",
+      "onRequest": false
+    },
+    {
+      "id": 172,
+      "file": "P00AC.mp3",
+      "name": "JAWORZE GÓRNE N.Ż.",
+      "text": "Jaworze górne na żądanie.",
+      "onRequest": true
+    },
+    {
+      "id": 173,
+      "file": "P00AD.mp3",
+      "name": "JAWORZE GÓRNE OSIEDLE",
+      "text": "Jaworze górne, osiedle.",
+      "onRequest": false
+    },
+    {
+      "id": 174,
+      "file": "P00AE.mp3",
+      "name": "JAWORZE GÓRNE",
+      "text": "Jaworze górne.",
+      "onRequest": false
+    },
+    {
+      "id": 175,
+      "file": "P00AF.mp3",
+      "name": "JAWORZE GÓRNE KAPLICZKA",
+      "text": "Jaworze górne, kapliczka.",
+      "onRequest": false
+    },
+    {
+      "id": 176,
+      "file": "P00B0.mp3",
+      "name": "JAWORZE GÓRNE/KAMIENICA DOLNA",
+      "text": "Jaworze górne, kamienica dolna.",
+      "onRequest": false
+    },
+    {
+      "id": 177,
+      "file": "P00B1.mp3",
+      "name": "GORZEJOWA N.Ż.",
+      "text": "Gorzejowa na żądanie.",
+      "onRequest": true
+    },
+    {
+      "id": 178,
+      "file": "P00B2.mp3",
+      "name": "GORZEJOWA MŁYN",
+      "text": "Gorzejowa, młyn.",
+      "onRequest": false
+    },
+    {
+      "id": 179,
+      "file": "P00B3.mp3",
+      "name": "GORZEJOWA SZKOŁA",
+      "text": "Gorzejowa, szkoła.",
+      "onRequest": false
+    },
+    {
+      "id": 180,
+      "file": "P00B4.mp3",
+      "name": "SIEDLISKA-BOGUSZ SKRZYŻOWANIE",
+      "text": "Siedliska-bogusz, skrzyżowanie.",
+      "onRequest": false
+    },
+    {
+      "id": 181,
+      "file": "P00B5.mp3",
+      "name": "SIEDLISKA-BOGUSZ",
+      "text": "Siedliska-bogusz.",
+      "onRequest": false
+    },
+    {
+      "id": 182,
+      "file": "P00B6.mp3",
+      "name": "SMARŻOWA CPN",
+      "text": "Smarżowa, cpn.",
+      "onRequest": false
+    },
+    {
+      "id": 183,
+      "file": "P00B7.mp3",
+      "name": "SMARŻOWA OŚRODEK ZDROWIA",
+      "text": "Smarżowa, ośrodek zdrowia.",
+      "onRequest": false
+    },
+    {
+      "id": 184,
+      "file": "P00B8.mp3",
+      "name": "GRUDNA DOLNA",
+      "text": "Grudna dolna.",
+      "onRequest": false
+    },
+    {
+      "id": 185,
+      "file": "P00B9.mp3",
+      "name": "GRUDNA SKRZYŻOWANIE",
+      "text": "Grudna skrzyżowanie.",
+      "onRequest": false
+    },
+    {
+      "id": 186,
+      "file": "P00BA.mp3",
+      "name": "DĘBICA RZESZOWSKA MECHANIK",
+      "text": "Dębica, rzeszowska mechanik.",
+      "onRequest": false
+    },
+    {
+      "id": 187,
+      "file": "P00BB.mp3",
+      "name": "ŚWILCZA GÓRKA",
+      "text": "Świlcza, górka.",
+      "onRequest": false
+    },
+    {
+      "id": 188,
+      "file": "P00BC.mp3",
+      "name": "ŚWILCZA GÓRKA",
+      "text": "Świlcza, górka.",
+      "onRequest": false
+    },
+    {
+      "id": 189,
+      "file": "P00BD.mp3",
+      "name": "DĄBROWA 1",
+      "text": "Dąbrowa jeden.",
+      "onRequest": false
+    },
+    {
+      "id": 190,
+      "file": "P00BE.mp3",
+      "name": "KLĘCZANY STADION",
+      "text": "Klęczany stadion.",
+      "onRequest": false
+    },
+    {
+      "id": 191,
+      "file": "P00BF.mp3",
+      "name": "DĘBICA RZESZOWSKA CPN",
+      "text": "Dębica, rzeszowska cpn.",
+      "onRequest": false
+    },
+    {
+      "id": 192,
+      "file": "P00C0.mp3",
+      "name": "DĘBICA RZESZOWSKA MECHANIK",
+      "text": "Dębica, rzeszowska mechanik.",
       "onRequest": false
     }
   ],
@@ -852,6 +1426,34 @@
       "name": "BRZEZINY BERDECHÓW > ROPCZYCE DWORZEC AUTOBUSOWY",
       "text": "Kierunek: Brzeziny berdechów. Ropczyce, dworzec autobusowy.",
       "onRequest": false
+    },
+    {
+      "id": "K000C",
+      "file": "K000C.mp3",
+      "name": "GRUDNA SKRZYŻOWANIE > DĘBICA DWORZEC AUTOBUSOWY",
+      "text": "Kierunek Dębica przez Jaworze Dolne.",
+      "onRequest": false
+    },
+    {
+      "id": "K000D",
+      "file": "K000D.mp3",
+      "name": "DĘBICA DWORZEC AUTOBUSOWY > RZESZÓW DWORZEC AUTOBUSOWY",
+      "text": "Kierunek Rzeszów.",
+      "onRequest": false
+    },
+    {
+      "id": "K000E",
+      "file": "K000E.mp3",
+      "name": "RZESZÓW DWORZEC AUTOBUSOWY > DĘBICA DWORZEC AUTOBUSOWY",
+      "text": "Kierunek Dębica.",
+      "onRequest": false
+    },
+    {
+      "id": "K000F",
+      "file": "K000F.mp3",
+      "name": "DĘBICA DWORZEC AUTOBUSOWY > GRUDNA SKRZYŻOWANIE",
+      "text": "Kierunek Grudna.",
+      "onRequest": false
     }
   ],
   "directions": [
@@ -898,6 +1500,22 @@
     {
       "code": "K000B",
       "name": "BRZEZINY BERDECHÓW > ROPCZYCE DWORZEC AUTOBUSOWY"
+    },
+    {
+      "code": "K000C",
+      "name": "GRUDNA SKRZYŻOWANIE > DĘBICA DWORZEC AUTOBUSOWY"
+    },
+    {
+      "code": "K000D",
+      "name": "DĘBICA DWORZEC AUTOBUSOWY > RZESZÓW DWORZEC AUTOBUSOWY"
+    },
+    {
+      "code": "K000E",
+      "name": "RZESZÓW DWORZEC AUTOBUSOWY > DĘBICA DWORZEC AUTOBUSOWY"
+    },
+    {
+      "code": "K000F",
+      "name": "DĘBICA DWORZEC AUTOBUSOWY > GRUDNA SKRZYŻOWANIE"
     }
   ],
   "directionCodeConflicts": {}
