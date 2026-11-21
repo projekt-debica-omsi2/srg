@@ -86,7 +86,7 @@ def make_plan(path):
         if code in conflicts:continue
         name=names[0];parts=name.split('>')
         text=('Kierunek: '+spoken(parts[0].strip())+' '+spoken(parts[1].strip())) if len(parts)==2 else 'Kierunek: '+spoken(name)
-        text={'K000C':'Kierunek Dębica przez Jaworze Dolne.','K000D':'Kierunek Rzeszów.','K000E':'Kierunek Dębica.','K000F':'Kierunek Grudna.'}.get(code,text)
+        text={'K000C':'Kierunek Dębica przez Jaworze Dolne.','K000D':'Kierunek Rzeszów.','K000E':'Kierunek Dębica.','K000F':'Kierunek Grudna.','K0010':'Kierunek Grudna.'}.get(code,text)
         direction_jobs.append({'id':code,'file':code+'.mp3','name':name,'text':text,'onRequest':False})
     return {'source':str(path),'sourceSHA256':sha,'voice':VOICE,'rate':RATE,'jobs':jobs,'directionJobs':direction_jobs,'directions':routes,'directionCodeConflicts':conflicts}
 

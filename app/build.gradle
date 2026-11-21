@@ -10,8 +10,8 @@ android {
         applicationId testEdition ? 'pl.srgmobile.test' : publicEdition ? 'pl.srgmobile.publicapp' : 'pl.srgmobile.classic.lcd23'
         minSdk 26
         targetSdk 34
-        versionCode 11489
-        versionName '1.4.89'
+        versionCode 11490
+        versionName '1.4.90'
         if (testEdition) versionNameSuffix '-test'
         buildConfigField 'boolean', 'SRG_PUBLIC', publicEdition.toString()
         manifestPlaceholders = [appLabel: testEdition ? 'SRGMobile Test' : publicEdition ? 'SRGMobile Public' : 'SRGMobile']

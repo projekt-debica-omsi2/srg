@@ -1,6 +1,6 @@
 {
   "source": "generator-grg/grgmonis.skl",
-  "sourceSHA256": "590a6b64110258eacbde6b65d917af1aee3cd69351846ddee390b68e0488bc08",
+  "sourceSHA256": "92e9593a89d54f6d5be64f8b350eea50d888364d5baf68130f7ce04d1768e18f",
   "voice": "pl-PL-MarekNeural",
   "rate": "-4%",
   "jobs": [
@@ -1454,6 +1454,13 @@
       "name": "DĘBICA DWORZEC AUTOBUSOWY > GRUDNA SKRZYŻOWANIE",
       "text": "Kierunek Grudna.",
       "onRequest": false
+    },
+    {
+      "id": "K0010",
+      "file": "K0010.mp3",
+      "name": "DĘBICA DWORZEC AUTOBUSOWY > GRUDNA SKRZYŻOWANIE",
+      "text": "Kierunek Grudna.",
+      "onRequest": false
     }
   ],
   "directions": [
@@ -1515,6 +1522,10 @@
     },
     {
       "code": "K000F",
+      "name": "DĘBICA DWORZEC AUTOBUSOWY > GRUDNA SKRZYŻOWANIE"
+    },
+    {
+      "code": "K0010",
       "name": "DĘBICA DWORZEC AUTOBUSOWY > GRUDNA SKRZYŻOWANIE"
     }
   ],

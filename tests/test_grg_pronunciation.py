@@ -17,7 +17,7 @@ class Pronunciation(unittest.TestCase):
     def test_complete_consistent_plan(self):
         p=g.make_plan(ROOT/'generator-grg/grgmonis.skl')
         self.assertEqual((p['voice'],p['rate']),('pl-PL-MarekNeural','-4%'))
-        self.assertEqual((len(p['jobs']),len(p['directionJobs'])),(192,15))
+        self.assertEqual((len(p['jobs']),len(p['directionJobs'])),(192,16))
         names={}
         for j in p['jobs']:
             self.assertEqual(names.setdefault(j['name'],j['text']),j['text'])

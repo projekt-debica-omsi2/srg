@@ -10,7 +10,7 @@ const at=id=>vm.runInContext(`plannedTimeInfo(state.variant.stops.findIndex(s=>s
 assert.equal(ctx.state.course.endTime,'09:35');assert.equal(at(33).time,'09:30');assert.equal(at(34).time,'09:35');assert.equal(at(5).time,null);assert.equal(at(7).time,'08:26');assert.equal(at(8).time,'08:27');assert.equal(ctx.state.variant.stops.at(-1).id,34);
 assert.equal(vm.runInContext('nextTripSameDuty().tripNo',ctx),4);ctx.state.course.individualSelection=true;assert.equal(vm.runInContext('nextTripSameDuty()',ctx),null);
 ctx.state.taskTab='special';vm.runInContext('renderDutySelect()',ctx);assert.equal(elements['#taskItems'].children.length,0);assert.equal(elements['#dutyConfirm'].disabled,true);
-ctx.state.taskTab='manual';vm.runInContext('renderDutySelect()',ctx);assert.equal(elements['#taskItems'].children.length,19);assert.equal(elements['#dutyConfirm'].disabled,false);assert(elements['#taskItems'].children.some(b=>b.textContent.includes('10:10')));
+ctx.state.taskTab='manual';vm.runInContext('renderDutySelect()',ctx);assert.equal(elements['#taskItems'].children.length,23);assert.equal(elements['#dutyConfirm'].disabled,false);assert(elements['#taskItems'].children.some(b=>b.textContent.includes('10:10')));
 vm.runInContext(`state.course=manualCourseEntries().find(c=>c.standalone);state.variant=state.rj.variants[1]`,ctx);assert.equal(at(40).time,'10:10');assert.equal(at(68).time,'11:29');assert.equal(at(47).time,null);assert.equal(vm.runInContext('nextTripSameDuty()',ctx),null);
 for(const key of ['S-27:3','VIDEO:1010']){let prev=0;const idx=key==='S-27:3'?0:1;for(const id of data.variants[idx].stopIds){const time=vm.runInContext(`PHOTO_STOP_TIMES_BY_COURSE['${key}'][${id}]`,ctx);if(!time)continue;const [a,b]=time.split(':').map(Number);assert(a*60+b>=prev);prev=a*60+b;}}
 console.log('PASS: exact timetable, unknown times blank, terminal, manual tabs, independent course, no next duty trip');
@@ -76,3 +76,13 @@ for(const c of bCourses){assert(c.routeStops.every(s=>s.street&&s.street.trim())
 console.log('PASS B street/locality fields in every course and both directions');
 
 assert.equal(vm.runInContext("dutyEntries('S-24!').length",ctx),4);
+
+const normal24=vm.runInContext("dutyEntries('S-24')",ctx),detour24=vm.runInContext("dutyEntries('S-24!')",ctx);
+assert.equal(normal24.length,4);assert.equal(detour24.length,4);
+const routeFor=c=>ctx.state.rj.variants.find(v=>v.index===c.variantIndex).stops;
+const housing=ss=>ss.filter(s=>/OSIEDLE (CHEMIK|METALOWIEC)/i.test(s.name));
+assert.equal(housing(routeFor(normal24[3])).length,0);
+assert.equal(housing(routeFor(normal24[0])).length,2);
+assert.equal(housing(routeFor(detour24[3])).length,2);
+assert.deepEqual(Array.from(routeFor(normal24[0]),s=>s.id),Array.from(routeFor(detour24[0]),s=>s.id));
+console.log('PASS S-24 omits Chemik/Metalowiec only outbound; S-24! and inbound unchanged');
