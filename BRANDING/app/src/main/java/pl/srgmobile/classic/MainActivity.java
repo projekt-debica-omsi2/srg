@@ -41,6 +41,7 @@ public final class MainActivity extends Activity implements LocationListener {
     private PermissionRequest pendingMediaRequest;
     private float voiceVolume = 0.9f;
     private WebView web;
+    private OmsiBridge omsi;
     private LocationManager gps;
     private boolean requested = false;
     private boolean listening = false;
@@ -54,6 +55,9 @@ public final class MainActivity extends Activity implements LocationListener {
     private final ArrayDeque<String> pendingVoice = new ArrayDeque<>();
     private LocalPanelServer lcdServer;
     private int chimeIndex = 1;
+    private android.webkit.ValueCallback<android.net.Uri[]> localFileCallback;
+    private String localExportText;
+    private LocalVoiceStore localVoices;
 
     @Override public void onCreate(Bundle state) {
         super.onCreate(state);
@@ -78,6 +82,13 @@ public final class MainActivity extends Activity implements LocationListener {
         cfg.setAllowFileAccessFromFileURLs(false);
         cfg.setAllowUniversalAccessFromFileURLs(false);
         web.setWebChromeClient(new WebChromeClient() {
+            @Override public boolean onShowFileChooser(WebView view, android.webkit.ValueCallback<android.net.Uri[]> callback, FileChooserParams params) {
+                if(localFileCallback!=null)localFileCallback.onReceiveValue(null);
+                localFileCallback=callback;
+                Intent pick=new Intent(Intent.ACTION_OPEN_DOCUMENT);pick.addCategory(Intent.CATEGORY_OPENABLE);pick.setType("*/*");
+                try{startActivityForResult(pick,45);}catch(Exception e){localFileCallback=null;callback.onReceiveValue(null);}
+                return true;
+            }
             @Override public void onPermissionRequest(PermissionRequest request) {
                 runOnUiThread(() -> {
                     // WebView wczytuje wyłącznie lokalne, zaufane assety aplikacji.
@@ -113,7 +124,9 @@ public final class MainActivity extends Activity implements LocationListener {
                 if (requested) startGpsNative(); else explainStatus();
             }
         });
-        TimetableSync.install(this);
+        if(!BuildConfig.SRG_PUBLIC)TimetableSync.install(this);
+        web.addJavascriptInterface(new LocalFilesBridge(),"SRGLocalFiles");
+        web.addJavascriptInterface(new LocalSpeechBridge(),"SRGLocalVoice");
         web.addJavascriptInterface(new TimetableSync.Bridge(this), "SRGTimetables");
         web.addJavascriptInterface(new Object(){
             @JavascriptInterface public void exportFile(){runOnUiThread(()->{
@@ -122,6 +135,8 @@ public final class MainActivity extends Activity implements LocationListener {
             });}
         },"SRGMksExport");
         web.addJavascriptInterface(new GpsBridge(), "SRGNativeGPS");
+        omsi = new OmsiBridge(web);
+        web.addJavascriptInterface(omsi, "SRGOmsiNative");
         web.addJavascriptInterface(new AudioBridge(), "SRGNativeAudio");
         web.addJavascriptInterface(new LcdBridge(), "SRGLcd");
         rgUsb = new RgUsbBridge(this, web);
@@ -129,6 +144,7 @@ public final class MainActivity extends Activity implements LocationListener {
         ibisUsb = new RgUsbBridge(this, web, "IBIS", "ibisUsbEvent");
         web.addJavascriptInterface(ibisUsb, "SRGIbisUsb");
         web.addJavascriptInterface(new Object(){
+            @JavascriptInterface public boolean isPhone(){return getResources().getConfiguration().smallestScreenWidthDp < 600;}
             @JavascriptInterface public String version(){try{return getPackageManager().getPackageInfo(getPackageName(),0).versionName;}catch(Exception e){return "";}}
         }, "SRGApp");
         setContentView(web);
@@ -162,6 +178,26 @@ public final class MainActivity extends Activity implements LocationListener {
         }
     }
 
+    public final class LocalFilesBridge {
+        @JavascriptInterface public void chooseDocument(){runOnUiThread(()->{Intent pick=new Intent(Intent.ACTION_OPEN_DOCUMENT);pick.addCategory(Intent.CATEGORY_OPENABLE);pick.setType("*/*");try{startActivityForResult(pick,47);}catch(Exception e){android.widget.Toast.makeText(MainActivity.this,"Nie otwarto wyboru rozkładu",android.widget.Toast.LENGTH_LONG).show();}});}
+        @JavascriptInterface public void exportText(String text){
+            if(text==null||text.length()>2*1024*1024)return;
+            runOnUiThread(()->{localExportText=text;Intent intent=new Intent(Intent.ACTION_CREATE_DOCUMENT);intent.addCategory(Intent.CATEGORY_OPENABLE);intent.setType("text/plain");intent.putExtra(Intent.EXTRA_TITLE,"kursowki-srg.txt");try{startActivityForResult(intent,46);}catch(Exception e){localExportText=null;android.widget.Toast.makeText(MainActivity.this,"Nie otwarto zapisu TXT",android.widget.Toast.LENGTH_LONG).show();}});
+        }
+    }
+    private LocalVoiceStore localVoices(){
+        if(localVoices==null)localVoices=new LocalVoiceStore(this,message->{
+            if(web!=null)web.evaluateJavascript("window.srgLocalVoiceStatus && window.srgLocalVoiceStatus("+JSONObject.quote(message)+")",null);
+            if(!message.startsWith("Generowanie offline:"))android.widget.Toast.makeText(this,message,android.widget.Toast.LENGTH_LONG).show();
+        },()->voiceVolume);
+        return localVoices;
+    }
+    public final class LocalSpeechBridge {
+        @JavascriptInterface public void speak(String text){if(text!=null&&text.length()<=1000)runOnUiThread(()->localVoices().speak(text));}
+        @JavascriptInterface public void chooseVoice(){runOnUiThread(()->localVoices().choose());}
+        @JavascriptInterface public void generate(String json){if(json!=null&&json.length()<=2*1024*1024)runOnUiThread(()->localVoices().generate(json));}
+        @JavascriptInterface public void cancelGeneration(){runOnUiThread(()->{localVoices().cancel();if(web!=null)web.evaluateJavascript("window.srgLocalVoiceStatus && window.srgLocalVoiceStatus('Anulowano generowanie. Gotowe pliki zachowano.')",null);});}
+    }
     /** Publish ONLY passenger-facing course data; never expose coordinates or driver ID. */
     public final class LcdBridge {
         @JavascriptInterface public void chooseAds() {
@@ -189,6 +225,26 @@ public final class MainActivity extends Activity implements LocationListener {
     }
     @Override protected void onActivityResult(int requestCode,int resultCode,Intent data) {
         super.onActivityResult(requestCode,resultCode,data);
+        if(requestCode==47){
+            if(resultCode!=RESULT_OK||data==null||data.getData()==null)return;
+            final android.net.Uri uri=data.getData();
+            new Thread(()->{JSONObject payload=new JSONObject();try{
+                String name="rozklad.011";
+                try(android.database.Cursor cursor=getContentResolver().query(uri,new String[]{android.provider.OpenableColumns.DISPLAY_NAME},null,null,null)){if(cursor!=null&&cursor.moveToFirst())name=cursor.getString(0);}
+                try(java.io.InputStream in=getContentResolver().openInputStream(uri);java.io.ByteArrayOutputStream out=new java.io.ByteArrayOutputStream()){
+                    if(in==null)throw new IOException("Brak dostępu do pliku");byte[] buffer=new byte[8192];int n;while((n=in.read(buffer))!=-1){if(out.size()+n>2*1024*1024)throw new IOException("Maksymalnie 2 MB");out.write(buffer,0,n);}
+                    payload.put("name",name);payload.put("base64",android.util.Base64.encodeToString(out.toByteArray(),android.util.Base64.NO_WRAP));
+                }
+            }catch(Exception e){try{payload.put("error",e.getMessage());}catch(Exception ignored){}}
+            final String json=payload.toString();runOnUiThread(()->{if(web!=null)web.evaluateJavascript("window.srgLocalDocument && window.srgLocalDocument("+json+")",null);});},"SRG-local-import").start();return;
+        }
+        if(requestCode==45){if(localFileCallback!=null){localFileCallback.onReceiveValue(resultCode==RESULT_OK&&data!=null&&data.getData()!=null?new android.net.Uri[]{data.getData()}:null);localFileCallback=null;}return;}
+        if(requestCode==46){
+            final String text=localExportText;localExportText=null;
+            if(resultCode==RESULT_OK&&data!=null&&data.getData()!=null&&text!=null){final android.net.Uri uri=data.getData();
+                new Thread(()->{String message;try(java.io.OutputStream out=getContentResolver().openOutputStream(uri)){if(out==null)throw new IOException("Brak dostępu");out.write(text.getBytes(java.nio.charset.StandardCharsets.UTF_8));message="Zapisano kursówki TXT";}catch(Exception e){message="Błąd eksportu TXT: "+e.getMessage();}final String result=message;runOnUiThread(()->android.widget.Toast.makeText(this,result,android.widget.Toast.LENGTH_LONG).show());},"SRG-local-export").start();
+            }return;
+        }
         if(requestCode==44){
             if(resultCode==RESULT_OK&&data!=null&&data.getData()!=null){final android.net.Uri uri=data.getData();new Thread(()->{
                 String message;
@@ -245,6 +301,29 @@ public final class MainActivity extends Activity implements LocationListener {
 
     /** Each utterance starts with the selected short chime (1..4). */
     public final class AudioBridge {
+        @JavascriptInterface public void announceGRG(String file, String mode, boolean onRequest) {
+            if (file == null || !file.matches("[PK][0-9A-F]{4}\\.mp3")) return;
+            if (!"next".equals(mode) && !"terminal".equals(mode) && !"arrival".equals(mode) && !"start".equals(mode)) return;
+            runOnUiThread(() -> {
+                java.util.ArrayList<String> files = new java.util.ArrayList<>();
+                files.add(chimeFile());
+                if ("next".equals(mode) || "terminal".equals(mode)) files.add("next.mp3");
+                files.add("grg/" + file);
+                if (onRequest) files.add("na_zadanie.mp3");
+                if ("terminal".equals(mode)) files.add("terminal.mp3");
+                queueVoice(files.toArray(new String[0]));
+            });
+        }
+        @JavascriptInterface public void announceBerdechow(String file, String mode) {
+            if (file == null || !file.matches("(?:stop-[0-9]{3}|start-[1-4])\\.mp3")) return;
+            if (!"next".equals(mode) && !"terminal".equals(mode) && !"arrival".equals(mode) && !"start".equals(mode)) return;
+            runOnUiThread(() -> {
+                String path = "berdechow/" + file;
+                if ("terminal".equals(mode)) queueVoice(chimeFile(), "next.mp3", path, "terminal.mp3");
+                else if ("next".equals(mode)) queueVoice(chimeFile(), "next.mp3", path);
+                else queueVoice(chimeFile(), path);
+            });
+        }
         @JavascriptInterface public void announceStop(int stopId, boolean onRequest) {
             if (stopId < 1 || stopId > 68) return;
             runOnUiThread(() -> {
@@ -297,6 +376,7 @@ public final class MainActivity extends Activity implements LocationListener {
         playVoiceNext();
     }
     private void stopVoice() {
+        if(localVoices!=null)localVoices.cancel();
         pendingVoice.clear();
         if (voicePlayer != null) {
             try { voicePlayer.setOnCompletionListener(null); voicePlayer.stop(); } catch (Exception ignored) {}
@@ -310,7 +390,7 @@ public final class MainActivity extends Activity implements LocationListener {
             return;
         }
         String file = pendingVoice.removeFirst();
-        if (!file.matches("(?:chimes/[1-4]\\.mp3|next\\.mp3|stops/[0-9]{1,2}\\.mp3|start/[0-6]\\.mp3|terminal\\.mp3|inspection\\.mp3|na_zadanie\\.mp3)")) {
+        if (!file.matches("(?:chimes/[1-4]\\.mp3|next\\.mp3|stops/[0-9]{1,2}\\.mp3|start/[0-6]\\.mp3|berdechow/(?:stop-[0-9]{3}|start-[1-4])\\.mp3|grg/[PK][0-9A-F]{4}\\.mp3|terminal\\.mp3|inspection\\.mp3|na_zadanie\\.mp3)")) {
             sendAudioError("Nieprawidłowy plik audio");
             playVoiceNext();
             return;
@@ -420,6 +500,17 @@ public final class MainActivity extends Activity implements LocationListener {
             receivedFix = false;
             lastFixAt = 0;
             sendStatus("WAITING", "GPS uruchomiony. Czekam na sygnał satelitarny; dane komórkowe nie są potrzebne.");
+            // Show the last satellite fix on the map while waiting after a restart.
+            // It remains explicitly cached: never feed it into automatic stop advancement.
+            Location cached = gps.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if (cached != null && cached.hasAccuracy()) {
+                long ageMs = Math.max(0L, (android.os.SystemClock.elapsedRealtimeNanos()
+                        - cached.getElapsedRealtimeNanos()) / 1000000L);
+                if (ageMs <= 3600000L) {
+                    sendJS("window.onNativeGpsCached&&window.onNativeGpsCached("
+                            + cached.getLatitude()+","+cached.getLongitude()+","+cached.getAccuracy()+","+ageMs+");");
+                }
+            }
             handler.postDelayed(() -> {
                 if (requested && listening && !receivedFix)
                     sendStatus("WAITING", "GPS nadal szuka pozycji. Spróbuj na otwartej przestrzeni i odczekaj 1–3 minuty.");
@@ -504,6 +595,9 @@ public final class MainActivity extends Activity implements LocationListener {
         if (requested && pageReady) handler.postDelayed(() -> { if (requested) startGpsNative(); }, 300L);
     }
     @Override protected void onDestroy() {
+        if(localFileCallback!=null){localFileCallback.onReceiveValue(null);localFileCallback=null;}
+        if(localVoices!=null){localVoices.close();localVoices=null;}
+        if(omsi!=null)omsi.close();
         stopListening();
         if (rgUsb != null) rgUsb.close();
         if (ibisUsb != null) ibisUsb.close();

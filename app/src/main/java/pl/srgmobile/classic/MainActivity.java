@@ -500,6 +500,17 @@ public final class MainActivity extends Activity implements LocationListener {
             receivedFix = false;
             lastFixAt = 0;
             sendStatus("WAITING", "GPS uruchomiony. Czekam na sygnał satelitarny; dane komórkowe nie są potrzebne.");
+            // Show the last satellite fix on the map while waiting after a restart.
+            // It remains explicitly cached: never feed it into automatic stop advancement.
+            Location cached = gps.getLastKnownLocation(LocationManager.GPS_PROVIDER);
+            if (cached != null && cached.hasAccuracy()) {
+                long ageMs = Math.max(0L, (android.os.SystemClock.elapsedRealtimeNanos()
+                        - cached.getElapsedRealtimeNanos()) / 1000000L);
+                if (ageMs <= 3600000L) {
+                    sendJS("window.onNativeGpsCached&&window.onNativeGpsCached("
+                            + cached.getLatitude()+","+cached.getLongitude()+","+cached.getAccuracy()+","+ageMs+");");
+                }
+            }
             handler.postDelayed(() -> {
                 if (requested && listening && !receivedFix)
                     sendStatus("WAITING", "GPS nadal szuka pozycji. Spróbuj na otwartej przestrzeni i odczekaj 1–3 minuty.");

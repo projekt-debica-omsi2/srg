@@ -1,0 +1,5 @@
+Road geography: OpenStreetMap contributors, ODbL 1.0. https://www.openstreetmap.org/copyright
+Extract: Geofabrik podkarpackie-latest.osm.pbf, downloaded 2026-11-20. SHA256 7eef91f65d13e480ed8006059fbbca1a86c0bafcdcd90306fe8ac7799a4cf11b
+Coverage: 21.05,49.78 to 21.85,50.25. Roads only; no private course or GPS data in geography asset.
+Aerial imagery: Geoportal/GUGiK WMS StandardResolution, requested online only after selection. Not bundled for offline use.
+Leaflet license: LICENSE-Leaflet.txt

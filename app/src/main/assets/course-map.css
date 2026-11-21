@@ -1,0 +1,13 @@
+#courseMapBox{width:min(330px,44%);height:180px;min-height:100px;position:relative;margin:0 8px 8px;border:1px solid #547263;border-radius:5px;overflow:hidden;flex-shrink:1;background:#101b18}#courseMap{height:100%;width:100%;background:#111d19}#courseMapBox[hidden]{display:none}#courseMapBox.expanded{position:absolute;z-index:90;inset:65px 12px 85px;width:auto;height:auto;margin:0;min-height:150px}#mapExpand,#mapClose{position:absolute;z-index:800;right:6px;top:6px;background:#132c21;color:white;border:1px solid #86b695;border-radius:4px;padding:7px;font-size:18px}#mapClose{display:none}.expanded #mapClose{display:block}.expanded #mapExpand{display:none}#mapMessage{position:absolute;z-index:800;left:4px;bottom:18px;background:#101b18dd;color:white;padding:3px 6px;font-size:11px;max-width:85%;pointer-events:none}.srgStopDot{background:#eaf7e9;border:2px solid #18d342;border-radius:50%}.srgBus{color:#25f04e;font-size:26px;text-shadow:0 0 3px black}.leaflet-control-attribution{font-size:9px!important}.mapSettings{overflow:auto;padding:20px;display:flex;flex-direction:column;gap:18px}.mapSettings label{font-size:20px}.mapSettings select,.mapSettings button{padding:12px;background:#153b27;color:#fff;border:1px solid #77ad86;font-size:20px}.mapSettings p{line-height:1.5}.leaflet-container{font-family:Arial,sans-serif}#course .meta{flex-shrink:0}@media(orientation:portrait){#courseMapBox{width:calc(100% - 16px);height:160px;min-height:110px}#courseMapBox.expanded{inset:65px 8px 140px;height:auto;width:auto}}@media(max-height:550px) and (orientation:landscape){#courseMapBox{height:120px;min-height:80px}}
+
+#courseMapBox{isolation:isolate;z-index:0}#courseMapBox.expanded{z-index:90}
+
+#mapMessage:empty{display:none}#courseMapBox .leaflet-control-attribution{font-size:10px!important;line-height:1.2;background:#101b18cc;color:#d4ded8;pointer-events:none}#courseMapBox .leaflet-popup{color:#18241c}
+
+#courseMapBox.hideCredit .leaflet-control-attribution{display:none}
+
+#mapLocate{position:absolute;z-index:800;right:6px;bottom:23px;width:44px;height:44px;border:1px solid #93b6a1;border-radius:5px;background:#132c21;color:white;font-size:30px;padding:0}#mapLocate.gpsReady{color:#63b5ff}
+
+#courseMapBox:not(.expanded) #mapLocate{display:none}
+
+#courseMapBox #mapMessage{display:none!important}

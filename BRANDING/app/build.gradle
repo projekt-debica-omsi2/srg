@@ -1,15 +1,24 @@
 plugins { id 'com.android.application' }
+def publicEdition = providers.gradleProperty('srgPublic').getOrElse('false').toBoolean()
+def testEdition = providers.gradleProperty('srgTest').getOrElse('false').toBoolean()
 
 android {
     namespace 'pl.srgmobile.classic'
     compileSdk 35
 
     defaultConfig {
-        applicationId 'pl.srgmobile.classic.lcd23'
+        applicationId testEdition ? 'pl.srgmobile.test' : publicEdition ? 'pl.srgmobile.publicapp' : 'pl.srgmobile.classic.lcd23'
         minSdk 26
         targetSdk 34
-        versionCode 11465
-        versionName '1.4.65'
+        versionCode 11491
+        versionName '1.4.91'
+        if (testEdition) versionNameSuffix '-test'
+        buildConfigField 'boolean', 'SRG_PUBLIC', publicEdition.toString()
+        manifestPlaceholders = [appLabel: testEdition ? 'SRGMobile Test' : publicEdition ? 'SRGMobile Public' : 'SRGMobile']
+    }
+    buildFeatures { buildConfig true }
+    if (publicEdition) {
+        sourceSets.main.assets.srcDirs = [layout.buildDirectory.dir('generated/publicAssets').get().asFile]
     }
 
     signingConfigs {
@@ -35,6 +44,17 @@ android {
     }
 }
 
+if (publicEdition) {
+    tasks.register('preparePublicAssets', Exec) {
+        workingDir rootProject.projectDir
+        commandLine 'python3', 'tools/prepare_public.py', '--output', layout.buildDirectory.dir('generated/publicAssets').get().asFile.absolutePath
+        inputs.dir 'src/main/assets'
+        inputs.file rootProject.file('tools/prepare_public.py')
+        outputs.dir layout.buildDirectory.dir('generated/publicAssets')
+    }
+    tasks.named('preBuild').configure { dependsOn 'preparePublicAssets' }
+}
+
 dependencies {
     implementation 'com.github.mik3y:usb-serial-for-android:3.8.1'
     implementation 'org.jsoup:jsoup:1.18.3'
@@ -42,7 +62,6 @@ dependencies {
     testImplementation 'org.json:json:20240303'
 }
 
-// Never silently publish a release signed with a newly generated debug key.
 gradle.taskGraph.whenReady { graph ->
     if (graph.allTasks.any { it.project == project && it.name.toLowerCase().contains('release') }) {
         if (!System.getenv('SRG_KEYSTORE_PATH') || !System.getenv('SRG_KEYSTORE_PASSWORD')) {

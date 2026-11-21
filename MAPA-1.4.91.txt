@@ -1,0 +1,9 @@
+SRGMobile / SRGMobile Public 1.4.91
+Mapa kursu: lokalne drogi OSM (powiat dębicki i okolice), przystanki i pozycja GPS; powiększanie i przesuwanie.
+Ustawienia: wyłączona / drogowa offline / zdjęcia lotnicze Geoportalu online. Zdjęcia nie są dołączone offline.
+Dotknięcie przystanku pokazuje nazwę i ID. Stopka źródła znika po 5 sekundach; licencje dostępne w ustawieniach mapy.
+Pozycja GPS: trójkąt, bez koła dokładności. Centrowanie dostępne na dużej mapie. Komunikaty diagnostyczne nie zasłaniają mapy.
+Po ponownym uruchomieniu mapa może pokazać ostatnią pozycję satelitarną z zachowanym wiekiem pomiaru. Nie służy ona do automatycznego przełączania przystanków ani zapowiedzi.
+Linie między przystankami są orientacyjne. Nawigacja zakręt po zakręcie oraz automatyczny numer zjazdu z ronda NIE są jeszcze zaimplementowane.
+Sprawdzone: lokalny build test APK, instalacja na JJMNQ8KBMFLFFQP7, minimapa i duży widok, realna pozycja GPS, zdjęcia Geoportalu. 41 kontroli z workflow przeszło lokalnie. Gesty dwoma palcami wymagają jeszcze fizycznego sprawdzenia użytkownika.
+Nowego pliku .011 nie generowano.

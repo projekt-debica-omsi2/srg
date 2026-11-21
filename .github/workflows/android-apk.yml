@@ -1,4 +1,4 @@
-name: Build SRGMobile 1.4.90 and SRGMobile Public
+name: Build SRGMobile 1.4.91 and SRGMobile Public
 on:
   workflow_dispatch:
   push:
@@ -51,7 +51,9 @@ jobs:
           node tests/test-omsi-classic.cjs
           node tests/test-omsi-camera.cjs
       - name: Test auto GPS stop switching
-        run: node tests/test-auto-gps.cjs
+        run: |
+          node tests/test-auto-gps.cjs
+          node tests/test-map-gps-cache.cjs
       - name: Test arrival and departure announcements
         run: node tests/test-voice-gps.cjs
       - name: Test LCD and RJ audio mapping
@@ -131,7 +133,7 @@ jobs:
       - name: Publish APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.edition == 'public' && 'SRGMobile-Public-1.4.90' || 'SRGMobile-1.4.90' }}
+          name: ${{ matrix.edition == 'public' && 'SRGMobile-Public-1.4.91' || 'SRGMobile-1.4.91' }}
           path: app/build/outputs/apk/release/app-release.apk
           if-no-files-found: error
 

@@ -1,0 +1,10 @@
+const fs=require('fs'),vm=require('vm'),assert=require('assert/strict');
+const h=fs.readFileSync('app/src/main/assets/index.html','utf8');
+const callback=h.match(/window.onNativeGpsCached=\(lat,lon,acc,ageMs\)=>\{[\s\S]*?\n\};/)[0];
+const ctx={window:{},state:{gpsLast:null},Date:{now:()=>100000}};vm.createContext(ctx);vm.runInContext(callback,ctx);
+ctx.window.onNativeGpsCached(50,21,10,40000);
+assert.equal(ctx.state.gpsLast.ts,60000);assert.equal(ctx.state.gpsLast.cached,true);
+const cached=ctx.state.gpsLast;ctx.window.onNativeGpsCached(51,22,10,0);assert.equal(ctx.state.gpsLast,cached);
+ctx.state.gpsLast=null;ctx.window.onNativeGpsCached(NaN,21,10,0);assert.equal(ctx.state.gpsLast,null);
+assert(!callback.includes('processAutoGpsFix'));assert(!callback.includes('processVoiceGpsFix'));
+console.log('PASS cached GPS preserves age, does not overwrite live fixes or advance/announce stops');
