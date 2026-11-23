@@ -9,7 +9,8 @@ import java.util.zip.GZIPInputStream;
 
 /** Read the public myBus SQLite schedule without executing database content. */
 public final class MksDatabase {
- static final String IDS="171,241,243,244,576,252,253,254,123,308,59,60,61,87,88,89,575";
+ static final String REQUIRED_IDS="171,241,243,244,576,252,253,254,123,308,59,60,61,87,88,89,575";
+ static final String IDS="40,59,60,61,64,65,66,87,88,89,100,123,171,235,236,237,238,239,240,241,243,244,252,253,254,308,465,469,474,574,575,576,685,686,690,691,692,693";
  static JSONArray query(SQLiteDatabase db,String sql) throws Exception {
   JSONArray rows=new JSONArray();try(Cursor c=db.rawQuery(sql,null)){while(c.moveToNext()){JSONObject row=new JSONObject();for(int i=0;i<c.getColumnCount();i++)if(!c.isNull(i))row.put(c.getColumnName(i),c.getString(i));rows.put(row);}}return rows;
  }
@@ -27,7 +28,7 @@ public final class MksDatabase {
   JSONObject result=new JSONObject().put("schema",1),byStop=new JSONObject(),dates=new JSONObject(),remarks=new JSONObject();
   if(versions.length()!=1)throw new IOException("Nieznana wersja bazy MKS");String from=versions.getJSONObject(0).getString("wazna_od");
   for(int i=0;i<stops.length();i++){JSONObject s=stops.getJSONObject(i);byStop.put(s.getString("id"),new JSONObject().put("name",s.getString("nazwa")).put("profiles",new JSONObject()));}
-  for(String id:IDS.split(","))if(!byStop.has(id))throw new IOException("Brak przystanku MKS "+id);
+  for(String id:REQUIRED_IDS.split(","))if(!byStop.has(id))throw new IOException("Brak przystanku MKS "+id);
   for(int i=0;i<calendar.length();i++){JSONObject c=calendar.getJSONObject(i);String day=c.getString("dt_kal").substring(0,10);java.time.LocalDate.parse(day);if(day.compareTo(from)>=0)dates.put(day,c.getString("td_rj"));}
   if(dates.length()==0||dates.length()>730)throw new IOException("Niepełny kalendarz MKS");
   for(int i=0;i<notes.length();i++){JSONObject n=notes.getJSONObject(i);remarks.put(n.getString("numer_lini").trim()+"/"+n.getString("ozn_uwagi"),n.getString("tresc_uwag"));}

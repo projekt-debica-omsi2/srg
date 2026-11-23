@@ -801,15 +801,15 @@
     "id": 115,
     "name": "SIEDLISKA-BOGUSZ",
     "text": "Siedliska-bogusz.",
-    "textHash": "6fa7dd65c51b2a2efe613b71adc82d389749d7b99fc3affccb9a3eaa77faa4a8",
-    "sha256": "4ed55ea56c1d4649950532fb6eb5826fa7b61a2e0dd98202633d7fd4aa35c7d8"
+    "textHash": "b0d485c34ad16bf3d5d63601c1bf31a462a991b5e62e2331e7cb73911994db33",
+    "sha256": "cd011a49f7857d0c62b3a1ca87908e0bc1d3a1f8000c1036060df0743dbb8564"
   },
   "P0074.mp3": {
     "id": 116,
     "name": "SIEDLISKA-BOGUSZ SKRZYŻOWANIE",
     "text": "Siedliska-bogusz, skrzyżowanie.",
-    "textHash": "23035f7a5a4d279d31c1dde1c68a42958ff8c20f358663764820b56ebfd62099",
-    "sha256": "9f2f717e28f223d3d6f4cdf480b74999e48b0975009dddf4db028d074a0cf1fe"
+    "textHash": "46ba61ea5ccb8984699545ebf119609f93adc69877a5a575d1b689038fe3b025",
+    "sha256": "27b96e0de717fb898cca763bf100b4a1310c0dc02b5608ab6a66b3b20bb2bd90"
   },
   "P0075.mp3": {
     "id": 117,
@@ -1256,15 +1256,15 @@
     "id": 180,
     "name": "SIEDLISKA-BOGUSZ SKRZYŻOWANIE",
     "text": "Siedliska-bogusz, skrzyżowanie.",
-    "textHash": "23035f7a5a4d279d31c1dde1c68a42958ff8c20f358663764820b56ebfd62099",
-    "sha256": "9f2f717e28f223d3d6f4cdf480b74999e48b0975009dddf4db028d074a0cf1fe"
+    "textHash": "46ba61ea5ccb8984699545ebf119609f93adc69877a5a575d1b689038fe3b025",
+    "sha256": "27b96e0de717fb898cca763bf100b4a1310c0dc02b5608ab6a66b3b20bb2bd90"
   },
   "P00B5.mp3": {
     "id": 181,
     "name": "SIEDLISKA-BOGUSZ",
     "text": "Siedliska-bogusz.",
-    "textHash": "6fa7dd65c51b2a2efe613b71adc82d389749d7b99fc3affccb9a3eaa77faa4a8",
-    "sha256": "4ed55ea56c1d4649950532fb6eb5826fa7b61a2e0dd98202633d7fd4aa35c7d8"
+    "textHash": "b0d485c34ad16bf3d5d63601c1bf31a462a991b5e62e2331e7cb73911994db33",
+    "sha256": "cd011a49f7857d0c62b3a1ca87908e0bc1d3a1f8000c1036060df0743dbb8564"
   },
   "P00B6.mp3": {
     "id": 182,
@@ -1396,29 +1396,29 @@
     "id": "K0008",
     "name": "ROPCZYCE DWORZEC AUTOBUSOWY > BRZEZINY BERDECHÓW",
     "text": "Kierunek: Ropczyce, dworzec autobusowy. Brzeziny berdechów.",
-    "textHash": "924897f108aa6783bd6f2e81af25fa8adad4e694f9a109e5a5dbf39573e5bff1",
-    "sha256": "df3fdd6788dbcc18d661b52cc13b9c097057e8a4b29803393964aab3cbd1b404"
+    "textHash": "0c6c35198559d7f0c85ea8eb775e72db87d43218cfc0888e05a2d3195bc763e3",
+    "sha256": "4c93f1c31c48abf870dbff5ff949b326f649a6a9a272be7e2435f24de68975fa"
   },
   "K0009.mp3": {
     "id": "K0009",
     "name": "BRZEZINY BERDECHÓW > ROPCZYCE MICKIEWICZA",
     "text": "Kierunek: Brzeziny berdechów. Ropczyce, mickiewicza.",
-    "textHash": "1f4e3ff5da4f857c588b7825747626bd46a0ffe53b893d564f8aade01c43c9f4",
-    "sha256": "6e4b35b0dbfd4472f0f90881ae9ad752c53ee24f8e4ae8bdf2b9c41a00d59c04"
+    "textHash": "e8ba12b17bcb96684ba7510560a38c466868abe691fb1e3d1769b00ebf0fc382",
+    "sha256": "ed35e4d616662c43b03ca184491599f93f34307f89cac77a21e0efb9a95b763b"
   },
   "K000A.mp3": {
     "id": "K000A",
     "name": "ROPCZYCE MICKIEWICZA > BRZEZINY BERDECHÓW",
     "text": "Kierunek: Ropczyce, mickiewicza. Brzeziny berdechów.",
-    "textHash": "46cf17e4ff7af9ece718e073fe9369b4eb29e6063f28d78a536e03a0e4e16ec7",
-    "sha256": "a3bd2ac12dcee53b24792ae462277cbef4e435311857f4de625789b573fe8b62"
+    "textHash": "0c6c35198559d7f0c85ea8eb775e72db87d43218cfc0888e05a2d3195bc763e3",
+    "sha256": "4c93f1c31c48abf870dbff5ff949b326f649a6a9a272be7e2435f24de68975fa"
   },
   "K000B.mp3": {
     "id": "K000B",
     "name": "BRZEZINY BERDECHÓW > ROPCZYCE DWORZEC AUTOBUSOWY",
     "text": "Kierunek: Brzeziny berdechów. Ropczyce, dworzec autobusowy.",
-    "textHash": "3521c8903d167d36aeae5306985fb1131a311274785c44a7cf5137b1bf31e1d8",
-    "sha256": "ce46c005f918d35cf9ba1e69c9b8834189465864cff6c1227bc200a86fe0fc18"
+    "textHash": "a7d345adaec779a6afe374e0a07cafcffe5118ff4cec2d4d8fc61ee5dfd4bdea",
+    "sha256": "07fb6b1e9e6658d9d6cc8630464c59f2966706419fdf26a2089109b6d84d63c0"
   },
   "K000C.mp3": {
     "id": "K000C",

@@ -1,0 +1,14 @@
+{
+  "source": "Geofabrik podkarpackie.osm.pbf — caly regionalny wyciag OpenStreetMap",
+  "license": "ODbL 1.0",
+  "bbox": [
+    21.116443,
+    48.985494,
+    23.59547,
+    50.839129
+  ],
+  "roads": 250244,
+  "places": 1630,
+  "sha256": "138a2bce72287ac0f1daf3ad24581ae9e5765e6216e97ee0ca6597998a28b535",
+  "satellite": "Geoportal GUGiK WMS, online"
+}

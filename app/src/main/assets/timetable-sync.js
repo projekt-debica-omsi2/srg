@@ -55,7 +55,7 @@
   }catch(e){const el=root.document?.getElementById('timetableSyncStatus');if(el)el.textContent='Nie udało się odczytać aktualizacji. Zachowano poprzedni rozkład.';}
  }
  root.SRGTimetableCache={apply,poll,mksRows};
- if(native){poll();root.setInterval(poll,15000);root.document?.addEventListener('visibilitychange',()=>{if(!root.document.hidden){native.check();poll();}});}
+ if(native){poll();root.setInterval(poll,15000);root.document?.addEventListener('visibilitychange',()=>{if(!root.document.hidden){poll();}});}
  for(const [id,flag] of [['restoreBundledTimetable',true],['resumeTimetableUpdates',false]]){
   const el=root.document?.getElementById(id);if(el)el.addEventListener('click',()=>{
    const status=root.document.getElementById('timetableSyncStatus');

@@ -1,5 +1,7 @@
 plugins { id 'com.android.application' }
 def publicEdition = providers.gradleProperty('srgPublic').getOrElse('false').toBoolean()
+def gpsTestEdition = providers.gradleProperty('srgGpsTest').getOrElse('false').toBoolean()
+
 def testEdition = providers.gradleProperty('srgTest').getOrElse('false').toBoolean()
 
 android {
@@ -7,14 +9,15 @@ android {
     compileSdk 35
 
     defaultConfig {
-        applicationId testEdition ? 'pl.srgmobile.test' : publicEdition ? 'pl.srgmobile.publicapp' : 'pl.srgmobile.classic.lcd23'
+        applicationId gpsTestEdition ? 'pl.srgmobile.testgps' : testEdition ? 'pl.srgmobile.test' : publicEdition ? 'pl.srgmobile.publicapp' : 'pl.srgmobile.classic.lcd23'
         minSdk 26
         targetSdk 34
-        versionCode 11491
-        versionName '1.4.91'
-        if (testEdition) versionNameSuffix '-test'
+        versionCode 11495
+        versionName '1.4.95'
+        if (gpsTestEdition) versionNameSuffix '-testgps'
+        else if (testEdition) versionNameSuffix '-test'
         buildConfigField 'boolean', 'SRG_PUBLIC', publicEdition.toString()
-        manifestPlaceholders = [appLabel: testEdition ? 'SRGMobile Test' : publicEdition ? 'SRGMobile Public' : 'SRGMobile']
+        manifestPlaceholders = [appLabel: gpsTestEdition ? 'SRGMobile TestGPS' : testEdition ? 'SRGMobile Test' : publicEdition ? 'SRGMobile Public' : 'SRGMobile']
     }
     buildFeatures { buildConfig true }
     if (publicEdition) {
@@ -47,7 +50,8 @@ android {
 if (publicEdition) {
     tasks.register('preparePublicAssets', Exec) {
         workingDir rootProject.projectDir
-        commandLine 'python3', 'tools/prepare_public.py', '--output', layout.buildDirectory.dir('generated/publicAssets').get().asFile.absolutePath
+        def pythonCommand = providers.gradleProperty('srgPython').getOrElse(System.getProperty('os.name').toLowerCase().contains('windows') ? 'python' : 'python3')
+        commandLine pythonCommand, 'tools/prepare_public.py', '--output', layout.buildDirectory.dir('generated/publicAssets').get().asFile.absolutePath
         inputs.dir 'src/main/assets'
         inputs.file rootProject.file('tools/prepare_public.py')
         outputs.dir layout.buildDirectory.dir('generated/publicAssets')
@@ -56,6 +60,7 @@ if (publicEdition) {
 }
 
 dependencies {
+    implementation 'androidx.core:core:1.13.1'
     implementation 'com.github.mik3y:usb-serial-for-android:3.8.1'
     implementation 'org.jsoup:jsoup:1.18.3'
     testImplementation 'junit:junit:4.13.2'
@@ -69,3 +74,6 @@ gradle.taskGraph.whenReady { graph ->
         }
     }
 }
+
+// Only the separate TestGPS package permits arbitrary HTTP test servers.
+android.sourceSets.debug.res.srcDirs += gpsTestEdition ? ['src/testgps/res'] : []

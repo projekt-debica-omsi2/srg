@@ -1,0 +1,65 @@
+{
+  "checkedOn": "2026-11-22",
+  "stop": "Pilzno Zajezdnia",
+  "scope": "Potwierdzeni przewoźnicy i kierunki, nie gwarantuje kompletności wszystkich operatorów. Samego katalogu nie zastosowano jako rozkładu odjazdów.",
+  "carriers": [
+    {
+      "carrier": "PKS Dębica / serwis Monis",
+      "directions": [
+        "Dębica D.A.",
+        "Grudna przez Jaworze Dolne",
+        "Jaworze Górne przez Jaworze Dolne",
+        "Bączałka",
+        "Brzostek przez Bielowy",
+        "Jodłowa",
+        "Klecie",
+        "Słotowa",
+        "Zwiernik",
+        "lokalne kursy okrężne Pilzno–Pilzno"
+      ],
+      "source": "http://www.pks-debica.pl/Rozklad-jazdy",
+      "stopSelection": "220 — Pilzno Zajezdnia",
+      "scheduleRowsDownloaded": 113
+    },
+    {
+      "carrier": "Miś",
+      "directions": [
+        "Warszawa przez Dębicę, Mielec, Opatów, Ostrowiec i Radom",
+        "Gorlice przez Brzostek, Kołaczyce, Jasło, Skołyszyn, Biecz, Libuszę, Zagórzany"
+      ],
+      "source": "https://miskrosno.pl/gorlice-warszawa/"
+    },
+    {
+      "carrier": "Barbara",
+      "directions": [
+        "Kraków",
+        "Krosno przez Brzostek, Kołaczyce i Jasło"
+      ],
+      "sources": [
+        "https://barbara.net.pl/rozklad-pdf/?line=27",
+        "https://barbara.net.pl/rozklad-pdf/?line=28"
+      ]
+    },
+    {
+      "carrier": "TravelPL",
+      "directions": [
+        "Bytom przez Tarnów, Brzesko, Kraków, Olkusz, Dąbrowę Górniczą i Katowice",
+        "Polańczyk przez Jasło, Krosno, Iwonicz-Zdrój, Rymanów, Sanok, Lesko i Solinę"
+      ],
+      "source": "https://travelpl.pl/ab_modules/polanczyk-bytom-polanczyk_7.html"
+    },
+    {
+      "carrier": "Ludbus",
+      "directions": [
+        "Tarnów przez Machową",
+        "Tarnów przez Łęki Górne i Skrzyszów"
+      ],
+      "sources": [
+        "https://www.ludbus.pl/pdf/tarnow-machowa-pilzno.pdf",
+        "https://www.ludbus.pl/pdf/tarnow-lekigorne-pilzno.pdf",
+        "https://skrzyszow.pl/pl/274/0/komunikacja.html"
+      ],
+      "note": "Potwierdzone relacje; bez wdrożenia godzin powrotnych do przesiadek."
+    }
+  ]
+}

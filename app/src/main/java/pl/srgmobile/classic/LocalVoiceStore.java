@@ -25,6 +25,7 @@ import java.util.function.Supplier;
 /** All synthesis and generated audio stay in app-private storage. No network voices. */
 final class LocalVoiceStore {
     private final Activity activity;
+    private final AnnouncementOutput output;
     private final Consumer<String> notice;
     private final Supplier<Float> volume;
     private final SharedPreferences prefs;
@@ -40,7 +41,7 @@ final class LocalVoiceStore {
     private int completed,total,serial;
     private Runnable timeout;
     LocalVoiceStore(Activity activity,Consumer<String> notice,Supplier<Float> volume){
-        this.activity=activity;this.notice=notice;this.volume=volume;
+        this.activity=activity;this.notice=notice;this.volume=volume;output=new AnnouncementOutput(activity);
         prefs=activity.getSharedPreferences("local-voices",0);
         directory=new File(activity.getFilesDir(),"offline-announcements");
         directory.mkdirs();
@@ -96,12 +97,12 @@ final class LocalVoiceStore {
     void speak(String text){
         if(text==null||text.trim().isEmpty()||text.length()>1000||closed)return;
         if(generating){notice.accept("Trwa generowanie zapowiedzi. Zaczekaj lub naciśnij Anuluj.");return;}
-        ensure(()->{stopPlayback();File file=cached(text);
-            if(valid(file)){try{player=new MediaPlayer();player.setDataSource(file.getAbsolutePath());player.setVolume(volume.get(),volume.get());player.setOnCompletionListener(p->stopPlayback());player.setOnErrorListener((p,w,e)->{stopPlayback();speakLive(text);return true;});player.prepare();player.start();return;}catch(Exception e){stopPlayback();}}
+        ensure(()->{stopPlayback();if(!output.playbackAllowed()){notice.accept("Wybrane radio Bluetooth nie jest połączone.");return;}File file=cached(text);
+            if(valid(file)){try{player=new MediaPlayer();player.setAudioAttributes(AnnouncementFocus.attributes());player.setDataSource(file.getAbsolutePath());if(!output.apply(player)){stopPlayback();notice.accept("Nie wybrano wyjścia Bluetooth.");return;}player.setVolume(volume.get(),volume.get());player.setOnCompletionListener(p->stopPlayback());player.setOnErrorListener((p,w,e)->{stopPlayback();speakLive(text);return true;});player.prepare();player.start();return;}catch(Exception e){stopPlayback();}}
             speakLive(text);
         });
     }
-    private void speakLive(String text){Bundle params=new Bundle();params.putFloat(TextToSpeech.Engine.KEY_PARAM_VOLUME,volume.get());tts.speak(text,TextToSpeech.QUEUE_FLUSH,params,"live");}
+    private void speakLive(String text){if(!output.playbackAllowed()){notice.accept("Wybrane radio Bluetooth nie jest połączone.");return;}tts.setAudioAttributes(AnnouncementFocus.attributes());Bundle params=new Bundle();params.putFloat(TextToSpeech.Engine.KEY_PARAM_VOLUME,volume.get());tts.speak(text,TextToSpeech.QUEUE_FLUSH,params,"live");}
     void generate(String json){
         if(generating){notice.accept("Generowanie już trwa.");return;}
         final LinkedHashSet<String> texts=new LinkedHashSet<>();

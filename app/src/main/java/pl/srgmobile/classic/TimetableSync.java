@@ -18,6 +18,7 @@ import java.util.regex.*;
 
 public final class TimetableSync {
     private static final AtomicBoolean busy=new AtomicBoolean();
+    private static final ThreadLocal<Boolean> manualDownload=new ThreadLocal<>();
     private static final ExecutorService executor=Executors.newSingleThreadExecutor();
     private static final Object lock=new Object();
     private static final int JOB=1455;
@@ -25,7 +26,7 @@ public final class TimetableSync {
     private static final String[][] STATIONS={{"rzeszow-da","rzeszow-glowny"},{"debica-da","debica"},{"sedziszow-grunwaldzka","sedziszow-malopolski-wschodni"}};
     static boolean bundled(Context c){return c.getSharedPreferences("timetables",Context.MODE_PRIVATE).getBoolean("useBundled",false);}
     static Network wifi(Context c){
-        if(bundled(c))return null;
+        if(!Boolean.TRUE.equals(manualDownload.get())||bundled(c))return null;
         ConnectivityManager cm=(ConnectivityManager)c.getSystemService(Context.CONNECTIVITY_SERVICE);
         for(Network n:cm.getAllNetworks()){NetworkCapabilities cap=cm.getNetworkCapabilities(n);if(cap!=null&&cap.hasTransport(NetworkCapabilities.TRANSPORT_WIFI)&&cap.hasCapability(NetworkCapabilities.NET_CAPABILITY_VALIDATED)&&!cap.hasTransport(NetworkCapabilities.TRANSPORT_VPN))return n;}
         return null;
@@ -99,14 +100,11 @@ public final class TimetableSync {
         Context app=c.getApplicationContext();executor.execute(()->{try{run(app,cancelled);}finally{busy.set(false);if(done!=null)done.run();}});
     }
     public static void install(Context c){
-        JobScheduler scheduler=(JobScheduler)c.getSystemService(Context.JOB_SCHEDULER_SERVICE);
-        if(scheduler.getPendingJob(JOB)==null){
-            JobInfo.Builder b=new JobInfo.Builder(JOB,new ComponentName(c,TimetableSyncJob.class)).setPeriodic(15*60*1000L).setPersisted(true);
-            if(Build.VERSION.SDK_INT>=28)b.setRequiredNetwork(new NetworkRequest.Builder().addTransportType(NetworkCapabilities.TRANSPORT_WIFI).addCapability(NetworkCapabilities.NET_CAPABILITY_INTERNET).build());
-            else b.setRequiredNetworkType(JobInfo.NETWORK_TYPE_ANY);
-            scheduler.schedule(b.build());
-        }
-        start(c,new AtomicBoolean(),null);
+        ((JobScheduler)c.getSystemService(Context.JOB_SCHEDULER_SERVICE)).cancel(JOB);
+    }
+    static void manualCheck(Context c){
+        if(!busy.compareAndSet(false,true))return;
+        Context app=c.getApplicationContext();executor.execute(()->{manualDownload.set(true);try{run(app,new AtomicBoolean());}finally{manualDownload.remove();busy.set(false);}});
     }
     public static final class Bridge {
         private final Context context;
@@ -115,7 +113,7 @@ public final class TimetableSync {
         @JavascriptInterface public String setMksProxy(String address){
             try{String normalized=MksDirectApi.proxyAddress(address);
                 if(!context.getSharedPreferences("timetables",Context.MODE_PRIVATE).edit().putString("mksProxyUrl",normalized).commit())return "Nie zapisano proxy";
-                check();return normalized.isEmpty()?"Wybrano bezpośrednie API MKS":"Zapisano proxy MKS. Pobieranie przez Wi-Fi; przywrócony stary rozkład nadal wstrzymuje aktualizacje.";
+                return normalized.isEmpty()?"Wybrano bezpośrednie API MKS":"Zapisano proxy MKS. Pobieranie przez Wi-Fi; przywrócony stary rozkład nadal wstrzymuje aktualizacje.";
             }catch(Exception e){return "Nie zapisano proxy: "+e.getMessage();}
         }
         @JavascriptInterface public String mksSource(){return TimetableSync.mksSource(context);}
@@ -128,15 +126,15 @@ public final class TimetableSync {
                 context.getSharedPreferences("timetables",Context.MODE_PRIVATE).edit().putString("mksUrl",address).apply();
                 // The next check uses the new endpoint; the previous good data is retained.
                 synchronized(lock){JSONObject data=read(context);obj(data,"checked").remove("mks");save(context,data);}
-                check();return address.isEmpty()?"Wyłączono pobieranie MKS; zachowano ostatnią kopię.":"Zapisano źródło MKS. Pobieranie przy dostępnym Wi-Fi.";
+                return address.isEmpty()?"Wyłączono pobieranie MKS; zachowano ostatnią kopię.":"Zapisano źródło MKS. Pobieranie przy dostępnym Wi-Fi.";
             }catch(Exception e){return "Nie zapisano źródła: "+e.getMessage();}
         }
         @JavascriptInterface public boolean useBundled(boolean value){
             boolean ok=context.getSharedPreferences("timetables",Context.MODE_PRIVATE).edit().putBoolean("useBundled",value).commit();
-            if(ok&&!value)check();return ok;
+            return ok;
         }
         @JavascriptInterface public String snapshot(){return bundled(context)?"{\"useBundled\":true}":read(context).toString();}
-        @JavascriptInterface public String status(){return bundled(context)?"Przywrócono rozkład z aplikacji — aktualizacje wstrzymane":busy.get()?"Pobieranie rozkładów przez Wi-Fi":wifi(context)!=null?"Wi-Fi dostępne — sprawdzanie co 6 godzin":"Offline — oczekiwanie na Wi-Fi z Internetem";}
-        @JavascriptInterface public void check(){start(context,new AtomicBoolean(),null);}
+        @JavascriptInterface public String status(){return bundled(context)?"Przywrócono rozkład z aplikacji — aktualizacje wstrzymane":busy.get()?"Pobieranie rozkładów przez Wi-Fi":wifi(context)!=null?"Pobieranie tylko na żądanie":"Offline — oczekiwanie na Wi-Fi z Internetem";}
+        @JavascriptInterface public void check(){manualCheck(context);}
     }
 }

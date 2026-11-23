@@ -1,0 +1,101 @@
+{
+  "source": "http://rj.mks.debica.pl/AndroidService/SchedulesService.svc/GetScheduleFile",
+  "downloadedOn": "2026-11-22",
+  "validFrom": "2026-11-02",
+  "calendarFrom": "2026-11-16",
+  "calendarTo": "2026-12-31",
+  "nativeToMks": {
+    "138": [
+      693
+    ],
+    "139": [
+      692
+    ],
+    "140": [
+      685
+    ],
+    "141": [
+      474
+    ],
+    "142": [
+      574
+    ],
+    "143": [
+      235
+    ],
+    "144": [
+      236
+    ],
+    "145": [
+      237
+    ],
+    "146": [
+      238
+    ],
+    "147": [
+      239
+    ],
+    "148": [
+      240
+    ],
+    "149": [
+      66
+    ],
+    "150": [
+      64
+    ],
+    "151": [
+      65
+    ],
+    "152": [
+      100
+    ],
+    "153": [
+      40
+    ],
+    "154": [
+      465
+    ],
+    "155": [
+      469
+    ],
+    "156": [
+      686
+    ],
+    "157": [
+      690
+    ],
+    "158": [
+      691
+    ]
+  },
+  "expectedNames": {
+    "138": "PODGRODZIE /PĘTLA",
+    "139": "PODGRODZIE 2",
+    "140": "PODGRODZIE 1",
+    "141": "LATOSZYN E40",
+    "142": "DĘBICA KRAKOWSKA RONDO",
+    "143": "DĘBICA KRAKOWSKA KĘPA",
+    "144": "DĘBICA KRAKOWSKA SZPITAL",
+    "145": "DĘBICA OSIEDLE MATEJKI",
+    "146": "DĘBICA OSIEDLE CHEMIK",
+    "147": "DĘBICA OSIEDLE METALOWIEC",
+    "148": "DĘBICA KRAKOWSKA KLASZTOR",
+    "149": "DĘBICA OSIEDLE METALOWIEC",
+    "150": "DĘBICA OSIEDLE CHEMIK",
+    "151": "DĘBICA OSIEDLE MATEJKI",
+    "152": "DĘBICA KRAKOWSKA SZPITAL",
+    "153": "DĘBICA KRAKOWSKA KĘPA",
+    "154": "LATOSZYN OBWODNICA (STARZYŃSKIEGO)",
+    "155": "LATOSZYN E40",
+    "156": "PODGRODZIE 1",
+    "157": "PODGRODZIE 2",
+    "158": "PODGRODZIE/PĘTLA"
+  },
+  "physicalSides": "Oddzielne ID; bez mieszania odjazdów przeciwnych stron. Nieaktywne 469 i 691 zachowują pusty rozkład, nie zapożyczają odjazdów z przeciwnej strony.",
+  "pilzno": "MKS PILZNO 400/403 bez odjazdów; nie przypisywać ich do Pilzno Zajezdnia.",
+  "sourceSha256": "ef61aaa28884f851f809199e13f4adde8fd094761ff07676261f790854f0aa7a",
+  "mksStopCount": 38,
+  "departureCount": 5616,
+  "notPublished": true
+}

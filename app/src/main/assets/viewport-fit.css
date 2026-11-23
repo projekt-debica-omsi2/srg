@@ -1,0 +1,40 @@
+/* Keep the classic panels; make every control reachable at small window sizes. */
+html,body{max-width:100%;min-width:0;overscroll-behavior:none}
+.app{width:100%;height:var(--srg-visible-height,100dvh);min-height:0;grid-template-columns:clamp(68px,9vw,116px) minmax(0,1fr)}
+.content{min-width:0;min-height:0}
+.view{min-width:0;min-height:0;max-width:100%;overflow-y:auto;overflow-x:hidden;overscroll-behavior:contain}
+.view.active>*{flex-shrink:0}
+.rail{min-height:0;overflow-y:auto;overscroll-behavior:contain}
+.rail>*{flex-shrink:0}.railBottom{flex-shrink:0}
+.view input,.view select,.view textarea{max-width:100%;min-width:0}
+.view button{min-width:0;overflow-wrap:anywhere}
+.top,.flowTop{min-height:42px;height:auto;flex-wrap:wrap;gap:6px}
+.dest{height:auto;min-height:60px;min-width:0;grid-template-columns:minmax(46px,75px) minmax(0,1fr)}
+#courseDest,#omsiUicourseDest{min-width:0;white-space:normal;overflow-wrap:anywhere;padding:8px;font-size:clamp(18px,2.3vw,29px);line-height:1.15}
+.meta>div,.transCard,.gpsCard,.flowField,.tripCard{min-width:0;overflow-wrap:anywhere}
+#courseCurrent,#omsiUicourseCurrent{height:auto;min-height:60px;white-space:normal;overflow-wrap:anywhere;line-height:1.25}
+#course .upcoming,#omsiCourse .upcoming{width:auto;white-space:normal;overflow-wrap:anywhere}
+.confirmBox,.driverChangeBox,.coursePickerBox,.logoutOptionsBox{max-width:calc(100vw - 24px);max-height:calc(var(--srg-visible-height,100dvh) - 24px);overflow:auto}
+.mapSettings{min-height:0;max-width:100%;overflow-y:auto;overflow-x:hidden}.mapSettings>*{flex-shrink:0}.mapSettings label{flex-wrap:wrap;overflow-wrap:anywhere}
+#courseMapBox.expanded{position:fixed;inset:54px 8px 82px calc(clamp(68px,9vw,116px) + 8px);min-height:0;max-height:none;width:auto;height:auto}
+@media(max-width:900px){
+ .idleGrid{grid-template-columns:minmax(0,1fr);padding:12px;gap:12px;flex:none}.calendarCard{min-width:0}
+ .settingsTiles{grid-template-columns:repeat(2,minmax(0,1fr));padding:12px;gap:10px;grid-auto-rows:minmax(90px,auto);flex:none;overflow:visible}
+ .settingTile{font-size:clamp(14px,2.2vw,20px);min-height:90px}.settingTile b{font-size:clamp(24px,4vw,38px)}
+ .gpsWrap,.rjWrap{grid-template-columns:minmax(0,1fr);flex:none;overflow:visible;min-height:0}
+ .transCard pre{white-space:pre-wrap;overflow-wrap:anywhere;max-width:100%}
+ .driverFlow .flowBody{display:flex;flex-direction:column;flex:none;min-height:0}.driverFlow .taskLeft{min-height:260px;flex:none}
+ .driverFlow .taskRight{padding:12px;min-width:0}.taskItem{white-space:normal;overflow-wrap:anywhere}
+ .tripCard{width:100%;padding:12px}.tripBox{height:auto;min-height:48px;overflow-wrap:anywhere;white-space:normal}
+ .meta{gap:10px!important;padding:16px 4px!important}.controls{max-width:100%;gap:6px!important}
+}
+@media(max-width:600px){
+ #course .controls,#omsiCourse .controls{width:100%;grid-template-columns:repeat(4,minmax(0,1fr));margin-left:0}
+ #course .controls .logout,#omsiCourse .controls .logout{grid-column:1/-1;min-height:44px;justify-self:end;width:140px}
+ #course .sched,#omsiCourse .sched{grid-template-columns:minmax(0,1fr);grid-template-areas:'bar' 'delay' 'upcoming'}
+ .top,.flowTop{font-size:clamp(14px,4vw,20px)}.clock{font-size:clamp(14px,4vw,20px)}
+ .rgTiles{grid-template-columns:repeat(2,minmax(0,1fr));grid-auto-rows:minmax(90px,auto);flex:none}.rgTile{font-size:16px;min-height:90px}
+ .transButtons,.gpsBtns{flex-wrap:wrap}.transButtons button,.gpsBtns button{height:auto;min-height:44px;white-space:normal}
+}
+@media(orientation:portrait){html[data-device=phone] #courseMapBox.expanded{left:8px;bottom:88px}}
+@media(orientation:landscape) and (max-height:500px){.dest{min-height:44px}.top,.flowTop{min-height:34px}.rail .iconBtn,.rail .courseBtn,.rail .menuBtn{min-height:40px;height:44px!important}.rail .version{font-size:9px}.view{padding-top:4px!important}.settingsTiles{padding:6px}.meta{padding:10px 2px!important}}

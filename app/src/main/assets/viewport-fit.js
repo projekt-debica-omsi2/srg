@@ -1,0 +1,1 @@
+(()=>{'use strict';const root=document.documentElement;function fit(){const view=window.visualViewport;const h=Math.max(160,Math.round(view?.height||window.innerHeight));root.style.setProperty('--srg-visible-height',h+'px');}fit();window.addEventListener('resize',fit);window.visualViewport?.addEventListener('resize',fit);})();

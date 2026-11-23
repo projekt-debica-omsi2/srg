@@ -1,4 +1,4 @@
-name: Build SRGMobile 1.4.91 and SRGMobile Public
+name: Build SRGMobile 1.4.95 and SRGMobile Public
 on:
   workflow_dispatch:
   push:
@@ -87,6 +87,7 @@ jobs:
           node tests/test-timetable-cache.cjs
           node tests/test-mks-debica.cjs
           node tests/test-mks-network.cjs
+          node tests/test-mks-grudna.cjs
           node tests/test-train-transfers.cjs
           node tests/test-road-progress.cjs
           node tests/test-schedule-deviation.cjs
@@ -133,7 +134,7 @@ jobs:
       - name: Publish APK artifact
         uses: actions/upload-artifact@v4
         with:
-          name: ${{ matrix.edition == 'public' && 'SRGMobile-Public-1.4.91' || 'SRGMobile-1.4.91' }}
+          name: ${{ matrix.edition == 'public' && 'SRGMobile-Public-1.4.95' || 'SRGMobile-1.4.95' }}
           path: app/build/outputs/apk/release/app-release.apk
           if-no-files-found: error
 

@@ -806,14 +806,14 @@
       "id": 115,
       "file": "P0073.mp3",
       "name": "SIEDLISKA-BOGUSZ",
-      "text": "Siedliska-bogusz.",
+      "text": "Siedliska Bogusz.",
       "onRequest": false
     },
     {
       "id": 116,
       "file": "P0074.mp3",
       "name": "SIEDLISKA-BOGUSZ SKRZYŻOWANIE",
-      "text": "Siedliska-bogusz, skrzyżowanie.",
+      "text": "Siedliska Bogusz skrzyżowanie.",
       "onRequest": false
     },
     {
@@ -1261,14 +1261,14 @@
       "id": 180,
       "file": "P00B4.mp3",
       "name": "SIEDLISKA-BOGUSZ SKRZYŻOWANIE",
-      "text": "Siedliska-bogusz, skrzyżowanie.",
+      "text": "Siedliska Bogusz skrzyżowanie.",
       "onRequest": false
     },
     {
       "id": 181,
       "file": "P00B5.mp3",
       "name": "SIEDLISKA-BOGUSZ",
-      "text": "Siedliska-bogusz.",
+      "text": "Siedliska Bogusz.",
       "onRequest": false
     },
     {
@@ -1403,28 +1403,28 @@
       "id": "K0008",
       "file": "K0008.mp3",
       "name": "ROPCZYCE DWORZEC AUTOBUSOWY > BRZEZINY BERDECHÓW",
-      "text": "Kierunek: Ropczyce, dworzec autobusowy. Brzeziny berdechów.",
+      "text": "Kierunek Brzeziny Berdechów.",
       "onRequest": false
     },
     {
       "id": "K0009",
       "file": "K0009.mp3",
       "name": "BRZEZINY BERDECHÓW > ROPCZYCE MICKIEWICZA",
-      "text": "Kierunek: Brzeziny berdechów. Ropczyce, mickiewicza.",
+      "text": "Kierunek Ropczyce, Mickiewicza.",
       "onRequest": false
     },
     {
       "id": "K000A",
       "file": "K000A.mp3",
       "name": "ROPCZYCE MICKIEWICZA > BRZEZINY BERDECHÓW",
-      "text": "Kierunek: Ropczyce, mickiewicza. Brzeziny berdechów.",
+      "text": "Kierunek Brzeziny Berdechów.",
       "onRequest": false
     },
     {
       "id": "K000B",
       "file": "K000B.mp3",
       "name": "BRZEZINY BERDECHÓW > ROPCZYCE DWORZEC AUTOBUSOWY",
-      "text": "Kierunek: Brzeziny berdechów. Ropczyce, dworzec autobusowy.",
+      "text": "Kierunek Ropczyce, dworzec autobusowy.",
       "onRequest": false
     },
     {

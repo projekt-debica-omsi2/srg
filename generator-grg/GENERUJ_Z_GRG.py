@@ -66,9 +66,10 @@ def spoken(name):
             name=city+', '+name[len(city)+1:];break
     # A comma gives a short natural break without changing voice or speech rate.
     name=name.replace('/', ', ')
-    for place in ['Jaworze dolne','Jaworze górne','Siedliska-bogusz','Łączki kucharskie','Wielopole skrzyńskie','Smarżowa','Gorzejowa','Latoszyn','Podgrodzie','Pilzno','Świlcza']:
+    for place in ['Jaworze dolne','Jaworze górne','Łączki kucharskie','Wielopole skrzyńskie','Smarżowa','Gorzejowa','Latoszyn','Podgrodzie','Pilzno','Świlcza']:
         if name.casefold().startswith(place.casefold()+' '):
             name=name[:len(place)]+', '+name[len(place)+1:];break
+    name=re.sub(r'Siedliska[- ]bogusz', 'Siedliska Bogusz', name, flags=re.I)
     # Keep the user's approved acronym pronunciation; do not phoneticize MKS.
     for code,words in [('OSP','o es pe'),('MKS','MKS')]:name=re.sub(r'\b'+code+r'\b',words,name,flags=re.I)
     if re.fullmatch(r'Dębica, rzeszowska MKS',name,re.I):
@@ -86,7 +87,7 @@ def make_plan(path):
         if code in conflicts:continue
         name=names[0];parts=name.split('>')
         text=('Kierunek: '+spoken(parts[0].strip())+' '+spoken(parts[1].strip())) if len(parts)==2 else 'Kierunek: '+spoken(name)
-        text={'K000C':'Kierunek Dębica przez Jaworze Dolne.','K000D':'Kierunek Rzeszów.','K000E':'Kierunek Dębica.','K000F':'Kierunek Grudna.','K0010':'Kierunek Grudna.'}.get(code,text)
+        text={'K0008':'Kierunek Brzeziny Berdechów.','K0009':'Kierunek Ropczyce, Mickiewicza.','K000A':'Kierunek Brzeziny Berdechów.','K000B':'Kierunek Ropczyce, dworzec autobusowy.','K000C':'Kierunek Dębica przez Jaworze Dolne.','K000D':'Kierunek Rzeszów.','K000E':'Kierunek Dębica.','K000F':'Kierunek Grudna.','K0010':'Kierunek Grudna.'}.get(code,text)
         direction_jobs.append({'id':code,'file':code+'.mp3','name':name,'text':text,'onRequest':False})
     return {'source':str(path),'sourceSHA256':sha,'voice':VOICE,'rate':RATE,'jobs':jobs,'directionJobs':direction_jobs,'directions':routes,'directionCodeConflicts':conflicts}
 

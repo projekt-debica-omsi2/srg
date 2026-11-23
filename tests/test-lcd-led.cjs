@@ -1,0 +1,11 @@
+const assert=require('node:assert/strict'),fs=require('node:fs'),vm=require('node:vm');
+const c={};vm.createContext(c);for(const f of ['lcd-cycle.js','lcd-led.js'])vm.runInContext(fs.readFileSync('app/src/main/assets/'+f,'utf8'),c);
+const d={kursAktywny:true,kursId:'S24-1',linia:'1',kierunek:'Dębica',aktualnyIndeks:1,przystanki:[{nazwa:'Grudna'},{nazwa:'A',ulica:'Jaworze'},{nazwa:'B',ulica:'Jaworze'},{nazwa:'C',ulica:'Pilzno'}],nastepny:{nazwa:'Pilzno'},aktualny:{nazwa:'Jaworze',naZadanie:true},lcdConfig:{steps:[{type:'route',seconds:5},{type:'clock',seconds:10}]}};
+assert.equal(c.SRGLcdLed.header(d,100000).text,'1 · Dębica · TRASA: Jaworze — Pilzno');
+assert.equal(c.SRGLcdLed.header(d,104999).type,'route');assert.equal(c.SRGLcdLed.header(d,105000).type,'clock');assert.equal(c.SRGLcdLed.header(d,114999).type,'clock');assert.equal(c.SRGLcdLed.header(d,115000).type,'route');
+d.lcdManual={type:'next',name:'Dobrków',naZadanie:true,index:2,anchorIndex:1,courseKey:'S24-1',expiresAt:140000};
+assert.equal(c.SRGLcdLed.header(d,120000).text,'NASTĘPNY PRZYSTANEK: Dobrków · NA ŻĄDANIE');
+d.lcdManual.courseKey='old';assert.equal(c.SRGLcdLed.header(d,120001).type,'route');
+assert.equal(c.SRGLcdLed.header({kursAktywny:false,clock:'19:05'},120000).text,'19:05');
+assert.equal(c.SRGLcdLed.header({kursAktywny:false,clock:'19:05:42'},120000).text,'19:05');
+console.log('PASS: LED uses LCD timing, remaining streets, manual stop identity and inactive clock');

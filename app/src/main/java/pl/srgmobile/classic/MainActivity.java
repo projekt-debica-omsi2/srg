@@ -42,6 +42,10 @@ public final class MainActivity extends Activity implements LocationListener {
     private float voiceVolume = 0.9f;
     private WebView web;
     private OmsiBridge omsi;
+    private FleetBridge fleet;
+    private IpixelBridge ipixel;
+    private AnnouncementOutput announcementOutput;
+    private ApkUpdates apkUpdates;
     private LocationManager gps;
     private boolean requested = false;
     private boolean listening = false;
@@ -52,6 +56,8 @@ public final class MainActivity extends Activity implements LocationListener {
     private final Handler handler = new Handler(Looper.getMainLooper());
     private GnssStatus.Callback satCallback;
     private MediaPlayer voicePlayer;
+    private AnnouncementFocus announcementFocus;
+    private boolean acquireAnnouncementFocus(){if(announcementFocus==null)announcementFocus=new AnnouncementFocus(this,()->stopVoice());return announcementFocus.acquire();}
     private final ArrayDeque<String> pendingVoice = new ArrayDeque<>();
     private LocalPanelServer lcdServer;
     private int chimeIndex = 1;
@@ -76,6 +82,7 @@ public final class MainActivity extends Activity implements LocationListener {
         WebSettings cfg = web.getSettings();
         cfg.setJavaScriptEnabled(true);
         cfg.setDomStorageEnabled(true);
+        cfg.setBlockNetworkLoads(!getSharedPreferences("fleet",MODE_PRIVATE).getBoolean("enabled",false));
         cfg.setDefaultTextEncodingName("UTF-8");
         cfg.setAllowFileAccess(true);
         cfg.setAllowContentAccess(false);
@@ -125,6 +132,7 @@ public final class MainActivity extends Activity implements LocationListener {
             }
         });
         if(!BuildConfig.SRG_PUBLIC)TimetableSync.install(this);
+        fleet=new FleetBridge(this,web);web.addJavascriptInterface(fleet,"SRGFleetNative");
         web.addJavascriptInterface(new LocalFilesBridge(),"SRGLocalFiles");
         web.addJavascriptInterface(new LocalSpeechBridge(),"SRGLocalVoice");
         web.addJavascriptInterface(new TimetableSync.Bridge(this), "SRGTimetables");
@@ -139,6 +147,9 @@ public final class MainActivity extends Activity implements LocationListener {
         web.addJavascriptInterface(omsi, "SRGOmsiNative");
         web.addJavascriptInterface(new AudioBridge(), "SRGNativeAudio");
         web.addJavascriptInterface(new LcdBridge(), "SRGLcd");
+        ipixel=new IpixelBridge(this);web.addJavascriptInterface(ipixel,"SRGIpixel");
+        announcementOutput=new AnnouncementOutput(this);web.addJavascriptInterface(announcementOutput,"SRGAudioOutput");
+        apkUpdates=new ApkUpdates(this);web.addJavascriptInterface(apkUpdates,"SRGApkUpdates");
         rgUsb = new RgUsbBridge(this, web);
         web.addJavascriptInterface(rgUsb, "SRGRgUsb");
         ibisUsb = new RgUsbBridge(this, web, "IBIS", "ibisUsbEvent");
@@ -193,7 +204,7 @@ public final class MainActivity extends Activity implements LocationListener {
         return localVoices;
     }
     public final class LocalSpeechBridge {
-        @JavascriptInterface public void speak(String text){if(text!=null&&text.length()<=1000)runOnUiThread(()->localVoices().speak(text));}
+        @JavascriptInterface public void speak(String text){if(text!=null&&text.length()<=1000)runOnUiThread(()->{if(acquireAnnouncementFocus())localVoices().speak(text);});}
         @JavascriptInterface public void chooseVoice(){runOnUiThread(()->localVoices().choose());}
         @JavascriptInterface public void generate(String json){if(json!=null&&json.length()<=2*1024*1024)runOnUiThread(()->localVoices().generate(json));}
         @JavascriptInterface public void cancelGeneration(){runOnUiThread(()->{localVoices().cancel();if(web!=null)web.evaluateJavascript("window.srgLocalVoiceStatus && window.srgLocalVoiceStatus('Anulowano generowanie. Gotowe pliki zachowano.')",null);});}
@@ -215,6 +226,7 @@ public final class MainActivity extends Activity implements LocationListener {
         @JavascriptInterface public boolean removeAd(String id) { return new AdStore(MainActivity.this).remove(id); }
         @JavascriptInterface public void publish(String json) {
             if (lcdServer != null) lcdServer.publish(json);
+            if (ipixel != null) ipixel.publish(json);
         }
         @JavascriptInterface public String getUrl() {
             return "http://"+getLocalIp()+":47283/";
@@ -372,6 +384,7 @@ public final class MainActivity extends Activity implements LocationListener {
     private String chimeFile() { return "chimes/"+chimeIndex+".mp3"; }
     private void queueVoice(String... files) {
         stopVoice();
+        if(!acquireAnnouncementFocus())return;
         for (String file : files) pendingVoice.addLast(file);
         playVoiceNext();
     }
@@ -401,6 +414,7 @@ public final class MainActivity extends Activity implements LocationListener {
                     .setUsage(AudioAttributes.USAGE_MEDIA)
                     .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH).build());
             mp.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
+            if(announcementOutput!=null&&!announcementOutput.apply(mp)){mp.release();pendingVoice.clear();sendAudioError("Wybrane radio Bluetooth nie jest połączone. Sprawdź wyjście zapowiedzi.");return;}
             mp.setOnCompletionListener(completed -> {
                 if (voicePlayer != completed) return;
                 completed.release();voicePlayer=null;playVoiceNext();
@@ -495,6 +509,7 @@ public final class MainActivity extends Activity implements LocationListener {
                 try { gps.registerGnssStatusCallback(satCallback, handler); }
                 catch (Exception ignored) { satCallback=null; }
             }
+            startForegroundService(new Intent(this, CourseGpsService.class));
             gps.requestLocationUpdates(LocationManager.GPS_PROVIDER, 1000L, 0f, this, Looper.getMainLooper());
             listening = true;
             receivedFix = false;
@@ -556,6 +571,7 @@ public final class MainActivity extends Activity implements LocationListener {
         if (LocationManager.GPS_PROVIDER.equals(provider) && requested) startGpsNative();
     }
     private void stopListening() {
+        stopService(new Intent(this, CourseGpsService.class));
         if (gps != null) {
             try { gps.removeUpdates(this); } catch (Exception ignored) {}
             if (satCallback != null) {
@@ -581,11 +597,11 @@ public final class MainActivity extends Activity implements LocationListener {
         // Okno systemowe uprawnień może wywołać onPause.
         // Nie anulujemy w tym momencie GPS ani życzenia jego uruchomienia.
         super.onPause();
-        if (web != null) web.onPause();
+        if (web != null && !requested) web.onPause();
     }
     @Override protected void onStop() {
         // Brak lokalizacji w tle. Użytkownik nadal chce GPS po wznowieniu.
-        stopListening();
+        if (!requested) stopListening();
         stopVoice();
         super.onStop();
     }
@@ -597,6 +613,10 @@ public final class MainActivity extends Activity implements LocationListener {
     @Override protected void onDestroy() {
         if(localFileCallback!=null){localFileCallback.onReceiveValue(null);localFileCallback=null;}
         if(localVoices!=null){localVoices.close();localVoices=null;}
+        if(announcementFocus!=null)announcementFocus.close();
+        if(fleet!=null)fleet.close();
+        if(ipixel!=null)ipixel.close();
+        if(apkUpdates!=null)apkUpdates.close();
         if(omsi!=null)omsi.close();
         stopListening();
         if (rgUsb != null) rgUsb.close();

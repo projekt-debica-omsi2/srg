@@ -24,4 +24,9 @@ class Pronunciation(unittest.TestCase):
             self.assertNotIn('em ka es',j['text'])
             self.assertNotRegex(j['text'],r'\b\d{2,4}\b')
         for j in p['directionJobs']:self.assertTrue(j['text'].startswith('Kierunek'))
+        directions={j['file']:j['text'] for j in p['directionJobs']}
+        self.assertEqual(directions['K0008.mp3'],'Kierunek Brzeziny Berdechów.')
+        self.assertEqual(directions['K000A.mp3'],directions['K0008.mp3'])
+        self.assertEqual(directions['K0009.mp3'],'Kierunek Ropczyce, Mickiewicza.')
+        self.assertEqual(directions['K000B.mp3'],'Kierunek Ropczyce, dworzec autobusowy.')
 if __name__=='__main__':unittest.main()

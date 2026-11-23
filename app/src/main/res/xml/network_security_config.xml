@@ -2,6 +2,7 @@
 <network-security-config>
     <base-config cleartextTrafficPermitted="false" />
     <domain-config cleartextTrafficPermitted="true">
+        <domain includeSubdomains="false">127.0.0.1</domain>
         <domain includeSubdomains="false">rj.mks.debica.pl</domain>
         <domain includeSubdomains="false">xn--e-dbica-c9a.pl</domain>
     </domain-config>

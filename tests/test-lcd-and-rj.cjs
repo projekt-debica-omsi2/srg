@@ -3,8 +3,8 @@ const assert=require('assert/strict');
 const vm=require('vm');
 const route=JSON.parse(fs.readFileSync('route_data.json','utf8'));
 const stops=new Map(route.stops.map(s=>[s.id,s.name]));
-assert.equal(route.stops.length,68);assert.equal(stops.size,68);
-assert.equal(route.variants.length,7);
+assert.equal(route.stops.length,192);assert.equal(stops.size,192);
+assert.equal(route.variants.length,16);
 for(const variant of route.variants){
  assert(variant.stopIds.length>1,'wariant za krotki');
  assert(stops.has(variant.stopIds[0])&&stops.has(variant.stopIds.at(-1)),'ID kursu bez nazwy');
@@ -34,4 +34,4 @@ assert(java.includes('na_zadanie.mp3'));
 assert(java.includes(':47283/'));
 const server=fs.readFileSync('app/src/main/java/pl/srgmobile/classic/LocalPanelServer.java','utf8');
 assert(server.includes('ServerSocket(47283)'));
-console.log('PASS LCD/RJ: 68 przystankow, 7 wariantow, 79 voice MP3 + fixed piano chime, LCD v4.1, LAN no key');
+console.log('PASS LCD/RJ: 192 reference stops, 16 reference variants, legacy RJ fixture preserved, 79 voice MP3 + fixed piano chime, LCD v4.1, LAN no key');

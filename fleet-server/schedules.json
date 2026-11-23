@@ -1,0 +1,4640 @@
+{
+  "format": "SRGFleetSchedules/1",
+  "source": "Current bundled duties and confirmed stop times; no route-editor drafts",
+  "trips": [
+    {
+      "id": "99156acfcb5cf165691f",
+      "duty": "S-24!",
+      "tripNo": 1,
+      "aliases": [
+        {
+          "duty": "S-24!",
+          "label": "S-24!",
+          "tripNo": 1
+        },
+        {
+          "duty": "S-24",
+          "label": "S-24",
+          "tripNo": 1
+        }
+      ],
+      "departure": "08:00",
+      "arrival": "09:05",
+      "serviceCode": "Dnj",
+      "direction": "DĘBICA DWORZEC AUTOBUSOWY",
+      "route": [
+        {
+          "id": 111,
+          "name": "GRUDNA SKRZYŻOWANIE",
+          "lat": 49.92935,
+          "lon": 21.46997,
+          "time": "08:00"
+        },
+        {
+          "id": 112,
+          "name": "GRUDNA DOLNA",
+          "lat": 49.92789,
+          "lon": 21.46325,
+          "time": "08:02"
+        },
+        {
+          "id": 113,
+          "name": "SMARŻOWA OŚRODEK ZDROWIA",
+          "lat": 49.92157,
+          "lon": 21.45692,
+          "time": "08:04"
+        },
+        {
+          "id": 114,
+          "name": "SMARŻOWA CPN",
+          "lat": 49.91741,
+          "lon": 21.43942,
+          "time": "08:06"
+        },
+        {
+          "id": 115,
+          "name": "SIEDLISKA-BOGUSZ",
+          "lat": 49.91464,
+          "lon": 21.41537,
+          "time": "08:09"
+        },
+        {
+          "id": 116,
+          "name": "SIEDLISKA-BOGUSZ SKRZYŻOWANIE",
+          "lat": 49.92223,
+          "lon": 21.40132,
+          "time": "08:10"
+        },
+        {
+          "id": 117,
+          "name": "GORZEJOWA SZKOŁA",
+          "lat": 49.92171,
+          "lon": 21.38325,
+          "time": "08:12"
+        },
+        {
+          "id": 118,
+          "name": "GORZEJOWA MŁYN",
+          "lat": 49.91771,
+          "lon": 21.3734,
+          "time": "08:14"
+        },
+        {
+          "id": 119,
+          "name": "GORZEJOWA N.Ż.",
+          "lat": 49.91513,
+          "lon": 21.36452,
+          "time": "08:16"
+        },
+        {
+          "id": 120,
+          "name": "KAMIENICA DOLNA",
+          "lat": 49.91032,
+          "lon": 21.35194,
+          "time": "08:18"
+        },
+        {
+          "id": 121,
+          "name": "JAWORZE GÓRNE/KAMIENICA DOLNA",
+          "lat": 49.9225,
+          "lon": 21.34117,
+          "time": null
+        },
+        {
+          "id": 122,
+          "name": "JAWORZE GÓRNE KAPLICZKA",
+          "lat": 49.92558,
+          "lon": 21.34058,
+          "time": null
+        },
+        {
+          "id": 123,
+          "name": "JAWORZE GÓRNE",
+          "lat": 49.93085,
+          "lon": 21.34703,
+          "time": "08:21"
+        },
+        {
+          "id": 124,
+          "name": "JAWORZE GÓRNE OSIEDLE",
+          "lat": 49.93784,
+          "lon": 21.34882,
+          "time": "08:23"
+        },
+        {
+          "id": 125,
+          "name": "JAWORZE GÓRNE N.Ż.",
+          "lat": 49.94583,
+          "lon": 21.3537,
+          "time": "08:24"
+        },
+        {
+          "id": 126,
+          "name": "JAWORZE DOLNE SZ.",
+          "lat": 49.95006,
+          "lon": 21.3524,
+          "time": "08:26"
+        },
+        {
+          "id": 127,
+          "name": "JAWORZE DOLNE N.Ż.",
+          "lat": 49.95688,
+          "lon": 21.35259,
+          "time": "08:28"
+        },
+        {
+          "id": 128,
+          "name": "JAWORZE DOLNE OŚ. W.",
+          "lat": 49.97102,
+          "lon": 21.34602,
+          "time": "08:30"
+        },
+        {
+          "id": 129,
+          "name": "GOŁĘCZYNA",
+          "lat": 49.97834,
+          "lon": 21.34131,
+          "time": "08:32"
+        },
+        {
+          "id": 130,
+          "name": "DOBRKÓW",
+          "lat": 49.98081,
+          "lon": 21.33237,
+          "time": "08:33"
+        },
+        {
+          "id": 131,
+          "name": "DOBRKÓW N.Ż",
+          "lat": 49.98601,
+          "lon": 21.3252,
+          "time": "08:35"
+        },
+        {
+          "id": 132,
+          "name": "PARKOSZ/ŁABUZIE",
+          "lat": 49.98901,
+          "lon": 21.3112,
+          "time": "08:36"
+        },
+        {
+          "id": 133,
+          "name": "PILZNO LWOWSKA",
+          "lat": 49.9834,
+          "lon": 21.30053,
+          "time": "08:38"
+        },
+        {
+          "id": 134,
+          "name": "PILZNO ZAJEZDNIA",
+          "lat": 49.98054,
+          "lon": 21.2888,
+          "time": "08:40"
+        },
+        {
+          "id": 135,
+          "name": "PILZNO LWOWSKA",
+          "lat": 49.9826,
+          "lon": 21.29903,
+          "time": "08:42"
+        },
+        {
+          "id": 136,
+          "name": "PARKOSZ/ŁABUZIE",
+          "lat": 49.98958,
+          "lon": 21.3135,
+          "time": "08:44"
+        },
+        {
+          "id": 137,
+          "name": "PARKOSZ",
+          "lat": 49.9928,
+          "lon": 21.32004,
+          "time": "08:45"
+        },
+        {
+          "id": 138,
+          "name": "PODGRODZIE /PĘTLA",
+          "lat": 50.0043,
+          "lon": 21.33383,
+          "time": "08:46"
+        },
+        {
+          "id": 139,
+          "name": "PODGRODZIE 2",
+          "lat": 50.00986,
+          "lon": 21.34351,
+          "time": "08:48"
+        },
+        {
+          "id": 140,
+          "name": "PODGRODZIE 1",
+          "lat": 50.01716,
+          "lon": 21.36128,
+          "time": "08:50"
+        },
+        {
+          "id": 141,
+          "name": "LATOSZYN E40",
+          "lat": 50.02252,
+          "lon": 21.36689,
+          "time": "08:52"
+        },
+        {
+          "id": 142,
+          "name": "DĘBICA KRAKOWSKA RONDO",
+          "lat": 50.03391,
+          "lon": 21.38402,
+          "time": "08:54"
+        },
+        {
+          "id": 143,
+          "name": "DĘBICA KRAKOWSKA KĘPA",
+          "lat": 50.03662,
+          "lon": 21.38764,
+          "time": "08:56"
+        },
+        {
+          "id": 144,
+          "name": "DĘBICA KRAKOWSKA SZPITAL",
+          "lat": 50.04032,
+          "lon": 21.39449,
+          "time": "08:58"
+        },
+        {
+          "id": 145,
+          "name": "DĘBICA OSIEDLE MATEJKI",
+          "lat": 50.04269,
+          "lon": 21.39848,
+          "time": "08:59"
+        },
+        {
+          "id": 146,
+          "name": "DĘBICA OSIEDLE CHEMIK",
+          "lat": 50.04403,
+          "lon": 21.40087,
+          "time": null
+        },
+        {
+          "id": 147,
+          "name": "DĘBICA OSIEDLE METALOWIEC",
+          "lat": 50.04737,
+          "lon": 21.40539,
+          "time": null
+        },
+        {
+          "id": 148,
+          "name": "DĘBICA KRAKOWSKA KLASZTOR",
+          "lat": 50.04915,
+          "lon": 21.40744,
+          "time": "09:04"
+        },
+        {
+          "id": 68,
+          "name": "DĘBICA DWORZEC AUTOBUSOWY",
+          "lat": 50.05387,
+          "lon": 21.40663,
+          "time": "09:05"
+        }
+      ]
+    },
+    {
+      "id": "8fa9dc49cd05869e8694",
+      "duty": "S-24!",
+      "tripNo": 2,
+      "aliases": [
+        {
+          "duty": "S-24!",
+          "label": "S-24!",
+          "tripNo": 2
+        },
+        {
+          "duty": "S-24",
+          "label": "S-24",
+          "tripNo": 2
+        }
+      ],
+      "departure": "12:20",
+      "arrival": "13:40",
+      "serviceCode": "Sx",
+      "direction": "RZESZÓW DWORZEC AUTOBUSOWY",
+      "route": [
+        {
+          "id": 1,
+          "name": "DĘBICA DWORZEC AUTOBUSOWY",
+          "lat": 50.05382,
+          "lon": 21.40646,
+          "time": "12:20"
+        },
+        {
+          "id": 2,
+          "name": "ZURT",
+          "lat": 50.05191,
+          "lon": 21.41304,
+          "time": "12:22"
+        },
+        {
+          "id": 3,
+          "name": "DĘBICA RZESZOWSKA TECHNIKUM",
+          "lat": 50.05382,
+          "lon": 21.42559,
+          "time": "12:24"
+        },
+        {
+          "id": 4,
+          "name": "DĘBICA RZESZOWSKA RAJ",
+          "lat": 50.05492,
+          "lon": 21.43617,
+          "time": "12:26"
+        },
+        {
+          "id": 5,
+          "name": "DĘBICA RZESZOWSKA MKS",
+          "lat": 50.0557,
+          "lon": 21.44369,
+          "time": null
+        },
+        {
+          "id": 6,
+          "name": "DĘBICA RZESZOWSKA NADLEŚNICTWO",
+          "lat": 50.05625,
+          "lon": 21.44925,
+          "time": "12:29"
+        },
+        {
+          "id": 7,
+          "name": "NAGAWCZYNA 1",
+          "lat": 50.05762,
+          "lon": 21.46242,
+          "time": "12:31"
+        },
+        {
+          "id": 8,
+          "name": "NAGAWCZYNA 2",
+          "lat": 50.05858,
+          "lon": 21.47173,
+          "time": "12:33"
+        },
+        {
+          "id": 9,
+          "name": "ZAWADA E4",
+          "lat": 50.05983,
+          "lon": 21.48364,
+          "time": "12:34"
+        },
+        {
+          "id": 10,
+          "name": "LUBZINA OSIEDLE",
+          "lat": 50.06204,
+          "lon": 21.50451,
+          "time": "12:38"
+        },
+        {
+          "id": 11,
+          "name": "LUBZINA E4",
+          "lat": 50.06243,
+          "lon": 21.51855,
+          "time": "12:39"
+        },
+        {
+          "id": 12,
+          "name": "BRZEZÓWKA",
+          "lat": 50.06204,
+          "lon": 21.54299,
+          "time": "12:42"
+        },
+        {
+          "id": 13,
+          "name": "ROPCZYCE PODSŁOŃCE",
+          "lat": 50.06161,
+          "lon": 21.56946,
+          "time": "12:43"
+        },
+        {
+          "id": 14,
+          "name": "ROPCZYCE DWORZEC AUTOBUSOWY",
+          "lat": 50.05253,
+          "lon": 21.60427,
+          "time": "12:46"
+        },
+        {
+          "id": 15,
+          "name": "ROPCZYCE MICKIEWICZA",
+          "lat": 50.05404,
+          "lon": 21.61878,
+          "time": "12:48"
+        },
+        {
+          "id": 16,
+          "name": "ROPCZYCE WITKOWICE",
+          "lat": 50.05997,
+          "lon": 21.63736,
+          "time": "12:51"
+        },
+        {
+          "id": 17,
+          "name": "ROPCZYCE WESOŁA",
+          "lat": 50.06692,
+          "lon": 21.65875,
+          "time": "12:54"
+        },
+        {
+          "id": 18,
+          "name": "SĘDZISZÓW MAŁOPOLSKI OSIEDLE MŁODYCH",
+          "lat": 50.06919,
+          "lon": 21.68797,
+          "time": "12:57"
+        },
+        {
+          "id": 19,
+          "name": "SĘDZISZÓW MAŁOPOLSKI RYNEK",
+          "lat": 50.06981,
+          "lon": 21.69987,
+          "time": "12:59"
+        },
+        {
+          "id": 20,
+          "name": "SĘDZISZÓW MAŁOPOLSKI PIŁSUDSKIEGO",
+          "lat": 50.07065,
+          "lon": 21.71139,
+          "time": "13:01"
+        },
+        {
+          "id": 21,
+          "name": "SĘDZISZÓW MAŁOPOLSKI GRUNWALDZKA",
+          "lat": 50.0698,
+          "lon": 21.72743,
+          "time": "13:03"
+        },
+        {
+          "id": 22,
+          "name": "OLCHOWA E4",
+          "lat": 50.07027,
+          "lon": 21.75508,
+          "time": "13:08"
+        },
+        {
+          "id": 23,
+          "name": "KLĘCZANY STADION",
+          "lat": 50.07091,
+          "lon": 21.78105,
+          "time": "13:10"
+        },
+        {
+          "id": 24,
+          "name": "DĄBROWA",
+          "lat": 50.07155,
+          "lon": 21.80588,
+          "time": "13:13"
+        },
+        {
+          "id": 25,
+          "name": "DĄBROWA 2",
+          "lat": 50.0718,
+          "lon": 21.82008,
+          "time": "13:16"
+        },
+        {
+          "id": 26,
+          "name": "TRZCIANA",
+          "lat": 50.07156,
+          "lon": 21.83792,
+          "time": "13:17"
+        },
+        {
+          "id": 27,
+          "name": "TRZCIANA WOLICZKA 56 N.Ż.",
+          "lat": 50.07146,
+          "lon": 21.86735,
+          "time": "13:19"
+        },
+        {
+          "id": 28,
+          "name": "ŚWILCZA 58",
+          "lat": 50.07168,
+          "lon": 21.89666,
+          "time": "13:21"
+        },
+        {
+          "id": 29,
+          "name": "ŚWILCZA OSIEDLE 60 N.Ż.",
+          "lat": 50.06985,
+          "lon": 21.91069,
+          "time": null
+        },
+        {
+          "id": 30,
+          "name": "ŚWILCZA NOWY DWÓR 62 N.Ż.",
+          "lat": 50.06501,
+          "lon": 21.92998,
+          "time": null
+        },
+        {
+          "id": 31,
+          "name": "RZESZÓW KRAKOWSKA GALERIA",
+          "lat": 50.04843,
+          "lon": 21.97509,
+          "time": "13:29"
+        },
+        {
+          "id": 32,
+          "name": "RZESZÓW KRAKOWSKA SZPITAL",
+          "lat": 50.04586,
+          "lon": 21.98075,
+          "time": "13:31"
+        },
+        {
+          "id": 33,
+          "name": "RZESZÓW DWORZEC LOKALNY",
+          "lat": 50.04273,
+          "lon": 21.99384,
+          "time": "13:35"
+        },
+        {
+          "id": 34,
+          "name": "RZESZÓW DWORZEC AUTOBUSOWY",
+          "lat": 50.04214,
+          "lon": 22.00312,
+          "time": "13:40"
+        }
+      ]
+    },
+    {
+      "id": "0be37c69df623a2a0c89",
+      "duty": "S-24!",
+      "tripNo": 3,
+      "aliases": [
+        {
+          "duty": "S-24!",
+          "label": "S-24!",
+          "tripNo": 3
+        },
+        {
+          "duty": "S-24",
+          "label": "S-24",
+          "tripNo": 3
+        }
+      ],
+      "departure": "14:00",
+      "arrival": "15:25",
+      "serviceCode": "Dn",
+      "direction": "DĘBICA DWORZEC AUTOBUSOWY",
+      "route": [
+        {
+          "id": 40,
+          "name": "RZESZÓW DWORZEC AUTOBUSOWY",
+          "lat": 50.04232,
+          "lon": 22.00264,
+          "time": "14:00"
+        },
+        {
+          "id": 41,
+          "name": "RZESZÓW DWORZEC LOKALNY",
+          "lat": 50.04295,
+          "lon": 21.99474,
+          "time": "14:05"
+        },
+        {
+          "id": 42,
+          "name": "RZESZÓW KRAKOWSKA SZPITAL",
+          "lat": 50.04609,
+          "lon": 21.98183,
+          "time": "14:08"
+        },
+        {
+          "id": 43,
+          "name": "RZESZÓW KRAKOWSKA GALERIA",
+          "lat": 50.04811,
+          "lon": 21.97628,
+          "time": "14:11"
+        },
+        {
+          "id": 35,
+          "name": "ŚWILCZA NOWY DWÓR 71 N.Ż.",
+          "lat": 50.06667,
+          "lon": 21.92433,
+          "time": null
+        },
+        {
+          "id": 36,
+          "name": "ŚWILCZA OSIEDLE 73 N.Ż.",
+          "lat": 50.07069,
+          "lon": 21.90748,
+          "time": null
+        },
+        {
+          "id": 37,
+          "name": "ŚWILCZA 75",
+          "lat": 50.0719,
+          "lon": 21.89657,
+          "time": "14:18"
+        },
+        {
+          "id": 38,
+          "name": "TRZCIANA WOLICZKA 77 N.Ż.",
+          "lat": 50.0716,
+          "lon": 21.86626,
+          "time": "14:20"
+        },
+        {
+          "id": 44,
+          "name": "TRZCIANA",
+          "lat": 50.07131,
+          "lon": 21.84132,
+          "time": "14:22"
+        },
+        {
+          "id": 45,
+          "name": "DĄBROWA 2",
+          "lat": 50.07181,
+          "lon": 21.81728,
+          "time": "14:24"
+        },
+        {
+          "id": 46,
+          "name": "DĄBROWA",
+          "lat": 50.0715,
+          "lon": 21.80431,
+          "time": "14:25"
+        },
+        {
+          "id": 47,
+          "name": "KLĘCZANY SZKOŁA",
+          "lat": 50.07091,
+          "lon": 21.77923,
+          "time": "14:28"
+        },
+        {
+          "id": 48,
+          "name": "OLCHOWA E4",
+          "lat": 50.07037,
+          "lon": 21.75678,
+          "time": "14:30"
+        },
+        {
+          "id": 49,
+          "name": "SĘDZISZÓW MAŁOPOLSKI GRUNWALDZKA",
+          "lat": 50.06987,
+          "lon": 21.7269,
+          "time": "14:35"
+        },
+        {
+          "id": 50,
+          "name": "SĘDZISZÓW MAŁOPOLSKI PIŁSUDSKIEGO",
+          "lat": 50.07067,
+          "lon": 21.71068,
+          "time": "14:37"
+        },
+        {
+          "id": 51,
+          "name": "SĘDZISZÓW MAŁOPOLSKI RYNEK",
+          "lat": 50.06981,
+          "lon": 21.69987,
+          "time": "14:41"
+        },
+        {
+          "id": 52,
+          "name": "SĘDZISZÓW MAŁOPOLSKI OSIEDLE MŁODYCH",
+          "lat": 50.06917,
+          "lon": 21.68726,
+          "time": "14:45"
+        },
+        {
+          "id": 53,
+          "name": "ROPCZYCE WESOŁA",
+          "lat": 50.06676,
+          "lon": 21.65778,
+          "time": "14:48"
+        },
+        {
+          "id": 54,
+          "name": "ROPCZYCE WITKOWICE",
+          "lat": 50.05928,
+          "lon": 21.63541,
+          "time": "14:51"
+        },
+        {
+          "id": 55,
+          "name": "ROPCZYCE MICKIEWICZA",
+          "lat": 50.05418,
+          "lon": 21.61864,
+          "time": "14:54"
+        },
+        {
+          "id": 56,
+          "name": "ROPCZYCE DWORZEC AUTOBUSOWY",
+          "lat": 50.05254,
+          "lon": 21.60425,
+          "time": "14:58"
+        },
+        {
+          "id": 57,
+          "name": "ROPCZYCE PODSŁOŃCE",
+          "lat": 50.06168,
+          "lon": 21.5694,
+          "time": "15:01"
+        },
+        {
+          "id": 58,
+          "name": "BRZEZÓWKA",
+          "lat": 50.06208,
+          "lon": 21.54486,
+          "time": "15:03"
+        },
+        {
+          "id": 59,
+          "name": "LUBZINA E4",
+          "lat": 50.06248,
+          "lon": 21.52007,
+          "time": "15:06"
+        },
+        {
+          "id": 60,
+          "name": "LUBZINA OSIEDLE",
+          "lat": 50.06193,
+          "lon": 21.5029,
+          "time": "15:08"
+        },
+        {
+          "id": 61,
+          "name": "ZAWADA E4",
+          "lat": 50.06014,
+          "lon": 21.48579,
+          "time": "15:11"
+        },
+        {
+          "id": 62,
+          "name": "NAGAWCZYNA 2",
+          "lat": 50.05855,
+          "lon": 21.4705,
+          "time": "15:13"
+        },
+        {
+          "id": 63,
+          "name": "NAGAWCZYNA 1",
+          "lat": 50.05782,
+          "lon": 21.46335,
+          "time": "15:14"
+        },
+        {
+          "id": 64,
+          "name": "DĘBICA RZESZOWSKA NADLEŚNICTWO",
+          "lat": 50.05603,
+          "lon": 21.44693,
+          "time": "15:16"
+        },
+        {
+          "id": 65,
+          "name": "DĘBICA RZESZOWSKA MKS",
+          "lat": 50.05562,
+          "lon": 21.4425,
+          "time": null
+        },
+        {
+          "id": 66,
+          "name": "DĘBICA RZESZOWSKA RAJ",
+          "lat": 50.05484,
+          "lon": 21.43534,
+          "time": null
+        },
+        {
+          "id": 67,
+          "name": "DĘBICA RZESZOWSKA TECHNIKUM",
+          "lat": 50.05398,
+          "lon": 21.42704,
+          "time": "15:21"
+        },
+        {
+          "id": 39,
+          "name": "DĘBICA RZESZOWSKA PLAC GRYFITÓW",
+          "lat": 50.05243,
+          "lon": 21.41531,
+          "time": "15:23"
+        },
+        {
+          "id": 68,
+          "name": "DĘBICA DWORZEC AUTOBUSOWY",
+          "lat": 50.05387,
+          "lon": 21.40663,
+          "time": "15:25"
+        }
+      ]
+    },
+    {
+      "id": "3242faf96f88935d3820",
+      "duty": "S-24!",
+      "tripNo": 4,
+      "aliases": [
+        {
+          "duty": "S-24!",
+          "label": "S-24!",
+          "tripNo": 4
+        }
+      ],
+      "departure": "15:40",
+      "arrival": "16:43",
+      "serviceCode": "S",
+      "direction": "GRUDNA SKRZYŻOWANIE",
+      "route": [
+        {
+          "id": 1,
+          "name": "DĘBICA DWORZEC AUTOBUSOWY",
+          "lat": 50.05382,
+          "lon": 21.40646,
+          "time": "15:40"
+        },
+        {
+          "id": 149,
+          "name": "DĘBICA OSIEDLE METALOWIEC",
+          "lat": 50.04663,
+          "lon": 21.40416,
+          "time": null
+        },
+        {
+          "id": 150,
+          "name": "DĘBICA OSIEDLE CHEMIK",
+          "lat": 50.044,
+          "lon": 21.40049,
+          "time": null
+        },
+        {
+          "id": 151,
+          "name": "DĘBICA OSIEDLE MATEJKI",
+          "lat": 50.04174,
+          "lon": 21.39648,
+          "time": "15:45"
+        },
+        {
+          "id": 152,
+          "name": "DĘBICA KRAKOWSKA SZPITAL",
+          "lat": 50.03916,
+          "lon": 21.39182,
+          "time": "15:46"
+        },
+        {
+          "id": 153,
+          "name": "DĘBICA KRAKOWSKA KĘPA",
+          "lat": 50.03639,
+          "lon": 21.3869,
+          "time": "15:48"
+        },
+        {
+          "id": 154,
+          "name": "LATOSZYN OBWODNICA (STARZYŃSKIEGO)",
+          "lat": 50.03181,
+          "lon": 21.37885,
+          "time": "15:50"
+        },
+        {
+          "id": 155,
+          "name": "LATOSZYN E40",
+          "lat": 50.02201,
+          "lon": 21.36591,
+          "time": "15:52"
+        },
+        {
+          "id": 156,
+          "name": "PODGRODZIE 1",
+          "lat": 50.01634,
+          "lon": 21.35759,
+          "time": "15:54"
+        },
+        {
+          "id": 157,
+          "name": "PODGRODZIE 2",
+          "lat": 50.00972,
+          "lon": 21.34279,
+          "time": "15:56"
+        },
+        {
+          "id": 158,
+          "name": "PODGRODZIE/PĘTLA",
+          "lat": 50.00391,
+          "lon": 21.33289,
+          "time": "15:58"
+        },
+        {
+          "id": 159,
+          "name": "PARKOSZ",
+          "lat": 49.99252,
+          "lon": 21.31895,
+          "time": "15:59"
+        },
+        {
+          "id": 161,
+          "name": "PARKOSZ/ŁABUZIE",
+          "lat": 49.98901,
+          "lon": 21.3112,
+          "time": "16:00"
+        },
+        {
+          "id": 162,
+          "name": "PILZNO LWOWSKA",
+          "lat": 49.9826,
+          "lon": 21.29903,
+          "time": "16:02"
+        },
+        {
+          "id": 163,
+          "name": "PILZNO ZAJEZDNIA",
+          "lat": 49.98054,
+          "lon": 21.2888,
+          "time": "16:04"
+        },
+        {
+          "id": 164,
+          "name": "PILZNO LWOWSKA",
+          "lat": 49.9834,
+          "lon": 21.30053,
+          "time": "16:06"
+        },
+        {
+          "id": 165,
+          "name": "PARKOSZ/ŁABUZIE",
+          "lat": 49.98958,
+          "lon": 21.3135,
+          "time": "16:08"
+        },
+        {
+          "id": 166,
+          "name": "DOBRKÓW N.Ż.",
+          "lat": 49.98601,
+          "lon": 21.3252,
+          "time": "16:09"
+        },
+        {
+          "id": 167,
+          "name": "DOBRKÓW",
+          "lat": 49.98081,
+          "lon": 21.33237,
+          "time": "16:11"
+        },
+        {
+          "id": 168,
+          "name": "GOŁĘCZYNA",
+          "lat": 49.97834,
+          "lon": 21.34131,
+          "time": "16:12"
+        },
+        {
+          "id": 169,
+          "name": "JAWORZE DOLNE OŚ. W.",
+          "lat": 49.97102,
+          "lon": 21.34602,
+          "time": "16:14"
+        },
+        {
+          "id": 170,
+          "name": "JAWORZE DOLNE N.Ż.",
+          "lat": 49.95688,
+          "lon": 21.35259,
+          "time": "16:16"
+        },
+        {
+          "id": 171,
+          "name": "JAWORZE DOLNE SZ.",
+          "lat": 49.95006,
+          "lon": 21.3524,
+          "time": "16:18"
+        },
+        {
+          "id": 172,
+          "name": "JAWORZE GÓRNE N.Ż.",
+          "lat": 49.94583,
+          "lon": 21.3537,
+          "time": "16:20"
+        },
+        {
+          "id": 173,
+          "name": "JAWORZE GÓRNE OSIEDLE",
+          "lat": 49.93784,
+          "lon": 21.34882,
+          "time": "16:21"
+        },
+        {
+          "id": 174,
+          "name": "JAWORZE GÓRNE",
+          "lat": 49.93085,
+          "lon": 21.34703,
+          "time": "16:23"
+        },
+        {
+          "id": 175,
+          "name": "JAWORZE GÓRNE KAPLICZKA",
+          "lat": 49.92558,
+          "lon": 21.34058,
+          "time": null
+        },
+        {
+          "id": 176,
+          "name": "JAWORZE GÓRNE/KAMIENICA DOLNA",
+          "lat": 49.9225,
+          "lon": 21.34117,
+          "time": null
+        },
+        {
+          "id": 160,
+          "name": "KAMIENICA DOLNA",
+          "lat": 49.90988,
+          "lon": 21.35387,
+          "time": "16:26"
+        },
+        {
+          "id": 177,
+          "name": "GORZEJOWA N.Ż.",
+          "lat": 49.91513,
+          "lon": 21.36452,
+          "time": "16:28"
+        },
+        {
+          "id": 178,
+          "name": "GORZEJOWA MŁYN",
+          "lat": 49.91771,
+          "lon": 21.3734,
+          "time": "16:29"
+        },
+        {
+          "id": 179,
+          "name": "GORZEJOWA SZKOŁA",
+          "lat": 49.92171,
+          "lon": 21.38325,
+          "time": "16:31"
+        },
+        {
+          "id": 180,
+          "name": "SIEDLISKA-BOGUSZ SKRZYŻOWANIE",
+          "lat": 49.92223,
+          "lon": 21.40132,
+          "time": "16:33"
+        },
+        {
+          "id": 181,
+          "name": "SIEDLISKA-BOGUSZ",
+          "lat": 49.91464,
+          "lon": 21.41537,
+          "time": "16:35"
+        },
+        {
+          "id": 182,
+          "name": "SMARŻOWA CPN",
+          "lat": 49.91741,
+          "lon": 21.43942,
+          "time": "16:37"
+        },
+        {
+          "id": 183,
+          "name": "SMARŻOWA OŚRODEK ZDROWIA",
+          "lat": 49.92157,
+          "lon": 21.45692,
+          "time": "16:39"
+        },
+        {
+          "id": 184,
+          "name": "GRUDNA DOLNA",
+          "lat": 49.92789,
+          "lon": 21.46325,
+          "time": "16:41"
+        },
+        {
+          "id": 185,
+          "name": "GRUDNA SKRZYŻOWANIE",
+          "lat": 49.92935,
+          "lon": 21.46997,
+          "time": "16:43"
+        }
+      ]
+    },
+    {
+      "id": "7fce8e0823fa0c9c3419",
+      "duty": "S-24",
+      "tripNo": 4,
+      "aliases": [
+        {
+          "duty": "S-24",
+          "label": "S-24",
+          "tripNo": 4
+        }
+      ],
+      "departure": "15:40",
+      "arrival": "16:43",
+      "serviceCode": "S",
+      "direction": "GRUDNA SKRZYŻOWANIE",
+      "route": [
+        {
+          "id": 1,
+          "name": "DĘBICA DWORZEC AUTOBUSOWY",
+          "lat": 50.05382,
+          "lon": 21.40646,
+          "time": "15:40"
+        },
+        {
+          "id": 151,
+          "name": "DĘBICA OSIEDLE MATEJKI",
+          "lat": 50.04174,
+          "lon": 21.39648,
+          "time": "15:45"
+        },
+        {
+          "id": 152,
+          "name": "DĘBICA KRAKOWSKA SZPITAL",
+          "lat": 50.03916,
+          "lon": 21.39182,
+          "time": "15:46"
+        },
+        {
+          "id": 153,
+          "name": "DĘBICA KRAKOWSKA KĘPA",
+          "lat": 50.03639,
+          "lon": 21.3869,
+          "time": "15:48"
+        },
+        {
+          "id": 154,
+          "name": "LATOSZYN OBWODNICA (STARZYŃSKIEGO)",
+          "lat": 50.03181,
+          "lon": 21.37885,
+          "time": "15:50"
+        },
+        {
+          "id": 155,
+          "name": "LATOSZYN E40",
+          "lat": 50.02201,
+          "lon": 21.36591,
+          "time": "15:52"
+        },
+        {
+          "id": 156,
+          "name": "PODGRODZIE 1",
+          "lat": 50.01634,
+          "lon": 21.35759,
+          "time": "15:54"
+        },
+        {
+          "id": 157,
+          "name": "PODGRODZIE 2",
+          "lat": 50.00972,
+          "lon": 21.34279,
+          "time": "15:56"
+        },
+        {
+          "id": 158,
+          "name": "PODGRODZIE/PĘTLA",
+          "lat": 50.00391,
+          "lon": 21.33289,
+          "time": "15:58"
+        },
+        {
+          "id": 159,
+          "name": "PARKOSZ",
+          "lat": 49.99252,
+          "lon": 21.31895,
+          "time": "15:59"
+        },
+        {
+          "id": 161,
+          "name": "PARKOSZ/ŁABUZIE",
+          "lat": 49.98901,
+          "lon": 21.3112,
+          "time": "16:00"
+        },
+        {
+          "id": 162,
+          "name": "PILZNO LWOWSKA",
+          "lat": 49.9826,
+          "lon": 21.29903,
+          "time": "16:02"
+        },
+        {
+          "id": 163,
+          "name": "PILZNO ZAJEZDNIA",
+          "lat": 49.98054,
+          "lon": 21.2888,
+          "time": "16:04"
+        },
+        {
+          "id": 164,
+          "name": "PILZNO LWOWSKA",
+          "lat": 49.9834,
+          "lon": 21.30053,
+          "time": "16:06"
+        },
+        {
+          "id": 165,
+          "name": "PARKOSZ/ŁABUZIE",
+          "lat": 49.98958,
+          "lon": 21.3135,
+          "time": "16:08"
+        },
+        {
+          "id": 166,
+          "name": "DOBRKÓW N.Ż.",
+          "lat": 49.98601,
+          "lon": 21.3252,
+          "time": "16:09"
+        },
+        {
+          "id": 167,
+          "name": "DOBRKÓW",
+          "lat": 49.98081,
+          "lon": 21.33237,
+          "time": "16:11"
+        },
+        {
+          "id": 168,
+          "name": "GOŁĘCZYNA",
+          "lat": 49.97834,
+          "lon": 21.34131,
+          "time": "16:12"
+        },
+        {
+          "id": 169,
+          "name": "JAWORZE DOLNE OŚ. W.",
+          "lat": 49.97102,
+          "lon": 21.34602,
+          "time": "16:14"
+        },
+        {
+          "id": 170,
+          "name": "JAWORZE DOLNE N.Ż.",
+          "lat": 49.95688,
+          "lon": 21.35259,
+          "time": "16:16"
+        },
+        {
+          "id": 171,
+          "name": "JAWORZE DOLNE SZ.",
+          "lat": 49.95006,
+          "lon": 21.3524,
+          "time": "16:18"
+        },
+        {
+          "id": 172,
+          "name": "JAWORZE GÓRNE N.Ż.",
+          "lat": 49.94583,
+          "lon": 21.3537,
+          "time": "16:20"
+        },
+        {
+          "id": 173,
+          "name": "JAWORZE GÓRNE OSIEDLE",
+          "lat": 49.93784,
+          "lon": 21.34882,
+          "time": "16:21"
+        },
+        {
+          "id": 174,
+          "name": "JAWORZE GÓRNE",
+          "lat": 49.93085,
+          "lon": 21.34703,
+          "time": "16:23"
+        },
+        {
+          "id": 175,
+          "name": "JAWORZE GÓRNE KAPLICZKA",
+          "lat": 49.92558,
+          "lon": 21.34058,
+          "time": null
+        },
+        {
+          "id": 176,
+          "name": "JAWORZE GÓRNE/KAMIENICA DOLNA",
+          "lat": 49.9225,
+          "lon": 21.34117,
+          "time": null
+        },
+        {
+          "id": 160,
+          "name": "KAMIENICA DOLNA",
+          "lat": 49.90988,
+          "lon": 21.35387,
+          "time": "16:26"
+        },
+        {
+          "id": 177,
+          "name": "GORZEJOWA N.Ż.",
+          "lat": 49.91513,
+          "lon": 21.36452,
+          "time": "16:28"
+        },
+        {
+          "id": 178,
+          "name": "GORZEJOWA MŁYN",
+          "lat": 49.91771,
+          "lon": 21.3734,
+          "time": "16:29"
+        },
+        {
+          "id": 179,
+          "name": "GORZEJOWA SZKOŁA",
+          "lat": 49.92171,
+          "lon": 21.38325,
+          "time": "16:31"
+        },
+        {
+          "id": 180,
+          "name": "SIEDLISKA-BOGUSZ SKRZYŻOWANIE",
+          "lat": 49.92223,
+          "lon": 21.40132,
+          "time": "16:33"
+        },
+        {
+          "id": 181,
+          "name": "SIEDLISKA-BOGUSZ",
+          "lat": 49.91464,
+          "lon": 21.41537,
+          "time": "16:35"
+        },
+        {
+          "id": 182,
+          "name": "SMARŻOWA CPN",
+          "lat": 49.91741,
+          "lon": 21.43942,
+          "time": "16:37"
+        },
+        {
+          "id": 183,
+          "name": "SMARŻOWA OŚRODEK ZDROWIA",
+          "lat": 49.92157,
+          "lon": 21.45692,
+          "time": "16:39"
+        },
+        {
+          "id": 184,
+          "name": "GRUDNA DOLNA",
+          "lat": 49.92789,
+          "lon": 21.46325,
+          "time": "16:41"
+        },
+        {
+          "id": 185,
+          "name": "GRUDNA SKRZYŻOWANIE",
+          "lat": 49.92935,
+          "lon": 21.46997,
+          "time": "16:43"
+        }
+      ]
+    },
+    {
+      "id": "64d492d2c54da62e3904",
+      "duty": "S-25",
+      "tripNo": 1,
+      "aliases": [
+        {
+          "duty": "S-25",
+          "label": "S-25",
+          "tripNo": 1
+        }
+      ],
+      "departure": "16:00",
+      "arrival": "17:20",
+      "serviceCode": "",
+      "direction": "RZESZÓW DWORZEC AUTOBUSOWY",
+      "route": [
+        {
+          "id": 1,
+          "name": "DĘBICA DWORZEC AUTOBUSOWY",
+          "lat": 50.05382,
+          "lon": 21.40646,
+          "time": "16:00"
+        },
+        {
+          "id": 2,
+          "name": "ZURT",
+          "lat": 50.05191,
+          "lon": 21.41304,
+          "time": "16:02"
+        },
+        {
+          "id": 3,
+          "name": "DĘBICA RZESZOWSKA TECHNIKUM",
+          "lat": 50.05382,
+          "lon": 21.42559,
+          "time": null
+        },
+        {
+          "id": 4,
+          "name": "DĘBICA RZESZOWSKA RAJ",
+          "lat": 50.05492,
+          "lon": 21.43617,
+          "time": "16:06"
+        },
+        {
+          "id": 5,
+          "name": "DĘBICA RZESZOWSKA MKS",
+          "lat": 50.0557,
+          "lon": 21.44369,
+          "time": null
+        },
+        {
+          "id": 6,
+          "name": "DĘBICA RZESZOWSKA NADLEŚNICTWO",
+          "lat": 50.05625,
+          "lon": 21.44925,
+          "time": "16:09"
+        },
+        {
+          "id": 7,
+          "name": "NAGAWCZYNA 1",
+          "lat": 50.05762,
+          "lon": 21.46242,
+          "time": null
+        },
+        {
+          "id": 8,
+          "name": "NAGAWCZYNA 2",
+          "lat": 50.05858,
+          "lon": 21.47173,
+          "time": null
+        },
+        {
+          "id": 9,
+          "name": "ZAWADA E4",
+          "lat": 50.05983,
+          "lon": 21.48364,
+          "time": "16:14"
+        },
+        {
+          "id": 10,
+          "name": "LUBZINA OSIEDLE",
+          "lat": 50.06204,
+          "lon": 21.50451,
+          "time": "16:16"
+        },
+        {
+          "id": 11,
+          "name": "LUBZINA E4",
+          "lat": 50.06243,
+          "lon": 21.51855,
+          "time": "16:19"
+        },
+        {
+          "id": 12,
+          "name": "BRZEZÓWKA",
+          "lat": 50.06204,
+          "lon": 21.54299,
+          "time": "16:22"
+        },
+        {
+          "id": 13,
+          "name": "ROPCZYCE PODSŁOŃCE",
+          "lat": 50.06161,
+          "lon": 21.56946,
+          "time": "16:23"
+        },
+        {
+          "id": 14,
+          "name": "ROPCZYCE DWORZEC AUTOBUSOWY",
+          "lat": 50.05253,
+          "lon": 21.60427,
+          "time": "16:26"
+        },
+        {
+          "id": 15,
+          "name": "ROPCZYCE MICKIEWICZA",
+          "lat": 50.05404,
+          "lon": 21.61878,
+          "time": "16:28"
+        },
+        {
+          "id": 16,
+          "name": "ROPCZYCE WITKOWICE",
+          "lat": 50.05997,
+          "lon": 21.63736,
+          "time": "16:31"
+        },
+        {
+          "id": 17,
+          "name": "ROPCZYCE WESOŁA",
+          "lat": 50.06692,
+          "lon": 21.65875,
+          "time": "16:34"
+        },
+        {
+          "id": 18,
+          "name": "SĘDZISZÓW MAŁOPOLSKI OSIEDLE MŁODYCH",
+          "lat": 50.06919,
+          "lon": 21.68797,
+          "time": "16:37"
+        },
+        {
+          "id": 19,
+          "name": "SĘDZISZÓW MAŁOPOLSKI RYNEK",
+          "lat": 50.06981,
+          "lon": 21.69987,
+          "time": "16:39"
+        },
+        {
+          "id": 20,
+          "name": "SĘDZISZÓW MAŁOPOLSKI PIŁSUDSKIEGO",
+          "lat": 50.07065,
+          "lon": 21.71139,
+          "time": "16:41"
+        },
+        {
+          "id": 21,
+          "name": "SĘDZISZÓW MAŁOPOLSKI GRUNWALDZKA",
+          "lat": 50.0698,
+          "lon": 21.72743,
+          "time": "16:43"
+        },
+        {
+          "id": 22,
+          "name": "OLCHOWA E4",
+          "lat": 50.07027,
+          "lon": 21.75508,
+          "time": "16:48"
+        },
+        {
+          "id": 23,
+          "name": "KLĘCZANY STADION",
+          "lat": 50.07091,
+          "lon": 21.78105,
+          "time": "16:50"
+        },
+        {
+          "id": 24,
+          "name": "DĄBROWA",
+          "lat": 50.07155,
+          "lon": 21.80588,
+          "time": "16:53"
+        },
+        {
+          "id": 25,
+          "name": "DĄBROWA 2",
+          "lat": 50.0718,
+          "lon": 21.82008,
+          "time": "16:55"
+        },
+        {
+          "id": 26,
+          "name": "TRZCIANA",
+          "lat": 50.07156,
+          "lon": 21.83792,
+          "time": "16:57"
+        },
+        {
+          "id": 27,
+          "name": "TRZCIANA WOLICZKA 56 N.Ż.",
+          "lat": 50.07146,
+          "lon": 21.86735,
+          "time": "16:59"
+        },
+        {
+          "id": 28,
+          "name": "ŚWILCZA 58",
+          "lat": 50.07168,
+          "lon": 21.89666,
+          "time": "17:01"
+        },
+        {
+          "id": 29,
+          "name": "ŚWILCZA OSIEDLE 60 N.Ż.",
+          "lat": 50.06985,
+          "lon": 21.91069,
+          "time": null
+        },
+        {
+          "id": 30,
+          "name": "ŚWILCZA NOWY DWÓR 62 N.Ż.",
+          "lat": 50.06501,
+          "lon": 21.92998,
+          "time": null
+        },
+        {
+          "id": 31,
+          "name": "RZESZÓW KRAKOWSKA GALERIA",
+          "lat": 50.04843,
+          "lon": 21.97509,
+          "time": "17:09"
+        },
+        {
+          "id": 32,
+          "name": "RZESZÓW KRAKOWSKA SZPITAL",
+          "lat": 50.04586,
+          "lon": 21.98075,
+          "time": "17:11"
+        },
+        {
+          "id": 33,
+          "name": "RZESZÓW DWORZEC LOKALNY",
+          "lat": 50.04273,
+          "lon": 21.99384,
+          "time": "17:15"
+        },
+        {
+          "id": 34,
+          "name": "RZESZÓW DWORZEC AUTOBUSOWY",
+          "lat": 50.04214,
+          "lon": 22.00312,
+          "time": "17:20"
+        }
+      ]
+    },
+    {
+      "id": "73c04f5e56fcf232faa8",
+      "duty": "S-25",
+      "tripNo": 2,
+      "aliases": [
+        {
+          "duty": "S-25",
+          "label": "S-25",
+          "tripNo": 2
+        }
+      ],
+      "departure": "17:20",
+      "arrival": "18:40",
+      "serviceCode": "",
+      "direction": "DĘBICA DWORZEC AUTOBUSOWY",
+      "route": [
+        {
+          "id": 40,
+          "name": "RZESZÓW DWORZEC AUTOBUSOWY",
+          "lat": 50.04232,
+          "lon": 22.00264,
+          "time": "17:20"
+        },
+        {
+          "id": 41,
+          "name": "RZESZÓW DWORZEC LOKALNY",
+          "lat": 50.04295,
+          "lon": 21.99474,
+          "time": null
+        },
+        {
+          "id": 42,
+          "name": "RZESZÓW KRAKOWSKA SZPITAL",
+          "lat": 50.04609,
+          "lon": 21.98183,
+          "time": null
+        },
+        {
+          "id": 43,
+          "name": "RZESZÓW KRAKOWSKA GALERIA",
+          "lat": 50.04811,
+          "lon": 21.97628,
+          "time": null
+        },
+        {
+          "id": 35,
+          "name": "ŚWILCZA NOWY DWÓR 71 N.Ż.",
+          "lat": 50.06667,
+          "lon": 21.92433,
+          "time": null
+        },
+        {
+          "id": 36,
+          "name": "ŚWILCZA OSIEDLE 73 N.Ż.",
+          "lat": 50.07069,
+          "lon": 21.90748,
+          "time": null
+        },
+        {
+          "id": 37,
+          "name": "ŚWILCZA 75",
+          "lat": 50.0719,
+          "lon": 21.89657,
+          "time": null
+        },
+        {
+          "id": 38,
+          "name": "TRZCIANA WOLICZKA 77 N.Ż.",
+          "lat": 50.0716,
+          "lon": 21.86626,
+          "time": null
+        },
+        {
+          "id": 44,
+          "name": "TRZCIANA",
+          "lat": 50.07131,
+          "lon": 21.84132,
+          "time": null
+        },
+        {
+          "id": 45,
+          "name": "DĄBROWA 2",
+          "lat": 50.07181,
+          "lon": 21.81728,
+          "time": null
+        },
+        {
+          "id": 46,
+          "name": "DĄBROWA",
+          "lat": 50.0715,
+          "lon": 21.80431,
+          "time": null
+        },
+        {
+          "id": 47,
+          "name": "KLĘCZANY SZKOŁA",
+          "lat": 50.07091,
+          "lon": 21.77923,
+          "time": null
+        },
+        {
+          "id": 48,
+          "name": "OLCHOWA E4",
+          "lat": 50.07037,
+          "lon": 21.75678,
+          "time": null
+        },
+        {
+          "id": 49,
+          "name": "SĘDZISZÓW MAŁOPOLSKI GRUNWALDZKA",
+          "lat": 50.06987,
+          "lon": 21.7269,
+          "time": null
+        },
+        {
+          "id": 50,
+          "name": "SĘDZISZÓW MAŁOPOLSKI PIŁSUDSKIEGO",
+          "lat": 50.07067,
+          "lon": 21.71068,
+          "time": null
+        },
+        {
+          "id": 51,
+          "name": "SĘDZISZÓW MAŁOPOLSKI RYNEK",
+          "lat": 50.06981,
+          "lon": 21.69987,
+          "time": null
+        },
+        {
+          "id": 52,
+          "name": "SĘDZISZÓW MAŁOPOLSKI OSIEDLE MŁODYCH",
+          "lat": 50.06917,
+          "lon": 21.68726,
+          "time": null
+        },
+        {
+          "id": 53,
+          "name": "ROPCZYCE WESOŁA",
+          "lat": 50.06676,
+          "lon": 21.65778,
+          "time": null
+        },
+        {
+          "id": 54,
+          "name": "ROPCZYCE WITKOWICE",
+          "lat": 50.05928,
+          "lon": 21.63541,
+          "time": null
+        },
+        {
+          "id": 55,
+          "name": "ROPCZYCE MICKIEWICZA",
+          "lat": 50.05418,
+          "lon": 21.61864,
+          "time": null
+        },
+        {
+          "id": 56,
+          "name": "ROPCZYCE DWORZEC AUTOBUSOWY",
+          "lat": 50.05254,
+          "lon": 21.60425,
+          "time": null
+        },
+        {
+          "id": 57,
+          "name": "ROPCZYCE PODSŁOŃCE",
+          "lat": 50.06168,
+          "lon": 21.5694,
+          "time": null
+        },
+        {
+          "id": 58,
+          "name": "BRZEZÓWKA",
+          "lat": 50.06208,
+          "lon": 21.54486,
+          "time": null
+        },
+        {
+          "id": 59,
+          "name": "LUBZINA E4",
+          "lat": 50.06248,
+          "lon": 21.52007,
+          "time": null
+        },
+        {
+          "id": 60,
+          "name": "LUBZINA OSIEDLE",
+          "lat": 50.06193,
+          "lon": 21.5029,
+          "time": null
+        },
+        {
+          "id": 61,
+          "name": "ZAWADA E4",
+          "lat": 50.06014,
+          "lon": 21.48579,
+          "time": null
+        },
+        {
+          "id": 62,
+          "name": "NAGAWCZYNA 2",
+          "lat": 50.05855,
+          "lon": 21.4705,
+          "time": null
+        },
+        {
+          "id": 63,
+          "name": "NAGAWCZYNA 1",
+          "lat": 50.05782,
+          "lon": 21.46335,
+          "time": null
+        },
+        {
+          "id": 64,
+          "name": "DĘBICA RZESZOWSKA NADLEŚNICTWO",
+          "lat": 50.05603,
+          "lon": 21.44693,
+          "time": null
+        },
+        {
+          "id": 65,
+          "name": "DĘBICA RZESZOWSKA MKS",
+          "lat": 50.05562,
+          "lon": 21.4425,
+          "time": null
+        },
+        {
+          "id": 66,
+          "name": "DĘBICA RZESZOWSKA RAJ",
+          "lat": 50.05484,
+          "lon": 21.43534,
+          "time": null
+        },
+        {
+          "id": 67,
+          "name": "DĘBICA RZESZOWSKA TECHNIKUM",
+          "lat": 50.05398,
+          "lon": 21.42704,
+          "time": null
+        },
+        {
+          "id": 39,
+          "name": "DĘBICA RZESZOWSKA PLAC GRYFITÓW",
+          "lat": 50.05243,
+          "lon": 21.41531,
+          "time": null
+        },
+        {
+          "id": 68,
+          "name": "DĘBICA DWORZEC AUTOBUSOWY",
+          "lat": 50.05387,
+          "lon": 21.40663,
+          "time": "18:40"
+        }
+      ]
+    },
+    {
+      "id": "169c74bb76ee59c11aad",
+      "duty": "S-25",
+      "tripNo": 3,
+      "aliases": [
+        {
+          "duty": "S-25",
+          "label": "S-25",
+          "tripNo": 3
+        }
+      ],
+      "departure": "19:45",
+      "arrival": "21:00",
+      "serviceCode": "",
+      "direction": "RZESZÓW DWORZEC AUTOBUSOWY",
+      "route": [
+        {
+          "id": 1,
+          "name": "DĘBICA DWORZEC AUTOBUSOWY",
+          "lat": 50.05382,
+          "lon": 21.40646,
+          "time": "19:45"
+        },
+        {
+          "id": 2,
+          "name": "ZURT",
+          "lat": 50.05191,
+          "lon": 21.41304,
+          "time": null
+        },
+        {
+          "id": 3,
+          "name": "DĘBICA RZESZOWSKA TECHNIKUM",
+          "lat": 50.05382,
+          "lon": 21.42559,
+          "time": null
+        },
+        {
+          "id": 4,
+          "name": "DĘBICA RZESZOWSKA RAJ",
+          "lat": 50.05492,
+          "lon": 21.43617,
+          "time": null
+        },
+        {
+          "id": 5,
+          "name": "DĘBICA RZESZOWSKA MKS",
+          "lat": 50.0557,
+          "lon": 21.44369,
+          "time": null
+        },
+        {
+          "id": 6,
+          "name": "DĘBICA RZESZOWSKA NADLEŚNICTWO",
+          "lat": 50.05625,
+          "lon": 21.44925,
+          "time": null
+        },
+        {
+          "id": 7,
+          "name": "NAGAWCZYNA 1",
+          "lat": 50.05762,
+          "lon": 21.46242,
+          "time": null
+        },
+        {
+          "id": 8,
+          "name": "NAGAWCZYNA 2",
+          "lat": 50.05858,
+          "lon": 21.47173,
+          "time": null
+        },
+        {
+          "id": 9,
+          "name": "ZAWADA E4",
+          "lat": 50.05983,
+          "lon": 21.48364,
+          "time": null
+        },
+        {
+          "id": 10,
+          "name": "LUBZINA OSIEDLE",
+          "lat": 50.06204,
+          "lon": 21.50451,
+          "time": null
+        },
+        {
+          "id": 11,
+          "name": "LUBZINA E4",
+          "lat": 50.06243,
+          "lon": 21.51855,
+          "time": null
+        },
+        {
+          "id": 12,
+          "name": "BRZEZÓWKA",
+          "lat": 50.06204,
+          "lon": 21.54299,
+          "time": null
+        },
+        {
+          "id": 13,
+          "name": "ROPCZYCE PODSŁOŃCE",
+          "lat": 50.06161,
+          "lon": 21.56946,
+          "time": null
+        },
+        {
+          "id": 14,
+          "name": "ROPCZYCE DWORZEC AUTOBUSOWY",
+          "lat": 50.05253,
+          "lon": 21.60427,
+          "time": null
+        },
+        {
+          "id": 15,
+          "name": "ROPCZYCE MICKIEWICZA",
+          "lat": 50.05404,
+          "lon": 21.61878,
+          "time": null
+        },
+        {
+          "id": 16,
+          "name": "ROPCZYCE WITKOWICE",
+          "lat": 50.05997,
+          "lon": 21.63736,
+          "time": null
+        },
+        {
+          "id": 17,
+          "name": "ROPCZYCE WESOŁA",
+          "lat": 50.06692,
+          "lon": 21.65875,
+          "time": null
+        },
+        {
+          "id": 18,
+          "name": "SĘDZISZÓW MAŁOPOLSKI OSIEDLE MŁODYCH",
+          "lat": 50.06919,
+          "lon": 21.68797,
+          "time": null
+        },
+        {
+          "id": 19,
+          "name": "SĘDZISZÓW MAŁOPOLSKI RYNEK",
+          "lat": 50.06981,
+          "lon": 21.69987,
+          "time": null
+        },
+        {
+          "id": 20,
+          "name": "SĘDZISZÓW MAŁOPOLSKI PIŁSUDSKIEGO",
+          "lat": 50.07065,
+          "lon": 21.71139,
+          "time": null
+        },
+        {
+          "id": 21,
+          "name": "SĘDZISZÓW MAŁOPOLSKI GRUNWALDZKA",
+          "lat": 50.0698,
+          "lon": 21.72743,
+          "time": null
+        },
+        {
+          "id": 22,
+          "name": "OLCHOWA E4",
+          "lat": 50.07027,
+          "lon": 21.75508,
+          "time": null
+        },
+        {
+          "id": 23,
+          "name": "KLĘCZANY STADION",
+          "lat": 50.07091,
+          "lon": 21.78105,
+          "time": null
+        },
+        {
+          "id": 24,
+          "name": "DĄBROWA",
+          "lat": 50.07155,
+          "lon": 21.80588,
+          "time": null
+        },
+        {
+          "id": 25,
+          "name": "DĄBROWA 2",
+          "lat": 50.0718,
+          "lon": 21.82008,
+          "time": null
+        },
+        {
+          "id": 26,
+          "name": "TRZCIANA",
+          "lat": 50.07156,
+          "lon": 21.83792,
+          "time": null
+        },
+        {
+          "id": 27,
+          "name": "TRZCIANA WOLICZKA 56 N.Ż.",
+          "lat": 50.07146,
+          "lon": 21.86735,
+          "time": null
+        },
+        {
+          "id": 28,
+          "name": "ŚWILCZA 58",
+          "lat": 50.07168,
+          "lon": 21.89666,
+          "time": null
+        },
+        {
+          "id": 29,
+          "name": "ŚWILCZA OSIEDLE 60 N.Ż.",
+          "lat": 50.06985,
+          "lon": 21.91069,
+          "time": null
+        },
+        {
+          "id": 30,
+          "name": "ŚWILCZA NOWY DWÓR 62 N.Ż.",
+          "lat": 50.06501,
+          "lon": 21.92998,
+          "time": null
+        },
+        {
+          "id": 31,
+          "name": "RZESZÓW KRAKOWSKA GALERIA",
+          "lat": 50.04843,
+          "lon": 21.97509,
+          "time": null
+        },
+        {
+          "id": 32,
+          "name": "RZESZÓW KRAKOWSKA SZPITAL",
+          "lat": 50.04586,
+          "lon": 21.98075,
+          "time": null
+        },
+        {
+          "id": 33,
+          "name": "RZESZÓW DWORZEC LOKALNY",
+          "lat": 50.04273,
+          "lon": 21.99384,
+          "time": null
+        },
+        {
+          "id": 34,
+          "name": "RZESZÓW DWORZEC AUTOBUSOWY",
+          "lat": 50.04214,
+          "lon": 22.00312,
+          "time": "21:00"
+        }
+      ]
+    },
+    {
+      "id": "e975d4dca8ac16bd5f6b",
+      "duty": "S-25",
+      "tripNo": 4,
+      "aliases": [
+        {
+          "duty": "S-25",
+          "label": "S-25",
+          "tripNo": 4
+        }
+      ],
+      "departure": "21:30",
+      "arrival": "22:45",
+      "serviceCode": "",
+      "direction": "DĘBICA DWORZEC AUTOBUSOWY",
+      "route": [
+        {
+          "id": 40,
+          "name": "RZESZÓW DWORZEC AUTOBUSOWY",
+          "lat": 50.04232,
+          "lon": 22.00264,
+          "time": "21:30"
+        },
+        {
+          "id": 41,
+          "name": "RZESZÓW DWORZEC LOKALNY",
+          "lat": 50.04295,
+          "lon": 21.99474,
+          "time": null
+        },
+        {
+          "id": 42,
+          "name": "RZESZÓW KRAKOWSKA SZPITAL",
+          "lat": 50.04609,
+          "lon": 21.98183,
+          "time": null
+        },
+        {
+          "id": 43,
+          "name": "RZESZÓW KRAKOWSKA GALERIA",
+          "lat": 50.04811,
+          "lon": 21.97628,
+          "time": null
+        },
+        {
+          "id": 35,
+          "name": "ŚWILCZA NOWY DWÓR 71 N.Ż.",
+          "lat": 50.06667,
+          "lon": 21.92433,
+          "time": null
+        },
+        {
+          "id": 36,
+          "name": "ŚWILCZA OSIEDLE 73 N.Ż.",
+          "lat": 50.07069,
+          "lon": 21.90748,
+          "time": null
+        },
+        {
+          "id": 37,
+          "name": "ŚWILCZA 75",
+          "lat": 50.0719,
+          "lon": 21.89657,
+          "time": null
+        },
+        {
+          "id": 38,
+          "name": "TRZCIANA WOLICZKA 77 N.Ż.",
+          "lat": 50.0716,
+          "lon": 21.86626,
+          "time": null
+        },
+        {
+          "id": 44,
+          "name": "TRZCIANA",
+          "lat": 50.07131,
+          "lon": 21.84132,
+          "time": null
+        },
+        {
+          "id": 45,
+          "name": "DĄBROWA 2",
+          "lat": 50.07181,
+          "lon": 21.81728,
+          "time": null
+        },
+        {
+          "id": 46,
+          "name": "DĄBROWA",
+          "lat": 50.0715,
+          "lon": 21.80431,
+          "time": null
+        },
+        {
+          "id": 47,
+          "name": "KLĘCZANY SZKOŁA",
+          "lat": 50.07091,
+          "lon": 21.77923,
+          "time": null
+        },
+        {
+          "id": 48,
+          "name": "OLCHOWA E4",
+          "lat": 50.07037,
+          "lon": 21.75678,
+          "time": null
+        },
+        {
+          "id": 49,
+          "name": "SĘDZISZÓW MAŁOPOLSKI GRUNWALDZKA",
+          "lat": 50.06987,
+          "lon": 21.7269,
+          "time": null
+        },
+        {
+          "id": 50,
+          "name": "SĘDZISZÓW MAŁOPOLSKI PIŁSUDSKIEGO",
+          "lat": 50.07067,
+          "lon": 21.71068,
+          "time": null
+        },
+        {
+          "id": 51,
+          "name": "SĘDZISZÓW MAŁOPOLSKI RYNEK",
+          "lat": 50.06981,
+          "lon": 21.69987,
+          "time": null
+        },
+        {
+          "id": 52,
+          "name": "SĘDZISZÓW MAŁOPOLSKI OSIEDLE MŁODYCH",
+          "lat": 50.06917,
+          "lon": 21.68726,
+          "time": null
+        },
+        {
+          "id": 53,
+          "name": "ROPCZYCE WESOŁA",
+          "lat": 50.06676,
+          "lon": 21.65778,
+          "time": null
+        },
+        {
+          "id": 54,
+          "name": "ROPCZYCE WITKOWICE",
+          "lat": 50.05928,
+          "lon": 21.63541,
+          "time": null
+        },
+        {
+          "id": 55,
+          "name": "ROPCZYCE MICKIEWICZA",
+          "lat": 50.05418,
+          "lon": 21.61864,
+          "time": null
+        },
+        {
+          "id": 56,
+          "name": "ROPCZYCE DWORZEC AUTOBUSOWY",
+          "lat": 50.05254,
+          "lon": 21.60425,
+          "time": null
+        },
+        {
+          "id": 57,
+          "name": "ROPCZYCE PODSŁOŃCE",
+          "lat": 50.06168,
+          "lon": 21.5694,
+          "time": null
+        },
+        {
+          "id": 58,
+          "name": "BRZEZÓWKA",
+          "lat": 50.06208,
+          "lon": 21.54486,
+          "time": null
+        },
+        {
+          "id": 59,
+          "name": "LUBZINA E4",
+          "lat": 50.06248,
+          "lon": 21.52007,
+          "time": null
+        },
+        {
+          "id": 60,
+          "name": "LUBZINA OSIEDLE",
+          "lat": 50.06193,
+          "lon": 21.5029,
+          "time": null
+        },
+        {
+          "id": 61,
+          "name": "ZAWADA E4",
+          "lat": 50.06014,
+          "lon": 21.48579,
+          "time": null
+        },
+        {
+          "id": 62,
+          "name": "NAGAWCZYNA 2",
+          "lat": 50.05855,
+          "lon": 21.4705,
+          "time": null
+        },
+        {
+          "id": 63,
+          "name": "NAGAWCZYNA 1",
+          "lat": 50.05782,
+          "lon": 21.46335,
+          "time": null
+        },
+        {
+          "id": 64,
+          "name": "DĘBICA RZESZOWSKA NADLEŚNICTWO",
+          "lat": 50.05603,
+          "lon": 21.44693,
+          "time": null
+        },
+        {
+          "id": 65,
+          "name": "DĘBICA RZESZOWSKA MKS",
+          "lat": 50.05562,
+          "lon": 21.4425,
+          "time": null
+        },
+        {
+          "id": 66,
+          "name": "DĘBICA RZESZOWSKA RAJ",
+          "lat": 50.05484,
+          "lon": 21.43534,
+          "time": null
+        },
+        {
+          "id": 67,
+          "name": "DĘBICA RZESZOWSKA TECHNIKUM",
+          "lat": 50.05398,
+          "lon": 21.42704,
+          "time": null
+        },
+        {
+          "id": 39,
+          "name": "DĘBICA RZESZOWSKA PLAC GRYFITÓW",
+          "lat": 50.05243,
+          "lon": 21.41531,
+          "time": null
+        },
+        {
+          "id": 68,
+          "name": "DĘBICA DWORZEC AUTOBUSOWY",
+          "lat": 50.05387,
+          "lon": 21.40663,
+          "time": "22:45"
+        }
+      ]
+    },
+    {
+      "id": "36cae2d9556e3e080c6d",
+      "duty": "S-27",
+      "tripNo": 1,
+      "aliases": [
+        {
+          "duty": "S-27",
+          "label": "S-27",
+          "tripNo": 1
+        }
+      ],
+      "departure": "05:05",
+      "arrival": "06:25",
+      "serviceCode": "",
+      "direction": "RZESZÓW DWORZEC AUTOBUSOWY",
+      "route": [
+        {
+          "id": 1,
+          "name": "DĘBICA DWORZEC AUTOBUSOWY",
+          "lat": 50.05382,
+          "lon": 21.40646,
+          "time": "05:05"
+        },
+        {
+          "id": 2,
+          "name": "ZURT",
+          "lat": 50.05191,
+          "lon": 21.41304,
+          "time": null
+        },
+        {
+          "id": 3,
+          "name": "DĘBICA RZESZOWSKA TECHNIKUM",
+          "lat": 50.05382,
+          "lon": 21.42559,
+          "time": null
+        },
+        {
+          "id": 4,
+          "name": "DĘBICA RZESZOWSKA RAJ",
+          "lat": 50.05492,
+          "lon": 21.43617,
+          "time": null
+        },
+        {
+          "id": 5,
+          "name": "DĘBICA RZESZOWSKA MKS",
+          "lat": 50.0557,
+          "lon": 21.44369,
+          "time": null
+        },
+        {
+          "id": 6,
+          "name": "DĘBICA RZESZOWSKA NADLEŚNICTWO",
+          "lat": 50.05625,
+          "lon": 21.44925,
+          "time": null
+        },
+        {
+          "id": 7,
+          "name": "NAGAWCZYNA 1",
+          "lat": 50.05762,
+          "lon": 21.46242,
+          "time": null
+        },
+        {
+          "id": 8,
+          "name": "NAGAWCZYNA 2",
+          "lat": 50.05858,
+          "lon": 21.47173,
+          "time": null
+        },
+        {
+          "id": 9,
+          "name": "ZAWADA E4",
+          "lat": 50.05983,
+          "lon": 21.48364,
+          "time": null
+        },
+        {
+          "id": 10,
+          "name": "LUBZINA OSIEDLE",
+          "lat": 50.06204,
+          "lon": 21.50451,
+          "time": null
+        },
+        {
+          "id": 11,
+          "name": "LUBZINA E4",
+          "lat": 50.06243,
+          "lon": 21.51855,
+          "time": null
+        },
+        {
+          "id": 12,
+          "name": "BRZEZÓWKA",
+          "lat": 50.06204,
+          "lon": 21.54299,
+          "time": null
+        },
+        {
+          "id": 13,
+          "name": "ROPCZYCE PODSŁOŃCE",
+          "lat": 50.06161,
+          "lon": 21.56946,
+          "time": null
+        },
+        {
+          "id": 14,
+          "name": "ROPCZYCE DWORZEC AUTOBUSOWY",
+          "lat": 50.05253,
+          "lon": 21.60427,
+          "time": null
+        },
+        {
+          "id": 15,
+          "name": "ROPCZYCE MICKIEWICZA",
+          "lat": 50.05404,
+          "lon": 21.61878,
+          "time": null
+        },
+        {
+          "id": 16,
+          "name": "ROPCZYCE WITKOWICE",
+          "lat": 50.05997,
+          "lon": 21.63736,
+          "time": null
+        },
+        {
+          "id": 17,
+          "name": "ROPCZYCE WESOŁA",
+          "lat": 50.06692,
+          "lon": 21.65875,
+          "time": null
+        },
+        {
+          "id": 18,
+          "name": "SĘDZISZÓW MAŁOPOLSKI OSIEDLE MŁODYCH",
+          "lat": 50.06919,
+          "lon": 21.68797,
+          "time": null
+        },
+        {
+          "id": 19,
+          "name": "SĘDZISZÓW MAŁOPOLSKI RYNEK",
+          "lat": 50.06981,
+          "lon": 21.69987,
+          "time": null
+        },
+        {
+          "id": 20,
+          "name": "SĘDZISZÓW MAŁOPOLSKI PIŁSUDSKIEGO",
+          "lat": 50.07065,
+          "lon": 21.71139,
+          "time": null
+        },
+        {
+          "id": 21,
+          "name": "SĘDZISZÓW MAŁOPOLSKI GRUNWALDZKA",
+          "lat": 50.0698,
+          "lon": 21.72743,
+          "time": null
+        },
+        {
+          "id": 22,
+          "name": "OLCHOWA E4",
+          "lat": 50.07027,
+          "lon": 21.75508,
+          "time": null
+        },
+        {
+          "id": 23,
+          "name": "KLĘCZANY STADION",
+          "lat": 50.07091,
+          "lon": 21.78105,
+          "time": null
+        },
+        {
+          "id": 24,
+          "name": "DĄBROWA",
+          "lat": 50.07155,
+          "lon": 21.80588,
+          "time": null
+        },
+        {
+          "id": 25,
+          "name": "DĄBROWA 2",
+          "lat": 50.0718,
+          "lon": 21.82008,
+          "time": null
+        },
+        {
+          "id": 26,
+          "name": "TRZCIANA",
+          "lat": 50.07156,
+          "lon": 21.83792,
+          "time": null
+        },
+        {
+          "id": 27,
+          "name": "TRZCIANA WOLICZKA 56 N.Ż.",
+          "lat": 50.07146,
+          "lon": 21.86735,
+          "time": null
+        },
+        {
+          "id": 28,
+          "name": "ŚWILCZA 58",
+          "lat": 50.07168,
+          "lon": 21.89666,
+          "time": null
+        },
+        {
+          "id": 29,
+          "name": "ŚWILCZA OSIEDLE 60 N.Ż.",
+          "lat": 50.06985,
+          "lon": 21.91069,
+          "time": null
+        },
+        {
+          "id": 30,
+          "name": "ŚWILCZA NOWY DWÓR 62 N.Ż.",
+          "lat": 50.06501,
+          "lon": 21.92998,
+          "time": null
+        },
+        {
+          "id": 31,
+          "name": "RZESZÓW KRAKOWSKA GALERIA",
+          "lat": 50.04843,
+          "lon": 21.97509,
+          "time": null
+        },
+        {
+          "id": 32,
+          "name": "RZESZÓW KRAKOWSKA SZPITAL",
+          "lat": 50.04586,
+          "lon": 21.98075,
+          "time": null
+        },
+        {
+          "id": 33,
+          "name": "RZESZÓW DWORZEC LOKALNY",
+          "lat": 50.04273,
+          "lon": 21.99384,
+          "time": null
+        },
+        {
+          "id": 34,
+          "name": "RZESZÓW DWORZEC AUTOBUSOWY",
+          "lat": 50.04214,
+          "lon": 22.00312,
+          "time": "06:25"
+        }
+      ]
+    },
+    {
+      "id": "5ac975526da86c32dde6",
+      "duty": "S-27",
+      "tripNo": 2,
+      "aliases": [
+        {
+          "duty": "S-27",
+          "label": "S-27",
+          "tripNo": 2
+        }
+      ],
+      "departure": "06:30",
+      "arrival": "07:50",
+      "serviceCode": "",
+      "direction": "DĘBICA DWORZEC AUTOBUSOWY",
+      "route": [
+        {
+          "id": 40,
+          "name": "RZESZÓW DWORZEC AUTOBUSOWY",
+          "lat": 50.04232,
+          "lon": 22.00264,
+          "time": "06:30"
+        },
+        {
+          "id": 41,
+          "name": "RZESZÓW DWORZEC LOKALNY",
+          "lat": 50.04295,
+          "lon": 21.99474,
+          "time": null
+        },
+        {
+          "id": 42,
+          "name": "RZESZÓW KRAKOWSKA SZPITAL",
+          "lat": 50.04609,
+          "lon": 21.98183,
+          "time": null
+        },
+        {
+          "id": 43,
+          "name": "RZESZÓW KRAKOWSKA GALERIA",
+          "lat": 50.04811,
+          "lon": 21.97628,
+          "time": null
+        },
+        {
+          "id": 35,
+          "name": "ŚWILCZA NOWY DWÓR 71 N.Ż.",
+          "lat": 50.06667,
+          "lon": 21.92433,
+          "time": null
+        },
+        {
+          "id": 36,
+          "name": "ŚWILCZA OSIEDLE 73 N.Ż.",
+          "lat": 50.07069,
+          "lon": 21.90748,
+          "time": null
+        },
+        {
+          "id": 37,
+          "name": "ŚWILCZA 75",
+          "lat": 50.0719,
+          "lon": 21.89657,
+          "time": null
+        },
+        {
+          "id": 38,
+          "name": "TRZCIANA WOLICZKA 77 N.Ż.",
+          "lat": 50.0716,
+          "lon": 21.86626,
+          "time": null
+        },
+        {
+          "id": 44,
+          "name": "TRZCIANA",
+          "lat": 50.07131,
+          "lon": 21.84132,
+          "time": null
+        },
+        {
+          "id": 45,
+          "name": "DĄBROWA 2",
+          "lat": 50.07181,
+          "lon": 21.81728,
+          "time": null
+        },
+        {
+          "id": 46,
+          "name": "DĄBROWA",
+          "lat": 50.0715,
+          "lon": 21.80431,
+          "time": null
+        },
+        {
+          "id": 47,
+          "name": "KLĘCZANY SZKOŁA",
+          "lat": 50.07091,
+          "lon": 21.77923,
+          "time": null
+        },
+        {
+          "id": 48,
+          "name": "OLCHOWA E4",
+          "lat": 50.07037,
+          "lon": 21.75678,
+          "time": null
+        },
+        {
+          "id": 49,
+          "name": "SĘDZISZÓW MAŁOPOLSKI GRUNWALDZKA",
+          "lat": 50.06987,
+          "lon": 21.7269,
+          "time": null
+        },
+        {
+          "id": 50,
+          "name": "SĘDZISZÓW MAŁOPOLSKI PIŁSUDSKIEGO",
+          "lat": 50.07067,
+          "lon": 21.71068,
+          "time": null
+        },
+        {
+          "id": 51,
+          "name": "SĘDZISZÓW MAŁOPOLSKI RYNEK",
+          "lat": 50.06981,
+          "lon": 21.69987,
+          "time": null
+        },
+        {
+          "id": 52,
+          "name": "SĘDZISZÓW MAŁOPOLSKI OSIEDLE MŁODYCH",
+          "lat": 50.06917,
+          "lon": 21.68726,
+          "time": null
+        },
+        {
+          "id": 53,
+          "name": "ROPCZYCE WESOŁA",
+          "lat": 50.06676,
+          "lon": 21.65778,
+          "time": null
+        },
+        {
+          "id": 54,
+          "name": "ROPCZYCE WITKOWICE",
+          "lat": 50.05928,
+          "lon": 21.63541,
+          "time": null
+        },
+        {
+          "id": 55,
+          "name": "ROPCZYCE MICKIEWICZA",
+          "lat": 50.05418,
+          "lon": 21.61864,
+          "time": null
+        },
+        {
+          "id": 56,
+          "name": "ROPCZYCE DWORZEC AUTOBUSOWY",
+          "lat": 50.05254,
+          "lon": 21.60425,
+          "time": null
+        },
+        {
+          "id": 57,
+          "name": "ROPCZYCE PODSŁOŃCE",
+          "lat": 50.06168,
+          "lon": 21.5694,
+          "time": null
+        },
+        {
+          "id": 58,
+          "name": "BRZEZÓWKA",
+          "lat": 50.06208,
+          "lon": 21.54486,
+          "time": null
+        },
+        {
+          "id": 59,
+          "name": "LUBZINA E4",
+          "lat": 50.06248,
+          "lon": 21.52007,
+          "time": null
+        },
+        {
+          "id": 60,
+          "name": "LUBZINA OSIEDLE",
+          "lat": 50.06193,
+          "lon": 21.5029,
+          "time": null
+        },
+        {
+          "id": 61,
+          "name": "ZAWADA E4",
+          "lat": 50.06014,
+          "lon": 21.48579,
+          "time": null
+        },
+        {
+          "id": 62,
+          "name": "NAGAWCZYNA 2",
+          "lat": 50.05855,
+          "lon": 21.4705,
+          "time": null
+        },
+        {
+          "id": 63,
+          "name": "NAGAWCZYNA 1",
+          "lat": 50.05782,
+          "lon": 21.46335,
+          "time": null
+        },
+        {
+          "id": 64,
+          "name": "DĘBICA RZESZOWSKA NADLEŚNICTWO",
+          "lat": 50.05603,
+          "lon": 21.44693,
+          "time": null
+        },
+        {
+          "id": 65,
+          "name": "DĘBICA RZESZOWSKA MKS",
+          "lat": 50.05562,
+          "lon": 21.4425,
+          "time": null
+        },
+        {
+          "id": 66,
+          "name": "DĘBICA RZESZOWSKA RAJ",
+          "lat": 50.05484,
+          "lon": 21.43534,
+          "time": null
+        },
+        {
+          "id": 67,
+          "name": "DĘBICA RZESZOWSKA TECHNIKUM",
+          "lat": 50.05398,
+          "lon": 21.42704,
+          "time": null
+        },
+        {
+          "id": 39,
+          "name": "DĘBICA RZESZOWSKA PLAC GRYFITÓW",
+          "lat": 50.05243,
+          "lon": 21.41531,
+          "time": null
+        },
+        {
+          "id": 68,
+          "name": "DĘBICA DWORZEC AUTOBUSOWY",
+          "lat": 50.05387,
+          "lon": 21.40663,
+          "time": "07:50"
+        }
+      ]
+    },
+    {
+      "id": "883b85a648ce0e80b47e",
+      "duty": "S-27",
+      "tripNo": 3,
+      "aliases": [
+        {
+          "duty": "S-27",
+          "label": "S-27",
+          "tripNo": 3
+        }
+      ],
+      "departure": "08:15",
+      "arrival": "09:35",
+      "serviceCode": "",
+      "direction": "RZESZÓW DWORZEC AUTOBUSOWY",
+      "route": [
+        {
+          "id": 1,
+          "name": "DĘBICA DWORZEC AUTOBUSOWY",
+          "lat": 50.05382,
+          "lon": 21.40646,
+          "time": "08:15"
+        },
+        {
+          "id": 2,
+          "name": "ZURT",
+          "lat": 50.05191,
+          "lon": 21.41304,
+          "time": "08:17"
+        },
+        {
+          "id": 3,
+          "name": "DĘBICA RZESZOWSKA TECHNIKUM",
+          "lat": 50.05382,
+          "lon": 21.42559,
+          "time": "08:19"
+        },
+        {
+          "id": 4,
+          "name": "DĘBICA RZESZOWSKA RAJ",
+          "lat": 50.05492,
+          "lon": 21.43617,
+          "time": "08:21"
+        },
+        {
+          "id": 5,
+          "name": "DĘBICA RZESZOWSKA MKS",
+          "lat": 50.0557,
+          "lon": 21.44369,
+          "time": null
+        },
+        {
+          "id": 6,
+          "name": "DĘBICA RZESZOWSKA NADLEŚNICTWO",
+          "lat": 50.05625,
+          "lon": 21.44925,
+          "time": "08:24"
+        },
+        {
+          "id": 7,
+          "name": "NAGAWCZYNA 1",
+          "lat": 50.05762,
+          "lon": 21.46242,
+          "time": "08:26"
+        },
+        {
+          "id": 8,
+          "name": "NAGAWCZYNA 2",
+          "lat": 50.05858,
+          "lon": 21.47173,
+          "time": "08:27"
+        },
+        {
+          "id": 9,
+          "name": "ZAWADA E4",
+          "lat": 50.05983,
+          "lon": 21.48364,
+          "time": "08:29"
+        },
+        {
+          "id": 10,
+          "name": "LUBZINA OSIEDLE",
+          "lat": 50.06204,
+          "lon": 21.50451,
+          "time": "08:31"
+        },
+        {
+          "id": 11,
+          "name": "LUBZINA E4",
+          "lat": 50.06243,
+          "lon": 21.51855,
+          "time": "08:34"
+        },
+        {
+          "id": 12,
+          "name": "BRZEZÓWKA",
+          "lat": 50.06204,
+          "lon": 21.54299,
+          "time": "08:37"
+        },
+        {
+          "id": 13,
+          "name": "ROPCZYCE PODSŁOŃCE",
+          "lat": 50.06161,
+          "lon": 21.56946,
+          "time": "08:38"
+        },
+        {
+          "id": 14,
+          "name": "ROPCZYCE DWORZEC AUTOBUSOWY",
+          "lat": 50.05253,
+          "lon": 21.60427,
+          "time": "08:41"
+        },
+        {
+          "id": 15,
+          "name": "ROPCZYCE MICKIEWICZA",
+          "lat": 50.05404,
+          "lon": 21.61878,
+          "time": "08:43"
+        },
+        {
+          "id": 16,
+          "name": "ROPCZYCE WITKOWICE",
+          "lat": 50.05997,
+          "lon": 21.63736,
+          "time": "08:46"
+        },
+        {
+          "id": 17,
+          "name": "ROPCZYCE WESOŁA",
+          "lat": 50.06692,
+          "lon": 21.65875,
+          "time": "08:49"
+        },
+        {
+          "id": 18,
+          "name": "SĘDZISZÓW MAŁOPOLSKI OSIEDLE MŁODYCH",
+          "lat": 50.06919,
+          "lon": 21.68797,
+          "time": "08:52"
+        },
+        {
+          "id": 19,
+          "name": "SĘDZISZÓW MAŁOPOLSKI RYNEK",
+          "lat": 50.06981,
+          "lon": 21.69987,
+          "time": "08:54"
+        },
+        {
+          "id": 20,
+          "name": "SĘDZISZÓW MAŁOPOLSKI PIŁSUDSKIEGO",
+          "lat": 50.07065,
+          "lon": 21.71139,
+          "time": "08:56"
+        },
+        {
+          "id": 21,
+          "name": "SĘDZISZÓW MAŁOPOLSKI GRUNWALDZKA",
+          "lat": 50.0698,
+          "lon": 21.72743,
+          "time": "08:58"
+        },
+        {
+          "id": 22,
+          "name": "OLCHOWA E4",
+          "lat": 50.07027,
+          "lon": 21.75508,
+          "time": "09:03"
+        },
+        {
+          "id": 23,
+          "name": "KLĘCZANY STADION",
+          "lat": 50.07091,
+          "lon": 21.78105,
+          "time": "09:05"
+        },
+        {
+          "id": 24,
+          "name": "DĄBROWA",
+          "lat": 50.07155,
+          "lon": 21.80588,
+          "time": "09:08"
+        },
+        {
+          "id": 25,
+          "name": "DĄBROWA 2",
+          "lat": 50.0718,
+          "lon": 21.82008,
+          "time": "09:10"
+        },
+        {
+          "id": 26,
+          "name": "TRZCIANA",
+          "lat": 50.07156,
+          "lon": 21.83792,
+          "time": "09:12"
+        },
+        {
+          "id": 27,
+          "name": "TRZCIANA WOLICZKA 56 N.Ż.",
+          "lat": 50.07146,
+          "lon": 21.86735,
+          "time": "09:14"
+        },
+        {
+          "id": 28,
+          "name": "ŚWILCZA 58",
+          "lat": 50.07168,
+          "lon": 21.89666,
+          "time": "09:16"
+        },
+        {
+          "id": 29,
+          "name": "ŚWILCZA OSIEDLE 60 N.Ż.",
+          "lat": 50.06985,
+          "lon": 21.91069,
+          "time": null
+        },
+        {
+          "id": 30,
+          "name": "ŚWILCZA NOWY DWÓR 62 N.Ż.",
+          "lat": 50.06501,
+          "lon": 21.92998,
+          "time": null
+        },
+        {
+          "id": 31,
+          "name": "RZESZÓW KRAKOWSKA GALERIA",
+          "lat": 50.04843,
+          "lon": 21.97509,
+          "time": "09:24"
+        },
+        {
+          "id": 32,
+          "name": "RZESZÓW KRAKOWSKA SZPITAL",
+          "lat": 50.04586,
+          "lon": 21.98075,
+          "time": "09:26"
+        },
+        {
+          "id": 33,
+          "name": "RZESZÓW DWORZEC LOKALNY",
+          "lat": 50.04273,
+          "lon": 21.99384,
+          "time": "09:30"
+        },
+        {
+          "id": 34,
+          "name": "RZESZÓW DWORZEC AUTOBUSOWY",
+          "lat": 50.04214,
+          "lon": 22.00312,
+          "time": "09:35"
+        }
+      ]
+    },
+    {
+      "id": "73ebc7b81893b2141636",
+      "duty": "S-27",
+      "tripNo": 4,
+      "aliases": [
+        {
+          "duty": "S-27",
+          "label": "S-27",
+          "tripNo": 4
+        }
+      ],
+      "departure": "10:45",
+      "arrival": "12:04",
+      "serviceCode": "",
+      "direction": "DĘBICA DWORZEC AUTOBUSOWY",
+      "route": [
+        {
+          "id": 40,
+          "name": "RZESZÓW DWORZEC AUTOBUSOWY",
+          "lat": 50.04232,
+          "lon": 22.00264,
+          "time": "10:45"
+        },
+        {
+          "id": 41,
+          "name": "RZESZÓW DWORZEC LOKALNY",
+          "lat": 50.04295,
+          "lon": 21.99474,
+          "time": "10:50"
+        },
+        {
+          "id": 42,
+          "name": "RZESZÓW KRAKOWSKA SZPITAL",
+          "lat": 50.04609,
+          "lon": 21.98183,
+          "time": "10:54"
+        },
+        {
+          "id": 43,
+          "name": "RZESZÓW KRAKOWSKA GALERIA",
+          "lat": 50.04811,
+          "lon": 21.97628,
+          "time": "10:56"
+        },
+        {
+          "id": 35,
+          "name": "ŚWILCZA NOWY DWÓR 71 N.Ż.",
+          "lat": 50.06667,
+          "lon": 21.92433,
+          "time": "10:59"
+        },
+        {
+          "id": 36,
+          "name": "ŚWILCZA OSIEDLE 73 N.Ż.",
+          "lat": 50.07069,
+          "lon": 21.90748,
+          "time": null
+        },
+        {
+          "id": 37,
+          "name": "ŚWILCZA 75",
+          "lat": 50.0719,
+          "lon": 21.89657,
+          "time": "11:03"
+        },
+        {
+          "id": 38,
+          "name": "TRZCIANA WOLICZKA 77 N.Ż.",
+          "lat": 50.0716,
+          "lon": 21.86626,
+          "time": "11:05"
+        },
+        {
+          "id": 44,
+          "name": "TRZCIANA",
+          "lat": 50.07131,
+          "lon": 21.84132,
+          "time": "11:07"
+        },
+        {
+          "id": 45,
+          "name": "DĄBROWA 2",
+          "lat": 50.07181,
+          "lon": 21.81728,
+          "time": "11:09"
+        },
+        {
+          "id": 46,
+          "name": "DĄBROWA",
+          "lat": 50.0715,
+          "lon": 21.80431,
+          "time": "11:10"
+        },
+        {
+          "id": 47,
+          "name": "KLĘCZANY SZKOŁA",
+          "lat": 50.07091,
+          "lon": 21.77923,
+          "time": "11:13"
+        },
+        {
+          "id": 48,
+          "name": "OLCHOWA E4",
+          "lat": 50.07037,
+          "lon": 21.75678,
+          "time": "11:15"
+        },
+        {
+          "id": 49,
+          "name": "SĘDZISZÓW MAŁOPOLSKI GRUNWALDZKA",
+          "lat": 50.06987,
+          "lon": 21.7269,
+          "time": "11:20"
+        },
+        {
+          "id": 50,
+          "name": "SĘDZISZÓW MAŁOPOLSKI PIŁSUDSKIEGO",
+          "lat": 50.07067,
+          "lon": 21.71068,
+          "time": "11:22"
+        },
+        {
+          "id": 51,
+          "name": "SĘDZISZÓW MAŁOPOLSKI RYNEK",
+          "lat": 50.06981,
+          "lon": 21.69987,
+          "time": "11:24"
+        },
+        {
+          "id": 52,
+          "name": "SĘDZISZÓW MAŁOPOLSKI OSIEDLE MŁODYCH",
+          "lat": 50.06917,
+          "lon": 21.68726,
+          "time": "11:26"
+        },
+        {
+          "id": 53,
+          "name": "ROPCZYCE WESOŁA",
+          "lat": 50.06676,
+          "lon": 21.65778,
+          "time": "11:29"
+        },
+        {
+          "id": 54,
+          "name": "ROPCZYCE WITKOWICE",
+          "lat": 50.05928,
+          "lon": 21.63541,
+          "time": "11:32"
+        },
+        {
+          "id": 55,
+          "name": "ROPCZYCE MICKIEWICZA",
+          "lat": 50.05418,
+          "lon": 21.61864,
+          "time": "11:35"
+        },
+        {
+          "id": 56,
+          "name": "ROPCZYCE DWORZEC AUTOBUSOWY",
+          "lat": 50.05254,
+          "lon": 21.60425,
+          "time": "11:37"
+        },
+        {
+          "id": 57,
+          "name": "ROPCZYCE PODSŁOŃCE",
+          "lat": 50.06168,
+          "lon": 21.5694,
+          "time": "11:40"
+        },
+        {
+          "id": 58,
+          "name": "BRZEZÓWKA",
+          "lat": 50.06208,
+          "lon": 21.54486,
+          "time": "11:42"
+        },
+        {
+          "id": 59,
+          "name": "LUBZINA E4",
+          "lat": 50.06248,
+          "lon": 21.52007,
+          "time": "11:45"
+        },
+        {
+          "id": 60,
+          "name": "LUBZINA OSIEDLE",
+          "lat": 50.06193,
+          "lon": 21.5029,
+          "time": "11:48"
+        },
+        {
+          "id": 61,
+          "name": "ZAWADA E4",
+          "lat": 50.06014,
+          "lon": 21.48579,
+          "time": "11:50"
+        },
+        {
+          "id": 62,
+          "name": "NAGAWCZYNA 2",
+          "lat": 50.05855,
+          "lon": 21.4705,
+          "time": "11:52"
+        },
+        {
+          "id": 63,
+          "name": "NAGAWCZYNA 1",
+          "lat": 50.05782,
+          "lon": 21.46335,
+          "time": "11:53"
+        },
+        {
+          "id": 64,
+          "name": "DĘBICA RZESZOWSKA NADLEŚNICTWO",
+          "lat": 50.05603,
+          "lon": 21.44693,
+          "time": "11:55"
+        },
+        {
+          "id": 65,
+          "name": "DĘBICA RZESZOWSKA MKS",
+          "lat": 50.05562,
+          "lon": 21.4425,
+          "time": null
+        },
+        {
+          "id": 66,
+          "name": "DĘBICA RZESZOWSKA RAJ",
+          "lat": 50.05484,
+          "lon": 21.43534,
+          "time": "11:58"
+        },
+        {
+          "id": 67,
+          "name": "DĘBICA RZESZOWSKA TECHNIKUM",
+          "lat": 50.05398,
+          "lon": 21.42704,
+          "time": "12:00"
+        },
+        {
+          "id": 39,
+          "name": "DĘBICA RZESZOWSKA PLAC GRYFITÓW",
+          "lat": 50.05243,
+          "lon": 21.41531,
+          "time": "12:02"
+        },
+        {
+          "id": 68,
+          "name": "DĘBICA DWORZEC AUTOBUSOWY",
+          "lat": 50.05387,
+          "lon": 21.40663,
+          "time": "12:04"
+        }
+      ]
+    },
+    {
+      "id": "d65a2cdba9c67e0ea661",
+      "duty": "S-27",
+      "tripNo": 5,
+      "aliases": [
+        {
+          "duty": "S-27",
+          "label": "S-27",
+          "tripNo": 5
+        }
+      ],
+      "departure": "12:45",
+      "arrival": "14:05",
+      "serviceCode": "",
+      "direction": "RZESZÓW DWORZEC AUTOBUSOWY",
+      "route": [
+        {
+          "id": 1,
+          "name": "DĘBICA DWORZEC AUTOBUSOWY",
+          "lat": 50.05382,
+          "lon": 21.40646,
+          "time": "12:45"
+        },
+        {
+          "id": 2,
+          "name": "ZURT",
+          "lat": 50.05191,
+          "lon": 21.41304,
+          "time": null
+        },
+        {
+          "id": 3,
+          "name": "DĘBICA RZESZOWSKA TECHNIKUM",
+          "lat": 50.05382,
+          "lon": 21.42559,
+          "time": null
+        },
+        {
+          "id": 4,
+          "name": "DĘBICA RZESZOWSKA RAJ",
+          "lat": 50.05492,
+          "lon": 21.43617,
+          "time": null
+        },
+        {
+          "id": 5,
+          "name": "DĘBICA RZESZOWSKA MKS",
+          "lat": 50.0557,
+          "lon": 21.44369,
+          "time": null
+        },
+        {
+          "id": 6,
+          "name": "DĘBICA RZESZOWSKA NADLEŚNICTWO",
+          "lat": 50.05625,
+          "lon": 21.44925,
+          "time": null
+        },
+        {
+          "id": 7,
+          "name": "NAGAWCZYNA 1",
+          "lat": 50.05762,
+          "lon": 21.46242,
+          "time": null
+        },
+        {
+          "id": 8,
+          "name": "NAGAWCZYNA 2",
+          "lat": 50.05858,
+          "lon": 21.47173,
+          "time": null
+        },
+        {
+          "id": 9,
+          "name": "ZAWADA E4",
+          "lat": 50.05983,
+          "lon": 21.48364,
+          "time": null
+        },
+        {
+          "id": 10,
+          "name": "LUBZINA OSIEDLE",
+          "lat": 50.06204,
+          "lon": 21.50451,
+          "time": null
+        },
+        {
+          "id": 11,
+          "name": "LUBZINA E4",
+          "lat": 50.06243,
+          "lon": 21.51855,
+          "time": null
+        },
+        {
+          "id": 12,
+          "name": "BRZEZÓWKA",
+          "lat": 50.06204,
+          "lon": 21.54299,
+          "time": null
+        },
+        {
+          "id": 13,
+          "name": "ROPCZYCE PODSŁOŃCE",
+          "lat": 50.06161,
+          "lon": 21.56946,
+          "time": null
+        },
+        {
+          "id": 14,
+          "name": "ROPCZYCE DWORZEC AUTOBUSOWY",
+          "lat": 50.05253,
+          "lon": 21.60427,
+          "time": null
+        },
+        {
+          "id": 15,
+          "name": "ROPCZYCE MICKIEWICZA",
+          "lat": 50.05404,
+          "lon": 21.61878,
+          "time": null
+        },
+        {
+          "id": 16,
+          "name": "ROPCZYCE WITKOWICE",
+          "lat": 50.05997,
+          "lon": 21.63736,
+          "time": null
+        },
+        {
+          "id": 17,
+          "name": "ROPCZYCE WESOŁA",
+          "lat": 50.06692,
+          "lon": 21.65875,
+          "time": null
+        },
+        {
+          "id": 18,
+          "name": "SĘDZISZÓW MAŁOPOLSKI OSIEDLE MŁODYCH",
+          "lat": 50.06919,
+          "lon": 21.68797,
+          "time": null
+        },
+        {
+          "id": 19,
+          "name": "SĘDZISZÓW MAŁOPOLSKI RYNEK",
+          "lat": 50.06981,
+          "lon": 21.69987,
+          "time": null
+        },
+        {
+          "id": 20,
+          "name": "SĘDZISZÓW MAŁOPOLSKI PIŁSUDSKIEGO",
+          "lat": 50.07065,
+          "lon": 21.71139,
+          "time": null
+        },
+        {
+          "id": 21,
+          "name": "SĘDZISZÓW MAŁOPOLSKI GRUNWALDZKA",
+          "lat": 50.0698,
+          "lon": 21.72743,
+          "time": null
+        },
+        {
+          "id": 22,
+          "name": "OLCHOWA E4",
+          "lat": 50.07027,
+          "lon": 21.75508,
+          "time": null
+        },
+        {
+          "id": 23,
+          "name": "KLĘCZANY STADION",
+          "lat": 50.07091,
+          "lon": 21.78105,
+          "time": null
+        },
+        {
+          "id": 24,
+          "name": "DĄBROWA",
+          "lat": 50.07155,
+          "lon": 21.80588,
+          "time": null
+        },
+        {
+          "id": 25,
+          "name": "DĄBROWA 2",
+          "lat": 50.0718,
+          "lon": 21.82008,
+          "time": null
+        },
+        {
+          "id": 26,
+          "name": "TRZCIANA",
+          "lat": 50.07156,
+          "lon": 21.83792,
+          "time": null
+        },
+        {
+          "id": 27,
+          "name": "TRZCIANA WOLICZKA 56 N.Ż.",
+          "lat": 50.07146,
+          "lon": 21.86735,
+          "time": null
+        },
+        {
+          "id": 28,
+          "name": "ŚWILCZA 58",
+          "lat": 50.07168,
+          "lon": 21.89666,
+          "time": null
+        },
+        {
+          "id": 29,
+          "name": "ŚWILCZA OSIEDLE 60 N.Ż.",
+          "lat": 50.06985,
+          "lon": 21.91069,
+          "time": null
+        },
+        {
+          "id": 30,
+          "name": "ŚWILCZA NOWY DWÓR 62 N.Ż.",
+          "lat": 50.06501,
+          "lon": 21.92998,
+          "time": null
+        },
+        {
+          "id": 31,
+          "name": "RZESZÓW KRAKOWSKA GALERIA",
+          "lat": 50.04843,
+          "lon": 21.97509,
+          "time": null
+        },
+        {
+          "id": 32,
+          "name": "RZESZÓW KRAKOWSKA SZPITAL",
+          "lat": 50.04586,
+          "lon": 21.98075,
+          "time": null
+        },
+        {
+          "id": 33,
+          "name": "RZESZÓW DWORZEC LOKALNY",
+          "lat": 50.04273,
+          "lon": 21.99384,
+          "time": null
+        },
+        {
+          "id": 34,
+          "name": "RZESZÓW DWORZEC AUTOBUSOWY",
+          "lat": 50.04214,
+          "lon": 22.00312,
+          "time": "14:05"
+        }
+      ]
+    },
+    {
+      "id": "50714246a1a6e7437c2e",
+      "duty": "S-27",
+      "tripNo": 6,
+      "aliases": [
+        {
+          "duty": "S-27",
+          "label": "S-27",
+          "tripNo": 6
+        }
+      ],
+      "departure": "14:20",
+      "arrival": "15:45",
+      "serviceCode": "",
+      "direction": "DĘBICA DWORZEC AUTOBUSOWY",
+      "route": [
+        {
+          "id": 40,
+          "name": "RZESZÓW DWORZEC AUTOBUSOWY",
+          "lat": 50.04232,
+          "lon": 22.00264,
+          "time": "14:20"
+        },
+        {
+          "id": 41,
+          "name": "RZESZÓW DWORZEC LOKALNY",
+          "lat": 50.04295,
+          "lon": 21.99474,
+          "time": "14:25"
+        },
+        {
+          "id": 42,
+          "name": "RZESZÓW KRAKOWSKA SZPITAL",
+          "lat": 50.04609,
+          "lon": 21.98183,
+          "time": "14:29"
+        },
+        {
+          "id": 43,
+          "name": "RZESZÓW KRAKOWSKA GALERIA",
+          "lat": 50.04811,
+          "lon": 21.97628,
+          "time": "14:31"
+        },
+        {
+          "id": 35,
+          "name": "ŚWILCZA NOWY DWÓR 71 N.Ż.",
+          "lat": 50.06667,
+          "lon": 21.92433,
+          "time": null
+        },
+        {
+          "id": 36,
+          "name": "ŚWILCZA OSIEDLE 73 N.Ż.",
+          "lat": 50.07069,
+          "lon": 21.90748,
+          "time": null
+        },
+        {
+          "id": 37,
+          "name": "ŚWILCZA 75",
+          "lat": 50.0719,
+          "lon": 21.89657,
+          "time": "14:38"
+        },
+        {
+          "id": 38,
+          "name": "TRZCIANA WOLICZKA 77 N.Ż.",
+          "lat": 50.0716,
+          "lon": 21.86626,
+          "time": "14:40"
+        },
+        {
+          "id": 44,
+          "name": "TRZCIANA",
+          "lat": 50.07131,
+          "lon": 21.84132,
+          "time": "14:42"
+        },
+        {
+          "id": 45,
+          "name": "DĄBROWA 2",
+          "lat": 50.07181,
+          "lon": 21.81728,
+          "time": null
+        },
+        {
+          "id": 46,
+          "name": "DĄBROWA",
+          "lat": 50.0715,
+          "lon": 21.80431,
+          "time": "14:45"
+        },
+        {
+          "id": 47,
+          "name": "KLĘCZANY SZKOŁA",
+          "lat": 50.07091,
+          "lon": 21.77923,
+          "time": null
+        },
+        {
+          "id": 48,
+          "name": "OLCHOWA E4",
+          "lat": 50.07037,
+          "lon": 21.75678,
+          "time": "14:50"
+        },
+        {
+          "id": 49,
+          "name": "SĘDZISZÓW MAŁOPOLSKI GRUNWALDZKA",
+          "lat": 50.06987,
+          "lon": 21.7269,
+          "time": "14:55"
+        },
+        {
+          "id": 50,
+          "name": "SĘDZISZÓW MAŁOPOLSKI PIŁSUDSKIEGO",
+          "lat": 50.07067,
+          "lon": 21.71068,
+          "time": "14:57"
+        },
+        {
+          "id": 51,
+          "name": "SĘDZISZÓW MAŁOPOLSKI RYNEK",
+          "lat": 50.06981,
+          "lon": 21.69987,
+          "time": "15:01"
+        },
+        {
+          "id": 52,
+          "name": "SĘDZISZÓW MAŁOPOLSKI OSIEDLE MŁODYCH",
+          "lat": 50.06917,
+          "lon": 21.68726,
+          "time": "15:05"
+        },
+        {
+          "id": 53,
+          "name": "ROPCZYCE WESOŁA",
+          "lat": 50.06676,
+          "lon": 21.65778,
+          "time": "15:08"
+        },
+        {
+          "id": 54,
+          "name": "ROPCZYCE WITKOWICE",
+          "lat": 50.05928,
+          "lon": 21.63541,
+          "time": "15:11"
+        },
+        {
+          "id": 55,
+          "name": "ROPCZYCE MICKIEWICZA",
+          "lat": 50.05418,
+          "lon": 21.61864,
+          "time": "15:14"
+        },
+        {
+          "id": 56,
+          "name": "ROPCZYCE DWORZEC AUTOBUSOWY",
+          "lat": 50.05254,
+          "lon": 21.60425,
+          "time": "15:18"
+        },
+        {
+          "id": 57,
+          "name": "ROPCZYCE PODSŁOŃCE",
+          "lat": 50.06168,
+          "lon": 21.5694,
+          "time": "15:21"
+        },
+        {
+          "id": 58,
+          "name": "BRZEZÓWKA",
+          "lat": 50.06208,
+          "lon": 21.54486,
+          "time": "15:23"
+        },
+        {
+          "id": 59,
+          "name": "LUBZINA E4",
+          "lat": 50.06248,
+          "lon": 21.52007,
+          "time": "15:26"
+        },
+        {
+          "id": 60,
+          "name": "LUBZINA OSIEDLE",
+          "lat": 50.06193,
+          "lon": 21.5029,
+          "time": "15:29"
+        },
+        {
+          "id": 61,
+          "name": "ZAWADA E4",
+          "lat": 50.06014,
+          "lon": 21.48579,
+          "time": "15:31"
+        },
+        {
+          "id": 62,
+          "name": "NAGAWCZYNA 2",
+          "lat": 50.05855,
+          "lon": 21.4705,
+          "time": null
+        },
+        {
+          "id": 63,
+          "name": "NAGAWCZYNA 1",
+          "lat": 50.05782,
+          "lon": 21.46335,
+          "time": null
+        },
+        {
+          "id": 64,
+          "name": "DĘBICA RZESZOWSKA NADLEŚNICTWO",
+          "lat": 50.05603,
+          "lon": 21.44693,
+          "time": "15:36"
+        },
+        {
+          "id": 65,
+          "name": "DĘBICA RZESZOWSKA MKS",
+          "lat": 50.05562,
+          "lon": 21.4425,
+          "time": null
+        },
+        {
+          "id": 66,
+          "name": "DĘBICA RZESZOWSKA RAJ",
+          "lat": 50.05484,
+          "lon": 21.43534,
+          "time": null
+        },
+        {
+          "id": 67,
+          "name": "DĘBICA RZESZOWSKA TECHNIKUM",
+          "lat": 50.05398,
+          "lon": 21.42704,
+          "time": null
+        },
+        {
+          "id": 39,
+          "name": "DĘBICA RZESZOWSKA PLAC GRYFITÓW",
+          "lat": 50.05243,
+          "lon": 21.41531,
+          "time": "15:43"
+        },
+        {
+          "id": 68,
+          "name": "DĘBICA DWORZEC AUTOBUSOWY",
+          "lat": 50.05387,
+          "lon": 21.40663,
+          "time": "15:45"
+        }
+      ]
+    },
+    {
+      "id": "a61c4ffccc90239d5090",
+      "duty": "B",
+      "tripNo": 1,
+      "aliases": [
+        {
+          "duty": "B",
+          "label": "Kursówka B",
+          "tripNo": 1
+        }
+      ],
+      "departure": "07:10",
+      "arrival": "07:40",
+      "serviceCode": "DN",
+      "direction": "BRZEZINY BERDECHÓW",
+      "route": [
+        {
+          "id": 56,
+          "name": "ROPCZYCE DWORZEC AUTOBUSOWY",
+          "lat": 50.05254,
+          "lon": 21.60425,
+          "time": "07:10"
+        },
+        {
+          "id": 69,
+          "name": "3-MAJA CHECHŁY 1",
+          "lat": 50.04307,
+          "lon": 21.58942,
+          "time": "07:13"
+        },
+        {
+          "id": 70,
+          "name": "3-MAJA CHECHŁY 2",
+          "lat": 50.03533,
+          "lon": 21.57752,
+          "time": null
+        },
+        {
+          "id": 71,
+          "name": "3-MAJA CHECHŁY 3",
+          "lat": 50.03021,
+          "lon": 21.56879,
+          "time": null
+        },
+        {
+          "id": 72,
+          "name": "OKONIN",
+          "lat": 50.03176,
+          "lon": 21.55604,
+          "time": null
+        },
+        {
+          "id": 73,
+          "name": "ŁĄCZKI KUCHARSKIE ŁOPUCHOWA 1",
+          "lat": 50.01982,
+          "lon": 21.54679,
+          "time": null
+        },
+        {
+          "id": 74,
+          "name": "ŁĄCZKI KUCHARSKIE ŁOPUCHOWA 2",
+          "lat": 50.00977,
+          "lon": 21.55351,
+          "time": null
+        },
+        {
+          "id": 75,
+          "name": "ŁĄCZKI KUCHARSKIE KOŚCIÓŁ",
+          "lat": 49.9986,
+          "lon": 21.56143,
+          "time": null
+        },
+        {
+          "id": 76,
+          "name": "BRONISZÓW",
+          "lat": 49.98883,
+          "lon": 21.56181,
+          "time": "07:29"
+        },
+        {
+          "id": 77,
+          "name": "GLINIK ŁYSA GÓRA",
+          "lat": 49.98003,
+          "lon": 21.55928,
+          "time": null
+        },
+        {
+          "id": 78,
+          "name": "GLINIK SZKOŁA",
+          "lat": 49.97409,
+          "lon": 21.57588,
+          "time": null
+        },
+        {
+          "id": 79,
+          "name": "GLINIK OSP",
+          "lat": 49.96626,
+          "lon": 21.57925,
+          "time": null
+        },
+        {
+          "id": 80,
+          "name": "GLINIK GÓRA",
+          "lat": 49.96145,
+          "lon": 21.58279,
+          "time": null
+        },
+        {
+          "id": 81,
+          "name": "WIELOPOLE SKRZYŃSKIE RZEGOCIN",
+          "lat": 49.95327,
+          "lon": 21.59848,
+          "time": null
+        },
+        {
+          "id": 82,
+          "name": "WIELOPOLE SKRZYŃSKIE",
+          "lat": 49.94609,
+          "lon": 21.61476,
+          "time": null
+        },
+        {
+          "id": 83,
+          "name": "WIELOPOLE SKRZYŃSKIE 1 19",
+          "lat": 49.94789,
+          "lon": 21.59926,
+          "time": null
+        },
+        {
+          "id": 84,
+          "name": "BRZEZINY 17",
+          "lat": 49.94536,
+          "lon": 21.58626,
+          "time": null
+        },
+        {
+          "id": 85,
+          "name": "BRZEZINY SKLEP 15",
+          "lat": 49.93702,
+          "lon": 21.57386,
+          "time": null
+        },
+        {
+          "id": 86,
+          "name": "BRZEZINY KLUB 13",
+          "lat": 49.93135,
+          "lon": 21.55418,
+          "time": null
+        },
+        {
+          "id": 87,
+          "name": "BRZEZINY SKRZYŻOWANIE 11",
+          "lat": 49.93095,
+          "lon": 21.53662,
+          "time": null
+        },
+        {
+          "id": 88,
+          "name": "BRZEZINY BERDECHÓW 1 02 (NOWA WIEŚ)",
+          "lat": 49.92332,
+          "lon": 21.53877,
+          "time": null
+        },
+        {
+          "id": 89,
+          "name": "BRZEZINY BERDECHÓW",
+          "lat": 49.91805,
+          "lon": 21.54334,
+          "time": "07:40"
+        }
+      ]
+    },
+    {
+      "id": "e8b88ef1afd1c139a23c",
+      "duty": "B",
+      "tripNo": 2,
+      "aliases": [
+        {
+          "duty": "B",
+          "label": "Kursówka B",
+          "tripNo": 2
+        }
+      ],
+      "departure": "07:40",
+      "arrival": "08:30",
+      "serviceCode": "DN",
+      "direction": "ROPCZYCE MICKIEWICZA",
+      "route": [
+        {
+          "id": 96,
+          "name": "BRZEZINY BERDECHÓW",
+          "lat": 49.91816,
+          "lon": 21.54343,
+          "time": "07:40"
+        },
+        {
+          "id": 90,
+          "name": "BRZEZINY BERDECHÓW 1 03 (NOWA WIEŚ)",
+          "lat": 49.92351,
+          "lon": 21.53889,
+          "time": null
+        },
+        {
+          "id": 91,
+          "name": "BRZEZINY SKRZYŻOWANIE 10",
+          "lat": 49.93076,
+          "lon": 21.53646,
+          "time": null
+        },
+        {
+          "id": 92,
+          "name": "BRZEZINY KLUB 08",
+          "lat": 49.9315,
+          "lon": 21.55342,
+          "time": "07:46"
+        },
+        {
+          "id": 93,
+          "name": "BRZEZINY SKLEP 06",
+          "lat": 49.93702,
+          "lon": 21.57414,
+          "time": null
+        },
+        {
+          "id": 94,
+          "name": "BRZEZINY 04",
+          "lat": 49.94533,
+          "lon": 21.58651,
+          "time": null
+        },
+        {
+          "id": 95,
+          "name": "WIELOPOLE SKRZYŃSKIE 1 02",
+          "lat": 49.94768,
+          "lon": 21.59953,
+          "time": null
+        },
+        {
+          "id": 97,
+          "name": "WIELOPOLE SKRZYŃSKIE",
+          "lat": 49.94608,
+          "lon": 21.61484,
+          "time": null
+        },
+        {
+          "id": 98,
+          "name": "WIELOPOLE SKRZYŃSKIE RZEGOCIN",
+          "lat": 49.95401,
+          "lon": 21.59695,
+          "time": null
+        },
+        {
+          "id": 99,
+          "name": "GLINIK GÓRA",
+          "lat": 49.96149,
+          "lon": 21.58299,
+          "time": null
+        },
+        {
+          "id": 100,
+          "name": "GLINIK OSP",
+          "lat": 49.96637,
+          "lon": 21.57942,
+          "time": null
+        },
+        {
+          "id": 101,
+          "name": "GLINIK SZKOŁA",
+          "lat": 49.97413,
+          "lon": 21.57614,
+          "time": null
+        },
+        {
+          "id": 102,
+          "name": "GLINIK ŁYSA GÓRA",
+          "lat": 49.98051,
+          "lon": 21.55969,
+          "time": null
+        },
+        {
+          "id": 103,
+          "name": "BRONISZÓW",
+          "lat": 49.98924,
+          "lon": 21.56225,
+          "time": null
+        },
+        {
+          "id": 104,
+          "name": "ŁĄCZKI KUCHARSKIE KOŚCIÓŁ",
+          "lat": 49.9977,
+          "lon": 21.56336,
+          "time": null
+        },
+        {
+          "id": 105,
+          "name": "ŁĄCZKI KUCHARSKIE ŁOPUCHOWA 2",
+          "lat": 50.01017,
+          "lon": 21.55375,
+          "time": null
+        },
+        {
+          "id": 106,
+          "name": "ŁĄCZKI KUCHARSKIE ŁOPUCHOWA 1",
+          "lat": 50.01876,
+          "lon": 21.54817,
+          "time": null
+        },
+        {
+          "id": 107,
+          "name": "OKONIN",
+          "lat": 50.03166,
+          "lon": 21.55596,
+          "time": null
+        },
+        {
+          "id": 108,
+          "name": "3-MAJA CHECHŁY 3",
+          "lat": 50.03024,
+          "lon": 21.56887,
+          "time": null
+        },
+        {
+          "id": 109,
+          "name": "3-MAJA CHECHŁY 2",
+          "lat": 50.0354,
+          "lon": 21.57791,
+          "time": null
+        },
+        {
+          "id": 110,
+          "name": "3-MAJA CHECHŁY 1",
+          "lat": 50.04321,
+          "lon": 21.59,
+          "time": null
+        },
+        {
+          "id": 14,
+          "name": "ROPCZYCE DWORZEC AUTOBUSOWY",
+          "lat": 50.05253,
+          "lon": 21.60427,
+          "time": null
+        },
+        {
+          "id": 15,
+          "name": "ROPCZYCE MICKIEWICZA",
+          "lat": 50.05404,
+          "lon": 21.61878,
+          "time": "08:30"
+        }
+      ]
+    },
+    {
+      "id": "835337e58f86200037b3",
+      "duty": "B",
+      "tripNo": 3,
+      "aliases": [
+        {
+          "duty": "B",
+          "label": "Kursówka B",
+          "tripNo": 3
+        }
+      ],
+      "departure": "13:18",
+      "arrival": "14:05",
+      "serviceCode": "SX",
+      "direction": "BRZEZINY BERDECHÓW",
+      "route": [
+        {
+          "id": 55,
+          "name": "ROPCZYCE MICKIEWICZA",
+          "lat": 50.05418,
+          "lon": 21.61864,
+          "time": "13:18"
+        },
+        {
+          "id": 56,
+          "name": "ROPCZYCE DWORZEC AUTOBUSOWY",
+          "lat": 50.05254,
+          "lon": 21.60425,
+          "time": "13:20"
+        },
+        {
+          "id": 69,
+          "name": "3-MAJA CHECHŁY 1",
+          "lat": 50.04307,
+          "lon": 21.58942,
+          "time": "13:23"
+        },
+        {
+          "id": 70,
+          "name": "3-MAJA CHECHŁY 2",
+          "lat": 50.03533,
+          "lon": 21.57752,
+          "time": null
+        },
+        {
+          "id": 71,
+          "name": "3-MAJA CHECHŁY 3",
+          "lat": 50.03021,
+          "lon": 21.56879,
+          "time": null
+        },
+        {
+          "id": 72,
+          "name": "OKONIN",
+          "lat": 50.03176,
+          "lon": 21.55604,
+          "time": null
+        },
+        {
+          "id": 73,
+          "name": "ŁĄCZKI KUCHARSKIE ŁOPUCHOWA 1",
+          "lat": 50.01982,
+          "lon": 21.54679,
+          "time": null
+        },
+        {
+          "id": 74,
+          "name": "ŁĄCZKI KUCHARSKIE ŁOPUCHOWA 2",
+          "lat": 50.00977,
+          "lon": 21.55351,
+          "time": null
+        },
+        {
+          "id": 75,
+          "name": "ŁĄCZKI KUCHARSKIE KOŚCIÓŁ",
+          "lat": 49.9986,
+          "lon": 21.56143,
+          "time": null
+        },
+        {
+          "id": 76,
+          "name": "BRONISZÓW",
+          "lat": 49.98883,
+          "lon": 21.56181,
+          "time": "13:39"
+        },
+        {
+          "id": 77,
+          "name": "GLINIK ŁYSA GÓRA",
+          "lat": 49.98003,
+          "lon": 21.55928,
+          "time": null
+        },
+        {
+          "id": 78,
+          "name": "GLINIK SZKOŁA",
+          "lat": 49.97409,
+          "lon": 21.57588,
+          "time": null
+        },
+        {
+          "id": 79,
+          "name": "GLINIK OSP",
+          "lat": 49.96626,
+          "lon": 21.57925,
+          "time": null
+        },
+        {
+          "id": 80,
+          "name": "GLINIK GÓRA",
+          "lat": 49.96145,
+          "lon": 21.58279,
+          "time": null
+        },
+        {
+          "id": 81,
+          "name": "WIELOPOLE SKRZYŃSKIE RZEGOCIN",
+          "lat": 49.95327,
+          "lon": 21.59848,
+          "time": null
+        },
+        {
+          "id": 82,
+          "name": "WIELOPOLE SKRZYŃSKIE",
+          "lat": 49.94609,
+          "lon": 21.61476,
+          "time": null
+        },
+        {
+          "id": 83,
+          "name": "WIELOPOLE SKRZYŃSKIE 1 19",
+          "lat": 49.94789,
+          "lon": 21.59926,
+          "time": null
+        },
+        {
+          "id": 84,
+          "name": "BRZEZINY 17",
+          "lat": 49.94536,
+          "lon": 21.58626,
+          "time": null
+        },
+        {
+          "id": 85,
+          "name": "BRZEZINY SKLEP 15",
+          "lat": 49.93702,
+          "lon": 21.57386,
+          "time": null
+        },
+        {
+          "id": 86,
+          "name": "BRZEZINY KLUB 13",
+          "lat": 49.93135,
+          "lon": 21.55418,
+          "time": "13:58"
+        },
+        {
+          "id": 87,
+          "name": "BRZEZINY SKRZYŻOWANIE 11",
+          "lat": 49.93095,
+          "lon": 21.53662,
+          "time": null
+        },
+        {
+          "id": 88,
+          "name": "BRZEZINY BERDECHÓW 1 02 (NOWA WIEŚ)",
+          "lat": 49.92332,
+          "lon": 21.53877,
+          "time": null
+        },
+        {
+          "id": 89,
+          "name": "BRZEZINY BERDECHÓW",
+          "lat": 49.91805,
+          "lon": 21.54334,
+          "time": "14:05"
+        }
+      ]
+    },
+    {
+      "id": "18e89c75d219d222cbc4",
+      "duty": "B",
+      "tripNo": 4,
+      "aliases": [
+        {
+          "duty": "B",
+          "label": "Kursówka B",
+          "tripNo": 4
+        }
+      ],
+      "departure": "14:05",
+      "arrival": "14:50",
+      "serviceCode": "SX",
+      "direction": "ROPCZYCE DWORZEC AUTOBUSOWY",
+      "route": [
+        {
+          "id": 96,
+          "name": "BRZEZINY BERDECHÓW",
+          "lat": 49.91816,
+          "lon": 21.54343,
+          "time": "14:05"
+        },
+        {
+          "id": 90,
+          "name": "BRZEZINY BERDECHÓW 1 03 (NOWA WIEŚ)",
+          "lat": 49.92351,
+          "lon": 21.53889,
+          "time": null
+        },
+        {
+          "id": 91,
+          "name": "BRZEZINY SKRZYŻOWANIE 10",
+          "lat": 49.93076,
+          "lon": 21.53646,
+          "time": null
+        },
+        {
+          "id": 92,
+          "name": "BRZEZINY KLUB 08",
+          "lat": 49.9315,
+          "lon": 21.55342,
+          "time": "14:11"
+        },
+        {
+          "id": 93,
+          "name": "BRZEZINY SKLEP 06",
+          "lat": 49.93702,
+          "lon": 21.57414,
+          "time": null
+        },
+        {
+          "id": 94,
+          "name": "BRZEZINY 04",
+          "lat": 49.94533,
+          "lon": 21.58651,
+          "time": null
+        },
+        {
+          "id": 95,
+          "name": "WIELOPOLE SKRZYŃSKIE 1 02",
+          "lat": 49.94768,
+          "lon": 21.59953,
+          "time": null
+        },
+        {
+          "id": 97,
+          "name": "WIELOPOLE SKRZYŃSKIE",
+          "lat": 49.94608,
+          "lon": 21.61484,
+          "time": null
+        },
+        {
+          "id": 98,
+          "name": "WIELOPOLE SKRZYŃSKIE RZEGOCIN",
+          "lat": 49.95401,
+          "lon": 21.59695,
+          "time": null
+        },
+        {
+          "id": 99,
+          "name": "GLINIK GÓRA",
+          "lat": 49.96149,
+          "lon": 21.58299,
+          "time": null
+        },
+        {
+          "id": 100,
+          "name": "GLINIK OSP",
+          "lat": 49.96637,
+          "lon": 21.57942,
+          "time": null
+        },
+        {
+          "id": 101,
+          "name": "GLINIK SZKOŁA",
+          "lat": 49.97413,
+          "lon": 21.57614,
+          "time": null
+        },
+        {
+          "id": 102,
+          "name": "GLINIK ŁYSA GÓRA",
+          "lat": 49.98051,
+          "lon": 21.55969,
+          "time": null
+        },
+        {
+          "id": 103,
+          "name": "BRONISZÓW",
+          "lat": 49.98924,
+          "lon": 21.56225,
+          "time": null
+        },
+        {
+          "id": 104,
+          "name": "ŁĄCZKI KUCHARSKIE KOŚCIÓŁ",
+          "lat": 49.9977,
+          "lon": 21.56336,
+          "time": null
+        },
+        {
+          "id": 105,
+          "name": "ŁĄCZKI KUCHARSKIE ŁOPUCHOWA 2",
+          "lat": 50.01017,
+          "lon": 21.55375,
+          "time": null
+        },
+        {
+          "id": 106,
+          "name": "ŁĄCZKI KUCHARSKIE ŁOPUCHOWA 1",
+          "lat": 50.01876,
+          "lon": 21.54817,
+          "time": null
+        },
+        {
+          "id": 107,
+          "name": "OKONIN",
+          "lat": 50.03166,
+          "lon": 21.55596,
+          "time": null
+        },
+        {
+          "id": 108,
+          "name": "3-MAJA CHECHŁY 3",
+          "lat": 50.03024,
+          "lon": 21.56887,
+          "time": null
+        },
+        {
+          "id": 109,
+          "name": "3-MAJA CHECHŁY 2",
+          "lat": 50.0354,
+          "lon": 21.57791,
+          "time": null
+        },
+        {
+          "id": 110,
+          "name": "3-MAJA CHECHŁY 1",
+          "lat": 50.04321,
+          "lon": 21.59,
+          "time": null
+        },
+        {
+          "id": 14,
+          "name": "ROPCZYCE DWORZEC AUTOBUSOWY",
+          "lat": 50.05253,
+          "lon": 21.60427,
+          "time": "14:50"
+        }
+      ]
+    }
+  ]
+}

@@ -1,7 +1,7 @@
 (function(root){
  'use strict';
  const kinds=['route','next','current','transfers','clock'];
- const defaults=()=>({scrollEnabled:true,scrollSpeed:48,manualControl:false,steps:[{type:'route',seconds:12},{type:'next',seconds:7},{type:'current',seconds:7},{type:'transfers',seconds:8},{type:'route',seconds:12}]});
+ const defaults=()=>({scrollEnabled:true,scrollSpeed:48,manualControl:false,steps:[{type:'route',seconds:12},{type:'next',seconds:7},{type:'current',seconds:7},{type:'transfers',seconds:8},{type:'route',seconds:12},{type:'clock',seconds:10}]});
  function normalize(raw){
   if(!raw||!Array.isArray(raw.steps))return defaults();
   const steps=raw.steps.slice(0,12).filter(s=>s&&kinds.includes(s.type)).map(s=>({type:s.type,seconds:Number.isFinite(Number(s.seconds))?Math.max(0,Math.min(300,Math.round(Number(s.seconds)))):0}));
