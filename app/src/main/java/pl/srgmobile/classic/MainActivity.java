@@ -146,6 +146,7 @@ public final class MainActivity extends Activity implements LocationListener {
         omsi = new OmsiBridge(web);
         web.addJavascriptInterface(omsi, "SRGOmsiNative");
         web.addJavascriptInterface(new AudioBridge(), "SRGNativeAudio");
+        web.addJavascriptInterface(InternetRadio.get(this),"SRGInternetRadio");
         web.addJavascriptInterface(new LcdBridge(), "SRGLcd");
         ipixel=LedDisplayService.obtain(this);web.addJavascriptInterface(ipixel,"SRGIpixel");
         announcementOutput=new AnnouncementOutput(this);web.addJavascriptInterface(announcementOutput,"SRGAudioOutput");
@@ -204,7 +205,7 @@ public final class MainActivity extends Activity implements LocationListener {
         return localVoices;
     }
     public final class LocalSpeechBridge {
-        @JavascriptInterface public void speak(String text){if(text!=null&&text.length()<=1000)runOnUiThread(()->{if(acquireAnnouncementFocus())localVoices().speak(text);});}
+        @JavascriptInterface public void speak(String text){if(text!=null&&text.length()<=1000)runOnUiThread(()->{stopVoice();localVoices().speak(text);});}
         @JavascriptInterface public void chooseVoice(){runOnUiThread(()->localVoices().choose());}
         @JavascriptInterface public void generate(String json){if(json!=null&&json.length()<=2*1024*1024)runOnUiThread(()->localVoices().generate(json));}
         @JavascriptInterface public void cancelGeneration(){runOnUiThread(()->{localVoices().cancel();if(web!=null)web.evaluateJavascript("window.srgLocalVoiceStatus && window.srgLocalVoiceStatus('Anulowano generowanie. Gotowe pliki zachowano.')",null);});}
@@ -391,6 +392,7 @@ public final class MainActivity extends Activity implements LocationListener {
     private void stopVoice() {
         if(localVoices!=null)localVoices.cancel();
         pendingVoice.clear();
+        if(announcementFocus!=null)announcementFocus.finish();
         if (voicePlayer != null) {
             try { voicePlayer.setOnCompletionListener(null); voicePlayer.stop(); } catch (Exception ignored) {}
             try { voicePlayer.release(); } catch (Exception ignored) {}
@@ -399,6 +401,7 @@ public final class MainActivity extends Activity implements LocationListener {
     }
     private void playVoiceNext() {
         if (pendingVoice.isEmpty()) {
+            if(announcementFocus!=null)announcementFocus.finish();
             sendJS("window.onNativeAudioStatus&&window.onNativeAudioStatus('DONE','');");
             return;
         }
@@ -414,7 +417,7 @@ public final class MainActivity extends Activity implements LocationListener {
                     .setUsage(AudioAttributes.USAGE_MEDIA)
                     .setContentType(AudioAttributes.CONTENT_TYPE_SPEECH).build());
             mp.setDataSource(afd.getFileDescriptor(), afd.getStartOffset(), afd.getLength());
-            if(announcementOutput!=null&&!announcementOutput.apply(mp)){mp.release();pendingVoice.clear();sendAudioError("Wybrane radio Bluetooth nie jest połączone. Sprawdź wyjście zapowiedzi.");return;}
+            if(announcementOutput!=null&&!announcementOutput.apply(mp)){mp.release();pendingVoice.clear();if(announcementFocus!=null)announcementFocus.finish();sendAudioError("Wybrane radio Bluetooth nie jest połączone. Sprawdź wyjście zapowiedzi.");return;}
             mp.setOnCompletionListener(completed -> {
                 if (voicePlayer != completed) return;
                 completed.release();voicePlayer=null;playVoiceNext();

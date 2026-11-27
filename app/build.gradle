@@ -12,8 +12,8 @@ android {
         applicationId gpsTestEdition ? 'pl.srgmobile.testgps' : testEdition ? 'pl.srgmobile.test' : publicEdition ? 'pl.srgmobile.publicapp' : 'pl.srgmobile.classic.lcd23'
         minSdk 26
         targetSdk 34
-        versionCode 1149700
-        versionName '1.4.97'
+        versionCode 1149800
+        versionName '1.4.98'
         if (gpsTestEdition) versionNameSuffix '-testgps'
         else if (testEdition) versionNameSuffix '-test'
         buildConfigField 'boolean', 'SRG_PUBLIC', publicEdition.toString()

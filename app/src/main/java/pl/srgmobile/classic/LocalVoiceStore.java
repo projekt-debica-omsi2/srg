@@ -26,6 +26,7 @@ import java.util.function.Supplier;
 final class LocalVoiceStore {
     private final Activity activity;
     private final AnnouncementOutput output;
+    private final AnnouncementFocus focus;private String liveId;
     private final Consumer<String> notice;
     private final Supplier<Float> volume;
     private final SharedPreferences prefs;
@@ -41,7 +42,7 @@ final class LocalVoiceStore {
     private int completed,total,serial;
     private Runnable timeout;
     LocalVoiceStore(Activity activity,Consumer<String> notice,Supplier<Float> volume){
-        this.activity=activity;this.notice=notice;this.volume=volume;output=new AnnouncementOutput(activity);
+        this.activity=activity;this.notice=notice;this.volume=volume;output=new AnnouncementOutput(activity);focus=new AnnouncementFocus(activity,()->cancel());
         prefs=activity.getSharedPreferences("local-voices",0);
         directory=new File(activity.getFilesDir(),"offline-announcements");
         directory.mkdirs();
@@ -97,12 +98,12 @@ final class LocalVoiceStore {
     void speak(String text){
         if(text==null||text.trim().isEmpty()||text.length()>1000||closed)return;
         if(generating){notice.accept("Trwa generowanie zapowiedzi. Zaczekaj lub naciśnij Anuluj.");return;}
-        ensure(()->{stopPlayback();if(!output.playbackAllowed()){notice.accept("Wybrane radio Bluetooth nie jest połączone.");return;}File file=cached(text);
+        ensure(()->{stopPlayback();if(!output.playbackAllowed()){focus.finish();notice.accept("Wybrane radio Bluetooth nie jest połączone.");return;}if(!focus.acquire())return;File file=cached(text);
             if(valid(file)){try{player=new MediaPlayer();player.setAudioAttributes(AnnouncementFocus.attributes());player.setDataSource(file.getAbsolutePath());if(!output.apply(player)){stopPlayback();notice.accept("Nie wybrano wyjścia Bluetooth.");return;}player.setVolume(volume.get(),volume.get());player.setOnCompletionListener(p->stopPlayback());player.setOnErrorListener((p,w,e)->{stopPlayback();speakLive(text);return true;});player.prepare();player.start();return;}catch(Exception e){stopPlayback();}}
             speakLive(text);
         });
     }
-    private void speakLive(String text){if(!output.playbackAllowed()){notice.accept("Wybrane radio Bluetooth nie jest połączone.");return;}tts.setAudioAttributes(AnnouncementFocus.attributes());Bundle params=new Bundle();params.putFloat(TextToSpeech.Engine.KEY_PARAM_VOLUME,volume.get());tts.speak(text,TextToSpeech.QUEUE_FLUSH,params,"live");}
+    private void speakLive(String text){if(!output.playbackAllowed()){focus.finish();notice.accept("Wybrane radio Bluetooth nie jest połączone.");return;}if(!focus.acquire())return;tts.setAudioAttributes(AnnouncementFocus.attributes());Bundle params=new Bundle();params.putFloat(TextToSpeech.Engine.KEY_PARAM_VOLUME,volume.get());liveId="live-"+(++serial);if(tts.speak(text,TextToSpeech.QUEUE_FLUSH,params,liveId)!=TextToSpeech.SUCCESS){liveId=null;focus.finish();}}
     void generate(String json){
         if(generating){notice.accept("Generowanie już trwa.");return;}
         final LinkedHashSet<String> texts=new LinkedHashSet<>();
@@ -121,6 +122,7 @@ final class LocalVoiceStore {
         if(tts.synthesizeToFile(jobs.peek(),new Bundle(),pendingFile,id)!=TextToSpeech.SUCCESS)complete(id,false);
     }
     private void complete(String id,boolean ok){
+        if(id!=null&&id.equals(liveId)){liveId=null;focus.finish();return;}
         if(!generating||!id.equals(activeId))return;
         if(timeout!=null)ui.removeCallbacks(timeout);activeId=null;
         if(!ok||!valid(pendingFile)||!pendingFile.renameTo(pendingTarget)){cancel();notice.accept("Silnik nie zapisał poprawnej zapowiedzi. Gotowe wcześniejsze pliki zachowano; możesz ponowić generowanie.");return;}
@@ -131,6 +133,6 @@ final class LocalVoiceStore {
         if(tts!=null)tts.stop();stopPlayback();
         if(pendingFile!=null)pendingFile.delete();pendingFile=null;pendingTarget=null;
     }
-    private void stopPlayback(){if(player!=null){try{player.release();}catch(Exception ignored){}player=null;}}
-    void close(){closed=true;cancel();if(tts!=null){tts.shutdown();tts=null;}}
+    private void stopPlayback(){if(liveId!=null&&tts!=null)tts.stop();liveId=null;focus.finish();if(player!=null){try{player.release();}catch(Exception ignored){}player=null;}}
+    void close(){closed=true;cancel();focus.close();if(tts!=null){tts.shutdown();tts=null;}}
 }
