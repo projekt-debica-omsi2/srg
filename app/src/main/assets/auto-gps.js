@@ -30,15 +30,15 @@
  }
  function createTracker(){
   let courseKey=null,activeIndex=-1,near=false,armNextDistance=Infinity;
-  let votes=0,lastVote=0,lastFix=null,lastAdvance=-Infinity;
+  let votes=0,lastVote=0,lastFix=null,lastAdvance=-Infinity,closestDistance=Infinity;
   function clearCandidate(){votes=0;lastVote=0;}
-  function reset(){courseKey=null;activeIndex=-1;near=false;armNextDistance=Infinity;clearCandidate();lastFix=null;lastAdvance=-Infinity;}
-  function evaluate({enabled,courseActive,fix,stops,index,pending,courseKey:key,now=Date.now()}){
+  function reset(){courseKey=null;activeIndex=-1;near=false;armNextDistance=Infinity;clearCandidate();lastFix=null;lastAdvance=-Infinity;closestDistance=Infinity;}
+  function evaluate({enabled,courseActive,fix,stops,index,pending,courseKey:key,departureMeters,now=Date.now()}){
    if(!enabled){reset();return{status:'WYŁĄCZONY'};}
    if(!courseActive||!Array.isArray(stops)||!stops.length||!Number.isInteger(index)||index<0){reset();return{status:'BRAK AKTYWNEGO KURSU'};}
    const signature=String(key);
    if(signature!==courseKey){reset();courseKey=signature;}
-   if(index!==activeIndex){activeIndex=index;near=false;armNextDistance=Infinity;clearCandidate();lastFix=null;}
+   if(index!==activeIndex){activeIndex=index;near=false;armNextDistance=Infinity;closestDistance=Infinity;clearCandidate();lastFix=null;}
    if(Number.isInteger(pending)){clearCandidate();lastFix=null;return{status:'ZATWIERDŹ LUB ANULUJ RĘCZNY WYBÓR'};}
    if(index>=stops.length-1){clearCandidate();return{status:'OSTATNI PRZYSTANEK — BEZ AUTOMATYCZNEGO KOŃCZENIA'};}
    const current=stops[index],next=stops[index+1];
@@ -49,13 +49,15 @@
    const d=distance(current,fix),nextDist=distance(next,fix);
    const stopSpacing=distance(current,next);
    const nearZone=Math.min(75,Math.max(40,acc+15));
-   const departZone=Math.max(50,Math.min(65,acc*0.9));
+   const configured=Number.isFinite(departureMeters);
+   const departZone=configured?Math.max(10,Math.min(1000,departureMeters)):Math.max(50,Math.min(65,acc*0.9));
    const result={distance:d,targetIndex:index+1,stopName:next.name||'',status:`OD ${index+1}/${stops.length} ${current.name||''}: ${Math.round(d)} m · NASTĘPNY: ${next.name||''}`};
    const sample={lat:fix.lat,lon:fix.lon,acc,now};
    const previous=lastFix;
    lastFix=sample;
    if(previous&&now<previous.now){clearCandidate();near=false;armNextDistance=Infinity;}
    if(d<=nearZone){
+    closestDistance=Math.min(closestDistance,d);
     if(!near){near=true;armNextDistance=nextDist;clearCandidate();}
     else armNextDistance=Math.max(armNextDistance,nextDist);
    }
@@ -69,8 +71,8 @@
     (now-previous.now>=700&&now-previous.now<=10000)&&
     distance(previous,sample)>Math.max(18,(previous.acc+acc)*0.7);
    const headingOk=(armNextDistance-nextDist>=14);
-   const farLimit=Math.max(80,Math.min(250,stopSpacing*0.65));
-   const leaving=d>=departZone&&d<=farLimit&&moving&&headingOk;
+   const farLimit=Math.max(departZone+100,80,Math.min(250,stopSpacing*0.65));
+   const leaving=d>=departZone&&d>=closestDistance+10&&d<=farLimit&&moving&&headingOk;
    if(!leaving){clearCandidate();return{...result,status:!moving?`POSTÓJ — CZEKAM NA ODJAZD (OD PRZYSTANKU ${Math.round(d)} m)`:
     !headingOk?`CZEKAM NA RUCH W KIERUNKU NASTĘPNEGO (OD ${Math.round(d)} m)`:
     `ODJAZD: ${Math.round(d)} m / ${Math.round(departZone)} m`};}
@@ -79,7 +81,7 @@
    if(votes>=2){
     lastAdvance=now;clearCandidate();near=false;armNextDistance=Infinity;
     return{...result,advance:true,nextIndex:index+1,departure:true,
-      status:`ODJAZD +50 m → PRZYSTANEK ${index+2}/${stops.length}: ${next.name||''}`};
+      status:`ODJAZD +${Math.round(departZone)} m → PRZYSTANEK ${index+2}/${stops.length}: ${next.name||''}`};
    }
    return{...result,status:`POTWIERDZANIE ODJAZDU ${votes}/2 · ${Math.round(d)} m`,confirmations:votes};
   }

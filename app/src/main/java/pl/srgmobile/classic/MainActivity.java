@@ -147,7 +147,7 @@ public final class MainActivity extends Activity implements LocationListener {
         web.addJavascriptInterface(omsi, "SRGOmsiNative");
         web.addJavascriptInterface(new AudioBridge(), "SRGNativeAudio");
         web.addJavascriptInterface(new LcdBridge(), "SRGLcd");
-        ipixel=new IpixelBridge(this);web.addJavascriptInterface(ipixel,"SRGIpixel");
+        ipixel=LedDisplayService.obtain(this);web.addJavascriptInterface(ipixel,"SRGIpixel");
         announcementOutput=new AnnouncementOutput(this);web.addJavascriptInterface(announcementOutput,"SRGAudioOutput");
         apkUpdates=new ApkUpdates(this);web.addJavascriptInterface(apkUpdates,"SRGApkUpdates");
         rgUsb = new RgUsbBridge(this, web);
@@ -593,16 +593,17 @@ public final class MainActivity extends Activity implements LocationListener {
         state.putBoolean("gps_requested", requested);
         super.onSaveInstanceState(state);
     }
+    @Override public void onBackPressed(){if(requested||(ipixel!=null&&ipixel.enabled()))moveTaskToBack(true);else super.onBackPressed();}
     @Override protected void onPause() {
         // Okno systemowe uprawnień może wywołać onPause.
         // Nie anulujemy w tym momencie GPS ani życzenia jego uruchomienia.
         super.onPause();
-        if (web != null && !requested) web.onPause();
+        if (web != null && !requested && (ipixel==null||!ipixel.enabled())) web.onPause();
     }
     @Override protected void onStop() {
         // Brak lokalizacji w tle. Użytkownik nadal chce GPS po wznowieniu.
         if (!requested) stopListening();
-        stopVoice();
+        // Keep active announcements playing when another app is foreground.
         super.onStop();
     }
     @Override protected void onResume() {
@@ -615,7 +616,7 @@ public final class MainActivity extends Activity implements LocationListener {
         if(localVoices!=null){localVoices.close();localVoices=null;}
         if(announcementFocus!=null)announcementFocus.close();
         if(fleet!=null)fleet.close();
-        if(ipixel!=null)ipixel.close();
+        // The foreground LED service owns the bridge independently of this screen.
         if(apkUpdates!=null)apkUpdates.close();
         if(omsi!=null)omsi.close();
         stopListening();

@@ -324,7 +324,7 @@ const autoGpsTracker=window.SRGAutoGPS.createTracker();
  function localStopName(stop){return window.SRGLocalSpeech.name(stop);}
  function playNextStopAudio(stop){
   if(state.rj?.localTimetable||window.SRGEdition?.public){if(stop){localSpeak(window.SRGLocalSpeech.next(stop,stop===state.variant?.stops?.at(-1)));markLcdPhase('NEXT');}return;}
-  markManualLcdScreen('next',state.variant?.stops.indexOf(stop));
+  // Audio distance is independent of the display distance.
   if(window.SRGGRGAudio?.playStop(stop,stop===state.variant?.stops?.at(-1)?'terminal':'next',isStopOnRequest(stop),nativeOrWebAudio,chimePath)){markLcdPhase('NEXT');return;}
   if(window.SRGBerdechowAudio?.playStop(stop,stop===state.variant?.stops?.at(-1)?'terminal':'next',nativeOrWebAudio,chimePath)){markLcdPhase('NEXT');return;}
   if(!stop||!Number.isInteger(stop.id)||stop.id<1||stop.id>68||!stop.referenceCompatible)return;
@@ -341,7 +341,7 @@ const autoGpsTracker=window.SRGAutoGPS.createTracker();
  }
  function playArrivalAudio(stop){
   if(state.rj?.localTimetable||window.SRGEdition?.public){if(stop){localSpeak(window.SRGLocalSpeech.arrival(stop));markLcdPhase('ARRIVAL');}return;}
-  markManualLcdScreen('current',state.variant?.stops.indexOf(stop));
+  // Arrival display is driven by its own GPS threshold.
   if(window.SRGGRGAudio?.playStop(stop,'arrival',isStopOnRequest(stop),nativeOrWebAudio,chimePath)){markLcdPhase('ARRIVAL');return;}
   if(window.SRGBerdechowAudio?.playStop(stop,'arrival',nativeOrWebAudio,chimePath)){markLcdPhase('ARRIVAL');return;}
   if(!stop||!Number.isInteger(stop.id)||stop.id<1||stop.id>68||!stop.referenceCompatible)return;
@@ -396,12 +396,19 @@ const autoGpsTracker=window.SRGAutoGPS.createTracker();
  function refreshVoiceIndicator(){
    const quick=$('#soundVoiceToggle');if(quick){quick.textContent='ZAPOWIEDZI: '+(voiceEnabled?'WŁ.':'WYŁ.');quick.classList.toggle('active',voiceEnabled)}
    const b=$('#gpsVoiceToggle');if(b){b.textContent='ZAPOWIEDZI: '+(voiceEnabled?'WŁ.':'WYŁ.');b.classList.toggle('off',!voiceEnabled);}
-   const a=$('#gpsVoiceInfo');if(a)a.textContent=voiceEnabled?('GŁOS: '+voiceMessage+' · Po 50 m: „Następny przystanek” + nazwa. Przy dojeździe: sama nazwa.'):'Zapowiedzi wyłączone. Automatyczna zmiana przystanków działa osobno.';
+   const a=$('#gpsVoiceInfo');if(a)a.textContent=voiceEnabled?('GŁOS: '+voiceMessage+' · Następny: '+gpsThresholds.voiceAfter+' m po. Nazwa: '+gpsThresholds.voiceBefore+' m przed.'):'Zapowiedzi wyłączone. Automatyczna zmiana przystanków działa osobno.';
  }
  function processVoiceGpsFix(fix){if(state.course?.extra)return;
-  const r=voiceGpsTracker.evaluate({enabled:voiceEnabled,courseActive:Boolean(state.course&&state.variant),extra:state.course?.extra?state.course:null,rjSignature:state.rj?.signature,courseKey:courseSessionKey(state.course),fix,stops:state.variant?.stops||[],index:state.routeIndex,pending:state.pendingStop,now:Date.now()});
+  const ss=state.variant?.stops||[],key=courseSessionKey(state.course);
+  if(key!==voiceDepartureCourse){voiceDepartureCourse=key;voiceDepartureIndex=state.routeIndex;voiceDepartureTracker.reset();}
+  const departure=voiceDepartureTracker.evaluate({enabled:voiceEnabled,courseActive:Boolean(state.course&&state.variant),courseKey:key,fix,stops:ss,index:voiceDepartureIndex,pending:state.pendingStop,departureMeters:gpsThresholds.voiceAfter,now:Date.now()});
+  if(departure.advance){voiceDepartureIndex=departure.nextIndex;playNextStopAudio(ss[departure.nextIndex]);}
+  const arrivalIndex=Math.max(state.routeIndex,voiceDepartureIndex);
+  const display=displayArrivalTracker.evaluate({enabled:autoGpsEnabled,courseActive:Boolean(state.course&&state.variant),courseKey:key,fix,stops:ss,index:state.routeIndex,pending:state.pendingStop,arrivalMeters:gpsThresholds.displayBefore,now:Date.now()});
+  if(display.arrival)markManualLcdScreen('current',state.routeIndex,true);
+  const r=voiceGpsTracker.evaluate({arrivalMeters:gpsThresholds.voiceBefore,enabled:voiceEnabled,courseActive:Boolean(state.course&&state.variant),extra:state.course?.extra?state.course:null,rjSignature:state.rj?.signature,courseKey:courseSessionKey(state.course),fix,stops:state.variant?.stops||[],index:arrivalIndex,pending:state.pendingStop,now:Date.now()});
   voiceMessage=r.status;
-  if(r.arrival){const current=state.variant.stops[state.routeIndex];playArrivalAudio(current);toast('DOJECHANO → '+current.name);}
+  if(r.arrival){const current=state.variant.stops[arrivalIndex];playArrivalAudio(current);toast('DOJECHANO → '+current.name);}
   refreshVoiceIndicator();
  }
  window.onNativeAudioStatus=(code,detail)=>{if(code==='ERROR')voiceMessage='BŁĄD ODTWARZANIA: '+detail;else if(code==='PLAYING')voiceMessage='ODTWARZANIE';refreshVoiceIndicator();};
@@ -420,10 +427,17 @@ const autoGpsTracker=window.SRGAutoGPS.createTracker();
  lcdShowUrl();setInterval(lcdShowUrl,15000);setInterval(lcdPublish,1750);
 
  
+const thresholdDefaults={displayBefore:55,displayAfter:50,voiceBefore:55,voiceAfter:50};
+let gpsThresholds={...thresholdDefaults};try{const v=JSON.parse(localStorage.getItem('srgGpsThresholds')||'{}');for(const k in thresholdDefaults)if(Number.isFinite(v[k]))gpsThresholds[k]=Math.max(10,Math.min(1000,Math.round(v[k])));}catch(e){}
+const displayArrivalTracker=window.SRGVoiceGPS.createTracker(),voiceDepartureTracker=window.SRGAutoGPS.createTracker();
+let voiceDepartureCourse='',voiceDepartureIndex=0;
+const thresholdBox=document.createElement('fieldset');thresholdBox.innerHTML='<legend>Odległości GPS: tablica i zapowiedzi</legend>'+[['displayBefore','Tablica: aktualny przystanek - metry przed'],['displayAfter','Tablica: następny przystanek - metry po'],['voiceBefore','Głos: nazwa przystanku - metry przed'],['voiceAfter','Głos: następny przystanek - metry po']].map(([k,label])=>'<label style="display:block;margin:10px">'+label+' <input style="width:90px;font:inherit" type="number" min="10" max="1000" id="gpsThreshold_'+k+'" value="'+gpsThresholds[k]+'"></label>').join('')+'<button id="gpsThresholdSave">Zapisz odległości</button><p>Zakres 10-1000 m. Dokładność GPS i kierunek ruchu nadal są sprawdzane. Zbyt duża odległość po przystanku może kolidować z następnym przystankiem.</p>';
+document.querySelector('#lcdSettings .lcdSettingsBody').append(thresholdBox);
+document.getElementById('gpsThresholdSave').onclick=()=>{const next={};for(const k in thresholdDefaults){const n=Number(document.getElementById('gpsThreshold_'+k).value);if(!Number.isInteger(n)||n<10||n>1000){toast('Podaj całe metry od 10 do 1000');return}next[k]=n;}gpsThresholds=next;localStorage.setItem('srgGpsThresholds',JSON.stringify(next));displayArrivalTracker.reset();voiceDepartureTracker.reset();voiceGpsTracker.reset();autoGpsTracker.reset();toast('Zapisano odległości GPS');};
 let autoGpsEnabled=true;
 try{autoGpsEnabled=localStorage.getItem('srgAutoGpsEnabled')!=='0'}catch(e){}
 let autoGpsMessage='OCZEKIWANIE NA GPS';
-function resetAutoGpsCandidate(){autoGpsTracker.reset();voiceGpsTracker.reset();refreshAutoGpsIndicator()}
+function resetAutoGpsCandidate(){autoGpsTracker.reset();voiceGpsTracker.reset();displayArrivalTracker.reset();voiceDepartureTracker.reset();voiceDepartureIndex=state.routeIndex;voiceDepartureCourse=courseSessionKey(state.course);refreshAutoGpsIndicator()}
 function refreshAutoGpsIndicator(){
   const msg=autoGpsEnabled?autoGpsMessage:'WYŁĄCZONY';
   const course=$('#courseAutoState');if(course){course.textContent='AUTO GPS: '+(autoGpsEnabled?'WŁ.':'WYŁ.');course.style.color=autoGpsEnabled?'#8aea97':'#c2b9aa';course.title=msg;course.style.cursor='pointer';course.onclick=()=>toast(msg);}
@@ -434,7 +448,7 @@ function processAutoGpsFix(fix){if(state.course?.extra)return;
   const ss=state.variant?.stops||[];
   const res=autoGpsTracker.evaluate({
     enabled:autoGpsEnabled,courseActive:Boolean(state.course&&state.variant),
-    extra:state.course?.extra?state.course:null,rjSignature:state.rj?.signature,courseKey:courseSessionKey(state.course),fix,stops:ss,index:state.routeIndex,pending:state.pendingStop,now:Date.now()
+    extra:state.course?.extra?state.course:null,rjSignature:state.rj?.signature,courseKey:courseSessionKey(state.course),fix,stops:ss,index:state.routeIndex,pending:state.pendingStop,departureMeters:gpsThresholds.displayAfter,now:Date.now()
   });
   autoGpsMessage=res.status;
   if(res.advance){
@@ -442,8 +456,8 @@ function processAutoGpsFix(fix){if(state.course?.extra)return;
     state.pendingStop=null;
     markManualLcdScreen('next',res.nextIndex,true);
     refreshCourse();
-    if(voiceEnabled&&res.departure)playNextStopAudio(ss[res.nextIndex]);
-    toast('ODJAZD +50 m → '+(ss[res.nextIndex]?.name||'przystanek '+(res.nextIndex+1)));
+    // Voice departure has an independent tracker and distance.
+    toast('ODJAZD +'+gpsThresholds.displayAfter+' m → '+(ss[res.nextIndex]?.name||'przystanek '+(res.nextIndex+1)));
   }
   refreshAutoGpsIndicator();
 }

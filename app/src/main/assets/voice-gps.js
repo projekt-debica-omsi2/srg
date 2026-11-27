@@ -8,7 +8,7 @@
  function createTracker(){
   let key=null,spoken=false,votes=0,lastVote=0,lastFix=null;
   function reset(){key=null;spoken=false;votes=0;lastVote=0;lastFix=null;}
-  function evaluate({enabled,courseActive,courseKey,fix,stops,index,pending,now=Date.now()}){
+  function evaluate({enabled,courseActive,courseKey,fix,stops,index,pending,arrivalMeters,now=Date.now()}){
    if(!enabled){reset();return{status:'WYŁĄCZONE'};}
    if(!courseActive||!Array.isArray(stops)||!Number.isInteger(index)||index<0||index>=stops.length){reset();return{status:'BRAK KURSU'};}
    const k=String(courseKey)+':'+index;
@@ -22,7 +22,7 @@
    if(!Number.isFinite(accuracy)||accuracy<0||accuracy>90){votes=0;return{status:'GPS NIEDOKŁADNY'};}
    if(spoken)return{status:'NAZWA PRZYSTANKU JUŻ ZAPOWIEDZIANA'};
    const d=distance(fix,current);
-   const zone=Math.min(85,Math.max(40,36+accuracy*0.65));
+   const zone=Number.isFinite(arrivalMeters)?Math.max(10,Math.min(1000,arrivalMeters)):Math.min(85,Math.max(40,36+accuracy*0.65));
    const prev=lastFix;
    const sample={lat:fix.lat,lon:fix.lon,acc:accuracy,now};
    lastFix=sample;
